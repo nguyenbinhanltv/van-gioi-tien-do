@@ -14,6 +14,38 @@ const CLASS_PATH: Record<string, shared.PathId> = {
   'kiem-tu': 'kiem',
   'thuong-tu': 'thuong',
 };
+/** Nearest walkable tile to a desired point (outward square rings), centred in the tile. */
+function walkableNear(walkable: (i: number, j: number) => boolean, i: number, j: number): TilePos {
+  const ci = Math.floor(i);
+  const cj = Math.floor(j);
+  for (let r = 0; r < 12; r++) {
+    for (let dj = -r; dj <= r; dj++) {
+      for (let di = -r; di <= r; di++) {
+        if (Math.max(Math.abs(di), Math.abs(dj)) === r && walkable(ci + di, cj + dj)) {
+          return { i: ci + di + 0.5, j: cj + dj + 0.5 };
+        }
+      }
+    }
+  }
+  return { i: ci + 0.5, j: cj + 0.5 };
+}
+
+/** Offline backend (`?combat=1`): five mock enemies around the spawn, near to far, the 2nd one hits back. */
+export function createMockBackend(
+  classId: string,
+  spawn: TilePos,
+  walkable: (i: number, j: number) => boolean,
+  rand: () => number,
+): cb.MockCombat {
+  const specs: Array<{ name: string; pos: TilePos; fightsBack?: boolean }> = [];
+  [3, 4.5, 6, 8, 12].forEach((r, n) => {
+    const a = n * 1.9 + 0.4;
+    const p = walkableNear(walkable, spawn.i + Math.cos(a) * r, spawn.j + Math.sin(a) * r);
+    specs.push({ name: n === 1 ? 'Hung nhan (hits back)' : `Moc nhan ${n + 1}`, pos: p, fightsBack: n === 1 });
+  });
+  return new cb.MockCombat({ path: pathOfClass(classId), enemies: specs, rand, playerPos: spawn });
+}
+
 export const pathOfClass = (classId: string): shared.PathId => CLASS_PATH[classId] ?? 'kiem';
 
 /** Placeholder icon colour per element (visual only; real icons come with the art pipeline). */
@@ -110,7 +142,8 @@ interface Floater {
  * - mock enemies: stationary dummies plus one that hits back; placeholder sprites in the L3 Y-sort layer
  */
 export class CombatUi {
-  readonly mock: InstanceType<typeof cb.MockCombat>;
+  readonly backend: cb.CombatBackend;
+  private readonly ysort: YSortLayer;
   private readonly hudRoot: Node;
   private readonly slots: SlotUi[] = [];
   private readonly hpFill: Sprite;
@@ -139,22 +172,13 @@ export class CombatUi {
     worldRoot: Node,
     ysort: YSortLayer,
     private readonly art: ArtFrames,
-    classId: string,
-    spawn: TilePos,
-    walkable: (i: number, j: number) => boolean,
-    rand: () => number,
+    /** Where combat is resolved: `createMockBackend(...)` (offline `?combat=1`) or a `cb.ServerCombat` (online, server-authoritative). */
+    backend: cb.CombatBackend,
     private readonly playerPos: () => TilePos,
     private readonly clientToUi: (x: number, y: number) => { x: number; y: number },
   ) {
-    // --- mock enemies around the spawn: near-to-far dummies, the 2nd one hits back
-    const specs: Array<{ name: string; pos: TilePos; fightsBack?: boolean }> = [];
-    const rings = [3, 4.5, 6, 8, 12];
-    rings.forEach((r, n) => {
-      const a = n * 1.9 + 0.4;
-      const p = this.walkableNear(walkable, spawn.i + Math.cos(a) * r, spawn.j + Math.sin(a) * r);
-      specs.push({ name: n === 1 ? 'Hung nhan (hits back)' : `Moc nhan ${n + 1}`, pos: p, fightsBack: n === 1 });
-    });
-    this.mock = new cb.MockCombat({ path: pathOfClass(classId), enemies: specs, rand, playerPos: spawn });
+    this.backend = backend;
+    this.ysort = ysort;
 
     const l1 = worldRoot.getChildByName('L1_Decal') ?? worldRoot;
     this.ring = newNode('TargetRing', l1);
@@ -164,20 +188,6 @@ export class CombatUi {
     rs.spriteFrame = art.marker;
     rs.color = new Color(255, 70, 70, 255);
     this.ring.active = false;
-    for (const e of this.mock.enemies) {
-      const n = newNode(`Enemy${e.id}`);
-      n.addComponent(UITransform).setContentSize(48, 72);
-      n.getComponent(UITransform)!.setAnchorPoint(0.5, 0.06);
-      const sp = n.addComponent(Sprite);
-      sp.sizeMode = Sprite.SizeMode.CUSTOM;
-      sp.spriteFrame = art.player;
-      sp.color = e.fightsBack ? new Color(235, 90, 90, 255) : new Color(225, 205, 130, 255);
-      n.setPosition(tileToWorld(e.pos.i, e.pos.j));
-      const id = 3000 + e.id;
-      ysort.add(n, () => pointSortable(id, 0, e.pos.i, e.pos.j));
-      this.enemyNodes.set(e.id, n);
-    }
-
     // --- HUD
     this.hudRoot = newNode('CombatHud', hudParent);
     const bars = SLOT + 8 + BAR_H;
@@ -197,7 +207,7 @@ export class CombatUi {
     this.toast = text(this.hudRoot, 'Toast', 16, new Color(255, 220, 160, 255));
     this.toast.node.setPosition(0, bars + BAR_H + 34, 0);
 
-    const bar = this.mock.hotbar;
+    const bar = this.backend.hotbar;
     bar.slots.forEach((s, i) => {
       const x = -HUD_W / 2 + SLOT / 2 + i * (SLOT + GAP);
       const root = newNode(`Slot${i + 1}`, this.hudRoot);
@@ -255,19 +265,19 @@ export class CombatUi {
     // automation hook (scripts/combat-smoke.mjs): read the mock state without touching the DOM / canvas pixels
     (globalThis as unknown as Record<string, unknown>).__vgtdCombat = {
       state: () => ({
-        path: this.mock.hotbar.path,
-        target: this.mock.target.current,
-        hp: this.mock.player.hp,
-        hpMax: this.mock.player.hpMax,
-        mp: this.mock.player.mp,
-        mpMax: this.mock.player.mpMax,
-        enemies: this.mock.enemies.map((e) => ({ id: e.id, hp: e.hp, hpMax: e.hpMax, alive: e.alive })),
-        slots: this.mock.hotbar.slots.map((s, i) => ({
+        path: this.backend.hotbar.path,
+        target: this.backend.target.current,
+        hp: this.backend.player.hp,
+        hpMax: this.backend.player.hpMax,
+        mp: this.backend.player.mp,
+        mpMax: this.backend.player.mpMax,
+        enemies: this.backend.enemies.map((e) => ({ id: e.id, hp: e.hp, hpMax: e.hpMax, alive: e.alive })),
+        slots: this.backend.hotbar.slots.map((s, i) => ({
           id: s.skill.id,
           castable: s.castable,
-          cdMs: this.mock.hotbar.cooldownRemainingMs(i, this.clock),
+          cdMs: this.backend.hotbar.cooldownRemainingMs(i, this.clock),
         })),
-        gcd: this.mock.hotbar.gcdFraction(this.clock),
+        gcd: this.backend.hotbar.gcdFraction(this.clock),
         floaters: this.floaters.filter((f) => f.node.active).length,
       }),
     };
@@ -277,8 +287,8 @@ export class CombatUi {
 
   /** Called by InputManager (`pickEntity`): tile under the click -> enemy id, trying the body (above the foot) too. */
   pick(tile: TilePos): number | null {
-    const targets = this.mock.enemies;
-    const sel = this.mock.target;
+    const targets = this.backend.enemies;
+    const sel = this.backend.target;
     const hit = sel.pickAt(targets, tile, 0.9);
     if (hit !== null) return hit;
     // the sprite stands ~1 tile above its foot: look one tile-height further down the screen
@@ -299,14 +309,14 @@ export class CombatUi {
   update(dt: number, frameTarget: number | null): void {
     this.clock += dt * 1000;
     const now = this.clock;
-    if (frameTarget !== null) this.mock.target.select(frameTarget);
-    this.mock.setPlayerPos(this.playerPos());
-    for (const ev of this.mock.update(now)) this.onEvent(ev);
+    if (frameTarget !== null) this.backend.target.select(frameTarget);
+    this.backend.setPlayerPos(this.playerPos());
+    for (const ev of this.backend.update(now)) this.onEvent(ev);
     this.refresh(now, dt);
   }
 
   private castSlot(i: number): void {
-    for (const ev of this.mock.cast(i, this.clock)) this.onEvent(ev);
+    for (const ev of this.backend.cast(i, this.clock)) this.onEvent(ev);
   }
 
   private onKey(e: KeyboardEvent): void {
@@ -316,10 +326,10 @@ export class CombatUi {
       this.castSlot(Number(m[1]) - 1);
       e.preventDefault();
     } else if (e.code === 'Tab') {
-      this.mock.target.cycle(this.mock.enemies, this.playerPos(), 15, e.shiftKey);
+      this.backend.target.cycle(this.backend.enemies, this.playerPos(), 15, e.shiftKey);
       e.preventDefault();
     } else if (e.code === 'Escape') {
-      this.mock.target.clear();
+      this.backend.target.clear();
     }
   }
 
@@ -375,7 +385,7 @@ export class CombatUi {
   }
 
   private spawnText(entityId: number, str: string, color: Color, size: number): void {
-    const pos = entityId === cb.PLAYER_ID ? this.playerPos() : (this.mock.enemy(entityId)?.pos ?? null);
+    const pos = entityId === cb.PLAYER_ID ? this.playerPos() : (this.backend.enemy(entityId)?.pos ?? null);
     if (!pos) return;
     const f =
       this.floaters.find((x) => !x.node.active) ??
@@ -393,7 +403,7 @@ export class CombatUi {
   }
 
   private refresh(now: number, dt: number): void {
-    const p = this.mock.player;
+    const p = this.backend.player;
     const frac = (v: number, max: number): number => (max > 0 ? Math.max(0, Math.min(1, v / max)) : 0);
     this.setBar(this.hpFill, BAR_W, frac(p.hp, p.hpMax));
     this.setBar(this.mpFill, BAR_W, frac(p.mp, p.mpMax));
@@ -401,7 +411,7 @@ export class CombatUi {
     this.mpText.string = `${Math.ceil(p.mp)} / ${Math.round(p.mpMax)}`;
     this.shieldFill.node.getComponent(UITransform)!.setContentSize(BAR_W * frac(p.shield, p.hpMax), 4);
 
-    const bar = this.mock.hotbar;
+    const bar = this.backend.hotbar;
     const gcd = bar.gcdFraction(now);
     this.slots.forEach((s, i) => {
       const slot = bar.slots[i]!;
@@ -427,8 +437,8 @@ export class CombatUi {
     this.toast.node.active = this.toastLeft > 0;
 
     // target frame + ring + enemy visibility
-    const tid = this.mock.target.current;
-    const t = tid === null ? undefined : this.mock.enemy(tid);
+    const tid = this.backend.target.current;
+    const t = tid === null ? undefined : this.backend.enemy(tid);
     this.targetRoot.active = !!t;
     this.ring.active = !!t;
     if (t) {
@@ -437,10 +447,7 @@ export class CombatUi {
       this.targetText.string = `${Math.ceil(t.hp)} / ${t.hpMax}`;
       this.ring.setPosition(cellCenterToWorld(Math.floor(t.pos.i), Math.floor(t.pos.j)));
     }
-    for (const e of this.mock.enemies) {
-      const n = this.enemyNodes.get(e.id);
-      if (n) n.active = e.alive;
-    }
+    this.syncEnemyNodes();
 
     for (const f of this.floaters) {
       if (!f.node.active) continue;
@@ -454,6 +461,43 @@ export class CombatUi {
       const a = Math.round(255 * (1 - Math.max(0, (f.age - 0.5) / 0.5)));
       f.label.color = new Color(f.baseColor.r, f.baseColor.g, f.baseColor.b, a);
     }
+  }
+
+  /**
+   * One placeholder sprite per enemy the backend knows (mock dummies, or mobs the server shows); created on first sight, moved to the
+   * backend position every frame, hidden while dead and removed when the backend forgets the enemy.
+   */
+  private syncEnemyNodes(): void {
+    const seen = new Set<number>();
+    for (const e of this.backend.enemies) {
+      seen.add(e.id);
+      let n = this.enemyNodes.get(e.id);
+      if (!n) {
+        n = newNode(`Enemy${e.id}`);
+        n.addComponent(UITransform).setContentSize(48, 72);
+        n.getComponent(UITransform)!.setAnchorPoint(0.5, 0.06);
+        const sp = n.addComponent(Sprite);
+        sp.sizeMode = Sprite.SizeMode.CUSTOM;
+        sp.spriteFrame = this.art.player;
+        const hostile = (e as { fightsBack?: boolean }).fightsBack === true;
+        sp.color = hostile ? new Color(235, 90, 90, 255) : new Color(225, 205, 130, 255);
+        const id = e.id;
+        const key = 3000 + (id % 100000);
+        this.ysort.add(n, () => {
+          const cur = this.backend.enemy(id);
+          return pointSortable(key, 0, cur?.pos.i ?? 0, cur?.pos.j ?? 0);
+        });
+        this.enemyNodes.set(id, n);
+      }
+      n.setPosition(tileToWorld(e.pos.i, e.pos.j));
+      n.active = e.alive;
+    }
+    this.enemyNodes.forEach((n, id) => {
+      if (seen.has(id)) return;
+      this.ysort.remove(n); // unregisters only: destroy the node here
+      n.destroy();
+      this.enemyNodes.delete(id);
+    });
   }
 
   private setBar(fill: Sprite, full: number, fraction: number): void {
@@ -485,22 +529,6 @@ export class CombatUi {
     fill.node.setPosition(-w / 2, 0, 0);
     const label = text(back.node, `${name}Text`, 11, new Color(255, 255, 255, 255));
     return { back: back.node, fill, label };
-  }
-
-  /** Nearest walkable tile to a desired point (outward square rings), centred in the tile. */
-  private walkableNear(walkable: (i: number, j: number) => boolean, i: number, j: number): TilePos {
-    const ci = Math.floor(i);
-    const cj = Math.floor(j);
-    for (let r = 0; r < 12; r++) {
-      for (let dj = -r; dj <= r; dj++) {
-        for (let di = -r; di <= r; di++) {
-          if (Math.max(Math.abs(di), Math.abs(dj)) === r && walkable(ci + di, cj + dj)) {
-            return { i: ci + di + 0.5, j: cj + dj + 0.5 };
-          }
-        }
-      }
-    }
-    return { i: ci + 0.5, j: cj + 0.5 };
   }
 
   destroy(): void {
