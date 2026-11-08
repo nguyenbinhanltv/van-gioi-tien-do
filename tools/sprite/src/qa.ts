@@ -9,6 +9,7 @@
  */
 import type { OriginMeasurement } from './authored-origin.js';
 import { checkBracketedOcclusion } from './bracketed-occlusion.js';
+import { checkClipRelativeProxy, type HeadProxyConfig } from './clip-relative-proxy.js';
 import type { Image } from '@vgtd/rig';
 import type { Direction } from '@vgtd/shared';
 import { registeredNativeSsim, type RegisteredSsim } from './native-similarity.js';
@@ -66,6 +67,8 @@ export interface Finding {
 export interface QaClip {
   readonly heightPolicy?: HeightPolicy;
   readonly headEvidence?: Readonly<Record<number, HeadEvidence>>;
+  /** D61: clip-local cell -> declared y of the headband top edge (cell pixels), for the clip-relative proxy. */
+  readonly headbandTopRows?: Readonly<Record<number, number>>;
   readonly name: string;
   /** Facing of the ground travel, default E for existing API callers. */
   readonly direction?: Direction;
@@ -87,6 +90,8 @@ export interface QaClip {
 
 export interface QaOptions {
   readonly masterHead?: HeadLandmarks;
+  /** D61 proxy definition (hair colour, head authoring crop). */
+  readonly headProxy?: HeadProxyConfig;
   readonly masterHeight: number;
   readonly master: Image;
   readonly guides: Guides;
@@ -127,7 +132,9 @@ export function checkHeights(clip: QaClip, o: QaOptions): Finding[] {
     const head =
       clip.headEvidence?.[i]?.kind === 'bracketed-occlusion'
         ? checkBracketedOcclusion(clip, o, i, tol)
-        : checkHeadEvidence(clip, o, i, inBand, tol);
+        : clip.headEvidence?.[i]?.kind === 'clip-relative-proxy'
+          ? checkClipRelativeProxy(clip, o, i, tol)
+          : checkHeadEvidence(clip, o, i, inBand, tol);
     if (head !== null) {
       out.push(...head);
       if (

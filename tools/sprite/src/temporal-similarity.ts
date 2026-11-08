@@ -8,6 +8,7 @@ import {
   landmarkSimilarityRegions,
   legacySimilarityRegions,
   crownAnchoredSimilarityRegions,
+  isCrownOnlyHead,
   certifiedMasterSimilarityRegions,
   type SimilarityCropMeasurement,
   type SimilarityFrameHead,
@@ -24,7 +25,7 @@ export function measureTemporalSimilarity(
     secondHead?: SimilarityFrameHead;
   },
 ) {
-  if (options.firstHead?.kind === 'bracketed-occlusion' || options.secondHead?.kind === 'bracketed-occlusion') {
+  if (isCrownOnlyHead(options.firstHead) || isCrownOnlyHead(options.secondHead)) {
     if (!options.master || !options.masterHead || !options.firstHead || !options.secondHead)
       throw new Error('D60 temporal comparison requires the certified master and both visible crowns');
     const reference = certifiedMasterSimilarityRegions(options.master, options.masterHead, options.masterHeight);

@@ -33,3 +33,4 @@ export * from './resample.js';
 
 export * from './inherited-registration.js';
 export * from './bracketed-occlusion.js';
+export * from './clip-relative-proxy.js';

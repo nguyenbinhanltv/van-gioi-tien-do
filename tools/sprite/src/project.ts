@@ -19,6 +19,7 @@ import { packFrames } from './pack.js';
 import { lockPalette, paletteFromMaster, type Color3, type LockOptions, type PaletteOptions } from './palette.js';
 import { applyBacklog, loadBacklog, type BacklogReport } from './backlog.js';
 import { runQa, type Finding, type QaClip } from './qa.js';
+import type { HeadProxyConfig } from './clip-relative-proxy.js';
 import { resizeImage } from './repair.js';
 import {
   nativeCellTransform,
@@ -51,6 +52,8 @@ export interface ProjectClip {
   readonly heightPolicy?: HeightPolicy;
   /** Clip-local frame indices; coordinates in the aligned 256px output cell. */
   readonly headEvidence?: Readonly<Record<string, HeadEvidence>>;
+  /** D61: clip-local cell -> y of the headband top edge in the aligned cell, for the clip-relative proxy. */
+  readonly headbandTopRows?: Readonly<Record<string, number>>;
   readonly variant?: VariantReference;
   /** Armature animation name. */
   readonly name: string;
@@ -101,6 +104,8 @@ export interface Project {
   readonly resample?: ResampleMethod;
   /** Direction-specific skull landmarks on the resized256px master; excludes secondary hair. */
   readonly masterHead?: HeadLandmarks;
+  /** D61 proxy definition used by clip-relative-proxy head evidence. */
+  readonly headProxy?: HeadProxyConfig;
   readonly variant?: VariantProject;
   readonly character: string;
   readonly direction: Direction;
@@ -491,6 +496,7 @@ export function runProject(
       name: s.clip.name,
       ...(s.clip.heightPolicy ? { heightPolicy: s.clip.heightPolicy } : {}),
       ...(s.clip.headEvidence ? { headEvidence: s.clip.headEvidence } : {}),
+      ...(s.clip.headbandTopRows ? { headbandTopRows: s.clip.headbandTopRows } : {}),
       ...(s.clip.authoredOrigins ? { authoredOrigins: s.clip.authoredOrigins } : {}),
       direction: project.direction,
       ...(s.clip.footSlideUnmeasuredReason !== undefined
@@ -510,6 +516,7 @@ export function runProject(
     master,
     guides,
     ...(project.masterHead ? { masterHead: project.masterHead } : {}),
+    ...(project.headProxy ? { headProxy: project.headProxy } : {}),
   });
   const backlog = loadBacklog(resolve(baseDir, project.backlog ?? 'quality-backlog.json'), project.character);
   const originFindings: Finding[] = aligned.flatMap((s) =>
