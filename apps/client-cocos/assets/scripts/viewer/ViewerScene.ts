@@ -150,7 +150,7 @@ export class ViewerScene extends Component {
       onChange: () => (this.dirty = true),
       onRestart: () => this.restart(),
       onSeek: (norm) => this.seekNorm(norm),
-      onStep: (dt) => this.step(dt),
+      onStep: (direction) => this.step(direction),
     });
     this.panel.onLayout = () => (this.lastPanelSig = '');
     (globalThis as unknown as { __vgtdViewer?: ViewerHook }).__vgtdViewer = this.makeHook();
@@ -406,9 +406,12 @@ export class ViewerScene extends Component {
     }
   }
 
-  private step(dt: number): void {
+  private step(direction: -1 | 1): void {
+    const frame = this.mainActor().time();
+    if (!frame || frame.frames <= 0 || frame.duration <= 0) return;
+    const dt = (direction * frame.duration) / frame.frames;
     if (this.settings.mode === 'review') {
-      const d = this.mainActor().time()?.duration ?? 1;
+      const d = frame.duration;
       this.reviewT = (this.reviewT + dt + d) % d;
       return;
     }
