@@ -40,6 +40,9 @@ import {
   makeProfile,
   resolveCast,
   skillElement,
+  InMemoryProgressionStore,
+  ProgressionService,
+  newRecord,
   type ClientTransport,
   type CombatEvent,
   type CombatResult,
@@ -679,6 +682,63 @@ describe('own vitals in the snapshot (wire v3)', () => {
     for (let k = 0; k < 10; k++) node.tick();
     expect(selfs(c).length).toBeGreaterThan(0);
     expect(selfs(c).every((s) => s.vitals === null)).toBe(true);
+  });
+});
+
+describe('progression -> combat (onStageChange -> setRealm)', () => {
+  it('a stored Luyện Khí 3-2 character gets the combat stats of that stage once its profile loads; vitals follow on the wire', async () => {
+    const store = new InMemoryProgressionStore();
+    const root = {
+      type: 'tap_tam' as const,
+      elements: ['kim', 'moc', 'thuy'] as ('kim' | 'moc' | 'thuy')[],
+      mutation: null,
+    };
+    await store.save({ ...newRecord('acc9', root), realm: 3, subRealm: 2, version: 1 }, 0);
+    const node = new WorldNode({
+      seed: 12,
+      mapTiles: 64,
+      spawn: { i0: 20, j0: 20, side: 1 },
+      combat: {},
+      progression: new ProgressionService({ store, seed: 12 }),
+    });
+    const c = new Client();
+    const id = node.addPlayer(c, 'acc9');
+    const level1 = makeProfile('kiem', 1, 1).stats.hp;
+    expect(node.combat!.maxHpOf(id)).toBe(level1); // registered at the default stage until the profile arrives
+    await new Promise<void>((r) => setImmediate(r)); // the async profile load finishes
+    const stage = makeProfile('kiem', 3, 2);
+    expect(stage.stats.hp).toBeGreaterThan(level1);
+    expect(node.combat!.maxHpOf(id)).toBe(stage.stats.hp);
+    expect(node.combat!.profileOf(id)).toMatchObject({ realm: 3, substage: 2 });
+    const me = node.world.entities.find((e) => e.id === id)!;
+    expect(me.hp).toBe(stage.stats.hp); // full HP stays full
+    expect(me.mpMax).toBe(stage.stats.mp);
+    // the snapshot's own vitals follow (hpMax / mpMax changed, so they are re-sent)
+    for (let k = 0; k < 6; k++) node.tick();
+    const selfs = c.msgs.flatMap((m) => (m.type === 'snapshot' && m.self?.vitals ? [m.self.vitals] : []));
+    expect(selfs[selfs.length - 1]).toMatchObject({ hp: stage.stats.hp, hpMax: stage.stats.hp, mpMax: stage.stats.mp });
+  });
+
+  it('a node without combat ignores stage changes, and a stage change for an id that left is a no-op', async () => {
+    const store = new InMemoryProgressionStore();
+    const root = { type: 'don' as const, elements: ['moc'] as 'moc'[], mutation: null };
+    await store.save({ ...newRecord('acc8', root), realm: 2, subRealm: 1, version: 1 }, 0);
+    const plain = new WorldNode({ seed: 1, mapTiles: 64, progression: new ProgressionService({ store, seed: 1 }) });
+    plain.addPlayer(new Client(), 'acc8');
+    await new Promise<void>((r) => setImmediate(r));
+    expect(plain.combat).toBeNull();
+    // the player leaves before the profile load callback runs: nothing breaks, nothing is registered
+    const node = new WorldNode({
+      seed: 1,
+      mapTiles: 64,
+      combat: {},
+      progression: new ProgressionService({ store, seed: 1 }),
+    });
+    const t = new Client();
+    const id = node.addPlayer(t, 'acc8');
+    node.removePlayer(id, t);
+    await new Promise<void>((r) => setImmediate(r));
+    expect(node.combat!.profileOf(id)).toBeUndefined();
   });
 });
 

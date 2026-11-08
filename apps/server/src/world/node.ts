@@ -47,6 +47,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
+import type { Outbound, ProgressionService } from '../progression/service.js';
 import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 
@@ -145,6 +146,8 @@ export interface WorldNodeOptions {
   /** square spawn region (tile coords); defaults to the map centre, 96 tiles wide */
   spawn?: { i0: number; j0: number; side: number };
   maxVisible?: number;
+  /** tu vi / breakthrough module (D76); absent = progression messages are rejected as unexpected */
+  progression?: ProgressionService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -227,6 +230,7 @@ export class WorldNode {
   private running = false;
   private lastTickStart = 0;
   private byId = new Map<number, EntityState>();
+  readonly progression: ProgressionService | undefined;
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
   /** monster spawns / AI (D74); null when the node runs without mobs */
@@ -243,6 +247,20 @@ export class WorldNode {
     const side = Math.min(96, n / 2);
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
+    this.progression = opts.progression;
+    this.progression?.attach({
+      isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
+      tickOf: () => this.world.tick,
+      // a character's realm / sub-stage (profile loaded, breakthrough done) re-derives its combat stats; `combat` exists by then
+      // (the callback only runs after construction), and an id that already left is a no-op in `setRealm`
+      onStageChange: (id, realm, subRealm) => {
+        if (this.combat) this.world = this.combat.setRealm(this.world, id, realm, subRealm);
+      },
+      onPersistFailure: (id) => {
+        const c = this.clients.get(id);
+        if (c) this.kick(c, ErrorCode.Internal, 'progression storage error');
+      },
+    });
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
     const mo = opts.mobs;
     if (mo) {
@@ -316,6 +334,7 @@ export class WorldNode {
       dead: false,
       stats: emptyStats(),
     });
+    this.progression?.join(id, accountId, this.world.timeMs);
     return id;
   }
 
@@ -336,6 +355,7 @@ export class WorldNode {
     const c = this.clients.get(id);
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
+    void this.progression?.leave(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
@@ -379,6 +399,7 @@ export class WorldNode {
       case 'input': {
         c.lastAckMs = this.world.timeMs;
         for (const p of msg.inputs) {
+          if (p.mag > 0) this.progression?.onInput(id, p.mag, this.world.timeMs);
           // the packet re-sends the previous inputs; apply each seq once (uint16 wrap-aware)
           if (c.lastRecvSeq !== null && !seqNewer(p.seq, c.lastRecvSeq)) continue;
           c.lastRecvSeq = p.seq;
@@ -395,6 +416,7 @@ export class WorldNode {
         break;
       }
       case 'skill_cast':
+        this.progression?.onCombat(id, this.world.timeMs);
         c.inbox.push({
           kind: 'cast',
           entityId: c.id,
@@ -404,6 +426,14 @@ export class WorldNode {
           rttMs: 0,
           aim: msg.aim ? { i: dequantizePos(msg.aim.qi), j: dequantizePos(msg.aim.qj) } : null,
         });
+        break;
+      case 'meditate_start':
+      case 'meditate_stop':
+      case 'breakthrough_start':
+        if (!this.progression) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
         break;
       case 'ping':
         this.send(c, { type: 'pong', clientTimeMs: msg.clientTimeMs, serverTimeMs: this.world.timeMs >>> 0 });
@@ -445,6 +475,7 @@ export class WorldNode {
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
+    if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -470,6 +501,14 @@ export class WorldNode {
     const dt = clock() - t0;
     pushCapped(this.tickMs, dt, WORLD_CONFIG.TICK_SAMPLES);
     return dt;
+  }
+
+  /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
+  private deliver(out: Outbound[]): void {
+    for (const o of out) {
+      const c = this.clients.get(o.entityId);
+      if (c && !c.dead) this.send(c, o.msg);
+    }
   }
 
   private handleEvents(events: SimEvent[]): void {

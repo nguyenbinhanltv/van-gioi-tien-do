@@ -25,6 +25,11 @@ WS    /ws   first frame (JSON text, <= 5 s): {"type":"hello","protocolMin":2,"pr
 | `scripts/loadtest.mjs` | bundles the TS entry with esbuild into `node_modules/.vgtd-loadtest/` and runs it                                                                 |
 | `src/config.ts`        | server-only tunables (auth limits, frame/rate limits, visible cap). Network/AOI/tick constants come from `@vgtd/shared`.                          |
 
+`src/progression/` (D76) holds the tu vi module: `ProgressionService` (meditation, minor/major breakthrough, seeded rolls, anti-abuse,
+idempotent `requestId`), pure rules in `state.ts` (all numbers from `@vgtd/shared`, docs/07 §2 §5), and the `ProgressionStore` / `RollLog`
+persistence ports with in-memory implementations (docs/23). `WorldNode` takes it as `WorldNodeOptions.progression` (`startServer` enables
+it by default) and only forwards inputs, casts, the six progression messages and the 20 Hz tick to it.
+
 Server authority: clients send **intent only** (direction, magnitude, flags, declared dt). Positions, cooldowns, MP and
 range/LOS are decided by `@vgtd/sim`; over-budget inputs are held, `dt` outside 8-50 ms is penalised, and the suspicion
 score disconnects speedhackers (docs/08 §6). Clocks (`hrtime`, `setTimeout`) only schedule and measure ticks; the sim

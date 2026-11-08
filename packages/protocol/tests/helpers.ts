@@ -1,4 +1,5 @@
 import type {
+  ColdMessage,
   AoiEnterMsg,
   AoiLeaveMsg,
   EnterEntity,
@@ -56,8 +57,11 @@ export function randEntity(r: Rng, index: number, qi = r.int(0, 65535), qj = r.i
   return { index, qi, qj, anim: r.int(0, 63), dir: r.int(0, 7), hpPct: r.bool(0.2) ? r.int(0, 127) : null };
 }
 
-export function randMessage(r: Rng, type?: Message['type']): Message {
-  const types: Message['type'][] = [
+/** Hot-family message types (the cold progression family has its own tests). */
+export type HotType = Exclude<Message['type'], ColdMessage['type']>;
+
+export function randMessage(r: Rng, type?: HotType): Message {
+  const types: HotType[] = [
     'input',
     'snapshot',
     'aoi_enter',
