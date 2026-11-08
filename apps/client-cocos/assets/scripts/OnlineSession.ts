@@ -138,6 +138,7 @@ export class OnlineSession {
       pending: this.net.predictor?.pendingCount ?? null,
       rttMs: this.net.rttMs,
       snapshots: this.net.snapshots,
+      reconnects: this.net.reconnects,
       lastError: this.net.lastError,
       others: Array.from(this.actors.values()).map((a) => ({ entityId: a.entityId, i: a.pos.i, j: a.pos.j })),
     });
@@ -157,7 +158,8 @@ export class OnlineSession {
   }
   /** Connecting (or logged in, waiting for the first snapshot): the character stands still. */
   get waiting(): boolean {
-    return this.net.status === 'connecting' || (this.net.status === 'online' && !this.net.predictor?.ready);
+    const st = this.net.status;
+    return st === 'connecting' || st === 'reconnecting' || (st === 'online' && !this.net.predictor?.ready);
   }
 
   /** Per-frame: feed the input, step the prediction, and sync the remote actors. Returns where to draw the local player. */
@@ -211,6 +213,8 @@ export class OnlineSession {
     const n = this.net;
     if (this.failed) return `online: ${this.failed} (offline controls active)`;
     if (n.status === 'closed') return `online: disconnected${n.lastError ? ` (${n.lastError})` : ''}`;
+    if (n.status === 'reconnecting')
+      return `online: connection lost, reconnecting${n.lastError ? ` (${n.lastError})` : ''}...`;
     if (!this.active) return `online: ${n.status}...`;
     const p = n.predictor!;
     return `online ${this.username} | rtt ${n.rttMs.toFixed(0)} ms | pending ${p.pendingCount} | err ${p.lastError.toFixed(3)} | others ${this.actors.size}`;
