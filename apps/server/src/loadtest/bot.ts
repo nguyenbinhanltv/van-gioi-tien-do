@@ -33,9 +33,13 @@ export interface BotOptions {
   area?: { i0: number; j0: number; side: number };
   /** number of skills in the sim table (bots cast random ids) */
   skillCount?: number;
+  /** wire ids the bot may cast (the skills its class owns, with combat on); default 0..skillCount-1 */
+  skillIds?: number[];
   /** deterministic behaviour stream */
   seed?: number;
   castEveryMs?: number;
+  /** global cooldown of the skill table: when set, casts are never spaced closer than this (+30 ms), like a real client */
+  castGcdMs?: number;
   /** speedhack clock multiplier (declared input time / real time); 3 = three inputs per tick */
   speedFactor?: number;
 }
@@ -64,6 +68,8 @@ export interface BotReport {
   kickedAfterMs: number | null;
   errors: string[];
   castOk: number;
+  /** total hits reported in skill_result packets (non-zero only with server combat on) */
+  hitsSeen: number;
   castRejected: number;
   closedUnexpectedly: boolean;
 }
@@ -146,6 +152,7 @@ export class Bot {
       kickedAfterMs: null,
       errors: [],
       castOk: 0,
+      hitsSeen: 0,
       castRejected: 0,
       closedUnexpectedly: false,
     };
@@ -259,6 +266,7 @@ export class Bot {
         this.sampleVisible();
         break;
       case 'skill_result':
+        r.hitsSeen += msg.hits.length;
         if (msg.reason === 0) r.castOk++;
         else r.castRejected++;
         // an honest client waits for the cooldown the server reports
@@ -308,7 +316,7 @@ export class Bot {
     r.visibleSum = r.visibleSamples = r.visibleMax = 0;
     r.rttMs = [];
     r.maxSpeedTilesPerS = 0;
-    r.castOk = r.castRejected = 0;
+    r.castOk = r.castRejected = r.hitsSeen = 0;
     this.measuringFrom = performance.now();
     this.posWindow = null;
   }
@@ -363,10 +371,13 @@ export class Bot {
         if (this.kind === 'cooldown') {
           // ignores the cooldown the server reports: one cast of skill 0 per input tick
           this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId: 0, targetId: 0 }), { binary: true });
-        } else if (now >= this.nextCastAt && (this.o.skillCount ?? 0) > 0) {
-          this.nextCastAt = now + (this.o.castEveryMs ?? 1500) * (0.5 + this.rnd());
+        } else if (now >= this.nextCastAt && ((this.o.skillIds?.length ?? 0) > 0 || (this.o.skillCount ?? 0) > 0)) {
+          this.nextCastAt =
+            now +
+            Math.max(this.o.castGcdMs ? this.o.castGcdMs + 30 : 0, (this.o.castEveryMs ?? 1500) * (0.5 + this.rnd()));
           const ready: number[] = [];
-          for (let id = 0; id < this.o.skillCount!; id++) if ((this.readyLocal.get(id) ?? 0) <= now) ready.push(id);
+          for (const id of this.o.skillIds ?? Array.from({ length: this.o.skillCount! }, (_, k) => k))
+            if ((this.readyLocal.get(id) ?? 0) <= now) ready.push(id);
           if (this.kind !== 'honest' || ready.length > 0) {
             const skillId = ready.length > 0 ? ready[Math.floor(this.rnd() * ready.length)]! : 0;
             this.ws.send(encode({ type: 'skill_cast', seq: this.seq, skillId, targetId: 0 }), { binary: true });

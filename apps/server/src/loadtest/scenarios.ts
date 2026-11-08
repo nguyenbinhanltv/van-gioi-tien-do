@@ -8,15 +8,17 @@
  *   loginstorm   S7  500 logins in 10 s against the password-hash queue while bots stay connected
  *   cooldown     --  bots that ignore skill cooldowns: must be capped or kicked, honest bots unaffected
  *   soak         S5  long run with heap / tick-drift sampling (minutes here; hours on a target box)
+ *   war          S3  200 players packed together with mobs around, all casting their class skills (server combat on)
  *
  * Common options: --bots N --duration S --warmup S --seed N --json
  * Per scenario: flight --flyers N --area T · badnet --predictors N · loginstorm --logins N --window S · cooldown --cheaters N
  *               · soak --minutes M --sample S
- * (S3 war with cast spam arrives with server combat.) Every scenario prints its numbers and PASS/FAIL criteria; exit code 1
+ * war: --bots N --mobs N --area T --cast-ms MS (default 900, above the 800 ms GCD) (no PvP exists yet, so the "two factions" of docs/28 are one crowd fighting mobs)
+ * Every scenario prints its numbers and PASS/FAIL criteria; exit code 1
  * when a criterion fails. All numbers are same-machine loopback: see docs/OPEN-ITEMS.md "P2 exit".
  */
 import { Worker } from 'node:worker_threads';
-import { NETWORK } from '@vgtd/shared';
+import { NETWORK, ZONE_SPAWN_TABLES, skillsOf } from '@vgtd/shared';
 import { FLY_SPEED, compileSkills } from '@vgtd/sim';
 import { startServer, type RunningServer } from '../server.js';
 import type { BotKind, BotReport } from './bot.js';
@@ -65,12 +67,31 @@ const skills = compileSkills();
 function squareAt(side: number): { i0: number; j0: number; side: number } {
   return { i0: MAP / 2 - side / 2, j0: MAP / 2 - side / 2, side };
 }
-async function startWorld(spawn: { i0: number; j0: number; side: number }): Promise<RunningServer> {
+async function startWorld(
+  spawn: { i0: number; j0: number; side: number },
+  world: { mobs?: number; combat?: boolean } = {},
+): Promise<RunningServer> {
+  // one zone over the bots' area; table counts scaled so about `mobs` monsters live there (same as the load-test CLI)
+  const per = ZONE_SPAWN_TABLES.find((t) => t.zone === 'bia_rung')!.groups.reduce((n, g) => n + g.count, 0);
+  const mobConfig = world.mobs
+    ? {
+        zones: [
+          {
+            zone: 'bia_rung' as const,
+            i0: spawn.i0,
+            j0: spawn.j0,
+            i1: spawn.i0 + spawn.side,
+            j1: spawn.j0 + spawn.side,
+          },
+        ],
+        density: world.mobs / per,
+      }
+    : undefined;
   return startServer({
     port: 0,
     // the per-IP limits would block a many-bot run that comes from one loopback address
     auth: { registerPerIpPerDay: 0, ipFailLimit: 1_000_000 },
-    world: { seed, mapTiles: MAP, spawn, skills },
+    world: { seed, mapTiles: MAP, spawn, skills, mobs: mobConfig, combat: world.combat ? {} : undefined },
   });
 }
 
@@ -540,8 +561,76 @@ async function soak(): Promise<Outcome> {
   }
 }
 
+// ------------------------------------------------------------------ S3 war
+async function war(): Promise<Outcome> {
+  const bots = num('bots', 200);
+  const mobs = num('mobs', 150);
+  const duration = num('duration', 30);
+  const castMs = num('cast-ms', 900); // a real client waits for the GCD (800 ms) and per-skill cooldowns
+  const spawn = squareAt(num('area', 40));
+  const srv = await startWorld(spawn, { mobs, combat: true });
+  try {
+    // the class every player gets owns 8 of the skills: casting any other id is rejected as UnknownSkill
+    const keys = new Set(skillsOf('kiem').map((k) => k.id));
+    const skillIds = skills.filter((k) => keys.has(k.key)).map((k) => k.id);
+    const alive = srv.world.mobs?.alive ?? 0;
+    const run = await runFleet(
+      srv,
+      fleetConfig(srv, spawn, { bots, skillIds, castEveryMs: castMs, castGcdMs: skills[0]!.gcdMs }),
+      duration,
+    );
+    const p = population(run, 'honest');
+    const tick = dist(run.sample.tickMs);
+    const rs = run.reports.filter((r) => r.kind === 'honest');
+    const hits = rs.reduce((a, r) => a + r.hitsSeen, 0);
+    const m = run.sample.metrics;
+    const war = NETWORK.BANDWIDTH_KBPS_WAR;
+    return {
+      scenario: `S3 war: ${bots} players in ${spawn.side}x${spawn.side} tiles with ${alive} mobs, each casting one of ${skillIds.length} class skills about every ${castMs} ms, ${duration}s (no PvP yet)`,
+      summary: [
+        tickLine(tick),
+        `tick breakdown ms: sim step mean ${f(run.sample.phases.stepMs / Math.max(1, tick.n))}  AOI mean ${f(run.sample.phases.aoiMs / Math.max(1, run.sample.phases.aoiTicks))} per AOI tick  snapshot encode+send mean ${f(run.sample.phases.snapMs / Math.max(1, tick.n))}`,
+        `down KB/s/player (wire) mean ${f(p.downWire.mean)} p95 ${f(p.downWire.p95)} max ${f(p.downMax)}; up mean ${f(p.up.mean)} max ${f(p.up.max)}`,
+        `AOI visible mean ${f(p.visible.mean, 1)} (max ${p.visibleMax}); enter ${f(p.enterPerSec)}/s leave ${f(p.leavePerSec)}/s`,
+        `casts: ok ${p.castOk}, rejected ${p.castRejected}, hits seen ${hits}; server: ok ${m.castOk} rejected ${m.castRejected} dropped ${m.castDropped}; violations ${JSON.stringify(m.violations)}`,
+        `server CPU ${f(((run.sample.cpuUserMs + run.sample.cpuSystemMs) / (run.sample.durationS * 1000)) * 100, 0)}% of one core, RSS ${f(run.sample.rssMb, 0)} MB`,
+      ],
+      criteria: [
+        {
+          name: 'CCU stable under casting',
+          target: `${bots} bots, none dropped or kicked`,
+          value: `${p.connected}/${bots} connected, ${m.disconnects} server disconnects`,
+          pass: p.count === bots && p.connected === bots && m.disconnects === 0,
+        },
+        { name: 'tick p99', target: '<= 40 ms', value: `${f(tick.p99)} ms`, pass: tick.p99 <= 40 },
+        {
+          name: 'downstream per player (worst, WS payload + frame header)',
+          target: `<= ${war} KB/s (war budget)`,
+          value: `${f(p.downMax)} KB/s (mean ${f(p.downWire.mean)})`,
+          pass: p.downMax <= war,
+        },
+        { name: 'upstream per player', target: '< 1 KB/s', value: `${f(p.up.max)} KB/s`, pass: p.up.max < 1 },
+        {
+          name: 'visible entities within the Mobile cap',
+          target: `<= ${NETWORK.MAX_ENTITIES_PER_CLIENT_MOBILE}`,
+          value: `${p.visibleMax}`,
+          pass: p.visibleMax <= NETWORK.MAX_ENTITIES_PER_CLIENT_MOBILE && p.visibleMax > 0,
+        },
+        {
+          name: 'combat really ran (hits resolved)',
+          target: 'accepted casts > 0 and hits > 0',
+          value: `${p.castOk} ok, ${hits} hits`,
+          pass: p.castOk > 0 && hits > 0,
+        },
+      ],
+    };
+  } finally {
+    await srv.stop();
+  }
+}
+
 // ------------------------------------------------------------------ main
-const table: Record<string, () => Promise<Outcome>> = { flight, badnet, loginstorm, cooldown, soak };
+const table: Record<string, () => Promise<Outcome>> = { flight, badnet, loginstorm, cooldown, soak, war };
 if (!table[scenario]) {
   console.error(`usage: p2exit <${Object.keys(table).join('|')}> [options]  (see the header of scenarios.ts)`);
   process.exit(2);

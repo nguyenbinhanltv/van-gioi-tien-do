@@ -30,6 +30,10 @@ export interface BotRunConfig {
   impair?: Impairment;
   /** server map size, needed by the predicting bots */
   mapTiles?: number;
+  /** skills the bots cast (wire ids), ms between casts; for the war scenario with server combat on */
+  skillIds?: number[];
+  castEveryMs?: number;
+  castGcdMs?: number;
 }
 
 export interface BotFleet {
@@ -63,6 +67,9 @@ export async function connectFleet(cfg: BotRunConfig, onProgress?: (n: number) =
         inputHz: cfg.inputHz,
         area: cfg.area,
         skillCount: cfg.skillCount,
+        skillIds: cfg.skillIds,
+        castEveryMs: cfg.castEveryMs,
+        castGcdMs: cfg.castGcdMs,
         speedFactor: cfg.speedFactor,
         seed: cfg.seed * 1000 + k,
       }),
