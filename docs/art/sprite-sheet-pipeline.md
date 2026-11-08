@@ -659,3 +659,13 @@ không fallback centroid, không ghi cửa sổ thành anatomy.
 
 INFO ghi `head_bracketed`, `measurement:unmeasured`, các lân cận, budget, Lab và hai pair SSIM. Không có
 size/span/breadth giả; review hiện `bracketed (unmeasured)`. Giữ nguyên cổng frame/canvas/foot/loop/export.
+
+## Bổ sung D62: ngoại lệ sửa HEAD-BAND bằng ROI đầu
+
+[Cập nhật D62: ghi nhận đúng phạm vi orchestrator phê duyệt ngày 2026-11-08; áp dụng mọi lớp/hướng có master đã khóa, không chỉ Đan/Phù S. D41/D47 vẫn cấm scale thân hoặc toàn ô; chỉ ngoại lệ vùng đầu dưới đây được phép.]
+
+- Chỉ sửa head-band: scale đồng đều ROI đầu đúng một lượt, độ lệch hệ số so với 1 không quá 5%, không rotation/shear; Lanczos3 với mặt nạ feather và dải base khóa. Pivot là chin/nape base đã khóa, hoặc đường tiếp giáp đầu–trang phục nhìn thấy khi cả hai bị che. Không chiếu hoặc bịa landmark để chọn pivot.
+- Mỗi sửa chữa bắt đầu từ ORIGINAL hoặc từ đúng một AI head edit khóa master. AI head replacement tối đa một lần thử mỗi ô; giữ tóc/bun/mặt/phụ kiện và trang phục đã khóa. Chỉ được thêm tối đa một lượt scale xác định sau AI, không nối chồng thêm.
+- RGBA ngoài mask phải giống từng byte, kể cả RGB ẩn. D57 inherited-registration giữ đăng ký căn chỉnh từ nguồn đã kiểm chứng; tỉ lệ thân/nhân vật D41 không đổi. Mask chỉ bao vùng đầu/tóc; giữ nguyên thân, cổ áo, tay, vũ khí và chân ngoài mask.
+- Provenance giữ nguồn, prompt/tool/model-undisclosed/UTC của AI nếu có, hệ số, pivot, bề rộng feather/dải base và SHA256 mask. Xem seam 4× bằng mắt; đo lại crown/chin hoặc rear landmarks trên ô aligned thực theo cùng quy tắc master. Kích thước yêu cầu trong prompt không phải bằng chứng.
+- Mọi gate head/Lab/foot/canvas/export/capture giữ nguyên. Không sửa pose động hoặc scale toàn ô để lọt bbox; không dùng ngoại lệ này để miễn lỗi chân, clipping hay thay thiết kế.

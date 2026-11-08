@@ -1,4 +1,4 @@
-/** Explicitly owner-authorized HEAD ROI only; original body calibration remains unchanged. */
+/** D62 owner-authorized HEAD ROI only; original body calibration remains unchanged. */
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -202,7 +202,7 @@ const provenance = {
   model: 'not applicable; original AI provenance retained',
   utc: new Date().toISOString(),
   authorization:
-    'Orchestrator2026-11-08: uniform head ROI <=5%, chin/neck anchored, Lanczos3 feather, exact outside RGBA, D57,4x seam review. No frame/body scale.',
+    'D62 / orchestrator2026-11-08: uniform head ROI <=5%, chin/neck anchored, Lanczos3 feather, exact outside RGBA, D57,4x seam review. No frame/body scale.',
   source: plan.source,
   sourceSha256: hash(sourceBytes),
   edited: plan.output,
