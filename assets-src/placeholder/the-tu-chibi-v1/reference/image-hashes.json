@@ -360,6 +360,266 @@
     "sha256": "207e579b2dd56d17d1c91f10ab4cc1aecdcab04a1491b5e4f6f81b77e0db1263"
   },
   {
+    "file": "S/raw/attack.attempt1.png",
+    "bytes": 1808415,
+    "sha256": "5aa58b067d8e85d80464c2e4d343e6517455377788fc09013a88bbceb5028811"
+  },
+  {
+    "file": "S/raw/attack_2.attempt1.png",
+    "bytes": 1748006,
+    "sha256": "7b4cf326f953e0ce8655f4226f050c320406b17db3bc7938b9f5a3211e695ef1"
+  },
+  {
+    "file": "S/raw/attack_3.attempt1.png",
+    "bytes": 1816790,
+    "sha256": "2c1c5c1e6bda61aa1845a53220cad55b653dd95eabafdeb6765ca7f0af6fe0ae"
+  },
+  {
+    "file": "S/raw/cast.attempt1.png",
+    "bytes": 1897233,
+    "sha256": "db441c1a798ec672b8a8e0e77dca1d5deae2a016f7a91e4321a88d9538434fec"
+  },
+  {
+    "file": "S/raw/cast.headroom.png",
+    "bytes": 1871756,
+    "sha256": "9e189f6b873af5e02e636a96939aa8a56066f2bb22a45da653fbb07808b5dced"
+  },
+  {
+    "file": "S/raw/cast.headroom2-edit.png",
+    "bytes": 1839428,
+    "sha256": "b0bd78cc5d3578fe4574c147924b9700fa88bc0f204746cb0b89839bf5736a0e"
+  },
+  {
+    "file": "S/raw/cast.headroom2.png",
+    "bytes": 2343342,
+    "sha256": "f53523dbca5258021c9ee3e85618191b48284d0f1bc0e474555b4e22c20c23cf"
+  },
+  {
+    "file": "S/raw/channel.attempt1.png",
+    "bytes": 1802093,
+    "sha256": "48ff30402efab35751452c9fdd48cf9b1b77f8dfc8d8275d22079e17ce611bc0"
+  },
+  {
+    "file": "S/raw/die.attempt1.png",
+    "bytes": 1732763,
+    "sha256": "9042bb4f08fb53bd8c6259c96be888cc8a6de6a5839746237d393de316f0b185"
+  },
+  {
+    "file": "S/raw/emote.attempt1.png",
+    "bytes": 1838238,
+    "sha256": "96821efd1bf44fb529f20483a58f994630aad64d52135f62b1ffbef07a114c3b"
+  },
+  {
+    "file": "S/raw/hit-dash.attempt1.png",
+    "bytes": 1981417,
+    "sha256": "0245a4c4846cf705f3cc531d946f99ae25514de7cda14dc7a4c0e036c893836e"
+  },
+  {
+    "file": "S/raw/hit-dash.head-edit.png",
+    "bytes": 1951475,
+    "sha256": "1f34c6a1ba4a081bdc8d2426fc9798f528e91e5a213535665fb79909609830b2"
+  },
+  {
+    "file": "S/raw/hit-dash.head-edit2.png",
+    "bytes": 1924116,
+    "sha256": "de77f5de16d5c725d3ef6ed8895c59030511eb72858c6a9a1b1a9203abe7e5f2"
+  },
+  {
+    "file": "S/raw/hit-dash.head-repaired.png",
+    "bytes": 2399853,
+    "sha256": "0205e42f746106dc50490310c85530e81b80226ebfa39f72bd7462d6c7d0641c"
+  },
+  {
+    "file": "S/raw/hit-dash.head-repaired2.png",
+    "bytes": 2406600,
+    "sha256": "0b1ec95b29e06a45616f2f0a91d2e3673d56ad5861d670ae6d4f69b892c4cafb"
+  },
+  {
+    "file": "S/raw/idle.attempt1.png",
+    "bytes": 1921730,
+    "sha256": "53c61b7f09e8bcd4e31e1968b9c9f1e51e19a99cf783ebfb729af3a58b5f9c66"
+  },
+  {
+    "file": "S/raw/meditate.attempt1.png",
+    "bytes": 1758881,
+    "sha256": "7c7742882a18fe5b462b74b53fa52e8da986ad3d5dadb6a46b33854a476a7b56"
+  },
+  {
+    "file": "S/raw/run.attempt1.png",
+    "bytes": 1929248,
+    "sha256": "8182cda1dde575aa51e7826b65bd990d20a14672aa03d56f3b9fd2f4b1a67d0a"
+  },
+  {
+    "file": "S/raw/run.head-corrected.png",
+    "bytes": 1857839,
+    "sha256": "a77024870ef3afe95330d7e01057ebbe9c844fc7622f308ae052b1f8af1c4ace"
+  },
+  {
+    "file": "S/raw/sword_fly.attempt1.png",
+    "bytes": 1742639,
+    "sha256": "0961547460bd0ad93ba16a544ead61b3a3832557516882db08597916bfd04e25"
+  },
+  {
+    "file": "S/raw/tribulation.attempt1.png",
+    "bytes": 1768566,
+    "sha256": "35498dec3c09aa50be26eb96a5432583b57bfccbb161529cc1c70c09a2a11373"
+  },
+  {
+    "file": "S/raw/walk.attempt1.png",
+    "bytes": 1865449,
+    "sha256": "1f740c10b3c19aaf150f6b7b5f6619be1a1db1f57a415fb3b0bebb46bbf98d2e"
+  },
+  {
+    "file": "S/templates/attack.head-stencil.template.png",
+    "bytes": 66238,
+    "sha256": "b1f1a722ac9337054354e5c066a3e11d104a6436747a244bdfbebd510a4acd63"
+  },
+  {
+    "file": "S/templates/attack.template.png",
+    "bytes": 14947,
+    "sha256": "4b1c73c904556cf1b514fd213f3dcacc7b463115eecbcc90ea513e00b1c90f5b"
+  },
+  {
+    "file": "S/templates/attack_2.head-stencil.template.png",
+    "bytes": 66238,
+    "sha256": "b1f1a722ac9337054354e5c066a3e11d104a6436747a244bdfbebd510a4acd63"
+  },
+  {
+    "file": "S/templates/attack_2.template.png",
+    "bytes": 14947,
+    "sha256": "4b1c73c904556cf1b514fd213f3dcacc7b463115eecbcc90ea513e00b1c90f5b"
+  },
+  {
+    "file": "S/templates/attack_3.head-stencil.template.png",
+    "bytes": 66265,
+    "sha256": "113de333f22e99ed0f1728989ba82aed5b6c0e9b5c24c206f39361d3fe46a3cb"
+  },
+  {
+    "file": "S/templates/attack_3.template.png",
+    "bytes": 14947,
+    "sha256": "4b1c73c904556cf1b514fd213f3dcacc7b463115eecbcc90ea513e00b1c90f5b"
+  },
+  {
+    "file": "S/templates/cast.head-stencil.template.png",
+    "bytes": 66546,
+    "sha256": "4f95f2e7913165ec774ac12677548a1865606f2955bcca85baee96a06f995f19"
+  },
+  {
+    "file": "S/templates/cast.template.png",
+    "bytes": 15535,
+    "sha256": "83dcd567f3b948bf37157dc3653969c7c21366e293536f12c39225bff0c27730"
+  },
+  {
+    "file": "S/templates/channel.head-stencil.template.png",
+    "bytes": 49930,
+    "sha256": "d4f8cfe8534f2af957d95e73faf7aa3c6fc1baf2b066c7a4e9073b2408e5fb35"
+  },
+  {
+    "file": "S/templates/channel.template.png",
+    "bytes": 11665,
+    "sha256": "a78931efae0bcb3f11a1934aab80e37a33c7c9120b90851231115379c6657dd7"
+  },
+  {
+    "file": "S/templates/dash.template.png",
+    "bytes": 11074,
+    "sha256": "9bae4cb9869edc6927c03e66ca54afd396352b55497423041cada8cf57fa7af4"
+  },
+  {
+    "file": "S/templates/die.head-stencil.template.png",
+    "bytes": 113316,
+    "sha256": "6aa4ffd4dac6a72f4225761f20d156398052bc7a499cbf98b8a30ae15365e421"
+  },
+  {
+    "file": "S/templates/die.template.png",
+    "bytes": 11665,
+    "sha256": "a78931efae0bcb3f11a1934aab80e37a33c7c9120b90851231115379c6657dd7"
+  },
+  {
+    "file": "S/templates/emote.head-stencil.template.png",
+    "bytes": 49930,
+    "sha256": "d4f8cfe8534f2af957d95e73faf7aa3c6fc1baf2b066c7a4e9073b2408e5fb35"
+  },
+  {
+    "file": "S/templates/emote.template.png",
+    "bytes": 11665,
+    "sha256": "a78931efae0bcb3f11a1934aab80e37a33c7c9120b90851231115379c6657dd7"
+  },
+  {
+    "file": "S/templates/hit-dash/group.head-stencil.template.png",
+    "bytes": 87431,
+    "sha256": "bbcafa3d243abd07db65484b6c2efced87bf1f578dd77c3d33ce026218da2662"
+  },
+  {
+    "file": "S/templates/hit-dash/group.template.png",
+    "bytes": 15535,
+    "sha256": "83dcd567f3b948bf37157dc3653969c7c21366e293536f12c39225bff0c27730"
+  },
+  {
+    "file": "S/templates/hit.template.png",
+    "bytes": 7215,
+    "sha256": "dd468f8a3add6fbd0d621e77b8a3b73ebd4fa508f0e2ac85c7f9f7d99c18e037"
+  },
+  {
+    "file": "S/templates/idle.head-stencil.template.png",
+    "bytes": 66546,
+    "sha256": "4f95f2e7913165ec774ac12677548a1865606f2955bcca85baee96a06f995f19"
+  },
+  {
+    "file": "S/templates/idle.template.png",
+    "bytes": 15535,
+    "sha256": "83dcd567f3b948bf37157dc3653969c7c21366e293536f12c39225bff0c27730"
+  },
+  {
+    "file": "S/templates/meditate.head-stencil.template.png",
+    "bytes": 66623,
+    "sha256": "aa9e78ed5a6fd62d049631eb9500eb5a6c7612a6fbdb3f18b93daecc59f0a881"
+  },
+  {
+    "file": "S/templates/meditate.template.png",
+    "bytes": 15535,
+    "sha256": "83dcd567f3b948bf37157dc3653969c7c21366e293536f12c39225bff0c27730"
+  },
+  {
+    "file": "S/templates/run.head-stencil.template.png",
+    "bytes": 69174,
+    "sha256": "977e71cafe13ebcef82936d3c80478ddd9d220d73cc35bb820bec9138f77a28c"
+  },
+  {
+    "file": "S/templates/run.template.png",
+    "bytes": 17135,
+    "sha256": "b2b63982b903c8ad35925d11bb636338fbd4f0fc96c630d7ce859f29a549107f"
+  },
+  {
+    "file": "S/templates/sword_fly.head-stencil.template.png",
+    "bytes": 49945,
+    "sha256": "bf6754b6abe4d34eb8431773612fd93b6a2cc6da15da98896cb046fe85d57d5c"
+  },
+  {
+    "file": "S/templates/sword_fly.template.png",
+    "bytes": 11665,
+    "sha256": "a78931efae0bcb3f11a1934aab80e37a33c7c9120b90851231115379c6657dd7"
+  },
+  {
+    "file": "S/templates/tribulation.head-stencil.template.png",
+    "bytes": 66569,
+    "sha256": "d13c1753caa2e13b3ea8d651a75102f507ea53b8286910bec3c576417295ff13"
+  },
+  {
+    "file": "S/templates/tribulation.template.png",
+    "bytes": 15535,
+    "sha256": "83dcd567f3b948bf37157dc3653969c7c21366e293536f12c39225bff0c27730"
+  },
+  {
+    "file": "S/templates/walk.head-stencil.template.png",
+    "bytes": 68127,
+    "sha256": "332d6f5c7031ef4ffb78982f9f7345650d8e58f23ac990eb11747fbfd6d4185a"
+  },
+  {
+    "file": "S/templates/walk.template.png",
+    "bytes": 17081,
+    "sha256": "9ea597f89aac3cb6a1ccca6c66b8a10badae615d985a5bff9ce686c8c269138b"
+  },
+  {
     "file": "SE/raw/attack.attempt1.png",
     "bytes": 1826231,
     "sha256": "90bfc67f8b65530292e33067a8f4cd4011f2c1283f2d92362c4532473977e997"

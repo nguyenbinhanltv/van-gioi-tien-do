@@ -1,0 +1,28 @@
+{
+  "clip": "meditate",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:04:59 UTC",
+  "utcEnd": "2026-11-07 21:05:24 UTC",
+  "prompt": "Use case: identity-preserve. Production MEDITATE EAST16frames24fps,4x4SQUARE2048x2048 sprite sheet,16wholefigures rowmajor. Image1correctedEfixedface/outfit/whiskidentity;Image2seatedlatticeguide. EVERYframe SEATED CROSS-LEGGED pureRIGHT-facingEprofile, oneeyeclosed/noseRIGHT, nofrontal3quarterturn. Sameoriginaladultfemalejadehealer, softadultjaw,olivebrownalmond eyeclosedcalmly, delicatestraightbrow,serenelips, correctedflattermainhaircap separatefoldedbun/simplejadepin/twolongstrands. PlainT1ivorywraprobe/jadecollar,cuffs,sash/thinantiquegoldedge/tinysparseinkhem,jadeivoryshoesvisiblefolded. SAMEHEAD/ANATOMYSCALE asstanding: Euclideanmaincapcrown-to-chin53.5logicaltexturepx incell256 (notbunincluded), noheadenlargement. Seatedpose genuinelyshorter, doNOT stretchseatedbodytofillstandingheight. Logicalseatedbuntop~66,maincap~80,chin~130,pelvis~170,foldedlegs/robeheelground232,center118. At512rawcellmultiplycoordsby2. Right hand visiblyGRIPS SAMEplainbrownwoodwhiskshaft withONE cylindricalbronze collar,whitehorsehair curls acrossfrontoflap outsideknees; fullwhiskretainedall16, nofloatingweapon orcutshaft. Lefthandrelaxedonfrontknee/palmup. Whiskrestswithrighthand duringmeditation, neverreplacedbylotus. 16continuoussubtlebreathposes:1neutral;2-4gentleinhale;5-6peak;7-8settle;9neutral;10-12exhale;13-14relax;15settle;16flowsinto1. Headsize/legs/gripstable, shoulderssashandloosesleeves lagbreath2frames; whiskhairtipgentleflex, no posechange. Same2celtones+highlight+narrowrim/tintedoutlines/NWlight. FlatopaqueMAGENTA#FF00FF, removeALLgrid/borders/guides/dots/triangles/labels/text. NO lotus/talismans/aura/glow/rings/particles/shadows/floor/platform. Entirecrossleggedbody/bun/whiskinsideowncell, no cropping/extracharacters. Originaldesignonly.",
+  "references": ["../../reference/E.identity-panel.corrected.png", "../templates/meditate.template.png"],
+  "raw": "../raw/meditate.attempt1.png",
+  "status": "rejected: seated figure/head enlarged to fill cell; whisk retained and lotus removed, but locked scale wrong. Regenerate with visible master-head stamp guide; no frame rescaling.",
+  "sha256": "c8a240e7b2688155195219c1e1cfac7bfc302d565e6ef7c16009998b818b742e",
+  "rawSha256": "c8a240e7b2688155195219c1e1cfac7bfc302d565e6ef7c16009998b818b742e",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    },
+    {
+      "file": "../templates/meditate.template.png",
+      "sha256": "e2be8a4f58d19a379f76913f06ec90bbcc2c239ac7a172832d317699e37a69b0"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

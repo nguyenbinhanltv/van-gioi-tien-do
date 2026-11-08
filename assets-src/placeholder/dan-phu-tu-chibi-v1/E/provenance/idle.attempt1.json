@@ -1,0 +1,28 @@
+{
+  "clip": "idle",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 20:47:26 UTC",
+  "utcEnd": "2026-11-07 20:48:04 UTC",
+  "prompt": "Use case: identity-preserve. PRODUCTION frame-by-frame sprite IDLE EAST, smooth-v2 16FRAMES24fps. Image1 exact native E identity/style; Image2 EXACT4x4 lattice placement guide. Output one SQUARE2048x2048 sheet, EXACT4equalcolumns4equalrows,16wholefigures rowmajor, squarecells512rawpx (=256logicaltexturepx at2x). Everyframe pure RIGHT-facing E PROFILE, one olivebrown almond eye,noseRIGHT, no camera turn or frontalface. Same original adult female Dan/Phu jadehealer: softlyrounded adultface, delicatestraightbrow, sereneclosedlips, darkbrownblack foldedbun distinctbehind tallroundedmainhaircap, simplejadepin,two longside strands. T1 plain warmivorywraprobe,jadecollar/cuffs/sash, narrowantiquegoldedge,tinysparseinkhem, jadeivoryshoes. Same right hand NATURALLY GRIPS brownwoodwhiskshaft continuousONE cylindricalbronze collar andwhite supplehorsehair, whiskwholevisibleall16frames, SAMEcarrygeometry, leftpalmgentlyopen. Same 2celtones+smallhighlight+narrowrim/materialtintedlines/NWlight asimage1. LOCKED SCALE: logicalcell256,buntopy5,maincapcrown16,eyes51,chin68,bootsoles232,pelvisaxis118. At512raw multiplyallcoordinatesby2. Anatomy maincap-to-sole216logicalpx, wholebun-to-sole227logicalpx; nozoom or individualrescaling. Followtemplatehead/ground/pelvislines; keepentirewhiskandhairinsideowncell. SIXTEEN distinct subtle sequential IDLE drawings:1neutral;2begininhale;3chest+0.3px;4+0.5;5+0.8;6+1;7+0.8;8+0.4;9neutral;10exhale-0.3;11-0.5;12-0.7;13-0.5;14-0.2;15settle;16nearfirstpose for seamlessloop. Boots planted identicalsolepositions, fullfigureheightstable within2px. Sleeve/sidehair/sashtips lagchest2frames then settle smoothly, tinywhiskhairflex only, gripshaft/collarunchanged. Preservefixedface andneck, no nodding or exaggeratedsway, no idle clonepaste. FlatopaqueMAGENTA#FF00FF background. REMOVEALLtemplateborders/grid/guidelines/dots/triangles/text/labels. No floorgroundshadow/aura/talismans/lotus/glow/particles/afterimages/scenery/watermark. Sixteen wholefigures, no cropping, no extrafigures.",
+  "references": ["../../reference/E.identity-panel.png", "../templates/idle.template.png"],
+  "raw": "../raw/idle.attempt1.png",
+  "status": "candidate; isolated initial QA at scale1 pending; no hard-gate pass claimed",
+  "sha256": "60bb20c2b863c671007284e664115c7c9e6bd7f0bc57efb4dc101123d50bfda2",
+  "rawSha256": "60bb20c2b863c671007284e664115c7c9e6bd7f0bc57efb4dc101123d50bfda2",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../../reference/E.identity-panel.png",
+      "sha256": "115e20255ca15e897d27cfe51e9d6047dfe9a4dc17e42a47168acf39b0f5e3cb"
+    },
+    {
+      "file": "../templates/idle.template.png",
+      "sha256": "aacaa86fadbc71a2e9cf1246cb0fb5a6842a21a5670b64db1d4312e453e45f55"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

@@ -1,0 +1,113 @@
+{
+  "process": {
+    "utcStarted": "2026-11-07T23:32:21.185Z",
+    "utcCompleted": "2026-11-07T23:37:02.303Z",
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-24/apps/client-cocos/scripts/capture.mjs",
+      "--skip-build",
+      "--src",
+      "dragonbones/the-tu-chibi-v1",
+      "--stem",
+      "thetuchibi",
+      "--direction",
+      "S",
+      "--mode",
+      "single",
+      "--animations",
+      "all",
+      "--frames",
+      "24",
+      "--zoom",
+      "2",
+      "--sample",
+      "midpoint",
+      "--out",
+      "D:/Temp/the-tu-chibi-S-capture-confirm"
+    ],
+    "status": 0,
+    "signal": null
+  },
+  "confirmation": "All15 real Cocos3.8.8 clips,24 midpoint samples each,2x, same built player; direct Node child status0;0page errors/loop warnings",
+  "initialPowerShellWrapper": {
+    "exitCode": 1,
+    "cause": "NativeCommandError from Node DEP0190 stderr warning; initial capture log completed all15 with no page errors/loop warnings. Actual process status independently confirmed by this repeat."
+  },
+  "contactSheets": [
+    {
+      "file": "attack.sheet.png",
+      "sha256": "be2b240f7c39553db41ac9c99b2f1f1c045cb4d0bbd115e6325340c39aeb1482",
+      "matchesInitial": true
+    },
+    {
+      "file": "attack_2.sheet.png",
+      "sha256": "4892e239182515e3783b9274bba4ffbdad5dad1a155ba9279d8ed76ff352ef25",
+      "matchesInitial": true
+    },
+    {
+      "file": "attack_3.sheet.png",
+      "sha256": "c94b24c1dc153e63d062679f0cc977f69061a20d29fa4cbdf2b7ac1ab452502a",
+      "matchesInitial": true
+    },
+    {
+      "file": "cast.sheet.png",
+      "sha256": "ebbab184b48208a9b2832f0fda33761d515e80e4f379521caa3bf5ebc49e49a1",
+      "matchesInitial": true
+    },
+    {
+      "file": "channel.sheet.png",
+      "sha256": "2f261059e5e58d36dab9002a4a144daa521e30f38b9f1c232998ffbaf0d1ecca",
+      "matchesInitial": true
+    },
+    {
+      "file": "dash.sheet.png",
+      "sha256": "c50e19bce58168a2c4c96361c7ca07592e19a118d73533740e2104352c9e956e",
+      "matchesInitial": true
+    },
+    {
+      "file": "die.sheet.png",
+      "sha256": "8bfa0bab5d58f868cfbfe5b45427e9e10090f8f368d95c6f41f9c2250ec0378d",
+      "matchesInitial": true
+    },
+    {
+      "file": "emote.sheet.png",
+      "sha256": "ab5c61aecc3dee34324aa8a6245278262db5711115b42a56b411625524d06cd0",
+      "matchesInitial": true
+    },
+    {
+      "file": "hit.sheet.png",
+      "sha256": "455a7ee80cc067decdd9191d6e2ae3531d6c6a164191b2cc3b6dd4b23aa8cef3",
+      "matchesInitial": true
+    },
+    {
+      "file": "idle.sheet.png",
+      "sha256": "6b471c6b0d0df2b81e749d10906cf2faa7789ba2936d7d80375d389e444a5d5a",
+      "matchesInitial": true
+    },
+    {
+      "file": "meditate.sheet.png",
+      "sha256": "f91ea825617ae69e2dc0fa590415d423441f3e93140b931861dccb7afea64b40",
+      "matchesInitial": true
+    },
+    {
+      "file": "run.sheet.png",
+      "sha256": "11fe11ef217d4d802939e136410bca4897ba6d26476f53b369e32a8f9840e8d5",
+      "matchesInitial": true
+    },
+    {
+      "file": "sword_fly.sheet.png",
+      "sha256": "b838c695f5f00c37aa1a7dc449a8b0b00327b753d79dbad590bc857320ecd3df",
+      "matchesInitial": true
+    },
+    {
+      "file": "tribulation.sheet.png",
+      "sha256": "7172372281c2bb04ffaae69564f0a96f461aa5958e640fd6805727f4b10e8ca2",
+      "matchesInitial": true
+    },
+    {
+      "file": "walk.sheet.png",
+      "sha256": "d6c6e8a06d60da02833f53a79452432dee43dd9a05d7520693dd16ec013f9e59",
+      "matchesInitial": true
+    }
+  ]
+}

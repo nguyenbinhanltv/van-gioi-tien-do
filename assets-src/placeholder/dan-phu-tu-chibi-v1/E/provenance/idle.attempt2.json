@@ -1,0 +1,28 @@
+{
+  "clip": "idle",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:03:15 UTC",
+  "utcEnd": "2026-11-07 21:03:45 UTC",
+  "prompt": "Use case: precise-object-edit. Image1 TARGET is16-frameIDLEsheet; Image2correctedEface/headidentityreference. Preserve all16poses, torso/arms/hands/whisk/cloth/boots/placement andflatmagenta EXACTLY. Correct ONLY an enlarged head/anatomy scale drift: redrawALLheads INCLUDINGface/maincap/bun about8percentSMALLER aroundNECKANCHOR. Keepfixedadultfemaleolivebrownalmond eye,straightdelicatebrow,nose/mouth/jaw/hairdesign andeveryexpression, no customface. New Euclidean MAINcapcrown-to-chin distance53.5logicalpx in256logicalcell (=65.5rawpx atcurrent313.5rawcellpitch). Sameheadsize±1logicalpx all16. Headonlyredraw, NOT individualwholefigurerescaling andNOT editingfaceidentityproportions. Preserveexistingnear-neutralIDLEmicrobreathing/hairsleevesashlag, right-handplainwhiskcontinuousshaft ONEbronzecollar whitehorsehair, leftpalmopen. Do not change any bootsolepositions or bodyheight belowneck. Sameivory/jade/goldT1outfit andsparseinkhem. Samecorrectflatteruppermaincap separatefoldedbun/simplejadepin/twolongstrands. Same2celtones+highlight+narrowrim/tintedlines/NWlight. Same4x4square16frames rowmajor, no newfigures/text/grid/shadows/FX. Upperheadbecomesslightlysmaller ascanonicalreference, allothermotionunchanged.",
+  "references": ["../raw/idle.attempt1.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/idle.attempt2.png",
+  "status": "head-only correction candidate; preserve all body poses; actual measurements and QA pending; no automatic pass claim",
+  "sha256": "7fc9483aed6009abd32894bb17bcdef121710172cedd92867552d024f4dce447",
+  "rawSha256": "7fc9483aed6009abd32894bb17bcdef121710172cedd92867552d024f4dce447",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/idle.attempt1.png",
+      "sha256": "60bb20c2b863c671007284e664115c7c9e6bd7f0bc57efb4dc101123d50bfda2"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

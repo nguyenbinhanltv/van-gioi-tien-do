@@ -1,0 +1,8 @@
+{
+  "source": "Orchestrator policy clarification delivered to worker26 on 2026-11-08 local time",
+  "uprightPolicy": "D47 head-size-v1: posture or secondary-overhang requires actual crown/chin evidence; no legacy generic exceptions are written to upright clips.",
+  "freePolicy": "D41 per-frame pose exceptions remain authorized on free meditation, death, attacks, hit, cast, channel, hover and tribulation. Raw measurements and declared poses must be disclosed in the PR.",
+  "emoteNote": "The clarification called emote free, while current public smooth-v2 defaults classify it upright. Until reconciled with tooling27, this project conservatively retains upright emote with D47 and no generic exception.",
+  "approvalHistory": "An initial unguarded free-exception write was rejected by automatic approval review for possible D47 bypass. No write executed. The orchestrator then explicitly clarified the free/upright scope; the retry asserts kind=free before any legacy exception.",
+  "noWaiver": "No pose reason or head evidence may waive canvas clipping or true foot findings. No generated frame is individually rescaled."
+}

@@ -1,0 +1,28 @@
+{
+  "clip": "die",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:55:16 UTC",
+  "utcEnd": "2026-11-07 21:55:32 UTC",
+  "prompt": "Use case: precise local sprite-sheet edit. Image1 TARGET is12-frame death animation4columns3rows. Image2 fixedfaceidentityreference. Modify ONLY first/top-left frame: same female facingright, samefaceheadhairwhiskcostumehands and anatomical segment lengths. Add a subtle anticipation knee buckle, lowering pelvis and head together by8logicalpx within256cell, soles remain on sameground; bend knees underrobe, shorten vertical pose through articulation, NOT scaling body or head. Preserve crown-to-chin headsize. Keep wholefigure in cell with5logicalpxminimumtopclearance. Do not alter ANY of the other11frames, especially backwardfall and finalhorizontalrest. Keep exact1448x1086sheet dimensions4x3mapping anduniformflatmagenta background, no grid/text/FX/shadow. Keep right hand on plainbrownwhisk ONEbronze collar whitehorsehair throughout, ivory/jadeT1robes narrowgoldtrim. No designchanges.",
+  "references": ["../raw/die.attempt1.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/die.attempt2.png",
+  "status": "candidate first-cell knee buckle; preserve other eleven original cells via exact same-DPI selection; QA pending",
+  "sha256": "d63c02f3f65d2cdd61ec66572a2774eeb1b52541162088ad7fdd173363811a3a",
+  "rawSha256": "d63c02f3f65d2cdd61ec66572a2774eeb1b52541162088ad7fdd173363811a3a",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/die.attempt1.png",
+      "sha256": "2e4a3a733595f5af9162ff97cc0861b2a14dca36ee59a69849579cd003f49ecb"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

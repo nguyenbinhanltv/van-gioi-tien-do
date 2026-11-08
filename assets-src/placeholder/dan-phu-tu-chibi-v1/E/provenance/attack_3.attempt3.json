@@ -1,0 +1,27 @@
+{
+  "clip": "attack_3",
+  "dir": "E",
+  "attempt": 3,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:57:34 UTC",
+  "utcEnd": "2026-11-07 22:58:07 UTC",
+  "prompt": "Precise source-foot repair ONLY. TARGETimage1 4x4sheet14attackframes+2blank. Image2fixedfemaleidentity. ZERO-BASEDcell7 (row2col4, impact lunge) has its REAR/LEFT boot extending LEFT across its cell boundary, so slicing cuts boot. Correct ONLY that rearboot/ankle: bring the ENTIREsame-sized boot about10RAWpixels RIGHT (8logicalpx), with a small natural rear-ankle/kneebend/toeoff adjustment. Keep wideforwardlunge, torso/hip/forwardknee/head/face/right-handwhisk/weaponreach/body/root/robesize ALLUNCHANGED. DoNOTshrinkfigure orflattenlunge. BootmustbeFULLYVISIBLEwith8RAWpixelsminimumclearance from LEFTcellborder, sameivoryjade bootdesign andnaturalgroundcontact. Complete anatomicallyattachedrearcalf/ankle, no duplicatefeet or detached fragments. The bit ofthisboot spilledintoneighborcell6 RIGHTmargin nearbottom mayberemoved asbackground, but neighborcell6 characterandallothercharacters COMPLETELYUNCHANGED. Restof14attackdrawings+2blankcells untouched. Keep same1254square4x4rowmajormapping, uniformflatmagenta#ff00ff outsideart. No grid/text/FX/shadow. Fixedface/whiskonebronzecollarwhitehorsehair and2tonecelgoldjadeivorydesignpreserved. Repair only actualclipped rearfoot, retain dynamicbodypose andallcalibration.",
+  "references": ["../raw/attack_3.selected.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/attack_3.attempt3.png",
+  "status": "rearboot-only repair of real unsliced cell7 boundary crossing; wide body lunge/root/scale preserved; select nativecell7",
+  "rawSha256": "d4981364e4f11554ba670893f390389f44f6b02de5a47e4d0f952e2fb8f76d3f",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/attack_3.selected.png",
+      "sha256": "3660ec8a551a4b28e7aefb8fd12ece99a522dc670984ae77fb96e6a2f192806a"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

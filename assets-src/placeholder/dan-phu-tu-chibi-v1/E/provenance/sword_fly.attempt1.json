@@ -1,0 +1,28 @@
+{
+  "clip": "sword_fly",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:28:54 UTC",
+  "utcEnd": "2026-11-07 21:29:14 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete the TWELVE master-head stamps in image 1 into the T1 HOVER loop, runtime clip sword_fly. Image 2 supplies the exact jade healer, fixed face, robe and held whisk. Preserve each head's size, profile and small guided bob. Layout: 4 columns × 3 rows, 12 square cells, 4:3 sheet, row-major. Every figure faces screen RIGHT.\n\nShe floats in place with relaxed, slightly bent knees and gently pointed toes. Both feet remain above the guide ground line; no walking steps. The robe hem, sash, sleeves, side strands and soft white whisk hair float backward LEFT with delayed settling. Twelve smooth phases: neutral hover, rise slightly through frames 2–4, settle through 5–6, neutral at 7, drift slightly down through 8–10, recover through 11–12. Keep the head scale, anatomy and right-hand grip stable. The head stamps establish the body scale; do not enlarge the floating figure.\n\nThe RIGHT hand naturally retains the same plain brown shaft with ONE cylindrical bronze collar and white horsehair beside the body. Left palm relaxed open. No sword, flying mount, platform, lotus or separate prop. This healer flies while holding her whisk.\n\nSame adult face, olive-brown almond eye, straight delicate brow, serene lips, flatter main cap, separate folded bun, jade pin and side strands. Plain ivory T1 robe, jade collar/cuffs/sash, narrow antique-gold edge, sparse ink hem, jade/ivory shoes. Two cel tones, small highlight, narrow rim, tinted outlines, NW light.\n\nKeep the actual head stamps at approximately 53.5 logical pixels crown-to-chin. Whole bun, body, toes and whisk inside every cell. Remove all guides, marks, borders and crop edges. Opaque #FF00FF. No text, floor, shadows, aura, talismans, glow, particles, trails, blur, afterimages or extra figures. Last frame flows into the first.",
+  "references": ["../templates/sword_fly.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/sword_fly.attempt1.png",
+  "status": "candidate; all expected frames present visually; natural whisk held; actual complete QA pending",
+  "sha256": "23ac7f3d9c1ea06d25b4ee9ae14802cc61e62740d8e1f74f478423de65e08da0",
+  "rawSha256": "23ac7f3d9c1ea06d25b4ee9ae14802cc61e62740d8e1f74f478423de65e08da0",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/sword_fly.head-guide.png",
+      "sha256": "67f50c4022fcc80ce40010580bc3c05dc48826bc864b4292d220d09c229dd619"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}
