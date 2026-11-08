@@ -1,0 +1,29 @@
+{
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 4,
+  "prompt": "EDIT TARGET IMAGE1, a 16-frame 4x4 NE running sheet with EXACT FIXED-SCALE canonical master skull-cap stencils already placed. Image2 is original run body/motion reference. Image3 is canonical locked NE master design. IMPORTANT: KEEP THE STENCILLED SKULL-CAP SILHOUETTES, THEIR SIZE AND THEIR CELL POSITIONS EXACTLY AS IN IMAGE1. Do not redraw smaller or bigger heads, do not shift heads, do not change the cap width or height; image1 has already calibrated these. Only complete the heads and blend the deliberate horizontal magenta gaps underneath the stencilled caps into natural neck/face/ear and flowing lower hair. Replace cut/stubbed hairpin/tassel guide fragments with complete matching vermilion pins and earrings at natural attachment; preserve fixed master female rear-three-quarter face and coil design. Master compact coil is the main skull cap, not an elevated bun. Preserve ALL original body/shoulder/arm/hand/leg/foot poses, fan LEFT-hand grip, sleeve/torso/sash silhouette, flowing secondary hair and ribbons outside the skull core. Do NOT rescale or move any body. Keep dynamic flight tucks, hair lag and sleeve follow-through. No anatomy simplification. This is NOT a new illustration: complete this same sprite sheet around the head stencils. All16 cells have the same head scale and original body scale; do not fit figures to individual cells. Same 4x4 layout and magenta background, no text/extra FX/shadows. Original project design only. Crisp 2-tone cel shading, restrained highlight/rim light, tinted outlines. Keep clean unblended magenta edges.",
+  "utcStart": "2026-11-08 02:05:12 UTC",
+  "utcEndObserved": "2026-11-08 02:06:47 UTC",
+  "references": ["NE/templates/run.edit-head-stencil.png", "NE/raw/run.attempt1.png", "reference/NE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/run.attempt4.png",
+  "status": "not selected; retained raw provenance and selection.json rationale",
+  "rawSha256": "667d4352c4140c0b0138d5240fcbd705d9465e4befa2cb8c6eb3e72bc4294266",
+  "utcRawOutputFileModified": "2026-11-08T02:05:50.194Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/templates/run.edit-head-stencil.png",
+      "sha256": "a87e8930c2bb0dbfa2424ce648d14e9551396073ed0e09e56d0e0cfe0c04b904"
+    },
+    {
+      "file": "NE/raw/run.attempt1.png",
+      "sha256": "ae218c756a2d85d4c569bb016832027847e44ec022fbbe48646a31050353e8f7"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ]
+}

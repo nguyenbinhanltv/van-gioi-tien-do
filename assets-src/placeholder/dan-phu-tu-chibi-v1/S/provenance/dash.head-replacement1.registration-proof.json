@@ -1,0 +1,517 @@
+{
+  "utc": "2026-11-08T06:36:45.515Z",
+  "status": "PASS preservation and deterministic selection reproduction; manual anatomy separate",
+  "all202RegistrationsExact": true,
+  "totalFrames": 202,
+  "unchangedAlignedPngs": 187,
+  "changedHeadRoiFrames": 15,
+  "all6HitFramesIdentical": true,
+  "sourceOutsideMaskRgba": "EXACT verified by D57 whole native sheet including hidden RGBA",
+  "lockedBodyBaseChangedBytesBeyondFilterSupport": 0,
+  "bodyComparisonFromAlignedY": {
+    "run": 74,
+    "dash2": 91,
+    "dash4": 94,
+    "otherDash": 74
+  },
+  "filterSupportNote": "Dash4 has47 byte differences at91..93 from Lanczos3 support under head ROI; source below mask exact, no body transform. Retain exact locations; do not claim all aligned collar pixels unchanged.",
+  "filterSupportDifferences": [
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 114,
+      "y": 91,
+      "channel": 0,
+      "before": 253,
+      "after": 254
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 115,
+      "y": 91,
+      "channel": 2,
+      "before": 211,
+      "after": 212
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 122,
+      "y": 91,
+      "channel": 0,
+      "before": 227,
+      "after": 228
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 124,
+      "y": 91,
+      "channel": 1,
+      "before": 77,
+      "after": 76
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 125,
+      "y": 91,
+      "channel": 0,
+      "before": 244,
+      "after": 245
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 128,
+      "y": 91,
+      "channel": 2,
+      "before": 77,
+      "after": 76
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 130,
+      "y": 91,
+      "channel": 0,
+      "before": 231,
+      "after": 230
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 132,
+      "y": 91,
+      "channel": 0,
+      "before": 183,
+      "after": 184
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 132,
+      "y": 91,
+      "channel": 1,
+      "before": 112,
+      "after": 113
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 132,
+      "y": 91,
+      "channel": 2,
+      "before": 87,
+      "after": 88
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 133,
+      "y": 91,
+      "channel": 2,
+      "before": 116,
+      "after": 117
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 136,
+      "y": 91,
+      "channel": 1,
+      "before": 140,
+      "after": 141
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 137,
+      "y": 91,
+      "channel": 1,
+      "before": 147,
+      "after": 148
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 138,
+      "y": 91,
+      "channel": 0,
+      "before": 214,
+      "after": 215
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 141,
+      "y": 91,
+      "channel": 0,
+      "before": 132,
+      "after": 133
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 145,
+      "y": 91,
+      "channel": 1,
+      "before": 190,
+      "after": 189
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 145,
+      "y": 91,
+      "channel": 2,
+      "before": 91,
+      "after": 90
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 146,
+      "y": 91,
+      "channel": 1,
+      "before": 144,
+      "after": 143
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 147,
+      "y": 91,
+      "channel": 0,
+      "before": 110,
+      "after": 109
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 147,
+      "y": 91,
+      "channel": 1,
+      "before": 74,
+      "after": 73
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 148,
+      "y": 91,
+      "channel": 0,
+      "before": 167,
+      "after": 166
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 148,
+      "y": 91,
+      "channel": 1,
+      "before": 124,
+      "after": 125
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 150,
+      "y": 91,
+      "channel": 1,
+      "before": 83,
+      "after": 84
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 150,
+      "y": 91,
+      "channel": 2,
+      "before": 58,
+      "after": 59
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 151,
+      "y": 91,
+      "channel": 2,
+      "before": 95,
+      "after": 96
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 153,
+      "y": 91,
+      "channel": 1,
+      "before": 233,
+      "after": 234
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 155,
+      "y": 91,
+      "channel": 2,
+      "before": 198,
+      "after": 199
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 158,
+      "y": 91,
+      "channel": 2,
+      "before": 205,
+      "after": 204
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 160,
+      "y": 91,
+      "channel": 1,
+      "before": 250,
+      "after": 249
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 161,
+      "y": 91,
+      "channel": 0,
+      "before": 239,
+      "after": 241
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 161,
+      "y": 91,
+      "channel": 1,
+      "before": 231,
+      "after": 234
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 161,
+      "y": 91,
+      "channel": 2,
+      "before": 186,
+      "after": 189
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 162,
+      "y": 91,
+      "channel": 0,
+      "before": 241,
+      "after": 242
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 162,
+      "y": 91,
+      "channel": 2,
+      "before": 171,
+      "after": 173
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 163,
+      "y": 91,
+      "channel": 2,
+      "before": 238,
+      "after": 221
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 118,
+      "y": 92,
+      "channel": 2,
+      "before": 214,
+      "after": 215
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 119,
+      "y": 92,
+      "channel": 2,
+      "before": 205,
+      "after": 206
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 129,
+      "y": 92,
+      "channel": 0,
+      "before": 74,
+      "after": 73
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 129,
+      "y": 92,
+      "channel": 1,
+      "before": 129,
+      "after": 128
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 133,
+      "y": 92,
+      "channel": 0,
+      "before": 188,
+      "after": 189
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 140,
+      "y": 92,
+      "channel": 0,
+      "before": 183,
+      "after": 184
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 140,
+      "y": 92,
+      "channel": 1,
+      "before": 168,
+      "after": 169
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 145,
+      "y": 92,
+      "channel": 1,
+      "before": 197,
+      "after": 196
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 148,
+      "y": 92,
+      "channel": 1,
+      "before": 122,
+      "after": 121
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 158,
+      "y": 92,
+      "channel": 1,
+      "before": 234,
+      "after": 235
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 161,
+      "y": 92,
+      "channel": 0,
+      "before": 243,
+      "after": 242
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "x": 162,
+      "y": 93,
+      "channel": 1,
+      "before": 140,
+      "after": 139
+    }
+  ],
+  "repro": [
+    {
+      "file": "raw/hit-dash.head-replacement1.png",
+      "sha256": "6063eede226a261b4edba410bbacfc4894d60c9756070f6a5a46d39d744e3a9d",
+      "reproducedSha256": "6063eede226a261b4edba410bbacfc4894d60c9756070f6a5a46d39d744e3a9d"
+    },
+    {
+      "file": "repair/dash.head-replacement1.mask.png",
+      "sha256": "b4ff1b4beb6b6a9a5e914daa33ee790d74724cf1be1e015bd95b2057b4652d80",
+      "reproducedSha256": "b4ff1b4beb6b6a9a5e914daa33ee790d74724cf1be1e015bd95b2057b4652d80"
+    }
+  ],
+  "changes": [
+    {
+      "clip": "run",
+      "cell": 0
+    },
+    {
+      "clip": "run",
+      "cell": 1
+    },
+    {
+      "clip": "run",
+      "cell": 2
+    },
+    {
+      "clip": "run",
+      "cell": 3
+    },
+    {
+      "clip": "run",
+      "cell": 6
+    },
+    {
+      "clip": "run",
+      "cell": 7
+    },
+    {
+      "clip": "run",
+      "cell": 8
+    },
+    {
+      "clip": "run",
+      "cell": 9
+    },
+    {
+      "clip": "run",
+      "cell": 10
+    },
+    {
+      "clip": "run",
+      "cell": 14
+    },
+    {
+      "clip": "run",
+      "cell": 15
+    },
+    {
+      "clip": "dash",
+      "cell": 0
+    },
+    {
+      "clip": "dash",
+      "cell": 2
+    },
+    {
+      "clip": "dash",
+      "cell": 4
+    },
+    {
+      "clip": "dash",
+      "cell": 9
+    }
+  ]
+}

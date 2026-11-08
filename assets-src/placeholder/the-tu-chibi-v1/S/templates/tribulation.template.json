@@ -1,0 +1,84 @@
+{
+  "clip": "tribulation",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "frames": 16,
+  "guides": {
+    "ground": 232,
+    "head": 7,
+    "pelvis": 119.5,
+    "centerX": 127.78143401454797
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "tribulation_0"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_1"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_2"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_3"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_4"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_5"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_6"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_7"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_8"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_9"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_10"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_11"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_12"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_13"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_14"
+    },
+    {
+      "leading": null,
+      "tag": "tribulation_15"
+    }
+  ],
+  "width": 1024,
+  "height": 1024
+}

@@ -1,0 +1,12 @@
+{
+  "status": "additional-final-pass-not-adopted",
+  "setting": {
+    "maxImbalance": 80,
+    "edgeRadius": 2
+  },
+  "changedPixels": 13826,
+  "alphaChanges": 0,
+  "protectedPaletteChanges": 0,
+  "broadOpaqueRedMaskChanges": 7998,
+  "note": "Broad red mask includes possible warm-magenta fringe and legitimate red art; no claim that all mask changes are damage. Keep additional final-pass off until visual checks establish accessory preservation. Existing raw-slice legacy despill remains active. Straight-alpha encoding boundary corrected separately; geometry and QA unchanged."
+}

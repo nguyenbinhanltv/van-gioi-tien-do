@@ -1,0 +1,78 @@
+{
+  "format": "vgtd-guide-cleanup-proof",
+  "version": 1,
+  "source": {
+    "file": "E/generation-selected/attack_3.raw.png",
+    "sha256": "39190453f9f0f5cc6f8b6226dfdbdc2b8a74f8be82e23de9b38dc8ff9437fd31"
+  },
+  "selected": {
+    "file": "E/sheets/attack_3.png",
+    "sha256": "347cd6656b221798ce560c77d06cbb8d7972991675fda83b5c249edb83590ef0"
+  },
+  "insetFraction": 0.01,
+  "cells": [
+    {
+      "cell": 1,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "b93f299b6f40f2451b5169fda6e36a95f274c4d8a3acc521145e527abe58c387",
+      "interiorAfterSha256Rgba": "b93f299b6f40f2451b5169fda6e36a95f274c4d8a3acc521145e527abe58c387",
+      "changedBoundaryPixels": 6624
+    },
+    {
+      "cell": 2,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "0109728db073f5d56ccd2183119babc103aa592767996e06d2ac818c0303dfe8",
+      "interiorAfterSha256Rgba": "0109728db073f5d56ccd2183119babc103aa592767996e06d2ac818c0303dfe8",
+      "changedBoundaryPixels": 6624
+    },
+    {
+      "cell": 3,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "82bc80535b66170389bf61f2e48f5b6319228c62a19594757c972dfd6ae9e542",
+      "interiorAfterSha256Rgba": "82bc80535b66170389bf61f2e48f5b6319228c62a19594757c972dfd6ae9e542",
+      "changedBoundaryPixels": 6624
+    },
+    {
+      "cell": 4,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "24933808ed7be42bc4d71a14098da0cc16dec14eba0258d615d07f78782c1719",
+      "interiorAfterSha256Rgba": "24933808ed7be42bc4d71a14098da0cc16dec14eba0258d615d07f78782c1719",
+      "changedBoundaryPixels": 6624
+    },
+    {
+      "cell": 5,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "b70edcc010974b6f05e484b8b5fe502cd1d73fd7cdc05a1b83e17dde7ddf605d",
+      "interiorAfterSha256Rgba": "b70edcc010974b6f05e484b8b5fe502cd1d73fd7cdc05a1b83e17dde7ddf605d",
+      "changedBoundaryPixels": 6620
+    },
+    {
+      "cell": 6,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "a21a059f38604885738736896d956c065a20a9d07a7409c447f0ea25f3f293bf",
+      "interiorAfterSha256Rgba": "a21a059f38604885738736896d956c065a20a9d07a7409c447f0ea25f3f293bf",
+      "changedBoundaryPixels": 6624
+    },
+    {
+      "cell": 7,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "f4a028a68139397ae621946e7b257d3f6e2b26a4633dc57c64359f000839d3d2",
+      "interiorAfterSha256Rgba": "f4a028a68139397ae621946e7b257d3f6e2b26a4633dc57c64359f000839d3d2",
+      "changedBoundaryPixels": 6624
+    },
+    {
+      "cell": 8,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "005ff817fd8fbcc976d0d67f73fee6ecbd5c7dfd1c6ec4fa099f4804b334be2a",
+      "interiorAfterSha256Rgba": "005ff817fd8fbcc976d0d67f73fee6ecbd5c7dfd1c6ec4fa099f4804b334be2a",
+      "changedBoundaryPixels": 6623
+    },
+    {
+      "cell": 9,
+      "inset": 4,
+      "interiorBeforeSha256Rgba": "233c2b2f6cc6a12e363c6cd72f19ee67c7668749109ec498b92e6f2f714fea1e",
+      "interiorAfterSha256Rgba": "233c2b2f6cc6a12e363c6cd72f19ee67c7668749109ec498b92e6f2f714fea1e",
+      "changedBoundaryPixels": 6624
+    }
+  ]
+}

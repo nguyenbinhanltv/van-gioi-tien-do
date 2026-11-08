@@ -1,0 +1,4384 @@
+{
+  "method": "Same selected sources, logical scale1 and Lanczos3 in both outputs; only asymmetric extension differs. Radius3 is NATIVE input raster pixels, not logical256. No source/master pixels edited.",
+  "spill": {
+    "threshold": 16,
+    "strength": 1,
+    "keepDistance": 36,
+    "palette": [[254, 220, 230]],
+    "asymmetric": {
+      "maxImbalance": 100,
+      "edgeRadius": 3
+    }
+  },
+  "approvedPink": {
+    "masterPoint": {
+      "x": 123,
+      "y": 81
+    },
+    "before": [254, 220, 230, 255],
+    "after": [254, 220, 230, 255]
+  },
+  "cells": [
+    {
+      "clip": "idle",
+      "index": 0,
+      "rgbPixelsChanged": 537,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "2bffe26d40ea21ebf11abce5cff572864935cc0065f0895cc7531e16be5bd626"
+    },
+    {
+      "clip": "idle",
+      "index": 1,
+      "rgbPixelsChanged": 754,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "517d2c35186de364021ac9d31911230b1eaf6e68e78315dca11047c98227f1b7"
+    },
+    {
+      "clip": "idle",
+      "index": 2,
+      "rgbPixelsChanged": 886,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c4dc31a3b785cfbc8227197a5387ed148bd712e97c3c550dec2960963012e540"
+    },
+    {
+      "clip": "idle",
+      "index": 3,
+      "rgbPixelsChanged": 661,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "55e4e01651727cd611be875ff7b22523db2e3d98b61fa1ba0e2b67e8d24b0f0b"
+    },
+    {
+      "clip": "idle",
+      "index": 4,
+      "rgbPixelsChanged": 787,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "44b6221d8d9429149e9d9dcfbebf1f770d0e024ad4cde0ea2dc35655393719ba"
+    },
+    {
+      "clip": "idle",
+      "index": 5,
+      "rgbPixelsChanged": 690,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "048bf9771cd50cda0509226fdf06a63dd6ac66dc6b60612cba21f28fb3a49fd0"
+    },
+    {
+      "clip": "idle",
+      "index": 6,
+      "rgbPixelsChanged": 702,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "b3d38335fac28fbd6ce4ea030d44c5ebad014abe8acb12b27eb7191f14261689"
+    },
+    {
+      "clip": "idle",
+      "index": 7,
+      "rgbPixelsChanged": 785,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "7708867045a8a3ba8df6c7d3b5a7f6a45f7f785daddf03916187c6c5da45afac"
+    },
+    {
+      "clip": "idle",
+      "index": 8,
+      "rgbPixelsChanged": 723,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "cb944cc84c30143caecce137c2f9931afc669ec724c3081a88348ff56e793f3f"
+    },
+    {
+      "clip": "idle",
+      "index": 9,
+      "rgbPixelsChanged": 797,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "a90c136aee76f4f6e1b2601124efa0b7e36d9697ae7c678bfd4022903cd76902"
+    },
+    {
+      "clip": "idle",
+      "index": 10,
+      "rgbPixelsChanged": 665,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "fa16ec67675dc0131c204097823b95ca340b33c53a275863e6a0a30dc5eef40d"
+    },
+    {
+      "clip": "idle",
+      "index": 11,
+      "rgbPixelsChanged": 690,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4371694e273bdad9d5b577f5ada1863ff549f6a0d9023750de4ede52b38733f2"
+    },
+    {
+      "clip": "idle",
+      "index": 12,
+      "rgbPixelsChanged": 531,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "eaa1a0f29fb6dc9e4fa02ac95c30ddd5410e2464bd805317caa83e82acb18c10"
+    },
+    {
+      "clip": "idle",
+      "index": 13,
+      "rgbPixelsChanged": 596,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "40c923cd5c08ee09a5e4c1684d84828825c1a50b614cc46afc4b7590cc0716f5"
+    },
+    {
+      "clip": "idle",
+      "index": 14,
+      "rgbPixelsChanged": 642,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9cc01b182d933b06ce7d90cfaf4c973924faead1851d24ef2868a25cb31b030e"
+    },
+    {
+      "clip": "idle",
+      "index": 15,
+      "rgbPixelsChanged": 616,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "843f32a406348d6ccf3aa3af9e67d0ee8817456bc689ecff3aab15fa643ad613"
+    },
+    {
+      "clip": "meditate",
+      "index": 0,
+      "rgbPixelsChanged": 760,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f75070a7d3c41236e6903aae0f6ed2e6154a2dc1eb36c9d50b221fce1b43f916"
+    },
+    {
+      "clip": "meditate",
+      "index": 1,
+      "rgbPixelsChanged": 826,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f85bf809c56aacfe20bfdbc485a99e585e2a102977c0a393d02fd1001613ed3e"
+    },
+    {
+      "clip": "meditate",
+      "index": 2,
+      "rgbPixelsChanged": 779,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e9969f88aa7c759ef7fb0e65ff5dc5057ecd1f09971569eed3de3d17ab0514ba"
+    },
+    {
+      "clip": "meditate",
+      "index": 3,
+      "rgbPixelsChanged": 1025,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "257f2743a086bb0cba0702fc0156273987370080178e781051348e34f6dd174f"
+    },
+    {
+      "clip": "meditate",
+      "index": 4,
+      "rgbPixelsChanged": 864,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "67d7caae822538f4ff2ff91a0c2acb71f9d33f3f73a70165e3f989272d3d3809"
+    },
+    {
+      "clip": "meditate",
+      "index": 5,
+      "rgbPixelsChanged": 853,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "74bd63d7e82d11148a37ed53cb974562231dd17d9d1883f92cf711a2695a54f0"
+    },
+    {
+      "clip": "meditate",
+      "index": 6,
+      "rgbPixelsChanged": 890,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9e5f4043b3a138049486d9fee0a5d9508af0b44d1b0bb732c580434f30e06d8a"
+    },
+    {
+      "clip": "meditate",
+      "index": 7,
+      "rgbPixelsChanged": 697,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "92ea450184e18d119581aca14b916a3c3c0f6faf547a2259d178d82d8fee095a"
+    },
+    {
+      "clip": "meditate",
+      "index": 8,
+      "rgbPixelsChanged": 866,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3836ae90a56ac64eb540cf252a798bb55897fa47fab54f9e7f7cad06f257f8d0"
+    },
+    {
+      "clip": "meditate",
+      "index": 9,
+      "rgbPixelsChanged": 772,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0aa8ae04f208c5ff5486769ff461c9e49eb9ff95713e242b83f7b9409120bac1"
+    },
+    {
+      "clip": "meditate",
+      "index": 10,
+      "rgbPixelsChanged": 769,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "2cbaacd1a585d6794b76c5a6a25655051f4248da81f45a925cec20ca61454c07"
+    },
+    {
+      "clip": "meditate",
+      "index": 11,
+      "rgbPixelsChanged": 697,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "64a411539208978474ca17b40fec3bbfc3d792f3bf55bba418ff398496db9659"
+    },
+    {
+      "clip": "meditate",
+      "index": 12,
+      "rgbPixelsChanged": 739,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c70d06829bc9b4b09f8f5397d7eb95e13df6a69aa7c6c54f398c1b617dee247d"
+    },
+    {
+      "clip": "meditate",
+      "index": 13,
+      "rgbPixelsChanged": 604,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "15a1ba8f3010eb7e3f941485fa2ba49f6b9add76092fcff5019e34dffe231201"
+    },
+    {
+      "clip": "meditate",
+      "index": 14,
+      "rgbPixelsChanged": 784,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "7f502605932aa841d52439c9a66f7463c3652ad4599f041134b2ba9bd47ca411"
+    },
+    {
+      "clip": "meditate",
+      "index": 15,
+      "rgbPixelsChanged": 718,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "6bb494ef390eb5a5201b56b1e1b06b22b51b2a2da1631a24f35dc21ae9af187b"
+    },
+    {
+      "clip": "walk",
+      "index": 0,
+      "rgbPixelsChanged": 651,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "73fe7f9248c9553669ebe07727ef9d26689757c543ca34c6de06b9223c9bcc8d"
+    },
+    {
+      "clip": "walk",
+      "index": 1,
+      "rgbPixelsChanged": 535,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "2fce4ff1f68c9a034540a77819347796d5cee1ade6098a7b99e1a9d5c89c4341"
+    },
+    {
+      "clip": "walk",
+      "index": 2,
+      "rgbPixelsChanged": 609,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0b0c5d252ebf467db1911a17f86f4b4d181b85e8dd44077a1cde899e19365658"
+    },
+    {
+      "clip": "walk",
+      "index": 3,
+      "rgbPixelsChanged": 618,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "d5c76ba7a6cf5f3f8b5b4c1356575879a89bcf8585ae510616e52a19221552b5"
+    },
+    {
+      "clip": "walk",
+      "index": 4,
+      "rgbPixelsChanged": 662,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c406379f4d683e4ccf261acea3791b041ea62528302b224f9d3341fa6863dad6"
+    },
+    {
+      "clip": "walk",
+      "index": 5,
+      "rgbPixelsChanged": 718,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f2711fa594f8c0f7d9d6b2a8275e8354cd1dd7a943c90d2dfed76575e7153449"
+    },
+    {
+      "clip": "walk",
+      "index": 6,
+      "rgbPixelsChanged": 706,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e52906b5bf89bc4e4ff0988552d2cdc3f3fad11164650f8d51eee2c7d8a7d795"
+    },
+    {
+      "clip": "walk",
+      "index": 7,
+      "rgbPixelsChanged": 527,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "8ca4d852d31d1b2f553ff4343d21c5afe0c9d116e2cc704b91a443f49c06e93a"
+    },
+    {
+      "clip": "walk",
+      "index": 8,
+      "rgbPixelsChanged": 489,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "6b086e43bcc7e87150758083b1e222cc60e4effa32a0865f5fad9e0be2fca21c"
+    },
+    {
+      "clip": "walk",
+      "index": 9,
+      "rgbPixelsChanged": 464,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "8fb21799b069bc54e899480cba89732bff417c2f7ce5bd5ae936bd0149758000"
+    },
+    {
+      "clip": "walk",
+      "index": 10,
+      "rgbPixelsChanged": 590,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9d8c8ac6abe2d03188a1b1bcf302af082dde0ae6e52035012ce79131ec1cdf2b"
+    },
+    {
+      "clip": "walk",
+      "index": 11,
+      "rgbPixelsChanged": 583,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3389b9ae256de350cb59567c65b38982078870f537b68f1d8b1ee30cc3e93269"
+    },
+    {
+      "clip": "walk",
+      "index": 12,
+      "rgbPixelsChanged": 735,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4cfc311f2f851b3f5079e82fe7b8ccb8507b5a88c8ed9d7dee1d520b688c206d"
+    },
+    {
+      "clip": "walk",
+      "index": 13,
+      "rgbPixelsChanged": 652,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "6a1d2b3154b8e2fd6f7577e55c938a67bc7963e307253f5af36fbda1a81bdff1"
+    },
+    {
+      "clip": "walk",
+      "index": 14,
+      "rgbPixelsChanged": 686,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1c75b889f30e7aab3885b2ff0056bcc5b78b21fe1a857d027141b049e624113b"
+    },
+    {
+      "clip": "walk",
+      "index": 15,
+      "rgbPixelsChanged": 693,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1524f9e80820781e3b7864670ae961ed36b371d19eecc9ec053b150e167343e4"
+    },
+    {
+      "clip": "run",
+      "index": 0,
+      "rgbPixelsChanged": 849,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "474214ce5dea724b321d0f27bfab8ee7dad476d5c81f7173951450e74d565801"
+    },
+    {
+      "clip": "run",
+      "index": 1,
+      "rgbPixelsChanged": 789,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "62b6c1d338d222c5386ae3fd5bf025fb548a2322c2f0a48ec4b70c1d81930fba"
+    },
+    {
+      "clip": "run",
+      "index": 2,
+      "rgbPixelsChanged": 772,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0fe088cd4d1dd9875238b651e8d95aa4cc41bc64ea2729d72f0069964cf30343"
+    },
+    {
+      "clip": "run",
+      "index": 3,
+      "rgbPixelsChanged": 810,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e2f77fbece7aced06e8092332907d548eebbd06bb3835c7ca24da3eacf06193b"
+    },
+    {
+      "clip": "run",
+      "index": 4,
+      "rgbPixelsChanged": 1108,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "afb1d890a277f49bd7f35d26cd3c58a188fbdaf9829ac4b1222d8db0c8b442ed"
+    },
+    {
+      "clip": "run",
+      "index": 5,
+      "rgbPixelsChanged": 755,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "603dea6a61d0b8a079ce87b93a19d7dcc94470a57606350151dc171484c320be"
+    },
+    {
+      "clip": "run",
+      "index": 6,
+      "rgbPixelsChanged": 1054,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1f7149eff5ee562b3460e64a527c5c7037b7d0ecaf9a1f79583b84f9a969fa47"
+    },
+    {
+      "clip": "run",
+      "index": 7,
+      "rgbPixelsChanged": 934,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "cd0202ea972ab79196522a4eb994d3b81357ff791613316aed408fa27e185cdb"
+    },
+    {
+      "clip": "run",
+      "index": 8,
+      "rgbPixelsChanged": 719,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "6ee214712d4fec5dd741ab35a723a3658591caa89c69582ee5ab3cf45303ed2d"
+    },
+    {
+      "clip": "run",
+      "index": 9,
+      "rgbPixelsChanged": 791,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "854b8d1e433743799c705149138dbec15dc56c25b87e4a3749bd89ea94b43b00"
+    },
+    {
+      "clip": "run",
+      "index": 10,
+      "rgbPixelsChanged": 848,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "94778d367b0ae2a052234a3e36542d680dd60fd75b4ee950098586a487c0333c"
+    },
+    {
+      "clip": "run",
+      "index": 11,
+      "rgbPixelsChanged": 759,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "d7e0d2fdfbec5a9fde903aeed8edb3952eb9d21c847a888b7c51484113b442bc"
+    },
+    {
+      "clip": "run",
+      "index": 12,
+      "rgbPixelsChanged": 720,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "d99c2fc6bc701bb5184ca0f92064f6e0190a8b025c052fe5f93df223c374cf8b"
+    },
+    {
+      "clip": "run",
+      "index": 13,
+      "rgbPixelsChanged": 840,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4d8869f1ee5fd29ec1732a1885b128f482bcb38e235e1ffa2359726746eaeb6c"
+    },
+    {
+      "clip": "run",
+      "index": 14,
+      "rgbPixelsChanged": 1097,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4d127ea1fa7078abb4aa6101e1773a21bc0296c06202c97930ab2329f4126ba9"
+    },
+    {
+      "clip": "run",
+      "index": 15,
+      "rgbPixelsChanged": 1002,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "90239b227ddef211907c877ca77cbf645eefd352b71603f9d568738c418f9c86"
+    },
+    {
+      "clip": "dash",
+      "index": 0,
+      "rgbPixelsChanged": 599,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c854e33358d3f1ab6d2b27206a8546904ba39783ccafa2c1c9157e08e390b549"
+    },
+    {
+      "clip": "dash",
+      "index": 1,
+      "rgbPixelsChanged": 738,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f8c9d57ca367b89e3ebab4ab08abae3f1e447eb8b95da45c6f72f071ed5414e1"
+    },
+    {
+      "clip": "dash",
+      "index": 2,
+      "rgbPixelsChanged": 625,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "64863be3a9882cf1d3fb5431bd6e364ee925bf6c1f77e477f91ebc879c8724d7"
+    },
+    {
+      "clip": "dash",
+      "index": 3,
+      "rgbPixelsChanged": 770,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1dc123ed6b67dd19c1a00a46b7a6aee261417bd1dc03e6863b4690005398c025"
+    },
+    {
+      "clip": "dash",
+      "index": 4,
+      "rgbPixelsChanged": 975,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1071085c22d026147b57a7d96fa39ce5e2a5b80cd859db87e36fff234171eb3d"
+    },
+    {
+      "clip": "dash",
+      "index": 5,
+      "rgbPixelsChanged": 783,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f8385b6a67ea733a109844460069fad98d134f61e5a2534fe48c3d8cff1188fe"
+    },
+    {
+      "clip": "dash",
+      "index": 6,
+      "rgbPixelsChanged": 916,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "bab46d5d8222c803c2b89f2ea5465417bed2b458dea86b21da2ff7a3e3a6ff16"
+    },
+    {
+      "clip": "dash",
+      "index": 7,
+      "rgbPixelsChanged": 801,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3121d48034f2124b1e7b803754b5e1c0983b8d31708b0ba2529114d2c19f48a7"
+    },
+    {
+      "clip": "dash",
+      "index": 8,
+      "rgbPixelsChanged": 910,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c457b1c690707a153037d31a8e9f0d4380dfe3811e81296b69cf419a5217b791"
+    },
+    {
+      "clip": "dash",
+      "index": 9,
+      "rgbPixelsChanged": 668,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "a12ef268c919397ff172970c972d9d8035f76da3a4b0fc879cecdeeda5c308ee"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 0,
+      "rgbPixelsChanged": 535,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "7cfd247d32fb6e9b9fa7d84320d9991505e5c3c9c9ebf08cb096fa6f566a21d6"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 1,
+      "rgbPixelsChanged": 620,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3d308b2c2ecc846d2ee99362bf4f780837132b4b3db2e7e8714d33e8bca3d25c"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 2,
+      "rgbPixelsChanged": 570,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "8ed9b6f033f80c3e3997956334f9600e47a933bdbc6d783b1bb015b894c6e21d"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 3,
+      "rgbPixelsChanged": 548,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "97ade20bda6bdc087200be12ed28bd4f4d658b8c3ee2de89d3aaabb9cebb1fa4"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 4,
+      "rgbPixelsChanged": 533,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "fecbc6932086dd0c0b43d569849ed8cbc17cc54f841f84c370239fe2181d85aa"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 5,
+      "rgbPixelsChanged": 615,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "16abe9f47c2c537b4e28c8bdea2629fafc97deb26c7d53ac29ce2390a198e524"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 6,
+      "rgbPixelsChanged": 500,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "40c8e3738fbc5d65ecaf8b882ca026b79eef503824cc6c08e55e35ee5693c19f"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 7,
+      "rgbPixelsChanged": 650,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "416e63e2a0473f01a6e066023938089f1b7c282ae1b922f622ceee8016640baf"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 8,
+      "rgbPixelsChanged": 607,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4c6bb4151d9eff7d31950d04ae79e4ae9ffb2d985e7fd488273af743a3ece109"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 9,
+      "rgbPixelsChanged": 651,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "06fd9c270c49a20341c295893a27dd91940e0f1b6f91116975e0de6be596361e"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 10,
+      "rgbPixelsChanged": 578,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3ffd88d243c95719d3ff70d063a71ae45b5ee7959ea332ca736943127bd9b267"
+    },
+    {
+      "clip": "sword_fly",
+      "index": 11,
+      "rgbPixelsChanged": 566,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9fff0e34363ca4dcaa35c0ddba6c7bc1e77d8f54bb7086097027eccd4058be8d"
+    },
+    {
+      "clip": "attack",
+      "index": 0,
+      "rgbPixelsChanged": 782,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "ed2896c709493bfb0a5140767a7eb5a6a3dfd171cbb0dc6e5613750a5d21defb"
+    },
+    {
+      "clip": "attack",
+      "index": 1,
+      "rgbPixelsChanged": 607,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "50ce8038859234a62c8f51c70901ed551945b2648d150def93d1c6a8970c41e8"
+    },
+    {
+      "clip": "attack",
+      "index": 2,
+      "rgbPixelsChanged": 498,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "317e8722dd4d017157994e9cf8c61af6d63a8315ffe143b9898f3c35f33b5d48"
+    },
+    {
+      "clip": "attack",
+      "index": 3,
+      "rgbPixelsChanged": 554,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1306b156a25470f7610337a615c6f0c1d99949c4d358c6bfe47cfa9b8b946e95"
+    },
+    {
+      "clip": "attack",
+      "index": 4,
+      "rgbPixelsChanged": 649,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "b74cd317ee1c56534ccb16ffe4ec1077494935249a59e2c7e86c261456d1bc81"
+    },
+    {
+      "clip": "attack",
+      "index": 5,
+      "rgbPixelsChanged": 744,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "91c13f899b885b989556beb0b35fc4c52369069d5a3759d34f0cf7cda951f4a2"
+    },
+    {
+      "clip": "attack",
+      "index": 6,
+      "rgbPixelsChanged": 810,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9fbc84a764c6ec0d2a79589ac8254ad1ca3f85fd50c0c42f16dc55cd644baaf5"
+    },
+    {
+      "clip": "attack",
+      "index": 7,
+      "rgbPixelsChanged": 906,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4b16d2bf9ad5f8fd0ea91249d8f2c7a3d5120119d2bd3f41215ab8fb14372a26"
+    },
+    {
+      "clip": "attack",
+      "index": 8,
+      "rgbPixelsChanged": 733,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0da1c59c1257cef586eab41165364a7ba06ad8f2727363a393bd8c649e3645f0"
+    },
+    {
+      "clip": "attack",
+      "index": 9,
+      "rgbPixelsChanged": 759,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "8a7c83beb49276a9f3f93d31ecaf21e94718099edc5e015557da5cafef499f2d"
+    },
+    {
+      "clip": "attack",
+      "index": 10,
+      "rgbPixelsChanged": 413,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0e4aada772ffa83918fe1e2eec186ad79493ae286175dc084c63f6875c2e32c0"
+    },
+    {
+      "clip": "attack",
+      "index": 11,
+      "rgbPixelsChanged": 582,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4f5b0ed35ea15616678c89b31ae3341d95d2468d10982a755579db30343d999a"
+    },
+    {
+      "clip": "attack",
+      "index": 12,
+      "rgbPixelsChanged": 644,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e49e6b59f79cd05099056cb290779a6271879aec9467e1934725d1df6b36fce4"
+    },
+    {
+      "clip": "attack",
+      "index": 13,
+      "rgbPixelsChanged": 767,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "d41c8ff64362a60dbd7c48faa922db89fd5463f6725908b2a0fd9d9732c53172"
+    },
+    {
+      "clip": "attack_2",
+      "index": 0,
+      "rgbPixelsChanged": 862,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "df463a729691e1e1e5fa7b3763ac80fb7733c659c7f9d55cfb726a7d7b1b56b1"
+    },
+    {
+      "clip": "attack_2",
+      "index": 1,
+      "rgbPixelsChanged": 612,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1f55e42671efe318c30de93d5d61ddb16cbbc33beb5de44811e4193516d790c1"
+    },
+    {
+      "clip": "attack_2",
+      "index": 2,
+      "rgbPixelsChanged": 606,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "57832e47906ab05e33c69328571e133150989769f37883f43bfcb1a114e093df"
+    },
+    {
+      "clip": "attack_2",
+      "index": 3,
+      "rgbPixelsChanged": 607,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3689b6f3158bad1a27270adfb81c02da0f0fea7846aac3abf74dabfe1ae1546d"
+    },
+    {
+      "clip": "attack_2",
+      "index": 4,
+      "rgbPixelsChanged": 996,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "b7d6de7f12bda290f2b455d3f36a661eb268d6fd5256a6d8cffc7139afc95e86"
+    },
+    {
+      "clip": "attack_2",
+      "index": 5,
+      "rgbPixelsChanged": 726,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "27e6af136e2692d15ef2d5d02ac3a76ee8dc92085b12df99ef10faa4a1cc9b98"
+    },
+    {
+      "clip": "attack_2",
+      "index": 6,
+      "rgbPixelsChanged": 793,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "a7afdc1767ce3a7fab8a8a53633df1bdfee61e7e31401af206f3404430382735"
+    },
+    {
+      "clip": "attack_2",
+      "index": 7,
+      "rgbPixelsChanged": 750,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9cba05c357d6c190a9c6e71b15e2db6fceb01927ff1ee89a3f54d0c853a64e80"
+    },
+    {
+      "clip": "attack_2",
+      "index": 8,
+      "rgbPixelsChanged": 899,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "277e7c8576cf9343dee11b57c3af677c7f70c41708022349b4b064abc1d4b0fa"
+    },
+    {
+      "clip": "attack_2",
+      "index": 9,
+      "rgbPixelsChanged": 755,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c53c9b5043ebb707ccb64d71de60e9fb7a180a7ac86ec7fb0a76ea9ee6ab8237"
+    },
+    {
+      "clip": "attack_2",
+      "index": 10,
+      "rgbPixelsChanged": 765,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4262f29ed22fa8d78d2b8cb74329744aa5b2d0c92bd597657320e1213725d861"
+    },
+    {
+      "clip": "attack_2",
+      "index": 11,
+      "rgbPixelsChanged": 759,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "811d05b68f0adae143db6b0762c5833737dccc76068c16d08cb7679785229e12"
+    },
+    {
+      "clip": "attack_2",
+      "index": 12,
+      "rgbPixelsChanged": 614,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "d16449c540999ca94d8bf002fc8f7e42c976bc7dae8587f05b5da5f92b35f4bb"
+    },
+    {
+      "clip": "attack_2",
+      "index": 13,
+      "rgbPixelsChanged": 824,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "80c2a4ce8a35df31d3f9bf75fdfc58bd3ff9cb0bc382c01ceb85e7b4cf07c427"
+    },
+    {
+      "clip": "attack_3",
+      "index": 0,
+      "rgbPixelsChanged": 731,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9fb702241e262378946132d9a05c76571f741f4fa6f29796dcbe2d061ac19873"
+    },
+    {
+      "clip": "attack_3",
+      "index": 1,
+      "rgbPixelsChanged": 805,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3cdc835753ada1863c91fae2d5826853d772bca3120ac6d3e555964a3a5857e4"
+    },
+    {
+      "clip": "attack_3",
+      "index": 2,
+      "rgbPixelsChanged": 941,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "41720227861b28a752921f02481e14721e9b9b1a140e84da3bc659487ff8953c"
+    },
+    {
+      "clip": "attack_3",
+      "index": 3,
+      "rgbPixelsChanged": 729,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c2208078f43aa932d6993d190f819082c4b24160628fc3a3a8a35d7b36d731a7"
+    },
+    {
+      "clip": "attack_3",
+      "index": 4,
+      "rgbPixelsChanged": 764,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "ecde6b1abff21670149026af0696e3976c1982119b678abe4786b0d3518da838"
+    },
+    {
+      "clip": "attack_3",
+      "index": 5,
+      "rgbPixelsChanged": 915,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "b73c24bed011555226fa2e5bf38fd7ef3cea1131728b11fc9c24e7c7c45804b4"
+    },
+    {
+      "clip": "attack_3",
+      "index": 6,
+      "rgbPixelsChanged": 930,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "fb4de6a9cc07b7b8ac543b5f6355879eef91f53bf455c344cdc6cae69f261196"
+    },
+    {
+      "clip": "attack_3",
+      "index": 7,
+      "rgbPixelsChanged": 1040,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "517a2e36040138bdf579d805e5326d65987ec5d29f18d8ae555dd4d07ccb4374"
+    },
+    {
+      "clip": "attack_3",
+      "index": 8,
+      "rgbPixelsChanged": 994,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e35540395f3dd61aaf41b412799d84d78c9334cb555c09a3c2550c5bbcb552d6"
+    },
+    {
+      "clip": "attack_3",
+      "index": 9,
+      "rgbPixelsChanged": 964,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "70ced5d2287feefd466bf0c154ee17296f22b93259a002e271540a1b4bd5ba3c"
+    },
+    {
+      "clip": "attack_3",
+      "index": 10,
+      "rgbPixelsChanged": 887,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "ad18841f5bf017a365409f5da561aa3336b105e8034dd3bbb740d0206196c587"
+    },
+    {
+      "clip": "attack_3",
+      "index": 11,
+      "rgbPixelsChanged": 893,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c4f9bdb8165be5ee568750ce82c79e2daf559dc3ec93142baef2971bab50d9e9"
+    },
+    {
+      "clip": "attack_3",
+      "index": 12,
+      "rgbPixelsChanged": 1106,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "7c60f2989df9828e8ee0ffbdaaadc0c3a345792b380f2f46069d2f86e01cf456"
+    },
+    {
+      "clip": "attack_3",
+      "index": 13,
+      "rgbPixelsChanged": 778,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "316843ff759c0ce20d8dab09fbd60c61ad6e9e9e28889bee4ebff5071857a77d"
+    },
+    {
+      "clip": "cast",
+      "index": 0,
+      "rgbPixelsChanged": 638,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "021ffa04fd7c7686b710fb3c0b5e81c67271bbe46344c39631739ce7995fb8ae"
+    },
+    {
+      "clip": "cast",
+      "index": 1,
+      "rgbPixelsChanged": 666,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "cecb8924a5142c8e1372a52c6e2918a153d492c09270d1c60a464cd3d9309562"
+    },
+    {
+      "clip": "cast",
+      "index": 2,
+      "rgbPixelsChanged": 613,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "235e1a10f61e79c727dd32fd9b3669ed37e31370df61f74d1ab678919345662e"
+    },
+    {
+      "clip": "cast",
+      "index": 3,
+      "rgbPixelsChanged": 546,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "fac2794f9c2c9a12ee06491fcec5706d9f91fd3f9475bb4d58455acc8cfeca18"
+    },
+    {
+      "clip": "cast",
+      "index": 4,
+      "rgbPixelsChanged": 516,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3c186eca0b378c3adb8b45450843e4c4bcb4584a6f99501eeba765b838321aed"
+    },
+    {
+      "clip": "cast",
+      "index": 5,
+      "rgbPixelsChanged": 610,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e63c6eb96a9f09db3cb695123f44703180ca385a0ae8daf99f4d45e50873ce8d"
+    },
+    {
+      "clip": "cast",
+      "index": 6,
+      "rgbPixelsChanged": 629,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "7487b650b3834a4eec378b4a157356babd3b65681c70af1f4bc40e41d94390a2"
+    },
+    {
+      "clip": "cast",
+      "index": 7,
+      "rgbPixelsChanged": 672,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c08fd16517fd773f72d698a7961ae8ab78fbde292a79bfec76a80523faa58c53"
+    },
+    {
+      "clip": "cast",
+      "index": 8,
+      "rgbPixelsChanged": 636,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "ef62d722a305b8cb99703fa0bafa02d70e441e9dff3a7c4a3a1781c3c3daae68"
+    },
+    {
+      "clip": "cast",
+      "index": 9,
+      "rgbPixelsChanged": 600,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "8d55678e97637b2131ee560d3dadfd3f8ce6598d69ea54d7e9ea3ecbf9fda9fe"
+    },
+    {
+      "clip": "cast",
+      "index": 10,
+      "rgbPixelsChanged": 619,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "5f3643edddc4047b83144ed3c4aafeb8a03c6bd98b91d98265bb6dbc11023d53"
+    },
+    {
+      "clip": "cast",
+      "index": 11,
+      "rgbPixelsChanged": 632,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "84dd892b47aabaa2325b9e278251ba6c8072cba3269cdc93c1c576fa40eb7354"
+    },
+    {
+      "clip": "cast",
+      "index": 12,
+      "rgbPixelsChanged": 561,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "382d4ad653e2941963633c8abf56fa74c5e77ad88be88c2443190ddea66499ab"
+    },
+    {
+      "clip": "cast",
+      "index": 13,
+      "rgbPixelsChanged": 551,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "aed60784aa61ca855e8334342335691b9569e2fbbba4237519ed06df7798f7d8"
+    },
+    {
+      "clip": "cast",
+      "index": 14,
+      "rgbPixelsChanged": 618,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1982487819a765bc0c4efecad980f57a0d4df36d2e5ce8b3a3e49fe79e5fe5b7"
+    },
+    {
+      "clip": "cast",
+      "index": 15,
+      "rgbPixelsChanged": 684,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "177d998b54eac4b843dc87098da80041742b1f20df6e08ccdb51aa12af351b0c"
+    },
+    {
+      "clip": "channel",
+      "index": 0,
+      "rgbPixelsChanged": 788,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3b02e0e82a32ebcf7f91edd2f217c69126bc3f51e61a3ae1416d35ea8c6a2e25"
+    },
+    {
+      "clip": "channel",
+      "index": 1,
+      "rgbPixelsChanged": 583,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "ac736bba2b02b9e713dd3c5176f3d2122f429d025c92d801f69fd6d2b702f257"
+    },
+    {
+      "clip": "channel",
+      "index": 2,
+      "rgbPixelsChanged": 550,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "98e750574108fcc98044f95cb3157afad3700c3f19cb28e06b2b74851489abc2"
+    },
+    {
+      "clip": "channel",
+      "index": 3,
+      "rgbPixelsChanged": 616,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "986606cf66ffa445c3f092d16f79040a74d5d8382ca727a90c5077c25f434a6d"
+    },
+    {
+      "clip": "channel",
+      "index": 4,
+      "rgbPixelsChanged": 646,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "6f32ebf711b1e707b0ab74d1ea5c512651a03f598d74635c23885885400b9995"
+    },
+    {
+      "clip": "channel",
+      "index": 5,
+      "rgbPixelsChanged": 615,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e4dad4202021bf46823be58c602b060a596b3bbae60664dc8a09d709295bfbe2"
+    },
+    {
+      "clip": "channel",
+      "index": 6,
+      "rgbPixelsChanged": 675,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "b1605b2878a0f3ed51973066c4053ef3d145fce909f8e58e3edce9b22be7e5b0"
+    },
+    {
+      "clip": "channel",
+      "index": 7,
+      "rgbPixelsChanged": 685,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "ddb78b4fb340e7b33bfcc1392a28f7221a681ad3417297ac97998c71d522319d"
+    },
+    {
+      "clip": "channel",
+      "index": 8,
+      "rgbPixelsChanged": 681,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "faec65b44e92ede693d65799035de5509f2e5fa6dd142916d864a1d7ee032fe6"
+    },
+    {
+      "clip": "channel",
+      "index": 9,
+      "rgbPixelsChanged": 688,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "12bee12dfa0a3065e88d72413817adf770c2e0b53d3a7aa678a1adfe008c9314"
+    },
+    {
+      "clip": "channel",
+      "index": 10,
+      "rgbPixelsChanged": 624,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "bdd7813d99a4f6a0e4fa29e5e6d1088f5194f2cb40c622d82b7ef94098cc8254"
+    },
+    {
+      "clip": "channel",
+      "index": 11,
+      "rgbPixelsChanged": 626,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "244a33cb16ba566550625936174dad71b9e421c7c0363c29293d802df907f900"
+    },
+    {
+      "clip": "hit",
+      "index": 0,
+      "rgbPixelsChanged": 702,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "17904fcfb1d87756e7c314697deacd0c775f87efcd8c1cfc0624a676df61587d"
+    },
+    {
+      "clip": "hit",
+      "index": 1,
+      "rgbPixelsChanged": 908,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0c400bd8c0d2dbabb85fceb9e00436ff6a24aab505b59fdcb21a144d7ab8d815"
+    },
+    {
+      "clip": "hit",
+      "index": 2,
+      "rgbPixelsChanged": 994,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "c75b571176c84638d643d0a00512353fe6d9dc8c7cbe420c3583388d2bbbd82a"
+    },
+    {
+      "clip": "hit",
+      "index": 3,
+      "rgbPixelsChanged": 1078,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "66be8405d3d2668c68cccc83c0bf22ae4b3f4d8f53378f46bb7d54881c600185"
+    },
+    {
+      "clip": "hit",
+      "index": 4,
+      "rgbPixelsChanged": 703,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f9e8a86751dbe4bb20a62b0dbbeda2948baa19e2749e3b4f64aafe6feb8b308f"
+    },
+    {
+      "clip": "hit",
+      "index": 5,
+      "rgbPixelsChanged": 702,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "8e15ef737fbb10df2179065c29e521b7c268410e919dea4c014d570873271477"
+    },
+    {
+      "clip": "die",
+      "index": 0,
+      "rgbPixelsChanged": 511,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "82ed9183a79962c3d3ad7031aa2f3f120d00185bcc75cf1336454dba1f3a90f1"
+    },
+    {
+      "clip": "die",
+      "index": 1,
+      "rgbPixelsChanged": 688,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "fbb252371f00d17361dbd42ef17277c393297a9b1f467365b618afc981377a06"
+    },
+    {
+      "clip": "die",
+      "index": 2,
+      "rgbPixelsChanged": 726,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "7c6625c31467612728e4f7580c4b9d4a1c8c7fa4ee2da137a5e7ce610770811a"
+    },
+    {
+      "clip": "die",
+      "index": 3,
+      "rgbPixelsChanged": 606,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "45287ddc00059cba17e43be3487e54fdb4a1a0315d29a2756aa9cdbb1a40ae30"
+    },
+    {
+      "clip": "die",
+      "index": 4,
+      "rgbPixelsChanged": 552,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "395432544d94cf37a754e14649dfc2ff8c4309f248d079b1cd5e15fb6317148a"
+    },
+    {
+      "clip": "die",
+      "index": 5,
+      "rgbPixelsChanged": 432,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "d975e8ce7e281ba18d8f2b3aa66b70fc5bbc05b020ce2dff30c840f3c4caa7e3"
+    },
+    {
+      "clip": "die",
+      "index": 6,
+      "rgbPixelsChanged": 472,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "eaca2e8ddfd045214fc4f49bfd7cd897fac777f69aeb8508f20e1d7a5c79c585"
+    },
+    {
+      "clip": "die",
+      "index": 7,
+      "rgbPixelsChanged": 306,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "46a0e90b3d803cd8629f33e699c6037a06eb563d49b77516244449d229213460"
+    },
+    {
+      "clip": "die",
+      "index": 8,
+      "rgbPixelsChanged": 465,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4bf57c1917ccf1c9f37ea30cccd11bac5eabe656c41e49502492561a94ad8333"
+    },
+    {
+      "clip": "die",
+      "index": 9,
+      "rgbPixelsChanged": 461,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9e8a4af339e552e1481e6a6be4e0b2f96b1e843628430541d25fe9e3bc55519f"
+    },
+    {
+      "clip": "die",
+      "index": 10,
+      "rgbPixelsChanged": 547,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "1f51e9332f7d8016c6b274bc37728d330af52538deb1a9cf8088393292531acf"
+    },
+    {
+      "clip": "die",
+      "index": 11,
+      "rgbPixelsChanged": 383,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e6f142c677b47b0ed8125b2ade4c64519416b9d4ba5ccf1bd99de42030c9fab6"
+    },
+    {
+      "clip": "tribulation",
+      "index": 0,
+      "rgbPixelsChanged": 882,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "ee48a05082f8a7b34af9456143570f53b653531508122a6580c7134843eee640"
+    },
+    {
+      "clip": "tribulation",
+      "index": 1,
+      "rgbPixelsChanged": 922,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "a64805c0c4dfd5dcf9af70cebda7a36d3a03653d9ff202863ddf968c2216b230"
+    },
+    {
+      "clip": "tribulation",
+      "index": 2,
+      "rgbPixelsChanged": 903,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0e193795628c872fa9a1962eb6fd58bc224ab8edc18a5bfddaeaf713d16a1bad"
+    },
+    {
+      "clip": "tribulation",
+      "index": 3,
+      "rgbPixelsChanged": 1007,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0d2a857d60958056e02b015e5bee7f42070d6c366ce0392d9d86f0585a5c66db"
+    },
+    {
+      "clip": "tribulation",
+      "index": 4,
+      "rgbPixelsChanged": 833,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "cdc2e9085174ee809378c7a28787e4dc5ebe98ff7c9c22eb6a9ed087a40031c1"
+    },
+    {
+      "clip": "tribulation",
+      "index": 5,
+      "rgbPixelsChanged": 779,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "4dabd8644b9a848e3263071d1ac080888aadc2489c4d2d9d1128194dee059029"
+    },
+    {
+      "clip": "tribulation",
+      "index": 6,
+      "rgbPixelsChanged": 728,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "bf585bb1460d89c8d1425065253e45f0662b3700ea4bcca9eed720c77b9b5061"
+    },
+    {
+      "clip": "tribulation",
+      "index": 7,
+      "rgbPixelsChanged": 754,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e845da3b5b664692306abd1b25973f1e6d30d949ec11a43c231b2efe53e5627b"
+    },
+    {
+      "clip": "tribulation",
+      "index": 8,
+      "rgbPixelsChanged": 812,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "cbbe2e6b6521e80755753dfe7c6dedce8734a09c9b58c979c04dbcb0b374f847"
+    },
+    {
+      "clip": "tribulation",
+      "index": 9,
+      "rgbPixelsChanged": 920,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "960e6f42d94e4807d2aa2f58710c38a4380520ead0517e28ee127503776c3108"
+    },
+    {
+      "clip": "tribulation",
+      "index": 10,
+      "rgbPixelsChanged": 779,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "e4199f67289013cd8fd470d976bdbaa656f909eae85ca797cc7923130e0cab1a"
+    },
+    {
+      "clip": "tribulation",
+      "index": 11,
+      "rgbPixelsChanged": 846,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "7187657f6aeee1feea67920b4db0037e8e2540f0c5cfc6af0bd0443404386931"
+    },
+    {
+      "clip": "tribulation",
+      "index": 12,
+      "rgbPixelsChanged": 901,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "cdb92b887af57e4c95bd4d04346dc7b82b5740e01c8ef7d244e7e6c11b87cea8"
+    },
+    {
+      "clip": "tribulation",
+      "index": 13,
+      "rgbPixelsChanged": 730,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "b4d549fb8faf43c56566eb036ad3d619f79033e22904e155e676baaecb6067f8"
+    },
+    {
+      "clip": "tribulation",
+      "index": 14,
+      "rgbPixelsChanged": 949,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9c636ff1b4cce83acce174abe757bbf72bf59e3f2185c3cb29341c4b95cf674d"
+    },
+    {
+      "clip": "tribulation",
+      "index": 15,
+      "rgbPixelsChanged": 883,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f6a3fec55dc49952c8947c57de580076f7fef127477fe020074e49bf6f938bac"
+    },
+    {
+      "clip": "emote",
+      "index": 0,
+      "rgbPixelsChanged": 645,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0f0b14da7481c8a4a711f25d8e1794eef56f93d90f1f9306f72a513bd20f85ac"
+    },
+    {
+      "clip": "emote",
+      "index": 1,
+      "rgbPixelsChanged": 533,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "9f16aab63807158b4f6ff9a92e1497f0b7f1d8f1bbe63a3aadb1428bbc063a1c"
+    },
+    {
+      "clip": "emote",
+      "index": 2,
+      "rgbPixelsChanged": 639,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "36e556de98a2ab47da341eaff5ba10a79c4ddd656af3f6cde9c8a49e1bf1315c"
+    },
+    {
+      "clip": "emote",
+      "index": 3,
+      "rgbPixelsChanged": 719,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "01722ac3aaf2c59cfbb80487010b3ef2c7de8bffbeff4e4bc82438fe3b3cc4b8"
+    },
+    {
+      "clip": "emote",
+      "index": 4,
+      "rgbPixelsChanged": 671,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "0a246bbda28ff5cad5b7e5e3f014edd3afe0c5c9b63983505c8564df7bda6508"
+    },
+    {
+      "clip": "emote",
+      "index": 5,
+      "rgbPixelsChanged": 725,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "a7ead177bdfaac9011dd39ba45a6047b41361b71dc3526cb918306150a37add4"
+    },
+    {
+      "clip": "emote",
+      "index": 6,
+      "rgbPixelsChanged": 511,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "b4b5eb73c73a0969e44d2c9278b42a1dfbe5ec475cc9a767af3685c1533c23d6"
+    },
+    {
+      "clip": "emote",
+      "index": 7,
+      "rgbPixelsChanged": 566,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "f1d559c72f8d95692d3fb7cb1d270d63ee0a8142b39f65de047be9ad66ff096b"
+    },
+    {
+      "clip": "emote",
+      "index": 8,
+      "rgbPixelsChanged": 610,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "406c64b44fe75030b8729b38581f846ad4e60e1ebd3274f6acc79ff2e460cf0c"
+    },
+    {
+      "clip": "emote",
+      "index": 9,
+      "rgbPixelsChanged": 715,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "2e42d04ed2dd9bc199ce51adcbb0b9a0c3eb783c87453d2849fcfc356d45f7e2"
+    },
+    {
+      "clip": "emote",
+      "index": 10,
+      "rgbPixelsChanged": 536,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "bc88dcf2aef837e45caaa3da2ad3e9a80b0ae14f3199a0379fcb3595f8ab75e5"
+    },
+    {
+      "clip": "emote",
+      "index": 11,
+      "rgbPixelsChanged": 634,
+      "alphaPixelsChanged": 0,
+      "alignedPngSha256": "3a6ad66a4a954a99a10c960a1a8b1857a8c79cccafbc441aa9675b95eabd8794"
+    }
+  ],
+  "qa": {
+    "fail-hard": 1,
+    "fail-soft": 2,
+    "accepted": 14,
+    "regression": 5,
+    "info": 141
+  },
+  "findings": [
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 0,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 1,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 3,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 4,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 5,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 6,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 7,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 8,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 9,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 10,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 11,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 12,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 13,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 14,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "meditate",
+      "frame": 15,
+      "metric": "height_excess_px",
+      "value": 60.1,
+      "limit": 0,
+      "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "walk",
+      "frame": 2,
+      "metric": "head_size_px",
+      "value": 53.46026561849464,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.46 px / master 53.46 px; bbox 237 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 65.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.46026561849464,
+        "ratio": 1,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 237
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "walk",
+      "frame": 3,
+      "metric": "head_size_px",
+      "value": 53.46026561849464,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.46 px / master 53.46 px; bbox 237 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 65.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.46026561849464,
+        "ratio": 1,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 237
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "walk",
+      "frame": 8,
+      "metric": "head_size_px",
+      "value": 52.46903848937963,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 52.47 px / master 53.46 px; bbox 237 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 120,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 127,
+            "y": 64.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 52.46903848937963,
+        "ratio": 0.9814586194504037,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 237
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "walk",
+      "frame": 10,
+      "metric": "head_size_px",
+      "value": 52.46903848937963,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 52.47 px / master 53.46 px; bbox 237 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 121,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 52.46903848937963,
+        "ratio": 0.9814586194504037,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 237
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "walk",
+      "frame": 11,
+      "metric": "head_size_px",
+      "value": 53.46026561849464,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.46 px / master 53.46 px; bbox 239 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 120,
+            "y": 12.5
+          },
+          "chin": {
+            "x": 127,
+            "y": 65.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.46026561849464,
+        "ratio": 1,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 239
+      }
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 1,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 5.85,
+      "limit": 3,
+      "message": "R foot slides 5.8 px/frame between frames 0-1 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 2,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 3.54,
+      "limit": 3,
+      "message": "R foot slides 3.5 px/frame between frames 1-2 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 4,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 7.57,
+      "limit": 3,
+      "message": "R foot slides 7.6 px/frame between frames 3-4 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 5,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 8.98,
+      "limit": 3,
+      "message": "R foot slides 9.0 px/frame between frames 4-5 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 6,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 3.16,
+      "limit": 3,
+      "message": "R foot slides 3.2 px/frame between frames 5-6 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 7,
+      "metric": "slide_ground_px_per_frame_R",
+      "value": 16.96,
+      "limit": 3,
+      "message": "R foot slides 17.0 px/frame between frames 6-7 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 9,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 9.36,
+      "limit": 3,
+      "message": "L foot slides 9.4 px/frame between frames 8-9 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 12,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 4.06,
+      "limit": 3,
+      "message": "L foot slides 4.1 px/frame between frames 11-12 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 13,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 5.85,
+      "limit": 3,
+      "message": "L foot slides 5.8 px/frame between frames 12-13 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 14,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 4.44,
+      "limit": 3,
+      "message": "L foot slides 4.4 px/frame between frames 13-14 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "walk",
+      "frame": 15,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 14.28,
+      "limit": 3,
+      "message": "L foot slides 14.3 px/frame between frames 14-15 (limit 3)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 0,
+      "metric": "head_size_px",
+      "value": 54.03008421240892,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.03 px / master 53.46 px; bbox 224 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 157.5,
+            "y": 81.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.03008421240892,
+        "ratio": 1.0106587310654356,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 224
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 1,
+      "metric": "head_size_px",
+      "value": 55.01136246267674,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 55.01 px / master 53.46 px; bbox 221 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 149,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 159.5,
+            "y": 82.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 55.01136246267674,
+        "ratio": 1.0290140130475802,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 221
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 2,
+      "metric": "head_size_px",
+      "value": 54.69232121605373,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.69 px / master 53.46 px; bbox 214 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 147,
+            "y": 28.5
+          },
+          "chin": {
+            "x": 160.5,
+            "y": 81.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.69232121605373,
+        "ratio": 1.0230461929679013,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 214
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 3,
+      "metric": "head_size_px",
+      "value": 54.12023651093923,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.12 px / master 53.46 px; bbox 218 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 149,
+            "y": 25.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 77.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.12023651093923,
+        "ratio": 1.0123450732017365,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 218
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 4,
+      "metric": "head_size_px",
+      "value": 51.92301994298868,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 51.92 px / master 53.46 px; bbox 209 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 150,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 72.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 51.92301994298868,
+        "ratio": 0.9712450797293805,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 209
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 5,
+      "metric": "head_size_px",
+      "value": 54.571054598569006,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.57 px / master 53.46 px; bbox 176 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Include surviving dark jaw-outline row75 atx162(alpha134), followed by row76alpha46; old74.5 excluded the last outline.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 149,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 162,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Include surviving dark jaw-outline row75 atx162(alpha134), followed by row76alpha46; old74.5 excluded the last outline."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.571054598569006,
+        "ratio": 1.0207778425195495,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 176
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 6,
+      "metric": "head_size_px",
+      "value": 54.81788029466298,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.82 px / master 53.46 px; bbox 220 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 155,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 72.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.81788029466298,
+        "ratio": 1.0253948359676437,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 220
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 7,
+      "metric": "head_size_px",
+      "value": 54.23329235810786,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.23 px / master 53.46 px; bbox 233 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 161,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 172.5,
+            "y": 72.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.23329235810786,
+        "ratio": 1.0144598372393008,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 233
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 8,
+      "metric": "head_size_px",
+      "value": 54.571054598569006,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.57 px / master 53.46 px; bbox 226 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 155,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 168,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.571054598569006,
+        "ratio": 1.0207778425195495,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 226
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 9,
+      "metric": "head_size_px",
+      "value": 54.03008421240892,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.03 px / master 53.46 px; bbox 224 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 154,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 164.5,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.03008421240892,
+        "ratio": 1.0106587310654356,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 224
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 10,
+      "metric": "head_size_px",
+      "value": 54.69232121605373,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.69 px / master 53.46 px; bbox 224 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 156,
+            "y": 22.5
+          },
+          "chin": {
+            "x": 169.5,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.69232121605373,
+        "ratio": 1.0230461929679013,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 224
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 11,
+      "metric": "head_size_px",
+      "value": 54.12023651093923,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.12 px / master 53.46 px; bbox 220 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 152,
+            "y": 21.5
+          },
+          "chin": {
+            "x": 167,
+            "y": 73.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.12023651093923,
+        "ratio": 1.0123450732017365,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 220
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 12,
+      "metric": "head_size_px",
+      "value": 52.63078946776307,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 52.63 px / master 53.46 px; bbox 210 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Central last jaw support atx169,row75alpha239; following row76alpha117. Prior168,76.5 sampled left neck-shadow support, not the central jaw.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 156,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 75.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Central last jaw support atx169,row75alpha239; following row76alpha117. Prior168,76.5 sampled left neck-shadow support, not the central jaw."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 52.63078946776307,
+        "ratio": 0.9844842493553828,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 210
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 13,
+      "metric": "head_size_px",
+      "value": 52.63078946776307,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 52.63 px / master 53.46 px; bbox 177 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 151,
+            "y": 26.5
+          },
+          "chin": {
+            "x": 164,
+            "y": 77.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 52.63078946776307,
+        "ratio": 0.9844842493553828,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 177
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 14,
+      "metric": "head_size_px",
+      "value": 53.85164807134504,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 231 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 155,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 169,
+            "y": 76.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.85164807134504,
+        "ratio": 1.0073209971615817,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 231
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "run",
+      "frame": 15,
+      "metric": "head_size_px",
+      "value": 53.85164807134504,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 231 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 151,
+            "y": 24.5
+          },
+          "chin": {
+            "x": 165,
+            "y": 76.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.85164807134504,
+        "ratio": 1.0073209971615817,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 231
+      }
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 2,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 28.8,
+      "limit": 20,
+      "message": "R planted foot: nearest sole is 28.8 px from its template ghost (xy 138.0,210.0 vs 124.8,235.6, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 3,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 999,
+      "limit": 20,
+      "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 4,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 27.7,
+      "limit": 20,
+      "message": "R planted foot: nearest sole is 27.7 px from its template ghost (xy 80.0,220.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 5,
+      "metric": "ghost_distance_2d_px_R",
+      "value": 999,
+      "limit": 20,
+      "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 8,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 22,
+      "limit": 20,
+      "message": "L planted foot: nearest sole is 22.0 px from its template ghost (xy 162.5,235.0 vs 142.7,244.5, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 11,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 38.4,
+      "limit": 20,
+      "message": "L planted foot: nearest sole is 38.4 px from its template ghost (xy 77.5,228.0 vs 115.8,231.1, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "fail",
+      "clip": "run",
+      "frame": 10,
+      "metric": "slide_ground_px_per_frame_L",
+      "value": 8.21,
+      "limit": 3,
+      "message": "L foot slides 8.2 px/frame between frames 9-10 (limit 3)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 12,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 999,
+      "limit": 20,
+      "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "footSlide",
+      "severity": "warn",
+      "clip": "run",
+      "frame": 13,
+      "metric": "ghost_distance_2d_px_L",
+      "value": 36.7,
+      "limit": 20,
+      "message": "L planted foot: nearest sole is 36.7 px from its template ghost (xy 78.5,191.0 vs 97.9,222.2, limit 20); not measured (the foot is not on the template)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 1,
+      "metric": "head_size_px",
+      "value": 52.39274758971894,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 52.39 px / master 53.46 px; bbox 203 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 123,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 135,
+            "y": 86.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 52.39274758971894,
+        "ratio": 0.9800315614517562,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 203
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 2,
+      "metric": "head_size_px",
+      "value": 51.97114584074514,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 51.97 px / master 53.46 px; bbox 201 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 132,
+            "y": 41.5
+          },
+          "chin": {
+            "x": 142,
+            "y": 92.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 51.97114584074514,
+        "ratio": 0.972145297810972,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 201
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 3,
+      "metric": "head_size_px",
+      "value": 54.91812087098393,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 198 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 145,
+            "y": 42.5
+          },
+          "chin": {
+            "x": 155,
+            "y": 96.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.91812087098393,
+        "ratio": 1.0272698841957295,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 198
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 4,
+      "metric": "head_size_px",
+      "value": 53.397097299385095,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.40 px / master 53.46 px; bbox 186 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 144,
+            "y": 31.5
+          },
+          "chin": {
+            "x": 150.5,
+            "y": 84.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.397097299385095,
+        "ratio": 0.9988184061867494,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 186
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "fail",
+      "clip": "dash",
+      "frame": 5,
+      "metric": "head_size_px",
+      "value": 55.31726674375733,
+      "limit": 55.06407358704948,
+      "message": "skull crown-chin 55.32 px outside 51.86..55.06 (master 53.46); Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Prior157,82.5 falls in left neck-shadow. Candidate159: skinrow81, dark jaw outline82, following neck shadow83; no transparent boundary because neck connects. UNRESOLVED outside-band candidate retained to keep gate rejecting pending independent contour review."
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 6,
+      "metric": "head_size_px",
+      "value": 54.91812087098393,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 202 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 130,
+            "y": 37.5
+          },
+          "chin": {
+            "x": 140,
+            "y": 91.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 54.91812087098393,
+        "ratio": 1.0272698841957295,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 202
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 7,
+      "metric": "head_size_px",
+      "value": 53.600373133029585,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 206 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 123,
+            "y": 35.5
+          },
+          "chin": {
+            "x": 136,
+            "y": 87.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.600373133029585,
+        "ratio": 1.002620778496216,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 206
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "dash",
+      "frame": 8,
+      "metric": "head_size_px",
+      "value": 53.85164807134504,
+      "limit": 55.06407358704948,
+      "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 221 px / master 230 px; Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output.",
+      "headEvidence": {
+        "kind": "crown-chin",
+        "direction": "SE",
+        "reason": "posture",
+        "master": {
+          "crown": {
+            "x": 121,
+            "y": 11.5
+          },
+          "chin": {
+            "x": 128,
+            "y": 64.5
+          }
+        },
+        "frame": {
+          "crown": {
+            "x": 115,
+            "y": 19.5
+          },
+          "chin": {
+            "x": 129,
+            "y": 71.5
+          },
+          "note": "Lanczos3 aligned256 manual semantic edges: first attached front-cap rim/highlight, excluding elevated bun/pin; last central jaw outline, excluding subsequent neck shadow. Native neighborhoods and source/output hashes in head-landmarks.lanczos3.json; about1px uncertainty. Rechecked surviving cap/jaw support on the sharper native output."
+        },
+        "masterSizePx": 53.46026561849464,
+        "sizePx": 53.85164807134504,
+        "ratio": 1.0073209971615817,
+        "masterBboxHeightPx": 230,
+        "bboxHeightPx": 221
+      }
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 0,
+      "metric": "height_excess_px",
+      "value": 4.1,
+      "limit": 0,
+      "message": "219 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 1,
+      "metric": "height_excess_px",
+      "value": 8.1,
+      "limit": 0,
+      "message": "215 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 10.1,
+      "limit": 0,
+      "message": "213 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 3,
+      "metric": "height_excess_px",
+      "value": 9.1,
+      "limit": 0,
+      "message": "214 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 4,
+      "metric": "height_excess_px",
+      "value": 6.1,
+      "limit": 0,
+      "message": "217 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 5,
+      "metric": "height_excess_px",
+      "value": 5.1,
+      "limit": 0,
+      "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 6,
+      "metric": "height_excess_px",
+      "value": 3.1,
+      "limit": 0,
+      "message": "220 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 7,
+      "metric": "height_excess_px",
+      "value": 0.1,
+      "limit": 0,
+      "message": "223 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 9,
+      "metric": "height_excess_px",
+      "value": 4.1,
+      "limit": 0,
+      "message": "219 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 10,
+      "metric": "height_excess_px",
+      "value": 5.1,
+      "limit": 0,
+      "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "sword_fly",
+      "frame": 11,
+      "metric": "height_excess_px",
+      "value": 5.1,
+      "limit": 0,
+      "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 15.1,
+      "limit": 0,
+      "message": "208 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 3,
+      "metric": "height_excess_px",
+      "value": 19.1,
+      "limit": 0,
+      "message": "204 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 4,
+      "metric": "height_excess_px",
+      "value": 16.1,
+      "limit": 0,
+      "message": "207 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 5,
+      "metric": "height_excess_px",
+      "value": 12.1,
+      "limit": 0,
+      "message": "211 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 6,
+      "metric": "height_excess_px",
+      "value": 11.1,
+      "limit": 0,
+      "message": "212 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 7,
+      "metric": "height_excess_px",
+      "value": 10.1,
+      "limit": 0,
+      "message": "213 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 8,
+      "metric": "height_excess_px",
+      "value": 10.1,
+      "limit": 0,
+      "message": "213 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 9,
+      "metric": "height_excess_px",
+      "value": 8.1,
+      "limit": 0,
+      "message": "215 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 10,
+      "metric": "height_excess_px",
+      "value": 5.1,
+      "limit": 0,
+      "message": "218 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 11,
+      "metric": "height_excess_px",
+      "value": 4.1,
+      "limit": 0,
+      "message": "219 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 0.1,
+      "limit": 0,
+      "message": "223 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 3,
+      "metric": "height_excess_px",
+      "value": 10.1,
+      "limit": 0,
+      "message": "213 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 4,
+      "metric": "height_excess_px",
+      "value": 9.1,
+      "limit": 0,
+      "message": "214 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 5,
+      "metric": "height_excess_px",
+      "value": 13.1,
+      "limit": 0,
+      "message": "210 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 6,
+      "metric": "height_excess_px",
+      "value": 22.1,
+      "limit": 0,
+      "message": "201 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 7,
+      "metric": "height_excess_px",
+      "value": 25.1,
+      "limit": 0,
+      "message": "198 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 8,
+      "metric": "height_excess_px",
+      "value": 24.1,
+      "limit": 0,
+      "message": "199 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 9,
+      "metric": "height_excess_px",
+      "value": 22.1,
+      "limit": 0,
+      "message": "201 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 10,
+      "metric": "height_excess_px",
+      "value": 16.1,
+      "limit": 0,
+      "message": "207 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 11,
+      "metric": "height_excess_px",
+      "value": 12.1,
+      "limit": 0,
+      "message": "211 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "hit",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 12.1,
+      "limit": 0,
+      "message": "211 px outside 223.1..236.9 (declared exception: recoil: flinch with knee bend)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "hit",
+      "frame": 3,
+      "metric": "height_excess_px",
+      "value": 0.1,
+      "limit": 0,
+      "message": "223 px outside 223.1..236.9 (declared exception: recoil: flinch with knee bend)"
+    },
+    {
+      "gate": "height",
+      "severity": "warn",
+      "clip": "die",
+      "frame": 0,
+      "metric": "height_excess_px",
+      "value": 1.1,
+      "limit": 0,
+      "message": "height 222 px outside the upright band and no pose exception declared"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 7.1,
+      "limit": 0,
+      "message": "216 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 3,
+      "metric": "height_excess_px",
+      "value": 34.1,
+      "limit": 0,
+      "message": "189 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 4,
+      "metric": "height_excess_px",
+      "value": 48.1,
+      "limit": 0,
+      "message": "175 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 5,
+      "metric": "height_excess_px",
+      "value": 86.1,
+      "limit": 0,
+      "message": "137 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 6,
+      "metric": "height_excess_px",
+      "value": 117.1,
+      "limit": 0,
+      "message": "106 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 7,
+      "metric": "height_excess_px",
+      "value": 143.1,
+      "limit": 0,
+      "message": "80 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 8,
+      "metric": "height_excess_px",
+      "value": 147.1,
+      "limit": 0,
+      "message": "76 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 9,
+      "metric": "height_excess_px",
+      "value": 148.1,
+      "limit": 0,
+      "message": "75 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 10,
+      "metric": "height_excess_px",
+      "value": 151.1,
+      "limit": 0,
+      "message": "72 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "die",
+      "frame": 11,
+      "metric": "height_excess_px",
+      "value": 153.1,
+      "limit": 0,
+      "message": "70 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 2,
+      "metric": "height_excess_px",
+      "value": 7.1,
+      "limit": 0,
+      "message": "216 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 3,
+      "metric": "height_excess_px",
+      "value": 18.1,
+      "limit": 0,
+      "message": "205 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 4,
+      "metric": "height_excess_px",
+      "value": 25.1,
+      "limit": 0,
+      "message": "198 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 5,
+      "metric": "height_excess_px",
+      "value": 35.1,
+      "limit": 0,
+      "message": "188 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 6,
+      "metric": "height_excess_px",
+      "value": 43.1,
+      "limit": 0,
+      "message": "180 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 7,
+      "metric": "height_excess_px",
+      "value": 42.1,
+      "limit": 0,
+      "message": "181 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 8,
+      "metric": "height_excess_px",
+      "value": 42.1,
+      "limit": 0,
+      "message": "181 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 9,
+      "metric": "height_excess_px",
+      "value": 38.1,
+      "limit": 0,
+      "message": "185 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 10,
+      "metric": "height_excess_px",
+      "value": 27.1,
+      "limit": 0,
+      "message": "196 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 11,
+      "metric": "height_excess_px",
+      "value": 19.1,
+      "limit": 0,
+      "message": "204 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 12,
+      "metric": "height_excess_px",
+      "value": 12.1,
+      "limit": 0,
+      "message": "211 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "height",
+      "severity": "info",
+      "clip": "tribulation",
+      "frame": 13,
+      "metric": "height_excess_px",
+      "value": 1.1,
+      "limit": 0,
+      "message": "222 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 0,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 1,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 2,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 3,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 4,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 5,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 6,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 7,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 8,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 9,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 10,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 11,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 12,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack",
+      "frame": 13,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 232
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack.template.json guides.centerX on ALL14cells; not anatomical pelvis. Keep the template ground232 as the authored pivot rather than centering each lowest boot. Reviewed neutral source soles234.36/234.77 retain SE foot-depth and remain an explicit soft finding. No per-frame fitting or scale change.; source (117.60678680981596, 232), scale 1, dx 0, dy 0"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 0,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 1,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 2,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 3,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 4,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 5,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 6,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 7,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 8,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 9,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 10,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 11,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 12,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_2",
+      "frame": 13,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "groundY": 237,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 237
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -5
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 0,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 248.24242424242425
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -16.24242424242425
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248.24242424242425), scale 1, dx 0, dy -16.24242424242425"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 1,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 248.24242424242425
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -16.24242424242425
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248.24242424242425), scale 1, dx 0, dy -16.24242424242425"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 2,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 248.24242424242425
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -16.24242424242425
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248.24242424242425), scale 1, dx 0, dy -16.24242424242425"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 3,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 248.24242424242425
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -16.24242424242425
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248.24242424242425), scale 1, dx 0, dy -16.24242424242425"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 4,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 247.83413078149923
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -15.834130781499226
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 247.83413078149923), scale 1, dx 0, dy -15.834130781499226"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 5,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 243.75119617224883
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -11.751196172248825
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 243.75119617224883), scale 1, dx 0, dy -11.751196172248825"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 6,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 241.30143540669857
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -9.301435406698573
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 241.30143540669857), scale 1, dx 0, dy -9.301435406698573"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 7,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 242.11802232854865
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -10.118022328548648
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242.11802232854865), scale 1, dx 0, dy -10.118022328548648"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 8,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 242.5263157894737
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -10.5263157894737
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242.5263157894737), scale 1, dx 0, dy -10.5263157894737"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 9,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 242.5263157894737
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -10.5263157894737
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242.5263157894737), scale 1, dx 0, dy -10.5263157894737"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 10,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 242.5263157894737
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -10.5263157894737
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242.5263157894737), scale 1, dx 0, dy -10.5263157894737"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 11,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 242.5263157894737
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -10.5263157894737
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242.5263157894737), scale 1, dx 0, dy -10.5263157894737"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 12,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 247.83413078149923
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -15.834130781499226
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 247.83413078149923), scale 1, dx 0, dy -15.834130781499226"
+    },
+    {
+      "gate": "authoredOrigin",
+      "severity": "info",
+      "clip": "attack_3",
+      "frame": 13,
+      "originEvidence": {
+        "kind": "lattice-root",
+        "pelvisX": 117.60678680981596,
+        "reason": "preserve authored root travel",
+        "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+        "source": {
+          "x": 117.60678680981596,
+          "y": 248.6507177033493
+        },
+        "scale": 1,
+        "dx": 0,
+        "dy": -16.6507177033493
+      },
+      "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248.6507177033493), scale 1, dx 0, dy -16.6507177033493"
+    }
+  ],
+  "projectSha256": "5465d9459dc30ab0b9fbba826a867fd0fa725b3c64e8c7226e074b871f072fa6",
+  "status": "All202 selected source frames compared with/without the edge extension at fixed scale1/Lanczos3: zero alpha differences. Native QA still rejects dash5 head evidence; D55 similarity pending. This is not a production export or Cocos capture.",
+  "postStudySourceRepair": {
+    "note": "Historical cleanup-only comparison preserved. Subsequent dash5 AI head-ROI repair changes one output head;201 aligned PNGs remain byte-identical to that source baseline. Native outside-mask RGBA unchanged; exact D57 registration retained. Not a cleanup alpha-preservation claim for edited head.",
+    "evidence": "repair/dash5.head-selection.json"
+  }
+}

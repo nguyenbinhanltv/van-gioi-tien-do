@@ -1,0 +1,27 @@
+{
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 2,
+  "prompt": "Surgical HEAD-CORE correction of image1, an exact 16-frame 4x4 NE run sheet. Image1 is EDIT TARGET. Image2 is locked canonical NE master reference. Preserve ALL body/arm/leg/foot poses and positions, fan LEFT-hand grips, cloth/sleeve shapes, hair/ribbon secondary streaming outside the core, lattice registration, cell sizes, opaque magenta background and lighting. DO NOT flatten flight tucks or change the run. Only redraw skull/main hair cap/visible tiny ear-cheek core in every cell to match image2's tall narrow rear-three-quarter head shape, not the current broad round head. Narrow core width about15-18%; retain crown-to-visible RIGHT shoulder vertical span, never move shoulders. Same compact bun/split-vermilion pin/bead tassel/earrings identity, back mainly visible, no front face or extra cheek. Locked output benchmark after whole-sheet DPI normalization + fixed0.947826 calibration: skull breadth54px, vertical main-cap crown to visible right shoulder62px. At source logical256 units before calibration these are about57px breadth and65.4px vertical span (~70px breadth in current313.5rawcell). Keep mature4.5head semi-chibi anatomy. Anatomical LEFT shoulder remains obscured by approved fan/hair/ribbon; do not invent an endpoint or expose nape. Preserve each head's natural pose attachment and all body motion. All16figures complete, no extra heads/FX/text/ghosts. Exact same sheet/cell layout; no camera zoom or per-cell body scaling. Original project design only.",
+  "utcStart": "2026-11-08 00:53:55 UTC",
+  "references": ["NE/raw/run.attempt1.png", "reference/NE.master.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/run.attempt2.png",
+  "status": "selected partial head contributor; full body remains attempt1",
+  "utcEndObserved": "2026-11-08 00:54:21 UTC",
+  "headContributionCells": [0, 2, 3, 8, 10, 11, 14],
+  "contributesTo": "prepared/run.png",
+  "rawSha256": "813ad2ef3f732f65e392ba08e1e93ae91c960fd180861f5a5e769fe86f7749ac",
+  "utcRawOutputFileModified": "2026-11-08T00:54:21.438Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/raw/run.attempt1.png",
+      "sha256": "ae218c756a2d85d4c569bb016832027847e44ec022fbbe48646a31050353e8f7"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ]
+}

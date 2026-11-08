@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:20:19.250Z",
+  "utcRecordedCompleted": "2026-11-07T20:22:38.694Z",
+  "prompt": "Use case: precise-object-edit / identity-preserve. Correct this five-tier Thể tu FRONT master strip. Preserve fixed adult face, anatomy, all five poses, exact scale, hand positions, gauntlet designs, charcoal/amber/bronze palette, all T2/T3/T4/T5 designs unchanged. ONLY costume correction: LEFTMOST T1 must have a warm IVORY ink-wash apron panel UNDER the amber hip sash, two broad plain tapered ivory ends down just above knees with tiny charcoal ink-wash at tips; two narrower amber sash tails remain OVER the ivory apron. T1 has NO embroidery/gems/shoulder armor. Match this simple ivory panel as the humble precursor to the later ornate panels. SECOND replace entire transparent/noisy background with perfectly flat solid opaque RGB(255,0,255) MAGENTA, right up to clean tinted outlines. Remove every detached red/yellow/white fleck/halo around contours. NO TRANSPARENCY, no shadow, no background texture, no text or labels, no grid. This is a chroma-key source. Original premium semi-chibi 4.5-head tank, two-tone cel plus small highlight/rim. Keep all characters full body with safe margins, identical layout. Do not remove actual detached T5 gauntlet shell fragments; those intentional bronze equipment pieces stay.",
+  "references": ["T1-T5-front.raw.png"],
+  "rawOutput": "C:/Users/PC/.codex/generated_images/01a1b7a1-8988-7183-8526-f666de449e35/exec-d1330e06-0715-4d1d-83c2-e85a54b92054.png",
+  "status": "T1 apron restored; keyed reference T1-T5-front.png uses keyOut -> defringe defaults, no resampling; equal native panel crops",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T20:22:38.694Z",
+    "basis": "Generated output ownership assigned subject to terms; original project concept inputs only."
+  }
+}

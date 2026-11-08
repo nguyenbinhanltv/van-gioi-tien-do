@@ -1,0 +1,759 @@
+{
+  "format": "vgtd-sprite-provenance",
+  "version": 1,
+  "character": "phap-tu",
+  "direction": "NE",
+  "concept": "D42 B Vermilion Fan Adept",
+  "pipelineCommit": "f9e169dc889e85a127274ffb374c58e6f326959a",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "codexCliVersion": "0.166.0",
+  "terms": "https://openai.com/policies/row-terms-of-use/",
+  "master": {
+    "file": "../reference/NE.master.png",
+    "sha256": "2cb45871712a8b797503e3480c114231f9119b9ba7c81788ec903707446656e1",
+    "generationReference": "../reference/NE.master-crop.png",
+    "generationReferenceSha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c",
+    "derivation": "../reference/turnaround-derivation.json"
+  },
+  "calls": [
+    {
+      "id": "B.NE.idle",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows=8square cells, overall2:1 aspect. Row-major eight-frame IDLE BREATH LOOP: same standing stance throughout, boots fixed, fan fixed in right-hand chest carry. Frames1-4 subtle inhale,5-8 exhale, tiny shoulder/ribbon/sleeve motion only. Smooth8->1 seam. No extra controls/cells.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:04:01.464Z",
+      "utcEnd": "2026-11-06T22:04:17.888Z",
+      "selectedOutput": "sheets/idle.generated.png",
+      "resultSha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f",
+      "references": ["../reference/NE.master-crop.png", "templates/idle.template.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/idle.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.dash",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows=8square cells, aspect2:1; ONLYfirst6used:1ready,2shallowload,3push-off,4lowfastreach,5brake,6recoverready. Cells7/8 unused copies of ready, no text. Dash northeast away/up-right, no face/chestturn. Slight forwardlean and natural shallowknees, same physical head/limbs/garment scale, no lowcrouch shrinking. OPENfan inRIGHTnear hand before chest, neverbehindback, left hand free. Clear acceleration/brake, robe/ribbon backwardfollowthrough. NOtrail, duplicate limbs, dust, shadows or VFX. Keep wholebody insideeachcell.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:05:29.831Z",
+      "utcEnd": "2026-11-06T22:06:56.548Z",
+      "selectedOutput": "sheets/dash.generated.png",
+      "resultSha256": "54bb3c9d3bdd0b88452ae024249de98d528f82408ce87e23c9e936b949741e6e",
+      "references": ["../reference/NE.master-crop.png", "templates/dash.template.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/dash.template.png",
+          "sha256": "c1973c4383f6bddf787ae15792e0c58c61f053c3d19ebfc073842f4a68d0848f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.meditate",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows=8square cells, aspect2:1. Eight-frame seated lotus meditation LOOP, same master physical head/torso/limb size as idle; body folds shorter because seated, NEVER enlarge to standing237height. Face always away/up-right. Right hand holds OPENfan at right knee/chest; empty left hand seal near abdomen. Calm breathing, small ribbon motion, fixed seated ground contact. No aura, cushions, floor/shadow, floating flecks.8->1 seamless.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:05:29.831Z",
+      "utcEnd": "2026-11-06T22:05:50.105Z",
+      "selectedOutput": "sheets/meditate.generated.png",
+      "resultSha256": "7a28aa5d4d3d19657f542d9e691327b515993a5807433876227358ece2ef724c",
+      "references": ["../reference/NE.master-crop.png", "templates/meditate.template.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/meditate.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.run",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT6columns x2rows=12square cells, aspect3:1. Twelve-frame brisk RUN LOOP northeast away/up-right: cells1..6 RIGHT contact/load/passing/toeoff/up/precontact,7..12 LEFT equivalents. Strong R/L boot alternation under split knee robe, modest natural forward lean. Use cyanRIGHT/amberLEFT ghosts, isometric diagonal travel up-right, planted boots move down-left, maintain lateral boot lanes. RUN stance one-thirdcycle, small flight phase. Keep one long anatomical leg extended to lowest boot rather than tucking both knees: raw standingfigure231..243px everycell, sameheadsize, no shrinking. RIGHT/near hand keeps SAME OPENfan before right chest/shoulder all12; emptyleftarm swings. Robe/ribbon lag and settle, no streaks/shadow/VFX, allfeet/bun/fan insidecell. Smooth12->1.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:05:29.831Z",
+      "utcEnd": "2026-11-06T22:06:29.085Z",
+      "selectedOutput": "sheets/run.generated.png",
+      "resultSha256": "86109a0f5e451aa1f692662284d0bc2fac4880d844ed140b5dd72e66ce344dda",
+      "references": ["../reference/NE.master-crop.png", "templates/run.template.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/run.template.png",
+          "sha256": "2f49d76e392bb5434eb4955120ea914a2c46ea7ea226f2b0057b7cdae6ec6183"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.walk",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT6columns x2rows=12square cells, aspect3:1. Twelve-frame WALK LOOP northeast away/up-right: right contact/down/passing/toeoff/up/precontact in cells1..6, left equivalents7..12. Clear anatomical R/L leg reversal. Follow CYAN nearRIGHT and AMBER farLEFT foot ghosts projected diagonally; planted boots travel backward/down-left while figure stays centred. Preserve separation/depth of boots, not horizontal E gait. Short relaxed stride and mild knee bend; one boot reaches downward so upright rawheight remains231..243 eachcell. OPENfan stays in RIGHT/near hand at chest, leftarm counter-swings. Robe splits move as cloth, no rubbery leg stretch, no squat/tuckedbothknees. Natural12->1 loop. No guide marks in final.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:05:29.831Z",
+      "utcEnd": "2026-11-06T22:06:11.585Z",
+      "selectedOutput": "sheets/walk.generated.png",
+      "resultSha256": "520d27ba8410a63b34f6e7e2f9b6f83cf990066c51951ebe151ec86b99c1064b",
+      "references": ["../reference/NE.master-crop.png", "templates/walk.template.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/walk.template.png",
+          "sha256": "3c5ff12e9edecaf4a3507a471dcf5251ca654efccf4f940fc3d003db77024279"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.run.reroll1",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only.  EXACT6columns x2rows,12equalSQUARE cells,totalaspect3:1. RE-DRAW a complete RUN cycle. Input2 is UPDATED RAW ANATOMY guide with HEADy8 and LOWESTSOLEy245: honor these NEW vertical guides, not old208px height. Input3 is idle costume/head identity and proportions. EVERYframe must have full bun-to-lowestboot RAWheight231..243units at256cell, target237. Samehead/torso dimensions allframes. In EACH pose keep one full-length anatomical leg reaching DOWN closey245, other foot may lift modestly; no tuckingbothknees, no exaggeratedjump, no squat, no miniaturefigure. Extend reaching leg anatomy instead of scaling the person. Bun remainsabout8 all12cells, allfeetinsidecell. ExactNEbackthreequarter away/up-right, vermilionrobeBACK/ivorysleeves/navysash, OPENtealfan inRIGHTnear hand atchest ALL12, leftarmfree. Genuine alternatingRIGHTleadingcells1..6,LEFTleading7..12. Briskrun with shallowknee flexion, smallflight and modestforwardlean, shortstride, never crouch. Follow directional cyanR/amberL ghost travel as feasible while retaining full-lengthlegs; ghostsarepositionsonly. Contact/down/passing/toeoff/up/precontacteachhalf. CELL12 PRECONTACT andCELL1 CONTACT must have near-identical body/head/robe/fan position for a smooth12->1loop, with boottravelcontinuous and no large silhouettejump. Keep tunic/calfboots/fan/headsize identicaltoinput3; no fanhandchange. Magenta#ff00ff only, no borders/grid/guides/text/shadow/VFX/fragments.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:08:38.352Z",
+      "utcEnd": "2026-11-06T22:09:03.416Z",
+      "selectedOutput": "sheets/run.reroll1.generated.png",
+      "resultSha256": "f84c126f62591642934dd1b2afbaf6e33386f6268232c74682db699e1fbf576c",
+      "references": [
+        "../reference/NE.master-crop.png",
+        "templates/run.raw-scale-guide.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/run.raw-scale-guide.png",
+          "sha256": "a648c390890a5ce0ac651608db9c5469893c621c524f1735eab5298687781fae"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.walk.reroll1",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only.  EXACT6columns x2rows,12equalSQUARE cells,totalaspect3:1. RE-DRAW a complete WALK cycle. Input2 is UPDATED RAW ANATOMY guide with HEADy8 and LOWESTSOLEy245: honor these NEW vertical guides, not old208px height. Input3 is idle costume/head identity and proportions. EVERYframe must have full bun-to-lowestboot RAWheight231..243units at256cell, target237. Samehead/torso dimensions allframes. In EACH pose keep one full-length anatomical leg reaching DOWN closey245, other foot may lift modestly; no tuckingbothknees, no exaggeratedjump, no squat, no miniaturefigure. Extend reaching leg anatomy instead of scaling the person. Bun remainsabout8 all12cells, allfeetinsidecell. ExactNEbackthreequarter away/up-right, vermilionrobeBACK/ivorysleeves/navysash, OPENtealfan inRIGHTnear hand atchest ALL12, leftarmfree. Genuine alternatingRIGHTleadingcells1..6,LEFTleading7..12. Relaxedwalk with shallowkneeflexion, steadyhead and shortstride, noflight. Follow directional cyanR/amberL ghost travel as feasible while retaining full-lengthlegs; ghostsarepositionsonly. Contact/down/passing/toeoff/up/precontacteachhalf. CELL12 PRECONTACT andCELL1 CONTACT must have near-identical body/head/robe/fan position for a smooth12->1loop, with boottravelcontinuous and no large silhouettejump. Keep tunic/calfboots/fan/headsize identicaltoinput3; no fanhandchange. Magenta#ff00ff only, no borders/grid/guides/text/shadow/VFX/fragments.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:08:38.352Z",
+      "utcEnd": "2026-11-06T22:09:28.167Z",
+      "selectedOutput": "sheets/walk.reroll1.generated.png",
+      "resultSha256": "0cf0181791d8a60d8d0efd4de7b56e96baba4675a28c95f97f14589cf6c753a9",
+      "references": [
+        "../reference/NE.master-crop.png",
+        "templates/walk.raw-scale-guide.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/walk.raw-scale-guide.png",
+          "sha256": "888728d3e956658030183676675e25c445982a33d4bed573eead448c3bb17a36"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.run.repair2",
+      "prompt": "LOCAL WHOLE-CELL ANATOMY REPAIR, NOT RESIZE. Input1 original6column x2row run sheet, input2 guide shows CYAN line at currentbun and YELLOW line where LOWEST BOOT SOLE must reach, input3 white mask selects ONLY cells 2,4,5,6,8,10,11 (row-major1based), input4 masteridentity. Retain EXACT6x2 squaregrid, magenta background and all othercells unchanged. In SELECTEDcells only, keep head/bun/torso/fan/robe upperhalf pixel-scale and position; redraw one natural whole trouserleg+boot reaching DOWN to the yellow line, while the other leg retains a relaxed bend and the correct alternating gait. Do not stretch/squash/rescale the sprite. This fixes too-tucked knees: cells5and11 need a much shallower knee/long reaching leg (+~50rawpx); other selectedcells need~15..21rawpx lowerboot. Keep sole at yellowguide, bun at cyan guide, fullphysical leg length anatomically plausible, both boots separate and clearly attached. SameNEbackthreequarter away/up-right, vermilion Fan Adept, ONEOPENtealfan inRIGHTnear hand atchest, ivorysleeves/trousers/navysash/bronzecloudhem. No face/chest turn. No guide lines, grid, masks, labels, shadows, floor or VFX in final. PureMAGENTA. Whole sheet output same framing; absolutely no edits to unselectedcells.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:11:23.097Z",
+      "utcEnd": "2026-11-06T22:12:08.760Z",
+      "selectedOutput": "sheets/run.repair2.generated.png",
+      "resultSha256": "cb5230cfe11e87e9564b7671e861096921e624de5faa14c95a897761d83e0956",
+      "references": [
+        "sheets/run.reroll1.generated.png",
+        "run.repair2.guide.png",
+        "run.repair2.mask.png",
+        "../reference/NE.master-crop.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "sheets/run.reroll1.generated.png",
+          "sha256": "f84c126f62591642934dd1b2afbaf6e33386f6268232c74682db699e1fbf576c"
+        },
+        {
+          "file": "run.repair2.guide.png",
+          "sha256": "959aaba2f0bb034378926d0fe8f3087068acb2d9cfdb74d5c07be9ca970d1f97"
+        },
+        {
+          "file": "run.repair2.mask.png",
+          "sha256": "d0371f31fc7e8661c9cff91feaf649efcdbb1bed5d3b5081c3049490f37830d7"
+        },
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.walk.repair2",
+      "prompt": "LOCAL WHOLE-CELL ANATOMY REPAIR, NOT RESIZE. Input1 original6column x2row walk sheet, input2 guide shows CYAN line at currentbun and YELLOW line where LOWEST BOOT SOLE must reach, input3 white mask selects ONLY cells 3,4,5,9 (row-major1based), input4 masteridentity. Retain EXACT6x2 squaregrid, magenta background and all othercells unchanged. In SELECTEDcells only, keep head/bun/torso/fan/robe upperhalf pixel-scale and position; redraw one natural whole trouserleg+boot reaching DOWN to the yellow line, while the other leg retains a relaxed bend and the correct alternating gait. Do not stretch/squash/rescale the sprite. This fixes too-tucked knees: selectedcells need~13..15rawpx lowerboot. Keep sole at yellowguide, bun at cyan guide, fullphysical leg length anatomically plausible, both boots separate and clearly attached. SameNEbackthreequarter away/up-right, vermilion Fan Adept, ONEOPENtealfan inRIGHTnear hand atchest, ivorysleeves/trousers/navysash/bronzecloudhem. No face/chest turn. No guide lines, grid, masks, labels, shadows, floor or VFX in final. PureMAGENTA. Whole sheet output same framing; absolutely no edits to unselectedcells.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:11:23.097Z",
+      "utcEnd": "2026-11-06T22:11:43.045Z",
+      "selectedOutput": "sheets/walk.repair2.generated.png",
+      "resultSha256": "811ca64c8581a1e6c3fdaa4ccee7969a2c3185104a92db0b7e5857949bd5318d",
+      "references": [
+        "sheets/walk.reroll1.generated.png",
+        "walk.repair2.guide.png",
+        "walk.repair2.mask.png",
+        "../reference/NE.master-crop.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "sheets/walk.reroll1.generated.png",
+          "sha256": "0cf0181791d8a60d8d0efd4de7b56e96baba4675a28c95f97f14589cf6c753a9"
+        },
+        {
+          "file": "walk.repair2.guide.png",
+          "sha256": "972faa2bef3d23e9c1be8b42c01345e5cf7d62d6075eca0c16d546f925ad0f3e"
+        },
+        {
+          "file": "walk.repair2.mask.png",
+          "sha256": "8c63ff96c49f8d3b94bb54ab2caa483cc0c8362c35f1ec82096a6d7d536f5a20"
+        },
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.attack",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. FAN ATTACK1:1readyrightfanatchest,2turnshoulderbackslightlyNEviewretained,3fanwindupbesideearbelowbun,4shortstepandfansweep,5clearhitposefanextendedup-rightatshoulderheight,6follow-through,7recover,8ready. OneOPENfan alwaysRIGHThand, leftarmcounterbalances; no VFX/waves/trails. Masterbody/headsize fixed, standingraw237heightwhenupright; lungeusesnaturallegbendnotshrinking. Ivorysleevefoldsflow, vermilionrobe/backcloudtrimvisible. Fullfigure/faninsidecell, samecameraall8, no frontview.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:14:37.275Z",
+      "utcEnd": "2026-11-06T22:15:32.652Z",
+      "selectedOutput": "sheets/attack.generated.png",
+      "resultSha256": "3e95316a7ec03e43bca8f10f1a0b4b943ad2f9307babfed6283200ef43dcb243",
+      "references": ["../reference/NE.master-crop.png", "templates/attack.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/attack.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.attack_2",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. FAN ATTACK2 follow-up:1ready,2rightfanloadlownearhip,3lowshallowstep/coil,4upwarddiagonalrightfansweep/HITtowardup-right,5fanfinishesatshoulderheightbelowbun,6settle,7recover,8ready. OPENfan alwaysanatomicalRIGHTnear hand, no secondfan/handchange. EmptyLEFTarm balances. Same physicalhead/torso/limblengths, no perframezoom. BACKthreequarterNEmasterneverfrontchest. No effects/trails/water/fire. Allbody/fanwithincell.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:14:37.275Z",
+      "utcEnd": "2026-11-06T22:15:52.777Z",
+      "selectedOutput": "sheets/attack_2.generated.png",
+      "resultSha256": "eb46b6402d5ed02b32a8f98cf96f4366a758e55f888c422733815e5b98c86d8a",
+      "references": ["../reference/NE.master-crop.png", "templates/attack_2.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/attack_2.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.attack_3",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. FAN ATTACK3 finisher:1ready,2weightbackshallowload,3rightfanbesideearwindupbelowbun,4stepforwardNE,5decisiveoutwardDOWNwarddiagonalfansweep/HITtowardup-right,6follow-throughwithnaturalbentleadknee,7returntorso,8ready. ONEOPENtealfan inRIGHTnear hand all8, not sword/staff. Fullbodysamephysical237rawstandingheight/headsize asidle, lungefoldslegsanatomicallynotrescaling. Vermilionrobe/ivorysleeves/navysash/goldcloudtrimconsistent, backviewNEalways. No VFX/shadows/duplicates.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:14:37.275Z",
+      "utcEnd": "2026-11-06T22:16:16.010Z",
+      "selectedOutput": "sheets/attack_3.generated.png",
+      "resultSha256": "b9014fc4e7938bd195dba08be1690d7141e624ec8923e74caad0034237ef26da",
+      "references": ["../reference/NE.master-crop.png", "templates/attack_3.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/attack_3.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.cast",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. Standing SPELL CAST:1readyrightfanatshoulder,2leftfreehandformstwofingerseal,3gatherwithfancloserchest,4fanwindupbesideear,5clearreleaseposeRIGHTarmextendsOPENfanup-rightatshoulderheight,6holdrelease,7return,8ready. Fulluprightbun-to-bootrawheight231..243target237 eachcell, bun8sole245, fixedfeet/headsize/costume. SameNEbackthreequarterawayup-right, neverfacefront. No magic/fire/water/glow/VFX. OnlyONEOPENtealfanRIGHThand, leftemptyseal.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:14:37.275Z",
+      "utcEnd": "2026-11-06T22:16:40.160Z",
+      "selectedOutput": "sheets/cast.generated.png",
+      "resultSha256": "d7d2aa723a3dd2f42d9d7f368536a6ce53310dda085533773b2836367236c4d3",
+      "references": ["../reference/NE.master-crop.png", "templates/cast.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/cast.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.sword_fly",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. Eight-frame MAGIC FLIGHT LOOP northeast away/up-right. Same standing physical237rawheight/head/limbs as idle; boots relaxed slightlypointdown, torso upright, gentlyfloating posture, no ground/cushion/platform/sword/cloud/VFX. OPENfan stays in RIGHTnear hand at rightchest, emptyleftarm balances. Small robe/ribbon flutter, constant size, clean8->1 loop. Flight support/effects belong to runtime; do not paint them.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:14:37.275Z",
+      "utcEnd": "2026-11-06T22:15:03.141Z",
+      "selectedOutput": "sheets/sword_fly.generated.png",
+      "resultSha256": "72b893d34da7c18ce5c8f3d8dcc886e63f29f865594b8d349e2dbcbecd1b6214",
+      "references": [
+        "../reference/NE.master-crop.png",
+        "templates/sword_fly.template.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/sword_fly.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.run.repair3",
+      "prompt": "FINAL LOCAL ANATOMICAL LEG REPAIR. EXACT same6columns x2rows/12equalcells sheet asinput1. ONLY CELLS5and11 (row1column5,row2column5) may change, white regionsinput3. Input2 CYANline=currentbun unchanged,YELLOWline=required lowestsole. In BOTH selectedcells, visibly redraw the LONG downward reaching leg so its boot SOLE touches YELLOWline, 16..18RAWPIXELS LOWER than current. Keep the pelvis/torso/head/fan at their ORIGINAL SIZE and position. Do not merely move or resize the entire figure; do not keep old too-highboot. Straighten the reaching knee a little and extend the whole natural trouser/shin/boot chain downward; other leg can bend back, two separateattachedboots. It is a modest long-stride running pose, not a seated/crouched/levitating pose. SameNEbackthreequarterVermilionFanAdept, RIGHTnear hand OPENtealfan beforechest, ivorytrousers/vermilionrobe/bronzecloudhem/navysash. Preserve all10othercells exactly. No guide/mask marks, floor, shadows or VFX; flatmagenta#ff00ff. Fullsheetoutputsameframing. Lowest sole MUST reach yellowline in5and11; bun MUST staycyanline.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:16:05.965Z",
+      "utcEnd": "2026-11-06T22:16:29.075Z",
+      "selectedOutput": "sheets/run.repair3.generated.png",
+      "resultSha256": "8df641ab54e625f889c56ca83fd4a35f6a7c7c459c1f62dd52c88b09ea9f4e66",
+      "references": [
+        "sheets/run.selected.png",
+        "run.repair3.guide.png",
+        "run.repair3.mask.png",
+        "../reference/NE.master-crop.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "sheets/run.selected.png",
+          "sha256": "5b8efd9280dbcf0460badc974ded0b022d2c819e9a2b84e47cb112f7b09876e1"
+        },
+        {
+          "file": "run.repair3.guide.png",
+          "sha256": "5f990eb176998279e1a347e2d44ddf123ee26666c67f699addea8e7fa2fdbe8e"
+        },
+        {
+          "file": "run.repair3.mask.png",
+          "sha256": "034c7bce3eb5c314c6c9e044bd2fe24d5d8058d18b56cb0f5b8ef1274164c9f1"
+        },
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.channel",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. Standing CHANNEL LOOP: ONEOPENtealfan steadyinRIGHTnear hand at rightchest/shoulder, emptyLEFT hand twofingerseal partlyvisiblebesidebody. SameNEbackthreequarterawayup-right, stableboots/head/body237rawheighttarget, onlytinybreathing/ribbon/sleeveflutter. Gentle8->1loop. No glow/effects/particles/grid/shadows.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:18:37.034Z",
+      "utcEnd": "2026-11-06T22:18:59.297Z",
+      "selectedOutput": "sheets/channel.generated.png",
+      "resultSha256": "7227b43e482837598e21271025fc67178012e9f32c02b9fb87b3e06f3438a93d",
+      "references": ["../reference/NE.master-crop.png", "templates/channel.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/channel.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.die",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. Non-graphic DIE:1standingready,2lightstagger,3deeperstaggerbuttorsovertical,4kneebucklewithtorsoalmostupright,5one-kneecollapse,6sidefall,7side-pronesettle,8pronehold. SAMEphysicalhead/torso/limblengths asidle, doNOTenlargefoldedbody. Characterfacesawayup-rightNE, backvermilionrobe/ponytailvisible, neverturnfrontforpose. Fan staysOPENinRIGHTnear hand thenrestsbesiderighthandonfloor, no secondfan. Collapsereducesvisibleheightnaturally, no perframezoom. Fullyinsidecellandmagenta, no blood/skull/shadow/floor/effects.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:18:37.034Z",
+      "utcEnd": "2026-11-06T22:19:49.282Z",
+      "selectedOutput": "sheets/die.generated.png",
+      "resultSha256": "76261e9b773fcaf64c0c3abdd14417f8e8d32250049e05afef54b1c913a68e32",
+      "references": ["../reference/NE.master-crop.png", "templates/die.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/die.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.emote",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x2rows8squarecells aspect2:1. GREETING EMOTE:1ready,2LEFTemptyhandrises,3smallleftwave,4holdwave,5smallwave,6lowerleftarm,7settle,8ready. RIGHTnear handkeepsSAMEOPENtealfanatchest throughout, neverwaveswithfan orswitcheshands. BackthreequarterNEawayup-rightall8. Uprightbun-to-bootRAW237targeteachcell, sameface/headbody/costumeasidle, feetfixed, nozoom. No effects/floor/shadow/text/grid.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:18:37.034Z",
+      "utcEnd": "2026-11-06T22:20:37.817Z",
+      "selectedOutput": "sheets/emote.generated.png",
+      "resultSha256": "aaf9e20f5b51e49861888e641883d9f36bcc0c16a79b1629df9919215c10ba4e",
+      "references": ["../reference/NE.master-crop.png", "templates/emote.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/emote.template.png",
+          "sha256": "8c4627dcf0a7783dad83cf607c8681150513c66629eb8f15bd1618288f968408"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.hit",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT4columns x1row=4squarecells, overall4:1 aspect. HIT REACTION fourframes:1ready,2smalluppertorso recoil,3bracewithshallowknees,4recoverready. SameNEbackthreequarterall4, nofrontface. Samephysicalheadsize/torso/limbs, rawstanding237, no enlargingorzoom; bendkneesonlyslightly. Fan staysOPEN inanatomicalRIGHTnear hand beforechest, emptyLEFTarmbalances. No effects/floor/shadows. Allbodyandfaninsideeachsquare.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:18:37.034Z",
+      "utcEnd": "2026-11-06T22:19:21.126Z",
+      "selectedOutput": "sheets/hit.generated.png",
+      "resultSha256": "59e7ddce529232ff10b75ab9b1593ec0bddd2d4450300da9ac5839ea797c986e",
+      "references": ["../reference/NE.master-crop.png", "templates/hit.template.png", "sheets/idle.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/hit.template.png",
+          "sha256": "8b80562d02b04f3e50c4098c30497cd5c7c517b4e06acf2ef3548472c2e21718"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.tribulation",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only. EXACT6columns x2rows12squarecells aspect3:1. TRIBULATION bracing reaction, NOlightning/VFX:1ready,2slightbrace,3shallowkneebend,4defensivebracerightfanbeforechest,5lowbrace,6rally,7hunchagainstimaginedimpact,8holdbrace,9rise,10pushupright,11recover,12ready. KeepmasterNEbackthreequarterawayup-right, physicalheadsize/torso/limblengths sameasidle, neverzoom/enlargeseatedbody. OPENfan alwaysRIGHTnear hand likeashield, leftemptyseals/balances. Samegarmentconstructionandbronzecloudtrim. No effects/shadows/marks, allbodyinsidecell.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:18:37.034Z",
+      "utcEnd": "2026-11-06T22:20:14.996Z",
+      "selectedOutput": "sheets/tribulation.generated.png",
+      "resultSha256": "38f6282d964dcca6fb0b9e05fe294d75b8a73eddae93d978a3a2769495e94097",
+      "references": [
+        "../reference/NE.master-crop.png",
+        "templates/tribulation.template.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/tribulation.template.png",
+          "sha256": "3759c444e9f61c0dfaf8b2fa13daaba49a9cb804220354cda88d4c8ee9032440"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.attack_3.repair1",
+      "prompt": "LOCAL ONE-CELL ACTION POSE REPAIR. Input1 original FOURcolumns TWOrows=8squarecells NE fanattack3sheet. Input2whitemask selects ONLY CELL6 (bottomrow secondcolumn). Input3 exactNEVermilionFanAdeptmaster. In CELL6 retain same physical head/torso/limb/fan size and camera: NE BACKthreequarter, facingawayup-right. Redraw follow-through with torso moreUPRIGHT and SHOULDERS/BACK nearly like master; reduce the deep forward bend currently making the torso foreshortened. Pelvis/feet staynaturalshortlunge, frontlegbraced, backleglong, rightfanarmstillfinishesdownward-outward toviewerRIGHT justbelowshoulder, no fanhandchange. Expose the full vermilion upperBACK panel and its ivorysleeveholeoutline like master, navysashclear; avoid excessive white sleeve covering the torso. Sameheadsize/hairstyle/bronzetrim/cloudhem. OneOPENtealfan inanatomicalRIGHTnear hand. EmptyLEFTarmbalancesbehind. Other7cells mustremainunchanged. Exact4x2grid/framing, puremagenta#ff00ff, no guide/mask/borders/text/shadow/VFX. DoNOT resizeorsquash anycell.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:20:22.987Z",
+      "utcEnd": "2026-11-06T22:20:42.349Z",
+      "selectedOutput": "sheets/attack_3.repair1.generated.png",
+      "resultSha256": "e29a2ccaeff816eb903692a9e2540ae2915d7e89c1f5a803e1087d2060f30327",
+      "references": ["sheets/attack_3.generated.png", "attack_3.repair1.mask.png", "../reference/NE.master-crop.png"],
+      "referenceSha256": [
+        {
+          "file": "sheets/attack_3.generated.png",
+          "sha256": "b9014fc4e7938bd195dba08be1690d7141e624ec8923e74caad0034237ef26da"
+        },
+        {
+          "file": "attack_3.repair1.mask.png",
+          "sha256": "78b6f1f29e7482539aa52a2a81f0ed040fa362e3a791a7563ba98e15d6cdcda0"
+        },
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.hit.reroll1",
+      "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction NE. Input1 is the exact high-resolution character/direction master; input2 is the 4-column x2-row equal-square-cell TEMPLATE for layout only, REMOVE ALL grid, lines and dots. Camera slight-overhead orthographic isometric BACK THREE-QUARTER, facing AWAY and toward SCREEN RIGHT/up-right. Show vermilion robe BACK and long dark ponytail, only the small cheek/ear sliver on viewer RIGHT from master, never front chest/face or SE view. Slender adult male compact5.75head proportions, high dark bun with jade pin/red hair ribbon, ivory collar/sleeves/trousers, muted vermilion knee-length split robe with bronze cloud edging, navy sash, dark calf boots. ONE OPEN CYAN/TEAL folding fan with dark ribs and bronze cloud motif, ALWAYS anatomical RIGHT/near hand, on viewer RIGHT at upper chest/shoulder like master; left hand empty. Preserve exact head size, silhouette proportions, garment construction, fan scale, clean fine dark outline and restrained2-3tone soft cel shading/NWlight. Ignore all stray red/yellow speckles outside reference figure. Pure PERFECT flat MAGENTA #FF00FF background, NO shadow, floor, VFX, text, numbers, borders, guide marks or fragments. Entire full body and fan inside every cell with margin. IMPORTANT production SCALE: in EACH256unit square cell draw visible bun-top to lowest boot sole about237 units (231..243), NOT208. This raw image will later receive one locked0.877637 scale. Bun top~8, lowest sole~245, pelvis axis~127; same head/body dimensions all8cells, no per-frame rescaling, no cropping. This size instruction overrides the faint template head/ground lines; template is grid layout only.  EXACTTWOcolumns xTWOrows=FOURequalSQUARE cells, overallSQUARE1:1canvas. DoNOT putfourfiguresinonelongrow. Readrow-major. FOURframe HIT REACTION:topLEFTready,topRIGHTsmalltorso recoil,bottomLEFTshallowkneebracing,bottomRIGHTrecoverready. SameNEbackthreequarterawayup-rightall4, same237RAWstandingfigure/headbody/garmentdimensions asidle, nofrontface/zoom. FanstaysOPENinRIGHTnear hand beforechest; emptyleftarmbalances. Naturalveryshallowkneebend, nobothkneestucked. Samevermilionbackrobe/bronzecloudhem/navysash/ivorysleevesandtrousers/darkcalfboots. FULLbodyandfaninsideeachsquare; flatmagenta, no shadows/floor/VFX/grid/marks. Input2square2x2templatepositionsonly; input3idlephysicalsize.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:22:49.551Z",
+      "utcEnd": "2026-11-06T22:23:13.072Z",
+      "selectedOutput": "sheets/hit.reroll1.generated.png",
+      "resultSha256": "d3cb7e9e4330ca76f41d9767303ddcdb59f91980188df2e0a4fe90433fd02180",
+      "references": [
+        "../reference/NE.master-crop.png",
+        "templates/hit.square2x2.template.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "templates/hit.square2x2.template.png",
+          "sha256": "9b6cbcdea32512507a0a9fa3c5898e7332852d38798f5c06cd31bd6229197869"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.attack_3.repair2",
+      "prompt": "ONECELL REPAIR: exact4columns x2rows NEfanattack3sheet. Change ONLY CELL6 = bottomrow SECONDcolumn, selectedbywhite mask. Other7cellsunchanged. MakeCELL6 EARLY RECOVERY aftercell5hit: BODY AND SHOULDERS moreupright, VERmilionBACK panel samewidth/shape/position relativehead asattachedstandingmaster/idle, spinealmostvertical, navywaistlevel. RIGHTelbow bends andreturns OPENtealfan CLOSE toRIGHTupperchest likeidle, NOT extendedfaraway. LEFTarm lowersclosertobody. Keep shortstep/lightbentleadknee fromfollowthrough but no deep torsolean/twist, noverywidearmspan. Samehead/torso/limb/fandimensions, exactNEbackthreequarterawayup-right master angle. Allblue/tealfan inRIGHTnearhand, nohandchange. Samevermilion/ivory/navy/bronzecloudcostumeandpalette. FULLbodyinsidecell, standingphysicalRAWheight237@256 withnaturalslightkneebend, noresizing. This is a recoverydrawing, hitremainsCELL5. Flatmagenta#ff00ff, no mask/grid/guide/shadow/VFX. Whole4x2sheetoutputsameframing; onlycell6change.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:27:03.104Z",
+      "utcEnd": "2026-11-06T22:27:30.949Z",
+      "selectedOutput": "sheets/attack_3.repair2.generated.png",
+      "resultSha256": "8d9a76746a522c7b8842b55d347c2bcb5fddf642e647e3ffe68820428eeca5f5",
+      "references": [
+        "sheets/attack_3.selected.png",
+        "attack_3.repair1.mask.png",
+        "../reference/NE.master-crop.png",
+        "sheets/idle.generated.png"
+      ],
+      "referenceSha256": [
+        {
+          "file": "sheets/attack_3.selected.png",
+          "sha256": "2b27b0009d62b30f58872fde2b61f54e7914cab2bf648d30624f0a51d8f36abb"
+        },
+        {
+          "file": "attack_3.repair1.mask.png",
+          "sha256": "78b6f1f29e7482539aa52a2a81f0ed040fa362e3a791a7563ba98e15d6cdcda0"
+        },
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        }
+      ]
+    },
+    {
+      "id": "B.NE.meditate.reroll1",
+      "prompt": "REDRAW PHAP TU B NE MEDITATE sheet, exact4columns x2rows8SQUAREcells, overall2:1. Reference1masteridentity, reference2IDLEphysicalhead/torso scale, reference3currentmeditation has an ENLARGED HEAD/TORSO and must be corrected anatomically. In every256unitcell LEAVE TOP35PERCENT EMPTY MAGENTA (bun topabout90). Seatedlotus body endsabout245, visibleheightabout155units; this is because legsfold, NOT becausephysicalhead/torso shrink. Match the actualhead width/height and torso dimensions of IDLE reference2 at samecellpitch; do notinflatehead/sleeves. Relaxedseatedlotus pelvislow, legsfoldnaturally, faninRIGHTnear hand at rightknee/chest, leftemptyseal. ExactNEbackthreequarterawayup-right, vermilionbackrobe/bronzecloudtrim/navysash/ivorysleeves/trousers, highbun/jadepin/redribbon. SAMEOPENtealfan proportionandphysicalsizeasidle, noswitch. Eighttinybreathingframes1-4inhale5-8exhale, stableheadbody/ground. No zoom; draw small folded silhouette in lower65%eachcell and leave upper35%trulyempty. Pureflatmagenta#ff00ff, no grids/shadows/cushions/floor/VFX/text. Keepall8posesfullinsideowncells, smooth8->1.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "codexCliVersion": "0.166.0",
+      "utcStart": "2026-11-06T22:29:18.332Z",
+      "utcEnd": "2026-11-06T22:29:42.704Z",
+      "selectedOutput": "sheets/meditate.reroll1.generated.png",
+      "resultSha256": "860ccae5ae40f2552a288c35178daf81d6118bc37edfdd81c4a29d7027856264",
+      "references": ["../reference/NE.master-crop.png", "sheets/idle.generated.png", "sheets/meditate.generated.png"],
+      "referenceSha256": [
+        {
+          "file": "../reference/NE.master-crop.png",
+          "sha256": "45dd26cb2d1130247b2bcc5695a4b66e61f41163ce30990994488602161abe6c"
+        },
+        {
+          "file": "sheets/idle.generated.png",
+          "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+        },
+        {
+          "file": "sheets/meditate.generated.png",
+          "sha256": "7a28aa5d4d3d19657f542d9e691327b515993a5807433876227358ece2ef724c"
+        }
+      ]
+    }
+  ],
+  "committedSheets": [
+    {
+      "clip": "idle",
+      "file": "sheets/idle.generated.png",
+      "sha256": "a6405f167343c937a1d5474ba287398f1f328b5e224a889a99f4291b43d44c9f"
+    },
+    {
+      "clip": "meditate",
+      "file": "sheets/meditate.reroll1.generated.png",
+      "sha256": "860ccae5ae40f2552a288c35178daf81d6118bc37edfdd81c4a29d7027856264"
+    },
+    {
+      "clip": "walk",
+      "file": "sheets/walk.selected.png",
+      "sha256": "1030b253555d0a153b52301b33738c9c5f59e1b852cad69a5a959f7f32353eb1"
+    },
+    {
+      "clip": "run",
+      "file": "sheets/run.final-selected.png",
+      "sha256": "760f2b186ff1bb3085b6d7473b4bf2f85a1d441414921ab49d75b955a5a6bdf1"
+    },
+    {
+      "clip": "dash",
+      "file": "sheets/dash.generated.png",
+      "sha256": "54bb3c9d3bdd0b88452ae024249de98d528f82408ce87e23c9e936b949741e6e"
+    },
+    {
+      "clip": "sword_fly",
+      "file": "sheets/sword_fly.generated.png",
+      "sha256": "72b893d34da7c18ce5c8f3d8dcc886e63f29f865594b8d349e2dbcbecd1b6214"
+    },
+    {
+      "clip": "attack",
+      "file": "sheets/attack.generated.png",
+      "sha256": "3e95316a7ec03e43bca8f10f1a0b4b943ad2f9307babfed6283200ef43dcb243"
+    },
+    {
+      "clip": "attack_2",
+      "file": "sheets/attack_2.generated.png",
+      "sha256": "eb46b6402d5ed02b32a8f98cf96f4366a758e55f888c422733815e5b98c86d8a"
+    },
+    {
+      "clip": "attack_3",
+      "file": "sheets/attack_3.final-selected.png",
+      "sha256": "fe2e9e53e2311bf2b2c77019f9501cf4faa291fbd94ceb0c7e63fff37a6929ff"
+    },
+    {
+      "clip": "cast",
+      "file": "sheets/cast.generated.png",
+      "sha256": "d7d2aa723a3dd2f42d9d7f368536a6ce53310dda085533773b2836367236c4d3"
+    },
+    {
+      "clip": "channel",
+      "file": "sheets/channel.generated.png",
+      "sha256": "7227b43e482837598e21271025fc67178012e9f32c02b9fb87b3e06f3438a93d"
+    },
+    {
+      "clip": "hit",
+      "file": "sheets/hit.reroll1.generated.png",
+      "sha256": "d3cb7e9e4330ca76f41d9767303ddcdb59f91980188df2e0a4fe90433fd02180"
+    },
+    {
+      "clip": "die",
+      "file": "sheets/die.generated.png",
+      "sha256": "76261e9b773fcaf64c0c3abdd14417f8e8d32250049e05afef54b1c913a68e32"
+    },
+    {
+      "clip": "tribulation",
+      "file": "sheets/tribulation.generated.png",
+      "sha256": "38f6282d964dcca6fb0b9e05fe294d75b8a73eddae93d978a3a2769495e94097"
+    },
+    {
+      "clip": "emote",
+      "file": "sheets/emote.generated.png",
+      "sha256": "aaf9e20f5b51e49861888e641883d9f36bcc0c16a79b1629df9919215c10ba4e"
+    }
+  ],
+  "postprocess": "Public @vgtd/sprite square-cell-dpi-v1 whole-sheet preparation and locked208/237 calibration. Straight source alpha; chroma key/defringe/palette-aware spill cleanup/master palette lock; per-frame translation only. No hand-painted final character pixels. Public repairCell selects whole AI-redrawn cells; SHA256 proofs preserve all others. Generation-only head8/sole245 anatomy guides are separate from original QA manifests; no inverse-registration claim. Non-E walk/run measured with vertical keep and public directional ghosts, no UNMEASURED opt-out. Pose exceptions: meditate0..7 anddie4..7 only,12 declared cells."
+}

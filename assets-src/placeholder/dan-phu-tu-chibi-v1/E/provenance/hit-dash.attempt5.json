@@ -1,0 +1,27 @@
+{
+  "clip": "hit+dash",
+  "dir": "E",
+  "attempt": 5,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:39:55 UTC",
+  "utcEnd": "2026-11-07 22:40:27 UTC",
+  "prompt": "Precise single-head anatomy correction. TARGETimage1 sharedHIT6+DASH10 sheet4x4; image2canonicalfixedface. Modify ONLY zero-basedglobalcell10, row3col3 = DASHlocalframe4, deepestforwardcrouch. Its maincap-tojawheadsize is slightlyoversized. Redraw attachedhead/maincap+face+jaw about3percentSMALLER aroundfixedneckanchor, target53.3logicalpx Euclideancrown-tochin per256cell (65.3rawpx). Preserve exactadultfemaleidentity/facialproportions, olivebrownalmond eye/delicatebrow/nose/lips/jaw/expression/tilt, sweptbrowncap foldedbun/simplejadepin. No babyface. Keep ALLBODYPOSE, deepforwardcrouch, arms/hands/whiskshaftONEbronzecollarwhitehorsehair, legs/boots/root/robe/sash/horsehairtrail EXACT. DoNOTflattenpose orrescalewholefigure. Other15cells COMPLETELYUNCHANGED, includingHIT6 andDASHendpoints. Same1254square4x4mapping andflatmagenta, no guides/text/FX/shadows. Subtle butactualheadonlysizereduction in ONEcell, allanimationdynamics preserved.",
+  "references": ["../raw/hit-dash.corrected-cap.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/hit-dash.attempt5.png",
+  "status": "head-only repair candidate global10/dashlocal4; actual new measurement pending; other15cells retained",
+  "rawSha256": "c0c962010c4b473ccb3a938a5f3082523cb9ab3e100c2592b4a7e7d3f2488056",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/hit-dash.corrected-cap.png",
+      "sha256": "4976a24c72c0af5b5ecb1dde31d497bebc6612bf67f2bb66e97e0ba76429c22f"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

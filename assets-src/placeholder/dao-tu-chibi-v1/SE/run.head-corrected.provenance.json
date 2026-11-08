@@ -1,0 +1,11 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T00:51:02.111Z",
+  "utcRecordedCompleted": "2026-11-08T00:51:35.900Z",
+  "prompt": "Use case: precise-object-edit. HEAD-SIZE CORRECTION ONLY on exact FIRST IMAGE Dao tu SE16frame RUN sheet. The moving heads/main skull-attached haircaps are visibly larger/broader than locked SE master image2 and exact-size stencil image3. Reduce ENTIRE HEAD including skull-attached haircap and face uniformly approximately12% around the neck attachment in EACH of16cells, to match canonical skull crown-to-chin~49logicalpx and breadth~36px per256cell after whole-sheet DPI normalization. Preserve exact stern adult greyeyes/faceidentity and existing head angles/gaze, do not make babyface. Keep neck attachment natural; ponytail/loose windstrands can reconnect but retain their trajectories. Preserve ALL torso/arms/hands/grip/saber/blade/costume/pelvis/legs/boots/footpositions/stride/body scale/cell placement EXACTLY. Do not shrink whole figures or move their root. Same4x4square1254canvas, same16unique RUN poses, same opaque pure RGB255,0,255 magenta. Only heads need to match master unit, not weapon/torso. No guide marks/text/FX. Preserve entire blade and all foot margins.",
+  "references": ["raw/run.png", "../reference/SE.master.png", "templates/run.head-stencil.template.png"],
+  "generatedOriginalPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b856-ee35-77d1-9217-2a7e924e189f\\exec-cdb01b6e-6c50-45e4-8e0f-336b51c85535.png",
+  "rawOutput": "raw/run.head-corrected.png",
+  "status": "head-repair candidate; compare actual landmarks before selecting"
+}

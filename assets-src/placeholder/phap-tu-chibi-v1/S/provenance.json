@@ -1,0 +1,379 @@
+{
+  "direction": "S",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "rights": "Original project art; OpenAI output ownership terms checked in worker25 ASSET-LICENSES section",
+  "master": {
+    "file": "reference/S.master.png",
+    "sha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168",
+    "anatomicalHeight2x": 216
+  },
+  "profile": "smooth-v2",
+  "frames": 202,
+  "clips": 15,
+  "files": [
+    {
+      "file": "S/raw/attack.attempt1.png",
+      "sha256": "18e3049287334ea488b6cfdc36f92fb0580a6a4097a3fd3468b4224ec17d5ed6",
+      "bytes": 1836915
+    },
+    {
+      "file": "S/raw/attack_2.attempt1.png",
+      "sha256": "b0099eb13c12465924a065cc0deb86eae33600f6460c8c59c99e26aea96140e5",
+      "bytes": 1780852
+    },
+    {
+      "file": "S/raw/attack_3.attempt1.png",
+      "sha256": "d29e2abce3a9a2de45ddd1ec245598bcc471dfd9e243201470b41f7715c796f7",
+      "bytes": 1840891
+    },
+    {
+      "file": "S/raw/cast.attempt1.png",
+      "sha256": "4633dd88b1bacca7ea3c5936ce0192a85f12364dc7ac47293a6ab8ca7726b7b5",
+      "bytes": 1834809
+    },
+    {
+      "file": "S/raw/channel.attempt1.png",
+      "sha256": "fdf8030d44dcfb6dd8209bb6c6fca89f53b3e7ec8af41849a653c35478a83e54",
+      "bytes": 1759169
+    },
+    {
+      "file": "S/raw/die.attempt1.png",
+      "sha256": "cf506c3c66cdc1797034b48b2b386342b0d2111e3e40e34764eafca00154ce8b",
+      "bytes": 1786562
+    },
+    {
+      "file": "S/raw/emote.attempt1.png",
+      "sha256": "fa631d5769e071edea45ef0b690d3715f3982c4d3ca22c302d94328b2136abde",
+      "bytes": 1734399
+    },
+    {
+      "file": "S/raw/hit-dash.attempt1.png",
+      "sha256": "3c7b9afc4cc77fea6ec71bf98b59ad78a7e77caf39c4367e2af3d0d215a0261e",
+      "bytes": 1954278
+    },
+    {
+      "file": "S/raw/hit-dash.attempt2.png",
+      "sha256": "643cde323388b9968b9f7d775efabd0e3a437e26c1f7c900c23929a530c0af44",
+      "bytes": 1944337
+    },
+    {
+      "file": "S/raw/idle.attempt1.png",
+      "sha256": "745616b7db82e3841ba8a24fbca21844d0e41db80b13ff50da09fba479b1099a",
+      "bytes": 1796786
+    },
+    {
+      "file": "S/raw/meditate.attempt1.png",
+      "sha256": "c0e62edaf4812e6d7c7f7a30cdfd91e88cd4764ba9115fd8ba90a7513c1ceca7",
+      "bytes": 1601361
+    },
+    {
+      "file": "S/raw/run.attempt1.png",
+      "sha256": "e5b9a5dbc0724285177cc22ba9f1559f23ade021326840572ba4f67aaadf8b0f",
+      "bytes": 1800037
+    },
+    {
+      "file": "S/raw/sword_fly.attempt1.png",
+      "sha256": "53c3352c4df2318f131581a7d207dfd063427189bf31551a9e6f72069519ddd8",
+      "bytes": 1754455
+    },
+    {
+      "file": "S/raw/tribulation.attempt1.png",
+      "sha256": "7f91d56709143e7c5f92f3d880220e7f00fddd219d638c464525a21d8e6cfc32",
+      "bytes": 2006343
+    },
+    {
+      "file": "S/raw/walk.attempt1.png",
+      "sha256": "88594b5d7cad0ecda0708940293446cfc7941e823165fc5c2bb6d354196d975a",
+      "bytes": 1849112
+    },
+    {
+      "file": "S/raw/walk.attempt2.png",
+      "sha256": "7b2d054cadff2aa9abac109c8f1499bc5210c5d9ad6f04b5fa6e2756200dc1fc",
+      "bytes": 1847033
+    },
+    {
+      "file": "S/sheets/attack.png",
+      "sha256": "18e3049287334ea488b6cfdc36f92fb0580a6a4097a3fd3468b4224ec17d5ed6",
+      "bytes": 1836915
+    },
+    {
+      "file": "S/sheets/attack_2.png",
+      "sha256": "b0099eb13c12465924a065cc0deb86eae33600f6460c8c59c99e26aea96140e5",
+      "bytes": 1780852
+    },
+    {
+      "file": "S/sheets/attack_3.png",
+      "sha256": "d29e2abce3a9a2de45ddd1ec245598bcc471dfd9e243201470b41f7715c796f7",
+      "bytes": 1840891
+    },
+    {
+      "file": "S/sheets/cast.png",
+      "sha256": "4633dd88b1bacca7ea3c5936ce0192a85f12364dc7ac47293a6ab8ca7726b7b5",
+      "bytes": 1834809
+    },
+    {
+      "file": "S/sheets/channel.png",
+      "sha256": "fdf8030d44dcfb6dd8209bb6c6fca89f53b3e7ec8af41849a653c35478a83e54",
+      "bytes": 1759169
+    },
+    {
+      "file": "S/sheets/die.png",
+      "sha256": "cf506c3c66cdc1797034b48b2b386342b0d2111e3e40e34764eafca00154ce8b",
+      "bytes": 1786562
+    },
+    {
+      "file": "S/sheets/emote.png",
+      "sha256": "fa631d5769e071edea45ef0b690d3715f3982c4d3ca22c302d94328b2136abde",
+      "bytes": 1734399
+    },
+    {
+      "file": "S/sheets/hit-dash.png",
+      "sha256": "643cde323388b9968b9f7d775efabd0e3a437e26c1f7c900c23929a530c0af44",
+      "bytes": 1944337
+    },
+    {
+      "file": "S/sheets/idle.png",
+      "sha256": "745616b7db82e3841ba8a24fbca21844d0e41db80b13ff50da09fba479b1099a",
+      "bytes": 1796786
+    },
+    {
+      "file": "S/sheets/meditate.png",
+      "sha256": "c0e62edaf4812e6d7c7f7a30cdfd91e88cd4764ba9115fd8ba90a7513c1ceca7",
+      "bytes": 1601361
+    },
+    {
+      "file": "S/sheets/run.png",
+      "sha256": "e5b9a5dbc0724285177cc22ba9f1559f23ade021326840572ba4f67aaadf8b0f",
+      "bytes": 1800037
+    },
+    {
+      "file": "S/sheets/sword_fly.png",
+      "sha256": "53c3352c4df2318f131581a7d207dfd063427189bf31551a9e6f72069519ddd8",
+      "bytes": 1754455
+    },
+    {
+      "file": "S/sheets/tribulation.png",
+      "sha256": "7f91d56709143e7c5f92f3d880220e7f00fddd219d638c464525a21d8e6cfc32",
+      "bytes": 2006343
+    },
+    {
+      "file": "S/sheets/walk.png",
+      "sha256": "88594b5d7cad0ecda0708940293446cfc7941e823165fc5c2bb6d354196d975a",
+      "bytes": 1849112
+    },
+    {
+      "file": "S/templates/attack.head-guide.png",
+      "sha256": "8091e1d5912023c10e9383f140bb020867d5a2cf621fc04a966eab145c8d6adb",
+      "bytes": 50046
+    },
+    {
+      "file": "S/templates/attack.template.png",
+      "sha256": "87d67ab3c93f860e5d61427d5b2d236009c2aaba731656737fd77265f8fe4b80",
+      "bytes": 15511
+    },
+    {
+      "file": "S/templates/attack_2.head-guide.png",
+      "sha256": "8091e1d5912023c10e9383f140bb020867d5a2cf621fc04a966eab145c8d6adb",
+      "bytes": 50046
+    },
+    {
+      "file": "S/templates/attack_2.template.png",
+      "sha256": "87d67ab3c93f860e5d61427d5b2d236009c2aaba731656737fd77265f8fe4b80",
+      "bytes": 15511
+    },
+    {
+      "file": "S/templates/attack_3.head-guide.png",
+      "sha256": "8091e1d5912023c10e9383f140bb020867d5a2cf621fc04a966eab145c8d6adb",
+      "bytes": 50046
+    },
+    {
+      "file": "S/templates/attack_3.template.png",
+      "sha256": "87d67ab3c93f860e5d61427d5b2d236009c2aaba731656737fd77265f8fe4b80",
+      "bytes": 15511
+    },
+    {
+      "file": "S/templates/cast.head-guide.png",
+      "sha256": "0922f8ea6744168a837d7165928ef188bed85a25c09bcbaa6fa25bb37f3f27b6",
+      "bytes": 51087
+    },
+    {
+      "file": "S/templates/cast.template.png",
+      "sha256": "567a16b32a522824764d55232f5b5e3d699c64e526e107b6ab6cf6dd80d86b20",
+      "bytes": 16359
+    },
+    {
+      "file": "S/templates/channel.head-guide.png",
+      "sha256": "5dc8e326f7c47977fb07d2244fd240bf440583ccfd1d7887562b4a2cf17afe87",
+      "bytes": 38136
+    },
+    {
+      "file": "S/templates/channel.template.png",
+      "sha256": "3f23436cc5a1c735689efcd01922bbd9686f168e07d4cbaf2749daa84e3d8103",
+      "bytes": 12279
+    },
+    {
+      "file": "S/templates/dash.head-guide.png",
+      "sha256": "81fe5a0a9b22361893197c3d08d007056f34e5ed0fe2bac304244930047bb377",
+      "bytes": 37022
+    },
+    {
+      "file": "S/templates/dash.template.png",
+      "sha256": "85bb915d7f5b0fd98ea4ab476928a82fa9f222144596082ab25d3762a47fdca1",
+      "bytes": 11450
+    },
+    {
+      "file": "S/templates/die.head-guide.png",
+      "sha256": "6868b34f0320e6def734da1523aed9c68cb8323cd85399edb9a9c7110782e353",
+      "bytes": 81220
+    },
+    {
+      "file": "S/templates/die.template.png",
+      "sha256": "3f23436cc5a1c735689efcd01922bbd9686f168e07d4cbaf2749daa84e3d8103",
+      "bytes": 12279
+    },
+    {
+      "file": "S/templates/emote.head-guide.png",
+      "sha256": "5dc8e326f7c47977fb07d2244fd240bf440583ccfd1d7887562b4a2cf17afe87",
+      "bytes": 38136
+    },
+    {
+      "file": "S/templates/emote.template.png",
+      "sha256": "3f23436cc5a1c735689efcd01922bbd9686f168e07d4cbaf2749daa84e3d8103",
+      "bytes": 12279
+    },
+    {
+      "file": "S/templates/hit-dash.head-guide.png",
+      "sha256": "0922f8ea6744168a837d7165928ef188bed85a25c09bcbaa6fa25bb37f3f27b6",
+      "bytes": 51087
+    },
+    {
+      "file": "S/templates/hit-dash.template.png",
+      "sha256": "567a16b32a522824764d55232f5b5e3d699c64e526e107b6ab6cf6dd80d86b20",
+      "bytes": 16359
+    },
+    {
+      "file": "S/templates/hit.head-guide.png",
+      "sha256": "c0723b8d800d3f50b5223a579d8d952264ecb0ccb42e1ac8d6ac24728b9ac10c",
+      "bytes": 24537
+    },
+    {
+      "file": "S/templates/hit.template.png",
+      "sha256": "c64ac75894950582e93873d56923a4b2a42feefa83b1b8226f8b473a946e5c83",
+      "bytes": 7384
+    },
+    {
+      "file": "S/templates/idle.head-guide.png",
+      "sha256": "0922f8ea6744168a837d7165928ef188bed85a25c09bcbaa6fa25bb37f3f27b6",
+      "bytes": 51087
+    },
+    {
+      "file": "S/templates/idle.template.png",
+      "sha256": "567a16b32a522824764d55232f5b5e3d699c64e526e107b6ab6cf6dd80d86b20",
+      "bytes": 16359
+    },
+    {
+      "file": "S/templates/meditate.head-guide.png",
+      "sha256": "be55492dcf90a00490037c68ac01b36da874484ebc80229b239901549e272793",
+      "bytes": 51115
+    },
+    {
+      "file": "S/templates/meditate.template.png",
+      "sha256": "567a16b32a522824764d55232f5b5e3d699c64e526e107b6ab6cf6dd80d86b20",
+      "bytes": 16359
+    },
+    {
+      "file": "S/templates/run.head-guide.png",
+      "sha256": "5aee7602d0ebdccaa1b19d2329c75981292b6cc47e5d04b6c72484f5aac54b54",
+      "bytes": 52890
+    },
+    {
+      "file": "S/templates/run.template.png",
+      "sha256": "f8f7b54322f658d75964b2873dd0e45e1f69e7fcd6654621e5bc40633ebb9516",
+      "bytes": 18287
+    },
+    {
+      "file": "S/templates/sword_fly.head-guide.png",
+      "sha256": "5dc8e326f7c47977fb07d2244fd240bf440583ccfd1d7887562b4a2cf17afe87",
+      "bytes": 38136
+    },
+    {
+      "file": "S/templates/sword_fly.template.png",
+      "sha256": "3f23436cc5a1c735689efcd01922bbd9686f168e07d4cbaf2749daa84e3d8103",
+      "bytes": 12279
+    },
+    {
+      "file": "S/templates/tribulation.head-guide.png",
+      "sha256": "0922f8ea6744168a837d7165928ef188bed85a25c09bcbaa6fa25bb37f3f27b6",
+      "bytes": 51087
+    },
+    {
+      "file": "S/templates/tribulation.template.png",
+      "sha256": "567a16b32a522824764d55232f5b5e3d699c64e526e107b6ab6cf6dd80d86b20",
+      "bytes": 16359
+    },
+    {
+      "file": "S/templates/walk.head-guide.png",
+      "sha256": "104bc57ab8fee3bc7552fda4879feead61c0d2b2ee3505431e2e9612ade097cf",
+      "bytes": 52699
+    },
+    {
+      "file": "S/templates/walk.template.png",
+      "sha256": "be5fc0fc16b1eafd31d93a36704be4376ac685fac0e11721228856f71739c1d6",
+      "bytes": 18094
+    }
+  ],
+  "runtimeAssets": [
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S.sprite.json",
+      "sha256": "dd99505694c51537fab929a4741d123577bc6c3febc4f7c55755aa15129219cc"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S.sprite.json.meta",
+      "sha256": "5691a578ed4a057626c9a2d77c31115ada68513aa6ca3dae84d5421045db5df2"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.json",
+      "sha256": "41a3bb23050f4f4e496546e247dddf085bd9dc6d56b9be393d4833f27ce0390d"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.json.meta",
+      "sha256": "a076e473a05266878480ff883098362d5d81119d142bdfe1ab191395b209c37c"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.png",
+      "sha256": "4971fc660127691cf2bdb3d121a3f42ec98bc3ae062e35d475e4cbbd887253d5"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_page1_tex.png.meta",
+      "sha256": "b4c146e9d8d3f913279ccd352d18daac5817a9056c6d5f80690ff8e324a0020a"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_ske.json",
+      "sha256": "b6758f124544fa3e5323e92c291c67b739926f161997f138f8f0fed49c0d9298"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_ske.json.meta",
+      "sha256": "b92be1cbf109fc618af4ee3dc57cfa839bf699401b5c1b75c1bca8ce35d07c26"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.json",
+      "sha256": "4ad1315620ae128c937cae072c38b09382d404956d8217974a20eb7448e6dcda"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.json.meta",
+      "sha256": "e600d3af7c9a1d4e95bf3648a7fabf0a83f1c5de8128c175fa40203b4dd4308a"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.png",
+      "sha256": "63f72c5f245863e1f7ef87ae36a6fecee1b7d836e17f97dd694a48dc6d494e26"
+    },
+    {
+      "file": "apps/client-cocos/assets/resources/dragonbones/phap-tu-chibi-v1/phaptuchibi_S_tex.png.meta",
+      "sha256": "e2836c1589b9dda123a12eb64d3f18a0471dc29615fdf61d11242ecf497b6f78"
+    }
+  ],
+  "generationRecords": "raw/*.generation.json",
+  "headReview": "head-landmarks.review.json",
+  "engineGate": "engine-gate.json"
+}

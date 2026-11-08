@@ -1,0 +1,262 @@
+{
+  "calibration": {
+    "scale": 0.18309859154929578,
+    "targetHeight": 208,
+    "referenceHeight": 1136,
+    "referenceFrames": 1
+  },
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 128
+  },
+  "records": [
+    {
+      "tier": 1,
+      "raw": "raw/front.attempt2.png",
+      "output": "T1.front.png",
+      "dimensions": [1122, 1402],
+      "source": {
+        "left": 112,
+        "right": 855,
+        "top": 109,
+        "bottom": 1245,
+        "height": 1136,
+        "width": 743,
+        "pelvisX": 468.20116194143816
+      },
+      "alignment": {
+        "pre": {
+          "height": 208,
+          "pelvisX": 85.72697331322108,
+          "soleY": 227.95774647887325
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 127.41977978765237,
+          "soleY": 232
+        },
+        "dx": 42.27302668677892,
+        "dy": 4.042253521126753
+      },
+      "diagnostics": [
+        {
+          "name": "face",
+          "bounds": [482, 308, 662, 491],
+          "meanAbsoluteRgbError": 0,
+          "changedPixelFractionOver30Sum": 0
+        },
+        {
+          "name": "whisk",
+          "bounds": [112, 393, 393, 827],
+          "meanAbsoluteRgbError": 0,
+          "changedPixelFractionOver30Sum": 0
+        },
+        {
+          "name": "rightHand",
+          "bounds": [359, 645, 426, 715],
+          "meanAbsoluteRgbError": 0,
+          "changedPixelFractionOver30Sum": 0
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "raw": "raw/tier2.png",
+      "output": "T2.front.png",
+      "dimensions": [1122, 1402],
+      "source": {
+        "left": 111,
+        "right": 854,
+        "top": 109,
+        "bottom": 1245,
+        "height": 1136,
+        "width": 743,
+        "pelvisX": 468.99678345011677
+      },
+      "alignment": {
+        "pre": {
+          "height": 208,
+          "pelvisX": 85.87265049086645,
+          "soleY": 227.95774647887325
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 127.49258160237389,
+          "soleY": 232
+        },
+        "dx": 42.12734950913355,
+        "dy": 4.042253521126753
+      },
+      "diagnostics": [
+        {
+          "name": "face",
+          "bounds": [482, 308, 662, 491],
+          "meanAbsoluteRgbError": 8.231643392025905,
+          "changedPixelFractionOver30Sum": 0.22058287795992715
+        },
+        {
+          "name": "whisk",
+          "bounds": [112, 393, 393, 827],
+          "meanAbsoluteRgbError": 6.3267160842066135,
+          "changedPixelFractionOver30Sum": 0.13950341932203947
+        },
+        {
+          "name": "rightHand",
+          "bounds": [359, 645, 426, 715],
+          "meanAbsoluteRgbError": 10.670788912579958,
+          "changedPixelFractionOver30Sum": 0.2833688699360341
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "raw": "raw/tier3.png",
+      "output": "T3.front.png",
+      "dimensions": [1122, 1402],
+      "source": {
+        "left": 112,
+        "right": 853,
+        "top": 109,
+        "bottom": 1244,
+        "height": 1135,
+        "width": 741,
+        "pelvisX": 468.49313603729854
+      },
+      "alignment": {
+        "pre": {
+          "height": 207.81690140845072,
+          "pelvisX": 85.78043335894199,
+          "soleY": 227.77464788732394
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 127.37043580683157,
+          "soleY": 232
+        },
+        "dx": 42.21956664105801,
+        "dy": 4.225352112676063
+      },
+      "diagnostics": [
+        {
+          "name": "face",
+          "bounds": [482, 308, 662, 491],
+          "meanAbsoluteRgbError": 9.048654118599474,
+          "changedPixelFractionOver30Sum": 0.21599878567091682
+        },
+        {
+          "name": "whisk",
+          "bounds": [112, 393, 393, 827],
+          "meanAbsoluteRgbError": 6.382376415151068,
+          "changedPixelFractionOver30Sum": 0.15414828541909245
+        },
+        {
+          "name": "rightHand",
+          "bounds": [359, 645, 426, 715],
+          "meanAbsoluteRgbError": 8.052380952380952,
+          "changedPixelFractionOver30Sum": 0.23603411513859274
+        }
+      ]
+    },
+    {
+      "tier": 4,
+      "raw": "raw/tier4.png",
+      "output": "T4.front.png",
+      "dimensions": [1122, 1402],
+      "source": {
+        "left": 112,
+        "right": 856,
+        "top": 109,
+        "bottom": 1245,
+        "height": 1136,
+        "width": 744,
+        "pelvisX": 468.8257622816685
+      },
+      "alignment": {
+        "pre": {
+          "height": 208,
+          "pelvisX": 85.84133675579847,
+          "soleY": 227.95774647887325
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 127.3876582278481,
+          "soleY": 232
+        },
+        "dx": 42.158663244201534,
+        "dy": 4.042253521126753
+      },
+      "diagnostics": [
+        {
+          "name": "face",
+          "bounds": [482, 308, 662, 491],
+          "meanAbsoluteRgbError": 7.753298927342644,
+          "changedPixelFractionOver30Sum": 0.20027322404371584
+        },
+        {
+          "name": "whisk",
+          "bounds": [112, 393, 393, 827],
+          "meanAbsoluteRgbError": 7.762571680032362,
+          "changedPixelFractionOver30Sum": 0.16904734572051758
+        },
+        {
+          "name": "rightHand",
+          "bounds": [359, 645, 426, 715],
+          "meanAbsoluteRgbError": 9.514925373134329,
+          "changedPixelFractionOver30Sum": 0.2603411513859275
+        }
+      ]
+    },
+    {
+      "tier": 5,
+      "raw": "raw/tier5.png",
+      "output": "T5.front.png",
+      "dimensions": [1122, 1402],
+      "source": {
+        "left": 112,
+        "right": 854,
+        "top": 108,
+        "bottom": 1245,
+        "height": 1137,
+        "width": 742,
+        "pelvisX": 467.811669624283
+      },
+      "alignment": {
+        "pre": {
+          "height": 208.1830985915493,
+          "pelvisX": 85.6556578185307,
+          "soleY": 227.95774647887325
+        },
+        "post": {
+          "height": 208,
+          "pelvisX": 127.4714089212026,
+          "soleY": 232
+        },
+        "dx": 42.3443421814693,
+        "dy": 4.042253521126753
+      },
+      "diagnostics": [
+        {
+          "name": "face",
+          "bounds": [482, 308, 662, 491],
+          "meanAbsoluteRgbError": 10.684790528233151,
+          "changedPixelFractionOver30Sum": 0.22097753491196115
+        },
+        {
+          "name": "whisk",
+          "bounds": [112, 393, 393, 827],
+          "meanAbsoluteRgbError": 7.993311685826897,
+          "changedPixelFractionOver30Sum": 0.16714498909424866
+        },
+        {
+          "name": "rightHand",
+          "bounds": [359, 645, 426, 715],
+          "meanAbsoluteRgbError": 12.639729921819473,
+          "changedPixelFractionOver30Sum": 0.3040511727078891
+        }
+      ]
+    }
+  ],
+  "note": "Diagnostics only; no production pose-lock gate is claimed. All raw coordinates unchanged."
+}

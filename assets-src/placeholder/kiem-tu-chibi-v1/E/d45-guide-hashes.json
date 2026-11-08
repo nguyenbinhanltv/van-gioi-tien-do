@@ -1,0 +1,65 @@
+{
+  "status": "Reproducibleofficialfullposeguides only; PNGs intentionallyNOTcommitted perorchestrator. Notbody/weapon/FX extraction.",
+  "command": "node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/layer-template.ts --project assets-src/placeholder/kiem-tu-chibi-v1/E/project.json --out <fresh-temp-directory>",
+  "projectSha256": "bb895aa68b4b84f5eab1bfaf279c89cf873efe94f96a309df12f5bb89142a2e8",
+  "layerInputsSha256": "9fa6444d7e5466c3a7672bfce79fb5a2d72a5f8e2b6cb79e507a0d34a9919005",
+  "guideCount": 14,
+  "guides": [
+    {
+      "file": "source-0.full.png",
+      "sha256": "e4e78726f51ae53876e2dafd1948cbca36b20c4aaf1ece5816451abf55398e6f"
+    },
+    {
+      "file": "source-1.full.png",
+      "sha256": "b2ee983241aee38d2b0170ff07f29400ca76ffb0714d6708bc14872de33eba6f"
+    },
+    {
+      "file": "source-10.full.png",
+      "sha256": "7c5f35ca99a01253e8080a3da1d708576f5264c1417609ff6ca88d30c5d4be14"
+    },
+    {
+      "file": "source-11.full.png",
+      "sha256": "e1daca6829f9194a7095c414acafb00d8e6bbc3034234cbe79954961d5f21e1e"
+    },
+    {
+      "file": "source-12.full.png",
+      "sha256": "f17cc43e6d976fd78dba14ac655143d9721afe56a28a2c048de7ed62723b2aee"
+    },
+    {
+      "file": "source-13.full.png",
+      "sha256": "d5e4f58287adfaa49872cafcc75e2a5f33077eb77d2e8f60197b89c2ae16f203"
+    },
+    {
+      "file": "source-2.full.png",
+      "sha256": "bbb3fe8322000fea6dfcdb3886af49876b0704326284eebca7123d2ca0ea7319"
+    },
+    {
+      "file": "source-3.full.png",
+      "sha256": "37d0f38a634ac36d6034ff7ddd0d2e60d9a5222cb19f3851c5c21b61a6008bc9"
+    },
+    {
+      "file": "source-4.full.png",
+      "sha256": "e3402b0a87b886b21453192946fa9be27263b8548329ec4d4114eb8200034b6c"
+    },
+    {
+      "file": "source-5.full.png",
+      "sha256": "91d25538b5cfceb23f007ed83111e398f59927cd0f7e6ff89b8668e051cc6d21"
+    },
+    {
+      "file": "source-6.full.png",
+      "sha256": "9e7cf1170c123cef14cf2db49b429523dd0fb5ad101251cd3af2abff213bc50a"
+    },
+    {
+      "file": "source-7.full.png",
+      "sha256": "bf3521640a652129222c91a3ad04a7acc2af2f0097f9ab4239a9372bb5379fa3"
+    },
+    {
+      "file": "source-8.full.png",
+      "sha256": "79a0475a29999ee5dcca8ebc4b380fe5470ab4d519db931d2df4a08b67f31f5c"
+    },
+    {
+      "file": "source-9.full.png",
+      "sha256": "93dfbf91fc2021a2e4a863f40ccd3a3b54e55cb852eaad46153766fcca5d0dc6"
+    }
+  ]
+}

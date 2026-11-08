@@ -1,0 +1,17 @@
+{
+  "clip": "walk",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "attempt": 2,
+  "frames": 16,
+  "prompt": "Edit INPUT1 MASTER-POPULATED WALK GUIDE into actual16-frame smoothwalk animation. The16identical figures ininput1areONLYreference placeholders,not finalframes. Keep each placeholder's EXACT headsize/face/profileeye/camera/plainT1costume/body scale and cellorigin. EDIT LEGS into16progressive WALKposes following the visible footmarkers EXACTLY; smallnaturalarm/hem/hairtipcountermotion allowed,bodybob\u00e2\u2030\u00a43logicalpixels. Eachcyanoval is nearRIGHT SOLE CENTER;eachamberoval is farLEFTsolecenter. PLANTmeanssoleonground;SWINGmeansraisedfootatitsguide. AnatomicalRIGHT near swordhand staysfixedwithsimple drawnsteelblade+cyanpommeltassel;leftfreehandcan counter-swing. Do not invent extrafootcontacts,skip phases,orchangeleglength. Upper ponytailloopstaysinsideoriginalheadroom,tailtipandribbon lag2frames. StrictEAST RIGHT-facingprofile throughout. Preserve adultgrayeye/brows/nose/mouth,plainivory/navyrobeandtrousers,nogold/armor/gems/FX. OnefullR+Lcycle16framesrowmajor,4x4square,output2048x2048 orsame squarecanvasasguide,all16cells. REMOVE ALL grayguide/coloredmarker/trianglepixels whenfinished,leavingOPAQUEPUREMAGENTA#FF00FF onlyoutsidecharacter,nomarks/text/shadow. No freezes or duplicatedposes;frame16connectstoback1. SourcecanonicalanatomicalH216logical@256cell,headsizeunchanged. Ifoutput2048cell512,ALLguidecoordinatesbelowmultiplyby2;forothersize useuniformsheetDPIonly. Footgeometry must change but head/torso identitymustnot. Input2 isoriginal footguidelayout;input3 canonicalEhighresforartdetail. Exactlogical256cellfootcoordinates: frame1:nearR(142.4,232)PLANT,farL(89,232)SWING; frame2:nearR(135.7,232)PLANT,farL(95.7,228.2)SWING; frame3:nearR(129,232)PLANT,farL(102.4,224.9)SWING; frame4:nearR(122.4,232)PLANT,farL(109,222.8)SWING; frame5:nearR(115.7,232)PLANT,farL(115.7,222)SWING; frame6:nearR(109,232)PLANT,farL(122.4,222.8)SWING; frame7:nearR(102.4,232)PLANT,farL(129,224.9)SWING; frame8:nearR(95.7,232)PLANT,farL(135.7,228.2)SWING; frame9:nearR(89,232)SWING,farL(142.4,232)PLANT; frame10:nearR(95.7,228.2)SWING,farL(135.7,232)PLANT; frame11:nearR(102.4,224.9)SWING,farL(129,232)PLANT; frame12:nearR(109,222.8)SWING,farL(122.4,232)PLANT; frame13:nearR(115.7,222)SWING,farL(115.7,232)PLANT; frame14:nearR(122.4,222.8)SWING,farL(109,232)PLANT; frame15:nearR(129,224.9)SWING,farL(102.4,232)PLANT; frame16:nearR(135.7,228.2)SWING,farL(95.7,232)PLANT",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:57:42.564Z",
+  "inputs": ["templates/walk.master-edit-guide.png", "templates/walk.template.png", "../reference/E.master.raw.png"],
+  "status": "Generated candidate repair; not accepted before contact/head/loop QA",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-a095677e-bd8b-4703-9610-5e557ba95581.png",
+  "utcCompletedRecorded": "2026-11-07T20:58:29.645Z",
+  "rawSha256": "847292912b65f5fc6cd99555dc34b3e9895b1a6691a22cedd203ce7b814bb61b",
+  "utcOutputFileModified": "2026-11-07T20:58:28.764321+00:00"
+}

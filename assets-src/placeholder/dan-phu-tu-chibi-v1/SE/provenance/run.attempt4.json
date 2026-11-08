@@ -1,0 +1,26 @@
+{
+  "clip": "run",
+  "direction": "SE",
+  "attempt": 4,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 01:05:03 UTC",
+  "utcEnd": "2026-11-08 01:05:34 UTC",
+  "prompt": "LOCAL HEAD-ONLY correction inZEROBASEDcell4(row2col1) ofTARGETimage1 SErun16sheet. ONLYthishead is4percentoversized (55.8logicalpx attachedfrontcap-tochin, master53.46). GUIDEimage2 is SAME1254squareDPI, withoneUN-SCALEDcanonicalhead atmatchingneckincell4. Matchguideheadvolume/identity(~65.5rawpx cap-tochin, notcurrent68.3rawpx), a SMALL~3rawpxreduction. Preservecanonicaladultface/eyes/nose/lips/jaw/mainhair/bunpin, no newface. Keepheadatcurrentneck, correcttheboundarycleanly, no cap/bunblend orlongneckseam. Everything BELOWneck exactsame: dynamicforwardlean, body/root/knee/flight/boots/sleeves/sash/right-heldplainbrownwhiskONEbronze collarwhitehorsehair/leftpalm. No wholebodyresize, poseflattening, translation or weaponchange. Other15cells COMPLETELYUNCHANGED. Same1254x1254/4x4mapping/flatsolidmagenta#ff00ff,no grid/text/shadow/FX. Onlynativecell4willbeselected; fullbodyremainsdrawn, donotoutputfloatingheadguide.",
+  "references": ["../raw/run.attempt3.png", "../templates/run.cell4-head-guide.raw-dpi.png"],
+  "raw": "../raw/run.attempt4.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "9a61ef0ee3a7f1496f3343199325db658f85b86c8a465407018159e0db47e049",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../raw/run.attempt3.png",
+      "sha256": "aa613a28630eef68f5a01f8e5a7a67e0591057970f98afa34cb35b67fd4aa1a5"
+    },
+    {
+      "reference": "../templates/run.cell4-head-guide.raw-dpi.png",
+      "sha256": "aa0e2a56e75ba3da3fbd6002f68dfdbc94a44c5cf87b0dff0525bef81f96828f"
+    }
+  ],
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

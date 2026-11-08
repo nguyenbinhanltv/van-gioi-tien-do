@@ -1,0 +1,14 @@
+{
+  "walk": {
+    "source": "sheets/walk.attempt-02.raw.png",
+    "measuredPlane": 235.5,
+    "targetPlane": 232,
+    "note": "Candidate2 R contact cells0-4 soles235-236; common source-plane offset only. Cell11 and other contact/leg errors remain for review."
+  },
+  "run": {
+    "source": "sheets/run.attempt-02.raw.png",
+    "measuredPlane": 244,
+    "targetPlane": 232,
+    "note": "Candidate2 first R contact span0-5 soles244-245 in normalized cells; apply same-12px translation to ALL cells to preserve flight. L span varies and still needs actual-contact/leg QA."
+  }
+}

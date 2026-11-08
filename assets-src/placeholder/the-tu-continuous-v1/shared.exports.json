@@ -1,0 +1,245 @@
+{
+  "tool": "tools/procgen/src/lib/png.js decodePNG/resizeArea/Image",
+  "alpha": "straight; no PMA before atlas export",
+  "palette": "prompt constrained; material palette-transfer and master silhouette gate apply to registered character pieces",
+  "exports": [
+    {
+      "id": "diamond_body_aura",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "diamond_body_shards_1",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "diamond_body_shards_2",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "diamond_body_shards_3",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "dragon_tiger_trail",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "dust_puff_1",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "dust_puff_2",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "dust_puff_3",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "fist_impact_burst",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "ground_crack_decal",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [512, 256],
+      "plane2to1": true,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "mountain_charge_trail",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "rock_chunk_1",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "rock_chunk_2",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "rock_chunk_3",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "rock_chunk_4",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "shockwave_ring",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [512, 256],
+      "plane2to1": true,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "stone_skin_overlay",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [256, 256],
+      "plane2to1": false,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "taunt_ring",
+      "group": "vfx",
+      "source": [1024, 1024],
+      "preview": [512, 256],
+      "plane2to1": true,
+      "method": "alpha-weighted resize; alpha>=8 preview bounds, 8% margin; planar preview bounding aspect 2:1",
+      "integration": "static component source; no particle system or flipbook authored, no gameplay scale changed"
+    },
+    {
+      "id": "class_emblem_the_tu",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "item_gauntlet_set",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T1_phach_quyen",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T2_thiet_bo_sam",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T3_dia_chan",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T4_khieu_khich",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T5_long_ho_quyen",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T6_kim_than_cong",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T7_thiet_son_khao",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "skill_T8_kim_cuong_bat_hoai",
+      "group": "icons",
+      "source": [256, 256],
+      "variants": [48, 64, 128],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    },
+    {
+      "id": "the_tu_portrait",
+      "group": "portrait",
+      "source": [512, 512],
+      "method": "alpha-weighted contain resize; straight-alpha PNG"
+    }
+  ]
+}

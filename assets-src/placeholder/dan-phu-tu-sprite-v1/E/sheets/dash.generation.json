@@ -1,0 +1,15 @@
+{
+  "id": "E-dash-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:38:52 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:39:26 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production dash sprite sheet for DAN/PHU TU support healer A, 6 complete poses. Reference1 exact E master, reference2 exact template. EXACT 4 COLUMNS x 2 ROWS, SQUARE cells, reading order left-to-right top-to-bottom. Every pose faces pure RIGHT/E. SAME adult compact woman: folded jade headpiece, tied loop dark hair, ivory sleeves, jade short split overrobe with blue side panels, bronze trim, dark sash/trousers/boots, medicine gourd and three gold belt talismans. RIGHT near hand holds bronze-handled WHITE whisk, LEFT far hand holds paper talisman. Match master face, anatomy, costume, prop dimensions, soft painted fine-ink game art, NW light. Each256unit cell upright master headtop24 sole232 height208; maintain anatomical scale throughout; legitimate bending/seated/collapse changes posture only. Six poses: anticipation, low forward acceleration, long forward lunge, peak travel, braking plant, recover upright guard. One dash towardRIGHT, no blur. Body inclination changes anatomically, no shrinking. Last TWO cells unused solid magenta. Complete every requested cell, unused cells pure magenta. No extra limbs, no duplicate props. Pure flat #FF00FF background, no floor shadow grid borders lines labels letters text VFX motion blur. Remove every template guide/ghost. Every body and prop entirely inside own cell, never overlap adjacent cells.",
+  "references": ["reference/E.master.png", "E/templates/dash.template.png"],
+  "output": "E/sheets/dash.png",
+  "toolOutputId": "exec-5b9c9ded-c6cf-42dd-acc2-ce0a72fe1c0a.png"
+}

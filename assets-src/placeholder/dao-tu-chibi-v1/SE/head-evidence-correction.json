@@ -1,0 +1,195 @@
+{
+  "kind": "manual-native-head-evidence-correction",
+  "utcRecorded": "2026-11-08T03:56:24.937Z",
+  "baselineProjectSha256": "9f6cfd1bce647096bb9a2f18e53737e37f623453d31dcdd1f41bf1e05660ae91",
+  "originalProposalBaselineSha256": "3466fac4f59788421a4c7f3041acef2ec35a39d08405f4e0dc869404a413934e",
+  "selectedSheet": "raw/run.head-corrected.png",
+  "selectedSheetSha256": "6893ec462df0822b2e666de61052ae4367cd6d15428f3e69dd32eba7151635a5",
+  "master": "../reference/SE.master.png",
+  "masterSha256": "8e35f096de0f8e5ee4f2d6c6de48d3a2f4feb4c4fa3fad482104028ae99084eb",
+  "changedCells": [3, 7, 11, 15],
+  "unchangedCells": 12,
+  "original": {
+    "3": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 139,
+        "y": 29
+      },
+      "chin": {
+        "x": 156,
+        "y": 74
+      },
+      "breadth": {
+        "left": {
+          "x": 133,
+          "y": 50
+        },
+        "right": {
+          "x": 169,
+          "y": 50
+        }
+      },
+      "note": "Manually reviewed run cell3 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+    },
+    "7": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 139,
+        "y": 32
+      },
+      "chin": {
+        "x": 157,
+        "y": 77
+      },
+      "breadth": {
+        "left": {
+          "x": 133,
+          "y": 53
+        },
+        "right": {
+          "x": 169,
+          "y": 53
+        }
+      },
+      "note": "Manually reviewed run cell7 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+    },
+    "11": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 139,
+        "y": 30
+      },
+      "chin": {
+        "x": 157,
+        "y": 75
+      },
+      "breadth": {
+        "left": {
+          "x": 133,
+          "y": 51
+        },
+        "right": {
+          "x": 169,
+          "y": 51
+        }
+      },
+      "note": "Manually reviewed run cell11 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+    },
+    "15": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 140,
+        "y": 32
+      },
+      "chin": {
+        "x": 158,
+        "y": 77
+      },
+      "breadth": {
+        "left": {
+          "x": 134,
+          "y": 53
+        },
+        "right": {
+          "x": 170,
+          "y": 53
+        }
+      },
+      "note": "Manually reviewed run cell15 in aligned coordinate grid and enlarged head diagnostic: visible main cap crown, chin and skull breadth exclude lifted curl, loose side strands and ponytail. Forward lean/translation retained; no frame rescale."
+    }
+  },
+  "corrected": {
+    "3": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 126,
+        "y": 28
+      },
+      "chin": {
+        "x": 139,
+        "y": 75
+      },
+      "breadth": {
+        "left": {
+          "x": 118,
+          "y": 51
+        },
+        "right": {
+          "x": 154,
+          "y": 51
+        }
+      },
+      "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
+    },
+    "7": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 128,
+        "y": 30
+      },
+      "chin": {
+        "x": 142,
+        "y": 77
+      },
+      "breadth": {
+        "left": {
+          "x": 120,
+          "y": 53
+        },
+        "right": {
+          "x": 156,
+          "y": 53
+        }
+      },
+      "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
+    },
+    "11": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 128,
+        "y": 28
+      },
+      "chin": {
+        "x": 142,
+        "y": 75
+      },
+      "breadth": {
+        "left": {
+          "x": 120,
+          "y": 51
+        },
+        "right": {
+          "x": 156,
+          "y": 51
+        }
+      },
+      "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
+    },
+    "15": {
+      "kind": "crown-chin",
+      "crown": {
+        "x": 128,
+        "y": 29
+      },
+      "chin": {
+        "x": 141,
+        "y": 76
+      },
+      "breadth": {
+        "left": {
+          "x": 120,
+          "y": 52
+        },
+        "right": {
+          "x": 156,
+          "y": 52
+        }
+      },
+      "note": "Native caliper remeasurement: visible main-cap vertex beneath the loose raised curl, visible jaw/chin tip, and attached skull breadth excluding wind wisps. Earlier chin/right-breadth marks were outside the head. Source pixels and authored head travel unchanged. Points frozen before any new D55 score evaluation."
+    }
+  },
+  "scope": "Evidence/annotation only. No art pixels, atlas, skeleton, timing, authored origin, threshold or resample changes relative to current D55/D58 main. Native before/after calipers reviewed and points frozen before any new D55 score evaluation.",
+  "frozenProposalSha256": "b69d15c42066a614a7830aa02c1d327e81c4c52124832d7f440dd79d3a23812b",
+  "saluteStatus": "emote7/8 observations held separately; no new emote points applied"
+}

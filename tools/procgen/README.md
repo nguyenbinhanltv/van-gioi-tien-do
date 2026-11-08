@@ -1,5 +1,71 @@
 # @vgtd/procgen – sinh asset Tu Tiên 2D Isometric bằng code
 
+## Kiếm tu art and neutral rig data (batch 3)
+
+The selected concept A / drawn-sword art is processed by
+`scripts/kiem_tu_rig.mjs`. It creates source layers, separate parts, packed PMA
+atlas pages, and format-neutral DATA following the coordinated `@vgtd/rig`
+schema. It contains no Spine or DragonBones exporter; worker 15 owns schema,
+exporters and animation authoring in `tools/rig`.
+
+```sh
+npm ci
+npm run gen:kiemtu -w @vgtd/procgen -- build
+npm run gen:kiemtu -w @vgtd/procgen -- validate
+npm run gen:kiemtu -w @vgtd/procgen -- review <session-artifact-dir>
+```
+
+`import <five-column-sheet.png>` replaces normalized art sources.
+The art/data builder imports the public shared/character APIs through the
+locked lightweight vite-node runner. It writes `tools/rig/data/kiem-tu.rig.json`
+(a RigSet), a typed idle Clip, and an asset manifest. Atlas pages include
+piece regions for weighted meshes and canonical regions for the bones-only
+fallback skin. Read `docs/art/kiem-tu-rig-spec.md` for units, roles, IK, chains,
+weights and the coordinated schema contract.
+
+All AI-derived art/data remain placeholders pending art-owner approval and
+license review. The standalone FK review is not a DragonBones/Cocos capture.
+There is no human-animator/editor dependency under D36.
+
+## First AI placeholder sample batch
+
+The human-authorized exception to “commit seeds, not images” is the first sample
+batch in `assets-src/placeholder/first-sample/` and
+`apps/client-cocos/assets/bundles/core/_placeholder/first-sample/`.
+See `docs/ASSET-LICENSES.md` for per-file provenance, exact prompts, restrictions,
+and the image tool's undisclosed underlying model/version. No audio is included.
+These files are never approved for release by this pipeline.
+
+From the repository root, build the shared public entry point first:
+
+```sh
+npm run build -w @vgtd/shared
+node tools/procgen/scripts/sample_art.mjs validate
+node tools/procgen/scripts/sample_art.mjs pack
+node tools/procgen/scripts/sample_art.mjs contact <contact-sheet.png>
+```
+
+`pack` uses the existing procgen packer and packed validator. Explicit
+`--padding 2 --extrude 1` keeps two clear pixels outside a one-pixel extrusion;
+omitting `--extrude` preserves the packer's legacy behavior. Atlases and QA
+reports remain under ignored `tools/procgen/build/sample-art/`.
+
+To normalize new tool outputs with the same layout (five character views in a
+row; four tiles in a row; individual pill, talisman and sword images):
+
+```sh
+node tools/procgen/scripts/sample_art.mjs import <character-sheet.png> <tile-sheet.png> <pill.png> <talisman.png> <sword.png>
+```
+
+`import` deliberately rewrites the batch; update its license inventory after
+any regeneration. It does not call an AI API. It creates eight procedural
+breathing frames from each AI idle pose, fixed foot pivots, edge-normalized
+diamond tiles and borderless icons with a small-size contrast pass. Sources
+are normalized @2x images (icons 256), not raw large reference sheets. The
+original AI reference sheets are working material; generation itself is not
+deterministic. Artist hand-polish, Spine rigging, full Wang sets and runtime
+integration remain outside this sample.
+
 Nhập từ gói `tutien-procgen` (xem "Hồ sơ tổng hợp", mục 6) + `orchestrator_pipeline.yaml`. Toàn bộ asset do script Node thuần (không bắt buộc thư viện ngoài) và shader GLSL ES 1.0 tạo ra; **cùng seed → cùng asset**, nên chỉ commit seed, không commit ảnh. Thư mục `out/`, `build/`, `reports/`, `preview/` nằm trong `.gitignore`.
 
 Yêu cầu: Node ≥ 18. Chạy từ `tools/procgen/` (hoặc `npm run <script> -w @vgtd/procgen` từ gốc monorepo).
@@ -72,14 +138,18 @@ Không có công cụ nào dưới đây bắt buộc để chạy `gen`/`valida
 - **Deploy** (tạo PR sang repo client) và **schema thật của `orchestrator.inc`**: YAML chỉ là bản thiết kế theo schema giả định; `workdir: ${workspace}/tutien-procgen` trong đó vẫn trỏ về cấu trúc gói gốc, cần đổi thành `tools/procgen` khi ánh xạ.
 - Chưa chạy `shader_snapshot.js`, `preview/shader_preview.html` (`npm run preview` tạo ra) trên trình duyệt/GPU thật; chưa nạp tileset vào Cocos Creator.
 
-## Lưu ý bảo mật (trước khi chạy `orchestrator_pipeline.yaml` trên runner thật)
+> **Chỉ để tham khảo.** `pipeline/orchestrator_pipeline.yaml` không được chạy bởi CI nào. "orchestrator.inc" trong tài liệu gốc là nhầm lẫn; dự án dùng GitHub Actions, CI ngắn, không CD, chưa có bước AI. Các bước AI trong file đó phải được rà soát lại trước khi bật.
 
-Rà soát tự động đã chỉ ra rủi ro trong YAML (nhập nguyên văn, chưa từng chạy):
+## Bảo mật pipeline (`orchestrator_pipeline.yaml`)
 
-- Bước 2 gọi `agy ... --dangerously-skip-permissions`: agent chạy không bị chặn quyền, có thể đọc/ghi/thực thi tùy ý trong runner.
-- `secrets: [ANTHROPIC_API_KEY, CODEX_API_KEY, GIT_PUSH_TOKEN, SLACK_WEBHOOK_URL]` khai báo ở cấp pipeline nên mọi task, kể cả bước render do agent điều khiển, đều thấy `GIT_PUSH_TOKEN` và webhook.
+Rà soát tự động từng chỉ ra rủi ro; đã xử lý trong YAML (vẫn **chưa chạy trên runner thật**; khóa `secrets:` ở cấp step/hook là giả định theo schema chung, cần ánh xạ theo schema thật của orchestrator):
 
-Cần xử lý **trước khi bật bước này**: bỏ `--dangerously-skip-permissions` và cho agy allowlist lệnh (chỉ `bash pipeline/render_layers.sh` / `node pipeline/render_layers.js`, `glslangValidator`); nếu agy không có allowlist thì chạy trong container không có mạng ra ngoài, mount workspace chỉ đọc trừ `build/raw`, không tiêm secret; và chỉ cấp `GIT_PUSH_TOKEN` / `SLACK_WEBHOOK_URL` cho `deploy_assets` và `on_failure`. Vì render đã có bản xác định (`render_layers.js|sh`) và pipeline luôn chạy lại nó sau agent, có thể bỏ hẳn agent khỏi bước này. Các thay đổi này phụ thuộc schema thật của orchestrator nên chưa sửa trong YAML.
+- **Antigravity (bước 2):** đã bỏ `--dangerously-skip-permissions`. `agy --help` không có cờ allowlist theo lệnh nên dùng `--sandbox --mode accept-edits` (hạn chế terminal, chỉ tự duyệt sửa file; lệnh shell không có người duyệt ở chế độ `-p` nên bị từ chối). Vì agent không chạy được lệnh, bước 2 được tách: `render_first` (script chuẩn, ghi `build/raw/render/logs/*.log`, `continue_on_error`) → `antigravity_agent` (chỉ chạy khi manifest có shader lỗi; prompt `antigravity_render_layers.md` chỉ đọc log và sửa `shaders/*`, không chạy lệnh) → `canonical_render` (chạy lại, quyết định kết quả). Cờ và prompt đã khớp nhau. Quy tắc allow/deny trong `--settings` của agy **chưa kiểm chứng** (khóa chưa có tài liệu); `--mode accept-edits` vẫn cho sửa mọi file trong workspace, mà `canonical_render` chạy `render_layers.sh`, `tools/*.js` và `node_modules/`, nên sau agent có **scope guard** inline (cùng logic với Codex): chụp sha256 file chưa theo dõi/bị `.gitignore` trước-sau và kiểm file đã theo dõi; chỉ `shaders/` (cùng `reports/`, `build/`) được đổi. Vi phạm → xóa/hoàn tác, ghi `reports/agy_violation`, thoát 20; `render_first` và `canonical_render` kiểm marker và thoát 20 nên không bị `continue_on_error` che. Cũng là heuristic (file có sẵn trong `node_modules/` bị sửa chỉ xóa được, runner phải bỏ); chưa chạy với agy thật. Có thể bỏ hẳn agent khỏi bước này.
+- **Secrets:** cấp pipeline là `secrets: []`; mỗi secret chỉ vào đúng step cần: `CODEX_API_KEY` → `codex_self_heal`, `ANTHROPIC_API_KEY` → `claude_code_review`, `GIT_PUSH_TOKEN` → `git_commit_push` (không phải cả `deploy_assets`), `SLACK_WEBHOOK_URL` → `notify_slack`. Bước agy không nhận secret nào.
+- **Codex (`codex_self_heal`):** bỏ `--full-auto`, giữ `--sandbox workspace-write` (không mạng). Sandbox không giới hạn được thư mục con nên hook chụp sha256 mọi file chưa theo dõi và file bị `.gitignore` (gồm `node_modules/`) ngoài `src/`, `reports/`, `build/` trước/sau Codex, và kiểm cả file đã theo dõi bị sửa. Vi phạm → xóa file mới/đã đổi, hoàn tác file đã theo dõi và cả `src/`, ghi `reports/codex_violation`, thoát 20. Vì hook có `continue_on_error`, việc **dừng run** do `run_generators`: bước này thoát 20 (không thử lại) nếu thấy marker. Đã thử logic bằng repo tạm + `codex` giả (sửa hợp lệ → qua; file mới, file trong `node_modules/` bị thêm/sửa, sửa `pipeline/` → bị chặn). Còn là heuristic: file có sẵn trong `node_modules/` bị sửa thì chỉ xóa chứ không khôi phục được, runner phải bỏ; không thay cho cô lập bằng container.
+- **Toàn vẹn `.git` cho cả hai scope guard:** agent có thể ghi `.git/config` hoặc hooks để chạy mã khi guard gọi git, nên guard băm `config`, `config.worktree`, `HEAD`, `packed-refs`, `refs/**`, `info/*`, `hooks/*` trước/sau, và diff/hoàn tác theo SHA commit ghi trước khi chạy agent (không tin `HEAD`/refs sau agent) và, nếu có đổi, dừng NGAY (không gọi thêm lệnh git), ghi marker, thoát 20. Guard ghi `top=$(git rev-parse --show-toplevel)` trước agent và `g()` ghim `GIT_DIR`/`GIT_WORK_TREE`, nên git không tự tìm một repo khác từ thư mục làm việc; `./.git` do agent tạo mới hoặc ghi đè (thư mục hay file trỏ gitdir, kể cả worktree/submodule) làm vân tay đổi và dừng guard trước khi chạy git. Mọi lệnh git của guard chạy qua `g()` (`core.fsmonitor=false`, `core.hooksPath=/dev/null`, `core.untrackedCache=false`, `GIT_CONFIG_NOSYSTEM=1`, `GIT_CONFIG_GLOBAL=/dev/null`). `.gitattributes` là file đã theo dõi nên bị diff bắt. Đã thử với agy/codex giả (sửa hợp lệ, sửa ngoài phạm vi, sửa `.git/config`, cài hook). Guard so với thư mục làm việc (`--relative -- .`), không bao trùm phần repo ngoài workdir; cô lập thật vẫn là chạy agent trên bản sao `shaders/` hoặc container.
+- **Claude QA (`claude_code_review`):** `--allowedTools` chỉ *duyệt sẵn* công cụ, không giới hạn đường dẫn đọc. Bảo đảm thực tế (allowlist dương, không duyệt sẵn `Read`/`Glob`/`Grep` trần): **đọc** được duyệt sẵn chỉ `Read(./build/raw/**)` và `Read(./reports/**)` (đọc ngoài thư mục làm việc như `~` hay `/proc/self/environ` bị từ chối vì `-p` không có người duyệt); **ghi** chỉ `Write(./reports/**)`; **Bash** chỉ đúng một lệnh `node pipeline/validate_assets.js --stage raw --root build/raw --report reports/qa_raw.json`. **Đọc** không bị khóa bởi allowlist: chặn bằng `--disallowedTools` (`Read(src/**)`, `pipeline/**`, `tools/**`, `shaders/**`, `.git/**`, `node_modules`, `.env*`; deny luôn thắng allow), nhưng quy tắc `Read(...)` áp cho Grep/Glob chỉ theo kiểu best-effort và không chặn tiến trình con của Bash. Biến môi trường `ANTHROPIC_API_KEY` vẫn nằm trong tiến trình của agent (cần cô lập/proxy khóa nếu muốn tránh hẳn). `qa_review.md` do LLM viết nên `git_commit_push` chặn (thoát 20) nếu nó chứa chuỗi giống secret/webhook trước khi dùng làm body PR (kiểm tra theo mẫu, không đầy đủ). Muốn đọc/ghi bị khóa cứng cần container chỉ mount `build/raw` + `reports/`. Chưa chạy thật.
+- File YAML đã được kiểm tra parse bằng PyYAML; ngữ nghĩa với orchestrator thật chưa kiểm chứng.
 
 ## Cấu trúc
 

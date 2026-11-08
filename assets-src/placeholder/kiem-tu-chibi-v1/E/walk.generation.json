@@ -1,0 +1,20 @@
+{
+  "clip": "walk",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 16,
+  "cols": 4,
+  "rows": 4,
+  "prompt": "Edit INPUT1 authoring template into a FULL FRAME-BY-FRAME game animation sheet of the SAME canonical KIEM TU T1 as INPUT2(E profile master) and fixed face from INPUT3(S master). EXACT4columns x4rows,16 chronological frames in row-major order. Output2048x2048 square,512px square cells; template logical256 units scale2x uniformly. Every figure SAME anatomical scale: crown MAIN hair cap tosole about216logicalpx (~432rawpx); elevated ponytail canextendabove crown but no bigger head. Canonical adult grey profileeye/straight brow/smallstraightnose/composedmouth,blackpony+cyanribbon,plainivoryshortsplitrobe/navycollar+navywaistsash/navypants/darksmallboots. Same oversized SIMPLE steelstraight sword/smallrectangularsilverguard/navygrip/cyanpommeltie in anatomical RIGHT nearhand,drawn and lowered forward-right. STRICT RIGHT-FACING EAST PROFILE every frame,noback/frontcamera turns,nocostumechanges. Material-tinted clean contour,2celtones+1highlight,NWlight,narrowrim,notblackink. Pure opaque uniform MAGENTA#FF00FF outside character,no shadow,no VFX,no particles,no glowhalo. Keep ALL limbs,hair,blade inside each own cell withpadding. The input grid/head/hip/ground lines/colored ellipses are invisible construction guides: follow their placement,then ERASE ALL visible guides/triangles/lines in output,leaving only character onmagenta,no text,numbers,labels,borders. Use small incremental poses and smootharcs,not16unrelatedposes or duplicatefrozenframes. Head/face stay consistent,secondaryhair/ribbon/sleeves lag1-3frames then settle. Preserve cellcanvasbaseline/scale; never rescale individual poses to fillcell.\nWALK16: natural two-step in-place RIGHT-facing walk,one fullR+Lcycle over16frames at24fps. Row1frames1-4 Rcontact,weightacceptance,passing;row2frames5-8 Rpush-off,Lswingforward;row3frames9-12 mirrored Lcontact/weight/pass;row4frames13-16 Lpush-off,Rswingforwardreturn. Follow EXACT cyan near-R and amber far-L FOOT GHOST ELLIPSES from template cellbycell; footSOLE CENTER on eachghost,planted feetremainongroundbaseline,raisedfeetfollowraisedghost. Do not freezelegs orslideallfeet together. Modest hipbob,max3logicalpixels,small handcountermotion while right handretainsloweredsword. Hem opens naturally around knees. Hair/cyanribbons lagthehip2frames,sleeveslag1frame. No running/no flight/no attack. Consistent adult profileface andbody size. Frame16connects smoothly backto1.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:43:06.414Z",
+  "inputs": ["templates/walk.template.png", "../reference/E.master.raw.png", "../reference/S.master.raw.png"],
+  "status": "Full-pose source generated; pending visual/contact/foot-slide/loop/face/scale QA and D45 layers",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-66c88cc1-0573-4dad-92fa-a62a3b85ef7a.png",
+  "utcCompletedRecorded": "2026-11-07T20:44:10.159Z",
+  "rawSha256": "a3ecc1cc03a72d62fd21140f156f414385a9a5cc4a51639a4e7ad8cfab3da194",
+  "actualRawDimensions": [1254, 1254],
+  "utcOutputFileModified": "2026-11-07T20:44:06.390891+00:00",
+  "diagnosticStatus": "Not accepted: see source-quality.json; intended contacts not actual acceptance"
+}

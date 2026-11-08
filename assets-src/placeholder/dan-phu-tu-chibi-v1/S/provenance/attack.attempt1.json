@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:04:01 UTC"
+  },
+  "prompt": "ONE square4columns x4rows ATTACK1 production sprite sheet, EXACTLY14 sequential FULL-BODY drawings rowmajor: cells0-13 occupied, LAST TWO CELLS14/15 PURE MAGENTA EMPTY. Image1 head-size/position guide only, image2 full approved master. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. Controlled jade-whisk horizontal sweep at chest/waist level, SOUTH camera stays fixed, face looks forward. RIGHT hand at viewerLEFT keeps same natural whisk grip through sweeping arc, free LEFT hand balances at viewerRIGHT. 0-3 anticipation: progressively coil right elbow/forearm toward body, gentle knee load.4-6 accelerate same whisk across front of chest from viewerLEFT toward viewerRIGHT, hips shift and robe follows;7 impact extension;8 impact hold almostsame pose with horsehair finishing its arc;9-11 follow-through deceleration and return;12-13 recovery toward master stance. Strong readable arc from wrist/elbow/cloth, no face/head scale growth, no turning away from SOUTH, no oversized foreshortened weapon. Upper weapon never above own-cell margin, allhair/boots/whisk insidecell. Face preserved, fixed53pxhead scale, body scale locked, smooth14drawings24fps. Bristles bend and lag physically, hands stay attached and no weapon swaps. No trails/FX, talismans, shadows or magic. Pure #FF00FF background remove every grid/guide/label. Exactly14figures plus2empty endingcells.",
+  "inputs": ["templates/attack.head-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/attack.attempt1.png",
+  "status": "raw candidate; panel borders retained; source-border review required before standard inset acceptance",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-01479e89-71ed-4a32-bd9b-a745aa4b31c3.png",
+  "sha256": "12ea4dc9d70298026afc9877f54a4c0892eb7a7ceb9d20b59fbb519bdae2354d",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/attack.head-guide.png",
+      "sha256": "a396f7e23b29040b19e77e185712fff48791aec1bbf56e1edd4ff6ddc915c990"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

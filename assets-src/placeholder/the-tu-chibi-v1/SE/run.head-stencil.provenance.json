@@ -1,0 +1,80 @@
+{
+  "kind": "generation-guide-only",
+  "master": "../reference/SE.master.png",
+  "crop": {
+    "x": 72,
+    "y": 4,
+    "width": 90,
+    "height": 67
+  },
+  "scale": 1,
+  "positions": [
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 1,
+      "y": 2
+    },
+    {
+      "x": 2,
+      "y": 4
+    },
+    {
+      "x": 3,
+      "y": 6
+    },
+    {
+      "x": 6,
+      "y": 11
+    },
+    {
+      "x": 9,
+      "y": 16
+    },
+    {
+      "x": 8,
+      "y": 12
+    },
+    {
+      "x": 3,
+      "y": 5
+    },
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 1,
+      "y": 2
+    },
+    {
+      "x": 2,
+      "y": 4
+    },
+    {
+      "x": 3,
+      "y": 6
+    },
+    {
+      "x": 6,
+      "y": 11
+    },
+    {
+      "x": 9,
+      "y": 16
+    },
+    {
+      "x": 8,
+      "y": 12
+    },
+    {
+      "x": 3,
+      "y": 5
+    }
+  ],
+  "operation": "Unscaled head stencils translated to intended pose locations; output still needs D47 measurement",
+  "masterSha256": "b0d176b957e8f518f703a41c8c41f6f4ea62706fb5c3ea6805935d773ed0060b",
+  "utcRecorded": "2026-11-07T22:18:00.077346+00:00"
+}

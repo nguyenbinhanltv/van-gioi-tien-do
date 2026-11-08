@@ -1,0 +1,12 @@
+{
+  "id": "B.S.hit-reroll-1",
+  "prompt": "Re-render these four S front-facing Vermilion Fan Adept hit reaction poses as EXACT TWO COLUMNS TWO ROWS, FOUR EQUAL SQUARE CELLS, square whole canvas1:1. Use attached original hit sheet for character and poses, attached2x2template for layout only (removeguides). Order: guard, shallow backward torso recoil, recovery,guard. Fullbody front view, right-hand cyanopenfan viewerleft, empty left hand. Same anatomy/proportions/clothing/head size as original/master, vermilion ivory robe/navysash. At256squarecell equivalent raw visibleheight237px (bun8, lowestsole245), no resize individual frames. No deepcrouch, no VFX, no weaponchanges. SolidMAGENTA background, NO text/grid/borders/shadow. IMPORTANT existing source has rectangularcells, do NOT copy aspect3:1: whole new output must square 2x2 with4squarecells.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 22:06:14 UTC",
+  "utcEnd": "2026-11-06 22:06:45 UTC",
+  "selectedOutput": "S/sheets/hit.reroll1.generated.png",
+  "references": ["S/sheets/hit.generated.png", "S/templates/hit-2x2.template.png"],
+  "attempt": 2,
+  "reason": "Original requested4x1 returned rectangular cells3:1; rejected without distortion"
+}

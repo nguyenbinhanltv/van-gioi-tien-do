@@ -1,0 +1,73 @@
+{
+  "status": "approved-by-orchestrator",
+  "reason": "Correct white-key transparency holes while preserving raw art and canonical216px anatomy. Final bbox remains218px; changed measured pelvis anchor/subpixel placement changes two soft measurements. Raw motion PNG hashes are unchanged.",
+  "oldMaster": {
+    "file": "reference/E.master.generation-v1.png",
+    "sha256": "65225c5a3692491be0b9b06b1eff7a4261dd400978a1956dac414b91356a28d0",
+    "metrics": {
+      "left": 83,
+      "right": 191,
+      "top": 14,
+      "bottom": 232,
+      "height": 218,
+      "width": 108,
+      "pelvisX": 127.72441983122363
+    },
+    "guides": {
+      "ground": 232,
+      "head": 14,
+      "pelvis": 123,
+      "centerX": 127.72441983122363
+    }
+  },
+  "newMaster": {
+    "file": "reference/E.master.alpha-fixed-unframed.png",
+    "sha256": "3b15a09a63c97e4250b6db8df5a0dcddcbb506cafee3a5c69b6ad46ba516aa93",
+    "metrics": {
+      "left": 82,
+      "right": 190,
+      "top": 14,
+      "bottom": 232,
+      "height": 218,
+      "width": 108,
+      "pelvisX": 127.67948717948718
+    },
+    "guides": {
+      "ground": 232,
+      "head": 14,
+      "pelvis": 123,
+      "centerX": 127.67948717948718
+    }
+  },
+  "regressions": [
+    {
+      "clip": "walk",
+      "cell": 1,
+      "gate": "footSlide",
+      "metric": "slide_px_per_frame_R",
+      "oldValue": 7.73,
+      "newValue": 7.84,
+      "limit": 3,
+      "sourceSheetSha256": "3e5e6917b7515455aed798a332493a170f44225770adf9176a9fba2d25daced3",
+      "note": "Selected raw sheet unchanged; derived master alpha/bbox/guide and palette corrected. Existing art defect remains open."
+    },
+    {
+      "clip": "channel",
+      "cell": 0,
+      "gate": "height",
+      "metric": "height_excess_px",
+      "oldValue": 0.5,
+      "newValue": 1.5,
+      "limit": 0,
+      "sourceSheetSha256": "2f67f605196e0d71d49cba4714b149a8f9251c8bd01f0a62c94f5c7404b94e6b",
+      "note": "Selected raw sheet unchanged; derived master alpha/bbox/guide and palette corrected. Existing art defect remains open."
+    }
+  ],
+  "reviewer": "worker25",
+  "reviewNote": "Intentional input-calibration migration, not a redraw improvement or removal of findings. Old/new values and input hashes retained. Orchestrator notified; no hard thresholds changed. Orchestrator explicitly approved this master-alpha baseline migration; foot findings remain open.",
+  "currentFraming": {
+    "file": "reference/E.master.png",
+    "x": 1,
+    "note": "Separate fixed character-wide translation; approved alpha-baseline snapshot retained unchanged."
+  }
+}

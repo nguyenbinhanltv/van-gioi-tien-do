@@ -64,7 +64,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'truc_co',
         base_rate: 0.7,
-        main_pill_ids: ['pill_truc_co'],
+        main_pill_ids: ['pill_truc_co_dan'],
         tribulation: {
           type: 'none',
         },
@@ -82,7 +82,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
         base_rate: 0.55,
         main_pill_ids: ['pill_ket_kim_dan'],
         tribulation: {
-          type: 'heart_demon',
+          type: 'heart_demon_light',
         },
       },
     },
@@ -96,7 +96,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'nguyen_anh',
         base_rate: 0.45,
-        main_pill_ids: ['pill_ket_anh'],
+        main_pill_ids: ['pill_ket_anh_dan'],
         tribulation: {
           type: 'lightning_heart_demon',
           strikes: 3,
@@ -120,7 +120,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'hoa_than',
         base_rate: 0.35,
-        main_pill_ids: ['pill_hoa_than'],
+        main_pill_ids: ['pill_hoa_than_dan'],
         tribulation: {
           type: 'lightning',
           strikes: 6,
@@ -144,7 +144,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'luyen_hu',
         base_rate: 0.3,
-        main_pill_ids: ['pill_luyen_hu'],
+        main_pill_ids: ['pill_luyen_hu_dan'],
         tribulation: {
           type: 'heart_demon_multi',
         },
@@ -160,7 +160,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'hop_the',
         base_rate: 0.25,
-        main_pill_ids: ['pill_hop_the'],
+        main_pill_ids: ['pill_hop_the_dan'],
         tribulation: {
           type: 'lightning',
           strikes: 9,
@@ -184,7 +184,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'dai_thua',
         base_rate: 0.2,
-        main_pill_ids: ['pill_dai_thua'],
+        main_pill_ids: ['pill_dai_thua_dan'],
         tribulation: {
           type: 'lightning',
           strikes: 18,
@@ -208,7 +208,7 @@ export const REALM_PROGRESSION_JSON: unknown = {
       breakthrough: {
         to: 'do_kiep',
         base_rate: 0.15,
-        main_pill_ids: ['pill_do_kiep'],
+        main_pill_ids: ['pill_do_kiep_dan'],
         tribulation: {
           type: 'lightning_heart_demon',
           strikes: 36,
@@ -451,7 +451,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
         max_pills: {
           type: 'integer',
           minimum: 1,
-          maximum: 5,
+          maximum: 3,
         },
         wrong_realm_pill_factor: {
           $ref: '#/$defs/ratio',
@@ -511,7 +511,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
     },
     realms: {
       type: 'array',
-      minItems: 7,
+      minItems: 9,
       items: {
         $ref: '#/$defs/realm',
       },
@@ -564,7 +564,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
       additionalProperties: false,
       properties: {
         type: {
-          enum: ['none', 'heart_demon', 'heart_demon_multi', 'lightning', 'lightning_heart_demon'],
+          enum: ['none', 'heart_demon_light', 'heart_demon', 'heart_demon_multi', 'lightning', 'lightning_heart_demon'],
         },
         strikes: {
           type: 'integer',
@@ -672,6 +672,7 @@ export const REALM_PROGRESSION_SCHEMA: unknown = {
               type: 'array',
               items: {
                 type: 'string',
+                pattern: '^pill_[a-z0-9_]+_dan$',
               },
             },
             tribulation: {
@@ -883,6 +884,4544 @@ export const ELEMENTAL_MATRIX_SCHEMA: unknown = {
       },
       minProperties: 5,
       maxProperties: 5,
+    },
+  },
+};
+
+export const SKILL_DEFINITIONS_JSON: unknown = {
+  schema_version: '0.2.0',
+  global: {
+    gcd_ms: 800,
+    max_targets_per_cast: 12,
+    cdr_cap: 0.3,
+  },
+  classes: [
+    {
+      path: 'kiem',
+      name_key: 'path.kiem.name',
+      weapon: 'sword',
+      element: 'kim',
+      role: 'dps_mid',
+      stat_weights: {
+        hp: 0.95,
+        mp: 0.9,
+        atk: 1.06,
+        def: 0.92,
+        agi: 1.1,
+      },
+      basic_attack: {
+        range_tiles: 2.5,
+        interval_ms: 900,
+        coeffs: [0.9, 0.9, 1.3],
+      },
+      solo_branch: 'kiem_ngu_kiem',
+      team_branch: 'kiem_ho_kiem',
+    },
+    {
+      path: 'phap',
+      name_key: 'path.phap.name',
+      weapon: 'fan',
+      element: 'hoa',
+      role: 'dps_ranged',
+      stat_weights: {
+        hp: 0.95,
+        mp: 1.25,
+        atk: 1.1,
+        def: 0.88,
+        agi: 0.95,
+      },
+      basic_attack: {
+        range_tiles: 8,
+        interval_ms: 900,
+        coeffs: [0.9, 0.9, 1.3],
+      },
+      solo_branch: 'phap_hoa_bao',
+      team_branch: 'phap_thuy_khong',
+    },
+    {
+      path: 'the',
+      name_key: 'path.the.name',
+      weapon: 'gauntlets',
+      element: 'tho',
+      role: 'tank_melee',
+      stat_weights: {
+        hp: 1.2,
+        mp: 0.85,
+        atk: 1.02,
+        def: 1.15,
+        agi: 0.95,
+      },
+      basic_attack: {
+        range_tiles: 1.8,
+        interval_ms: 900,
+        coeffs: [0.9, 0.9, 1.3],
+      },
+      trait: {
+        id: 'khi_huyet_an',
+        gain_on: 'hit_dealt',
+        max_stacks: 5,
+        duration_ms: 8000,
+        per_stack: {
+          dr_pct: 0.03,
+          lifesteal: 0.01,
+        },
+      },
+      solo_branch: 'the_ba_quyen',
+      team_branch: 'the_kim_cuong',
+    },
+    {
+      path: 'dan_phu',
+      name_key: 'path.dan_phu.name',
+      weapon: 'whisk_talisman',
+      element: 'moc',
+      role: 'support_ranged',
+      stat_weights: {
+        hp: 1,
+        mp: 1.15,
+        atk: 1.04,
+        def: 0.95,
+        agi: 1.05,
+      },
+      basic_attack: {
+        range_tiles: 7,
+        interval_ms: 900,
+        coeffs: [0.9, 0.9, 1.3],
+      },
+      solo_branch: 'dan_phu_phu_sat',
+      team_branch: 'dan_phu_dan_y',
+    },
+    {
+      path: 'thuong',
+      name_key: 'path.thuong.name',
+      weapon: 'spear',
+      element: 'loi',
+      role: 'vanguard_mid',
+      stat_weights: {
+        hp: 1.05,
+        mp: 0.95,
+        atk: 1.04,
+        def: 1,
+        agi: 1.05,
+      },
+      basic_attack: {
+        range_tiles: 3.5,
+        interval_ms: 900,
+        coeffs: [0.9, 0.9, 1.3],
+      },
+      solo_branch: 'thuong_loi_thuong',
+      team_branch: 'thuong_tien_phong',
+    },
+    {
+      path: 'dao',
+      name_key: 'path.dao.name',
+      weapon: 'heavy_saber',
+      element: 'phong',
+      role: 'berserker_melee',
+      stat_weights: {
+        hp: 1.1,
+        mp: 0.85,
+        atk: 1.06,
+        def: 0.9,
+        agi: 1,
+      },
+      basic_attack: {
+        range_tiles: 2.5,
+        interval_ms: 900,
+        coeffs: [0.9, 0.9, 1.3],
+      },
+      trait: {
+        id: 'cuong_no',
+        gain_on: 'both',
+        max_stacks: 5,
+        duration_ms: 6000,
+        per_stack: {
+          dmg_pct: 0.04,
+          lifesteal: 0.015,
+        },
+      },
+      solo_branch: 'dao_huyet_dao',
+      team_branch: 'dao_tran_dao',
+    },
+  ],
+  branches: [
+    {
+      id: 'kiem_ngu_kiem',
+      path: 'kiem',
+      mode: 'solo',
+      name_key: 'branch.kiem_ngu_kiem.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 1.05,
+      },
+      skill_patches: {
+        thiem_kiem_bo: {
+          cooldown_mult: 0.85,
+        },
+      },
+    },
+    {
+      id: 'kiem_ho_kiem',
+      path: 'kiem',
+      mode: 'team',
+      name_key: 'branch.kiem_ho_kiem.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.82,
+        dmg_taken_mult: 0.88,
+        ally_crit_bonus: 0.1,
+      },
+      skill_patches: {
+        ngu_kiem_tran: {
+          buff_mult: 1.8,
+        },
+        van_kiem_quy_tong: {
+          buff_mult: 1.5,
+        },
+      },
+    },
+    {
+      id: 'phap_hoa_bao',
+      path: 'phap',
+      mode: 'solo',
+      name_key: 'branch.phap_hoa_bao.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 1.12,
+        dmg_taken_mult: 0.85,
+      },
+      skill_patches: {
+        liet_diem_phan_thien: {
+          damage_mult: 1.15,
+        },
+        thien_hoa_luu_tinh: {
+          damage_mult: 1.1,
+        },
+      },
+    },
+    {
+      id: 'phap_thuy_khong',
+      path: 'phap',
+      mode: 'team',
+      name_key: 'branch.phap_thuy_khong.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 1,
+      },
+      skill_patches: {
+        bang_phong_thuat: {
+          cooldown_mult: 0.7,
+        },
+        linh_quang_thuan: {
+          shield_mult: 1.8,
+          cooldown_mult: 0.7,
+        },
+      },
+    },
+    {
+      id: 'the_ba_quyen',
+      path: 'the',
+      mode: 'solo',
+      name_key: 'branch.the_ba_quyen.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.8,
+      },
+      skill_patches: {
+        thiet_bo_sam: {
+          cooldown_mult: 0.8,
+        },
+        long_ho_quyen: {
+          damage_mult: 1.1,
+        },
+      },
+    },
+    {
+      id: 'the_kim_cuong',
+      path: 'the',
+      mode: 'team',
+      name_key: 'branch.the_kim_cuong.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.71,
+        dmg_taken_mult: 0.85,
+        threat_mult: 3,
+        team_dr: 0.08,
+      },
+      skill_patches: {
+        khieu_khich: {
+          duration_mult: 1.5,
+          cooldown_mult: 0.8,
+        },
+        thiet_bo_sam: {
+          shield_mult: 1.4,
+        },
+      },
+    },
+    {
+      id: 'dan_phu_phu_sat',
+      path: 'dan_phu',
+      mode: 'solo',
+      name_key: 'branch.dan_phu_phu_sat.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.865,
+      },
+      skill_patches: {
+        phu_tien: {
+          damage_mult: 1.15,
+        },
+        tuong_sinh_phap: {
+          damage_mult: 1.3,
+        },
+      },
+    },
+    {
+      id: 'dan_phu_dan_y',
+      path: 'dan_phu',
+      mode: 'team',
+      name_key: 'branch.dan_phu_dan_y.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.745,
+        heal_mult: 1.7,
+        shield_mult: 1.5,
+      },
+      skill_patches: {
+        tuong_sinh_phap: {
+          buff_mult: 1.5,
+        },
+      },
+    },
+    {
+      id: 'thuong_loi_thuong',
+      path: 'thuong',
+      mode: 'solo',
+      name_key: 'branch.thuong_loi_thuong.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.95,
+      },
+      skill_patches: {
+        kinh_loi_thich: {
+          damage_mult: 1.1,
+        },
+      },
+    },
+    {
+      id: 'thuong_tien_phong',
+      path: 'thuong',
+      mode: 'team',
+      name_key: 'branch.thuong_tien_phong.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.75,
+        threat_mult: 1.5,
+        team_dmg: 0.05,
+      },
+      skill_patches: {
+        doan_hon_thich: {
+          debuff_mult: 1.6,
+        },
+        kinh_loi_thich: {
+          cooldown_mult: 0.75,
+        },
+      },
+    },
+    {
+      id: 'dao_huyet_dao',
+      path: 'dao',
+      mode: 'solo',
+      name_key: 'branch.dao_huyet_dao.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.95,
+        lifesteal_add: 0.03,
+      },
+      skill_patches: {
+        cuong_huyet: {
+          cooldown_mult: 0.85,
+        },
+      },
+    },
+    {
+      id: 'dao_tran_dao',
+      path: 'dao',
+      mode: 'team',
+      name_key: 'branch.dao_tran_dao.name',
+      unlock_level: 20,
+      switch: 'out_of_combat',
+      stat_mods: {
+        dmg_mult: 0.71,
+        dmg_taken_mult: 0.88,
+        threat_mult: 2.2,
+        team_dmg: 0.06,
+      },
+      skill_patches: {
+        liet_dia_tram: {
+          cooldown_mult: 0.8,
+        },
+        cuong_huyet: {
+          buff_mult: 1.6,
+        },
+      },
+    },
+  ],
+  skills: [
+    {
+      id: 'kiem_khi_tram',
+      name_key: 'skill.kiem_khi_tram.name',
+      desc_key: 'skill.kiem_khi_tram.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 1,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 2.5,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 2.5,
+        angle_deg: 90,
+      },
+      timing: {
+        cast_ms: 400,
+        cooldown_ms: 3000,
+        gcd: true,
+        move_during_cast: 'slow',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.01,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.3,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_kiem_khi_cast',
+        hit_fx: 'fx_kiem_khi_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_kiem_khi_tram',
+    },
+    {
+      id: 'lien_hoan_kiem',
+      name_key: 'skill.lien_hoan_kiem.name',
+      desc_key: 'skill.lien_hoan_kiem.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 5,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 3,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 3,
+        angle_deg: 60,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 1000,
+        channel_ticks: 3,
+        cooldown_ms: 7000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.02,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 0.8,
+          },
+          hits: 3,
+        },
+      ],
+      tags: [],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_lien_hoan_cast',
+        hit_fx: 'fx_lien_hoan_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_lien_hoan_kiem',
+    },
+    {
+      id: 'phi_kiem_thuat',
+      name_key: 'skill.phi_kiem_thuat.name',
+      desc_key: 'skill.phi_kiem_thuat.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 12,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 8,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 8,
+        width: 1,
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 5000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.02,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.6,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_phi_kiem_cast',
+        hit_fx: 'fx_phi_kiem_hit',
+        max_draw_calls: 1,
+        projectile_fx: 'fx_phi_kiem_proj',
+      },
+      icon_id: 'icon_skill_phi_kiem_thuat',
+    },
+    {
+      id: 'kim_quang_quet',
+      name_key: 'skill.kim_quang_quet.name',
+      desc_key: 'skill.kim_quang_quet.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'active',
+      tier: 'core',
+      element: 'kim',
+      unlock: {
+        level_min: 20,
+        realm_min: 'luyen_khi',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 3.5,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 3.5,
+        angle_deg: 120,
+      },
+      timing: {
+        cast_ms: 600,
+        cooldown_ms: 10000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 2,
+          },
+          hits: 1,
+          pen: 0.15,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'stun',
+          duration_ms: 600,
+        },
+      ],
+      tags: ['cc', 'interrupt'],
+      anim_clip: 'attack_2',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_kim_quang_cast',
+        hit_fx: 'fx_kim_quang_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_kim_quang_quet',
+    },
+    {
+      id: 'thiem_kiem_bo',
+      name_key: 'skill.thiem_kiem_bo.name',
+      desc_key: 'skill.thiem_kiem_bo.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'active',
+      tier: 'core',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 31,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 5,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 5,
+        width: 1,
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 12000,
+        gcd: false,
+        move_during_cast: 'free',
+        interruptible: false,
+        invuln_ms: 300,
+      },
+      cost: {
+        mp_pct: 0.02,
+      },
+      effects: [
+        {
+          type: 'dash',
+          applies_to: 'self',
+          distance_tiles: 5,
+        },
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1,
+          },
+          hits: 1,
+        },
+        {
+          type: 'shield',
+          applies_to: 'self',
+          scale: {
+            stat: 'hp_max',
+            coeff: 0.1,
+          },
+          duration_ms: 4000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'all',
+          context: 'group',
+          stat: 'move_speed_pct',
+          magnitude: 0.2,
+          duration_ms: 3000,
+          radius: 4,
+        },
+      ],
+      tags: ['mobility', 'dual_use', 'context_aware'],
+      anim_clip: 'dash',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thiem_kiem_cast',
+        hit_fx: 'fx_thiem_kiem_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_thiem_kiem_bo',
+    },
+    {
+      id: 'kiem_tam',
+      name_key: 'skill.kiem_tam.name',
+      desc_key: 'skill.kiem_tam.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'passive',
+      tier: 'core',
+      element: 'none',
+      unlock: {
+        level_min: 40,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 0,
+        cooldown_ms: 0,
+        gcd: false,
+      },
+      effects: [
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'crit_chance',
+          magnitude: 0.05,
+        },
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'pen',
+          magnitude: 0.06,
+        },
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'lifesteal',
+          magnitude: 0.04,
+        },
+      ],
+      tags: ['dual_use'],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 1,
+        coeff_per_rank: 0,
+      },
+      icon_id: 'icon_skill_kiem_tam',
+    },
+    {
+      id: 'ngu_kiem_tran',
+      name_key: 'skill.ngu_kiem_tran.name',
+      desc_key: 'skill.ngu_kiem_tran.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'active',
+      tier: 'core',
+      element: 'kim',
+      unlock: {
+        level_min: 51,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'ground',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'drag_ground',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 4,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 3000,
+        channel_ticks: 6,
+        cooldown_ms: 18000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.06,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 0.9,
+          },
+          hits: 6,
+        },
+        {
+          type: 'buff',
+          applies_to: 'all',
+          stat: 'crit_chance',
+          magnitude: 0.12,
+          duration_ms: 8000,
+          radius: 4,
+        },
+        {
+          type: 'hot',
+          applies_to: 'self',
+          context: 'solo',
+          scale: {
+            stat: 'atk',
+            coeff: 0.35,
+          },
+          duration_ms: 3000,
+          tick_interval_ms: 500,
+        },
+      ],
+      tags: ['context_aware', 'dual_use'],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_ngu_kiem_cast',
+        hit_fx: 'fx_ngu_kiem_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_ngu_kiem_tran',
+    },
+    {
+      id: 'van_kiem_quy_tong',
+      name_key: 'skill.van_kiem_quy_tong.name',
+      desc_key: 'skill.van_kiem_quy_tong.desc',
+      owner: 'player',
+      path: 'kiem',
+      kind: 'active',
+      tier: 'ultimate',
+      element: 'kim',
+      unlock: {
+        level_min: 65,
+        realm_min: 'kim_dan',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'ground',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'drag_ground',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 6,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 4000,
+        channel_ticks: 8,
+        cooldown_ms: 60000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.15,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.1,
+          },
+          hits: 8,
+        },
+        {
+          type: 'shield',
+          applies_to: 'self',
+          scale: {
+            stat: 'hp_max',
+            coeff: 0.2,
+          },
+          duration_ms: 5000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'all',
+          context: 'group',
+          stat: 'dmg_pct',
+          magnitude: 0.1,
+          duration_ms: 8000,
+          radius: 6,
+        },
+      ],
+      tags: ['context_aware', 'dual_use'],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_van_kiem_cast',
+        hit_fx: 'fx_van_kiem_hit',
+        max_draw_calls: 1,
+        projectile_fx: 'fx_van_kiem_proj',
+        instanced: true,
+      },
+      icon_id: 'icon_skill_van_kiem_quy_tong',
+    },
+    {
+      id: 'linh_khi_dan',
+      name_key: 'skill.linh_khi_dan.name',
+      desc_key: 'skill.linh_khi_dan.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 1,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'enemy',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'target',
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 2500,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.02,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.4,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_linh_khi_cast',
+        hit_fx: 'fx_linh_khi_hit',
+        max_draw_calls: 1,
+        projectile_fx: 'fx_linh_khi_proj',
+      },
+      icon_id: 'icon_skill_linh_khi_dan',
+    },
+    {
+      id: 'ngu_hanh_chu',
+      name_key: 'skill.ngu_hanh_chu.name',
+      desc_key: 'skill.ngu_hanh_chu.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 5,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'ground',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'drag_ground',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 2,
+      },
+      timing: {
+        cast_ms: 800,
+        cooldown_ms: 6000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.4,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_ngu_hanh_cast',
+        hit_fx: 'fx_ngu_hanh_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_ngu_hanh_chu',
+    },
+    {
+      id: 'linh_quang_thuan',
+      name_key: 'skill.linh_quang_thuan.name',
+      desc_key: 'skill.linh_quang_thuan.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 12,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'ally_or_self',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 14000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'shield',
+          applies_to: 'ally',
+          scale: {
+            stat: 'target_hp_max',
+            coeff: 0.27,
+          },
+          duration_ms: 6000,
+          explode: {
+            coeff: 1.2,
+            radius: 2.5,
+          },
+        },
+      ],
+      tags: ['sustain', 'dual_use'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_linh_quang_thuan_cast',
+        hit_fx: 'fx_linh_quang_thuan_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_linh_quang_thuan',
+    },
+    {
+      id: 'lien_chau_dan',
+      name_key: 'skill.lien_chau_dan.name',
+      desc_key: 'skill.lien_chau_dan.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'core',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 20,
+        realm_min: 'luyen_khi',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 8,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 8,
+        angle_deg: 30,
+      },
+      timing: {
+        cast_ms: 800,
+        cooldown_ms: 8000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 0.9,
+          },
+          hits: 3,
+        },
+      ],
+      tags: [],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_lien_chau_cast',
+        hit_fx: 'fx_lien_chau_hit',
+        max_draw_calls: 1,
+        projectile_fx: 'fx_lien_chau_proj',
+      },
+      icon_id: 'icon_skill_lien_chau_dan',
+    },
+    {
+      id: 'bang_phong_thuat',
+      name_key: 'skill.bang_phong_thuat.name',
+      desc_key: 'skill.bang_phong_thuat.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'core',
+      element: 'thuy',
+      unlock: {
+        level_min: 31,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'ground',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'drag_ground',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 3,
+      },
+      timing: {
+        cast_ms: 800,
+        cooldown_ms: 12000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1,
+          },
+          hits: 1,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'root',
+          duration_ms: 2000,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'slow',
+          duration_ms: 3000,
+          magnitude: 0.5,
+        },
+      ],
+      tags: ['cc', 'interrupt'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_bang_phong_cast',
+        hit_fx: 'fx_bang_phong_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_bang_phong_thuat',
+    },
+    {
+      id: 'liet_diem_phan_thien',
+      name_key: 'skill.liet_diem_phan_thien.name',
+      desc_key: 'skill.liet_diem_phan_thien.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'core',
+      element: 'hoa',
+      unlock: {
+        level_min: 40,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'ground',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'drag_ground',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 3,
+      },
+      timing: {
+        cast_ms: 1200,
+        cooldown_ms: 16000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.08,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 2.6,
+          },
+          hits: 1,
+        },
+        {
+          type: 'dot',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 0.25,
+          },
+          duration_ms: 3000,
+          tick_interval_ms: 1000,
+        },
+      ],
+      tags: [],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_liet_diem_cast',
+        hit_fx: 'fx_liet_diem_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_liet_diem_phan_thien',
+    },
+    {
+      id: 'phien_phong_bo',
+      name_key: 'skill.phien_phong_bo.name',
+      desc_key: 'skill.phien_phong_bo.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'core',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 48,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 4,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 4,
+        width: 1,
+      },
+      timing: {
+        cast_ms: 200,
+        cooldown_ms: 10000,
+        gcd: false,
+        move_during_cast: 'free',
+        interruptible: false,
+        invuln_ms: 200,
+      },
+      cost: {
+        mp_pct: 0.02,
+      },
+      effects: [
+        {
+          type: 'dash',
+          applies_to: 'self',
+          distance_tiles: 4,
+          direction: 'back',
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'slow',
+          duration_ms: 3000,
+          magnitude: 0.6,
+        },
+        {
+          type: 'restore_mp',
+          applies_to: 'self',
+          magnitude: 0.06,
+        },
+      ],
+      tags: ['mobility', 'dual_use'],
+      anim_clip: 'dash',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_phien_phong_cast',
+        hit_fx: 'fx_phien_phong_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_phien_phong_bo',
+    },
+    {
+      id: 'thien_hoa_luu_tinh',
+      name_key: 'skill.thien_hoa_luu_tinh.name',
+      desc_key: 'skill.thien_hoa_luu_tinh.desc',
+      owner: 'player',
+      path: 'phap',
+      kind: 'active',
+      tier: 'ultimate',
+      element: 'hoa',
+      unlock: {
+        level_min: 60,
+        realm_min: 'kim_dan',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'ground',
+        range_tiles: 9,
+        requires_los: true,
+        aim_ui: 'drag_ground',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 4,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 3000,
+        channel_ticks: 5,
+        cooldown_ms: 60000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.15,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.6,
+          },
+          hits: 5,
+        },
+      ],
+      tags: ['dual_use'],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thien_hoa_cast',
+        hit_fx: 'fx_thien_hoa_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_thien_hoa_luu_tinh',
+    },
+    {
+      id: 'phach_quyen',
+      name_key: 'skill.phach_quyen.name',
+      desc_key: 'skill.phach_quyen.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 1,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'enemy',
+        range_tiles: 1.8,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'target',
+      },
+      timing: {
+        cast_ms: 400,
+        cooldown_ms: 2500,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.01,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.2,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_phach_quyen_cast',
+        hit_fx: 'fx_phach_quyen_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_phach_quyen',
+    },
+    {
+      id: 'thiet_bo_sam',
+      name_key: 'skill.thiet_bo_sam.name',
+      desc_key: 'skill.thiet_bo_sam.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'active',
+      tier: 'basic',
+      element: 'tho',
+      unlock: {
+        level_min: 5,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 16000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.03,
+      },
+      effects: [
+        {
+          type: 'shield',
+          applies_to: 'self',
+          scale: {
+            stat: 'hp_max',
+            coeff: 0.12,
+          },
+          duration_ms: 8000,
+          explode: {
+            coeff: 5.5,
+            radius: 2.8,
+          },
+        },
+      ],
+      tags: ['sustain', 'dual_use'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thiet_bo_sam_cast',
+        hit_fx: 'fx_thiet_bo_sam_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_thiet_bo_sam',
+    },
+    {
+      id: 'dia_chan',
+      name_key: 'skill.dia_chan.name',
+      desc_key: 'skill.dia_chan.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'active',
+      tier: 'basic',
+      element: 'tho',
+      unlock: {
+        level_min: 12,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 2.5,
+      },
+      timing: {
+        cast_ms: 600,
+        cooldown_ms: 7000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.6,
+          },
+          hits: 1,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'slow',
+          duration_ms: 2000,
+          magnitude: 0.3,
+        },
+      ],
+      tags: ['cc'],
+      anim_clip: 'attack_2',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_dia_chan_cast',
+        hit_fx: 'fx_dia_chan_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_dia_chan',
+    },
+    {
+      id: 'khieu_khich',
+      name_key: 'skill.khieu_khich.name',
+      desc_key: 'skill.khieu_khich.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'active',
+      tier: 'core',
+      element: 'none',
+      unlock: {
+        level_min: 20,
+        realm_min: 'luyen_khi',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 4,
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 15000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.03,
+      },
+      effects: [
+        {
+          type: 'taunt',
+          applies_to: 'enemy',
+          context: 'group',
+          duration_ms: 4000,
+          radius: 4,
+        },
+        {
+          type: 'pull',
+          applies_to: 'enemy',
+          context: 'solo',
+          radius: 4,
+          distance_tiles: 2.5,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          context: 'solo',
+          stat: 'lifesteal',
+          magnitude: 0.15,
+          duration_ms: 5000,
+        },
+      ],
+      tags: ['context_aware', 'dual_use', 'cc'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_khieu_khich_cast',
+        hit_fx: 'fx_khieu_khich_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_khieu_khich',
+    },
+    {
+      id: 'long_ho_quyen',
+      name_key: 'skill.long_ho_quyen.name',
+      desc_key: 'skill.long_ho_quyen.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'active',
+      tier: 'core',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 31,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 2.8,
+      },
+      timing: {
+        cast_ms: 800,
+        cooldown_ms: 8000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.5,
+          },
+          hits: 2,
+        },
+      ],
+      tags: [],
+      anim_clip: 'attack_3',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_long_ho_cast',
+        hit_fx: 'fx_long_ho_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_long_ho_quyen',
+    },
+    {
+      id: 'kim_than_cong',
+      name_key: 'skill.kim_than_cong.name',
+      desc_key: 'skill.kim_than_cong.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'passive',
+      tier: 'core',
+      element: 'none',
+      unlock: {
+        level_min: 45,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 0,
+        cooldown_ms: 0,
+        gcd: false,
+      },
+      effects: [
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'def_pct',
+          magnitude: 0.08,
+        },
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'tribulation_reduction',
+          magnitude: 0.1,
+        },
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'lifesteal',
+          magnitude: 0.04,
+        },
+      ],
+      tags: ['dual_use'],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 1,
+        coeff_per_rank: 0,
+      },
+      icon_id: 'icon_skill_kim_than_cong',
+    },
+    {
+      id: 'thiet_son_khao',
+      name_key: 'skill.thiet_son_khao.name',
+      desc_key: 'skill.thiet_son_khao.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'active',
+      tier: 'core',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 51,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 4,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 4,
+        width: 1.5,
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 14000,
+        gcd: false,
+        move_during_cast: 'free',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'dash',
+          applies_to: 'self',
+          distance_tiles: 4,
+        },
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.5,
+          },
+          hits: 1,
+        },
+        {
+          type: 'knockback',
+          applies_to: 'enemy',
+          distance_tiles: 2,
+        },
+      ],
+      tags: ['mobility', 'cc', 'interrupt'],
+      anim_clip: 'dash',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thiet_son_cast',
+        hit_fx: 'fx_thiet_son_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_thiet_son_khao',
+    },
+    {
+      id: 'ba_the_bat_hoai',
+      name_key: 'skill.ba_the_bat_hoai.name',
+      desc_key: 'skill.ba_the_bat_hoai.desc',
+      owner: 'player',
+      path: 'the',
+      kind: 'active',
+      tier: 'ultimate',
+      element: 'tho',
+      unlock: {
+        level_min: 62,
+        realm_min: 'kim_dan',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 5,
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 75000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.12,
+      },
+      effects: [
+        {
+          type: 'buff',
+          applies_to: 'self',
+          stat: 'dr_pct',
+          magnitude: 0.4,
+          duration_ms: 6000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          context: 'solo',
+          stat: 'lifesteal',
+          magnitude: 0.25,
+          duration_ms: 6000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          context: 'solo',
+          stat: 'dmg_pct',
+          magnitude: 0.2,
+          duration_ms: 6000,
+        },
+        {
+          type: 'taunt',
+          applies_to: 'enemy',
+          context: 'group',
+          duration_ms: 6000,
+          radius: 5,
+        },
+        {
+          type: 'buff',
+          applies_to: 'all',
+          context: 'group',
+          stat: 'dr_pct',
+          magnitude: 0.15,
+          duration_ms: 6000,
+          radius: 5,
+        },
+      ],
+      tags: ['context_aware', 'dual_use', 'sustain'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_ba_the_cast',
+        hit_fx: 'fx_ba_the_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_ba_the_bat_hoai',
+    },
+    {
+      id: 'phu_tien',
+      name_key: 'skill.phu_tien.name',
+      desc_key: 'skill.phu_tien.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 1,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'enemy',
+        range_tiles: 7,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'target',
+      },
+      timing: {
+        cast_ms: 400,
+        cooldown_ms: 2000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.02,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.6,
+          },
+          hits: 1,
+        },
+        {
+          type: 'mark',
+          applies_to: 'enemy',
+          mark_id: 'phu_an',
+          max_stacks: 3,
+          duration_ms: 10000,
+          detonate_coeff: 1.2,
+          detonate_radius: 2.5,
+        },
+      ],
+      tags: ['dual_use'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_phu_tien_cast',
+        hit_fx: 'fx_phu_tien_hit',
+        max_draw_calls: 1,
+        projectile_fx: 'fx_phu_tien_proj',
+      },
+      icon_id: 'icon_skill_phu_tien',
+    },
+    {
+      id: 'hoi_xuan_chu',
+      name_key: 'skill.hoi_xuan_chu.name',
+      desc_key: 'skill.hoi_xuan_chu.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'active',
+      tier: 'basic',
+      element: 'moc',
+      unlock: {
+        level_min: 5,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'ally_or_self',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 800,
+        cooldown_ms: 4000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'heal',
+          applies_to: 'ally',
+          scale: {
+            stat: 'atk',
+            coeff: 4,
+          },
+          overheal_to_shield: 0.6,
+          shield_duration_ms: 6000,
+        },
+      ],
+      tags: ['sustain', 'dual_use'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_hoi_xuan_cast',
+        hit_fx: 'fx_hoi_xuan_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_hoi_xuan_chu',
+    },
+    {
+      id: 'van_moc_hoi_xuan',
+      name_key: 'skill.van_moc_hoi_xuan.name',
+      desc_key: 'skill.van_moc_hoi_xuan.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'active',
+      tier: 'basic',
+      element: 'moc',
+      unlock: {
+        level_min: 12,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'ground',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'drag_ground',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 4,
+      },
+      timing: {
+        cast_ms: 800,
+        cooldown_ms: 10000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.08,
+      },
+      effects: [
+        {
+          type: 'hot',
+          applies_to: 'all',
+          scale: {
+            stat: 'atk',
+            coeff: 1.2,
+          },
+          duration_ms: 5000,
+          tick_interval_ms: 1000,
+          radius: 4,
+        },
+        {
+          type: 'dot',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 2.25,
+          },
+          duration_ms: 5000,
+          tick_interval_ms: 1000,
+        },
+      ],
+      tags: ['sustain', 'dual_use'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_van_moc_cast',
+        hit_fx: 'fx_van_moc_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_van_moc_hoi_xuan',
+    },
+    {
+      id: 'dinh_than_phu',
+      name_key: 'skill.dinh_than_phu.name',
+      desc_key: 'skill.dinh_than_phu.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'active',
+      tier: 'core',
+      element: 'kim',
+      unlock: {
+        level_min: 20,
+        realm_min: 'luyen_khi',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'enemy',
+        range_tiles: 7,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'target',
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 12000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'stun',
+          duration_ms: 2000,
+        },
+        {
+          type: 'dash',
+          applies_to: 'self',
+          distance_tiles: 3,
+          direction: 'back',
+        },
+      ],
+      tags: ['cc', 'interrupt', 'mobility'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_dinh_than_cast',
+        hit_fx: 'fx_dinh_than_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_dinh_than_phu',
+    },
+    {
+      id: 'ho_the_phu',
+      name_key: 'skill.ho_the_phu.name',
+      desc_key: 'skill.ho_the_phu.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'active',
+      tier: 'core',
+      element: 'kim',
+      unlock: {
+        level_min: 31,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'ally_or_self',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 12000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'shield',
+          applies_to: 'ally',
+          scale: {
+            stat: 'atk',
+            coeff: 5,
+          },
+          duration_ms: 8000,
+        },
+      ],
+      tags: ['sustain', 'dual_use'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_ho_the_cast',
+        hit_fx: 'fx_ho_the_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_ho_the_phu',
+    },
+    {
+      id: 'phu_linh',
+      name_key: 'skill.phu_linh.name',
+      desc_key: 'skill.phu_linh.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'passive',
+      tier: 'core',
+      element: 'moc',
+      unlock: {
+        level_min: 35,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 0,
+        cooldown_ms: 0,
+        gcd: false,
+      },
+      effects: [
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'potion_power',
+          magnitude: 0.12,
+        },
+        {
+          type: 'summon',
+          applies_to: 'self',
+          scale: {
+            stat: 'atk',
+            coeff: 0.7,
+          },
+          tick_interval_ms: 1200,
+          magnitude: 6,
+        },
+      ],
+      tags: ['pet', 'dual_use'],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 1,
+        coeff_per_rank: 0,
+      },
+      icon_id: 'icon_skill_phu_linh',
+    },
+    {
+      id: 'tuong_sinh_phap',
+      name_key: 'skill.tuong_sinh_phap.name',
+      desc_key: 'skill.tuong_sinh_phap.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'active',
+      tier: 'core',
+      element: 'thuy',
+      unlock: {
+        level_min: 51,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 5,
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 30000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.08,
+      },
+      effects: [
+        {
+          type: 'buff',
+          applies_to: 'all',
+          stat: 'dmg_pct',
+          magnitude: 0.1,
+          duration_ms: 10000,
+          radius: 5,
+        },
+        {
+          type: 'detonate',
+          applies_to: 'enemy',
+          mark_id: 'phu_an',
+          radius: 5,
+          scale: {
+            stat: 'atk',
+            coeff: 0.8,
+          },
+        },
+      ],
+      tags: ['dual_use'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_tuong_sinh_cast',
+        hit_fx: 'fx_tuong_sinh_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_tuong_sinh_phap',
+    },
+    {
+      id: 'thien_y_vo_phung',
+      name_key: 'skill.thien_y_vo_phung.name',
+      desc_key: 'skill.thien_y_vo_phung.desc',
+      owner: 'player',
+      path: 'dan_phu',
+      kind: 'active',
+      tier: 'ultimate',
+      element: 'moc',
+      unlock: {
+        level_min: 62,
+        realm_min: 'kim_dan',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'ally_or_self',
+        range_tiles: 8,
+        requires_los: true,
+        aim_ui: 'tap',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'ground_point',
+        radius: 4,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 2000,
+        channel_ticks: 8,
+        cooldown_ms: 120000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.2,
+      },
+      effects: [
+        {
+          type: 'revive',
+          applies_to: 'ally',
+          context: 'group',
+          magnitude: 0.4,
+        },
+        {
+          type: 'heal',
+          applies_to: 'ally',
+          scale: {
+            stat: 'hp_max',
+            coeff: 0.35,
+          },
+          overheal_to_shield: 0.6,
+          shield_duration_ms: 6000,
+        },
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 0.9,
+          },
+          hits: 8,
+          context: 'solo',
+        },
+      ],
+      tags: ['context_aware', 'dual_use', 'sustain'],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thien_y_cast',
+        hit_fx: 'fx_thien_y_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_thien_y_vo_phung',
+    },
+    {
+      id: 'xuyen_van_thich',
+      name_key: 'skill.xuyen_van_thich.name',
+      desc_key: 'skill.xuyen_van_thich.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 1,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 3.5,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 3.5,
+        width: 1,
+      },
+      timing: {
+        cast_ms: 400,
+        cooldown_ms: 2500,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.01,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.3,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_xuyen_van_cast',
+        hit_fx: 'fx_xuyen_van_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_xuyen_van_thich',
+    },
+    {
+      id: 'hoi_thuong_quet',
+      name_key: 'skill.hoi_thuong_quet.name',
+      desc_key: 'skill.hoi_thuong_quet.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 5,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 3,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 3,
+        angle_deg: 130,
+      },
+      timing: {
+        cast_ms: 600,
+        cooldown_ms: 6000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.03,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.3,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'attack_2',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_hoi_thuong_cast',
+        hit_fx: 'fx_hoi_thuong_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_hoi_thuong_quet',
+    },
+    {
+      id: 'truy_phong_xung',
+      name_key: 'skill.truy_phong_xung.name',
+      desc_key: 'skill.truy_phong_xung.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 12,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 4,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 4,
+        width: 1.2,
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 10000,
+        gcd: false,
+        move_during_cast: 'free',
+        interruptible: false,
+      },
+      cost: {
+        mp_pct: 0.03,
+      },
+      effects: [
+        {
+          type: 'dash',
+          applies_to: 'self',
+          distance_tiles: 4,
+        },
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.4,
+          },
+          hits: 1,
+        },
+      ],
+      tags: ['mobility'],
+      anim_clip: 'dash',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_truy_phong_cast',
+        hit_fx: 'fx_truy_phong_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_truy_phong_xung',
+    },
+    {
+      id: 'kinh_loi_thich',
+      name_key: 'skill.kinh_loi_thich.name',
+      desc_key: 'skill.kinh_loi_thich.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'active',
+      tier: 'core',
+      element: 'loi',
+      unlock: {
+        level_min: 20,
+        realm_min: 'luyen_khi',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 4,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 4,
+        width: 1.5,
+      },
+      timing: {
+        cast_ms: 600,
+        cooldown_ms: 9000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 2,
+          },
+          hits: 1,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'knockup',
+          duration_ms: 1000,
+        },
+      ],
+      tags: ['cc', 'interrupt'],
+      anim_clip: 'attack_3',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_kinh_loi_cast',
+        hit_fx: 'fx_kinh_loi_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_kinh_loi_thich',
+    },
+    {
+      id: 'thuong_vu',
+      name_key: 'skill.thuong_vu.name',
+      desc_key: 'skill.thuong_vu.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'active',
+      tier: 'core',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 31,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 3,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 1000,
+        channel_ticks: 4,
+        cooldown_ms: 14000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 0.7,
+          },
+          hits: 4,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          stat: 'dr_pct',
+          magnitude: 0.3,
+          duration_ms: 1500,
+        },
+      ],
+      tags: ['sustain', 'dual_use'],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thuong_vu_cast',
+        hit_fx: 'fx_thuong_vu_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_thuong_vu',
+    },
+    {
+      id: 'loi_thuong_y',
+      name_key: 'skill.loi_thuong_y.name',
+      desc_key: 'skill.loi_thuong_y.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'passive',
+      tier: 'core',
+      element: 'none',
+      unlock: {
+        level_min: 40,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 0,
+        cooldown_ms: 0,
+        gcd: false,
+      },
+      effects: [
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'crit_chance',
+          magnitude: 0.06,
+        },
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'lifesteal',
+          magnitude: 0.05,
+        },
+      ],
+      tags: ['dual_use'],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 1,
+        coeff_per_rank: 0,
+      },
+      icon_id: 'icon_skill_loi_thuong_y',
+    },
+    {
+      id: 'doan_hon_thich',
+      name_key: 'skill.doan_hon_thich.name',
+      desc_key: 'skill.doan_hon_thich.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'active',
+      tier: 'core',
+      element: 'loi',
+      unlock: {
+        level_min: 51,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 4,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 4,
+        width: 1.5,
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 12000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 3.2,
+          },
+          hits: 1,
+        },
+        {
+          type: 'debuff',
+          applies_to: 'enemy',
+          stat: 'def_shred',
+          magnitude: 0.15,
+          duration_ms: 6000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          context: 'solo',
+          stat: 'lifesteal',
+          magnitude: 0.1,
+          duration_ms: 4000,
+        },
+      ],
+      tags: ['context_aware', 'dual_use'],
+      anim_clip: 'attack_3',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_doan_hon_cast',
+        hit_fx: 'fx_doan_hon_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_doan_hon_thich',
+    },
+    {
+      id: 'loi_long_pha_quan',
+      name_key: 'skill.loi_long_pha_quan.name',
+      desc_key: 'skill.loi_long_pha_quan.desc',
+      owner: 'player',
+      path: 'thuong',
+      kind: 'active',
+      tier: 'ultimate',
+      element: 'loi',
+      unlock: {
+        level_min: 65,
+        realm_min: 'kim_dan',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 6,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 6,
+        width: 2,
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 60000,
+        gcd: true,
+        move_during_cast: 'free',
+        interruptible: false,
+      },
+      cost: {
+        mp_pct: 0.14,
+      },
+      effects: [
+        {
+          type: 'dash',
+          applies_to: 'self',
+          distance_tiles: 6,
+        },
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 3.5,
+          },
+          hits: 1,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'stun',
+          duration_ms: 1500,
+        },
+        {
+          type: 'shield',
+          applies_to: 'self',
+          scale: {
+            stat: 'hp_max',
+            coeff: 0.2,
+          },
+          duration_ms: 5000,
+        },
+      ],
+      tags: ['mobility', 'cc', 'dual_use', 'interrupt'],
+      anim_clip: 'dash',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_loi_long_cast',
+        hit_fx: 'fx_loi_long_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_loi_long_pha_quan',
+    },
+    {
+      id: 'pha_thien_chem',
+      name_key: 'skill.pha_thien_chem.name',
+      desc_key: 'skill.pha_thien_chem.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 1,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 2.5,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 2.5,
+        angle_deg: 120,
+      },
+      timing: {
+        cast_ms: 500,
+        cooldown_ms: 3000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.01,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.4,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_pha_thien_cast',
+        hit_fx: 'fx_pha_thien_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_pha_thien_chem',
+    },
+    {
+      id: 'huyet_nguyet_quet',
+      name_key: 'skill.huyet_nguyet_quet.name',
+      desc_key: 'skill.huyet_nguyet_quet.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 5,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 3,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 3,
+        angle_deg: 140,
+      },
+      timing: {
+        cast_ms: 600,
+        cooldown_ms: 6000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.03,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.4,
+          },
+          hits: 1,
+        },
+      ],
+      tags: [],
+      anim_clip: 'attack_2',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_huyet_nguyet_cast',
+        hit_fx: 'fx_huyet_nguyet_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_huyet_nguyet_quet',
+    },
+    {
+      id: 'cuong_phong_xoay',
+      name_key: 'skill.cuong_phong_xoay.name',
+      desc_key: 'skill.cuong_phong_xoay.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'active',
+      tier: 'basic',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 12,
+        realm_min: 'luyen_khi',
+        source: 'level',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 2,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 1000,
+        channel_ticks: 4,
+        cooldown_ms: 9000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.04,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 0.65,
+          },
+          hits: 4,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          stat: 'lifesteal',
+          magnitude: 0.1,
+          duration_ms: 1500,
+        },
+      ],
+      tags: ['sustain', 'dual_use'],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_cuong_phong_cast',
+        hit_fx: 'fx_cuong_phong_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_cuong_phong_xoay',
+    },
+    {
+      id: 'thiet_ky_xung',
+      name_key: 'skill.thiet_ky_xung.name',
+      desc_key: 'skill.thiet_ky_xung.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'active',
+      tier: 'core',
+      element: 'root_main',
+      elemental_rider: true,
+      unlock: {
+        level_min: 20,
+        realm_min: 'luyen_khi',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 4,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'line',
+        anchor: 'caster',
+        length: 4,
+        width: 1.5,
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 12000,
+        gcd: false,
+        move_during_cast: 'free',
+        interruptible: false,
+      },
+      cost: {
+        mp_pct: 0.03,
+      },
+      effects: [
+        {
+          type: 'dash',
+          applies_to: 'self',
+          distance_tiles: 4,
+        },
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.4,
+          },
+          hits: 1,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'stun',
+          duration_ms: 1000,
+        },
+      ],
+      tags: ['mobility', 'cc', 'interrupt'],
+      anim_clip: 'dash',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thiet_ky_cast',
+        hit_fx: 'fx_thiet_ky_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_thiet_ky_xung',
+    },
+    {
+      id: 'cuong_huyet',
+      name_key: 'skill.cuong_huyet.name',
+      desc_key: 'skill.cuong_huyet.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'active',
+      tier: 'core',
+      element: 'none',
+      unlock: {
+        level_min: 31,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 300,
+        cooldown_ms: 20000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.03,
+      },
+      effects: [
+        {
+          type: 'buff',
+          applies_to: 'self',
+          stat: 'dmg_pct',
+          magnitude: 0.25,
+          duration_ms: 8000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          stat: 'lifesteal',
+          magnitude: 0.12,
+          duration_ms: 8000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          stat: 'def_pct',
+          magnitude: -0.15,
+          duration_ms: 8000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'all',
+          context: 'group',
+          stat: 'dmg_pct',
+          magnitude: 0.06,
+          duration_ms: 8000,
+          radius: 5,
+        },
+      ],
+      tags: ['sustain', 'dual_use', 'context_aware'],
+      anim_clip: 'cast',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_cuong_huyet_cast',
+        hit_fx: 'fx_cuong_huyet_hit',
+        max_draw_calls: 1,
+      },
+      icon_id: 'icon_skill_cuong_huyet',
+    },
+    {
+      id: 'dao_y',
+      name_key: 'skill.dao_y.name',
+      desc_key: 'skill.dao_y.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'passive',
+      tier: 'core',
+      element: 'none',
+      unlock: {
+        level_min: 40,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'single',
+        anchor: 'caster',
+      },
+      timing: {
+        cast_ms: 0,
+        cooldown_ms: 0,
+        gcd: false,
+      },
+      effects: [
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'lifesteal',
+          magnitude: 0.04,
+        },
+        {
+          type: 'passive_stat',
+          applies_to: 'self',
+          stat: 'low_hp_dmg_pct',
+          magnitude: 0.12,
+        },
+      ],
+      tags: ['dual_use'],
+      anim_clip: 'attack',
+      progression: {
+        max_rank: 1,
+        coeff_per_rank: 0,
+      },
+      icon_id: 'icon_skill_dao_y',
+    },
+    {
+      id: 'liet_dia_tram',
+      name_key: 'skill.liet_dia_tram.name',
+      desc_key: 'skill.liet_dia_tram.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'active',
+      tier: 'core',
+      element: 'phong',
+      unlock: {
+        level_min: 51,
+        realm_min: 'truc_co',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'direction',
+        range_tiles: 3.5,
+        requires_los: false,
+        aim_ui: 'drag_aim',
+      },
+      shape: {
+        type: 'cone',
+        anchor: 'caster',
+        radius: 3.5,
+        angle_deg: 80,
+      },
+      timing: {
+        cast_ms: 800,
+        cooldown_ms: 10000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.05,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 3,
+          },
+          hits: 1,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'slow',
+          duration_ms: 2000,
+          magnitude: 0.4,
+        },
+        {
+          type: 'status',
+          applies_to: 'enemy',
+          status_id: 'stun',
+          duration_ms: 700,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          context: 'solo',
+          stat: 'lifesteal',
+          magnitude: 0.15,
+          duration_ms: 3000,
+        },
+        {
+          type: 'taunt',
+          applies_to: 'enemy',
+          context: 'group',
+          duration_ms: 2500,
+          radius: 3.5,
+        },
+      ],
+      tags: ['cc', 'context_aware', 'interrupt'],
+      anim_clip: 'attack_3',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_liet_dia_cast',
+        hit_fx: 'fx_liet_dia_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_liet_dia_tram',
+    },
+    {
+      id: 'thien_dia_dao_than',
+      name_key: 'skill.thien_dia_dao_than.name',
+      desc_key: 'skill.thien_dia_dao_than.desc',
+      owner: 'player',
+      path: 'dao',
+      kind: 'active',
+      tier: 'ultimate',
+      element: 'phong',
+      unlock: {
+        level_min: 65,
+        realm_min: 'kim_dan',
+        source: 'tome',
+      },
+      targeting: {
+        mode: 'self',
+      },
+      shape: {
+        type: 'circle',
+        anchor: 'caster',
+        radius: 5,
+      },
+      timing: {
+        cast_ms: 0,
+        channel_ms: 2400,
+        channel_ticks: 6,
+        cooldown_ms: 60000,
+        gcd: true,
+        move_during_cast: 'lock',
+        interruptible: true,
+      },
+      cost: {
+        mp_pct: 0.12,
+      },
+      effects: [
+        {
+          type: 'damage',
+          applies_to: 'enemy',
+          scale: {
+            stat: 'atk',
+            coeff: 1.3,
+          },
+          hits: 6,
+        },
+        {
+          type: 'buff',
+          applies_to: 'self',
+          stat: 'lifesteal',
+          magnitude: 0.4,
+          duration_ms: 3000,
+        },
+        {
+          type: 'buff',
+          applies_to: 'all',
+          context: 'group',
+          stat: 'lifesteal',
+          magnitude: 0.1,
+          duration_ms: 8000,
+          radius: 5,
+        },
+      ],
+      tags: ['context_aware', 'dual_use', 'sustain'],
+      anim_clip: 'channel',
+      progression: {
+        max_rank: 5,
+        coeff_per_rank: 0.05,
+        mp_cost_reduction_per_rank: 0.03,
+      },
+      vfx: {
+        cast_fx: 'fx_thien_dia_cast',
+        hit_fx: 'fx_thien_dia_hit',
+        max_draw_calls: 2,
+      },
+      icon_id: 'icon_skill_thien_dia_dao_than',
+    },
+  ],
+};
+
+export const SKILL_DEFINITIONS_SCHEMA: unknown = {
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
+  $id: 'https://data.tutien.game/schema/skill_definitions.schema.json',
+  title: 'skill_definitions',
+  description:
+    "Class skill kits (D49): 6 paths x 8 skills, 2 cong phap branches per path. Every number is 'Đề xuất – chờ duyệt'.",
+  type: 'object',
+  required: ['schema_version', 'global', 'classes', 'branches', 'skills'],
+  additionalProperties: false,
+  properties: {
+    schema_version: {
+      type: 'string',
+      pattern: '^\\d+\\.\\d+\\.\\d+$',
+    },
+    global: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        gcd_ms: {
+          type: 'integer',
+          minimum: 0,
+          maximum: 2000,
+        },
+        max_targets_per_cast: {
+          type: 'integer',
+          minimum: 1,
+          maximum: 32,
+        },
+        cdr_cap: {
+          $ref: '#/$defs/ratio',
+        },
+      },
+    },
+    classes: {
+      type: 'array',
+      minItems: 1,
+      items: {
+        $ref: '#/$defs/class',
+      },
+    },
+    branches: {
+      type: 'array',
+      minItems: 1,
+      items: {
+        $ref: '#/$defs/branch',
+      },
+    },
+    skills: {
+      type: 'array',
+      minItems: 1,
+      items: {
+        $ref: '#/$defs/skill',
+      },
+    },
+  },
+  $defs: {
+    ratio: {
+      type: 'number',
+      minimum: 0,
+      maximum: 1,
+    },
+    id: {
+      type: 'string',
+      pattern: '^[a-z0-9_]+$',
+    },
+    path: {
+      enum: ['kiem', 'phap', 'the', 'dan_phu', 'thuong', 'dao'],
+    },
+    element: {
+      enum: ['kim', 'moc', 'thuy', 'hoa', 'tho', 'phong', 'loi', 'bang', 'root_main', 'none'],
+    },
+    stat: {
+      enum: ['atk', 'def', 'hp_max', 'target_hp_max', 'mp_max', 'agi'],
+    },
+    scale: {
+      type: 'object',
+      required: ['stat', 'coeff'],
+      additionalProperties: false,
+      properties: {
+        stat: {
+          $ref: '#/$defs/stat',
+        },
+        coeff: {
+          type: 'number',
+          exclusiveMinimum: 0,
+        },
+      },
+    },
+    stat_weights: {
+      type: 'object',
+      required: ['hp', 'mp', 'atk', 'def', 'agi'],
+      additionalProperties: false,
+      properties: {
+        hp: {
+          type: 'number',
+          minimum: 0.85,
+          maximum: 1.25,
+        },
+        mp: {
+          type: 'number',
+          minimum: 0.85,
+          maximum: 1.25,
+        },
+        atk: {
+          type: 'number',
+          minimum: 0.85,
+          maximum: 1.25,
+        },
+        def: {
+          type: 'number',
+          minimum: 0.85,
+          maximum: 1.25,
+        },
+        agi: {
+          type: 'number',
+          minimum: 0.85,
+          maximum: 1.25,
+        },
+      },
+    },
+    class: {
+      type: 'object',
+      required: [
+        'path',
+        'name_key',
+        'weapon',
+        'element',
+        'role',
+        'stat_weights',
+        'basic_attack',
+        'solo_branch',
+        'team_branch',
+      ],
+      additionalProperties: false,
+      properties: {
+        path: {
+          $ref: '#/$defs/path',
+        },
+        name_key: {
+          type: 'string',
+          minLength: 1,
+        },
+        weapon: {
+          type: 'string',
+          minLength: 1,
+        },
+        element: {
+          $ref: '#/$defs/element',
+        },
+        role: {
+          type: 'string',
+          minLength: 1,
+        },
+        stat_weights: {
+          $ref: '#/$defs/stat_weights',
+        },
+        basic_attack: {
+          type: 'object',
+          required: ['range_tiles', 'interval_ms', 'coeffs'],
+          additionalProperties: false,
+          properties: {
+            range_tiles: {
+              type: 'number',
+              exclusiveMinimum: 0,
+              maximum: 12,
+            },
+            interval_ms: {
+              type: 'integer',
+              minimum: 300,
+            },
+            coeffs: {
+              type: 'array',
+              minItems: 1,
+              maxItems: 5,
+              items: {
+                type: 'number',
+                exclusiveMinimum: 0,
+              },
+            },
+          },
+        },
+        trait: {
+          type: 'object',
+          required: ['id', 'gain_on', 'max_stacks', 'duration_ms', 'per_stack'],
+          additionalProperties: false,
+          properties: {
+            id: {
+              $ref: '#/$defs/id',
+            },
+            gain_on: {
+              enum: ['hit_dealt', 'hit_taken', 'both'],
+            },
+            max_stacks: {
+              type: 'integer',
+              minimum: 1,
+              maximum: 10,
+            },
+            duration_ms: {
+              type: 'integer',
+              minimum: 1000,
+            },
+            per_stack: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                dr_pct: {
+                  type: 'number',
+                  minimum: 0,
+                  maximum: 0.1,
+                },
+                lifesteal: {
+                  type: 'number',
+                  minimum: 0,
+                  maximum: 0.05,
+                },
+                dmg_pct: {
+                  type: 'number',
+                  minimum: 0,
+                  maximum: 0.1,
+                },
+              },
+            },
+          },
+        },
+        solo_branch: {
+          $ref: '#/$defs/id',
+        },
+        team_branch: {
+          $ref: '#/$defs/id',
+        },
+      },
+    },
+    branch: {
+      type: 'object',
+      required: ['id', 'path', 'mode', 'name_key', 'unlock_level', 'switch', 'stat_mods'],
+      additionalProperties: false,
+      properties: {
+        id: {
+          $ref: '#/$defs/id',
+        },
+        path: {
+          $ref: '#/$defs/path',
+        },
+        mode: {
+          enum: ['solo', 'team'],
+        },
+        name_key: {
+          type: 'string',
+          minLength: 1,
+        },
+        unlock_level: {
+          type: 'integer',
+          minimum: 1,
+        },
+        switch: {
+          enum: ['out_of_combat'],
+        },
+        stat_mods: {
+          type: 'object',
+          additionalProperties: false,
+          properties: {
+            dmg_mult: {
+              type: 'number',
+              minimum: 0.3,
+              maximum: 1.5,
+            },
+            dmg_taken_mult: {
+              type: 'number',
+              minimum: 0.5,
+              maximum: 1.5,
+            },
+            heal_mult: {
+              type: 'number',
+              minimum: 0.5,
+              maximum: 3,
+            },
+            shield_mult: {
+              type: 'number',
+              minimum: 0.5,
+              maximum: 3,
+            },
+            threat_mult: {
+              type: 'number',
+              minimum: 0.5,
+              maximum: 5,
+            },
+            lifesteal_add: {
+              type: 'number',
+              minimum: 0,
+              maximum: 0.2,
+            },
+            ally_crit_bonus: {
+              type: 'number',
+              minimum: 0,
+              maximum: 0.3,
+            },
+            team_dmg: {
+              type: 'number',
+              minimum: 0,
+              maximum: 0.2,
+            },
+            team_dr: {
+              type: 'number',
+              minimum: 0,
+              maximum: 0.2,
+            },
+          },
+        },
+        skill_patches: {
+          type: 'object',
+          additionalProperties: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+              damage_mult: {
+                type: 'number',
+                minimum: 0.5,
+                maximum: 2,
+              },
+              cooldown_mult: {
+                type: 'number',
+                minimum: 0.5,
+                maximum: 1.5,
+              },
+              shield_mult: {
+                type: 'number',
+                minimum: 0.5,
+                maximum: 3,
+              },
+              buff_mult: {
+                type: 'number',
+                minimum: 0.5,
+                maximum: 3,
+              },
+              debuff_mult: {
+                type: 'number',
+                minimum: 0.5,
+                maximum: 3,
+              },
+              duration_mult: {
+                type: 'number',
+                minimum: 0.5,
+                maximum: 3,
+              },
+            },
+          },
+        },
+      },
+    },
+    shape: {
+      type: 'object',
+      required: ['type'],
+      additionalProperties: false,
+      properties: {
+        type: {
+          enum: ['single', 'circle', 'ring', 'cone', 'line'],
+        },
+        anchor: {
+          enum: ['caster', 'target', 'ground_point'],
+        },
+        radius: {
+          type: 'number',
+          exclusiveMinimum: 0,
+          maximum: 12,
+        },
+        inner_radius: {
+          type: 'number',
+          minimum: 0,
+          maximum: 12,
+        },
+        angle_deg: {
+          type: 'number',
+          exclusiveMinimum: 0,
+          maximum: 360,
+        },
+        length: {
+          type: 'number',
+          exclusiveMinimum: 0,
+          maximum: 16,
+        },
+        width: {
+          type: 'number',
+          exclusiveMinimum: 0,
+          maximum: 8,
+        },
+      },
+      allOf: [
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['circle', 'ring'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['radius', 'anchor'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                const: 'ring',
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['inner_radius'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                const: 'cone',
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['radius', 'angle_deg'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                const: 'line',
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['length', 'width'],
+          },
+        },
+      ],
+    },
+    effect: {
+      type: 'object',
+      required: ['type'],
+      additionalProperties: false,
+      properties: {
+        type: {
+          enum: [
+            'damage',
+            'heal',
+            'shield',
+            'dot',
+            'hot',
+            'status',
+            'dash',
+            'knockback',
+            'pull',
+            'taunt',
+            'buff',
+            'debuff',
+            'mark',
+            'detonate',
+            'summon',
+            'revive',
+            'restore_mp',
+            'passive_stat',
+          ],
+        },
+        applies_to: {
+          enum: ['enemy', 'ally', 'self', 'all'],
+        },
+        context: {
+          enum: ['any', 'solo', 'group'],
+        },
+        scale: {
+          $ref: '#/$defs/scale',
+        },
+        hits: {
+          type: 'integer',
+          minimum: 1,
+          maximum: 20,
+        },
+        duration_ms: {
+          type: 'integer',
+          minimum: 1,
+        },
+        tick_interval_ms: {
+          type: 'integer',
+          minimum: 50,
+        },
+        status_id: {
+          enum: ['stun', 'root', 'slow', 'freeze', 'knockup', 'silence'],
+        },
+        magnitude: {
+          type: 'number',
+        },
+        distance_tiles: {
+          type: 'number',
+          exclusiveMinimum: 0,
+          maximum: 8,
+        },
+        direction: {
+          enum: ['forward', 'back'],
+        },
+        radius: {
+          type: 'number',
+          exclusiveMinimum: 0,
+          maximum: 12,
+        },
+        pen: {
+          type: 'number',
+          minimum: 0,
+          maximum: 0.4,
+        },
+        mark_id: {
+          $ref: '#/$defs/id',
+        },
+        max_stacks: {
+          type: 'integer',
+          minimum: 1,
+          maximum: 10,
+        },
+        detonate_coeff: {
+          type: 'number',
+          exclusiveMinimum: 0,
+        },
+        detonate_radius: {
+          type: 'number',
+          exclusiveMinimum: 0,
+          maximum: 12,
+        },
+        overheal_to_shield: {
+          $ref: '#/$defs/ratio',
+        },
+        shield_duration_ms: {
+          type: 'integer',
+          minimum: 1,
+        },
+        explode: {
+          type: 'object',
+          required: ['coeff', 'radius'],
+          additionalProperties: false,
+          properties: {
+            coeff: {
+              type: 'number',
+              exclusiveMinimum: 0,
+            },
+            radius: {
+              type: 'number',
+              exclusiveMinimum: 0,
+              maximum: 12,
+            },
+          },
+        },
+        stat: {
+          enum: [
+            'crit_chance',
+            'pen',
+            'def_pct',
+            'dmg_pct',
+            'dr_pct',
+            'lifesteal',
+            'move_speed_pct',
+            'def_shred',
+            'low_hp_dmg_pct',
+            'max_mp_pct',
+            'mp_regen_pct_per_s',
+            'tribulation_reduction',
+            'potion_power',
+          ],
+        },
+        pvp_mult: {
+          type: 'number',
+          minimum: 0,
+          maximum: 2,
+        },
+      },
+      allOf: [
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['damage', 'heal', 'shield', 'dot', 'hot', 'detonate'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['scale'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['dot', 'hot', 'status', 'taunt', 'shield', 'buff', 'debuff'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['duration_ms'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['dot', 'hot'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['tick_interval_ms'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                const: 'status',
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['status_id'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['dash', 'knockback', 'pull'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['distance_tiles'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['passive_stat', 'buff', 'debuff', 'revive', 'restore_mp'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['magnitude'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['passive_stat', 'buff', 'debuff'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['stat'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                enum: ['mark', 'detonate'],
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['mark_id'],
+          },
+        },
+        {
+          if: {
+            properties: {
+              type: {
+                const: 'mark',
+              },
+            },
+            required: ['type'],
+          },
+          then: {
+            required: ['max_stacks', 'duration_ms', 'detonate_coeff'],
+          },
+        },
+      ],
+    },
+    skill: {
+      type: 'object',
+      required: [
+        'id',
+        'name_key',
+        'owner',
+        'path',
+        'kind',
+        'tier',
+        'element',
+        'unlock',
+        'targeting',
+        'shape',
+        'timing',
+        'effects',
+        'tags',
+        'progression',
+      ],
+      additionalProperties: false,
+      properties: {
+        id: {
+          $ref: '#/$defs/id',
+        },
+        name_key: {
+          type: 'string',
+          minLength: 1,
+        },
+        desc_key: {
+          type: 'string',
+          minLength: 1,
+        },
+        owner: {
+          enum: ['player'],
+        },
+        path: {
+          $ref: '#/$defs/path',
+        },
+        kind: {
+          enum: ['active', 'passive'],
+        },
+        tier: {
+          enum: ['basic', 'core', 'ultimate'],
+        },
+        element: {
+          $ref: '#/$defs/element',
+        },
+        elemental_rider: {
+          type: 'boolean',
+        },
+        unlock: {
+          type: 'object',
+          required: ['level_min'],
+          additionalProperties: false,
+          properties: {
+            level_min: {
+              type: 'integer',
+              minimum: 1,
+            },
+            realm_min: {
+              type: 'string',
+              pattern: '^[a-z_]+$',
+            },
+            source: {
+              enum: ['level', 'tome', 'quest', 'sect_shop'],
+            },
+          },
+        },
+        targeting: {
+          type: 'object',
+          required: ['mode'],
+          additionalProperties: false,
+          properties: {
+            mode: {
+              enum: ['self', 'ally_or_self', 'enemy', 'ground', 'direction', 'auto_nearest_enemy'],
+            },
+            range_tiles: {
+              type: 'number',
+              minimum: 0,
+              maximum: 16,
+            },
+            requires_los: {
+              type: 'boolean',
+            },
+            aim_ui: {
+              enum: ['tap', 'drag_aim', 'drag_ground'],
+            },
+          },
+        },
+        shape: {
+          $ref: '#/$defs/shape',
+        },
+        timing: {
+          type: 'object',
+          required: ['cast_ms', 'cooldown_ms'],
+          additionalProperties: false,
+          properties: {
+            cast_ms: {
+              type: 'integer',
+              minimum: 0,
+            },
+            channel_ms: {
+              type: 'integer',
+              minimum: 0,
+            },
+            channel_ticks: {
+              type: 'integer',
+              minimum: 1,
+              maximum: 20,
+            },
+            recovery_ms: {
+              type: 'integer',
+              minimum: 0,
+            },
+            cooldown_ms: {
+              type: 'integer',
+              minimum: 0,
+            },
+            gcd: {
+              type: 'boolean',
+            },
+            move_during_cast: {
+              enum: ['lock', 'slow', 'free'],
+            },
+            interruptible: {
+              type: 'boolean',
+            },
+            invuln_ms: {
+              type: 'integer',
+              minimum: 0,
+              maximum: 500,
+            },
+          },
+        },
+        cost: {
+          type: 'object',
+          additionalProperties: false,
+          properties: {
+            mp_pct: {
+              $ref: '#/$defs/ratio',
+            },
+            item_id: {
+              $ref: '#/$defs/id',
+            },
+            item_qty: {
+              type: 'integer',
+              minimum: 1,
+            },
+          },
+        },
+        effects: {
+          type: 'array',
+          minItems: 1,
+          items: {
+            $ref: '#/$defs/effect',
+          },
+        },
+        tags: {
+          type: 'array',
+          uniqueItems: true,
+          items: {
+            enum: ['context_aware', 'dual_use', 'cc', 'interrupt', 'mobility', 'sustain', 'pet'],
+          },
+        },
+        anim_clip: {
+          enum: ['attack', 'attack_2', 'attack_3', 'cast', 'channel', 'dash'],
+        },
+        progression: {
+          type: 'object',
+          required: ['max_rank'],
+          additionalProperties: false,
+          properties: {
+            max_rank: {
+              type: 'integer',
+              minimum: 1,
+              maximum: 5,
+            },
+            coeff_per_rank: {
+              type: 'number',
+              minimum: 0,
+              maximum: 0.2,
+            },
+            mp_cost_reduction_per_rank: {
+              type: 'number',
+              minimum: 0,
+              maximum: 0.1,
+            },
+          },
+        },
+        vfx: {
+          type: 'object',
+          additionalProperties: false,
+          properties: {
+            cast_fx: {
+              $ref: '#/$defs/id',
+            },
+            projectile_fx: {
+              $ref: '#/$defs/id',
+            },
+            hit_fx: {
+              $ref: '#/$defs/id',
+            },
+            max_draw_calls: {
+              type: 'integer',
+              minimum: 1,
+              maximum: 2,
+            },
+            instanced: {
+              type: 'boolean',
+            },
+          },
+        },
+        icon_id: {
+          $ref: '#/$defs/id',
+        },
+      },
+      allOf: [
+        {
+          if: {
+            properties: {
+              kind: {
+                const: 'active',
+              },
+            },
+            required: ['kind'],
+          },
+          then: {
+            required: ['cost', 'anim_clip', 'vfx'],
+          },
+        },
+      ],
     },
   },
 };

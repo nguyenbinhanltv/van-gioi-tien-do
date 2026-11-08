@@ -1,0 +1,27 @@
+{
+  "clip": "hit-dash",
+  "direction": "SE",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:01:11 UTC",
+  "utcEnd": "2026-11-08 00:01:40 UTC",
+  "prompt": "EDIT TARGET4x4 SE master-guide16cells. EXACT mapping readingorder: global0..5 = HIT6 recoil, global6..15 = DASH10. Keep character sameFIXEDadultface/headsize/ivoryjadegoldinkhemcostume/bunpin/brownwhisk ONEbronze collar whitehorsehair, right-handnaturalgrip, leftpalm. Use reference2locked256master as scale; keepheadandbodydimensions identical, no enlargement. Allviews SE3quarter towardlower-right. HIT:0neutral,1shoulderbackflinch,2deeprecoilkneeflex,3recover,4settling,5neutral. DASH(global6..15):6neutral,7anticipationcrouch,8forwardlean,9powerfulkneepush,10lowairbornesurge,11kneestuckedflight,12landingextendedfoot,13lowdeceleration,14rise/settle,15neutral. Dynamic body/roottravel within sourcecells, lean atwaist, naturalbootcontact, no teleport. Headstays SAMEcanonicalvolume whenleaning, fixedfacefeaturesnot foreshortened/slightlyaltered. Hair/longsleeves/hem/sash/whiskfibres streamlagthen settle. No newweapon, no extra limbs, no FX. Allowpostureheightchanges, never flatten dash orshrinkbody. Entirebun/weapon/hair/boots mustremain fullyinside EACHcell with>=4logicalpxmargin; keepwidestdashcentered enough, never crosscellboundaries. Keep4x4mapping,16unique inbetweens,noemptycells. RemoveALLgrid/rulers/ghosts/markers/text; flatpuremagenta#ff00ff,no shadow/platform/talismans. This is two clips packed, NOT16framesofoneclip.",
+  "references": ["../templates/hit-dash.master-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/hit-dash.attempt1.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "285dcc5c48d86b2bcdf760bb8be5f6ff34ef6090e110118165307ae8b3338c9e",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/hit-dash.master-guide.png",
+      "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

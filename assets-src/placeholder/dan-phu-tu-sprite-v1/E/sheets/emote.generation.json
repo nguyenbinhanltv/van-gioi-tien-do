@@ -1,0 +1,15 @@
+{
+  "id": "E-emote-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:44:45 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:45:21 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production emote sprite sheet for DAN/PHU TU support healer A, 12 complete poses. Reference1 exact E master, reference2 exact template. EXACT 4 COLUMNS x 3 ROWS, SQUARE cells, reading order left-to-right top-to-bottom. Every pose faces pure RIGHT/E. SAME adult compact woman: folded jade headpiece, tied loop dark hair, ivory sleeves, jade short split overrobe with blue side panels, bronze trim, dark sash/trousers/boots, medicine gourd and three gold belt talismans. RIGHT near hand holds bronze-handled WHITE whisk, LEFT far hand holds paper talisman. Match master face, anatomy, costume, prop dimensions, soft painted fine-ink game art, NW light. Each256unit cell upright master headtop24 sole232 height208; maintain anatomical scale throughout; legitimate bending/seated/collapse changes posture only. Twelve sequential respectful sect greeting poses:1-3 neutral,4-6 bring left talisman hand toward right whisk hand before chest,7-8 shallow courteous bow,9-10 rise,11-12 return neutral. Keep props held, adult proportions, no face exaggeration, no VFX. Complete every requested cell, unused cells pure magenta. No extra limbs, no duplicate props. Pure flat #FF00FF background, no floor shadow grid borders lines labels letters text VFX motion blur. Remove every template guide/ghost. Every body and prop entirely inside own cell, never overlap adjacent cells.",
+  "references": ["reference/E.master.png", "E/templates/emote.template.png"],
+  "output": "E/sheets/emote.png",
+  "toolOutputId": "exec-1f59a2d5-dc22-4e20-88da-164470c0f89c.png"
+}

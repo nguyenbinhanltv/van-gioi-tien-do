@@ -1,0 +1,74 @@
+{
+  "source": "T1-turnaround.master-source.raw.png",
+  "output": "T1-turnaround.png",
+  "operation": "@vgtd/sprite keyOut defaults -> defringe defaults -> removeFragments defaults -> equal native panel crops",
+  "resampling": false,
+  "removedFragments": 0,
+  "panels": [
+    {
+      "direction": "E",
+      "panel": [0, 0, 434, 724],
+      "metrics": {
+        "left": 55,
+        "right": 323,
+        "top": 34,
+        "bottom": 703,
+        "height": 669,
+        "width": 268,
+        "pelvisX": 230.71806759701423
+      }
+    },
+    {
+      "direction": "SE",
+      "panel": [434, 0, 868, 724],
+      "metrics": {
+        "left": 12,
+        "right": 347,
+        "top": 34,
+        "bottom": 701,
+        "height": 667,
+        "width": 335,
+        "pelvisX": 180.53933928800376
+      }
+    },
+    {
+      "direction": "S",
+      "panel": [868, 0, 1303, 724],
+      "metrics": {
+        "left": 36,
+        "right": 380,
+        "top": 34,
+        "bottom": 701,
+        "height": 667,
+        "width": 344,
+        "pelvisX": 205.36403482437706
+      }
+    },
+    {
+      "direction": "NE",
+      "panel": [1303, 0, 1737, 724],
+      "metrics": {
+        "left": 58,
+        "right": 370,
+        "top": 35,
+        "bottom": 702,
+        "height": 667,
+        "width": 312,
+        "pelvisX": 219.74181877217802
+      }
+    },
+    {
+      "direction": "N",
+      "panel": [1737, 0, 2172, 724],
+      "metrics": {
+        "left": 44,
+        "right": 375,
+        "top": 32,
+        "bottom": 699,
+        "height": 667,
+        "width": 331,
+        "pelvisX": 209.38327439151237
+      }
+    }
+  ]
+}

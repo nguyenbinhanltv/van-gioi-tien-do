@@ -1,0 +1,10 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:46:59.013Z",
+  "utcRecordedCompleted": "2026-11-07T23:48:27.435Z",
+  "prompt": "Use case: precise-object-edit. Fill FIRST IMAGE exact square4x4 lattice with16 distinct sequential MEDITATE breathing loop frames, male DAO TU T1 E profile facing RIGHT,24fps. Image1 head stencil is SIZE/IDENTITY guide, not standing position: translate same head LOWER to a natural seated location, never shrink. Image2 canonical E master. Same stern adult grey-eyed male now eyes gently closed, swept black fringe and low loose ponytail; skull crown-to-chin50px, breadth38px at256cell. Same lean body/anatomical proportions and plain sleeveless muted dark teal tunic, grey-blue collar/sash, plain short split skirt, loose darkpants/darkboots/bracers minimal dullbrass. Sit cross-legged on groundy232, torso erect, seated head main crown near95-100px, face profile right, hands resting together gently on lap. SAME heavy broad single-edge dao with sparse ink-mountain steel blade lies across knees/lap horizontally diagonal in profile, fully visible, size unchanged. Do NOT omit weapon or invent another sword. Subtle inhalationframes0-7, exhalation8-15 with1-2px torso motion and delayed ponytail settling, smooth return15->0. All16 unique in-betweens row-major. No lotus/cushion/platform/halo/aura/circles/particles/ground shadow/FX. Feet remain crossed and hands remain same throughout, no standing. Body seated can have lower bbox due pose, not smaller anatomy. Entire body/hair/dao within each256square, maintain margins, no overlap/crop. Remove all guides/borders/head-stencil rectangles. Uniform opaque PURE RGB255,0,255 magenta background, exact4x4 cells, no text/labels. Same clean premium semi-chibi xianxia painting/northwest light.",
+  "references": ["templates/meditate.head-stencil.template.png", "../reference/E.master.png"],
+  "rawOutput": "raw/meditate.png",
+  "status": "candidate; seated exception and head/loop QA pending"
+}

@@ -1,0 +1,3549 @@
+{
+  "status": "Native hard gates passed with reviewed manual D47 evidence;20 soft findings recorded. Residual spill and crown/bun wording clarification remain open; no production export or Cocos capture claimed.",
+  "utc": "2026-11-08T01:17:52.089Z",
+  "projectSha256": "ba0d5c9fa35402925e56d45ebf210a8ff0a0aae046bd280e6eb07833d4699407",
+  "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "counts": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 20,
+    "regression": 0,
+    "info": 125
+  },
+  "canvasClipping": [],
+  "projectedCanvasLoss": [],
+  "sourceBorderReview": "source-border-review.json",
+  "sources": [
+    {
+      "clip": "idle",
+      "frames": 16,
+      "sheet": "raw/idle.attempt1.png",
+      "sha256": "2d97c3dd07ef870b72b23a5b5bcd7ab7231a28f35d7434780e70d0d5f31d531f"
+    },
+    {
+      "clip": "meditate",
+      "frames": 16,
+      "sheet": "raw/meditate.attempt1.png",
+      "sha256": "4853ca8c8927e0d8070876009bcc2559e6a6ff6ffe259cc03bf0417c4bf22f2a"
+    },
+    {
+      "clip": "walk",
+      "frames": 16,
+      "sheet": "raw/walk.attempt1.png",
+      "sha256": "574f9949c9f8c4e38428e63f00ef9d92b35f31e90796278c9648e7feb430a62a"
+    },
+    {
+      "clip": "run",
+      "frames": 16,
+      "sheet": "raw/run.selected.png",
+      "sha256": "dcbbcfb801b21cfa7d04d807d8e360d632c019d665b9a99c4c5aa44eca81c23f"
+    },
+    {
+      "clip": "dash",
+      "frames": 10,
+      "sheet": "raw/hit-dash.selected.png",
+      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e"
+    },
+    {
+      "clip": "sword_fly",
+      "frames": 12,
+      "sheet": "raw/sword_fly.selected.png",
+      "sha256": "43ff5039c0388af42606f446d83d6e78757a154cba4e5bf178cc0b7bbf61fec1"
+    },
+    {
+      "clip": "attack",
+      "frames": 14,
+      "sheet": "raw/attack.attempt1.png",
+      "sha256": "39874699f70f33202c31c0e2543a755525ed6bc22c49a817026d69045e5d2515"
+    },
+    {
+      "clip": "attack_2",
+      "frames": 14,
+      "sheet": "raw/attack_2.attempt1.png",
+      "sha256": "c75be0104c1ddb6188bcd3209e5330b47256d35ffd7ce84e1cbe48daa1700fee"
+    },
+    {
+      "clip": "attack_3",
+      "frames": 14,
+      "sheet": "raw/attack_3.selected.png",
+      "sha256": "7e8f8f4841f7a884c456b8f6a993890fc2d20d5261f9fb2508828371f60cd7a6"
+    },
+    {
+      "clip": "cast",
+      "frames": 16,
+      "sheet": "raw/cast.attempt2.png",
+      "sha256": "15df6b08cb2c66e861d7af41a2815a2725ac023c0af548a572c996b0be0a982d"
+    },
+    {
+      "clip": "channel",
+      "frames": 12,
+      "sheet": "raw/channel.attempt1.png",
+      "sha256": "a9d18455d6bebcf4303ea510cde50d67bc95d2923d032c4b66ab60361d4877a4"
+    },
+    {
+      "clip": "hit",
+      "frames": 6,
+      "sheet": "raw/hit-dash.selected.png",
+      "sha256": "c5faad7da1c16c607e69f3958ebadbabf09dda4bcfc0033877a33b2ba79f852e"
+    },
+    {
+      "clip": "die",
+      "frames": 12,
+      "sheet": "raw/die.selected.png",
+      "sha256": "4c1e9b44d1f6b94c2a3aea6cdceb71f956c7bffa9dd10166507f32d6c32aab4b"
+    },
+    {
+      "clip": "tribulation",
+      "frames": 16,
+      "sheet": "raw/tribulation.attempt1.png",
+      "sha256": "5dca1bcfef9fdc08bbac6791dd69b7b7512c1771f7186db6995a5a4ea11d5c15"
+    },
+    {
+      "clip": "emote",
+      "frames": 12,
+      "sheet": "raw/emote.attempt1.png",
+      "sha256": "0385b67717d05a6c83df7a9b25e7a2fcb82714b0e5d92f7c4336d39921307c3b"
+    }
+  ],
+  "judged": [
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 12,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 13,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 14,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "meditate",
+        "frame": 15,
+        "metric": "height_excess_px",
+        "value": 60.1,
+        "limit": 0,
+        "message": "163 px outside 223.1..236.9 (declared exception: seated: compact crosslegged meditation, fixed anatomical scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "walk",
+        "frame": 2,
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 237 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 121,
+              "y": 12.5
+            },
+            "chin": {
+              "x": 129,
+              "y": 65.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 237
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "walk",
+        "frame": 3,
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 237 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 121,
+              "y": 12.5
+            },
+            "chin": {
+              "x": 129,
+              "y": 65.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 237
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "walk",
+        "frame": 11,
+        "metric": "head_size_px",
+        "value": 53.46026561849464,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.46 px / master 53.46 px; bbox 238 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 120,
+              "y": 12.5
+            },
+            "chin": {
+              "x": 127,
+              "y": 65.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.46026561849464,
+          "ratio": 1,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 238
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 1,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 5.85,
+        "limit": 3,
+        "message": "R foot slides 5.8 px/frame between frames 0-1 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 1,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 5.85,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 2,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 3.54,
+        "limit": 3,
+        "message": "R foot slides 3.5 px/frame between frames 1-2 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 2,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 3.54,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 3,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.23,
+        "limit": 3,
+        "message": "R foot slides 6.2 px/frame between frames 2-3 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 3,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 6.23,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 5,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 8.98,
+        "limit": 3,
+        "message": "R foot slides 9.0 px/frame between frames 4-5 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 5,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 8.98,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 6,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 4.06,
+        "limit": 3,
+        "message": "R foot slides 4.1 px/frame between frames 5-6 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 6,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 4.06,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 7,
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 17.86,
+        "limit": 3,
+        "message": "R foot slides 17.9 px/frame between frames 6-7 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 7,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_R",
+        "value": 17.86,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 12,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 4.06,
+        "limit": 3,
+        "message": "L foot slides 4.1 px/frame between frames 11-12 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 12,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 4.06,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 13,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 5.85,
+        "limit": 3,
+        "message": "L foot slides 5.8 px/frame between frames 12-13 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 13,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 5.85,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 14,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 3.99,
+        "limit": 3,
+        "message": "L foot slides 4.0 px/frame between frames 13-14 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 14,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 3.99,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "walk",
+        "frame": 15,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 15.17,
+        "limit": 3,
+        "message": "L foot slides 15.2 px/frame between frames 14-15 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "walk",
+        "dir": "SE",
+        "cell": 15,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 15.17,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 0,
+        "metric": "head_size_px",
+        "value": 54.03008421240892,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.03 px / master 53.46 px; bbox 224 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 147,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 157.5,
+              "y": 81.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.03008421240892,
+          "ratio": 1.0106587310654356,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 224
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 1,
+        "metric": "head_size_px",
+        "value": 55.01136246267674,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 55.01 px / master 53.46 px; bbox 221 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 149,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 159.5,
+              "y": 82.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 55.01136246267674,
+          "ratio": 1.0290140130475802,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 221
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 2,
+        "metric": "head_size_px",
+        "value": 54.69232121605373,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.69 px / master 53.46 px; bbox 214 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 147,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 160.5,
+              "y": 81.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.69232121605373,
+          "ratio": 1.0230461929679013,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 214
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 3,
+        "metric": "head_size_px",
+        "value": 54.12023651093923,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.12 px / master 53.46 px; bbox 218 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 149,
+              "y": 25.5
+            },
+            "chin": {
+              "x": 164,
+              "y": 77.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.12023651093923,
+          "ratio": 1.0123450732017365,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 218
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 4,
+        "metric": "head_size_px",
+        "value": 51.92301994298868,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 51.92 px / master 53.46 px; bbox 209 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 150,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 164,
+              "y": 72.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 51.92301994298868,
+          "ratio": 0.9712450797293805,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 209
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 5,
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 176 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 149,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 162,
+              "y": 74.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 176
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 6,
+        "metric": "head_size_px",
+        "value": 54.81788029466298,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.82 px / master 53.46 px; bbox 220 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 155,
+              "y": 19.5
+            },
+            "chin": {
+              "x": 169,
+              "y": 72.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.81788029466298,
+          "ratio": 1.0253948359676437,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 220
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 7,
+        "metric": "head_size_px",
+        "value": 54.23329235810786,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.23 px / master 53.46 px; bbox 233 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 161,
+              "y": 19.5
+            },
+            "chin": {
+              "x": 172.5,
+              "y": 72.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.23329235810786,
+          "ratio": 1.0144598372393008,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 233
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 8,
+        "metric": "head_size_px",
+        "value": 54.571054598569006,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.57 px / master 53.46 px; bbox 227 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 155,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 168,
+              "y": 75.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.571054598569006,
+          "ratio": 1.0207778425195495,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 227
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 9,
+        "metric": "head_size_px",
+        "value": 54.03008421240892,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.03 px / master 53.46 px; bbox 225 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 154,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 164.5,
+              "y": 75.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.03008421240892,
+          "ratio": 1.0106587310654356,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 225
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 10,
+        "metric": "head_size_px",
+        "value": 54.69232121605373,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.69 px / master 53.46 px; bbox 224 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 156,
+              "y": 22.5
+            },
+            "chin": {
+              "x": 169.5,
+              "y": 75.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.69232121605373,
+          "ratio": 1.0230461929679013,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 224
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 11,
+        "metric": "head_size_px",
+        "value": 54.12023651093923,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.12 px / master 53.46 px; bbox 219 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 152,
+              "y": 21.5
+            },
+            "chin": {
+              "x": 167,
+              "y": 73.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.12023651093923,
+          "ratio": 1.0123450732017365,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 219
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 12,
+        "metric": "head_size_px",
+        "value": 53.36665625650534,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.37 px / master 53.46 px; bbox 209 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 156,
+              "y": 24.5
+            },
+            "chin": {
+              "x": 168,
+              "y": 76.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.36665625650534,
+          "ratio": 0.9982489918277376,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 209
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 13,
+        "metric": "head_size_px",
+        "value": 52.63078946776307,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 52.63 px / master 53.46 px; bbox 177 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 151,
+              "y": 26.5
+            },
+            "chin": {
+              "x": 164,
+              "y": 77.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 52.63078946776307,
+          "ratio": 0.9844842493553828,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 177
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 14,
+        "metric": "head_size_px",
+        "value": 53.85164807134504,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 231 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 155,
+              "y": 24.5
+            },
+            "chin": {
+              "x": 169,
+              "y": 76.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.85164807134504,
+          "ratio": 1.0073209971615817,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 231
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "run",
+        "frame": 15,
+        "metric": "head_size_px",
+        "value": 53.85164807134504,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 231 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 151,
+              "y": 24.5
+            },
+            "chin": {
+              "x": 165,
+              "y": 76.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.85164807134504,
+          "ratio": 1.0073209971615817,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 231
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 2,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 28.8,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 28.8 px from its template ghost (xy 138.0,210.0 vs 124.8,235.6, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 2,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 28.8,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 3,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 999,
+        "limit": 20,
+        "message": "R planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 3,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 999,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 4,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 27.7,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 27.7 px from its template ghost (xy 80.0,220.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 4,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 27.7,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 5,
+        "metric": "ghost_distance_2d_px_R",
+        "value": 34.8,
+        "limit": 20,
+        "message": "R planted foot: nearest sole is 34.8 px from its template ghost (xy 91.5,188.0 vs 97.9,222.2, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 5,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_R",
+        "value": 34.8,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 8,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 21.1,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 21.1 px from its template ghost (xy 161.5,235.0 vs 142.7,244.5, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 8,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 21.1,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 11,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 36.5,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 36.5 px from its template ghost (xy 79.5,228.0 vs 115.8,231.1, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 11,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 36.5,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "fail",
+        "clip": "run",
+        "frame": 10,
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 13.13,
+        "limit": 3,
+        "message": "L foot slides 13.1 px/frame between frames 9-10 (limit 3)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 10,
+        "gate": "footSlide",
+        "metric": "slide_ground_px_per_frame_L",
+        "value": 13.13,
+        "limit": 3,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 12,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 33.2,
+        "limit": 20,
+        "message": "L planted foot: nearest sole is 33.2 px from its template ghost (xy 74.0,222.0 vs 106.9,226.6, limit 20); not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 12,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 33.2,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "footSlide",
+        "severity": "warn",
+        "clip": "run",
+        "frame": 13,
+        "metric": "ghost_distance_2d_px_L",
+        "value": 999,
+        "limit": 20,
+        "message": "L planted foot: no sole found within 40 px of its template ghost; not measured (the foot is not on the template)"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "run",
+        "dir": "SE",
+        "cell": 13,
+        "gate": "footSlide",
+        "metric": "ghost_distance_2d_px_L",
+        "value": 999,
+        "limit": 20,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 1,
+        "metric": "head_size_px",
+        "value": 52.39274758971894,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 52.39 px / master 53.46 px; bbox 203 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 123,
+              "y": 35.5
+            },
+            "chin": {
+              "x": 135,
+              "y": 86.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 52.39274758971894,
+          "ratio": 0.9800315614517562,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 203
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 2,
+        "metric": "head_size_px",
+        "value": 51.97114584074514,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 51.97 px / master 53.46 px; bbox 201 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 132,
+              "y": 41.5
+            },
+            "chin": {
+              "x": 142,
+              "y": 92.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 51.97114584074514,
+          "ratio": 0.972145297810972,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 201
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 3,
+        "metric": "head_size_px",
+        "value": 54.91812087098393,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 198 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 145,
+              "y": 42.5
+            },
+            "chin": {
+              "x": 155,
+              "y": 96.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.91812087098393,
+          "ratio": 1.0272698841957295,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 198
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 4,
+        "metric": "head_size_px",
+        "value": 53.397097299385095,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.40 px / master 53.46 px; bbox 185 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 144,
+              "y": 31.5
+            },
+            "chin": {
+              "x": 150.5,
+              "y": 84.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.397097299385095,
+          "ratio": 0.9988184061867494,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 185
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 5,
+        "metric": "head_size_px",
+        "value": 54.91812087098393,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 164 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 147,
+              "y": 28.5
+            },
+            "chin": {
+              "x": 157,
+              "y": 82.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.91812087098393,
+          "ratio": 1.0272698841957295,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 164
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 6,
+        "metric": "head_size_px",
+        "value": 54.91812087098393,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 54.92 px / master 53.46 px; bbox 202 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 130,
+              "y": 37.5
+            },
+            "chin": {
+              "x": 140,
+              "y": 91.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 54.91812087098393,
+          "ratio": 1.0272698841957295,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 202
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 7,
+        "metric": "head_size_px",
+        "value": 53.600373133029585,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.60 px / master 53.46 px; bbox 206 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 123,
+              "y": 35.5
+            },
+            "chin": {
+              "x": 136,
+              "y": 87.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.600373133029585,
+          "ratio": 1.002620778496216,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 206
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "dash",
+        "frame": 8,
+        "metric": "head_size_px",
+        "value": 53.85164807134504,
+        "limit": 55.06407358704948,
+        "message": "posture: crown-chin skull 53.85 px / master 53.46 px; bbox 221 px / master 230 px; Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px.",
+        "headEvidence": {
+          "kind": "crown-chin",
+          "direction": "SE",
+          "reason": "posture",
+          "master": {
+            "crown": {
+              "x": 121,
+              "y": 11.5
+            },
+            "chin": {
+              "x": 128,
+              "y": 64.5
+            }
+          },
+          "frame": {
+            "crown": {
+              "x": 115,
+              "y": 19.5
+            },
+            "chin": {
+              "x": 129,
+              "y": 71.5
+            },
+            "note": "Manually reviewed aligned256 semantic boundary edges: first attached front swept-cap rim/highlight and last central jaw outline; exclude elevated bun/pin and following neck shadow. Dynamic SE stride/lean/flight preserved at character-global scale1. Source and native trace history in head-landmarks candidates/selection files; manual boundary uncertainty approximately1px."
+          },
+          "masterSizePx": 53.46026561849464,
+          "sizePx": 53.85164807134504,
+          "ratio": 1.0073209971615817,
+          "masterBboxHeightPx": 230,
+          "bboxHeightPx": 221
+        }
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 4.1,
+        "limit": 0,
+        "message": "219 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 1,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 10.1,
+        "limit": 0,
+        "message": "213 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 6.1,
+        "limit": 0,
+        "message": "217 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 3.1,
+        "limit": 0,
+        "message": "220 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 0.1,
+        "limit": 0,
+        "message": "223 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 4.1,
+        "limit": 0,
+        "message": "219 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "sword_fly",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: airborne: hovering relaxed knees and pointed boots)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 15.1,
+        "limit": 0,
+        "message": "208 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 20.1,
+        "limit": 0,
+        "message": "203 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 16.1,
+        "limit": 0,
+        "message": "207 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 11.1,
+        "limit": 0,
+        "message": "212 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 10.1,
+        "limit": 0,
+        "message": "213 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 10.1,
+        "limit": 0,
+        "message": "213 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 5.1,
+        "limit": 0,
+        "message": "218 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 3.1,
+        "limit": 0,
+        "message": "220 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 0.1,
+        "limit": 0,
+        "message": "223 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 11.1,
+        "limit": 0,
+        "message": "212 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 9.1,
+        "limit": 0,
+        "message": "214 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 13.1,
+        "limit": 0,
+        "message": "210 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 21.1,
+        "limit": 0,
+        "message": "202 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 25.1,
+        "limit": 0,
+        "message": "198 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 24.1,
+        "limit": 0,
+        "message": "199 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 22.1,
+        "limit": 0,
+        "message": "201 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 16.1,
+        "limit": 0,
+        "message": "207 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: lunge: authored attack knee bend, swing and follow-through)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "hit",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: recoil: flinch with knee bend)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "warn",
+        "clip": "die",
+        "frame": 0,
+        "metric": "height_excess_px",
+        "value": 1.1,
+        "limit": 0,
+        "message": "height 222 px outside the upright band and no pose exception declared"
+      },
+      "class": "soft",
+      "verdict": "accepted",
+      "entry": {
+        "clip": "die",
+        "dir": "SE",
+        "cell": 0,
+        "gate": "height",
+        "metric": "height_excess_px",
+        "value": 1.1,
+        "limit": 0,
+        "note": "SE reviewed soft foot-contact/height diagnostic retained for polish; dynamic authored motion preserved. Native hard/canvas/head gates pass; manual uncertainty, residual spill and mobile residency remain explicitly open.",
+        "status": "open",
+        "owner": "26",
+        "added": "2026-11-08"
+      }
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 7.1,
+        "limit": 0,
+        "message": "216 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 34.1,
+        "limit": 0,
+        "message": "189 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 48.1,
+        "limit": 0,
+        "message": "175 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 85.1,
+        "limit": 0,
+        "message": "138 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 116.1,
+        "limit": 0,
+        "message": "107 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 142.1,
+        "limit": 0,
+        "message": "81 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 146.1,
+        "limit": 0,
+        "message": "77 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 148.1,
+        "limit": 0,
+        "message": "75 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 151.1,
+        "limit": 0,
+        "message": "72 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "die",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 152.1,
+        "limit": 0,
+        "message": "71 px outside 223.1..236.9 (declared exception: die-collapse: backward fall and lying settle, held whisk retained)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 2,
+        "metric": "height_excess_px",
+        "value": 8.1,
+        "limit": 0,
+        "message": "215 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 3,
+        "metric": "height_excess_px",
+        "value": 17.1,
+        "limit": 0,
+        "message": "206 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 4,
+        "metric": "height_excess_px",
+        "value": 25.1,
+        "limit": 0,
+        "message": "198 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 5,
+        "metric": "height_excess_px",
+        "value": 35.1,
+        "limit": 0,
+        "message": "188 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 6,
+        "metric": "height_excess_px",
+        "value": 43.1,
+        "limit": 0,
+        "message": "180 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 7,
+        "metric": "height_excess_px",
+        "value": 42.1,
+        "limit": 0,
+        "message": "181 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 8,
+        "metric": "height_excess_px",
+        "value": 43.1,
+        "limit": 0,
+        "message": "180 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 9,
+        "metric": "height_excess_px",
+        "value": 38.1,
+        "limit": 0,
+        "message": "185 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 10,
+        "metric": "height_excess_px",
+        "value": 27.1,
+        "limit": 0,
+        "message": "196 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 11,
+        "metric": "height_excess_px",
+        "value": 19.1,
+        "limit": 0,
+        "message": "204 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 12,
+        "metric": "height_excess_px",
+        "value": 12.1,
+        "limit": 0,
+        "message": "211 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "height",
+        "severity": "info",
+        "clip": "tribulation",
+        "frame": 13,
+        "metric": "height_excess_px",
+        "value": 1.1,
+        "limit": 0,
+        "message": "222 px outside 223.1..236.9 (declared exception: recoil: protective kneel and recovery, same body scale)"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 0,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 1,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 2,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 3,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 4,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 5,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 6,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 7,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 8,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 9,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 10,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 11,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 12,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_2",
+        "frame": 13,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "groundY": 237,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 237
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -5
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed source/T1 registration from templates/attack_2.template.json guides.centerX. Neutral source frames0 and13 both have sole bottom237; use that one source ground for ALL14cells. During SE sweep the source forward foot travels+4px in Y; not an anatomical pelvis or per-frame ground fit.; source (117.60678680981596, 237), scale 1, dx 0, dy -5"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 0,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 1,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 249
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -17
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 249), scale 1, dx 0, dy -17"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 2,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 3,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 4,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 5,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 244
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -12
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 244), scale 1, dx 0, dy -12"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 6,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 7,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 8,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 9,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 10,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 242
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -10
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 242), scale 1, dx 0, dy -10"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 11,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 243
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -11
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 243), scale 1, dx 0, dy -11"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 12,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    },
+    {
+      "finding": {
+        "gate": "authoredOrigin",
+        "severity": "info",
+        "clip": "attack_3",
+        "frame": 13,
+        "originEvidence": {
+          "kind": "lattice-root",
+          "pelvisX": 117.60678680981596,
+          "reason": "preserve authored root travel",
+          "evidence": "Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.",
+          "source": {
+            "x": 117.60678680981596,
+            "y": 248
+          },
+          "scale": 1,
+          "dx": 0,
+          "dy": -16
+        },
+        "message": "reviewed authored origin (lattice-root): preserve authored root travel; Fixed SOURCE/T1 lattice registration from templates/attack_3.template.json guides.centerX on ALL14cells. Not an anatomical pelvis. Preserve authored horizontal lunge travel; default sole alignment remains the vertical policy. No per-frame fitting or scale change.; source (117.60678680981596, 248), scale 1, dx 0, dy -16"
+      },
+      "class": "info",
+      "verdict": "info"
+    }
+  ],
+  "diagnosticAtlas": {
+    "pages": [
+      {
+        "file": "danphuchibi_SE_page1_tex.png",
+        "width": 2048,
+        "height": 2048,
+        "rgbaBytes": 16777216
+      },
+      {
+        "file": "danphuchibi_SE_tex.png",
+        "width": 2048,
+        "height": 2048,
+        "rgbaBytes": 16777216
+      }
+    ],
+    "rgbaMiB": 32,
+    "validatedMobileResidency": false
+  }
+}

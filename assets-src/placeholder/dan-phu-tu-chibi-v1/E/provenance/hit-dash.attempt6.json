@@ -1,0 +1,27 @@
+{
+  "clip": "hit+dash",
+  "dir": "E",
+  "attempt": 6,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:52:50 UTC",
+  "utcEnd": "2026-11-07 22:53:14 UTC",
+  "prompt": "Precise ONE-head anatomy correction. TARGETimage1 is4x4 sharedHIT6+DASH10sheet. Image2canonicaladultfemaleidentity. Modify ONLY zero-basedglobalcell8 (row3col1), whichisDASHlocalframe2. Measured attachedmaincap-tojaw51.66logicalpx, slightlysmallerthanmaster53.31. Redraw ONLYattachedhead/maincap/face/jaw about2percentLARGER aroundfixedneckanchor toward53.3logicalpx (=65.3rawpx in313.5rawcell). Preserve SAMEfixedadultfemaleidentity/faceproportions/olivebrownalmond eye/straightbrow/nose/lips/jaw/expression/tilt/sweptbrowncap/bun/jadepin. No babyface. Allbodypose/arms/hands/whiskshaftONEbronzecollarwhitehorsehair/legs/boots/root/robe/sash/secondaryhair EXACT. DoNOTflattenforwarddash orwholefigure rescale. Other15cellsCOMPLETELYUNCHANGED. Same1254square4x4mapping andflatmagenta; no text/grid/FX/shadows. Verysmallactualheadonlyenlargement inonecell, matchingcanonicalheadsize, no otherchanges.",
+  "references": ["../raw/hit-dash.head-selected.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/hit-dash.attempt6.png",
+  "status": "head-only repair global8/dashlocal2 for measured below-band head; actual new measurements pending",
+  "rawSha256": "1bd1a7c7dcc64d0ec704c68be373c0de97f91537803039a754a374e181a7ff36",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/hit-dash.head-selected.png",
+      "sha256": "430aa9455cc17356ea4fbda98ce48671db3eb1bbf46b1b8e9ac1a78bf93a224a"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

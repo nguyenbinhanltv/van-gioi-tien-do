@@ -1,0 +1,23 @@
+{
+  "clip": "die",
+  "direction": "SE",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:17:58 UTC",
+  "utcEnd": "2026-11-08 00:18:13 UTC",
+  "prompt": "LOCALIZED EDIT ONLY zero-basedcell0 (top-left) ofthisSE12frame4columns3rows die sheet. It is the initial kneebuckle pose. Bend BOTHknees a littlemore so the ENTIREtorso/head/bun/arms/heldwhisk moveDOWN6logicalpx (=8.5rawpx in362rawcell), while bothboots remainatEXACTsame sourceground andhead/body/limblengths remain SAME. Thisis kneearticulation, NOTwholefigure rescale/stretch. Preserveexactface/headvolume/eye/nose/lips/maincapbunpin, ivoryjadegoldinkhemdesign andright-handplainwhisk. Lowercap/bun contour byactual~8-9RAWpx; doNOTshrinkhead ordeletebun. Smallneck/hipconnection natural, hipslowerwithknees, bootsstationary. Other11cells EXACTLYUNCHANGED, same1448x1086canvas4x3mapping andflatmagenta#ff00ff. No grid/lines/text/shadows/FX. Onlycell0willbeselected; no changes tofall/finalproneposes needed.",
+  "references": ["../raw/die.attempt1.png"],
+  "raw": "../raw/die.attempt2.png",
+  "status": "retained alternative: actual knee bend deeper than requested; inspect entry transition before selection",
+  "rawSha256": "a0c19d617432da277043dbaa14b5b3182991c46169ac64a35d0581b7d2046cc7",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../raw/die.attempt1.png",
+      "sha256": "f616e727f329bf58fb9a4158f7e7729f1f5d20ac3d6f3158154fb568e7eceece"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}

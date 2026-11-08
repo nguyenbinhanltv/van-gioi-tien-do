@@ -1,0 +1,3242 @@
+{
+  "direction": "SE",
+  "frames": 202,
+  "sourceInset": 0,
+  "note": "Whole-sheet square-cell DPI normalization only; no individual frame fit. Native alpha checked before the slicer inset.",
+  "minimumRequiredMarginPx": 3,
+  "unsafe": [],
+  "rows": [
+    {
+      "clip": "idle",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 116,
+        "pelvisX": 133.29040642722117
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "idle",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 8,
+        "bottom": 246,
+        "height": 238,
+        "width": 116,
+        "pelvisX": 133.64703099124674
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "idle",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 7,
+        "bottom": 246,
+        "height": 239,
+        "width": 116,
+        "pelvisX": 134.41792430926398
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "idle",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 7,
+        "bottom": 246,
+        "height": 239,
+        "width": 116,
+        "pelvisX": 134.32766651141128
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "idle",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 7,
+        "bottom": 246,
+        "height": 239,
+        "width": 116,
+        "pelvisX": 135.31791773181502
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "idle",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 184,
+        "top": 6,
+        "bottom": 246,
+        "height": 240,
+        "width": 117,
+        "pelvisX": 135.77803903127204
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "idle",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 68,
+        "right": 184,
+        "top": 6,
+        "bottom": 246,
+        "height": 240,
+        "width": 116,
+        "pelvisX": 135.822348216395
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "idle",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 68,
+        "right": 184,
+        "top": 6,
+        "bottom": 246,
+        "height": 240,
+        "width": 116,
+        "pelvisX": 136.3431910326735
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "idle",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 6,
+        "bottom": 246,
+        "height": 240,
+        "width": 116,
+        "pelvisX": 135.52661064425772
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "idle",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 6,
+        "bottom": 246,
+        "height": 240,
+        "width": 116,
+        "pelvisX": 134.38255652976466
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "idle",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 7,
+        "bottom": 246,
+        "height": 239,
+        "width": 116,
+        "pelvisX": 133.39331210191082
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "idle",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 8,
+        "bottom": 246,
+        "height": 238,
+        "width": 116,
+        "pelvisX": 133.54946085325832
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "idle",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 116,
+        "pelvisX": 133.39445228020688
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "idle",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 116,
+        "pelvisX": 133.68148670900965
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "idle",
+      "frame": 14,
+      "sourceCell": 14,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 116,
+        "pelvisX": 133.64992894362862
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "idle",
+      "frame": 15,
+      "sourceCell": 15,
+      "sheet": "raw/idle.png",
+      "bounds": {
+        "left": 67,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 116,
+        "pelvisX": 133.5034222327118
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 70,
+        "bottom": 248,
+        "height": 178,
+        "width": 175,
+        "pelvisX": 118.43070967741936
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 69,
+        "bottom": 248,
+        "height": 179,
+        "width": 175,
+        "pelvisX": 118.25681233933162
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 68,
+        "bottom": 248,
+        "height": 180,
+        "width": 175,
+        "pelvisX": 118.4309067688378
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 67,
+        "bottom": 248,
+        "height": 181,
+        "width": 175,
+        "pelvisX": 118.2390873015873
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 66,
+        "bottom": 247,
+        "height": 181,
+        "width": 175,
+        "pelvisX": 118.40447504302927
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 64,
+        "bottom": 247,
+        "height": 183,
+        "width": 175,
+        "pelvisX": 118.60014531363527
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 62,
+        "bottom": 247,
+        "height": 185,
+        "width": 175,
+        "pelvisX": 118.62003825920613
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 60,
+        "bottom": 247,
+        "height": 187,
+        "width": 175,
+        "pelvisX": 118.48206701274187
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 65,
+        "bottom": 248,
+        "height": 183,
+        "width": 175,
+        "pelvisX": 119.26838678562817
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 71,
+        "bottom": 248,
+        "height": 177,
+        "width": 175,
+        "pelvisX": 118.19341563786008
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 70,
+        "bottom": 248,
+        "height": 178,
+        "width": 175,
+        "pelvisX": 118.39167750325097
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 71,
+        "bottom": 248,
+        "height": 177,
+        "width": 175,
+        "pelvisX": 118.75309291918926
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "meditate",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 71,
+        "bottom": 247,
+        "height": 176,
+        "width": 175,
+        "pelvisX": 118.86514195583597
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 71,
+        "bottom": 247,
+        "height": 176,
+        "width": 175,
+        "pelvisX": 118.84426877470355
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 14,
+      "sourceCell": 14,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 71,
+        "bottom": 247,
+        "height": 176,
+        "width": 175,
+        "pelvisX": 118.69
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "meditate",
+      "frame": 15,
+      "sourceCell": 15,
+      "sheet": "raw/meditate.png",
+      "bounds": {
+        "left": 50,
+        "right": 225,
+        "top": 71,
+        "bottom": 247,
+        "height": 176,
+        "width": 175,
+        "pelvisX": 118.43807520378648
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 9,
+        "bottom": 249,
+        "height": 240,
+        "width": 114,
+        "pelvisX": 126.03416687298837
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "walk",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 9,
+        "bottom": 244,
+        "height": 235,
+        "width": 114,
+        "pelvisX": 126.66469428007889
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 179,
+        "top": 9,
+        "bottom": 243,
+        "height": 234,
+        "width": 116,
+        "pelvisX": 127.7205492652373
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 179,
+        "top": 8,
+        "bottom": 239,
+        "height": 231,
+        "width": 116,
+        "pelvisX": 127.62319201995012
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "walk",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 181,
+        "top": 8,
+        "bottom": 237,
+        "height": 229,
+        "width": 118,
+        "pelvisX": 128.5206611570248
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "walk",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 179,
+        "top": 9,
+        "bottom": 237,
+        "height": 228,
+        "width": 116,
+        "pelvisX": 127.76440177252584
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 8,
+        "bottom": 243,
+        "height": 235,
+        "width": 114,
+        "pelvisX": 128.09119496855345
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "walk",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 8,
+        "bottom": 245,
+        "height": 237,
+        "width": 114,
+        "pelvisX": 127.31155051844706
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "walk",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 8,
+        "bottom": 244,
+        "height": 236,
+        "width": 114,
+        "pelvisX": 127.14305816135085
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "walk",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 8,
+        "bottom": 242,
+        "height": 234,
+        "width": 114,
+        "pelvisX": 126.35301090564248
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "walk",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 179,
+        "top": 8,
+        "bottom": 240,
+        "height": 232,
+        "width": 116,
+        "pelvisX": 126.97191011235955
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "walk",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 9,
+        "bottom": 239,
+        "height": 230,
+        "width": 114,
+        "pelvisX": 126.26160234489497
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 178,
+        "top": 9,
+        "bottom": 239,
+        "height": 230,
+        "width": 115,
+        "pelvisX": 126.4456415279138
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 9,
+        "bottom": 236,
+        "height": 227,
+        "width": 114,
+        "pelvisX": 125.38667005850928
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 14,
+      "sourceCell": 14,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 9,
+        "bottom": 244,
+        "height": 235,
+        "width": 114,
+        "pelvisX": 127.09319346181995
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "walk",
+      "frame": 15,
+      "sourceCell": 15,
+      "sheet": "raw/walk.png",
+      "bounds": {
+        "left": 63,
+        "right": 177,
+        "top": 9,
+        "bottom": 245,
+        "height": 236,
+        "width": 114,
+        "pelvisX": 126.34354161521364
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "run",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 65,
+        "right": 193,
+        "top": 9,
+        "bottom": 248,
+        "height": 239,
+        "width": 128,
+        "pelvisX": 126.73248707099201
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 59,
+        "right": 185,
+        "top": 10,
+        "bottom": 242,
+        "height": 232,
+        "width": 126,
+        "pelvisX": 120.87487126673533
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "run",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 55,
+        "right": 181,
+        "top": 9,
+        "bottom": 231,
+        "height": 222,
+        "width": 126,
+        "pelvisX": 117.91548327989005
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "run",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 46,
+        "right": 175,
+        "top": 8,
+        "bottom": 233,
+        "height": 225,
+        "width": 129,
+        "pelvisX": 112.21950123567737
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 63,
+        "right": 193,
+        "top": 8,
+        "bottom": 227,
+        "height": 219,
+        "width": 130,
+        "pelvisX": 128.0667251975417
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 57,
+        "right": 186,
+        "top": 8,
+        "bottom": 221,
+        "height": 213,
+        "width": 129,
+        "pelvisX": 119.57923112986404
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 53,
+        "right": 181,
+        "top": 8,
+        "bottom": 242,
+        "height": 234,
+        "width": 128,
+        "pelvisX": 116.6132944082641
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 49,
+        "right": 178,
+        "top": 8,
+        "bottom": 239,
+        "height": 231,
+        "width": 129,
+        "pelvisX": 112.49342105263158
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 62,
+        "right": 191,
+        "top": 8,
+        "bottom": 238,
+        "height": 230,
+        "width": 129,
+        "pelvisX": 127.08404303003138
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 56,
+        "right": 186,
+        "top": 8,
+        "bottom": 234,
+        "height": 226,
+        "width": 130,
+        "pelvisX": 121.5023685991428
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 53,
+        "right": 183,
+        "top": 8,
+        "bottom": 232,
+        "height": 224,
+        "width": 130,
+        "pelvisX": 120.34850483729112
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 45,
+        "right": 179,
+        "top": 7,
+        "bottom": 230,
+        "height": 223,
+        "width": 134,
+        "pelvisX": 116.86971197119712
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "run",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 59,
+        "right": 192,
+        "top": 9,
+        "bottom": 222,
+        "height": 213,
+        "width": 133,
+        "pelvisX": 127.75782833971616
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "run",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 56,
+        "right": 186,
+        "top": 9,
+        "bottom": 241,
+        "height": 232,
+        "width": 130,
+        "pelvisX": 125.09819441009152
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "run",
+      "frame": 14,
+      "sourceCell": 14,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 53,
+        "right": 182,
+        "top": 9,
+        "bottom": 248,
+        "height": 239,
+        "width": 129,
+        "pelvisX": 118.88979591836734
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "run",
+      "frame": 15,
+      "sourceCell": 15,
+      "sheet": "raw/run.head-corrected.png",
+      "bounds": {
+        "left": 49,
+        "right": 178,
+        "top": 8,
+        "bottom": 248,
+        "height": 240,
+        "width": 129,
+        "pelvisX": 114.03919781221514
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 7,
+        "bottom": 248,
+        "height": 241,
+        "width": 171,
+        "pelvisX": 122.10384980988593
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 12,
+        "bottom": 247,
+        "height": 235,
+        "width": 171,
+        "pelvisX": 122.83370938628158
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 19,
+        "bottom": 246,
+        "height": 227,
+        "width": 171,
+        "pelvisX": 123.29734552754852
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 33,
+        "bottom": 244,
+        "height": 211,
+        "width": 171,
+        "pelvisX": 123.83058210251954
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 28,
+        "bottom": 246,
+        "height": 218,
+        "width": 171,
+        "pelvisX": 126.64791901012373
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 15,
+        "bottom": 246,
+        "height": 231,
+        "width": 171,
+        "pelvisX": 123.62762628520339
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 8,
+        "bottom": 246,
+        "height": 238,
+        "width": 171,
+        "pelvisX": 121.93714555765595
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 4,
+        "bottom": 246,
+        "height": 242,
+        "width": 171,
+        "pelvisX": 122.94321914594087
+      },
+      "minMarginPx": 4
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 5,
+        "bottom": 248,
+        "height": 243,
+        "width": 171,
+        "pelvisX": 122.61004501303009
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 11,
+        "bottom": 246,
+        "height": 235,
+        "width": 171,
+        "pelvisX": 122.88243366880147
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 23,
+        "bottom": 244,
+        "height": 221,
+        "width": 171,
+        "pelvisX": 123.48938522777532
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "sword_fly",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/sword_fly.png",
+      "bounds": {
+        "left": 39,
+        "right": 210,
+        "top": 13,
+        "bottom": 243,
+        "height": 230,
+        "width": 171,
+        "pelvisX": 123.30352729723657
+      },
+      "minMarginPx": 13
+    },
+    {
+      "clip": "attack",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 64,
+        "right": 183,
+        "top": 10,
+        "bottom": 249,
+        "height": 239,
+        "width": 119,
+        "pelvisX": 130.28788243796674
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "attack",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 64,
+        "right": 181,
+        "top": 16,
+        "bottom": 248,
+        "height": 232,
+        "width": 117,
+        "pelvisX": 126.48858995916406
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "attack",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 55,
+        "right": 183,
+        "top": 22,
+        "bottom": 249,
+        "height": 227,
+        "width": 128,
+        "pelvisX": 126.99115467367918
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "attack",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 67,
+        "right": 176,
+        "top": 11,
+        "bottom": 249,
+        "height": 238,
+        "width": 109,
+        "pelvisX": 117.4677657480315
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "attack",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 64,
+        "right": 182,
+        "top": 3,
+        "bottom": 250,
+        "height": 247,
+        "width": 118,
+        "pelvisX": 121.49288806431663
+      },
+      "minMarginPx": 3
+    },
+    {
+      "clip": "attack",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 49,
+        "right": 174,
+        "top": 15,
+        "bottom": 249,
+        "height": 234,
+        "width": 125,
+        "pelvisX": 121.13910921293471
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "attack",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 29,
+        "right": 177,
+        "top": 46,
+        "bottom": 251,
+        "height": 205,
+        "width": 148,
+        "pelvisX": 122.03349820143885
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "attack",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 22,
+        "right": 199,
+        "top": 62,
+        "bottom": 247,
+        "height": 185,
+        "width": 177,
+        "pelvisX": 110.99329608938548
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "attack",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 35,
+        "right": 204,
+        "top": 65,
+        "bottom": 246,
+        "height": 181,
+        "width": 169,
+        "pelvisX": 123.1687595129376
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 34,
+        "right": 234,
+        "top": 69,
+        "bottom": 247,
+        "height": 178,
+        "width": 200,
+        "pelvisX": 122.49102180418983
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "attack",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 35,
+        "right": 232,
+        "top": 56,
+        "bottom": 247,
+        "height": 191,
+        "width": 197,
+        "pelvisX": 113.72263429984267
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "attack",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 39,
+        "right": 215,
+        "top": 43,
+        "bottom": 246,
+        "height": 203,
+        "width": 176,
+        "pelvisX": 109.9549929676512
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 56,
+        "right": 213,
+        "top": 33,
+        "bottom": 246,
+        "height": 213,
+        "width": 157,
+        "pelvisX": 114.49381835473133
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/attack.png",
+      "bounds": {
+        "left": 61,
+        "right": 189,
+        "top": 9,
+        "bottom": 247,
+        "height": 238,
+        "width": 128,
+        "pelvisX": 130.246408045977
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "attack_2",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 65,
+        "right": 188,
+        "top": 20,
+        "bottom": 250,
+        "height": 230,
+        "width": 123,
+        "pelvisX": 136.75592712752683
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "attack_2",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 63,
+        "right": 183,
+        "top": 21,
+        "bottom": 248,
+        "height": 227,
+        "width": 120,
+        "pelvisX": 133.51446700507614
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "attack_2",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 57,
+        "right": 189,
+        "top": 11,
+        "bottom": 245,
+        "height": 234,
+        "width": 132,
+        "pelvisX": 131.39141226110698
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "attack_2",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 48,
+        "right": 191,
+        "top": 28,
+        "bottom": 245,
+        "height": 217,
+        "width": 143,
+        "pelvisX": 129.5722631445263
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "attack_2",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 54,
+        "right": 199,
+        "top": 24,
+        "bottom": 246,
+        "height": 222,
+        "width": 145,
+        "pelvisX": 132.9344701583435
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack_2",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 55,
+        "right": 202,
+        "top": 6,
+        "bottom": 246,
+        "height": 240,
+        "width": 147,
+        "pelvisX": 132.18549951503394
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "attack_2",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 25,
+        "right": 201,
+        "top": 46,
+        "bottom": 246,
+        "height": 200,
+        "width": 176,
+        "pelvisX": 113.76568959037955
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack_2",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 32,
+        "right": 205,
+        "top": 47,
+        "bottom": 246,
+        "height": 199,
+        "width": 173,
+        "pelvisX": 138.66275510204082
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack_2",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 31,
+        "right": 235,
+        "top": 48,
+        "bottom": 244,
+        "height": 196,
+        "width": 204,
+        "pelvisX": 146.50159472677015
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "attack_2",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 33,
+        "right": 224,
+        "top": 45,
+        "bottom": 244,
+        "height": 199,
+        "width": 191,
+        "pelvisX": 136.65858343337334
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "attack_2",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 43,
+        "right": 197,
+        "top": 38,
+        "bottom": 246,
+        "height": 208,
+        "width": 154,
+        "pelvisX": 129.5304219823356
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack_2",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 30,
+        "right": 193,
+        "top": 26,
+        "bottom": 245,
+        "height": 219,
+        "width": 163,
+        "pelvisX": 125.23255314580202
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "attack_2",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 61,
+        "right": 189,
+        "top": 17,
+        "bottom": 247,
+        "height": 230,
+        "width": 128,
+        "pelvisX": 136.99975314737102
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "attack_2",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/attack_2.clearance-repaired.png",
+      "bounds": {
+        "left": 65,
+        "right": 186,
+        "top": 20,
+        "bottom": 249,
+        "height": 229,
+        "width": 121,
+        "pelvisX": 136.6394927536232
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "attack_3",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 71,
+        "right": 189,
+        "top": 20,
+        "bottom": 245,
+        "height": 225,
+        "width": 118,
+        "pelvisX": 135.28422180551834
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "attack_3",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 71,
+        "right": 186,
+        "top": 20,
+        "bottom": 244,
+        "height": 224,
+        "width": 115,
+        "pelvisX": 134.72886848501216
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "attack_3",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 69,
+        "right": 187,
+        "top": 9,
+        "bottom": 245,
+        "height": 236,
+        "width": 118,
+        "pelvisX": 133.49661569315617
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "attack_3",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 74,
+        "right": 186,
+        "top": 8,
+        "bottom": 245,
+        "height": 237,
+        "width": 112,
+        "pelvisX": 132.56063774176687
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "attack_3",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 68,
+        "right": 182,
+        "top": 15,
+        "bottom": 244,
+        "height": 229,
+        "width": 114,
+        "pelvisX": 134.22412125120928
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "attack_3",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 72,
+        "right": 185,
+        "top": 14,
+        "bottom": 244,
+        "height": 230,
+        "width": 113,
+        "pelvisX": 126.50428107469737
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "attack_3",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 59,
+        "right": 224,
+        "top": 56,
+        "bottom": 246,
+        "height": 190,
+        "width": 165,
+        "pelvisX": 132.38204440107344
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack_3",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 53,
+        "right": 227,
+        "top": 82,
+        "bottom": 245,
+        "height": 163,
+        "width": 174,
+        "pelvisX": 115.1912955465587
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "attack_3",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 53,
+        "right": 233,
+        "top": 81,
+        "bottom": 244,
+        "height": 163,
+        "width": 180,
+        "pelvisX": 116.04290982232652
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "attack_3",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 55,
+        "right": 232,
+        "top": 96,
+        "bottom": 245,
+        "height": 149,
+        "width": 177,
+        "pelvisX": 108.16810482582295
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "attack_3",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 48,
+        "right": 234,
+        "top": 112,
+        "bottom": 245,
+        "height": 133,
+        "width": 186,
+        "pelvisX": 106.45911047345767
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "attack_3",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 51,
+        "right": 214,
+        "top": 96,
+        "bottom": 242,
+        "height": 146,
+        "width": 163,
+        "pelvisX": 101.88271394476645
+      },
+      "minMarginPx": 14
+    },
+    {
+      "clip": "attack_3",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 59,
+        "right": 216,
+        "top": 64,
+        "bottom": 246,
+        "height": 182,
+        "width": 157,
+        "pelvisX": 112.95793901156676
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "attack_3",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/attack_3.png",
+      "bounds": {
+        "left": 71,
+        "right": 187,
+        "top": 21,
+        "bottom": 245,
+        "height": 224,
+        "width": 116,
+        "pelvisX": 135.28439117406703
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "cast",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 63,
+        "right": 179,
+        "top": 9,
+        "bottom": 250,
+        "height": 241,
+        "width": 116,
+        "pelvisX": 131.98536585365855
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 181,
+        "top": 9,
+        "bottom": 251,
+        "height": 242,
+        "width": 119,
+        "pelvisX": 132.4878328741965
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "cast",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 182,
+        "top": 9,
+        "bottom": 251,
+        "height": 242,
+        "width": 120,
+        "pelvisX": 132.05609011969023
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "cast",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 183,
+        "top": 9,
+        "bottom": 251,
+        "height": 242,
+        "width": 121,
+        "pelvisX": 131.7386850881372
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "cast",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 63,
+        "right": 183,
+        "top": 9,
+        "bottom": 250,
+        "height": 241,
+        "width": 120,
+        "pelvisX": 132.2471473658655
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 186,
+        "top": 7,
+        "bottom": 250,
+        "height": 243,
+        "width": 124,
+        "pelvisX": 133.95381284580228
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 187,
+        "top": 5,
+        "bottom": 250,
+        "height": 245,
+        "width": 125,
+        "pelvisX": 134.52843601895734
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "cast",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 61,
+        "right": 188,
+        "top": 4,
+        "bottom": 250,
+        "height": 246,
+        "width": 127,
+        "pelvisX": 135.19218861633723
+      },
+      "minMarginPx": 4
+    },
+    {
+      "clip": "cast",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 61,
+        "right": 188,
+        "top": 5,
+        "bottom": 250,
+        "height": 245,
+        "width": 127,
+        "pelvisX": 135.3582338902148
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "cast",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 186,
+        "top": 5,
+        "bottom": 250,
+        "height": 245,
+        "width": 124,
+        "pelvisX": 134.41972693032014
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "cast",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 184,
+        "top": 8,
+        "bottom": 250,
+        "height": 242,
+        "width": 122,
+        "pelvisX": 132.97503532736692
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 181,
+        "top": 8,
+        "bottom": 250,
+        "height": 242,
+        "width": 119,
+        "pelvisX": 131.68093200190205
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 63,
+        "right": 179,
+        "top": 10,
+        "bottom": 250,
+        "height": 240,
+        "width": 116,
+        "pelvisX": 131.8117791411043
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 179,
+        "top": 10,
+        "bottom": 250,
+        "height": 240,
+        "width": 117,
+        "pelvisX": 131.09590043923865
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 14,
+      "sourceCell": 14,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 179,
+        "top": 10,
+        "bottom": 250,
+        "height": 240,
+        "width": 117,
+        "pelvisX": 131.52295121365057
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "cast",
+      "frame": 15,
+      "sourceCell": 15,
+      "sheet": "raw/cast.png",
+      "bounds": {
+        "left": 62,
+        "right": 179,
+        "top": 10,
+        "bottom": 250,
+        "height": 240,
+        "width": 117,
+        "pelvisX": 131.47163965681602
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "channel",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 60,
+        "right": 180,
+        "top": 8,
+        "bottom": 249,
+        "height": 241,
+        "width": 120,
+        "pelvisX": 130.48831775700936
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "channel",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 50,
+        "right": 188,
+        "top": 23,
+        "bottom": 249,
+        "height": 226,
+        "width": 138,
+        "pelvisX": 130.87146960268072
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "channel",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 27,
+        "right": 177,
+        "top": 30,
+        "bottom": 250,
+        "height": 220,
+        "width": 150,
+        "pelvisX": 104.781430973286
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "channel",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 53,
+        "right": 191,
+        "top": 35,
+        "bottom": 248,
+        "height": 213,
+        "width": 138,
+        "pelvisX": 124.08042028692665
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "channel",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 55,
+        "right": 211,
+        "top": 36,
+        "bottom": 248,
+        "height": 212,
+        "width": 156,
+        "pelvisX": 129.8229189666593
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "channel",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 59,
+        "right": 237,
+        "top": 33,
+        "bottom": 249,
+        "height": 216,
+        "width": 178,
+        "pelvisX": 131.8382323129941
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "channel",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 44,
+        "right": 245,
+        "top": 29,
+        "bottom": 248,
+        "height": 219,
+        "width": 201,
+        "pelvisX": 136.4591274216412
+      },
+      "minMarginPx": 8
+    },
+    {
+      "clip": "channel",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 41,
+        "right": 235,
+        "top": 27,
+        "bottom": 249,
+        "height": 222,
+        "width": 194,
+        "pelvisX": 139.20698172237775
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "channel",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 52,
+        "right": 211,
+        "top": 25,
+        "bottom": 249,
+        "height": 224,
+        "width": 159,
+        "pelvisX": 123.90742377375166
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "channel",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 76,
+        "right": 218,
+        "top": 21,
+        "bottom": 249,
+        "height": 228,
+        "width": 142,
+        "pelvisX": 125.66206377102687
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "channel",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 72,
+        "right": 208,
+        "top": 19,
+        "bottom": 249,
+        "height": 230,
+        "width": 136,
+        "pelvisX": 127.55033185840708
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "channel",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/channel.png",
+      "bounds": {
+        "left": 65,
+        "right": 190,
+        "top": 12,
+        "bottom": 251,
+        "height": 239,
+        "width": 125,
+        "pelvisX": 132.2151385447173
+      },
+      "minMarginPx": 5
+    },
+    {
+      "clip": "die",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 69,
+        "right": 179,
+        "top": 10,
+        "bottom": 246,
+        "height": 236,
+        "width": 110,
+        "pelvisX": 132.19807983830216
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "die",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 72,
+        "right": 181,
+        "top": 13,
+        "bottom": 246,
+        "height": 233,
+        "width": 109,
+        "pelvisX": 131.10071235568657
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "die",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 72,
+        "right": 187,
+        "top": 23,
+        "bottom": 245,
+        "height": 222,
+        "width": 115,
+        "pelvisX": 130.31262376237623
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "die",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 70,
+        "right": 190,
+        "top": 36,
+        "bottom": 246,
+        "height": 210,
+        "width": 120,
+        "pelvisX": 126.73559408465069
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "die",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 66,
+        "right": 197,
+        "top": 39,
+        "bottom": 243,
+        "height": 204,
+        "width": 131,
+        "pelvisX": 127.35378787878788
+      },
+      "minMarginPx": 13
+    },
+    {
+      "clip": "die",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 60,
+        "right": 201,
+        "top": 47,
+        "bottom": 237,
+        "height": 190,
+        "width": 141,
+        "pelvisX": 124.93287858117326
+      },
+      "minMarginPx": 19
+    },
+    {
+      "clip": "die",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 52,
+        "right": 211,
+        "top": 67,
+        "bottom": 230,
+        "height": 163,
+        "width": 159,
+        "pelvisX": 127.83788021323299
+      },
+      "minMarginPx": 26
+    },
+    {
+      "clip": "die",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 44,
+        "right": 209,
+        "top": 91,
+        "bottom": 233,
+        "height": 142,
+        "width": 165,
+        "pelvisX": 122.65754145827849
+      },
+      "minMarginPx": 23
+    },
+    {
+      "clip": "die",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 38,
+        "right": 213,
+        "top": 91,
+        "bottom": 226,
+        "height": 135,
+        "width": 175,
+        "pelvisX": 121.92020860495437
+      },
+      "minMarginPx": 30
+    },
+    {
+      "clip": "die",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 23,
+        "right": 222,
+        "top": 107,
+        "bottom": 227,
+        "height": 120,
+        "width": 199,
+        "pelvisX": 121.43165657097708
+      },
+      "minMarginPx": 23
+    },
+    {
+      "clip": "die",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 13,
+        "right": 232,
+        "top": 121,
+        "bottom": 226,
+        "height": 105,
+        "width": 219,
+        "pelvisX": 124.53217243576131
+      },
+      "minMarginPx": 13
+    },
+    {
+      "clip": "die",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/die.png",
+      "bounds": {
+        "left": 12,
+        "right": 237,
+        "top": 131,
+        "bottom": 222,
+        "height": 91,
+        "width": 225,
+        "pelvisX": 129.53593783725447
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "tribulation",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 63,
+        "right": 194,
+        "top": 7,
+        "bottom": 248,
+        "height": 241,
+        "width": 131,
+        "pelvisX": 126.43668319062641
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "tribulation",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 62,
+        "right": 196,
+        "top": 16,
+        "bottom": 247,
+        "height": 231,
+        "width": 134,
+        "pelvisX": 120.82914462081129
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "tribulation",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 60,
+        "right": 202,
+        "top": 33,
+        "bottom": 246,
+        "height": 213,
+        "width": 142,
+        "pelvisX": 114.73914053426249
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "tribulation",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 61,
+        "right": 220,
+        "top": 44,
+        "bottom": 244,
+        "height": 200,
+        "width": 159,
+        "pelvisX": 119.37719298245614
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "tribulation",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 59,
+        "right": 221,
+        "top": 44,
+        "bottom": 244,
+        "height": 200,
+        "width": 162,
+        "pelvisX": 120.38576687116564
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "tribulation",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 55,
+        "right": 217,
+        "top": 54,
+        "bottom": 239,
+        "height": 185,
+        "width": 162,
+        "pelvisX": 120.81005719733079
+      },
+      "minMarginPx": 17
+    },
+    {
+      "clip": "tribulation",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 53,
+        "right": 216,
+        "top": 67,
+        "bottom": 238,
+        "height": 171,
+        "width": 163,
+        "pelvisX": 126.19829375144108
+      },
+      "minMarginPx": 18
+    },
+    {
+      "clip": "tribulation",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 53,
+        "right": 216,
+        "top": 80,
+        "bottom": 239,
+        "height": 159,
+        "width": 163,
+        "pelvisX": 125.98005439709883
+      },
+      "minMarginPx": 17
+    },
+    {
+      "clip": "tribulation",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 53,
+        "right": 218,
+        "top": 88,
+        "bottom": 240,
+        "height": 152,
+        "width": 165,
+        "pelvisX": 127.81971830985916
+      },
+      "minMarginPx": 16
+    },
+    {
+      "clip": "tribulation",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 54,
+        "right": 216,
+        "top": 78,
+        "bottom": 238,
+        "height": 160,
+        "width": 162,
+        "pelvisX": 124.28101089728727
+      },
+      "minMarginPx": 18
+    },
+    {
+      "clip": "tribulation",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 56,
+        "right": 216,
+        "top": 66,
+        "bottom": 239,
+        "height": 173,
+        "width": 160,
+        "pelvisX": 119.82967413912641
+      },
+      "minMarginPx": 17
+    },
+    {
+      "clip": "tribulation",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 56,
+        "right": 216,
+        "top": 51,
+        "bottom": 243,
+        "height": 192,
+        "width": 160,
+        "pelvisX": 112.95902228612509
+      },
+      "minMarginPx": 13
+    },
+    {
+      "clip": "tribulation",
+      "frame": 12,
+      "sourceCell": 12,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 59,
+        "right": 217,
+        "top": 47,
+        "bottom": 244,
+        "height": 197,
+        "width": 158,
+        "pelvisX": 111.89773575516297
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "tribulation",
+      "frame": 13,
+      "sourceCell": 13,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 60,
+        "right": 213,
+        "top": 32,
+        "bottom": 246,
+        "height": 214,
+        "width": 153,
+        "pelvisX": 118.00631057020509
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "tribulation",
+      "frame": 14,
+      "sourceCell": 14,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 62,
+        "right": 194,
+        "top": 14,
+        "bottom": 249,
+        "height": 235,
+        "width": 132,
+        "pelvisX": 121.78671023965141
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "tribulation",
+      "frame": 15,
+      "sourceCell": 15,
+      "sheet": "raw/tribulation.png",
+      "bounds": {
+        "left": 64,
+        "right": 193,
+        "top": 8,
+        "bottom": 249,
+        "height": 241,
+        "width": 129,
+        "pelvisX": 125.43184855233854
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "emote",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 64,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 119,
+        "pelvisX": 131.9405168210629
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "emote",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 64,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 119,
+        "pelvisX": 131.9214620894048
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "emote",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 64,
+        "right": 182,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 118,
+        "pelvisX": 129.78622448979593
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "emote",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 63,
+        "right": 182,
+        "top": 10,
+        "bottom": 246,
+        "height": 236,
+        "width": 119,
+        "pelvisX": 128.78514588859417
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "emote",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 64,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 119,
+        "pelvisX": 128.29074074074074
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "emote",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 64,
+        "right": 185,
+        "top": 11,
+        "bottom": 246,
+        "height": 235,
+        "width": 121,
+        "pelvisX": 123.08183006535948
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "emote",
+      "frame": 6,
+      "sourceCell": 6,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 69,
+        "right": 195,
+        "top": 19,
+        "bottom": 246,
+        "height": 227,
+        "width": 126,
+        "pelvisX": 120.6936148300721
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "emote",
+      "frame": 7,
+      "sourceCell": 7,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 70,
+        "right": 196,
+        "top": 22,
+        "bottom": 246,
+        "height": 224,
+        "width": 126,
+        "pelvisX": 121.01217932106763
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "emote",
+      "frame": 8,
+      "sourceCell": 8,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 66,
+        "right": 191,
+        "top": 15,
+        "bottom": 246,
+        "height": 231,
+        "width": 125,
+        "pelvisX": 122.9047376464595
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "emote",
+      "frame": 9,
+      "sourceCell": 9,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 63,
+        "right": 183,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 120,
+        "pelvisX": 126.11688311688312
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "emote",
+      "frame": 10,
+      "sourceCell": 10,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 64,
+        "right": 182,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 118,
+        "pelvisX": 130.7612121212121
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "emote",
+      "frame": 11,
+      "sourceCell": 11,
+      "sheet": "raw/emote.png",
+      "bounds": {
+        "left": 64,
+        "right": 182,
+        "top": 9,
+        "bottom": 246,
+        "height": 237,
+        "width": 118,
+        "pelvisX": 131.55898058252427
+      },
+      "minMarginPx": 9
+    },
+    {
+      "clip": "hit",
+      "frame": 0,
+      "sourceCell": 0,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 69,
+        "right": 198,
+        "top": 7,
+        "bottom": 245,
+        "height": 238,
+        "width": 129,
+        "pelvisX": 140.0633163604162
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "hit",
+      "frame": 1,
+      "sourceCell": 1,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 57,
+        "right": 192,
+        "top": 6,
+        "bottom": 244,
+        "height": 238,
+        "width": 135,
+        "pelvisX": 134.1969320066335
+      },
+      "minMarginPx": 6
+    },
+    {
+      "clip": "hit",
+      "frame": 2,
+      "sourceCell": 2,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 48,
+        "right": 187,
+        "top": 12,
+        "bottom": 240,
+        "height": 228,
+        "width": 139,
+        "pelvisX": 126.41682173427614
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "hit",
+      "frame": 3,
+      "sourceCell": 3,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 39,
+        "right": 197,
+        "top": 12,
+        "bottom": 240,
+        "height": 228,
+        "width": 158,
+        "pelvisX": 119.41518163125428
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "hit",
+      "frame": 4,
+      "sourceCell": 4,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 60,
+        "right": 203,
+        "top": 11,
+        "bottom": 243,
+        "height": 232,
+        "width": 143,
+        "pelvisX": 136.22777565814576
+      },
+      "minMarginPx": 11
+    },
+    {
+      "clip": "hit",
+      "frame": 5,
+      "sourceCell": 5,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 64,
+        "right": 190,
+        "top": 7,
+        "bottom": 244,
+        "height": 237,
+        "width": 126,
+        "pelvisX": 133.43656147986943
+      },
+      "minMarginPx": 7
+    },
+    {
+      "clip": "dash",
+      "frame": 0,
+      "sourceCell": 6,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 64,
+        "right": 188,
+        "top": 13,
+        "bottom": 242,
+        "height": 229,
+        "width": 124,
+        "pelvisX": 126.9782909930716
+      },
+      "minMarginPx": 13
+    },
+    {
+      "clip": "dash",
+      "frame": 1,
+      "sourceCell": 7,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 61,
+        "right": 194,
+        "top": 20,
+        "bottom": 242,
+        "height": 222,
+        "width": 133,
+        "pelvisX": 125.77117940199335
+      },
+      "minMarginPx": 14
+    },
+    {
+      "clip": "dash",
+      "frame": 2,
+      "sourceCell": 8,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 63,
+        "right": 212,
+        "top": 20,
+        "bottom": 241,
+        "height": 221,
+        "width": 149,
+        "pelvisX": 136.6880613772455
+      },
+      "minMarginPx": 15
+    },
+    {
+      "clip": "dash",
+      "frame": 3,
+      "sourceCell": 9,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 54,
+        "right": 212,
+        "top": 23,
+        "bottom": 228,
+        "height": 205,
+        "width": 158,
+        "pelvisX": 125.01361483820047
+      },
+      "minMarginPx": 23
+    },
+    {
+      "clip": "dash",
+      "frame": 4,
+      "sourceCell": 10,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 50,
+        "right": 217,
+        "top": 29,
+        "bottom": 225,
+        "height": 196,
+        "width": 167,
+        "pelvisX": 124.63453565505804
+      },
+      "minMarginPx": 29
+    },
+    {
+      "clip": "dash",
+      "frame": 5,
+      "sourceCell": 11,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 43,
+        "right": 218,
+        "top": 33,
+        "bottom": 237,
+        "height": 204,
+        "width": 175,
+        "pelvisX": 123.60359525574499
+      },
+      "minMarginPx": 19
+    },
+    {
+      "clip": "dash",
+      "frame": 6,
+      "sourceCell": 12,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 55,
+        "right": 216,
+        "top": 28,
+        "bottom": 240,
+        "height": 212,
+        "width": 161,
+        "pelvisX": 131.20896358543416
+      },
+      "minMarginPx": 16
+    },
+    {
+      "clip": "dash",
+      "frame": 7,
+      "sourceCell": 13,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 65,
+        "right": 199,
+        "top": 17,
+        "bottom": 244,
+        "height": 227,
+        "width": 134,
+        "pelvisX": 129.28290614761997
+      },
+      "minMarginPx": 12
+    },
+    {
+      "clip": "dash",
+      "frame": 8,
+      "sourceCell": 14,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 60,
+        "right": 189,
+        "top": 10,
+        "bottom": 245,
+        "height": 235,
+        "width": 129,
+        "pelvisX": 131.6396883791387
+      },
+      "minMarginPx": 10
+    },
+    {
+      "clip": "dash",
+      "frame": 9,
+      "sourceCell": 15,
+      "sheet": "raw/hit-dash.png",
+      "bounds": {
+        "left": 63,
+        "right": 189,
+        "top": 8,
+        "bottom": 245,
+        "height": 237,
+        "width": 126,
+        "pelvisX": 133.53694365270775
+      },
+      "minMarginPx": 8
+    }
+  ]
+}

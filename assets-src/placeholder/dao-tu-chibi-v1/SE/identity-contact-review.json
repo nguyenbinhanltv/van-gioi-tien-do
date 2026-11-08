@@ -1,0 +1,83 @@
+{
+  "policy": "D55 mandatory visual contact-sheet review, all 15 clips. Temporal values are INFO review prompts, never proof of drift or identity.",
+  "projectSha256": "dbe387bdf358262c5f0a6aa794dba54939fb54c2bc1b063749b53c66134bb25c",
+  "temporalFlaggedPairs": 45,
+  "reviewer": "worker33, native source contact sheets",
+  "clips": [
+    {
+      "clip": "idle",
+      "contactSheetSha256": "389c40b421b2c4cf27293e6437a68dd9da98dbef27cd2b6c673a46d283ad2f1c",
+      "observation": "Stable face, costume and shoulder carry; existing hair fringe polish retained."
+    },
+    {
+      "clip": "meditate",
+      "contactSheetSha256": "bc0b316c2918dc0d42e89c99c8a5c11c291c1b3d64d480fb32038ea17b18358d",
+      "observation": "Seated posture and closed eyes retain identity; blade remains supported across lap."
+    },
+    {
+      "clip": "walk",
+      "contactSheetSha256": "a1214ea9fd2adfcb90e39293ff2f141c5bb1f9c55f23723c4b6816462a70542b",
+      "observation": "Identity retained; weak lead reversal and contact findings remain in the existing backlog."
+    },
+    {
+      "clip": "run",
+      "contactSheetSha256": "4f95c21fd4cfe866ff0a1c403f3bfaeb1d3f0b6e28fca4ce0e1012eb68f0caeb",
+      "observation": "Identity retained through leaning poses. Four native contour annotations corrected independently of metric scores; existing foot findings retained."
+    },
+    {
+      "clip": "sword_fly",
+      "contactSheetSha256": "dc6e44452ef343dd06c2ba1a803f1a892fbfbb917c0b396703f6c58d699d58b2",
+      "observation": "Face/costume retained; feet remain on broad dao despite crouch and lean changes."
+    },
+    {
+      "clip": "attack",
+      "contactSheetSha256": "adbc6b9d0304d27cb473de0b779a215cf165cdd7e317a910f339762b0bfe078a",
+      "observation": "Face and costume retained; heavy-cut blade/grip redraw is an existing polish finding."
+    },
+    {
+      "clip": "attack_2",
+      "contactSheetSha256": "5246c9d2f0820b4e04bc26b08fa441376763ae026de06cd986e886e4c3182716",
+      "observation": "Identity retained through sweep; existing weapon foreshortening/grip polish remains open."
+    },
+    {
+      "clip": "attack_3",
+      "contactSheetSha256": "4096b611bfde3c3937078aea374fd3d8b272494ed4e1791f4a15715d05fea324",
+      "observation": "Identity retained through raised arms and kneel; ground-strike blade drift remains open."
+    },
+    {
+      "clip": "cast",
+      "contactSheetSha256": "3f28f14edbddfd15f4da2ff2b9104c665d8be3c395359939bcc8e7e68cf4fdd8",
+      "observation": "Face and costume stable through off-hand gesture."
+    },
+    {
+      "clip": "channel",
+      "contactSheetSha256": "c14dcccd43567ef5c4165389d22d86f397db884772470ac70de3cc37969d4e86",
+      "observation": "Turning spin changes visibility and silhouette; costume retained. Existing blade/grip polish remains open."
+    },
+    {
+      "clip": "die",
+      "contactSheetSha256": "83c3c0939456ca07ecf64a582da040f1a9104fd0a3ab72485d2eac42b0d04b76",
+      "observation": "Collapse changes head angle and silhouette; identity retained, existing death-blade polish remains open."
+    },
+    {
+      "clip": "tribulation",
+      "contactSheetSha256": "95984cc7f9e1b9f9dcbe67d0e4f3994f6e9f867b555b5d9bd724cedfbca7dab5",
+      "observation": "Kneeling transition retains face and costume; changing posture explains large temporal differences."
+    },
+    {
+      "clip": "emote",
+      "contactSheetSha256": "a5509088ed44db813e2a5e3fd2648f2ceca9d49cab5487e581add10af2397c85",
+      "observation": "Bowing retains recognizable identity. Existing frame 7/8 annotations are untrusted and unchanged, pending native semantic review; scores do not validate these points."
+    },
+    {
+      "clip": "hit",
+      "contactSheetSha256": "309dcb5b78d93bfcfb7a2dfcc8c36c0296574dbe29d649489c2d7d1830376111",
+      "observation": "Recoil changes head angle; recognizable face/costume retained."
+    },
+    {
+      "clip": "dash",
+      "contactSheetSha256": "314c3d76d55214409ad06662c5ca92bc6704a4465402d2b0de9f994775287d52",
+      "observation": "Leaning/lunging silhouette changes retain identity; no repaint based on historical L1 or temporal flags."
+    }
+  ]
+}

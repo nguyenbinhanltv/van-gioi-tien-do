@@ -1,0 +1,128 @@
+{
+  "status": "Authoring only, not production frames or contact annotations",
+  "guideSha256": "6c450c7000c49ee4225341b6ca23e4a11636b5391b52ab0271762ee2b27fb240",
+  "records": [
+    {
+      "cell": 0,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "01c5a2646ffd6ac81bbafbd25fa82f093561f11e1236afae5b290be69279c5aa"
+    },
+    {
+      "cell": 1,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "cf7a1311d101dd1348c28ac190763970f268cd171b36991927e7271c643cf2c3"
+    },
+    {
+      "cell": 2,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "4a1e39bbe0e4afcdba4bfa34de14e442cb5103400e5da691a61790b1c9b2f19b"
+    },
+    {
+      "cell": 3,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "82d24e77813b4274122f04a317b137f513a505b600a03e4d369950e2c5437309"
+    },
+    {
+      "cell": 4,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "e2c799b894c67603581e009e1a0bf6be39ef034e6e050ca9745a8ebeaf4db7ca"
+    },
+    {
+      "cell": 5,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "44bf54539237c23af0ad3b8904caf678a80a80267709654c067807130dfcc387"
+    },
+    {
+      "cell": 6,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "9c4987d05b30f103b0c42b1c9190c210695f49aff59fb76fa0e44125f032dab9"
+    },
+    {
+      "cell": 7,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "b8aa1f2444c6334ce95f6b7503bfd80d3e64753c51f7a9ab17ebbe98269b2706"
+    },
+    {
+      "cell": 8,
+      "side": "L",
+      "sourceSha256": "2ca8424630fe350bbdbc96c8dae14c48990f5a3a2d9d44802b530bedd39b2ed2",
+      "sourceSoleProposal": {
+        "x": 143.52482269503545,
+        "y": 232
+      },
+      "target": {
+        "x": 148.68584437086093,
+        "y": 232
+      },
+      "bootTranslation": {
+        "dx": 5,
+        "dy": 0
+      },
+      "bootScale": 1,
+      "cutout": {
+        "left": 120,
+        "right": 172,
+        "top": 187,
+        "bottom": 235
+      },
+      "bootPixels": 613,
+      "operation": "Authoring-only lower-leg cutout and translated SAME-frame boot stencil. AI must reconstruct anatomy. No coordinate is passing contact evidence."
+    },
+    {
+      "cell": 9,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "27c40df2be428715ae029a087e516ed457a07450856887d0518c430233b4e1bf"
+    },
+    {
+      "cell": 10,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "11bddd3b31ccc9896309a45e84c6f81c64b2900756ad35d73315ef34aa274a59"
+    },
+    {
+      "cell": 11,
+      "side": "L",
+      "sourceSha256": "38c590c737a7c46b2663f238aba9e0da4e57893e907a0a30822e706b668cc2e1",
+      "sourceSoleProposal": {
+        "x": 107.5,
+        "y": 232
+      },
+      "target": {
+        "x": 111.18584437086092,
+        "y": 232
+      },
+      "bootTranslation": {
+        "dx": 4,
+        "dy": 0
+      },
+      "bootScale": 1,
+      "cutout": {
+        "left": 84,
+        "right": 135,
+        "top": 187,
+        "bottom": 235
+      },
+      "bootPixels": 652,
+      "operation": "Authoring-only lower-leg cutout and translated SAME-frame boot stencil. AI must reconstruct anatomy. No coordinate is passing contact evidence."
+    },
+    {
+      "cell": 12,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "782c91d40d48ff351a0e13cfb468df94e65920372ec9d65cc0ff49b44efc1ff1"
+    },
+    {
+      "cell": 13,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "2dd19012c2fd64ad3c2bdcb346733088dd648abe5c9d0c3bbb2facd570ca6ae1"
+    },
+    {
+      "cell": 14,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "85959b1bacce8d6d85fd899d64e7e8c19726bf7dfb4df727d89d2bc8185798d8"
+    },
+    {
+      "cell": 15,
+      "operation": "Preserve flight drawing unchanged",
+      "sourceSha256": "fea0db1d9d1468e9f9ddd1740f8f612d294176beda701307458cd1d16df0641c"
+    }
+  ]
+}

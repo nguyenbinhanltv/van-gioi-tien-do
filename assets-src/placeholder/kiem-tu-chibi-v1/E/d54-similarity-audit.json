@@ -1,0 +1,849 @@
+{
+  "format": "kiem-tu-e-d54-candidate-audit",
+  "version": 1,
+  "utc": "2026-11-08T01:33:21.849861+00:00",
+  "gitHead": "b16e3d2",
+  "project": "project.lattice-diagnostic.json",
+  "projectSha256": "3d22a5792d7857e753d27be91d31d3bf25de5a953d1e6545545345e131ca7a55",
+  "contractSha256": "a575da7859fd28da34c84cc6560dd1b8185c2917d1918d18fc4f959442f1de7c",
+  "status": "FAILED diagnostic candidate; no review-ready production claim",
+  "resample": "lanczos3",
+  "asymmetricDespill": {
+    "maxImbalance": 80,
+    "edgeRadius": 2,
+    "units": "native input raster pixels"
+  },
+  "d54": {
+    "measuredCells": 202,
+    "passCells": 130,
+    "failCells": 72,
+    "similarityFindings": 75,
+    "headReasonsSkipped": 0,
+    "freePoseExceptions": 0,
+    "unmeasuredCells": 0
+  },
+  "worker24ReportOnlyAudit": {
+    "totals": {
+      "projects": 0,
+      "cells": 0,
+      "pass": 0,
+      "fail": 0,
+      "unmeasured": 0
+    },
+    "explanation": "No current exceptions means zero formerly-skipped cells; all202 current cells were similarity-tested in the separate full build. Zero audit affected cells is not an art pass.",
+    "provenance": {
+      "worker24AuditCommit": "1ba482bcfd61d0356b289d83b0d4155117f74e81",
+      "originalAuditSha256": "3894204fd9d7f48dd3f4342bab5067de4323d315f9b23d1837ff837b89a273fd",
+      "adapterSha256": "a4067ec13360393d32b9445ff310aa44212ab3c1fee96a439bb25768d089150b",
+      "adapter": "Only resolve runProject to this checkout public index and inline the exact branch isHeadEvidenceReason helper. Audit algorithm unchanged. No pipeline source edits.",
+      "scope": "Uncommitted candidate inputs, not a merged direction. Zero current exceptions means the former-head-reason report has zero affected cells; separately report all202 unskipped similarity results from the full fresh build.",
+      "inputs": [
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\calibration.json",
+          "sha256": "aa19b1cf3385feffd8b1517d2f86d29ca87367f2ae390f73f757a117ed429980"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\project.lattice-diagnostic.json",
+          "sha256": "3d22a5792d7857e753d27be91d31d3bf25de5a953d1e6545545345e131ca7a55"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\attack.repaired.png",
+          "sha256": "a2d5789f13e48805cebe6a765f03a8e4704d6ec94f8780a0b10e4f8ec19996b4"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\attack_2.raw.png",
+          "sha256": "71af9c39751d333cc52ddfdf4cc7bae36c8bf74361965a9fd499277e22b55343"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\attack_3.repaired.png",
+          "sha256": "82c57eaf161c669010d4ed2b768e888d28b8f326f47965218773ce27d4f76a6d"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\cast.raw.png",
+          "sha256": "5d6d1126ce0ae1d7e8b321788e0ff684b03519ad0901104604912e6bcfff4093"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\channel.raw.png",
+          "sha256": "6c0f02f3a795afa4a1bafa73d51818507943f57c9998c90a65df7599ab11d85e"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\die.raw.png",
+          "sha256": "07b1120673f6ad2af1d7b1c86206b9c2d3a70d195062d9bcd14b2a5c0252dca9"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\emote.raw.png",
+          "sha256": "cf5ae39bc7ef6cdb6f9aa4fa87fe75116bcc57a6a8d13e3940b1e41427e42bc2"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\hit-dash.raw.png",
+          "sha256": "166760952781279d8f59d57d7563cd84333698d637655f06736de0c922c2aeee"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\idle.attempt-02.raw.png",
+          "sha256": "4698437fa25379b744dee0c26476b4654779be7beb0b5a54c5ffe19af2ba508d"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\meditate.attempt-02.raw.png",
+          "sha256": "68e13da5d415b37453cda98f6b597c6db027951f118efc76eeed71aea4b5a2e7"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\run.attempt-02.raw.png",
+          "sha256": "291abf169d20cdb3949f81594d01429ca77fbd3365422780e8872efbb0bdb24e"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\sword_fly.raw.png",
+          "sha256": "4f0b0646df13ca87cd90df3e296cfdf642dc209aa4baa07061c2d78f44f2e1c1"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\tribulation.raw.png",
+          "sha256": "9df01c02d00f8778479a0fe180cc657a0e3eb2d95d491d5c77f7f781a8e7321d"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\sheets\\walk.attempt-02.raw.png",
+          "sha256": "847292912b65f5fc6cd99555dc34b3e9895b1a6691a22cedd203ce7b814bb61b"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\attack.template.json",
+          "sha256": "b18bc6ab986e8dc4ee25cfce96c9425b7296fd32fe7577a3c7e980ecb9308553"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\attack_2.template.json",
+          "sha256": "d59b6c76e67a0f86b89598a2304724e5e171d9fa9bbfd489333cf49d20fbcf9d"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\attack_3.template.json",
+          "sha256": "7d69c37d86f33ff26e67cdc2a2dde78fd455bd88373c9a10b923e1f383e3ad71"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\cast.template.json",
+          "sha256": "bfe328c13bcd2f9795acac0080f7147ef54625225748f3d567310ab142746e24"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\channel.template.json",
+          "sha256": "d0911b605a3f851f961d7b08c0f56b352839c8bce3b71d8c435dbf3a54f16c82"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\die.template.json",
+          "sha256": "857d7d01a8447562930070116c5e2ed2a5bde79f7b419ccd289695b204288705"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\emote.template.json",
+          "sha256": "d43527c351c578edd6b9c20c79162ac2441cab3d2cfb9e6b6f8d1a7662790b3b"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\hit-dash.template.json",
+          "sha256": "0285396b1b2439390bc889af5537035a445df1dbd2dd35e13b6b3808659d01d4"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\idle.template.json",
+          "sha256": "62257ce2eda2911892549c53e2784bfb58647c59db301214ae2b6f9b108fb0d4"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\meditate.template.json",
+          "sha256": "87c51b0f4e074942ff52574b18f28651e7aeb3f11d1ad41211128e5f735f58a2"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\run.template.json",
+          "sha256": "b98925fb90551a6d3591f4656fdc49977e7137f2e976cf181ea2cede75d818d6"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\sword_fly.template.json",
+          "sha256": "51c85aaeed400a27ed566fe0e71b4fd2254734ee028a2d4bda6ffb5628ef90ab"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\tribulation.template.json",
+          "sha256": "737355518167c2dc5bd81420c2a3ea9dd12e3a9a4fd5d045237853ed77f235d6"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\E\\templates\\walk.template.json",
+          "sha256": "19448ea0c61f937a8fffd1ca8747d1ca26f1a7bed98539d23dcbdab12cf21297"
+        },
+        {
+          "file": "C:\\Users\\PC\\.ao\\data\\worktrees\\van-gioi-tien-do\\van-gioi-tien-do-23\\assets-src\\placeholder\\kiem-tu-chibi-v1\\reference\\E.master.png",
+          "sha256": "d20d255c5e4dbb86011ccce4cb07f4a4e3e533330d9dbe9bd687ef39ca554cfa"
+        }
+      ]
+    }
+  },
+  "qaCounts": {
+    "fail-hard": 88,
+    "fail-soft": 95,
+    "accepted": 0,
+    "regression": 0,
+    "info": 64
+  },
+  "hardByClip": {
+    "meditate": 16,
+    "run": 14,
+    "dash": 16,
+    "attack": 6,
+    "attack_2": 2,
+    "attack_3": 9,
+    "cast": 2,
+    "die": 11,
+    "tribulation": 12
+  },
+  "hardByGate": {
+    "similarity": 75,
+    "height": 13
+  },
+  "atlas": {
+    "pages": 3,
+    "width": 2048,
+    "height": 2048,
+    "regions": 202,
+    "textures": [
+      "kiemtu_chibi_t1_lattice_diagnostic_E_tex",
+      "kiemtu_chibi_t1_lattice_diagnostic_E_page1_tex",
+      "kiemtu_chibi_t1_lattice_diagnostic_E_page2_tex"
+    ]
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "frames": 16,
+      "similarityPassCells": 16,
+      "similarityFailCells": 0,
+      "findings": []
+    },
+    {
+      "name": "meditate",
+      "frames": 16,
+      "similarityPassCells": 0,
+      "similarityFailCells": 16,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 0,
+          "message": "torso similarity 0.62 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 1,
+          "message": "torso similarity 0.62 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 2,
+          "message": "torso similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 3,
+          "message": "torso similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 4,
+          "message": "torso similarity 0.68 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 5,
+          "message": "torso similarity 0.68 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 6,
+          "message": "torso similarity 0.69 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 7,
+          "message": "torso similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 8,
+          "message": "torso similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 9,
+          "message": "torso similarity 0.64 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 10,
+          "message": "torso similarity 0.60 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 11,
+          "message": "torso similarity 0.60 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 12,
+          "message": "torso similarity 0.59 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 13,
+          "message": "torso similarity 0.59 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 14,
+          "message": "torso similarity 0.59 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 15,
+          "message": "torso similarity 0.59 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "walk",
+      "frames": 16,
+      "similarityPassCells": 16,
+      "similarityFailCells": 0,
+      "findings": []
+    },
+    {
+      "name": "run",
+      "frames": 16,
+      "similarityPassCells": 6,
+      "similarityFailCells": 10,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 3,
+          "message": "torso similarity 0.70 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 4,
+          "message": "torso similarity 0.67 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 5,
+          "message": "torso similarity 0.64 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 6,
+          "message": "torso similarity 0.61 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 7,
+          "message": "torso similarity 0.62 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 8,
+          "message": "torso similarity 0.63 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 9,
+          "message": "torso similarity 0.69 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 10,
+          "message": "torso similarity 0.67 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 14,
+          "message": "torso similarity 0.67 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "run",
+          "frame": 15,
+          "message": "torso similarity 0.69 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "dash",
+      "frames": 10,
+      "similarityPassCells": 3,
+      "similarityFailCells": 7,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 1,
+          "message": "torso similarity 0.56 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 2,
+          "message": "torso similarity 0.57 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 3,
+          "message": "torso similarity 0.58 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 4,
+          "message": "torso similarity 0.56 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 5,
+          "message": "torso similarity 0.56 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 6,
+          "message": "torso similarity 0.57 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "dash",
+          "frame": 7,
+          "message": "torso similarity 0.65 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "sword_fly",
+      "frames": 12,
+      "similarityPassCells": 12,
+      "similarityFailCells": 0,
+      "findings": []
+    },
+    {
+      "name": "attack",
+      "frames": 14,
+      "similarityPassCells": 8,
+      "similarityFailCells": 6,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 3,
+          "message": "torso similarity 0.62 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 4,
+          "message": "torso similarity 0.64 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 5,
+          "message": "torso similarity 0.65 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 7,
+          "message": "torso similarity 0.67 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 8,
+          "message": "torso similarity 0.67 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack",
+          "frame": 9,
+          "message": "torso similarity 0.64 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "attack_2",
+      "frames": 14,
+      "similarityPassCells": 12,
+      "similarityFailCells": 2,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_2",
+          "frame": 3,
+          "message": "torso similarity 0.69 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_2",
+          "frame": 10,
+          "message": "torso similarity 0.68 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "attack_3",
+      "frames": 14,
+      "similarityPassCells": 5,
+      "similarityFailCells": 9,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 2,
+          "message": "torso similarity 0.69 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 3,
+          "message": "torso similarity 0.61 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 4,
+          "message": "torso similarity 0.62 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 5,
+          "message": "torso similarity 0.63 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 6,
+          "message": "torso similarity 0.65 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 7,
+          "message": "torso similarity 0.64 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 8,
+          "message": "torso similarity 0.64 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 9,
+          "message": "torso similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "attack_3",
+          "frame": 10,
+          "message": "torso similarity 0.67 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "cast",
+      "frames": 16,
+      "similarityPassCells": 14,
+      "similarityFailCells": 2,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "cast",
+          "frame": 9,
+          "message": "torso similarity 0.68 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "cast",
+          "frame": 10,
+          "message": "torso similarity 0.68 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "channel",
+      "frames": 12,
+      "similarityPassCells": 12,
+      "similarityFailCells": 0,
+      "findings": []
+    },
+    {
+      "name": "hit",
+      "frames": 6,
+      "similarityPassCells": 6,
+      "similarityFailCells": 0,
+      "findings": []
+    },
+    {
+      "name": "die",
+      "frames": 12,
+      "similarityPassCells": 4,
+      "similarityFailCells": 8,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 4,
+          "message": "torso similarity 0.68 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 5,
+          "message": "torso similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 6,
+          "message": "torso similarity 0.65 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 7,
+          "message": "torso similarity 0.61 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 8,
+          "message": "torso similarity 0.59 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 9,
+          "message": "face similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 9,
+          "message": "torso similarity 0.59 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 10,
+          "message": "face similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 10,
+          "message": "torso similarity 0.54 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 11,
+          "message": "face similarity 0.66 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 11,
+          "message": "torso similarity 0.51 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "tribulation",
+      "frames": 16,
+      "similarityPassCells": 4,
+      "similarityFailCells": 12,
+      "findings": [
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 1,
+          "message": "torso similarity 0.69 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 2,
+          "message": "torso similarity 0.64 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 3,
+          "message": "torso similarity 0.62 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 4,
+          "message": "torso similarity 0.61 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 5,
+          "message": "torso similarity 0.61 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 6,
+          "message": "torso similarity 0.62 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 7,
+          "message": "torso similarity 0.57 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 8,
+          "message": "torso similarity 0.59 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 9,
+          "message": "torso similarity 0.61 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 10,
+          "message": "torso similarity 0.61 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 11,
+          "message": "torso similarity 0.64 < 0.7"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "tribulation",
+          "frame": 12,
+          "message": "torso similarity 0.68 < 0.7"
+        }
+      ]
+    },
+    {
+      "name": "emote",
+      "frames": 12,
+      "similarityPassCells": 12,
+      "similarityFailCells": 0,
+      "findings": []
+    }
+  ],
+  "limitations": [
+    "Missing native head evidence remains hard failure.",
+    "Foot findings remain open; none reclassified or waived.",
+    "Three atlas pages increase decoded RGBA residency; no mobile budget or Cocos pass established.",
+    "Native edge cleanup still requires visual colour/fringe inspection.",
+    "No new source selection from runattempt3, which remains a failed gait candidate."
+  ]
+}

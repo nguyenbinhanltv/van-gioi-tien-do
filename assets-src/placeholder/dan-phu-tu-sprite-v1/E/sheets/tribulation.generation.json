@@ -1,0 +1,15 @@
+{
+  "id": "E-tribulation-1",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "startUtc": {
+    "current_time": "2026-11-06 16:43:56 UTC"
+  },
+  "endUtc": {
+    "current_time": "2026-11-06 16:44:39 UTC"
+  },
+  "prompt": "Use case: stylized-concept. Production tribulation sprite sheet for DAN/PHU TU support healer A, 24 complete poses. Reference1 exact E master, reference2 exact template. EXACT 6 COLUMNS x 4 ROWS, SQUARE cells, reading order left-to-right top-to-bottom. Every pose faces pure RIGHT/E. SAME adult compact woman: folded jade headpiece, tied loop dark hair, ivory sleeves, jade short split overrobe with blue side panels, bronze trim, dark sash/trousers/boots, medicine gourd and three gold belt talismans. RIGHT near hand holds bronze-handled WHITE whisk, LEFT far hand holds paper talisman. Match master face, anatomy, costume, prop dimensions, soft painted fine-ink game art, NW light. Each256unit cell upright master headtop24 sole232 height208; maintain anatomical scale throughout; legitimate bending/seated/collapse changes posture only. Twenty-four sequential tribulation bracing poses:1-4 upright preparation,5-8 bring whisk and talisman into chest-height protective cross,9-16 braced knees slightly flexed while shoulders recoil subtly at imagined impacts,17-20 release tension,21-24 recover upright. Keep adult proportions and large headpiece same dimensions. No lightning, aura, glow, particles or shadows; effects runtime only. Complete every requested cell, unused cells pure magenta. No extra limbs, no duplicate props. Pure flat #FF00FF background, no floor shadow grid borders lines labels letters text VFX motion blur. Remove every template guide/ghost. Every body and prop entirely inside own cell, never overlap adjacent cells.",
+  "references": ["reference/E.master.png", "E/templates/tribulation.template.png"],
+  "output": "E/sheets/tribulation.png",
+  "toolOutputId": "exec-ca09331b-4431-4f00-8e75-a9e252a46396.png"
+}

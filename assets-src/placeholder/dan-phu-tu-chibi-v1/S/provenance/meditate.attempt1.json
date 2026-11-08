@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:01:44 UTC"
+  },
+  "prompt": "ONE SQUARE4columns x4rows MEDITATE production sprite sheet, EXACTLY16 sequential unique FULL-BODY drawings row-major. Image1 is UN SCALED canonical head stencil at seated height, ONLY an input size/placement guide; image2 full approved identity/costume. Original female jade-whisk healer, approved premium semi-chibi about4.5heads. Ivory+jade+narrow antique-gold trim, tinted brown cel outlines, two tones plus highlight/rim, sparse ink-wash hem. Exactly the approved S/front master face, olive-brown eyes/brows, swept maincap, folded elevated bun and jade pin, collar/sash/pattern; natural RIGHT-hand grip on whisk at viewer LEFT, relaxed LEFT palm at viewer RIGHT. Same orthographic SOUTH/front camera in every cell, no sideways turn/mirror/hand swap. Locked anatomical and skull scale from unscaled input master (256logical cell, about216crown-to-sole anatomy,53px frontcap-to-chin; sourceDPI can differ uniformly). All opaque parts including soles/bun/whisk stay INSIDE their OWN cell with clear margins. PURE #FF00FF background; remove every guide/grid/ghost/label/text/ground/shadow/FX/talisman. No per-frame body/head size drift. Draw whole seated cross-legged healer in EACH cell, head at stencil position and same53logicalpx frontcap-to-chin size, not enlarged for seated silhouette. Robe drapes naturally over crossed legs, shoes/toes visible near ground232, knees wide but insidecell. RIGHT hand viewerLEFT naturally holds original whisk upright beside right knee, LEFT palm viewerRIGHT rests on left knee. Serene face identical; eyes softly half-close for meditation without redesigning eye/face. 16phase breathing loop at24fps: gradual inhale frames0-7, exhale8-15; chest/shoulders small rise then settle, sleeves/sash/horsehair lag1-2frames. No repeated freeze/reset, last connects to first. Seated silhouette lower than standing is intentional, head/body proportions unchanged. NO lotus, pedestal, rug, ground disk, shadow, aura, magic, talisman, particles or extra props. Remove every grid/guide/text/head-stencil boundary. Pure #FF00FF continuous matte,16 complete full-body figures with all parts safely within own cell.",
+  "inputs": ["templates/meditate.head-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/meditate.attempt1.png",
+  "status": "raw candidate; seated pose and head size require actual aligned review; no hard-pass claim",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-2a6b25bd-5378-4212-b372-94d7b6416920.png",
+  "sha256": "dcb091fb4b1f9ad83b6da587c5f4f2166cf7efa0aaf925ca3a559eb5f417b008",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/meditate.head-guide.png",
+      "sha256": "9d243ae58ea08986f7425d9eb09829622b6a6a2ce489f6cdc6d61e5345808ce4"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "prompt": "EDIT image1 ONLY in row1 column2 (zero-based cell1), the second sprite of the top row of this exact4x4 NE-running sheet. Image2 is a deterministic INPUT GUIDE: in that ONE cell it already places the approved master skull/main hair cap at EXACT required size and location. Reconstruct the skull cap in image1 to match image2's cap silhouette bounds and crown position precisely; smoothly reconnect to original streaming hair, preserve the original earring/face/neck design. Do not inflate the guide cap or shift it upward. The cap must remain small: maincap width55 nativepx and crown near global392,27 on the1024 lattice; approx52px at runtime. Image3 is canonical identity. Guide image2's magenta gaps are only editing guides: fill the tiny connection gaps naturally using existing plum hair. EVERY body, torso, shoulder, sleeve, hand, fan, trousers, leg and foot pixel in image1 must retain original positions and scale. Other15 cells stay unchanged. No new camera, no enlarged head, no new pose, no extra ornament. Same tinted cel shading plum/vermilion/gold female Phap tu T1, fixed face, left-hand redfan. Maintain exact4x4 1024x1024 lattice with no margins/labels. Preserve image1 transparency. Only this small cap correction is wanted; not a redraw of the sheet.",
+  "utcStart": "2026-11-08 04:09:23 UTC",
+  "utcEndObserved": "2026-11-08 04:10:20 UTC",
+  "clip": "run",
+  "direction": "NE",
+  "attempt": 9,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "references": [
+    "NE/templates/run.D57-edit-input.png",
+    "NE/templates/run.D57-head-stencil.png",
+    "reference/NE.master.png"
+  ],
+  "raw": "raw/run.attempt9.png",
+  "status": "selected partial head contributor; full body remains attempt1",
+  "rawSha256": "da62b23cf7175ad9b7aa0180cea45391e0d4124296abcd8d2b54cb35b26dcc1b",
+  "utcRawOutputFileModified": "2026-11-08T04:09:57.104Z",
+  "referenceSnapshots": [
+    {
+      "file": "NE/templates/run.D57-edit-input.png",
+      "sha256": "9d754ca6c7d024db7a9e30140edda1f321f8c53ab46c34a5549fba912d96b09b"
+    },
+    {
+      "file": "NE/templates/run.D57-head-stencil.png",
+      "sha256": "b0a6173514c10b02347554d2542a3e7343a4572fb47ca626d4aaca51eeed1723"
+    },
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    }
+  ],
+  "headContributionCells": [1],
+  "contributesTo": "prepared/run.png"
+}

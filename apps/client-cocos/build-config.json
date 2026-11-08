@@ -1,0 +1,7 @@
+{
+  "platform": "web-mobile",
+  "debug": true,
+  "outputName": "web-mobile",
+  "startScene": "db://assets/scenes/Bootstrap.scene",
+  "mainBundleCompressionType": "merge_dep"
+}

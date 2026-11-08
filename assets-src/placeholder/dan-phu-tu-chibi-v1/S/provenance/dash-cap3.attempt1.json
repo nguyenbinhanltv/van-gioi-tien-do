@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 05:37:31 UTC"
+  },
+  "prompt": "LOCAL MAIN CAP correction on image1, same1254x1254square4x4. Image2 original source is reference for unchanged face/body. Only zero-based globalcells6,11,12,13,14,15: the cream top rim of ATTACHED FRONT MAIN HAIR CAP on image1 was lowered too far; RAISE/ROUND its upper volume by these LOGICAL256pxcell amounts: cell6 UP4px, cell11 UP4px, cell12 UP3px, cell13 UP3px, cell14 UP2px, cell15 UP4px. Native source1.225x, so roughly2.5-5nativepx. Keep the elevated bun/coil and jadepin fixed; do not move or scale the entire head. This changes only bounded MAIN CAP top construction/hair volume between bun and forehead, NOT face, eyes, fringe, brows, jaw/chin, neck or body. Keep cells0-5(hit) and7-10 EXACTLY image1 unchanged. Preserve same hair materials/tintedoutline and smooth natural layered hair, no painted stripe or artificial spike. Desired first FRONT cap rim logicalrow about18 in global6/15,29 in11,33 in12/13,26 in14, while elevatedbun is separateabove. Those locations are only intended drawing instructions, keep actual existing face and chin anchors unchanged. All whisk/hands/sleeves/robe/legs/shoes/root/motion/body pixels unchanged. SOUTH/frontcamera, original faceidentity, no head/wholebody resizing, no newexpression. Pure #FF00FF matte, all16wholefigures samegrid, no guides/text/FX.",
+  "inputs": ["raw/dash-cap2.attempt1.png", "raw/hit-dash.attempt1.png"],
+  "rawOutput": "raw/dash-cap3.attempt1.png",
+  "status": "unselected bounded upper-maincap correction; actual semantic boundaries pending",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-c8ac0e02-6fd7-4698-8a94-6cd08d75d4ce.png",
+  "sha256": "4b31fe5ed494d4a6504026ef779db785e55e1b43418776ab9df5b202ce3582ac",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "raw/dash-cap2.attempt1.png",
+      "sha256": "f5e90b9c12b806d1d58e55a6bba8b37ad5d8617ec8ab67357b170a37af2bbcfc"
+    },
+    {
+      "file": "raw/hit-dash.attempt1.png",
+      "sha256": "04e7fb5bb8f6e66e5a3ddbff100be7e7c16035741376a05075366128352d7dfc"
+    }
+  ]
+}

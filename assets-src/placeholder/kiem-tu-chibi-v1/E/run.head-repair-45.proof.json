@@ -1,0 +1,257 @@
+{
+  "status": "Derived candidate, not raw AI output and not accepted head evidence. Native head/canvas/contact review required.",
+  "bodySource": "sheets/run.attempt-04.raw.png",
+  "headSource": "sheets/run.attempt-05.raw.png",
+  "bodySha256": "22faf3e7009921400abb6eec8ddd2d686b08d55e58b6ccfce0616b62d382950d",
+  "headSha256": "dc400130301369323741119f69bfee0147f4bd3c9b2683895303df7274755aa4",
+  "outputSha256": "d2bf3293239ef9ab35250087be8a61c64bab6908211251605e7b68bee3b2b8bb",
+  "operation": "Exact native RGBA region copy from AI head edit5 into AI lower-loop/body source4. No rescale, rotation, per-frame fitting, palette change or hand-painted pixel.",
+  "outsideRegions": {
+    "beforeSha256": "59d48f7ff4e0b36555eaea979cbe4e7bbd1500778c51f545186e840128323729",
+    "afterSha256": "59d48f7ff4e0b36555eaea979cbe4e7bbd1500778c51f545186e840128323729",
+    "byteIdentical": true
+  },
+  "changedInside": 113174,
+  "regions": [
+    {
+      "cell": 0,
+      "logical": {
+        "left": 129,
+        "right": 194,
+        "top": 22.5,
+        "bottom": 93.5
+      },
+      "native": {
+        "left": 158,
+        "right": 238,
+        "top": 27,
+        "bottom": 115
+      }
+    },
+    {
+      "cell": 1,
+      "logical": {
+        "left": 124,
+        "right": 189,
+        "top": 24.5,
+        "bottom": 95.5
+      },
+      "native": {
+        "left": 465,
+        "right": 546,
+        "top": 30,
+        "bottom": 118
+      }
+    },
+    {
+      "cell": 2,
+      "logical": {
+        "left": 122,
+        "right": 187,
+        "top": 27.5,
+        "bottom": 98.5
+      },
+      "native": {
+        "left": 776,
+        "right": 857,
+        "top": 33,
+        "bottom": 121
+      }
+    },
+    {
+      "cell": 3,
+      "logical": {
+        "left": 123,
+        "right": 188,
+        "top": 27.5,
+        "bottom": 98.5
+      },
+      "native": {
+        "left": 1091,
+        "right": 1171,
+        "top": 33,
+        "bottom": 121
+      }
+    },
+    {
+      "cell": 4,
+      "logical": {
+        "left": 119,
+        "right": 184,
+        "top": 28.5,
+        "bottom": 99.5
+      },
+      "native": {
+        "left": 145,
+        "right": 226,
+        "top": 348,
+        "bottom": 436
+      }
+    },
+    {
+      "cell": 5,
+      "logical": {
+        "left": 122,
+        "right": 187,
+        "top": 28.5,
+        "bottom": 99.5
+      },
+      "native": {
+        "left": 463,
+        "right": 543,
+        "top": 348,
+        "bottom": 436
+      }
+    },
+    {
+      "cell": 6,
+      "logical": {
+        "left": 127,
+        "right": 192,
+        "top": 20.5,
+        "bottom": 91.5
+      },
+      "native": {
+        "left": 782,
+        "right": 863,
+        "top": 339,
+        "bottom": 426
+      }
+    },
+    {
+      "cell": 7,
+      "logical": {
+        "left": 125,
+        "right": 190,
+        "top": 17.5,
+        "bottom": 88.5
+      },
+      "native": {
+        "left": 1093,
+        "right": 1174,
+        "top": 335,
+        "bottom": 423
+      }
+    },
+    {
+      "cell": 8,
+      "logical": {
+        "left": 132,
+        "right": 197,
+        "top": 21.5,
+        "bottom": 92.5
+      },
+      "native": {
+        "left": 161,
+        "right": 242,
+        "top": 653,
+        "bottom": 741
+      }
+    },
+    {
+      "cell": 9,
+      "logical": {
+        "left": 132,
+        "right": 197,
+        "top": 22.5,
+        "bottom": 93.5
+      },
+      "native": {
+        "left": 475,
+        "right": 555,
+        "top": 654,
+        "bottom": 742
+      }
+    },
+    {
+      "cell": 10,
+      "logical": {
+        "left": 132,
+        "right": 197,
+        "top": 24.5,
+        "bottom": 95.5
+      },
+      "native": {
+        "left": 788,
+        "right": 869,
+        "top": 657,
+        "bottom": 745
+      }
+    },
+    {
+      "cell": 11,
+      "logical": {
+        "left": 135,
+        "right": 200,
+        "top": 26.5,
+        "bottom": 97.5
+      },
+      "native": {
+        "left": 1106,
+        "right": 1186,
+        "top": 659,
+        "bottom": 747
+      }
+    },
+    {
+      "cell": 12,
+      "logical": {
+        "left": 131,
+        "right": 196,
+        "top": 26.5,
+        "bottom": 97.5
+      },
+      "native": {
+        "left": 160,
+        "right": 241,
+        "top": 973,
+        "bottom": 1061
+      }
+    },
+    {
+      "cell": 13,
+      "logical": {
+        "left": 130,
+        "right": 195,
+        "top": 25.5,
+        "bottom": 96.5
+      },
+      "native": {
+        "left": 472,
+        "right": 553,
+        "top": 972,
+        "bottom": 1059
+      }
+    },
+    {
+      "cell": 14,
+      "logical": {
+        "left": 123,
+        "right": 188,
+        "top": 23.5,
+        "bottom": 94.5
+      },
+      "native": {
+        "left": 777,
+        "right": 858,
+        "top": 969,
+        "bottom": 1057
+      }
+    },
+    {
+      "cell": 15,
+      "logical": {
+        "left": 122,
+        "right": 187,
+        "top": 23.5,
+        "bottom": 94.5
+      },
+      "native": {
+        "left": 1090,
+        "right": 1170,
+        "top": 969,
+        "bottom": 1057
+      }
+    }
+  ]
+}

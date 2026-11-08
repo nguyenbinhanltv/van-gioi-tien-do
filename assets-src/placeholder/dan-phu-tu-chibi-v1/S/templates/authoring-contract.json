@@ -1,0 +1,127 @@
+{
+  "master": "../reference/S.corrected-master.png",
+  "masterMetrics": {
+    "left": 56,
+    "right": 181,
+    "top": 3,
+    "bottom": 232,
+    "height": 229,
+    "width": 125,
+    "pelvisX": 120.75315443397903
+  },
+  "guides": {
+    "ground": 232,
+    "head": 3,
+    "pelvis": 117.5,
+    "centerX": 120.75315443397903
+  },
+  "scale": 1,
+  "note": "INPUT-ONLY unscaled master/head stencils; not output frames or head evidence. Every output pose is an AI drawing/edit. No per-frame fitting or cloned animation frames.",
+  "clips": [
+    {
+      "name": "idle",
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "kind": "upright"
+    },
+    {
+      "name": "meditate",
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "kind": "free"
+    },
+    {
+      "name": "walk",
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "kind": "upright"
+    },
+    {
+      "name": "run",
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "kind": "upright"
+    },
+    {
+      "name": "dash",
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "kind": "upright"
+    },
+    {
+      "name": "sword_fly",
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "kind": "free"
+    },
+    {
+      "name": "attack",
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "attack_2",
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "attack_3",
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "cast",
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "channel",
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "kind": "free"
+    },
+    {
+      "name": "hit",
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "die",
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "tribulation",
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "kind": "free"
+    },
+    {
+      "name": "emote",
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "kind": "upright"
+    }
+  ]
+}

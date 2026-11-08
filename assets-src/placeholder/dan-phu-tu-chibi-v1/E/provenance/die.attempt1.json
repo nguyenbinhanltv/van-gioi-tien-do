@@ -1,0 +1,28 @@
+{
+  "clip": "die",
+  "dir": "E",
+  "attempt": 1,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:19:18 UTC",
+  "utcEnd": "2026-11-07 21:19:40 UTC",
+  "prompt": "Use case: precise-object-edit.\nComplete the TWELVE head stamps in image 1 into the T1 DIE animation. Image 2 is the exact jade healer, robe, fixed adult face and whisk. Preserve each head's size and guided rotation/path. Layout is 4 columns × 3 rows, 12 square cells, 4:3 aspect, row-major. The camera stays E profile; the head rolls backward in that plane, never toward the camera.\n\nFrames 1–2 standing guard then recoil; 3–4 knees buckle and the torso tips backward toward screen LEFT; 5–7 fall onto the hip and back; frame 8 approaches the ground; 9 lands lying on the back with head LEFT and feet RIGHT; 10–12 settle the sleeves, sash, side hair and white strands into the final resting pose. Eyes close. Keep natural limb lengths and the same head scale rather than enlarging the collapsed body to fill the cell. The final three drawings have small distinct settling changes.\n\nRight hand continues to grip the same plain brown whisk shaft with ONE cylindrical bronze collar and white horsehair. It lies naturally across the body as she falls; never remove, duplicate or switch the weapon. Keep the whole head, bun, body, boots and whisk inside every cell.\n\nFixed adult female face and hairstyle: olive-brown almond eye now closed, straight delicate brow, serene jaw/lips, flatter main cap, separate folded bun, jade pin and side strands. Plain ivory T1 robe with jade collar/cuffs/sash, narrow antique-gold edge, sparse ink hem, jade/ivory shoes. Two cel tones, small highlight, narrow rim, tinted outlines, NW light.\n\nKeep the actual head stamps' approximately 53.5 logical-pixel crown-to-chin distance through rotation. Remove all guide marks, grid, borders and crop edges. Flat opaque #FF00FF only. No blood, injury detail, text, ground, shadows, lotus, talismans, aura, particles, blur or afterimages.",
+  "references": ["../templates/die.head-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/die.attempt1.png",
+  "status": "candidate; 12-frame collapse with weapon held; actual QA pending; declare true die-collapse poses",
+  "sha256": "2e4a3a733595f5af9162ff97cc0861b2a14dca36ee59a69849579cd003f49ecb",
+  "rawSha256": "2e4a3a733595f5af9162ff97cc0861b2a14dca36ee59a69849579cd003f49ecb",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/die.head-guide.png",
+      "sha256": "b467f17f9c0c3bc39c8714b1231aa323ddc34c23ae112bef8008bba26fd8dfd4"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

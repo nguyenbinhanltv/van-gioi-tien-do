@@ -1,0 +1,243 @@
+{
+  "convention": "D41 same as merged Phap tu E: meditate0..7 seated and die4..7 die-collapse only. Folded poses remain visual review, not a generic standing similarity pass.",
+  "count": 12,
+  "records": [
+    {
+      "clip": "meditate",
+      "cell0based": 0,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 56.8,
+          "limit": 0,
+          "message": "height 145 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cell0based": 1,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 52.8,
+          "limit": 0,
+          "message": "height 149 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cell0based": 2,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 49.8,
+          "limit": 0,
+          "message": "height 152 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cell0based": 3,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 47.8,
+          "limit": 0,
+          "message": "height 154 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cell0based": 4,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 47.8,
+          "limit": 0,
+          "message": "height 154 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cell0based": 5,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 53.8,
+          "limit": 0,
+          "message": "height 148 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cell0based": 6,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 56.8,
+          "limit": 0,
+          "message": "height 145 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "cell0based": 7,
+      "reason": "seated",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 56.8,
+          "limit": 0,
+          "message": "height 145 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "cell0based": 4,
+      "reason": "die-collapse",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 41.8,
+          "limit": 0,
+          "message": "height 160 px outside the upright band and no pose exception declared"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "cell0based": 5,
+      "reason": "die-collapse",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 61.8,
+          "limit": 0,
+          "message": "height 140 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 5,
+          "message": "torso similarity 0.67 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "cell0based": 6,
+      "reason": "die-collapse",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 90.8,
+          "limit": 0,
+          "message": "height 111 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 6,
+          "message": "torso similarity 0.68 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "cell0based": 7,
+      "reason": "die-collapse",
+      "standingSimilaritySkipped": true,
+      "originalFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 112.8,
+          "limit": 0,
+          "message": "height 89 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 7,
+          "message": "torso similarity 0.70 < 0.7"
+        }
+      ]
+    }
+  ]
+}

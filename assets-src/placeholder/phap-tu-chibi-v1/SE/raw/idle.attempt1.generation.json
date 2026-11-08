@@ -1,0 +1,32 @@
+{
+  "name": "idle",
+  "direction": "SE",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED SE master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT SE front three-quarter view facing screen DOWN-RIGHT in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx128.76. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. CLIP IDLE SE: EXACT16frames4equalcolumns4equalSQUARErows, square2048x2048requested,512rawpixelspercell. EVERYfigurestaysfrontthree-quarterSE, visiblefrontandrightfacingside, samefixedface, no turningtosideprofileorstraightfront. Feetfixedmatchingmaster: anatomicalRnearfoot atscreenLEFT/down, Lfarfoot screenRIGHT/up, bothsolesvisible; no stepping. Smooth16framebreathloop:1-4inhalechest+1px,5-8softpeak,9-12exhale,13-16returntostart. Leftfanhandremainsbentatchestlevel, rightfreearmrelaxed. Head/faceandbodyanatomicalscaleconstant, no giantbabyhead. Hair/ribbons/longsleeveendslag2frames withtiny2-3px swayandsettlethrough16->1. Keepall16fullfiguresincludingfanfeetpin safelyinsideeachcell; no grid/text/shadow/FX.",
+  "utcStart": {
+    "current_time": "2026-11-07 21:41:15 UTC"
+  },
+  "references": ["reference/SE.master.png", "SE/templates/idle.template.png"],
+  "workingTemplate": "D:/Temp/vgtd-phap-chibi-SE/templates/idle.template.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcEndObserved": {
+    "current_time": "2026-11-07 21:43:46 UTC"
+  },
+  "raw": "raw/idle.attempt1.png",
+  "selected": "sheets/idle.png",
+  "status": "selected source; hard sprite gates passed; engine capture recorded separately",
+  "rawToolOutputPath": "C:/Users/PC/.codex/generated_images/01a1b7a1-fffd-7213-8655-a7b6942537ee/exec-8551abce-4c5b-4b88-9266-68146f837842.png",
+  "rawSha256": "23fdea5bf9bb9247a6fd7f62f14b2247fa4e7da7c23a55ea5a49d0a3d0a5695a",
+  "utcRawOutputFileModified": "2026-11-07T21:41:46.851Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/SE.master.png",
+      "sha256": "8f91c915753dacb750110de3cbca30cb65284d20cf2956c52e96e1aa579dbf95"
+    },
+    {
+      "file": "SE/templates/idle.template.png",
+      "sha256": "567a16b32a522824764d55232f5b5e3d699c64e526e107b6ab6cf6dd80d86b20"
+    }
+  ],
+  "selectedSha256": "23fdea5bf9bb9247a6fd7f62f14b2247fa4e7da7c23a55ea5a49d0a3d0a5695a"
+}

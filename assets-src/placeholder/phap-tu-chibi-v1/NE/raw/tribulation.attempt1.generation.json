@@ -1,0 +1,27 @@
+{
+  "clip": "tribulation",
+  "direction": "NE",
+  "attempt": 1,
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is the EXACT LOCKED NE master: rear THREE-QUARTER view facing screen UPPER RIGHT, back predominantly visible, tiny right cheek/ear edge only; NEVER turn toward camera, never SE/front/side. Same fixed female identity, black half-up long hair over nape/back, compact bun, horizontal split-vermilion pin and beaded tassel, gold/red earrings. Same SHORT plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves with thin palegold seams, red sash/tails, plum/gold pointed ankle shoes. ANATOMICAL LEFT hand holds ONE simple open vermilion fan naturally, at screen LEFT as in master; plain vermilion panels/fixed gold ribs, no motif/gems/FX. Right hand at screen RIGHT. Orthographic slight overhead isometric camera fixed in ALL cells. Adult 4.5-head semi-chibi anatomy; main skull cap to soles216 logical px @2x, head22-24%, shoulder width24-28%. Fixed anatomical scale/cell and geometry, no zoom/camera changes. Image2 is EXACT layout/pose guide: equal square256logical-unit cells, pelvisaxis128.65, ground232, main haircap near16. Unscaled master-head stencils constrain skull size and orientation. Keep visible shoulder-top contours and maximum skull breadth consistent with master; hair hides nape, DO NOT invent a chin/skullbase or alter hair to expose it. Cel shading2tones+smallhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Complete body/pin/hair/fan/feet inside each cell, no overlap/clipping. Pure opaque solid #FF00FF background, no scenery/shadow/afterimage/smears. OMIT ALL lattice/ghosts/stencils/markers/text from finished art. Keep naturally held fan in every frame. CLIP tribulation: 16figures4x4 smoothtribulationendurance loop facingNErear3quarter, body+fanONLY noactualFX.0standingbrace1-3gather/leftfanlift4-6sinktoonekneeshieldingwithLEFTfan nearhead butnotcutbytop7-9holdagainstimaginedwind10-12rise13-15settlebraceconnect0. Rightfreehandbalances, fanalwaysLEFTnaturalgrip, nevernewweapon. SAMEskull/limbscale asmaster evenkneeling, nopostureflattening/nozoom, noface towardcamera. Longhair/redribbons/longsleeves lashmodestlytowardlowerleft thenlagandsettle. Headornament/fan/feet/haircontainedinowncell, marginallaround. No lightning/aura/glow/groundcircle/particles/shadow/grid/text.",
+  "utcStart": "2026-11-08 00:13:53 UTC",
+  "references": ["reference/NE.master.png", "NE/templates/tribulation.head-guide.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "raw": "raw/tribulation.attempt1.png",
+  "selected": "sheets/tribulation.png",
+  "status": "selected source; hard gates and real Cocos capture passed",
+  "utcEndObserved": "2026-11-08 00:14:19 UTC",
+  "rawSha256": "2a69f46c96f0b9b03fd013c81e0f12b215f2ed34102189a5110f5ffa5bb1c7be",
+  "utcRawOutputFileModified": "2026-11-08T00:14:19.182Z",
+  "referenceSnapshots": [
+    {
+      "file": "reference/NE.master.png",
+      "sha256": "64bda58468c608a5f872c0517efb1e0fe9cbdda05d44d8046e56e9b81702cce4"
+    },
+    {
+      "file": "NE/templates/tribulation.head-guide.png",
+      "sha256": "a430db31099012443458ed97e540c9bed4cb4cdc22afaccd09ad3330b171a5c8"
+    }
+  ],
+  "selectedSha256": "2a69f46c96f0b9b03fd013c81e0f12b215f2ed34102189a5110f5ffa5bb1c7be"
+}

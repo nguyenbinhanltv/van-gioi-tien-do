@@ -1,0 +1,122 @@
+{
+  "grid": {
+    "cols": 4,
+    "rows": 4
+  },
+  "records": [
+    {
+      "name": "walk",
+      "cell": 8,
+      "operation": "public sprite:repair / repairCell",
+      "files": [
+        {
+          "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/walk.png",
+          "sha256": "051a10b05125f19d2a9156801d62c61cdf06a806ff43613cbc9cc1406f1ad859"
+        },
+        {
+          "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/walk.headroom-edited.png",
+          "sha256": "5d16d32304f20bca0b9485d472ef51642533af0999406b7b0bf6f75dc0068b7d"
+        },
+        {
+          "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/walk.headroom.png",
+          "sha256": "0ed356f3851aafbaa1ca9f04e3b92138f0196d83d88a5b9e5529169c715e0fbe"
+        }
+      ],
+      "originalCellSha1": [
+        "a21496ccecdd6e23942c6b97b74b9c67d77d230b",
+        "b9e6e5dd09f665d0d4f40d2938d011b2c6da4d72",
+        "831a62fe4189880322ff4b0bad543eb9cb885839",
+        "aa3254af43c4c0ba44d4b7c1ab1a064f00a6be19",
+        "e784be32d6cfa04bdb908c12fadb818f6e25a52b",
+        "a0b44c8f0b887cd7c90d5cbfd29a6bf0552685d0",
+        "309909687464434b25f0f8f3602a911cc6672dc9",
+        "ee3fa596a77ee6d9aaa208085c851353a1757009",
+        "6e3dcea33b3538f5487bc9cd2dda1d6faa4af68a",
+        "44193b55efa24ad01281767d0dd389555eecc794",
+        "416b6846656f3168a4459ccf5c3e3dd46f4db625",
+        "c90d7d9f58c375baa5e6a3bfaeffa58faec2d36b",
+        "ee4637fe7a795f76b83a95591f135d871d1c488c",
+        "18ae74ec8c69ec31556c430fa45b58e557f7294e",
+        "3f53604579326641c06d8f09d1d73af923d6198a",
+        "c60dcac7adf1f02c0815b15cfd86ca578f78eabb"
+      ],
+      "selectedCellSha1": [
+        "a21496ccecdd6e23942c6b97b74b9c67d77d230b",
+        "b9e6e5dd09f665d0d4f40d2938d011b2c6da4d72",
+        "831a62fe4189880322ff4b0bad543eb9cb885839",
+        "aa3254af43c4c0ba44d4b7c1ab1a064f00a6be19",
+        "e784be32d6cfa04bdb908c12fadb818f6e25a52b",
+        "a0b44c8f0b887cd7c90d5cbfd29a6bf0552685d0",
+        "309909687464434b25f0f8f3602a911cc6672dc9",
+        "ee3fa596a77ee6d9aaa208085c851353a1757009",
+        "d95b9ec4da1551d19556c81970bf01659288ef8d",
+        "44193b55efa24ad01281767d0dd389555eecc794",
+        "416b6846656f3168a4459ccf5c3e3dd46f4db625",
+        "c90d7d9f58c375baa5e6a3bfaeffa58faec2d36b",
+        "ee4637fe7a795f76b83a95591f135d871d1c488c",
+        "18ae74ec8c69ec31556c430fa45b58e557f7294e",
+        "3f53604579326641c06d8f09d1d73af923d6198a",
+        "c60dcac7adf1f02c0815b15cfd86ca578f78eabb"
+      ],
+      "changed": [8],
+      "otherCellsByteIdentical": 15
+    },
+    {
+      "name": "attack_3",
+      "cell": 1,
+      "operation": "public sprite:repair / repairCell",
+      "files": [
+        {
+          "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_3.png",
+          "sha256": "66be806b185ec3b631d673eb821ca0c2787c3282e6b6c9dfe0413d0172e23abf"
+        },
+        {
+          "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_3.headroom-edited.png",
+          "sha256": "651603506f74b998547d75900fefb001ef0b4cdf97d8215459bfec3210db3a8d"
+        },
+        {
+          "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/attack_3.headroom.png",
+          "sha256": "42db9027983fbbf01390cfa237caf5380b18c45228cfb08c3c8e44fc10c4d49e"
+        }
+      ],
+      "originalCellSha1": [
+        "a33c92efdde3ed6b40069132eb3f438143d35d43",
+        "487887651bd2b52928574211880fd3294948f07e",
+        "d337aa205cc46514cf06c40853eee91aedbc189c",
+        "3b9df4ae97f9fa6ead8b976e489894dd1931bd97",
+        "ef9794534208a63ee1567ef7b58d1b1d470d4f65",
+        "2fd07cb3cbad81ba9c9ae765abb6b1f8cff16e27",
+        "5f8aa1457be40b8dc9b0f79a38c6d48dbbb8065b",
+        "2e35d639850e0cbe6aaad9bcb22b7bef82e16da6",
+        "f94b6fb0f6eb0353c2b648bb6f7a6ebfd6a60514",
+        "964d7218041fb6990613431fa9f5187a71401bf9",
+        "83d2822c7460dd7418c52ec4943463222709bce5",
+        "577dfec2b15667f04153b28cf3a33025a5580211",
+        "fa4a6313331a1589910ee38bb0c64b6618ee28c9",
+        "ce74b500efa676017ec0f481aa56eae319122a31",
+        "84131392f346179fba11a5319c2114116739b7db",
+        "3e2df803595e8fea0a3266f26a95ea804bbafa9e"
+      ],
+      "selectedCellSha1": [
+        "a33c92efdde3ed6b40069132eb3f438143d35d43",
+        "04f1c52aa7224b415a536b04af8d9b079a0510be",
+        "d337aa205cc46514cf06c40853eee91aedbc189c",
+        "3b9df4ae97f9fa6ead8b976e489894dd1931bd97",
+        "ef9794534208a63ee1567ef7b58d1b1d470d4f65",
+        "2fd07cb3cbad81ba9c9ae765abb6b1f8cff16e27",
+        "5f8aa1457be40b8dc9b0f79a38c6d48dbbb8065b",
+        "2e35d639850e0cbe6aaad9bcb22b7bef82e16da6",
+        "f94b6fb0f6eb0353c2b648bb6f7a6ebfd6a60514",
+        "964d7218041fb6990613431fa9f5187a71401bf9",
+        "83d2822c7460dd7418c52ec4943463222709bce5",
+        "577dfec2b15667f04153b28cf3a33025a5580211",
+        "fa4a6313331a1589910ee38bb0c64b6618ee28c9",
+        "ce74b500efa676017ec0f481aa56eae319122a31",
+        "84131392f346179fba11a5319c2114116739b7db",
+        "3e2df803595e8fea0a3266f26a95ea804bbafa9e"
+      ],
+      "changed": [1],
+      "otherCellsByteIdentical": 15
+    }
+  ]
+}

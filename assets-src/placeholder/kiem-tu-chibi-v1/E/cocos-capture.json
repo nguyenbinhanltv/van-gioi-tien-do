@@ -1,0 +1,378 @@
+{
+  "status": "RealCocos3.8.8capturecommandexit0;15clips/202drawings;24midpointsamplesperclipatzoom2.",
+  "command": "node apps/client-cocos/scripts/capture.mjs --skip-build --src dragonbones/kiem-tu-chibi-v1 --stem kiemtuchibi --direction E --mode single --frames 24 --sample midpoint --zoom 2 --gif --out <fresh-temp-directory>",
+  "index": {
+    "url": "http://127.0.0.1:59356/#viewer&mode=single&dir=E&paused=1&src=dragonbones/kiem-tu-chibi-v1&stem=kiemtuchibi",
+    "mode": "single",
+    "direction": "E",
+    "frames": 24,
+    "animations": {
+      "idle": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "idle.sheet.png",
+        "gif": "idle.gif"
+      },
+      "meditate": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "meditate.sheet.png",
+        "gif": "meditate.gif"
+      },
+      "walk": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "walk.sheet.png",
+        "gif": "walk.gif"
+      },
+      "run": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "run.sheet.png",
+        "gif": "run.gif"
+      },
+      "dash": {
+        "duration": 0.4166666666666667,
+        "keyFrames": 10,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "dash.sheet.png",
+        "gif": "dash.gif"
+      },
+      "sword_fly": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "sword_fly.sheet.png",
+        "gif": "sword_fly.gif"
+      },
+      "attack": {
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack.sheet.png",
+        "gif": "attack.gif"
+      },
+      "cast": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "cast.sheet.png",
+        "gif": "cast.gif"
+      },
+      "channel": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "channel.sheet.png",
+        "gif": "channel.gif"
+      },
+      "hit": {
+        "duration": 0.25,
+        "keyFrames": 6,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "hit.sheet.png",
+        "gif": "hit.gif"
+      },
+      "die": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "die.sheet.png",
+        "gif": "die.gif"
+      },
+      "tribulation": {
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "tribulation.sheet.png",
+        "gif": "tribulation.gif"
+      },
+      "emote": {
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "emote.sheet.png",
+        "gif": "emote.gif"
+      },
+      "attack_2": {
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_2.sheet.png",
+        "gif": "attack_2.gif"
+      },
+      "attack_3": {
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_3.sheet.png",
+        "gif": "attack_3.gif"
+      }
+    },
+    "source": "dragonbones/kiem-tu-chibi-v1/kiemtuchibi"
+  },
+  "outputs": [
+    {
+      "file": "attack.gif",
+      "sha256": "6181e6b186d6c26eee6e2fc841844d9f1755509f5aaa73b7e63b1127cdf62a13",
+      "bytes": 193758
+    },
+    {
+      "file": "attack.sheet.png",
+      "sha256": "a622b1c412a938911611671b1a119e9e91a97f4f748f68569b3ca1e04b24d639",
+      "bytes": 5795886
+    },
+    {
+      "file": "attack_2.gif",
+      "sha256": "8ae22e398165430f0fe2cb557fb3808ae60a788fc6bdc7cb747532d81663cce2",
+      "bytes": 185274
+    },
+    {
+      "file": "attack_2.sheet.png",
+      "sha256": "8c6dabf03d80cf4b2a06d166fdd43b7f406b82efbc65006bcd521fcdba55163c",
+      "bytes": 5412453
+    },
+    {
+      "file": "attack_3.gif",
+      "sha256": "c7f34f869af1ae225e2c958abea71c47f676e60f73185adf3310cf1439b0f11f",
+      "bytes": 201753
+    },
+    {
+      "file": "attack_3.sheet.png",
+      "sha256": "8cd9669152145b6e98f252f7f6e2e2e9c701b8ee5b554770c4c8b9fd637d6862",
+      "bytes": 6055751
+    },
+    {
+      "file": "cast.gif",
+      "sha256": "e77ab10764de6c8d98d011ecbcb5c62edaef704aaaa2a012d0f29845cb86052d",
+      "bytes": 209003
+    },
+    {
+      "file": "cast.sheet.png",
+      "sha256": "14a4aba9ad5cca334af8ca246028826abd468844dea01cd0250d7ddd57e61e99",
+      "bytes": 5027113
+    },
+    {
+      "file": "channel.gif",
+      "sha256": "51dcb183b3f9da21fe53b3b86373dbbc3eaad1755f487e304abde6f62ab29887",
+      "bytes": 154691
+    },
+    {
+      "file": "channel.sheet.png",
+      "sha256": "ecb0dac46e1f5289b2da1b919387f3203f19dd7f2308e38e9de24e5795b0e5f9",
+      "bytes": 4925626
+    },
+    {
+      "file": "dash.gif",
+      "sha256": "e05cd82b884e7b5713fc92da00c9fe978b0d6f1962a4829d3e9cb506bb6ac035",
+      "bytes": 142197
+    },
+    {
+      "file": "dash.sheet.png",
+      "sha256": "5ca87442f54390a61fb90199ac8257d1a980d6d58df07fde10c1452e351b4373",
+      "bytes": 5843557
+    },
+    {
+      "file": "die.gif",
+      "sha256": "ab8e1d673ca212a311423e52bd067496d57c0581d8455f40d53ffcdcd6dd2cbb",
+      "bytes": 147131
+    },
+    {
+      "file": "die.sheet.png",
+      "sha256": "8ae96912f873cfaccf0889322662d098ccc4292b683f9f364521af0770deb77c",
+      "bytes": 5035022
+    },
+    {
+      "file": "emote.gif",
+      "sha256": "9eec00d81d230b71316d2a3268b9e91ffb146a9f8c945e2295b6ec8a355641b4",
+      "bytes": 151019
+    },
+    {
+      "file": "emote.sheet.png",
+      "sha256": "1fd414894e43cfbe96bbbcc18731629b7a2ab63f154a81fdee85143888a33eba",
+      "bytes": 4779999
+    },
+    {
+      "file": "hit.gif",
+      "sha256": "6bbe9398cb56eaf9eb747293d7d2c495c19d6bac776e545cc08d5c06fec74703",
+      "bytes": 79714
+    },
+    {
+      "file": "hit.sheet.png",
+      "sha256": "7089685b7a021846a393c0f8c3eac438342fffee087232a951e29e6e2b22f7fa",
+      "bytes": 4036403
+    },
+    {
+      "file": "idle.gif",
+      "sha256": "9789386720a11b85b7c2a30856fa64c12faebc252378a49fedf312f4dd386692",
+      "bytes": 198111
+    },
+    {
+      "file": "idle.sheet.png",
+      "sha256": "83c21c3ef554fcd8afd19b6bc09668499322677aab3b9ae5f848afabd325e090",
+      "bytes": 4684987
+    },
+    {
+      "file": "index.json",
+      "sha256": "3cc61e0017f5fff12ede9b7c988da58d82abb4c8db127640ddcdb46d231ce94e",
+      "bytes": 4426
+    },
+    {
+      "file": "meditate.gif",
+      "sha256": "cba1c8cb0057311cfb6a2c9e0cfd9cf565185e39432f5d19989161bfd0ee5aac",
+      "bytes": 211905
+    },
+    {
+      "file": "meditate.sheet.png",
+      "sha256": "64a6bee375e3966df58a465fe176085d661942ba74675f55bc4fb701647a28e4",
+      "bytes": 5695075
+    },
+    {
+      "file": "run.gif",
+      "sha256": "55c48c3bb9e57266f3a4d794a89d1b9ecfcbabd6abb81f6420168a60db08bc5c",
+      "bytes": 215649
+    },
+    {
+      "file": "run.sheet.png",
+      "sha256": "9ce75222a1a119d10e24451bb90775c46703884546eaf1a40a70957ca1fad1a4",
+      "bytes": 5234627
+    },
+    {
+      "file": "sword_fly.gif",
+      "sha256": "5664a5d8a073e38526dd6c736311f5e32d246c9ab6f837e03dfb9e34fd58381b",
+      "bytes": 150899
+    },
+    {
+      "file": "sword_fly.sheet.png",
+      "sha256": "7e56b7cf99bcf07922efecd6707643054fec759d644b813dd14a00b195e5111e",
+      "bytes": 5125376
+    },
+    {
+      "file": "tribulation.gif",
+      "sha256": "1ab58189e6fff3c74fd454f28cab28be246e5755cae60027a41382fbf0a0705c",
+      "bytes": 230419
+    },
+    {
+      "file": "tribulation.sheet.png",
+      "sha256": "2e14a15b7b95057cfd9a5dfa36a39e9f4cab0e41cdce5525a9885de23290d610",
+      "bytes": 6351018
+    },
+    {
+      "file": "walk.gif",
+      "sha256": "eba72ebb2a5b18387d27cbc8601548c9a1f605ace2d792e3e4244bb910c5906b",
+      "bytes": 201165
+    },
+    {
+      "file": "walk.sheet.png",
+      "sha256": "0a153fd35f82af0307442a6de8012074246225fd9003a676e97326eb5ef6690c",
+      "bytes": 4673053
+    }
+  ],
+  "limitations": [
+    "Root-bone geometricseammetric is0 fordisplay-swaprigs; notproof ofpixelcontinuity. Byeyecontactsheet/GIFreviewrequired.",
+    "GIFcentisecondtimequantization isapproximate, runtimeSKEclock24Hzverifiedseparately.",
+    "CocosCreatorreportedexit36afterproducingfreshwebartifact(windowrecoveryJSONenvironmentwarning);officialbuildscriptvalidatedartifactandreturned0. Captureviewerloadedresourcesandall15clipswithoutpage/viewererror."
+  ],
+  "runtimeInputs": {
+    "kiemtuchibi_E.sprite.json": "758e55cbfd74bf0f75e7e10b0cb19402228b3024d3bf5829ec2ef933bb5ec18e",
+    "kiemtuchibi_E_page1_tex.json": "842fe5aa86a7f34a11d3f926a0c5aa0859f6b22138688ee65e3f24905da042aa",
+    "kiemtuchibi_E_page1_tex.png": "b9dedc4537df0a7feb6a437422d7273092e11c576869160e5395309dc8b78053",
+    "kiemtuchibi_E_ske.json": "2c5009b33316cb18f3e741135773196ad3ee9f8668a6645ad360a7299a161d6f",
+    "kiemtuchibi_E_tex.json": "1e0d35d7b84bf1f96784694d05181ddb5b40d28306d2537cccc7b40cf9729f65",
+    "kiemtuchibi_E_tex.png": "e9b064ad6c1c3b867069e454727b30440177b6b7a99598abca33b82a1faa3fdc"
+  }
+}

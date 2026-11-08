@@ -1,0 +1,97 @@
+{
+  "clip": "meditate",
+  "grid": {
+    "cols": 3,
+    "rows": 3,
+    "cell": 256
+  },
+  "frames": 9,
+  "guides": {
+    "ground": 232,
+    "head": 24,
+    "pelvis": 128,
+    "centerX": 124.0505617977528
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 96,
+        "pelvisY": 200,
+        "standingControl": false
+      }
+    },
+    {
+      "leading": null,
+      "artGuide": {
+        "headY": 24,
+        "pelvisY": 128,
+        "standingControl": true
+      }
+    }
+  ],
+  "width": 768,
+  "height": 768,
+  "generationTemplate": {
+    "base": "publicbuildTemplate",
+    "postprocess": "Public hLine/vLine remove1px cell boundaries; replace head/pelvis guide lines per declared artGuide. No character pixels exist in templates.",
+    "coordinateScale": "2x"
+  }
+}

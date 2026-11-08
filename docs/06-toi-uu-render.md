@@ -2,6 +2,8 @@
 
 Oct 31, 2026 · An Nguyen
 
+> **[Cập nhật D35: hoạt cảnh xương nhân vật dùng **DragonBones** (runtime `dragon-bones` của Cocos 3.8.8, MIT) thay Spine 4.2; mọi chỗ "Spine" bên dưới đọc là "skeleton DragonBones" khi nói về Player / Boss / Linh thú / NPC chủ chốt. Các con số (30 skeleton, 5 hướng + lật, giới hạn bone/slot/đỉnh, 30 fps key) không đổi. Chi tiết, nguồn và rủi ro: [art/dragonbones.md](art/dragonbones.md).]**
+
 ## 1. Vạn Kiếm Quy Tông: 1 sprite + GPU Instancing
 
 Cả chiêu dùng **một sprite kiếm 64 × 16 px** và **một draw call**: mỗi thanh kiếm là một instance chỉ mang 2 số (chỉ số k và seed), còn vị trí, hướng, độ kéo dài đều tính trong vertex shader từ thời gian. CPU chỉ cập nhật một uniform thời gian mỗi frame.

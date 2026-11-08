@@ -1,0 +1,50 @@
+[
+  { "name": "neck", "slot": "body", "bone": "neck", "box": { "x": 116, "y": 57, "w": 22, "h": 31 } },
+  { "name": "torso_base", "slot": "body", "bone": "spine_mid", "box": { "x": 113, "y": 63, "w": 31, "h": 83 } },
+  { "name": "thigh_R", "slot": "body", "bone": "thigh_R", "box": { "x": 111, "y": 131, "w": 18, "h": 68 } },
+  { "name": "thigh_L", "slot": "body", "bone": "thigh_L", "box": { "x": 128, "y": 131, "w": 18, "h": 68 } },
+  { "name": "shin_R", "slot": "body", "bone": "shin_R", "box": { "x": 94, "y": 171, "w": 34, "h": 57 } },
+  { "name": "shin_L", "slot": "body", "bone": "shin_L", "box": { "x": 128, "y": 171, "w": 30, "h": 59 } },
+  { "name": "foot_R", "slot": "body", "bone": "foot_R", "box": { "x": 95, "y": 209, "w": 19, "h": 23 } },
+  { "name": "foot_L", "slot": "body", "bone": "foot_L", "box": { "x": 136, "y": 209, "w": 27, "h": 22 } },
+  { "name": "robe_back", "slot": "outfit_lower", "bone": "robe_back", "box": { "x": 103, "y": 117, "w": 29, "h": 87 } },
+  {
+    "name": "robe_front",
+    "slot": "outfit_lower",
+    "bone": "robe_front",
+    "box": { "x": 76, "y": 117, "w": 94, "h": 87 }
+  },
+  { "name": "scabbard", "slot": "outfit_lower", "bone": "scabbard", "box": { "x": 142, "y": 126, "w": 22, "h": 66 } },
+  { "name": "coat", "slot": "outfit_upper", "bone": "spine_upper", "box": { "x": 81, "y": 75, "w": 68, "h": 53 } },
+  { "name": "sash_L_1", "slot": "outfit_upper", "bone": "sash_L_1", "box": { "x": 117, "y": 123, "w": 11, "h": 28 } },
+  { "name": "sash_L_2", "slot": "outfit_upper", "bone": "sash_L_2", "box": { "x": 117, "y": 151, "w": 11, "h": 15 } },
+  { "name": "sash_R_1", "slot": "outfit_upper", "bone": "sash_R_1", "box": { "x": 128, "y": 123, "w": 12, "h": 28 } },
+  { "name": "sash_R_2", "slot": "outfit_upper", "bone": "sash_R_2", "box": { "x": 128, "y": 151, "w": 12, "h": 37 } },
+  { "name": "face", "slot": "head", "bone": "head", "box": { "x": 118, "y": 36, "w": 24, "h": 44 } },
+  { "name": "hair_back_1", "slot": "hair_back", "bone": "hair_back_1", "box": { "x": 117, "y": 31, "w": 19, "h": 64 } },
+  { "name": "hair_back_2", "slot": "hair_back", "bone": "hair_back_2", "box": { "x": 107, "y": 70, "w": 42, "h": 49 } },
+  {
+    "name": "hair_front_1",
+    "slot": "hair_front",
+    "bone": "hair_front_1",
+    "box": { "x": 102, "y": 24, "w": 39, "h": 33 }
+  },
+  {
+    "name": "hair_front_2",
+    "slot": "hair_front",
+    "bone": "hair_front_2",
+    "box": { "x": 95, "y": 57, "w": 45, "h": 23 }
+  },
+  { "name": "hair_ribbon_1", "slot": "hair_back", "bone": "ribbon_1", "box": { "x": 124, "y": 36, "w": 7, "h": 47 } },
+  { "name": "hair_ribbon_2", "slot": "hair_back", "bone": "ribbon_2", "box": { "x": 124, "y": 70, "w": 7, "h": 42 } },
+  { "name": "hairpin", "slot": "headwear", "bone": "head", "box": { "x": 98, "y": 33, "w": 41, "h": 9 } },
+  { "name": "upper_sleeve_R", "slot": "arm_R", "bone": "upper_arm_R", "box": { "x": 91, "y": 82, "w": 23, "h": 48 } },
+  { "name": "lower_sleeve_R", "slot": "arm_R", "bone": "lower_arm_R", "box": { "x": 81, "y": 107, "w": 33, "h": 39 } },
+  { "name": "sleeve_tip_R", "slot": "arm_R", "bone": "sleeve_tip_R", "box": { "x": 81, "y": 121, "w": 25, "h": 21 } },
+  { "name": "hand_R", "slot": "arm_R", "bone": "hand_R", "box": { "x": 80, "y": 122, "w": 22, "h": 29 } },
+  { "name": "upper_sleeve_L", "slot": "arm_L", "bone": "upper_arm_L", "box": { "x": 133, "y": 78, "w": 30, "h": 52 } },
+  { "name": "lower_sleeve_L", "slot": "arm_L", "bone": "lower_arm_L", "box": { "x": 140, "y": 96, "w": 29, "h": 50 } },
+  { "name": "sleeve_tip_L", "slot": "arm_L", "bone": "sleeve_tip_L", "box": { "x": 141, "y": 107, "w": 27, "h": 35 } },
+  { "name": "hand_L", "slot": "arm_L", "bone": "hand_L", "box": { "x": 147, "y": 122, "w": 23, "h": 26 } },
+  { "name": "sword", "slot": "weapon_R", "bone": "weapon", "box": { "x": 54, "y": 140, "w": 36, "h": 68 } }
+]

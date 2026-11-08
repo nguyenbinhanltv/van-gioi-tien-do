@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.dash",
+  "prompt": "undefined4 columns x2 rows,6 used square cells; last2 pure magenta, exact square-cell grid, row-major. 6 frames:1guard,2small anticipation knee flex,3short southeast lunge with trailing leg extended,4landing,5rise,6guard. Natural anatomical bending without shrinking. Fan stays open in right hand close to chest. No motion trail.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:22:23 UTC",
+  "utcEnd": "2026-11-06 21:22:55 UTC",
+  "selectedOutput": "SE/sheets/dash.generated.png",
+  "references": ["reference/SE.master-crop.png", "SE/templates/dash.template.png"],
+  "attempt": 1
+}

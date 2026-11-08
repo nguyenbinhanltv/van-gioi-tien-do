@@ -1,0 +1,1990 @@
+{
+  "timingProfile": "smooth-v2",
+  "character": "thuong-tu-chibi-v1",
+  "direction": "E",
+  "stem": "thuongtuchibi",
+  "master": "../reference/E.master.png",
+  "backlog": "../quality-backlog.json",
+  "preparation": {
+    "kind": "square-cell-dpi-v1",
+    "calibration": "../motion-calibration.json"
+  },
+  "palette": {
+    "lock": true
+  },
+  "masterHead": {
+    "crown": {
+      "x": 121.96470588235293,
+      "y": 16.95294117647061
+    },
+    "chin": {
+      "x": 137.52941176470588,
+      "y": 67.14117647058826
+    }
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "idle",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/idle.png",
+      "manifest": "templates/idle.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E source lattice registration at logical x128; subtle idle weight shift is preserved, not centered per frame."
+        }
+      }
+    },
+    {
+      "name": "meditate",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "meditate",
+      "kind": "free",
+      "sheet": "raw/meditate.png",
+      "manifest": "templates/meditate.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        }
+      },
+      "exceptions": {
+        "0": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "1": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "2": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "3": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "4": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "5": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "6": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "7": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "8": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "9": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "10": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "11": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "12": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "13": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "14": "seated: visible cross-legged meditation, unchanged anatomical scale",
+        "15": "seated: visible cross-legged meditation, unchanged anatomical scale"
+      }
+    },
+    {
+      "name": "walk",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "walk",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/walk.headroom.png",
+      "manifest": "templates/walk.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting.",
+          "groundY": 245
+        }
+      }
+    },
+    {
+      "name": "run",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": true,
+      "tableId": "run",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/run.lanczos-selected.png",
+      "manifest": "templates/run.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E official stride lattice x128; common contact baseline approximately241logicalpx before inset (native planted sole near295px in313.5pxcell). Same plane all16cells; airborne travel preserved, not fitted per frame.",
+          "groundY": 241
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture",
+        "8": "posture",
+        "9": "posture",
+        "10": "posture",
+        "11": "posture",
+        "12": "posture",
+        "13": "posture",
+        "14": "posture",
+        "15": "posture"
+      },
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 134,
+            "y": 19
+          },
+          "chin": {
+            "x": 146.5,
+            "y": 70
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 0: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "1": {
+          "crown": {
+            "x": 134.5,
+            "y": 20
+          },
+          "chin": {
+            "x": 146.5,
+            "y": 70
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 1: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "2": {
+          "crown": {
+            "x": 134,
+            "y": 18
+          },
+          "chin": {
+            "x": 146.5,
+            "y": 68
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 2: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "3": {
+          "crown": {
+            "x": 134.5,
+            "y": 16
+          },
+          "chin": {
+            "x": 147,
+            "y": 66
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 3: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "4": {
+          "crown": {
+            "x": 135,
+            "y": 14
+          },
+          "chin": {
+            "x": 147,
+            "y": 65
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 4: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "5": {
+          "crown": {
+            "x": 135,
+            "y": 14
+          },
+          "chin": {
+            "x": 147,
+            "y": 64
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 5: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "6": {
+          "crown": {
+            "x": 137.5,
+            "y": 13
+          },
+          "chin": {
+            "x": 147,
+            "y": 65
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 6: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "7": {
+          "crown": {
+            "x": 136,
+            "y": 18
+          },
+          "chin": {
+            "x": 147,
+            "y": 68
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 7: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "8": {
+          "crown": {
+            "x": 136.5,
+            "y": 20
+          },
+          "chin": {
+            "x": 147,
+            "y": 70
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 8: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "9": {
+          "crown": {
+            "x": 135,
+            "y": 21
+          },
+          "chin": {
+            "x": 147.5,
+            "y": 73
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 9: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "10": {
+          "crown": {
+            "x": 135.5,
+            "y": 18
+          },
+          "chin": {
+            "x": 147.5,
+            "y": 68
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 10: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "11": {
+          "crown": {
+            "x": 134.5,
+            "y": 18
+          },
+          "chin": {
+            "x": 147,
+            "y": 68
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 11: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "12": {
+          "crown": {
+            "x": 135,
+            "y": 15
+          },
+          "chin": {
+            "x": 147.5,
+            "y": 67
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 12: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "13": {
+          "crown": {
+            "x": 135,
+            "y": 16
+          },
+          "chin": {
+            "x": 147.5,
+            "y": 66
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 13: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "14": {
+          "crown": {
+            "x": 137.5,
+            "y": 19
+          },
+          "chin": {
+            "x": 147.5,
+            "y": 69
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 14: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "15": {
+          "crown": {
+            "x": 136,
+            "y": 21
+          },
+          "chin": {
+            "x": 147.5,
+            "y": 72
+          },
+          "note": "Reviewed aligned Lanczos3 run cell 15: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        }
+      }
+    },
+    {
+      "name": "sword_fly",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "sword_fly",
+      "kind": "free",
+      "sheet": "raw/sword_fly.png",
+      "manifest": "templates/sword_fly.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved.",
+          "groundY": 232
+        }
+      },
+      "vertical": "keep",
+      "exceptions": {
+        "0": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "1": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "2": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "3": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "4": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "5": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "6": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "7": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "8": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "9": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "10": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale",
+        "11": "airborne: visibly crouched balance stance on own floating spear, unchanged physical scale"
+      }
+    },
+    {
+      "name": "attack",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack.png",
+      "manifest": "templates/attack.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored pose and root travel preserved without centroid fitting."
+        }
+      },
+      "exceptions": {
+        "1": "angled-spear anticipation: visible rearward spear tilt and knee preparation reduce full-alpha height, anatomical scale unchanged",
+        "2": "knee-bend anticipation: visible split stance and angled spear before thrust, anatomical scale unchanged",
+        "3": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "4": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "5": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "6": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "7": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "8": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "9": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "10": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "11": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale",
+        "12": "lunge: visible two-handed thrust with bent front knee and leaning torso, unchanged source scale"
+      }
+    },
+    {
+      "name": "attack_2",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 2,
+        "hit_frame": 4,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_2.png",
+      "manifest": "templates/attack_2.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        }
+      },
+      "exceptions": {
+        "1": "knee-lift pivot anticipation: visible raised front knee and angled spear, anatomical scale unchanged",
+        "2": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "3": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "4": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "5": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "6": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "7": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "8": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "9": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "10": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "11": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale",
+        "12": "lunge: visible waist sweep pivot and bent front knee, unchanged source scale"
+      }
+    },
+    {
+      "name": "attack_3",
+      "cols": 4,
+      "frames": 14,
+      "durationSec": 0.5833333333333334,
+      "loop": false,
+      "tableId": "attack",
+      "kind": "free",
+      "phases": {
+        "windup_end": 3,
+        "hit_frame": 5,
+        "combo_window": 7
+      },
+      "sheet": "raw/attack_3.headroom.png",
+      "manifest": "templates/attack_3.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        }
+      },
+      "exceptions": {
+        "1": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "2": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "3": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "4": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "5": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "6": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "7": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "8": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "9": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "10": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "11": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale",
+        "12": "raised-spear and lunge: visible overhead anticipation, downward pierce or recovery crouch; unchanged source scale"
+      }
+    },
+    {
+      "name": "cast",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "cast",
+      "kind": "free",
+      "phases": {
+        "windup_end": 6
+      },
+      "sheet": "raw/cast.png",
+      "manifest": "templates/cast.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        }
+      }
+    },
+    {
+      "name": "channel",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": true,
+      "tableId": "channel",
+      "kind": "free",
+      "sheet": "raw/channel.png",
+      "manifest": "templates/channel.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        }
+      }
+    },
+    {
+      "name": "die",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "die",
+      "kind": "free",
+      "sheet": "raw/die.png",
+      "manifest": "templates/die.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        }
+      },
+      "exceptions": {
+        "2": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "3": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "4": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "5": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "6": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "7": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "8": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "9": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "10": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale",
+        "11": "die-collapse: visible kneeling, bracing, lowering and side-lying defeat, unchanged source scale"
+      }
+    },
+    {
+      "name": "tribulation",
+      "cols": 4,
+      "frames": 16,
+      "durationSec": 0.6666666666666666,
+      "loop": false,
+      "tableId": "tribulation",
+      "kind": "free",
+      "sheet": "raw/tribulation.png",
+      "manifest": "templates/tribulation.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "12": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "13": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "14": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "15": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        }
+      },
+      "exceptions": {
+        "3": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "4": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "5": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "6": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "7": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "8": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "9": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "10": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "11": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "12": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale",
+        "13": "kneeling-brace: visible knee bend or shielding arm under pressure, unchanged source scale"
+      }
+    },
+    {
+      "name": "emote",
+      "cols": 4,
+      "frames": 12,
+      "durationSec": 0.5,
+      "loop": false,
+      "tableId": "emote",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheet": "raw/emote.png",
+      "manifest": "templates/emote.template.json",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "10": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        },
+        "11": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; authored gesture or airborne root travel preserved."
+        }
+      }
+    },
+    {
+      "name": "hit",
+      "cols": 4,
+      "frames": 6,
+      "durationSec": 0.25,
+      "loop": false,
+      "tableId": "hit",
+      "kind": "free",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [0, 1, 2, 3, 4, 5]
+      },
+      "sheet": "raw/hit-dash.locked.png",
+      "manifest": "templates/hit-dash.template.json",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering."
+        }
+      },
+      "exceptions": {
+        "1": "recoil: visible backward lean and bent knees, unchanged source scale",
+        "2": "recoil: visible backward lean and bent knees, unchanged source scale",
+        "3": "recoil: visible backward lean and bent knees, unchanged source scale",
+        "4": "recoil: visible backward lean and bent knees, unchanged source scale"
+      }
+    },
+    {
+      "name": "dash",
+      "cols": 4,
+      "frames": 10,
+      "durationSec": 0.4166666666666667,
+      "loop": false,
+      "tableId": "dash",
+      "kind": "upright",
+      "heightPolicy": "head-size-v1",
+      "sheetSelection": {
+        "rows": 4,
+        "cells": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "sheet": "raw/hit-dash.locked.png",
+      "manifest": "templates/hit-dash.template.json",
+      "vertical": "keep",
+      "authoredOrigins": {
+        "0": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "1": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "2": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "3": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "4": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "5": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "6": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "7": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "8": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        },
+        "9": {
+          "kind": "lattice-root",
+          "pelvisX": 128,
+          "reason": "preserve authored root travel",
+          "evidence": "Reviewed fixed E template/source lattice x128; source root travel retained without per-frame centering.",
+          "groundY": 245
+        }
+      },
+      "headEvidence": {
+        "0": {
+          "crown": {
+            "x": 152.5,
+            "y": 50
+          },
+          "chin": {
+            "x": 162.5,
+            "y": 103
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 0: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "1": {
+          "crown": {
+            "x": 161.0,
+            "y": 50
+          },
+          "chin": {
+            "x": 170.5,
+            "y": 101
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 1: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "2": {
+          "crown": {
+            "x": 167.5,
+            "y": 48
+          },
+          "chin": {
+            "x": 177.5,
+            "y": 100
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 2: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "3": {
+          "crown": {
+            "x": 156.5,
+            "y": 30
+          },
+          "chin": {
+            "x": 169.0,
+            "y": 82
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 3: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "4": {
+          "crown": {
+            "x": 155.5,
+            "y": 32
+          },
+          "chin": {
+            "x": 169,
+            "y": 82
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 4: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity. The two-pixel ROI candidate missed the single opaque jaw-tip pixel (169,81); outer boundary chin is (169,82), same outer-edge convention as master. See head-evidence.review.json."
+        },
+        "5": {
+          "crown": {
+            "x": 165.5,
+            "y": 36
+          },
+          "chin": {
+            "x": 176.0,
+            "y": 89
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 5: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "6": {
+          "crown": {
+            "x": 161.5,
+            "y": 42
+          },
+          "chin": {
+            "x": 174.0,
+            "y": 92
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 6: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        },
+        "7": {
+          "crown": {
+            "x": 134.5,
+            "y": 34
+          },
+          "chin": {
+            "x": 148.0,
+            "y": 86
+          },
+          "note": "Reviewed aligned Lanczos3 dash cell 7: solid contiguous main-cap crown and outer jaw tip; thin swept strands, ponytail and weapon excluded. Dynamic lean/knee/flight posture retained. Head reason does not exempt D54 similarity."
+        }
+      },
+      "exceptions": {
+        "0": "posture",
+        "1": "posture",
+        "2": "posture",
+        "3": "posture",
+        "4": "posture",
+        "5": "posture",
+        "6": "posture",
+        "7": "posture"
+      }
+    }
+  ],
+  "slice": {
+    "spill": {
+      "threshold": 12,
+      "strength": 1,
+      "keepDistance": 36,
+      "asymmetric": {
+        "maxImbalance": 80,
+        "edgeRadius": 2
+      }
+    },
+    "inner": 35,
+    "outer": 135
+  },
+  "resample": "lanczos3"
+}

@@ -1,0 +1,24 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utc": {
+    "current_time": "2026-11-08 04:41:02 UTC"
+  },
+  "prompt": "Create ONE production animation sprite sheet by EDITING image1, a 4x4 authoring lattice of the canonical character. Image2 is the approved S/front master identity reference. EXACTLY16 sequential unique idle-breathing drawings, row-major, all16cells used, four equal columns and four equal rows. Same orthographic SOUTH/front-facing view in every cell: face looks straight at camera, no SE turn or mirror. Female jade-whisk cultivation healer, original premium semi-chibi about4.5heads, ivory base+jade accent+narrow antique-gold trim, tinted brown outlines, two-tone cel shading+highlight/rim, sparse ink-wash robe hem. Preserve EXACT face identity, eye/brow/nose/mouth design, attached swept cap, elevated brown folded bun/jade pin, clothing pattern and weapon from image2. Anatomical figure and skull scale LOCKED to image1: logical256px cell, about216px crown-to-sole anatomy, master front-cap-to-chin about53px; source image may have higher DPI but ratios identical. Keep skull and facial proportions constant. Gentle16-drawing breathing loop, small chest/shoulder rise and settle, sleeves/ribbons/white horsehair lag by1-2drawings then settle; hands keep a natural right-hand grip (viewer LEFT) on the same plain brown whisk with one bronze collar, left palm relaxed (viewer RIGHT). Each drawing differs naturally; no duplicated poses. Keep head position nearly fixed, soles around the same guide ground line, at least3px logical clearance above bun and all opaque parts inside their OWN cell. Subtle breathing can move downward0-2logicalpx, never enlarge body/head. Last pose connects smoothly to first. Do not swap hands, change face, costume, palette or weapon. PURE SOLID #FF00FF background. ERASE every grid line, label, ghost and guide; do not render any text/ruler/ground disc/shadow/FX/talismans. Empty margins remain magenta. Return one complete square sheet with16characters, uncut feet, exact equal-cell lattice, no extra characters.",
+  "inputs": ["templates/idle.master-guide.png", "../reference/S.corrected-master.png"],
+  "rawOutput": "raw/idle.attempt1.png",
+  "status": "raw candidate; partial QA only until the entire direction passes",
+  "sourceToolOutput": "C:/Users/PC/.codex/generated_images/01a1b7a2-9e1a-7233-b191-8e6dc74b7527/exec-00c10794-dc5b-4428-95e9-9e1b9e916b6a.png",
+  "sha256": "c67fc12c440d4bda4dcec851e6e47d041ead89088a01d63ab1e64590b1c1090b",
+  "dimensions": [1254, 1254],
+  "inputHashes": [
+    {
+      "file": "templates/idle.master-guide.png",
+      "sha256": "aae2423a46dfda5044b589b77e6dbf7d7cd7f4ed63deb600b3736d5bf460d37b"
+    },
+    {
+      "file": "../reference/S.corrected-master.png",
+      "sha256": "8154d2ebf1e8032d600913d5a2523a0c2d59f470b3d34350815eab1bd3479e83"
+    }
+  ]
+}

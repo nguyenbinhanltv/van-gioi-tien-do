@@ -1,0 +1,15 @@
+{
+  "clip": "idle",
+  "direction": "E",
+  "derivation": "D45 body-only controlled edit from locked full-pose source",
+  "prompt": "Precise weapon-removal edit of attached KIEM TU T1 idle sheet. Keep EXACT1254x1254canvas,4x4lattice,16cells,EVERY bodypose/face/eye/blink/hair/ribbon/robe/pants/boots/pixelposition andcamera unchanged. Change ONLY each character's steel SWORD: remove blade,rectangularguard,navyhandle,and cyanPOMMELtassel inall16cells; do NOT remove cyanHAIRribbons. Inpaint the small gripping RIGHT hand naturally as an empty loose grip,matchingoriginal fingers/skin,keepingarm/wrist location identical. Restore only cloth/background that was under sword; mostblade isonMAGENTAsobackgroundmustbeperfect#FF00FF. Allotherimageareas mustremainunaltered,no repaint,no extra shadows,no facechanges,no scaling,no recentering. This is controlled layerderivation from a LOCKEDfullpose source,not a new animation. Keep opaqueuniformmagenta,do not addtransparency,text,labels,guide,bordersornewobjects. Treat each weapon+grip region as the only edit region. Preserve all16 chronological idle/breath/blink poses exactly.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T20:50:50.314Z",
+  "input": "sheets/idle.raw.png",
+  "status": "Body-only edit generated; unverified until D45 region/grip/ordering gates",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-978237fd-5457-4eae-98ec-df02866c1e37.png",
+  "utcCompletedRecorded": "2026-11-07T20:51:27.723Z",
+  "rawSha256": "7cdd8dcf824c8c7ea7b2f37446e77abfc7b2b7e187b93f82b58b7060fe0f9409",
+  "utcOutputFileModified": "2026-11-07T20:51:25.009454+00:00"
+}

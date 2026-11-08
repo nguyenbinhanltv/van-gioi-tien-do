@@ -1,0 +1,20 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:02:54.538Z",
+  "utcRecordedCompleted": "2026-11-07T21:03:46.378Z",
+  "prompt": "Use case: identity-preserve / precise-object-edit. HEAD SCALE correction only on this12frame EMOTE4columns3rows squarecell sheet. Image1 target, image2 pinnedmaster identity/headscale. Heads currently slightly oversized: uniformly redraw each entire skull/face/maincap unit at correct SMALLER master size, crown-to-chin Euclidean48logicalpx in256cell(~68nativepx if362pxrawcell; preserve exact samecellDPI), tolerance\u00c2\u00b11logicalpx. Keep exact same adulttan squarejaw/ambereyes/thickbrow identity and facialinternalproportions. Match master headshape/size, not babyface. Excludebun/looseribbonsfrommeasurement. Keep EVERYTHINGbelowneck unchanged: salute sequence, arms/gauntlets, bodypositions/scale, apron/sash/trousers/boots and grid. No wholefigureresize, no poseflattening. Neck connects naturally, sameheadangle/slightnod. Opaque uniformmagenta, exact4x3layout andsamecanvasdimensions, no labels/effects/shadows.",
+  "references": ["raw/emote.attempt1.png", "../reference/E.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-f01ac81e-0ad5-4817-8da5-e05bbfbb16e5.png",
+  "status": "Selected full sheet; official D47 and canvasLoss gates passed, all15clips captured in Cocos3.8.8 at2x; explicit soft/manual backlog remains.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checkedUtc": "2026-11-07T21:03:46.378Z",
+    "basis": "OpenAI generated Output; original project reference inputs only"
+  },
+  "selectionAtFinalECheckpoint": {
+    "selectedFullSheet": true,
+    "registry": "project.json",
+    "note": "Intermediate AI edits can be inputs of selected composited sources; inspect repair proof and references."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "clip": "run",
+  "direction": "E",
+  "attempt": 4,
+  "frames": 16,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-08T01:43:58.090Z",
+  "prompt": "Precise LOCAL HEAD-SCALE REPAIR of the attached 4x4 KIEM TU E run authoring guide. This guide has UN-SCALED CANONICAL MASTER HEAD STENCILS pasted over oversized old heads. The smaller sharply drawn overlaid face/head is the only approved head identity and SIZE; erase the old larger head halo/extra jaw/duplicate forehead behind it. Keep every smaller stencil face EXACTLY its present size, shape and position within each cell. Do not average it with the obsolete larger head, enlarge it, shrink it further, move it to another body, or redesign the grey-eyed adult face. Same skull/chin dimensions in ALL16 cells. Complete clean hair roots and neck joins around the smaller stencil. Head front cap should follow the smaller stencil silhouette, not the old larger outline. All16 are E profile.\nKeep the EXISTING BODY POSES, ROOT LOCATIONS, limbs, boots, clothing, hands, sword and foot contacts exactly as shown. Do not regenerate a different run cycle, change leg length or torso lean, or fit each figure to a height. These dynamic sprint/flight poses are locked. Right hand keeps the same simple steel sword; ivory/navy robe and trousers, cyan ribbon, small boots unchanged. Preserve hair/ribbon secondary-motion direction and continuity. Only reshape the highest ponytail loop if necessary so the loop tip has at least18/256 cell-height source padding from each cell TOP (needed for one later common source-ground translation); do not lower the main head or move the body to gain that space. Lower/flatten that loose upper hair-loop arc slightly, not the skull, never flatten the running posture.\nUpper-body matching: preserve the plain ivory/navy costume panels, material outline and face identity. No armor, gems, extra ornaments, VFX, shadow, copy-pasted frozen new limbs or text. Clean two-tone cel shading plus highlight; no jagged cyan fringe outside real ribbon. Same4columns4rows, EXACT16frames in same order, full square canvas. OPAQUE PERFECTLY FLAT MAGENTA #FF00FF background. Output preferably2048square; same uniform4x4ratio. Every limb/blade/hair stays inside its own cell. This is an edit, not a new character sheet. The guide contains intentional seams/duplicate old-head pixels: remove those ONLY while keeping the unscaled overlaid head and all original dynamic body poses.",
+  "inputs": ["templates/run.head-stencil-guide-04.png"],
+  "status": "AI head-scale/neck/hair-loop repair retained. Body/pose preservation, native head measurements, source-plane/canvas/contact QA pending; not selected.",
+  "rawToolOutputPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-53f4b1f9-8b2d-4e80-9553-5b0b76c7eb1d.png",
+  "rawSha256": "22faf3e7009921400abb6eec8ddd2d686b08d55e58b6ccfce0616b62d382950d",
+  "utcOutputFileModified": "2026-11-08T01:44:33.231741+00:00",
+  "guideSha256": "046657ec7e6bd95263458f9bf7bf78e665d333a49b02fa2bc6538f670c32c8e0"
+}

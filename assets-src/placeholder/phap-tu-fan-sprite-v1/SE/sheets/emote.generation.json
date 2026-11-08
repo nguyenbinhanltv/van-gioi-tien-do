@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.emote",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion Fan Adept sprite sheet, direction SE. Input 1 is the exact character and direction master; input 2 is the square-cell template, layout only, remove ALL guides. Camera is slight overhead orthographic isometric. THREE-QUARTER FRONT facing DOWN AND SCREEN RIGHT (southeast), front chest visible, same nose and shoulders as master in EVERY cell. Never turn into pure E profile or full front. Slender young adult male, compact 5.75-head proportions, high dark bun with jade pin and red hair ribbon, ivory cross collar/sleeves/trousers, muted vermilion split knee robe with restrained bronze cloud edging, navy two-tail sash, dark calf boots. ONE open cyan/teal folding fan, dark ribs and bronze cloud motif, always in anatomical RIGHT hand as in master, visible physical grip; left hand free. Preserve exact face, garment construction, fan size and anatomy. No staff, sword, gauntlets or armor. Clean dark outlines, restrained 2-3 tone soft cel shading, NW light, readable at128px. PURE solid MAGENTA #FF00FF background, no text, numbers, grid, shadow, ground, VFX or fragments. Ignore stray red/yellow speckles outside the figure in the reference; draw clean silhouettes. Every sprite wholly inside its own square cell. Same scale across frames; never enlarge a seated pose or rescale an individual frame. Upright reference at256cell: top23, sole232, pelvisx127, figure209px; maintain203..215px for upright poses. 4 columns x2 rows,8 square cells,aspect2:1. Read row-major left to right, then next row. Eight-frame respectful salute:1guard,2-3free left palm to heart,4-5tiny head nod1-2px,6lower palm,7-8guard. Right-hand open fan stays at chest. Upright body203..215px throughout, no waist bow or crouch.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:22:02 UTC",
+  "utcEnd": "2026-11-06 21:22:53 UTC",
+  "selectedOutput": "SE/sheets/emote.generated.png",
+  "references": ["reference/SE.master-crop.png", "SE/templates/emote.template.png"],
+  "attempt": 1
+}

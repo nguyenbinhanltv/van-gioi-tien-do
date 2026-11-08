@@ -1,0 +1,5 @@
+{
+  "character": "the-tu-chibi-v1",
+  "scale": 1,
+  "note": "Locked normalized-grid scale 1 for all E clips after declared whole-sheet DPI conversion; full 15-clip/202-frame build passes hard gates. No individual frame fitting. Source master reference calibration is separately recorded in character-calibration.json."
+}

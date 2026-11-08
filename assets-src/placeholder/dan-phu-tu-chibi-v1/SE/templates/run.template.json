@@ -1,0 +1,244 @@
+{
+  "clip": "run",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "cell": 256
+  },
+  "frames": 16,
+  "guides": {
+    "ground": 232,
+    "head": 2,
+    "pelvis": 117,
+    "centerX": 117.60678680981596
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 142.6507481578136,
+        "y": 244.52198067399883,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 104.12157685320184,
+        "y": 214.6474324898402,
+        "planted": false
+      },
+      "tag": "R_contact"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 133.70647624781444,
+        "y": 240.04984471899925,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 108.93772326627831,
+        "y": 213.97296787140803,
+        "planted": false
+      },
+      "tag": "R_contact"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 124.76220433781529,
+        "y": 235.57770876399965,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 113.75386967935478,
+        "y": 214.5384723559526,
+        "planted": false
+      },
+      "tag": "R_down"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 115.81793242781613,
+        "y": 231.10557280900008,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 118.57001609243126,
+        "y": 216.51080577373457,
+        "planted": false
+      },
+      "tag": "R_passing"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 106.87366051781697,
+        "y": 226.6334368540005,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 123.38616250550773,
+        "y": 219.92942796487927,
+        "planted": false
+      },
+      "tag": "R_toeoff"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 97.92938860781781,
+        "y": 222.16130089900093,
+        "planted": true
+      },
+      "farFoot": {
+        "x": 128.20230891858418,
+        "y": 224.70282536463932,
+        "planted": false
+      },
+      "tag": "R_toeoff"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 94.48928402704891,
+        "y": 218.51266172453128,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 133.01845533166065,
+        "y": 230.61679831322385,
+        "planted": false
+      },
+      "tag": "R_up"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 99.30543044012538,
+        "y": 216.28271692791063,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 137.83460174473714,
+        "y": 237.35385860577733,
+        "planted": false
+      },
+      "tag": "R_precontact"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 104.12157685320184,
+        "y": 214.6474324898402,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 142.6507481578136,
+        "y": 244.52198067399883,
+        "planted": true
+      },
+      "tag": "L_contact"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 108.93772326627831,
+        "y": 213.97296787140803,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 133.70647624781444,
+        "y": 240.04984471899925,
+        "planted": true
+      },
+      "tag": "L_contact"
+    },
+    {
+      "leading": "L",
+      "nearFoot": {
+        "x": 113.75386967935478,
+        "y": 214.5384723559526,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 124.76220433781529,
+        "y": 235.57770876399965,
+        "planted": true
+      },
+      "tag": "L_down"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 118.57001609243126,
+        "y": 216.51080577373457,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 115.81793242781613,
+        "y": 231.10557280900008,
+        "planted": true
+      },
+      "tag": "L_passing"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 123.38616250550773,
+        "y": 219.92942796487927,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 106.87366051781697,
+        "y": 226.6334368540005,
+        "planted": true
+      },
+      "tag": "L_toeoff"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 128.20230891858418,
+        "y": 224.70282536463932,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 97.92938860781781,
+        "y": 222.16130089900093,
+        "planted": true
+      },
+      "tag": "L_toeoff"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 133.01845533166065,
+        "y": 230.61679831322385,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 94.48928402704891,
+        "y": 218.51266172453128,
+        "planted": false
+      },
+      "tag": "L_up"
+    },
+    {
+      "leading": "R",
+      "nearFoot": {
+        "x": 137.83460174473714,
+        "y": 237.35385860577733,
+        "planted": false
+      },
+      "farFoot": {
+        "x": 99.30543044012538,
+        "y": 216.28271692791063,
+        "planted": false
+      },
+      "tag": "L_precontact"
+    }
+  ],
+  "width": 1024,
+  "height": 1024
+}

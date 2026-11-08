@@ -1,0 +1,8 @@
+{
+  "sheet": "sheets/hit-dash.png",
+  "scale": 0.990909090909091,
+  "masterAlphaHeight": 218,
+  "rawNormalizedUprightHeight": 220,
+  "referenceGlobalFrames": [0, 1, 4, 5, 6, 14, 15],
+  "note": "One fixed calibration for both clips after whole-sheet DPI normalization; no per-frame fitting. Shared neutral sheet figures occupy220px versus master218px."
+}

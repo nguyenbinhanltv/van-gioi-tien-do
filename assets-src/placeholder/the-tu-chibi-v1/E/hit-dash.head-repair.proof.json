@@ -1,0 +1,48 @@
+{
+  "source": "raw/hit-dash.head-corrected.png",
+  "edit": "raw/hit-dash.head-repair-edit.png",
+  "output": "raw/hit-dash.head-repaired.png",
+  "selected": [10, 11, 13],
+  "grid": {
+    "cols": 4,
+    "rows": 4
+  },
+  "before": [
+    "36858d7e9356a088f9d6e5bbbc2f50bfff8cfebc",
+    "272860602c7c25a454dd5e6e61c33ed7cec779e8",
+    "7043ed38e1fe36214b00e239b44541796258f5a0",
+    "e34f9fa1fe07ed6777c4d8ea14bcd0ad261825ce",
+    "637173a5beac09a97bf9574a37d9d50e853aa6c1",
+    "fcc66e9ee96a02ca0fa7c3f39f58c44832a7bd03",
+    "7550348f3e9993458326c4ed5390605fc091158e",
+    "91ede7398a69388052d22771e6004acff46908a2",
+    "5f96b8871bf431fce00f552f63633aff751287ec",
+    "67b8976a3fc3677d21f99708d892dfda2e6f9aab",
+    "72b944ebd7a1f64e6835d2fa03378493d87d8439",
+    "e5304bc219484f3aa0c297c24c2cd825197a4460",
+    "17d5fac90f51ee69c727821299afbdaf6adac0e9",
+    "88e518effc39030862fc19a6edbdb240cedd3096",
+    "52840dfa9abf47be4fcaed83e6c1f197e5b20810",
+    "9f90e4ccab30cc86fc0be3b8b1e4a9e69cb47e36"
+  ],
+  "after": [
+    "36858d7e9356a088f9d6e5bbbc2f50bfff8cfebc",
+    "272860602c7c25a454dd5e6e61c33ed7cec779e8",
+    "7043ed38e1fe36214b00e239b44541796258f5a0",
+    "e34f9fa1fe07ed6777c4d8ea14bcd0ad261825ce",
+    "637173a5beac09a97bf9574a37d9d50e853aa6c1",
+    "fcc66e9ee96a02ca0fa7c3f39f58c44832a7bd03",
+    "7550348f3e9993458326c4ed5390605fc091158e",
+    "91ede7398a69388052d22771e6004acff46908a2",
+    "5f96b8871bf431fce00f552f63633aff751287ec",
+    "67b8976a3fc3677d21f99708d892dfda2e6f9aab",
+    "76deb70c53932cabe1d6123515a3ebe0415ffd3f",
+    "a8767a00c41f8db1eb5f33fe6953826c139e4623",
+    "17d5fac90f51ee69c727821299afbdaf6adac0e9",
+    "e578466792d683b0bf885320d5a49e585e32e402",
+    "52840dfa9abf47be4fcaed83e6c1f197e5b20810",
+    "9f90e4ccab30cc86fc0be3b8b1e4a9e69cb47e36"
+  ],
+  "unchangedOtherCells": 13,
+  "resampling": false
+}

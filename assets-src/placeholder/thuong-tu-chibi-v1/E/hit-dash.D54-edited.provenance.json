@@ -1,0 +1,38 @@
+{
+  "name": "E-dash-D54-torso-lock",
+  "start": "2026-11-08T01:32:59.469Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-selected.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Edit ONLY TWO cells of image1, this1254x1254 4x4 grouped THUONG TU T1 male E sprite sheet: sourcecell9=row3col2 (dashlocal3), sourcecell10=row3col3 (dashlocal4). They are flying dash poses with torso excessively curled/horizontal and have lost canonical torso/face read. Redraw these TWO poses FROM the locked T1 master image2: same adult male rightPROFILE face, small slate almond eye, straight brow, jaw, swept black primary hair cap, low ponytail; same plain navy sleeveless wrap with clean visible ivory V collar/binding, broad contiguous navy chest-to-waist silhouette, red sash, wrap wrists, compact pants/boots, straight spear with red fork pennon. Keep the forward DASH and both knees/legs bent airborne behind, but lift chest/head and reduce torso lean to20-25degrees forward from vertical (like nearby dashlocal2), no folded horizontal torso. Preserve fixed hip/root registration, blade forward-right and two clean connected hand grips on continuous straight shaft. Don't just relabel pose; repaint torso/neck/arms frommaster visibly. Head-size MUST match canonical: rounded solid primary hair cap to chin Euclidean66.7nativepx per313.5cell (~52.55 afterlockedcanvascalibration). Thin flyaways/ponytail excluded. No face-only distortion, no giant head. Neck/collar seam clean, no duplicate outlines or gaps. Preserve anatomical proportions216px canonical standing scale despite bentlegs; do not fit totalposeheight or shrinkbody. Preserve all other14 cells EXACTLY, including six hits, otherdashcells, two standingrecoveries. Same square4x4nativecanvas and flat#FF00FF background; every full weapon/pennon staysinsideitscell with7pxmargin. No text/grids/shadows/FX. Only cell9 and10 redraw: moderate-forward airborne dash, face/torso locked tomaster.",
+  "endObserved": "2026-11-08T01:33:40.569Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f895ba60-ab71-4c71-ab1c-5b9a6ae70e10.png",
+  "output": "raw/hit-dash.D54-edited.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "status": "candidate, cells9/10 eligible only; pending head/D54 QA",
+  "outputEvidence": {
+    "path": "E/raw/hit-dash.D54-edited.png",
+    "sha256": "2d0b18cfd5692b080a8ef94ed4785673a345daf6023f4a143f36ebdea6c41478",
+    "bytes": 1838708,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/raw/hit-dash.head-selected.png",
+      "path": "E/raw/hit-dash.head-selected.png",
+      "sha256": "38d8563d7770e0a8e969438f6a5bb35a1ac91fd9974de1be321d98e310b3bac8",
+      "bytes": 2181026,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

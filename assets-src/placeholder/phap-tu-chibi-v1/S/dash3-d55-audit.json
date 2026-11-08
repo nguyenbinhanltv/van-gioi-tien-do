@@ -1,0 +1,303 @@
+{
+  "format": "vgtd-head-reason-similarity-audit-summary",
+  "version": 1,
+  "utc": "2026-11-08T04:33:05.104Z",
+  "command": "npm run sprite:audit-head-similarity -w @vgtd/sprite -- --root assets-src/placeholder/phap-tu-chibi-v1/S --out D:/Temp/phap-S-dash3-D55-final.json",
+  "gitHead": "496ef9d3e8265a413b10e4b8355c793e40ecd0bc",
+  "gateSourceSha256": "20daba7a2615f7c02c987f85040fb4ac845f8f948e73119cee3689bdd72bde4c",
+  "reasonSourceSha256": "1d8840da0f16cb68ea22baa9134663ed93aaeafe7f9956d4d4e42e576c2a488d",
+  "fullReportSha256": "42497d04eca03634b5395a3110bfc17a561e55b98a922ddd5e0ba47512b72363",
+  "method": "Compare every old truthy exception with isSimilarityExemptReason, independent of clip kind; select exactly old-skipped/new-checked cells, remove only those reasons in memory and run the unchanged-source pipeline. Inventory retained D41 pose exemptions separately (not similarity passes). No source, export or backlog writes; all rerun input hashes rechecked. No findings are accepted by this report.",
+  "selection": {
+    "oldSkippedCells": 151,
+    "newlyCheckedCells": 19,
+    "retainedD41PoseCells": 132
+  },
+  "retainedD41PoseExemptionCount": 132,
+  "retainedD41Note": "Retained pose exemptions are unmeasured/exempt, not passes. Full per-cell inventory is reproducible with the command and pinned inputs.",
+  "scannedProjects": [
+    {
+      "file": "assets-src/placeholder/phap-tu-chibi-v1/S/project.json",
+      "sha256": "529046d6d3863bda3523ba8b155f8f5d0434abc7ae0887c98b2507b58d7b31cc"
+    }
+  ],
+  "totals": {
+    "projects": 1,
+    "cells": 19,
+    "pass": 19,
+    "fail": 0,
+    "unmeasured": 0
+  },
+  "projects": [
+    {
+      "project": "assets-src/placeholder/phap-tu-chibi-v1/S/project.json",
+      "character": "phap-tu-chibi-v1",
+      "direction": "S",
+      "inputs": [
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/project.json",
+          "sha256": "529046d6d3863bda3523ba8b155f8f5d0434abc7ae0887c98b2507b58d7b31cc"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/quality-backlog.json",
+          "sha256": "a26f963b50bdac90ad66d331a1dd9b63b0f59400b2b1345c1c0a70dc2c091816"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/attack.png",
+          "sha256": "18e3049287334ea488b6cfdc36f92fb0580a6a4097a3fd3468b4224ec17d5ed6"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/attack_2.png",
+          "sha256": "b0099eb13c12465924a065cc0deb86eae33600f6460c8c59c99e26aea96140e5"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/attack_3.png",
+          "sha256": "d29e2abce3a9a2de45ddd1ec245598bcc471dfd9e243201470b41f7715c796f7"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/cast.png",
+          "sha256": "4633dd88b1bacca7ea3c5936ce0192a85f12364dc7ac47293a6ab8ca7726b7b5"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/channel.png",
+          "sha256": "fdf8030d44dcfb6dd8209bb6c6fca89f53b3e7ec8af41849a653c35478a83e54"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/die.png",
+          "sha256": "cf506c3c66cdc1797034b48b2b386342b0d2111e3e40e34764eafca00154ce8b"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/emote.png",
+          "sha256": "fa631d5769e071edea45ef0b690d3715f3982c4d3ca22c302d94328b2136abde"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/hit-dash.png",
+          "sha256": "643cde323388b9968b9f7d775efabd0e3a437e26c1f7c900c23929a530c0af44"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/idle.png",
+          "sha256": "745616b7db82e3841ba8a24fbca21844d0e41db80b13ff50da09fba479b1099a"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/meditate.png",
+          "sha256": "c0e62edaf4812e6d7c7f7a30cdfd91e88cd4764ba9115fd8ba90a7513c1ceca7"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/run.png",
+          "sha256": "e5b9a5dbc0724285177cc22ba9f1559f23ade021326840572ba4f67aaadf8b0f"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/sword_fly.png",
+          "sha256": "53c3352c4df2318f131581a7d207dfd063427189bf31551a9e6f72069519ddd8"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/tribulation.png",
+          "sha256": "7f91d56709143e7c5f92f3d880220e7f00fddd219d638c464525a21d8e6cfc32"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/sheets/walk.png",
+          "sha256": "88594b5d7cad0ecda0708940293446cfc7941e823165fc5c2bb6d354196d975a"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/attack.template.json",
+          "sha256": "89368e827add7cb0edf9d72107b4d484edb8b1d663c39b79f05e55d337f706d4"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/attack_2.template.json",
+          "sha256": "991684510ecff4f4a1f309f79016838d8cd620af220fcfe961a59b594db05d60"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/attack_3.template.json",
+          "sha256": "c8fabcb6047363ad85afa95d0a68b4de3f115242d998769b30340f40c61248da"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/cast.template.json",
+          "sha256": "8ac96cf3e129ba815420baa758aef6c18e7a6bd06618048d86c8b7b18aae2726"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/channel.template.json",
+          "sha256": "99e8512321a9544541d3592d0b03415723519ee874bc4bdd9143a6dd677493d5"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/die.template.json",
+          "sha256": "00f52528a92c31495f8c10e043da044f86ac034798c2428f537b23fa11ac185b"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/emote.template.json",
+          "sha256": "8b8ae479b9aac166ba0c600156882abbd3d1374b8cbfc82961266d2908da05cc"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/hit-dash.template.json",
+          "sha256": "6da7d3e07208e7a39973f7f45c5b7ff498906c5f53450a49459d4e1a49e04d27"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/idle.template.json",
+          "sha256": "fb2e30c08121aae3af953e801f9b0780f3eef06593519f7fc37389ce8d41887d"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/meditate.template.json",
+          "sha256": "48619c194223b625fd965ceccea5c852a1bf44303d98cfa68bcf4cab14c6cac4"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/run.template.json",
+          "sha256": "044971dabde5e1ba7b97333bb480c6b49dc4128a9fc16ae7218662ab4762b6db"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/sword_fly.template.json",
+          "sha256": "21069916ac12f11aa583290c1be6c82b5cb13bf51ce141a668db927af3ca09ca"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/tribulation.template.json",
+          "sha256": "52b7a3b68a0093742c39261850883acdebf79473799d4c0d4e3f5d03d4f91954"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/S/templates/walk.template.json",
+          "sha256": "440e2a9e6360998e3a8757964c2f8842806dd8aa13eefe6ea275cc536701eef8"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/character-calibration.json",
+          "sha256": "243ed6f29d0be69a26721f190929932f5bb80f49a3e6e43896cd583a0d7b44d4"
+        },
+        {
+          "file": "assets-src/placeholder/phap-tu-chibi-v1/reference/S.master.png",
+          "sha256": "1c2b8e63d96016f8a000683fb017b0c38dd937d497c4ed6daf6514bb180f3168"
+        }
+      ],
+      "cells": [
+        {
+          "clip": "run",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 3,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 4,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 5,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 6,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 7,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 10,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 11,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 12,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 13,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 14,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "run",
+          "cell": 15,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 1,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 2,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 4,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 5,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "dash",
+          "cell": 6,
+          "reason": "secondary-overhang",
+          "status": "pass",
+          "findings": []
+        },
+        {
+          "clip": "emote",
+          "cell": 9,
+          "reason": "posture",
+          "status": "pass",
+          "findings": []
+        }
+      ]
+    }
+  ]
+}

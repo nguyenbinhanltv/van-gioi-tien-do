@@ -1,0 +1,11 @@
+{
+  "id": "B.SE.run-reroll-1",
+  "prompt": "Edit the attached SE RUN sprite sheet, retaining its exact SIX columns TWO rows, 12 square cells, magenta background, character scale and framing. Character is the attached Vermilion Fan Adept reference: cyan fan held always in anatomical RIGHT hand, vermilion ivory robe navy sash, southeast three-quarter front. Current run poses are too deeply tucked. Redraw legs anatomically, not scaling any figure. In EVERY cell retain full standing silhouette height: at 256px cell equivalent bun top about23, lowest boot sole about260 before locked character normalization, raw visible height237..244px. Keep head/torso/robe/fan size unchanged. Extend one entire natural full-length leg diagonally downward toward near contact even in flight, other leg bent behind, modest knee bend, clear alternating near/right and far/left leg reversal between the two half cycles. Do not squat or fold both knees up. Keep lowest sole below robe and clear separated boots, all within square cell. Mild forward lean, brisk run progression contact/load/passing/reach, no airborne tucked crouch. Preserve all twelve different sequential poses, stable camera, full bun and feet, no staff/sword, no text/grid/shadow/VFX. No per-frame resizing. Whole sheet same aspect3:1. Render clean edges no stray red speckles.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 21:45:09 UTC",
+  "utcEnd": "2026-11-06 21:45:34 UTC",
+  "selectedOutput": "SE/sheets/run.reroll1.generated.png",
+  "references": ["SE/sheets/run.generated.png", "reference/SE.master-crop.png"],
+  "attempt": 2
+}

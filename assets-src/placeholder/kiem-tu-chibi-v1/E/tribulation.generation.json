@@ -1,0 +1,18 @@
+{
+  "clip": "tribulation",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 16,
+  "cols": 4,
+  "rows": 4,
+  "prompt": "Precise edit-from-MASTER authoring. INPUT1 contains identical canonicalreferenceplaceholdersinagrid: EDIT themintoNEWchronologicalanimationdrawings,notduplicatefrozenframes. PreserveEXACTadultKIEMTUT1identity,headsize/profileface(grayeye,straightbrow,smallnose,softangularjaw),plainivory/navyshortrobe/navysash/trousers/smallboots,blackpony/cyanribbon,simplesteelstraightblade/rectangularsilverguard/navygrip/cyanpommeltassel. NOarmor,crown,gems,embroideredpatterns,newpropsorFX. Eastright-facingorthographicgamecameraeverycell. HEADSIZE mustnotchangeevenonlunge/crouch/flight;dynamicbodyposturesallowed,neverfitbodyheightperframe. Material-tintedoutline,2celtones+1highlight,NWlight,thinrim. Samecellorigins/scaleasINPUT1,groundat232logicalunits@256cellwhenplanted;naturalbodytranslationsonly. Eachposewholeinsideowncellpadding. Hair/ribbon/sleeveslag1-3framesandsettle,notrigidcutouts. REMOVEALLreferencegridlines/markersbeforefinished;OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,no text,labels,borders,shadowsorparticles. Input2iscanonicalhighresEidentity. EXACT4columns x4rows,squarecanvas,target2048square(oruniformsquareDPI). All16cellsactive.\n16frame NONLOOP resolve/bracing againstunseenstorm,NOFXbaked.1-4widenstanceandraiseleftpalm/rightbladediagonalguard,5-8loweronekneeandcompressunderpressure,9-12holdguardwithsmallphysicaltremorandstronghair/sleevelag,13-16recovertofirmhalf-kneelingguard. Keepdynamiccrouch/lunge,NOhead/bodyresizing. OneplainsteelbladeinRIGHT hand,tips/limbsinsidecell,facefixedseriousEprofile,eyesgray. No lightning,glow,crown,extraobjects.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:06:01.542Z",
+  "inputs": ["templates/cast.master-edit-guide.png", "../reference/E.master.raw.png"],
+  "status": "Full-pose source generated; pending actual frame/pose/head/contact/loop QA and Cocos capture.",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-1213b497-6053-4396-90b4-c42027555022.png",
+  "utcCompletedRecorded": "2026-11-07T21:06:31.909Z",
+  "rawSha256": "9df01c02d00f8778479a0fe180cc657a0e3eb2d95d491d5c77f7f781a8e7321d",
+  "utcOutputFileModified": "2026-11-07T21:06:29.238108+00:00"
+}

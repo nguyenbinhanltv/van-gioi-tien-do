@@ -1,0 +1,28 @@
+{
+  "clip": "channel",
+  "dir": "E",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 21:51:54 UTC",
+  "utcEnd": "2026-11-07 21:52:26 UTC",
+  "prompt": "Use case: production sprite-sheet precise edit. TARGET image1: a4columns x3rows authoring sheet with12 copies of calibrated standing femaleE master. Image2 exactfaceidentity. Edit these into12 sequential CHANNEL LOOP frames, rowmajor. CRITICAL preserve standing body and leg lengths and head size from stamped figures, same bootcontact232 of256logicalcell, maincapcrown16, headcrown-tochin53.5. Do not enlarge or lengthen. Maintain upright stance, feet rooted. Right hand holds plainbrownwhisk natural fingers, ONEbronzecollar whitehorsehair. Left palm begins gently open ahead of torso, rises~8px and fingers close in small mudra, returns smoothly. No giant arm extension. Shoulders/chest subtly breathe, sleeves/sash/hair/horsehair lag and settle over12frames. Use same fixed mature delicatefemaleolivebrownalmondface, unchangedhaircap/bun/jadepin and2side strands. Ivory/jadeT1robe narrowantiquegoldtrim sparseinkwashhem, originaldesign, two-tonecelshading+highlight+narrowrim,tintedoutlines,NWlight. Keep eachfigure exactlysame reference scale, generouscellmargins andbuninsidecell. Remove black rules/dashedguides; finishedbackgroundflat#ff00ff ONLY. No glow,FX,talismans,platform,text,watermark,shadows. Exactly12fullbodyframes4x3landscape sheet, noemptycells, no cropping.",
+  "references": ["../templates/channel.master-guide.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/channel.attempt2.png",
+  "status": "full-body guide correction candidate; actual QA pending",
+  "sha256": "8d629bc459c1fd2b9015a229ceb08288243851c83d6aca042e73679e02123374",
+  "rawSha256": "8d629bc459c1fd2b9015a229ceb08288243851c83d6aca042e73679e02123374",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/channel.master-guide.png",
+      "sha256": "00ec85f4e4ad0a058a6bdd1ffe616e7be766d990faaa0abc476e13cd6245761f"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

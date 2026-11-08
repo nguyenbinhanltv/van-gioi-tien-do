@@ -1,0 +1,18 @@
+{
+  "clip": "emote",
+  "dir": "S",
+  "attempt": 3,
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "cli": "codex-cli 0.166.0",
+  "utcStart": "2026-11-06 19:10:07 UTC",
+  "prompt": "EDIT image1 (the accepted SOUTH idle sheet) into an eight-frame EMOTE martial salute sheet. Image2 is character identity reference only. Preserve image1 EXACT canvas size, FOUR columns TWO rows, cell positions, full-body height, head/bun top, boot soles, legs, boots, torso width, face identity and all colors. Do not zoom, shrink, stretch or recenter any figure; keep the same compact adult stocky earth tank. Change ONLY the arm/gauntlet poses: frame1 stays exact idle; frame2 gauntlets raise toward chest; frame3 right fist meets open left bronze-gauntleted palm at chest; frame4 hold salute; frame5 small respectful chin dip (no change bun position); frame6 chin returns; frame7 hands lower; frame8 exactly original idle. Hands remain paired bronze stone-block earth gauntlets with square meander, no bare hands. Anatomical right is screen LEFT. Keep exact front-facing SOUTH camera and all eight unchanged foot positions. Retain ivory sleeves/trousers, mountain-blue bronze-cloud tabard, dark blue sash knot/tails, dark boots, jade bun pin. Flat opaque #FF00FF background. No text, guide marks, particles, ground shadow, swords or scenery. Critical: keep every figure's height pixel-identical to image1; only redraw articulated arms/hands and minimal chin expression.",
+  "references": ["sheets/idle.png", "../../the-tu-continuous-v1/reference/S.master4x.png"],
+  "selectedOutput": "sheets/emote.png",
+  "status": "selected; directional QA PASS, real Cocos2x capture all15 clips PASS",
+  "utcEndObserved": "2026-11-06 19:10:35 UTC",
+  "originalImageId": "imagegen:01a1ae93-8c12-7102-b948-0a9ecd590073/exec-4301c22a-72f2-4cd5-b627-bc101f025d51.png",
+  "originalBackup": "raw/originals/emote.attempt3.png",
+  "sourceSelectionStatus": "selected; awaiting hard QA",
+  "finalGate": "export/engine-gate.json"
+}

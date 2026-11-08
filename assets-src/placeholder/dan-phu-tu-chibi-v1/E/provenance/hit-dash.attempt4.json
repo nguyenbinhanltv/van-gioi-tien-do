@@ -1,0 +1,28 @@
+{
+  "clip": "hit+dash",
+  "dir": "E",
+  "attempt": 4,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:13:20 UTC",
+  "utcEnd": "2026-11-07 22:13:52 UTC",
+  "prompt": "Precise localized hair-cap anatomy edit on TARGET image1. Keep face pixels/features, eyes/brow/nose/mouth/chin, elevatedbun/jadepin, neck, body, hands/weapon/boots/motion/placement EXACT. Only TWO heads in4x4 sharedHIT6+DASH10 sheet need smaller attachedMAINhaircap volume: globalcell10 (0based,row3col3,DASHlocal4), LOWER/FLATTEN the verytop outline of attached MAINhaircap by6RAWimagepixels (about5logicalpx). Globalcell12 (row4col1,DASHlocal6), LOWER/FLATTEN topofattachedMAINcap by4RAWpixels (about3logicalpx). Maincap is sweptbrownroundedhair attached toskull below elevatedbun; bun andpinktie andpinareNOTcap. Keep maincap sides/fringe/ears/face/chin atsamepositions, smoothlyreshape onlyuppercapoutline into slightlyflattercanonicalelegantshape. Do not makebun bigger or movesummit sideways. This actualvisiblecontourcorrection reduces oversizedcrown-tochin toward53.5logicalpx, with EXACTsameface and jaw. Do not redraw any other14cells. Do not change dynamic deepdashbodyposes, feet/root orwhiskhair/shaft. Same1254x1254raw4x4cellmapping andflatmagenta. No text/guides/FX/shadows. Image2fixedEidentity reference illustratesflattercanonicalmaincap. Correct ONLY upperattachedcap topcontours in those2cells, allotherartunchanged.",
+  "references": ["../raw/hit-dash.attempt2.png", "../../reference/E.identity-panel.corrected.png"],
+  "raw": "../raw/hit-dash.attempt4.png",
+  "status": "local maincap contour edit cells10,12 only; preserve otherselected cells; actual output measurement pending",
+  "sha256": "80f50641edf00bd836d0bf2cc576991b2f6b3cb2bf94177fe741cff771a8ac98",
+  "rawSha256": "80f50641edf00bd836d0bf2cc576991b2f6b3cb2bf94177fe741cff771a8ac98",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../raw/hit-dash.attempt2.png",
+      "sha256": "59f14d137decbae6fd1dbee3aa4adb4c75eab7f870f08f00465459667b1b126f"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

@@ -1,0 +1,96 @@
+{
+  "originalsAvailableAt": "wip/van-gioi-tien-do-21-pause-20261107@15cec8459ced4326324eff0ddc373bf60d992574:assets-src/placeholder/dan-phu-tu-sprite-v1/pause-backup/raw-tool-outputs",
+  "method": "Compare selected raw PNG bytes directly with the retained imagegen outputs before shared whole-sheet DPI preparation. No N image redraw, crop or per-frame scaling.",
+  "records": [
+    {
+      "sheet": "sheets/attack_1.png",
+      "toolOutputId": "exec-5d290f16-5ca1-4733-a790-c5e85e006ce0.png",
+      "sha256": "228223477715d3004bc9b93ceaf74e5e64e014f7217e6decfb3bd2f7e3842988",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/attack_2.png",
+      "toolOutputId": "exec-f5e1e40c-0f56-46d8-bcef-a3cda07d80aa.png",
+      "sha256": "b7f3aca59500dd70b420767f7e37b65922dfe54f6bc725ebd15915330eef6ef7",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/attack_3.png",
+      "toolOutputId": "exec-22955b8b-d630-4900-886f-0a5ea8a2f414.png",
+      "sha256": "7bc170c690c5874a8ccc048b58b17244610eef3bda50cd10db5d3a24f77f2507",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/cast.png",
+      "toolOutputId": "exec-c44b28ee-bfb4-4289-a9d7-ab650e7d140a.png",
+      "sha256": "1c2f54c83781dfa3fb6a495b88c64e14283ca0f09bfbc6c6e425a868fc7d42c2",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/channel.png",
+      "toolOutputId": "exec-ae11f135-fd55-4fe3-8ffc-8593ae4cffdb.png",
+      "sha256": "6812e37d8f998cbd2cf7245c9386a4af94fb52fb71c710d39cbdf7fe936693cd",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/dash.png",
+      "toolOutputId": "exec-e33fcb57-ccdf-49d3-94c6-38de94cc3fad.png",
+      "sha256": "2834e4d16f2a62e26b50decedd80c58ae030879573a860d9b248790bb1080b02",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/die.png",
+      "toolOutputId": "exec-341e6893-82f3-419d-8a73-65ea7ea23922.png",
+      "sha256": "789f1898d00970f4ea0ea7ed105328fa1c95d366bcb4f75e75cd3286e06d7510",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/emote.png",
+      "toolOutputId": "exec-036b58f7-0e4a-45d6-b6b1-619fe61bdf56.png",
+      "sha256": "ac6f26118904fb48a7a86f0cec9bed7b487c662346ab50b964ca3549501547bb",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/hit.png",
+      "toolOutputId": "exec-f19f39b7-2e6e-4aab-9e88-54a0b59ac873.png",
+      "sha256": "6586b16fe05c9706610d3f29a14c78541d9f2877a5a39fbcd0b1251a53e42402",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/idle.png",
+      "toolOutputId": "exec-8ef605a0-8d71-4ec8-b9ff-894e6d046b99.png",
+      "sha256": "39056eec4a683b43bf5ca74a599550d3056e77dcb5dca89026644b045e2c2033",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/meditate.png",
+      "toolOutputId": "exec-229b6b3a-a83d-4b3e-8c3c-131725d7ae62.png",
+      "sha256": "1141427888cafa3b0e96b8f7db98810abcfec75643960671ccb80d84eb2d648a",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/run.png",
+      "toolOutputId": "exec-02880841-ff3d-476a-aee6-c2fb65d549a7.png",
+      "sha256": "12962851653a7d7bad87d05f79784091d101281b75fc7f8d67b8f463e5e5b790",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/sword_fly.png",
+      "toolOutputId": "exec-d19580aa-5358-405c-8a12-43149d74072e.png",
+      "sha256": "04e8024960834e8cf113931c6322b6b685259554f439ec92ca92d1e604d38afa",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/tribulation.png",
+      "toolOutputId": "exec-a045015d-66fe-4e3d-b7ad-31bac5372b97.png",
+      "sha256": "df86463440c4afa41935378bf45531616906c6d893015cbdefd90c2ee827b25d",
+      "byteIdenticalToToolOutput": true
+    },
+    {
+      "sheet": "sheets/walk.png",
+      "toolOutputId": "exec-4d3dba7c-81a6-4541-aa3b-f0a9e4a01737.png",
+      "sha256": "2eca9a958cf98e9cccc0f7379e949ff2c795eee4f8b2c1f989b36f8445cbf4ef",
+      "byteIdenticalToToolOutput": true
+    }
+  ]
+}

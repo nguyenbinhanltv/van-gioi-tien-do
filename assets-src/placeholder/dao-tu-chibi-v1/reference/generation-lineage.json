@@ -1,0 +1,29 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "checked": "2026-11-08",
+    "basis": "Output assigned subject to terms; original project concept inputs only"
+  },
+  "records": [
+    {
+      "name": "T1-front.attempt1",
+      "prompt": "Use case: stylized-concept. Create ONE canonical FRONT (S facing viewer) full-body T1 production master of the male DAO TU Storm Reaver from the provided project concept references. Reference1 approved accent A LEFT figure ONLY: storm grey-blue over dark muted teal. Reference2 T1 LEFTMOST figure clothing simplicity. Same lean adult male, stern grey eyes, swept black fringe and low loose black ponytail, no topknot, no beard. Premium hand-painted semi-chibi xianxia mobile MMORPG sprite, crisp readable forms, restrained ink-wash, northwest light. Body anatomical height main hair crown to soles 4.5 heads; main hair cap to chin22% of height, eye line16% below main crown; lean shoulders approximately28% height as art construction. Plain sleeveless dark muted teal wrap tunic, storm grey-blue diagonal collar and cloth belt, short plain split overskirt, loose dark pants, simple dark boots/bracers with minimal dull brass fastenings. NO T3 mantle, NO ornamental gold patterns, NO beads, NO embroidery, NO aura. Heavy broad single-edged dao carried across the shoulder in right hand, blade above and behind head without covering face. Blade steel pale grey with ONE sparse dark ink mountain silhouette, plain dark grip, minimal old-gold guard; significantly less decorated than both concepts, retains recognizably broad mountain blade. Other arm relaxed fist. Face squarely front, both eyes visible symmetrical, feet planted, no action twist. Full figure and entire sword fully visible with margin. Isolated opaque uniform pure magenta RGB255,0,255 background, no ground shadow, no gradients/background texture, no text/labels/borders. Large clean master source; all future directions must preserve this face/costume. Do not enlarge head into cute child proportions.",
+      "utcStarted": "2026-11-07T23:28:57.873Z",
+      "output": "exec-7c3c421e-b1f8-4eed-9d8e-03c6511881d7.png",
+      "status": "not selected; head and eyes too high/small",
+      "references": ["concept/dao-tu-accent-variants.png", "concept/dao-tu-tiers.png"],
+      "retainedOutput": "raw/T1-front.attempt1.png"
+    },
+    {
+      "name": "T1-front.head-correction",
+      "prompt": "Use case: precise-object-edit. Correct ONLY head-to-body proportion in this exact Dao tu T1 front master. Current main hair cap crown to chin is about18% of crown-to-sole anatomical height; enlarge the WHOLE head including facial features and attached swept hair uniformly approximately25% around neck attachment, to reach22% anatomical height and eyes16% below main crown, about4.5heads tall. Keep stern grey-eyed adult male identity, same face shape, eyebrows and expression; not a baby. Keep torso, arms, boots, tunic, sash, sword, grip and their pixel sizes/positions unchanged. Adjust hair/neck connection naturally only as needed, preserve low loose ponytail. Keep all objects fully within canvas. Retain opaque uniform pure magenta RGB255,0,255 background. No other changes, no text. This is proportion repair of a canonical game sprite, do not make taller or longer-legged.",
+      "utcStarted": "2026-11-07T23:30:18.623Z",
+      "output": "exec-c3e9db68-9140-4173-b6d8-758a2556a1bb.png",
+      "status": "not selected; eye line requires correction",
+      "references": ["raw/T1-front.attempt1.png"],
+      "retainedOutput": "raw/T1-front.head-correction.png"
+    }
+  ]
+}

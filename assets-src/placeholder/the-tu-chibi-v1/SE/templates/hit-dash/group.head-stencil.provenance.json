@@ -1,0 +1,79 @@
+{
+  "kind": "generation-guide-only",
+  "master": "reference/SE.master.png",
+  "crop": {
+    "x": 72,
+    "y": 4,
+    "width": 90,
+    "height": 67
+  },
+  "scale": 1,
+  "offsets": [
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 0,
+      "y": 3
+    },
+    {
+      "x": 0,
+      "y": 5
+    },
+    {
+      "x": 0,
+      "y": 4
+    },
+    {
+      "x": 0,
+      "y": 2
+    },
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 4,
+      "y": 8
+    },
+    {
+      "x": 9,
+      "y": 16
+    },
+    {
+      "x": 14,
+      "y": 24
+    },
+    {
+      "x": 18,
+      "y": 32
+    },
+    {
+      "x": 18,
+      "y": 32
+    },
+    {
+      "x": 14,
+      "y": 24
+    },
+    {
+      "x": 9,
+      "y": 16
+    },
+    {
+      "x": 4,
+      "y": 8
+    },
+    {
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "clipLocalGhosts": true,
+  "note": "D47 measurements still required on generated output"
+}

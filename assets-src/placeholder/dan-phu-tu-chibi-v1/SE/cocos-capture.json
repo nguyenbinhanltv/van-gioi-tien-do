@@ -1,0 +1,757 @@
+{
+  "status": "PASS real Cocos Creator3.8.8 2x capture; all15clips/202drawings represented,0 actor-region edge contacts.21 native soft findings remain OPEN; mobile/compression unvalidated.",
+  "startUtc": "2026-11-08T04:09:23.749Z",
+  "endUtc": "2026-11-08T04:13:28.786Z",
+  "exitCode": 0,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "D:/Temp/vgtd26-SE-cocos-final-v1/scripts/capture.mjs",
+    "--skip-build",
+    "--out",
+    "D:/Temp/vgtd26-SE-cocos-final-v1/capture",
+    "--animations",
+    "all",
+    "--frames",
+    "24",
+    "--mode",
+    "single",
+    "--direction",
+    "SE",
+    "--src",
+    "dragonbones/dan-phu-tu-chibi-v1",
+    "--stem",
+    "danphuchibi",
+    "--zoom",
+    "2",
+    "--sample",
+    "midpoint",
+    "--gif"
+  ],
+  "out": "D:/Temp/vgtd26-SE-cocos-final-v1/capture",
+  "temporaryPatches": "Fullviewport single framing; perclip actual runtime tick midpoint count; GIF reuses same snapshots. No production capture script changes. Puppeteer dependency resolution anchored workspace.",
+  "gifTiming": "Preview GIF uses centisecond-rounded holds; runtime/SKE uses exact24Hz.",
+  "engineVersion": "3.8.8",
+  "engineVersionEvidence": "build/web-mobile/cocos-js/cc.js:348 VERSION3.8.8",
+  "engineBundleSha256": "8a0e33971355d8d2aa5c662d1984e4d35876b8cdacb7d196ea6fe9f1871ff150",
+  "captureScriptSha256": "435d6166b1e6f25192f7657d7d409d750a32fb020f0c3c0bcc2f761d6d5812a7",
+  "viewport": {
+    "width": 1280,
+    "height": 720,
+    "deviceScaleFactor": 2,
+    "singleModeFixedZoom": 2.6
+  },
+  "samplePolicy": "One actual runtime tick midpoint per drawing; no source/character fit/rescale.",
+  "clock": {
+    "frameRate": 24,
+    "drawings": 202,
+    "clips": 15
+  },
+  "index": {
+    "url": "http://127.0.0.1:62589/#viewer&mode=single&dir=SE&paused=1&src=dragonbones/dan-phu-tu-chibi-v1&stem=danphuchibi",
+    "mode": "single",
+    "direction": "SE",
+    "frames": 24,
+    "animations": {
+      "idle": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "idle.sheet.png",
+        "gif": "idle.gif"
+      },
+      "meditate": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "meditate.sheet.png",
+        "gif": "meditate.gif"
+      },
+      "walk": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "walk.sheet.png",
+        "gif": "walk.gif"
+      },
+      "run": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "run.sheet.png",
+        "gif": "run.gif"
+      },
+      "dash": {
+        "samples": 10,
+        "duration": 0.4166666666666667,
+        "keyFrames": 10,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "dash.sheet.png",
+        "gif": "dash.gif"
+      },
+      "sword_fly": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "sword_fly.sheet.png",
+        "gif": "sword_fly.gif"
+      },
+      "attack": {
+        "samples": 14,
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack.sheet.png",
+        "gif": "attack.gif"
+      },
+      "cast": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "cast.sheet.png",
+        "gif": "cast.gif"
+      },
+      "channel": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": true,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "channel.sheet.png",
+        "gif": "channel.gif"
+      },
+      "hit": {
+        "samples": 6,
+        "duration": 0.25,
+        "keyFrames": 6,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "hit.sheet.png",
+        "gif": "hit.gif"
+      },
+      "die": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "die.sheet.png",
+        "gif": "die.gif"
+      },
+      "tribulation": {
+        "samples": 16,
+        "duration": 0.6666666666666666,
+        "keyFrames": 16,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "tribulation.sheet.png",
+        "gif": "tribulation.gif"
+      },
+      "emote": {
+        "samples": 12,
+        "duration": 0.5,
+        "keyFrames": 12,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "emote.sheet.png",
+        "gif": "emote.gif"
+      },
+      "attack_2": {
+        "samples": 14,
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_2.sheet.png",
+        "gif": "attack_2.gif"
+      },
+      "attack_3": {
+        "samples": 14,
+        "duration": 0.5833333333333334,
+        "keyFrames": 14,
+        "seam": {
+          "specLoop": false,
+          "loop": true,
+          "meanStep": 0,
+          "seamStep": 0,
+          "ratio": 0
+        },
+        "sheet": "attack_3.sheet.png",
+        "gif": "attack_3.gif"
+      }
+    },
+    "source": "dragonbones/dan-phu-tu-chibi-v1/danphuchibi"
+  },
+  "pixels": {
+    "status": "Capture coverage check: actual perclip tick midpoints. This checks distinct renders and region contacts, not identity. Fixed actor region excludes Cocos profiler. No sprite/camera rescale.",
+    "region": {
+      "x": 600,
+      "y": 140,
+      "width": 1640,
+      "height": 1260
+    },
+    "reader": "Capture PNG filter0 reader previously crosschecked against public decoder on all24 historical run samples; fixed-size native RGBA rows.",
+    "reports": [
+      {
+        "clip": "idle",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "cb408776b970490d93259514782f4e5e0523f5ca9f44482a03ebe4678c6b872b",
+          "92512cef6e1c957874f4df12b62bc3f18b06886f673440f71fbc818707ab537a",
+          "10131f729e96b0bb985de6b3ffb844c03d66c7eedb7395fa82e5344f9ea740f2",
+          "02c3ce13cd5c6eb798c10a12ea0c2b2269793e4d67755188bfd1842380d7db58",
+          "930babc5bd10ce72998d172190bdafb90e2fd1cdf0bcc28ac31f8b1c578ba0fd",
+          "943fba0e31090373439f44262dfb4efaa4470200c706fcf7afb5ec04beedfe1c",
+          "2a56ed14ea0af38be9c6cd0b0a0bce53b6305a58f4baa5d7fe56627b5de00c5e",
+          "f59d8bd1ba7d94095f5a3d3716b13a9e2c3c86d1b212a7470cc5a18062adc8bf",
+          "03805b121304e90cc0730dffddb376321194afeed49e2e92eb5162ff9a92226f",
+          "5f2d63d4cc7e005a660e048b6e10d0aec47d80b1fbcc200cb2db1f8fd0946139",
+          "b02744811c339e2ebf648c87057195ab614752cec8fc38d4697ffd2518f869c4",
+          "d0c77faa3035a86bcd66493e9d2938b62a568dbde46e7c8a7758af0978e6a97c",
+          "2211c3299bb02a45a51946e49e28e1e38633f40bf59904e7462cfa2e911c3dc6",
+          "912136edf92e12f84206c251aae87b67e499cad7b8cb150d709ab8716dd5dc3e",
+          "cd66f1944445e36b4b5281dfb6c6c4dee7229126a01bf8c0577656eb7aaf32f5",
+          "1f255a8d1cd92c71e2f153a46502f3f78d33e7d2d59c211779e23a6f4382c09e"
+        ],
+        "sheetSha256": "dd01d0788c52c8ea9d04d44035211ad1d8489b85cc0c79f51f6b42037d0f9bef"
+      },
+      {
+        "clip": "meditate",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "d9d5fed6ec8c4ef2e177bf69fdb4543163e7a61ee4f9887f98d7ce1cf7a606ef",
+          "7ad6439d543fe751f2c4580e1341805ca2e4d26d1b8a04a7f20ef5479f5d1d63",
+          "c46620eb0cc49257dc274ccad0bacb48de1642ea074cc8b5af778f27ae336bc5",
+          "26a24b0483adc907bb50b3710067ce653b176beb6ce32f85eb9e72d34e8809ba",
+          "c9f75ccd8a2214e8a12abcda9686b3fb2b7d5f60b1e7f6c20a65ffb6c4454b6d",
+          "5ccc4030f091d4a508608df5b39b81fffd25b110837f89239d606f74da66a7af",
+          "9a36eb4b1545e1d5adc3b03b676818ca108fa3cd9e49d09653601895a4e4655c",
+          "fc9f9172d9aab59b1df8afc659bb45e146973f624b00ca2c25c4caa6e772ecdc",
+          "e50e94b836445a9673ffb69beecc26178f84bc9288e78a2e804aadce63226489",
+          "603396d075e575eb597f22e68d83be5e1f51d2b5516d28336581ee6de7e090a0",
+          "d9f3b012d68fa4f15bc92a25b4f357ad4842f414afd952a21a23160a8169bf2b",
+          "4493775cf1000fafc071dabfb9fb0fe1897c2e3ad2fb3a91a3790e804b8d4148",
+          "c9dbf94bf27e2daaa8abe5d4057d9f77e827af5b26b799f1938590819ba06b9f",
+          "43f1425330fbe5c8ab9219b538b975037f950c67593952855556d73d5cb14579",
+          "2a34bf94ba2d834bdc714c00bc6f0f28388464daef228c775b098f7e10871fa5",
+          "48a2572dcf78fc51cbecdbc9babadf0b4f91f297b99b1a9348b55462c64c4046"
+        ],
+        "sheetSha256": "bc11a82a41715a8eb58db722876aef8985678878cc49ba7ca89baa3c578ad3df"
+      },
+      {
+        "clip": "walk",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "ef94237f44130195b4e2e69f9ef19a1fda6198e306f120365d229401bf7019f7",
+          "976774aac0142b686063bf7290e8451a94479719cc0518336d8b0510dbe6a5b4",
+          "ac7c5b6899a142b6fa80dedd39b990fa1457cbf87168ab2858ea664ccba85a62",
+          "662c1847d19200b2aa39ddb93c24637950aa003c55169ba8ec273a913aab1a17",
+          "330a30dada7e371546d2affc01d89ec27e3b7a34c039a3f8e6b32d196256a384",
+          "12a6c4ab0f91182d5d514b0f4567a3701005dd9497f650747ed0b60e9c291b73",
+          "72cacde6869113f2bf71b4fff28c46337fdf000f596a0cb4299362fa6028ee2f",
+          "ef4a3f5252140b82e2897ffc7939713223bd334e877f123914b3d6c76e497a60",
+          "b0f4042a04bf72eab927cdd43eafba2d60eb4fcbf0703142b861a5b9640a7270",
+          "86f8c8870dcb66734adac15c34f5a9ec209fce3dd9b667170b0f39f713bcf4c8",
+          "1432f6acc0c791e8c1cd2284ca1d3e1ca0be1645566450e5a52a7d5918991b0c",
+          "b1ecac8359cd8bc87362bc5e696364e1d93f1a66accf3a7224b8ea231e3378e5",
+          "cd5343a1cb04e6cde5e848280dae991903629994d59d941d740b88f2f5c15b81",
+          "a1ee48c43caf9e61230d1ce41e8ec1c1e6387660043249e715d59057ccb6232d",
+          "d9284935c5395834d7d364dbf2775ea8588546d7e8b88af128cab87f1079cfdf",
+          "2d73e339872487184af0ac207ce1a7709c514fb0b335ec34b016e66550225599"
+        ],
+        "sheetSha256": "9b371d0809ebea6576a59ec7fd9dd554e04fea46b87d6ac942f54ececb341c90"
+      },
+      {
+        "clip": "run",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "8f41c683de0a6a30b144e3efe7beae04f72067785917f05cf9f3efa4cd9db4f5",
+          "cd6953bd5e4a97daf9e83ea5b77b75b602f2f0e65d62dcce26410bb24124ff5a",
+          "71701b231206ab1b4b1d9254bd04c421f7ca83b6ba3280bf482cc63b6348d976",
+          "c486572b6884899829057af87285e611759760d4a836f16fbf1a478f1bf9fb8b",
+          "0295f1512496ab2414d7dcf050192d9c89f0032100b000d8757d991cdfd2c393",
+          "c15ed994909907a458878c75859ec3c9a43d8f234777519a2de764894d8ff3ae",
+          "e0625549f182256113598da8dccba89f576e8ec13aeb902123f84036d793f22b",
+          "474f248dbe9aa646226e6879633c0394b80120ab4bd77a64bddbd695f653af93",
+          "256a8a99157472558f2829ed68684ae7054423a0f9fe98e687af3fb8c614252a",
+          "601c9a6b951b04080659663c66fe78fc3c80c73f93cbcf0a744f7db4a5b56ac0",
+          "1fdd62fdd0a45636844b41756993b96841bcdcb5e6f8ced68226eea8cba0142c",
+          "565ac4a55dc4ffc6bf232a49edb9620dff6b847bd34813341a9c1c1af018b1dd",
+          "1b58c207a8ac95211466236328472057e14753888c63e64b82a7a9e68bc8dca4",
+          "ec2ecd6feef94b88899b563b174e32e79b0c58314bdd1d2a7ca7e9d4d9f9873d",
+          "c8a13a142a8ba642a15416205e08209bf68f1bfd9193571f5e578f66fba141bb",
+          "002ddfb4381cd76ec4992c11e0850c0fb2d0722e779ca720561434776ebd9e2a"
+        ],
+        "sheetSha256": "33dab4b01ac4d228bafbd1e84f87f73904fb1c9770eda2b32e360f5060eedd76"
+      },
+      {
+        "clip": "dash",
+        "samples": 10,
+        "distinctActorRegionHashes": 10,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "40f9ce21aca39f7987eaa3ddb24bd228aa3ed0c21ac2bac71aadfab0d9151151",
+          "51972a8ce485f4200f0b0812b948ad77c5050ce2d74ba2d13b61d78afb7219e3",
+          "2f509dbe0539b501153e5e7f9529a04613b36a3776c43bf95e8dd251de65bf21",
+          "cea4f0a17b81aaca831cc9c86b782863f82dd946439d8deb442f826470a831ba",
+          "702246fbbd3d45edbcb5fc93adb4540531e8490de7015bcc7aaccb6a6f03d3cb",
+          "06063ae30bb61cf6c43d737ab29f36eb45060da43424fc4b948467b1bcc29071",
+          "b205de05a881d3c5eec6a71dd456723e22071cd45e92c0aff00fa81adb51cdf1",
+          "ca09b2a292743bea18f92e6823b6c754bb3db066ecb52fcf818602c7bd1da78e",
+          "61daaab439549a0c1b171806c96daa7fdc5bf616e0f60cd2c6870e2e3a802658",
+          "72937cae2cfa101a5ac9056da74ccbe4d207df4529de8dab308d9f718c6575c1"
+        ],
+        "sheetSha256": "e9e21de3980da2e0ce026f4f6dcfa0f6bbacb61f0eb4f8235c92fbd054ea2fa1"
+      },
+      {
+        "clip": "sword_fly",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "72df369446c9d4c0109787e725fd9ff0c2cab03178b270f040309a4011cd0cd5",
+          "7517fc65e40734ffabc5a486bcfff307fffed073d5612c6e9e66d0d3adea62b2",
+          "dccbccdeb7e51f15c477378678b4b36f0fcc60c3643b5b30f28f03d0ddd28b67",
+          "884edb22ab3b63a9bcd0b039596a31156aad0c6ee4aa09ec22affbdebc2beaaa",
+          "1ac1b42e32947fd98d3dc6888896ecfd8dc622defa886eecbe3a8366d3c8ef25",
+          "bd1c4700b192e78373608bc4d4e9ea6ebca73252687257321a83d5466f1da640",
+          "80fe4dfe1cac5e611a576583b0485021383a5d187c3d1e53308b3af6205ddec8",
+          "68ca7775bfb03180a50b927390acff294baf5402b6a209a6da8574e550e54069",
+          "49f62bff127bdb49994d8031236a6ed057c597290c75a19e9d3c55c6564d675c",
+          "4a0339c7f1232696ba153ca8767db621dd1d1975a031c8fba469a96ab614c11a",
+          "602f1974a098d23b7f775060b48e1aeac67f6738402bc31ab01246b5d0328030",
+          "85d21981365dbef725e1dd51108aa4a7b35d55dad1ba2e32889938640460857e"
+        ],
+        "sheetSha256": "043cd2275dfa3a4b6cf130b44a8dd7aa1058c952e47c690eb695dddbdbcfcc24"
+      },
+      {
+        "clip": "attack",
+        "samples": 14,
+        "distinctActorRegionHashes": 14,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "cff9d79812f5b55395ed9b6ff41bec13a55b6dcc63a032fa8fa572d44e33a63e",
+          "17056c3ea60c8058151ca891ef515a72d758f2665994be4c3e707dd04eebd87c",
+          "5d69c996547caf1ae4c3c0f07614faef99a888000af40d13463faab9dd0b5547",
+          "11ed1d05cb5d671594f3bc5e194a20ff89b01767241f0b0b95ac83ae9e9dd2c6",
+          "0250023be8656cb0746292f7563c15a3cc510ab50fe23106c413d8ce563b9b7c",
+          "7f6ac0fcec6f84b80f01dad52fd3b4d62bfa9fdb01bf5f0d85470b04d387d1a2",
+          "6ab21231deec36972d22e1d4dc3a3a3b36e869c7f2a22158bd2d2df035aa222a",
+          "32e89b22c8bdc237298c8da41d9136af2a2ce6d9d2b00b731e80712d171195ea",
+          "c4fa899ea04a29be732d9aa70163eb3beab0bb9b00514ee945e5821d907556ee",
+          "02e62dfc431db7a2d2575adf8ab682d6f3a57bec053877b6e1c05b72eb60b235",
+          "f7b9adef51645311e739005c4f618f0554a0cd213173ce69f224bb7c78dc1285",
+          "4b98050ec78b15c8a26dea7a358e8a806e6b8cf86f1d27c0ff3eea3142ce341b",
+          "0845e8d8548b1621551ed8f177e4d6099281d741468b845d8e91407b6b420cea",
+          "688bf0be4bb745a7edcafd43c1d7361f4dff5370b2e7dd0a589d4ce5e0154f08"
+        ],
+        "sheetSha256": "d69a1e20264a12c36b9ca11aa14b6c5b424fd8cf14c385960c66f58a8f0d7e5b"
+      },
+      {
+        "clip": "cast",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "f4365ff4d1bcbd621cd1b590feaec4c7265747e5570f1e7eda6290755f5d0d84",
+          "103995c282a52f16761ee689487c4ef42a7c900c756e881122ddc4655ec0d1b5",
+          "f555b38e204b0d58b1496e427a67f26ae71d58ab8f0766d5ef83468d18e4ddb5",
+          "63b5a4203d6a6c374e6ac6b10ffb5f8917ffc5e4ac8d3674387cf63aaa871262",
+          "3e10effef768c61776ea659132fcf0380f94b4c013ec97e8edb9eb91e9b0c099",
+          "207a0b695c0ecba68cf79534c5757f83a5c5beb39044547715c412f70a9a8005",
+          "b68164c07e437589928a803ab1fbb5af806c4d0699ad35425956db03b409534d",
+          "73139f1f585426722cd6bb6c811b870d316413512dd9a5849545554a726795b3",
+          "d70ac470cd1375bad06a71d28e9a87f876e2c1cf82efed907c992b148a7adebf",
+          "21d4b646fcc4b5ec75a7fe7aa76e05e5931e68ce7dad52c437f646008dbc35d6",
+          "e54229bffa3ec6be48b8db1a9d152bf4e724d1a73738a45b2ed90b20826d351e",
+          "e5d61a3630958f12a17e0341f8f5cf7bc1e875656c6cc9d10e4a5a853be599df",
+          "1038d0f983104a331ecb978e6e43160257cd542f4a8fdceff72c71a2a4228d39",
+          "96b185487cb65842be14d3748184eb4e66f31fd0cd9a7388f55b2766f9acf87f",
+          "082f6cb4def77a3e241faa840deb70dde333f0570eceb10d691ee2261a472dd7",
+          "9e9a1c17aee28650a8ca6d097bd8d4b6e36ba3d4dda5b819a6274c2a500a494f"
+        ],
+        "sheetSha256": "79996af2e854e340b43193e77344abfb748bf9de3a6b1aa724de1c743a7a5290"
+      },
+      {
+        "clip": "channel",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "4fd03b8cec15c5f20a9c48ddb58bc941021c9e7a2ae2d82e0a6f029d24b85ff2",
+          "dfd248d3946af8020a757e278c48ebedc9275ccb02451636466e3548229329e9",
+          "21e5555e7593fb817a5916df574d697bd7ee978f206feebe8940af0d369cd1c0",
+          "4cfc900473fbd86118abb7a25c178dcb52cf15f009027b353b118b160d198502",
+          "ca5f1044229cc9b7a3284d6b60330b9efa63576eb91a4470ddde6261493fb01b",
+          "d3e8220b1754c8f4a1bfcbe1df1e8c4f42dfce619d5dff64940d112e828e1bd8",
+          "4675e37a06a4b9491b1e17bac7457e03da119af543734c4c366a587f5841c796",
+          "be5fec5676a368c7650c93d96da89d964f0bf53edea5c9b50c5e60de66a34cba",
+          "26995029a3fea144968b0e3c7a9c043a8c99d88b6e4c19072ea505f28fbb12d2",
+          "777e1e5b864cf2b8b940a84d2a3f5eab1534f0b123d0fb4571d6290145010a54",
+          "ef2d8a620bc5b20395441785c26263207c0d58910ede5b1a600ebd2bf93bc70d",
+          "8b2a5331ff9d577d087e19ea5626f2a807b1a7b03549083b0db52566d15f7224"
+        ],
+        "sheetSha256": "2f325ce3d20a5013cb9c5ee6d49e7da92cc55ced753c3b3901b10755e63e60d4"
+      },
+      {
+        "clip": "hit",
+        "samples": 6,
+        "distinctActorRegionHashes": 6,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "5a7f3e45357505c5347fa874d522101781bb281806845cfb28a6f05638495b2f",
+          "e4aaae3d286ce72df92a9fa6ac2641da08167bb1f103e70921cceb4cafb78e31",
+          "395b35e70571dd7cfb39f8c6fdda39ecef2980c43b87d8ba2a96f41540e606e3",
+          "50c71cacb7c79e59eb98f27182b696b8eab860b133a34f191aca6a694ee9cd88",
+          "cde9b955bc044782935c9e65245fe9ac41caa2bf3a798acbea36f11e84734a44",
+          "03cbb0cc1791039bb75cb042939c2ccfe2b6470ae932a3837605e86b4baebf69"
+        ],
+        "sheetSha256": "197b3970cbc553af7e54afada3390fce3814dc1f91c4eb1585e8a55156bee576"
+      },
+      {
+        "clip": "die",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "9ee93c1b94313052f8205810323ff880c79a3644035f8f21589853e6bf6c31ef",
+          "d30da72052002bd36b64e0c37d0f3b3441b5e7843897730317c69069e31677a8",
+          "c591d0d6b138f1a3ff0ac7653dccc2ee510b4fc160a538ed372afebbb9c7ba8b",
+          "87b965666c6d5f6a636e605110159a0f94f819f7f402518fbf35ac29bbdcb8cf",
+          "ab26be9b69e86703fe7f4ca5a458c9c98fc2c12792131aa5b09954bf38613e23",
+          "6fd755f22fa1ac326a34e4aa15c4744b4c46e6662d922f2ac116becfd64a50af",
+          "547e2f553559f5dcf1049e5b2378a69ff10b15281440c95b8a38458579b85426",
+          "daac66252926e5a883a8e83a1ba29668a5d939f76053cfabd7e60d94a77a31b4",
+          "368e17627d82f43592f952b6a9e76fbbe0dfc0ecd303f5ab8b002ed32cc502a9",
+          "cbac30af0ab5b49501d3fb059ba4b6688ea0d395f9edbc7b6a82aba0ac556ace",
+          "0eeb7c07f44308d52cf42ba5007753518273c6029a366349651fbdfecebc993f",
+          "b7aab6b8b03d677188fbaf970cd4046c49c8454be5f9757dfd6098254772b10a"
+        ],
+        "sheetSha256": "e1e22d43174eeaff159810f6268938bc0e74fe44623ff694412b89e344f67d12"
+      },
+      {
+        "clip": "tribulation",
+        "samples": 16,
+        "distinctActorRegionHashes": 16,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "2c5770351e35f7f48ad62d727b750cbd3cbcb11d5fef92dc22811e7252d3256d",
+          "efa84428f8e4c18324ce4f1ed6b90582700909b5167975e2eda4e0865015d330",
+          "402d7d2155ff9da06c925644ed5d636646ea92b010bbfc136531d42f39adf8e4",
+          "f71e5b6b8728309111f71bd2d1efd8db04f73b83d36a44b9b1288ae1668fee64",
+          "d278ca7da8f1e698ec9766d4780c02331e86e84ff27a13e5adb2fa19bfc0efef",
+          "63b5ad7fda8e3ec8be46257492188fe1dc6709d56871319069e212601f433961",
+          "c33eb7693287f639a2f4ac996060aaaa5f0db6db6132697ee266526495f62039",
+          "cf1be7f7ca080015edfc4f5325cf6945e4c5ea9dc6d1f81ad969e91d7d584bed",
+          "9480e4a0b897a9bb04dfa621eeb38eaf4d6e29b6135ee389be27726915646b4c",
+          "dea7379f932d3956e87b18c8499395ea6da01558de18471e60e2335d2773550e",
+          "554f204d2307cb56c46c54ef8fc83cca51504beb437df27a679fbd30063ad684",
+          "d188f3be07cfaf1cf59a79bcb9d4889b759dbe2965c76df72977109b5122936e",
+          "4e05304bc5cfba3c057b9855a7cc5c58744019c8f85bf023b0b3c20651156251",
+          "d69ed9013b2dafbd8215ae4d22fdacbef6916ef12c77932c1fa2285ab1cfe85b",
+          "bd2adfe8cba6f03a1fcfa9c1be4ca84499d2c87325a883cf32c86d611af40f9c",
+          "c75a1876fd724c9b887cf1a2fe76ef8518dab3dc8f3396b494cc2c8eab6e2a8c"
+        ],
+        "sheetSha256": "bccfcfb63bf0c51ceb3ce53f38a0de1790c33d6ae6530ec48bbd30e7d793ba01"
+      },
+      {
+        "clip": "emote",
+        "samples": 12,
+        "distinctActorRegionHashes": 12,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "fb338ef0330627a86ba55b6a2b0f6f4f8be586f768eba3b7f1e43c751eb673ab",
+          "317dac675eb8122538d423f3ee1298827050216e07294edf0e924c09ea4a1d7e",
+          "ba2735e85ee7376481a22df9565c4c3c3e3cf26acc60d9ac1ee01745bb4d8b92",
+          "8a317960b7bcb4a714afc8cf4d0e50ccd66641946f2eacb6795d3b1816c050e9",
+          "0fc7ecaaf5bc4e239543d96003fbe8211c388c6f1c48cdac55427370a7e94668",
+          "1291d3a30e20e27d5581baecef66bb4bec219bc387261c3aad27b9585605c870",
+          "f9944776b65b77b25ab2cb1a9205064114658f5e359c67df17f348af5c600589",
+          "23fab5708a1cb033278085858b63c7493910c1265a8256156f52fc065f8c291c",
+          "1372726b66a0d64a49ade3d04285f99c1a41384c33806cd6f7c94d83a902b392",
+          "fdbc214f9c91b1a811f1eb5e97063bfc06d5eafebe5f6f1e2143d6a01f13ce7f",
+          "dda2e2bfcd98b472a858f7f00daaedd4799e94e7207853754c65965be4e489ec",
+          "c180d50553463502a42c12e8ded9e6e49a088847c87f7a71acb8328fe452301a"
+        ],
+        "sheetSha256": "37e0607aa81a4d51fa125b83c2d7d04ddd0f88b6045befaf972d4e4f4a059f79"
+      },
+      {
+        "clip": "attack_2",
+        "samples": 14,
+        "distinctActorRegionHashes": 14,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "a933fc1100697de6f10831ded619731ac37027338e247bade10ea48447c38e49",
+          "98143f2371b3dd3c43b8abe34b8b9ff537d58b7d3646e9651aa89b42338d80a7",
+          "1ebe4c141c13393c67e3f702cf96c673236217487fa99b97317250270e4720c2",
+          "d96037d1e2d8cc3114932d6a517b87bd726bc1e62a980adf27fd6c40169b9720",
+          "34f2c05fcc1b8e9a9d2b5c8008992493c8da47736112339c9b4f599d3e93e5fc",
+          "0ba3ca561c5d8b01144c7aec48ce89eceb977a4fc0954779208048e27c97aa31",
+          "b1afb451ce9377b6179f18146b2f6c12e526684f23547ac91b24a6ae7d1daffb",
+          "e024ba81f3b70fb532fbe358e36966cfe5fc8fab15c1eae81700a29603a6793c",
+          "6869ae485018e58e63b222f5cd98de47275fc6b58829fe434f931e6eea01569e",
+          "6b7e79176bf4f5c2e25ca0fa4fe36bd88c84662d05be135e8cb105fe17cffffa",
+          "f4a69638d4ecc1c894e3c8e667360eddedfc7fcad7fc9ac0bccd6a6947fb060a",
+          "c17fb04db24f74e19d2ae3da99c0c3ea475a8bfa616c96a3cee8b5eb5731db26",
+          "95e6e6c75b5d94ebff08bd1ec7d4d0b1dd15ca3be7d99c0d53c166fa701f1369",
+          "a994ef7d3bcd51ffba4948476964fc167f00d3f7d2b359adac34b969f51c7668"
+        ],
+        "sheetSha256": "fccb81644a1bb0ddb0d3c3a8b43147778820ce4f442a172a6041598be15c8e5b"
+      },
+      {
+        "clip": "attack_3",
+        "samples": 14,
+        "distinctActorRegionHashes": 14,
+        "regionEdgeContacts": [],
+        "hashes": [
+          "72c89246a89e66a5b7da615eb38819ea6956705f7f3d75eb90dd8a2fb1e8ff25",
+          "505f2a7298c7daa80255e46345d9d00c345771b3244aedc3451e1122e035bb1f",
+          "d47d0cec92102b3ccfd58dd9a6c408251d3274b6fe56b49098d24a439daeec6d",
+          "f9771bc3f798d352af16d30a4bb804a5d702d6cb01ecc3234e8c17ebdadd7325",
+          "7b5168ec8a47cc9fcd3210b060f5d12e7f0771262b979dc0eb6d6248005e4aba",
+          "7664e3f1ff69945ead22bd41a040557b27243ee348502287120ef19a73a9df2e",
+          "83820d580bdeecfe0ecf2f0974f798039618bf85c33bca6dfa414c62f543b3e8",
+          "8ad0e529e6ce05fa991064779e09b96d2856b095a317f72d8ccf12d5484a8b86",
+          "8bb281d8e002ee2ef6a41bc66d7e854dbddacd40d605b1a79fde0a34e8fc6f5e",
+          "463381ada02766c35f6d606fcd2cad40d14951e9db2bb23ec57e9a158db8f32f",
+          "140b4a7d3f8cd6e719f72aeb1d47b03ea5b351a29b1ae71eff56a001a0876f05",
+          "46a3f9b0ca58ea09903b87374b51d52ea1a6b297bd89365ae3be8504d5a45325",
+          "aeec0ae74b73b0c61742e5759b419fcdec03131632151c88bbf780634520d5cc",
+          "b5b8a66050373568aef1df400824cd3f058bba7d0668dfa2b9763921c89e69e1"
+        ],
+        "sheetSha256": "35fc860999a3f5ad890354fdd228d1cc3e558f378bd65f5ec7b72a0aee89e4ff"
+      }
+    ]
+  },
+  "exportByteProof": {
+    "status": "PASS",
+    "files": 6,
+    "currentProjectSha256": "3d4e5aacb411dcb6c8bb8ba5f20fa7582a6754f57d5cde8cae8a8949a62d2623",
+    "stagingProjectSha256": "b3f7ca05e6dfb9ffc4c35683654426c2a438cc922097a92bff2af59553258819",
+    "serializationOnlyDifference": true,
+    "proof": "Reconstructed JSON.stringify(currentProject,null,2)+newline exactly matches staging SHA256. Fresh public runProject from formatted project yields all6 runtime file bytes identical to repository and built capture staging.",
+    "counts": {
+      "fail-hard": 0,
+      "fail-soft": 0,
+      "accepted": 21,
+      "regression": 0,
+      "info": 276
+    }
+  },
+  "stagingSourceProjectSha256": "b3f7ca05e6dfb9ffc4c35683654426c2a438cc922097a92bff2af59553258819",
+  "currentSourceProjectSha256": "3d4e5aacb411dcb6c8bb8ba5f20fa7582a6754f57d5cde8cae8a8949a62d2623",
+  "captureFiles": [
+    {
+      "file": "idle.sheet.png",
+      "sha256": "dd01d0788c52c8ea9d04d44035211ad1d8489b85cc0c79f51f6b42037d0f9bef"
+    },
+    {
+      "file": "idle.gif",
+      "sha256": "25c711a17f31852733a8b25af0cfb60c7f62d975f97342b98fbdde20254c4956"
+    },
+    {
+      "file": "meditate.sheet.png",
+      "sha256": "bc11a82a41715a8eb58db722876aef8985678878cc49ba7ca89baa3c578ad3df"
+    },
+    {
+      "file": "meditate.gif",
+      "sha256": "8a3629557bd20a3bffb1eebb2e214a59b6c0b49705478082252cfdfcc512102a"
+    },
+    {
+      "file": "walk.sheet.png",
+      "sha256": "9b371d0809ebea6576a59ec7fd9dd554e04fea46b87d6ac942f54ececb341c90"
+    },
+    {
+      "file": "walk.gif",
+      "sha256": "266e0e7bea7cf95a3afc829478bd4b3991a0e3515b72fd54e44507c5e1165550"
+    },
+    {
+      "file": "run.sheet.png",
+      "sha256": "33dab4b01ac4d228bafbd1e84f87f73904fb1c9770eda2b32e360f5060eedd76"
+    },
+    {
+      "file": "run.gif",
+      "sha256": "61bca217bd2d1af74827383e32491caf36d744ef6b027943cdf82d74f7ba4974"
+    },
+    {
+      "file": "dash.sheet.png",
+      "sha256": "e9e21de3980da2e0ce026f4f6dcfa0f6bbacb61f0eb4f8235c92fbd054ea2fa1"
+    },
+    {
+      "file": "dash.gif",
+      "sha256": "3ec47b8bee99661d5784dce8e225e284bd5efcd7eb252d48738236974eaca97a"
+    },
+    {
+      "file": "sword_fly.sheet.png",
+      "sha256": "043cd2275dfa3a4b6cf130b44a8dd7aa1058c952e47c690eb695dddbdbcfcc24"
+    },
+    {
+      "file": "sword_fly.gif",
+      "sha256": "e661a11cb1aa4b70d24e8e124d2960dccad34def631bbefac36ddcb126041b1f"
+    },
+    {
+      "file": "attack.sheet.png",
+      "sha256": "d69a1e20264a12c36b9ca11aa14b6c5b424fd8cf14c385960c66f58a8f0d7e5b"
+    },
+    {
+      "file": "attack.gif",
+      "sha256": "c59c783966b8210a57bb635da3720a9371dc63396bbf0f461e0c9fc9bb520dd8"
+    },
+    {
+      "file": "cast.sheet.png",
+      "sha256": "79996af2e854e340b43193e77344abfb748bf9de3a6b1aa724de1c743a7a5290"
+    },
+    {
+      "file": "cast.gif",
+      "sha256": "97c56aeb03ea07a729ba0472c9153bab4c4e18a2e3c9915b3a0bbdb951c583ce"
+    },
+    {
+      "file": "channel.sheet.png",
+      "sha256": "2f325ce3d20a5013cb9c5ee6d49e7da92cc55ced753c3b3901b10755e63e60d4"
+    },
+    {
+      "file": "channel.gif",
+      "sha256": "cdace6f7a70ccec782878d6953d7b898f3ea8d512a05c5c90e587d80ff2873c6"
+    },
+    {
+      "file": "hit.sheet.png",
+      "sha256": "197b3970cbc553af7e54afada3390fce3814dc1f91c4eb1585e8a55156bee576"
+    },
+    {
+      "file": "hit.gif",
+      "sha256": "049263976b53860af60c48f11ad128733bcdd0f59b1670cd1b82bc02ad105842"
+    },
+    {
+      "file": "die.sheet.png",
+      "sha256": "e1e22d43174eeaff159810f6268938bc0e74fe44623ff694412b89e344f67d12"
+    },
+    {
+      "file": "die.gif",
+      "sha256": "ec5724a44a4dd8c8498fc70053a34de325a55a2fed3444e94b7241dc43ce44f0"
+    },
+    {
+      "file": "tribulation.sheet.png",
+      "sha256": "bccfcfb63bf0c51ceb3ce53f38a0de1790c33d6ae6530ec48bbd30e7d793ba01"
+    },
+    {
+      "file": "tribulation.gif",
+      "sha256": "4fedc4fc714292ccfa8d3c11f259fc550eaa3947774964a478b0260436c6e36f"
+    },
+    {
+      "file": "emote.sheet.png",
+      "sha256": "37e0607aa81a4d51fa125b83c2d7d04ddd0f88b6045befaf972d4e4f4a059f79"
+    },
+    {
+      "file": "emote.gif",
+      "sha256": "12e4145375575e1fd2eca737218e21be664bbd8bf7e1dc30fc0c5bb23f401788"
+    },
+    {
+      "file": "attack_2.sheet.png",
+      "sha256": "fccb81644a1bb0ddb0d3c3a8b43147778820ce4f442a172a6041598be15c8e5b"
+    },
+    {
+      "file": "attack_2.gif",
+      "sha256": "ad12c19ca042baa142522de2467de9010b0f5501db3cd3dda9d4798bfc70f5a6"
+    },
+    {
+      "file": "attack_3.sheet.png",
+      "sha256": "35fc860999a3f5ad890354fdd228d1cc3e558f378bd65f5ec7b72a0aee89e4ff"
+    },
+    {
+      "file": "attack_3.gif",
+      "sha256": "d8dca9fc4c79a8510b738ebfdba2bcff296a72aa84c82fdc326786a90dca638b"
+    }
+  ],
+  "note": "Viewer root-bone seam0 is not pixel-loop or identity proof. Native source QA separately passes. GIF holds are centisecond-rounded previews; runtime/SKE clock is exactly24Hz. Initial historical diagnostics remain history."
+}

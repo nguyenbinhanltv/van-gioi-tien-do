@@ -1,0 +1,36 @@
+{
+  "clip": "run",
+  "dir": "E",
+  "attempt": 3,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-07 22:04:40 UTC",
+  "utcEnd": "2026-11-07 22:05:19 UTC",
+  "prompt": "Production sprite sheet edit with calibrated head stencil. Image1 TARGET is16-cell4x4 RUN lattice, containing the actual canonical head at EXACT correct size and intended positions. Image2 provides the approved dynamic16-running BODY POSES, boots, clothing, whisk and secondary-motion arcs. Image3 fixedfaceidentity. Complete Image1 into16fullbodyRUNframes by drawing the matching Image2 bodypose in eachcell around its canonicalhead. Preserve Image1 head/maincap/face dimensions closely:53.5logicalpx Euclidean maincapcrown-tochin per256logicalcell, SAME actual stencil size; no enlarging or shrinking. Keep fixedadultfemaleolivebrownalmondface, straightdelicatebrow,nose/lips/jaw, sweptbrownmaincap distinctbun/simplejadepin. Do not make babyface. Headstencil is not a floating object: attachnecknaturally tobody preserving dynamic forward torso lean and knee/hiparticulation fromimage2. Preserve all16runphases: contact/compression/stance/kneeup/push/toeoff/flighttuck/reach, secondhalflegswap. Especiallyframes7and15 BOTHFEETAIRBORNE tucked, neverflatten. Retainbootpositions and alternatingnear/farlegs, leadinglegghosts forcontact, noextra feet. Right hand continuouslygripsplainbrownwhisk onebronze collar whitehorsehair; leftopenpalm. IvoryjadegoldT1robe/inkhem, cloth/sash/side strands/whiskhair trailleft withlag. Keep samebodysegmentlengths asimage2; only actualheadscaledrift corrected withcanonicalstencil. 4x4square16fullframesrowmajor, nofigureclipping, noartcrossingcell. Remove all lattice/grid/dashes/ghostdots/cornertriangles, finishedoutsideuniformflat#ff00ff. No text/shadow/FX/talismans/lotus/afterimage/blur. Tintedoutlines2tonecel+highlight+rim NWlight. Final16distinctdrawings loop smoothly. Use actualstencilsize rather than verbalpercentage correction.",
+  "references": [
+    "../templates/run.head-guide.png",
+    "../raw/run.attempt1.png",
+    "../../reference/E.identity-panel.corrected.png"
+  ],
+  "raw": "../raw/run.attempt3.png",
+  "status": "canonical unscaled head-stencil input candidate; body dynamics retained; actual output head evidence pending",
+  "sha256": "0eb667e5965ee463ad2f7424ce61d1e5eb4afe65532b893b3ad26f553084ff30",
+  "rawSha256": "0eb667e5965ee463ad2f7424ce61d1e5eb4afe65532b893b3ad26f553084ff30",
+  "finalReview": "../final-source-review.json",
+  "currentReferenceFileHashes": [
+    {
+      "file": "../templates/run.head-guide.png",
+      "sha256": "37220fbc84e66b3402b52a301f78bb6bf2eabfbabd1243ed4f67c37b380a742a"
+    },
+    {
+      "file": "../raw/run.attempt1.png",
+      "sha256": "e7f3c5053f0fa2f63d1cfba7bc989deffb7cd919e2ad1bf7243d370717d21967"
+    },
+    {
+      "file": "../../reference/E.identity-panel.corrected.png",
+      "sha256": "6283496f9a6263a7bf76abdc108679e9118f5d7a97a4b3b1252a8f1e1cbcded1"
+    }
+  ],
+  "currentReferenceHashNote": "Snapshot of present reference-file bytes during final audit, not a tool-attested call-time hash. Templates/guides may have evolved; original prompt/call paths and historicalInputGuide record retain that limitation."
+}

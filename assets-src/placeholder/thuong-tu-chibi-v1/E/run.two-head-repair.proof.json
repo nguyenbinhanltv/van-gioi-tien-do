@@ -1,0 +1,56 @@
+{
+  "operation": "public repairCell; no per-frame scaling",
+  "cells": [6, 11],
+  "changed": [6, 11],
+  "unchangedCells": 14,
+  "files": [
+    {
+      "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-repaired.png",
+      "sha256": "627fd93a1101607bd2fd6dee1ebfe39bf0815351084ae1b37836229d5357f98d"
+    },
+    {
+      "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.two-head-edited.png",
+      "sha256": "37f27fe15a433f13e6c23efa0932155661faa9c8d68b29491cd63bf932458987"
+    },
+    {
+      "path": "assets-src/placeholder/thuong-tu-chibi-v1/E/raw/run.head-final.png",
+      "sha256": "974e7cb58697e44591ef60acf5c6d52dea7a2b4dde3342cff6193ec24e900bf0"
+    }
+  ],
+  "originalCellSha1": [
+    "9f5b031e8717964541f66fc307f422c8f9651667",
+    "3c2485819005803839455f183e6ffcdc69b6d9c6",
+    "15281f7e73ba0fa3b791a1b886571dc73eca3e04",
+    "c5a15078c00289b26793a76acce6b538f564cae6",
+    "e8769464d25922d25fcdd9087e47a936e644b278",
+    "b12bac26f11fa4dc9957a29a64160449a50ab7f1",
+    "fa798ec6bcbef73631fffbd2e228a9265f5d4687",
+    "f0b74cc364bc0f71573fcbba07fe230c45810228",
+    "05db3526ddee641dcd66382f0c70030dffff9388",
+    "18619e3616bc9cca9e38d8165f51d314fac7fd96",
+    "d71dff5b24cadc26e9bad8794f35f9c8a30480f5",
+    "fef6009eafad540d5e64e91e9070b70ce60a8ac3",
+    "f3a4c32b6654c022936e3af76cb1b366c6a25df8",
+    "e915b265cd2853cc0e844cb8846e70fd369b54ae",
+    "de79395dd3e3039058f6a71ae06f3641a977998a",
+    "3b85bd78ef6c899b7004612eab65d5d826450607"
+  ],
+  "selectedCellSha1": [
+    "9f5b031e8717964541f66fc307f422c8f9651667",
+    "3c2485819005803839455f183e6ffcdc69b6d9c6",
+    "15281f7e73ba0fa3b791a1b886571dc73eca3e04",
+    "c5a15078c00289b26793a76acce6b538f564cae6",
+    "e8769464d25922d25fcdd9087e47a936e644b278",
+    "b12bac26f11fa4dc9957a29a64160449a50ab7f1",
+    "72d7c0c42af57ec2338c4ff7932cad691fdba0ec",
+    "f0b74cc364bc0f71573fcbba07fe230c45810228",
+    "05db3526ddee641dcd66382f0c70030dffff9388",
+    "18619e3616bc9cca9e38d8165f51d314fac7fd96",
+    "d71dff5b24cadc26e9bad8794f35f9c8a30480f5",
+    "cdcf77b62f788fb7c3f6a5cd1c72c19ffb957814",
+    "f3a4c32b6654c022936e3af76cb1b366c6a25df8",
+    "e915b265cd2853cc0e844cb8846e70fd369b54ae",
+    "de79395dd3e3039058f6a71ae06f3641a977998a",
+    "3b85bd78ef6c899b7004612eab65d5d826450607"
+  ]
+}

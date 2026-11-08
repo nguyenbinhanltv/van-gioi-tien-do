@@ -1,0 +1,26 @@
+{
+  "format": "vgtd-manual-art-findings",
+  "version": 1,
+  "character": "the-tu",
+  "cellConvention": "0based;-1wholeclip",
+  "entries": [
+    {
+      "kind": "leg_reversal",
+      "clip": "walk",
+      "dir": "SE",
+      "cell": -1,
+      "note": "Chu kỳ 12 frame còn cần tăng độ rõ vai trò chân trụ/chân vung. Giữ nguyên ảnh đã được duyệt; guide QA mới không được coi là template đã dùng sinh ảnh. Số đo 2D được ghi riêng, không dùng quan sát này để chấp nhận hard gate.",
+      "severity": "warn",
+      "status": "open"
+    },
+    {
+      "kind": "leg_reversal",
+      "clip": "run",
+      "dir": "SE",
+      "cell": -1,
+      "note": "Đảo chân ở chu kỳ 12 frame chưa mạnh; cần polish quỹ đạo đế giày. Giữ nguyên ba ô sửa donor 4/9/10 và chín ô còn lại đã được chứng minh không đổi byte; không sinh lại hoặc rescale frame.",
+      "severity": "warn",
+      "status": "open"
+    }
+  ]
+}

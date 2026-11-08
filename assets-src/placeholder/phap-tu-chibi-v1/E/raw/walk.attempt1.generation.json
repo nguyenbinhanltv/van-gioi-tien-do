@@ -1,0 +1,21 @@
+{
+  "name": "walk",
+  "prompt": "Production FRAME-BY-FRAME sprite sheet, original Phap tu B premium semi-chibi MMORPG. Image1 is EXACT LOCKED E master: same adult oval female face/narrow darkbrown eyes/arched brows/right beauty mark, black half-up hair, compact bun, low horizontal split-vermilion pin with3-bead tassel, gold/red earrings. Same short plain ink-plum midthigh tunic, separate loose plum ankle-gathered trousers, long hanging sleeves thinpalegoldseams, red waist sash/tails, pointed plum/gold ankle shoes. ANATOMICALLEFT hand holds ONE simple open vermilion fan naturally, plain panels fixedgoldribs, no motif/gem/FX; otherhand relaxed. EXACT E strict right-facing profile in EVERY frame, orthographic slight overhead camera. Face/hairstyle/garment/fan geometry and anatomical proportions NEVER drift. Mainhaircap crown-to-sole216 logicalpixels, head22-24%body, eyes16%, adult4.5head premiumsemichibi. In EVERY SQUARE CELL of256logicalunits: wholepin/hair topy14, maincrown~16, plantedsolesy232, pelvisaxisx127.72. Same anatomicalscale everyframe, no zoom, no camera changes. Precisely2celtones+tinyhighlight/rim, tintedoutlines, NWlight, sparseinkwashsleeveends. Image2 is EXACT lattice/layout guide. Reproduce equal SQUARE cell grid and rowmajor framecount; draw subject according to guide but OMIT ALL guide lines/borders/ghosts/markers/text in finished sheet. Pure solid opaque #FF00FF background, no shadows/scenery/smear/afterimage. Full body INCLUDING fan hands feet safely within each cell, no overlap, no cuttinghair. Keep recognizable long sleeves and open fan. CLIP WALK: EXACTLY16 frames in4columns4rows square2048x2048,512rawpixelcells. Smooth16frame WALK IN PLACE towardscreenRIGHT. Follow image2 footghosts EXACTLY, nearRboot CYAN and farLboot AMBER, red/blue triangles indicate leadingleg. Alternate R/L contact/load/passing/push/swing then oppositehalfcycle; legs clearly reverse afterhalfcycle, bothfeet fullyvisible, no hiddenfootallframes. Feet move BACKWARD along ground while planted, toeslift andkneebends when swinging, no body sliding acrosscell. Gentlehiprotation butface staysrightprofile, almostconstantheight, shallowkneeflex. LEFTfanhand remainsbent atchestlevel and fanopen, RIGHTfreearm mildcounter-swing. Hair/sleeves/ribbons trailbody by2frames and settlethroughloop. No duplicated staticposes, no actionjump, no airbornewalk, no morphingbootsortrousers. Seam16->1 smooth. Exact same bodyvolume/fixedface/equal scale allcells.",
+  "utcStart": {
+    "current_time": "2026-11-07 20:30:31 UTC"
+  },
+  "references": ["reference/E.master.png", "E/templates/walk.template.png"],
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcEndObserved": {
+    "current_time": "2026-11-07 20:31:23 UTC"
+  },
+  "raw": "raw/walk.attempt1.png",
+  "selected": "sheets/walk.png",
+  "status": "selected; complete E hard QA passed; accepted soft findings are explicit in quality-backlog.json",
+  "rawSha256": "3e5e6917b7515455aed798a332493a170f44225770adf9176a9fba2d25daced3",
+  "rawDimensions": [1254, 1254],
+  "utcRawOutputFileModified": "2026-11-07T20:31:09.798Z",
+  "selectedSha256": "3e5e6917b7515455aed798a332493a170f44225770adf9176a9fba2d25daced3",
+  "referenceSnapshots": ["reference/E.master.generation-v1.png", "E/templates/walk.template.png"]
+}

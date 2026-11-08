@@ -1,0 +1,8 @@
+{
+  "scale": 0.9004329004329005,
+  "referenceHeight": 231,
+  "masterHeight": 208,
+  "referenceDirection": "E",
+  "referenceClips": ["idle", "walk", "run"],
+  "method": "Normalize each raw grid to 256px square cells for DPI only; median opaque upright height is 231px. One character scale = E master 208 / 231, reused for all clips and directions. Alignment permits translation only."
+}

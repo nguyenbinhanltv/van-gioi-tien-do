@@ -1,0 +1,33 @@
+{
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:13:52.383Z",
+  "utcCompleted": "2026-11-07T23:15:23.671Z",
+  "prompt": "Use case: precise-object-edit identity-preserve. Image1 is EDIT TARGET a4x4 shared HIT6+DASH10 sprite sheet. Rowmajor cells0..5 HIT must remain pixel-identical. DASH usesglobal6..15. Correct ONLY enlarged head units in global7..13 (=dashlocal1..7). Their attached skull maincap-to-centralchin distance is now52–54logicalpx; match locked master image2:48logicalpx in256logicalcell =58.8nativepixels in313.5nativecell. Around8–10percent smaller skull/face where enlarged, preserve exact head center, forward pitch, face direction and mature squarejaw identity. The dashlocal4/5 poses are deliberately very deep and looking forward from pitched skull; KEEP that pitch and the existing neck/body relation, not an upright pasted face. Minimal neck blend. Do not shrink/move/redraw body, arms, pairedgauntlets, boots, knees, apron, sash, clothlag or roottravel. No flattening of dynamic flight/crouch. Global0..6 and14..15 untouched. Same image dimensions, same4x4 registration, pure opaque magenta background and thinblack dividers. Original charcoal/amber/gold/ivory celshade palette,tintedoutlines. No addedFX/text/props. Change only actual oversizedskulls in designatedcells; retaincompactbun/ribbonsecondarymotion.",
+  "references": ["raw/hit-dash.attempt1.png", "../reference/S.master.png"],
+  "rawOutput": "C:\\Users\\PC\\.codex\\generated_images\\01a1b7a1-8988-7183-8526-f666de449e35\\exec-afede16b-7928-49bc-8c23-36f217f96b28.png",
+  "status": "Historical generation/edit input retained; project.json selects final fullsheets. Cell compositions use adjacent repair proofs.",
+  "license": {
+    "source": "https://openai.com/policies/row-terms-of-use/",
+    "basis": "OpenAI Output; original project inputs"
+  },
+  "selectionRegistry": "project.json",
+  "note": "Original/rejected raw attempts retained. Authoritative selected source per clip is project.json; provenance status is not a QA waiver.",
+  "selectedFullSheet": false,
+  "archivedRaw": {
+    "file": "raw/hit-dash.head-edit.png",
+    "sha256": "1f34c6a1ba4a081bdc8d2426fc9798f528e91e5a213535665fb79909609830b2",
+    "matchesOriginalOutput": true
+  },
+  "archivedReferences": [
+    {
+      "file": "raw/hit-dash.attempt1.png",
+      "sha256": "0245a4c4846cf705f3cc531d946f99ae25514de7cda14dc7a4c0e036c893836e"
+    },
+    {
+      "file": "../reference/S.master.png",
+      "sha256": "0429965d9e3ce141a1caab9110c24f01b64a21ed6cdd78ebc6110a9ffa0434e9"
+    }
+  ],
+  "utcProvenanceAudit": "2026-11-07T23:40:35.893601+00:00"
+}

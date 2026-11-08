@@ -1,0 +1,287 @@
+{
+  "engine": "Cocos Creator",
+  "version": "3.8.8",
+  "direction": "E",
+  "source": "dragonbones/phap-tu-chibi-v1/phaptuchibi",
+  "zoom": 2,
+  "midpointSamplesPerClip": 24,
+  "captureExitCode": 0,
+  "utcCaptureIndexModified": "2026-11-07T21:45:10.607Z",
+  "captureIndexSha256": "6ea998963942bb21bd18e95d7f046e49c5947764827ebb78b28b05a936bbba39",
+  "clips": [
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif",
+      "name": "idle",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "meditate.sheet.png",
+      "gif": "meditate.gif",
+      "name": "meditate",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "walk.sheet.png",
+      "gif": "walk.gif",
+      "name": "walk",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "run.sheet.png",
+      "gif": "run.gif",
+      "name": "run",
+      "filesExist": true
+    },
+    {
+      "duration": 0.43333333333333335,
+      "keyFrames": 13,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "dash.sheet.png",
+      "gif": "dash.gif",
+      "name": "dash",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "sword_fly.sheet.png",
+      "gif": "sword_fly.gif",
+      "name": "sword_fly",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack.sheet.png",
+      "gif": "attack.gif",
+      "name": "attack",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "cast.sheet.png",
+      "gif": "cast.gif",
+      "name": "cast",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "channel.sheet.png",
+      "gif": "channel.gif",
+      "name": "channel",
+      "filesExist": true
+    },
+    {
+      "duration": 0.26666666666666666,
+      "keyFrames": 8,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "hit.sheet.png",
+      "gif": "hit.gif",
+      "name": "hit",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "die.sheet.png",
+      "gif": "die.gif",
+      "name": "die",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "tribulation.sheet.png",
+      "gif": "tribulation.gif",
+      "name": "tribulation",
+      "filesExist": true
+    },
+    {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "emote.sheet.png",
+      "gif": "emote.gif",
+      "name": "emote",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_2.sheet.png",
+      "gif": "attack_2.gif",
+      "name": "attack_2",
+      "filesExist": true
+    },
+    {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_3.sheet.png",
+      "gif": "attack_3.gif",
+      "name": "attack_3",
+      "filesExist": true
+    }
+  ],
+  "runtimeAssets": [
+    {
+      "file": "phaptuchibi_E_page1_tex.json",
+      "sha256": "ffa08973f0d76bfb2aa02255ff16b2634db76a9201b65e1597638a266e8b9f95",
+      "capturedSourceSha256": "ffa08973f0d76bfb2aa02255ff16b2634db76a9201b65e1597638a266e8b9f95",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_E_page1_tex.png",
+      "sha256": "6dcabc1493c1351dece1d85d2587655a38f0561cf7ae2f840e9c5c28aa3e15fa",
+      "capturedSourceSha256": "6dcabc1493c1351dece1d85d2587655a38f0561cf7ae2f840e9c5c28aa3e15fa",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_E_ske.json",
+      "sha256": "27df785109cc3b0537fb8b78b31e98deebe986c0a929c38dcca9ddec9d1882d5",
+      "capturedSourceSha256": "27df785109cc3b0537fb8b78b31e98deebe986c0a929c38dcca9ddec9d1882d5",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_E_tex.json",
+      "sha256": "1c0eaf00590e246063bd9e1b521bb7caaa123035aebd40989ee17d4ec4823f34",
+      "capturedSourceSha256": "1c0eaf00590e246063bd9e1b521bb7caaa123035aebd40989ee17d4ec4823f34",
+      "byteMatch": true
+    },
+    {
+      "file": "phaptuchibi_E_tex.png",
+      "sha256": "cc85d8e61391aa3b0b9cca8d6dbd2e4a47386ac1f1aed68a938df4c7b19f6fd2",
+      "capturedSourceSha256": "cc85d8e61391aa3b0b9cca8d6dbd2e4a47386ac1f1aed68a938df4c7b19f6fd2",
+      "byteMatch": true
+    }
+  ],
+  "spriteQa": {
+    "fail-hard": 0,
+    "fail-soft": 0,
+    "accepted": 38,
+    "regression": 0,
+    "info": 52
+  },
+  "headEvidenceCells": 16,
+  "status": "passed",
+  "note": "Final fixed +1 px character-wide framing; all 15 clips captured at 2x in real Cocos Creator 3.8.8. No per-frame fitting. Zero-loss canvas gate passed for all 202 frames. Soft findings remain open.",
+  "canvasGate": "canvas-gate.json",
+  "nativeCanvasLossGate": {
+    "status": "passed",
+    "source": "PR152 merged main; official sprite:build",
+    "frames": 202,
+    "failHard": 0
+  }
+}

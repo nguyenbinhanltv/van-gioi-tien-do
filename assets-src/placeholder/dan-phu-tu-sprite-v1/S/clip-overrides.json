@@ -1,0 +1,23 @@
+{
+  "attack": {
+    "exceptions": {}
+  },
+  "attack_2": {
+    "exceptions": {}
+  },
+  "attack_3": {
+    "exceptions": {}
+  },
+  "emote": {
+    "exceptions": {
+      "6": "bow: head and torso incline in the greeting; original anatomy retained",
+      "7": "bow: head and torso incline in the greeting; original anatomy retained"
+    }
+  },
+  "walk": {
+    "vertical": "keep"
+  },
+  "run": {
+    "vertical": "keep"
+  }
+}

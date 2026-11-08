@@ -1,0 +1,26 @@
+{
+  "method": "uniform scale and translation only",
+  "source": "E.master-generated.png",
+  "target": "E.master.png",
+  "sourceSize": [1254, 1254],
+  "sourceMetrics": {
+    "left": 395,
+    "right": 838,
+    "top": 61,
+    "bottom": 1198,
+    "height": 1137,
+    "width": 443,
+    "pelvisX": 618.4103880597015
+  },
+  "scale": 0.18293755496921724,
+  "translation": [15, 13],
+  "metrics": {
+    "left": 87,
+    "right": 168,
+    "top": 24,
+    "bottom": 232,
+    "height": 208,
+    "width": 81,
+    "pelvisX": 127.54954954954955
+  }
+}

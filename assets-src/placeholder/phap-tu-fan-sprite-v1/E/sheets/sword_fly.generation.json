@@ -1,0 +1,11 @@
+{
+  "id": "B.E.sword_fly",
+  "prompt": "Use case: stylized-concept. Production frame-by-frame PHAP TU B Vermilion FAN Adept game sprite sheet. Reference1 EXACT immutable E master identity/anatomy/costume/palette. Reference2 square-cell TEMPLATE layout/pose guides only; REMOVE ALL GUIDELINES and colored dots. All characters exact RIGHT/E-facing profile. Adult male compact5.75heads, highdarkbun/jadepin/redribbon/tiedtail, ivorycrosscollar sleeves/trousers, mutedVERMILION red knee split robe bronzecloudtrim, navy two-tail sash, darkcalfboots. ONE OPEN CYAN/TEAL foldingFAN bronzecloudmotif darkribs in ANATOMICAL RIGHT/NEAR hand ALWAYS; hold at chest level, fan does not hide face. Empty left hand visible. Fan NEVER swaps hands, never becomes staff/sword/gauntlet. Same face/head size and body dimensions as master. NW light clean fine dark outline restrained soft2-3tone cel shade, readable128px. Pure solid MAGENTA #FF00FF background, no shadows/scene/text/numbers/grid/borders/VFX. Same uniform scale allcells, no resizingindividualframes. At256equivalent eachcell: bun topy24, solebaseliney232, total208px tall, allowed202..214, pelvisx128. Head and feet heights stable, do not crouch or shrink. Every sprite fullyinsideowncell nooverlap. FOURcolumns TWOrows EIGHTsquarecells,total2:1. 8frame levitatingflightLOOP forfanclass. NO sword, nofanride, nootherweapon. Characterupright hovering, bothbootsvisibleslightlyrelaxedknees, OPENfan inRIGHThandatchest, LEFTarmrelaxedoutforbalance. Samefullanatomicalsize, not crouch; no bobbakedintoart (runtimeoffsethandles). Onlysubtlerobe/hair/ribbonmovement, fan always held. Smoothfirst-last; noflightVFX.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-06 17:14:10 UTC",
+  "utcEnd": "2026-11-06 17:14:48 UTC",
+  "selectedOutput": "E/sheets/sword_fly.generated.png",
+  "references": ["reference/E.master-generated.png", "E/templates/sword_fly.template.png"],
+  "attempt": 1
+}

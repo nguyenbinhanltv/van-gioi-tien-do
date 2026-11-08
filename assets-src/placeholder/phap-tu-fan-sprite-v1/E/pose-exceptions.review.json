@@ -1,0 +1,476 @@
+{
+  "authorization": "Owner reviewed B-E-review and explicitly approved this exact 12-cell D41 set before pause; RESUME directs applying it.",
+  "ownerQuote": "Pháp tu vẫn ok đó, không sao cả, các animation nhân vật khác cũng ổn. Tập trung hoàn thành toàn bộ đi",
+  "policy": "Standard D41 seated/die-collapse declarations; no threshold changes or per-frame scaling",
+  "limitation": "The existing generic face/torso standing comparison skips these 12 cells. Raw measurements and pre-declaration findings are retained; owner judged the poses visually.",
+  "declarations": [
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 0,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 183.42616033755274,
+          "pelvisX": 110.39582998699461,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 183,
+          "pelvisX": 127.52068965517242,
+          "soleY": 232
+        },
+        "dx": 17.15371956255494,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 0,
+          "metric": "height_excess_px",
+          "value": 18.8,
+          "limit": 0,
+          "message": "height 183 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 0,
+          "message": "torso similarity 0.66 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 1,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 185.18143459915612,
+          "pelvisX": 110.25768754540897,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 185,
+          "pelvisX": 127.52978220939386,
+          "soleY": 232
+        },
+        "dx": 17.291862004140583,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 1,
+          "metric": "height_excess_px",
+          "value": 16.8,
+          "limit": 0,
+          "message": "height 185 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 1,
+          "message": "torso similarity 0.66 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 2,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 187.8143459915612,
+          "pelvisX": 110.38713080168776,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 188,
+          "pelvisX": 127.42583484338597,
+          "soleY": 232
+        },
+        "dx": 17.162418747861793,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 2,
+          "metric": "height_excess_px",
+          "value": 13.8,
+          "limit": 0,
+          "message": "height 188 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 2,
+          "message": "torso similarity 0.67 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 3,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 189.56962025316457,
+          "pelvisX": 111.18697469031703,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 189,
+          "pelvisX": 127.52897051215727,
+          "soleY": 232
+        },
+        "dx": 16.362574859232524,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 3,
+          "metric": "height_excess_px",
+          "value": 12.8,
+          "limit": 0,
+          "message": "height 189 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 3,
+          "message": "torso similarity 0.67 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 4,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 188.69198312236287,
+          "pelvisX": 110.80033149496658,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 189,
+          "pelvisX": 127.47845161290323,
+          "soleY": 232
+        },
+        "dx": 16.74921805458297,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 12.8,
+          "limit": 0,
+          "message": "height 189 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 4,
+          "message": "torso similarity 0.67 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 5,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 186.05907172995782,
+          "pelvisX": 110.43636195439339,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 186,
+          "pelvisX": 127.5534871525957,
+          "soleY": 232
+        },
+        "dx": 17.113187595156163,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 15.8,
+          "limit": 0,
+          "message": "height 186 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 5,
+          "message": "torso similarity 0.67 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 6,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 184.30379746835445,
+          "pelvisX": 110.16221284575715,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 184,
+          "pelvisX": 127.53653389606964,
+          "soleY": 232
+        },
+        "dx": 17.3873367037924,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 17.8,
+          "limit": 0,
+          "message": "height 184 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 6,
+          "message": "torso similarity 0.67 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "meditate",
+      "dir": "E",
+      "cell": 7,
+      "reason": "seated",
+      "record": {
+        "pre": {
+          "height": 183.42616033755274,
+          "pelvisX": 110.26968797207898,
+          "soleY": 206.24472573839662
+        },
+        "post": {
+          "height": 183,
+          "pelvisX": 127.52631578947368,
+          "soleY": 232
+        },
+        "dx": 17.27986157747057,
+        "dy": 25.755274261603375
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "meditate",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 18.8,
+          "limit": 0,
+          "message": "height 183 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "meditate",
+          "frame": 7,
+          "message": "torso similarity 0.66 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 4,
+      "reason": "die-collapse",
+      "record": {
+        "pre": {
+          "height": 136.9113924050633,
+          "pelvisX": 120.68254308803549,
+          "soleY": 201.8565400843882
+        },
+        "post": {
+          "height": 137,
+          "pelvisX": 127.6013986013986,
+          "soleY": 232
+        },
+        "dx": 6.867006461514066,
+        "dy": 30.1434599156118
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 4,
+          "metric": "height_excess_px",
+          "value": 64.8,
+          "limit": 0,
+          "message": "height 137 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 4,
+          "message": "torso similarity 0.68 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 5,
+      "reason": "die-collapse",
+      "record": {
+        "pre": {
+          "height": 112.33755274261604,
+          "pelvisX": 126.23921982759302,
+          "soleY": 200.9789029535865
+        },
+        "post": {
+          "height": 112,
+          "pelvisX": 127.12770137524558,
+          "soleY": 232
+        },
+        "dx": 1.3103297219565349,
+        "dy": 31.0210970464135
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 5,
+          "metric": "height_excess_px",
+          "value": 89.8,
+          "limit": 0,
+          "message": "height 112 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 5,
+          "message": "torso similarity 0.61 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 6,
+      "reason": "die-collapse",
+      "record": {
+        "pre": {
+          "height": 86.8860759493671,
+          "pelvisX": 137.26606637957286,
+          "soleY": 197.46835443037975
+        },
+        "post": {
+          "height": 87,
+          "pelvisX": 128.0082827167311,
+          "soleY": 232
+        },
+        "dx": -9.71651683002331,
+        "dy": 34.53164556962025
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 6,
+          "metric": "height_excess_px",
+          "value": 114.8,
+          "limit": 0,
+          "message": "height 87 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 6,
+          "message": "torso similarity 0.61 < 0.7"
+        }
+      ]
+    },
+    {
+      "clip": "die",
+      "dir": "E",
+      "cell": 7,
+      "reason": "die-collapse",
+      "record": {
+        "pre": {
+          "height": 86.8860759493671,
+          "pelvisX": 136.6826004885632,
+          "soleY": 197.46835443037975
+        },
+        "post": {
+          "height": 87,
+          "pelvisX": 127.99558255107675,
+          "soleY": 232
+        },
+        "dx": -9.133050939013643,
+        "dy": 34.53164556962025
+      },
+      "preDeclarationFindings": [
+        {
+          "gate": "height",
+          "severity": "warn",
+          "clip": "die",
+          "frame": 7,
+          "metric": "height_excess_px",
+          "value": 114.8,
+          "limit": 0,
+          "message": "height 87 px outside the upright band and no pose exception declared"
+        },
+        {
+          "gate": "similarity",
+          "severity": "fail",
+          "clip": "die",
+          "frame": 7,
+          "message": "torso similarity 0.60 < 0.7"
+        }
+      ]
+    }
+  ]
+}
