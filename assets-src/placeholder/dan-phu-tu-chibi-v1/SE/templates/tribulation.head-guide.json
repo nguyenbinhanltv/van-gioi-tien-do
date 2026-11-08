@@ -1,0 +1,93 @@
+{
+  "master": "../../reference/SE.corrected-master.png",
+  "scale": 1,
+  "poses": [
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 4,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 10,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 20,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 30,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 44,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 50,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 52,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 52,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 50,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 42,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 30,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 20,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 10,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 4,
+      "angle": 0
+    },
+    {
+      "dx": 0,
+      "dy": 0,
+      "angle": 0
+    }
+  ],
+  "stencil": {
+    "left": 88,
+    "right": 148,
+    "top": 3,
+    "bottom": 71
+  },
+  "note": "Authoring intentions only, not measured output annotations. Unscaled master-head stencil transformed in input guide only; generated artwork is never scaled or repainted by code. Review actual output landmarks independently."
+}

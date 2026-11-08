@@ -1,0 +1,217 @@
+{
+  "note": "Manual visible-neck authoring intentions, not output landmarks or head-size certification. Canonical master head is copied unscaled into INPUT only; output remains an AI repaint. Source body/root/flight must remain unchanged.",
+  "master": "../reference/SE.corrected-master.png",
+  "masterSha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a",
+  "source": "raw/run.attempt1.png",
+  "sourceSha256": "00ad9227bb6a43a09f5379ba16aecafbca1bb01fee2313c71ea2f8031221fe65",
+  "placements": [
+    {
+      "index": 0,
+      "alignedNeckIntent": {
+        "x": 155,
+        "y": 88
+      },
+      "normalizedSourceTranslation": {
+        "dx": 27,
+        "dy": 20
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 1,
+      "alignedNeckIntent": {
+        "x": 163,
+        "y": 96
+      },
+      "normalizedSourceTranslation": {
+        "dx": 35,
+        "dy": 28
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 2,
+      "alignedNeckIntent": {
+        "x": 155,
+        "y": 90
+      },
+      "normalizedSourceTranslation": {
+        "dx": 30,
+        "dy": 22
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 3,
+      "alignedNeckIntent": {
+        "x": 160,
+        "y": 83
+      },
+      "normalizedSourceTranslation": {
+        "dx": 34,
+        "dy": 15
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 4,
+      "alignedNeckIntent": {
+        "x": 158,
+        "y": 96
+      },
+      "normalizedSourceTranslation": {
+        "dx": 35,
+        "dy": 28
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 5,
+      "alignedNeckIntent": {
+        "x": 156,
+        "y": 84
+      },
+      "normalizedSourceTranslation": {
+        "dx": 36,
+        "dy": 16
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 6,
+      "alignedNeckIntent": {
+        "x": 161,
+        "y": 91
+      },
+      "normalizedSourceTranslation": {
+        "dx": 32,
+        "dy": 23
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 7,
+      "alignedNeckIntent": {
+        "x": 168,
+        "y": 90
+      },
+      "normalizedSourceTranslation": {
+        "dx": 35,
+        "dy": 22
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 8,
+      "alignedNeckIntent": {
+        "x": 162,
+        "y": 93
+      },
+      "normalizedSourceTranslation": {
+        "dx": 35,
+        "dy": 25
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 9,
+      "alignedNeckIntent": {
+        "x": 160,
+        "y": 101
+      },
+      "normalizedSourceTranslation": {
+        "dx": 35,
+        "dy": 33
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 10,
+      "alignedNeckIntent": {
+        "x": 161,
+        "y": 95
+      },
+      "normalizedSourceTranslation": {
+        "dx": 32,
+        "dy": 27
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 11,
+      "alignedNeckIntent": {
+        "x": 170,
+        "y": 85
+      },
+      "normalizedSourceTranslation": {
+        "dx": 43,
+        "dy": 17
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 12,
+      "alignedNeckIntent": {
+        "x": 161,
+        "y": 88
+      },
+      "normalizedSourceTranslation": {
+        "dx": 36,
+        "dy": 20
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 13,
+      "alignedNeckIntent": {
+        "x": 159,
+        "y": 91
+      },
+      "normalizedSourceTranslation": {
+        "dx": 36,
+        "dy": 23
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 14,
+      "alignedNeckIntent": {
+        "x": 161,
+        "y": 99
+      },
+      "normalizedSourceTranslation": {
+        "dx": 32,
+        "dy": 31
+      },
+      "scale": 1,
+      "angle": 0
+    },
+    {
+      "index": 15,
+      "alignedNeckIntent": {
+        "x": 159,
+        "y": 93
+      },
+      "normalizedSourceTranslation": {
+        "dx": 33,
+        "dy": 25
+      },
+      "scale": 1,
+      "angle": 0
+    }
+  ]
+}

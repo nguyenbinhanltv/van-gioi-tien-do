@@ -1,0 +1,68 @@
+{
+  "clip": "emote",
+  "grid": {
+    "cols": 4,
+    "rows": 3,
+    "cell": 256
+  },
+  "frames": 12,
+  "guides": {
+    "ground": 232,
+    "head": 2,
+    "pelvis": 117,
+    "centerX": 117.60678680981596
+  },
+  "key": [255, 0, 255],
+  "cells": [
+    {
+      "leading": null,
+      "tag": "emote_0"
+    },
+    {
+      "leading": null,
+      "tag": "emote_1"
+    },
+    {
+      "leading": null,
+      "tag": "emote_2"
+    },
+    {
+      "leading": null,
+      "tag": "emote_3"
+    },
+    {
+      "leading": null,
+      "tag": "emote_4"
+    },
+    {
+      "leading": null,
+      "tag": "emote_5"
+    },
+    {
+      "leading": null,
+      "tag": "emote_6"
+    },
+    {
+      "leading": null,
+      "tag": "emote_7"
+    },
+    {
+      "leading": null,
+      "tag": "emote_8"
+    },
+    {
+      "leading": null,
+      "tag": "emote_9"
+    },
+    {
+      "leading": null,
+      "tag": "emote_10"
+    },
+    {
+      "leading": null,
+      "tag": "emote_11"
+    }
+  ],
+  "width": 1024,
+  "height": 768
+}

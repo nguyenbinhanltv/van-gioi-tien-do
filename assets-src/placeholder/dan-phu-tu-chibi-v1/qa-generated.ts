@@ -5,6 +5,7 @@ import { decodePng, encodePng } from '@vgtd/rig';
 import {
   CELL_PX,
   measureFigure,
+  nativeCellTransform,
   normalizeSheetDpi,
   runProject,
   selectSheetCells,
@@ -41,13 +42,41 @@ const projectedCanvasLoss = present.flatMap((clip) => {
   const contract = result.contract.clips.find((entry) => entry.name === clip.name)!;
   const grid = sheetLayout(clip);
   const raw = decodePng(readFileSync(resolve(base, clip.sheet)));
-  const prepared = project.preparation ? normalizeSheetDpi(raw, grid.cols, grid.frames).image : raw;
-  const sheet = decodePng(encodePng(prepared));
+  const resample = project.resample ?? 'bilinear';
+  const deferred = !!project.preparation && resample !== 'bilinear';
+  const prepared = project.preparation
+    ? normalizeSheetDpi(raw, grid.cols, grid.frames, deferred ? { resample, defer: true } : {})
+    : undefined;
+  const sheet = decodePng(encodePng(prepared?.image ?? raw));
   const frames = selectSheetCells(sliceSheet(sheet, grid, project.slice), clip.sheetSelection);
   return frames.flatMap((frame, index) => {
-    const source = measureFigure(frame.image);
+    const native = measureFigure(frame.image);
     const record = contract.records[index];
-    if (!source || !record) return [];
+    if (!native || !record) return [];
+    const transform = deferred
+      ? nativeCellTransform(
+          sheet.width,
+          sheet.height,
+          prepared!.record.normalized[0],
+          prepared!.record.normalized[1],
+          grid.cols,
+          grid.rows,
+          clip.sheetSelection?.cells[index] ?? index,
+          project.slice?.inset ?? 0.01,
+        )
+      : undefined;
+    const source = transform
+      ? {
+          ...native,
+          left: native.left * transform.scaleX + transform.dx,
+          right: native.right * transform.scaleX + transform.dx,
+          top: native.top * transform.scaleY + transform.dy,
+          bottom: native.bottom * transform.scaleY + transform.dy,
+          width: native.width * transform.scaleX,
+          height: native.height * transform.scaleY,
+          pelvisX: native.pelvisX * transform.scaleX + transform.dx,
+        }
+      : native;
     const scale = contract.calibration.scale;
     if (Math.abs(source.height * scale - record.pre.height) > 1.25)
       throw new Error('Source geometry diagnostic differs from pipeline: ' + clip.name + ' #' + index);

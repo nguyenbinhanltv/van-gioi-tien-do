@@ -1,0 +1,160 @@
+{
+  "status": "Frozen manual semantic landmarks before size calculation; retained earlier drafts and raw attempts. Not an automatic landmark detector.",
+  "master": "head-baseline-history.json",
+  "nativeTrace": "Native cap/jaw neighborhoods retained in head-selection-native-traces.json after final source verification.",
+  "selections": [
+    {
+      "clip": "run",
+      "index": 4,
+      "raw": "raw/run.attempt4.png",
+      "rawSha256": "9a61ef0ee3a7f1496f3343199325db658f85b86c8a465407018159e0db47e049",
+      "alignedPngSha256": "962073aa79fd03146ffff4753f383b333c85e7cdd4ac3d3aa76d5b1031a4367a",
+      "crown": {
+        "x": 150,
+        "y": 22.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 72.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "run",
+      "index": 5,
+      "raw": "raw/run.attempt2.png",
+      "rawSha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
+      "alignedPngSha256": "f3a31de1deb3fb7afb2a5bffd8920ee17a87a5a1a8a7f8db3ef6334ced9c8691",
+      "crown": {
+        "x": 149,
+        "y": 22.5
+      },
+      "chin": {
+        "x": 162,
+        "y": 74.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "run",
+      "index": 12,
+      "raw": "raw/run.attempt2.png",
+      "rawSha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
+      "alignedPngSha256": "4b928e2e4d18b85aaeb111f13f0342d702bf570f30852d506f3a55b5f2daa884",
+      "crown": {
+        "x": 156,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 168,
+        "y": 76.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "run",
+      "index": 13,
+      "raw": "raw/run.attempt2.png",
+      "rawSha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
+      "alignedPngSha256": "6461f71d164d964dd620cfe3b93ad81447afd6a4847a56be63e4d34655ef90ad",
+      "crown": {
+        "x": 151,
+        "y": 26.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 77.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "run",
+      "index": 14,
+      "raw": "raw/run.attempt2.png",
+      "rawSha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
+      "alignedPngSha256": "60e609ae47bc1612efc862275e49cba798ccf797069df60a09398cc799dc5891",
+      "crown": {
+        "x": 155,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 169,
+        "y": 76.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "run",
+      "index": 15,
+      "raw": "raw/run.attempt2.png",
+      "rawSha256": "3e5cf093ab48c5921031582fe61932d001ee80f1eebdc70218d01fdd3f267084",
+      "alignedPngSha256": "122181758828a7a50e7c80b33468ac69cdbe90bdb05783c3382d2471a6c1601e",
+      "crown": {
+        "x": 151,
+        "y": 24.5
+      },
+      "chin": {
+        "x": 165,
+        "y": 76.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "dash",
+      "index": 1,
+      "raw": "raw/hit-dash.attempt2.png",
+      "rawSha256": "c442a6309e1b7b4138f5578b1b24e70fbc917b5e7c152a109cfa18b6d21529ea",
+      "alignedPngSha256": "56ec677daa76e691c3587e3506de0dc04038328e1c52c3345529c0746996938b",
+      "crown": {
+        "x": 123,
+        "y": 35.5
+      },
+      "chin": {
+        "x": 135,
+        "y": 86.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "dash",
+      "index": 2,
+      "raw": "raw/hit-dash.attempt2.png",
+      "rawSha256": "c442a6309e1b7b4138f5578b1b24e70fbc917b5e7c152a109cfa18b6d21529ea",
+      "alignedPngSha256": "a2d4a01d4416be7eaf584634c920629203c43aeefaa898498c32c48161fa7b08",
+      "crown": {
+        "x": 132,
+        "y": 41.5
+      },
+      "chin": {
+        "x": 142,
+        "y": 92.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    },
+    {
+      "clip": "dash",
+      "index": 7,
+      "raw": "raw/hit-dash.attempt2.png",
+      "rawSha256": "c442a6309e1b7b4138f5578b1b24e70fbc917b5e7c152a109cfa18b6d21529ea",
+      "alignedPngSha256": "4bf5994e3bdf466ffd2d6ed0e91dcc961499c208e9d6bf2722de33a202c1175e",
+      "crown": {
+        "x": 123,
+        "y": 35.5
+      },
+      "chin": {
+        "x": 136,
+        "y": 87.5
+      },
+      "manualUncertaintyPx": 1,
+      "note": "Native semantic boundary edges: attached front swept-cap rim/highlight, excluding elevated bun/pin; central jaw outline, excluding following neck shadow. Whole-cell AI source selection; no output rescale."
+    }
+  ]
+}

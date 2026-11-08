@@ -1,0 +1,27 @@
+{
+  "clip": "cast",
+  "direction": "SE",
+  "attempt": 2,
+  "profile": "smooth-v2",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "utcStart": "2026-11-08 00:16:09 UTC",
+  "utcEnd": "2026-11-08 00:17:14 UTC",
+  "prompt": "EDIT TARGET4x4 repeatedfullbodySEmaster-guide16frames. ThisisEXACTcanonicalbodyANDheadsize ineverycell; preservefullbodydimensions/height/bunplacement/boots-ground232 exactly, DO NOTextendtorso/legs orscaleup. AnimateONLY LEFTarm/hand andsecondarysleeves/hair/whiskfibres in16smoothCASTphases:0ready,1..4leftpalmgathersinwardatsternum,5..7risesmudra,8..9leftpalmreleasesforwardchestheight,10..15relaxbackready. RIGHT hand holdsplainbrownwhiskONEbronzecollarwhitehorsehair inoriginalnaturalgripthroughout; lowerbody remainsmaster'scorrectshorteradultproportions, noheightdrift. SAMEfixedadultface/maincap/bunpin/ivoryjadenarrowgoldinkhem, noredesign. ConstantSE3quarter. Keep2boots fixedatground232 andhead/bunexactlycurrentheight, slightbreathonly. Fullmasterbody230logicalpx INCLUDINGbun isalreadycalibrated; doNOTstretchitto240. Same4x4map16completefigures. RemoveALLgrid/border/dashes/rulers/text; pureuniformmagenta#ff00ff background,noFX/talisman/shadow/platform. Keepentirefigureinsideeachcell, no touching/crossingborders. Reference2identityanddimensionsonly.",
+  "references": ["../templates/cast.master-guide.png", "../../reference/SE.corrected-master.png"],
+  "raw": "../raw/cast.attempt2.png",
+  "status": "raw output; actual QA pending",
+  "rawSha256": "15df6b08cb2c66e861d7af41a2815a2725ac023c0af548a572c996b0be0a982d",
+  "currentReferenceFileHashes": [
+    {
+      "reference": "../templates/cast.master-guide.png",
+      "sha256": "e024710f4c478bcc369f8f9057ab56cfa6f6adb9a3fa809f1cfeadcf4e220885"
+    },
+    {
+      "reference": "../../reference/SE.corrected-master.png",
+      "sha256": "a8c98d1dd9653ca47efa5ccc661263dfcd21ac45bb0131c126fe636e313fd43a"
+    }
+  ],
+  "currentReferenceHashNote": "Current local reference bytes, not tool-attested call-time hashes. Original exact prompts, paths and UTC are retained; deliberate guide variants are named separately.",
+  "referenceHashNote": "Current retained reference-file bytes, not tool-attested call-time hashes."
+}
