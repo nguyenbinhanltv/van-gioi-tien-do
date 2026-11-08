@@ -9,6 +9,7 @@ npm workspaces (`packages/*`, `apps/*`, `tools/*`), Node ≥ 18, TypeScript stri
 ```
 packages/shared         Kiểu/hằng số/giao thức dùng chung client ↔ server (@vgtd/shared)
 packages/client-core    Input Abstraction Layer + HUD responsive, không phụ thuộc engine (@vgtd/client-core)
+packages/client-combat  Hotbar kỹ năng lớp + cooldown / GCD, chọn mục tiêu, vòng chiến đấu mô phỏng offline cho HUD chiến đấu, không phụ thuộc engine (@vgtd/client-combat)
 packages/client-world   Chunk streaming, draw order L0-L7, occlusion, loader map procgen, không phụ thuộc engine (@vgtd/client-world)
 packages/character      Hướng, paperdoll, bảng animation, footprint/socket/hitbox, boss, schema định nghĩa nhân vật (@vgtd/character)
 apps/client-cocos       Dự án Cocos Creator 3.x (placeholder)

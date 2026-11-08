@@ -26,11 +26,13 @@ export class InputBridge {
     player: { position(): TilePos },
     art: ArtFrames,
     hudRoot: Node,
+    /** Optional click-to-select hook (combat): tile under the pointer -> entity id; a hit selects instead of walking. */
+    pickEntity?: (tile: TilePos) => number | null,
   ) {
     const canvas = game.canvas as HTMLCanvasElement;
     const q = new URLSearchParams(location.search).get('input');
     const forcedMode = q === 'touch' || q === 'pointer' ? q : null;
-    this.input = new core.InputManager(canvas, { grid, camera: rig, player, forcedMode });
+    this.input = new core.InputManager(canvas, { grid, camera: rig, player, forcedMode, pickEntity });
 
     this.layout = new core.AnchorLayout(canvas.parentElement!);
     const applyLayout = (res: core.LayoutResult) => {

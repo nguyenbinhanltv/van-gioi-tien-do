@@ -1,0 +1,29 @@
+{
+  "name": "@vgtd/client-combat",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Engine-agnostic client combat logic: hotbar (class skills, cooldown + GCD), target selection, offline mock combat loop (D49 skill data).",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.test.json"
+  },
+  "dependencies": {
+    "@vgtd/shared": "*"
+  }
+}

@@ -2,4 +2,5 @@
 export * as shared from './shared-subset.js';
 export * as core from '../../../packages/client-core/src/index.js';
 export * as character from './character-subset.js';
+export * as combat from '../../../packages/client-combat/src/index.js';
 export * as world from '../../../packages/client-world/src/index.js';
