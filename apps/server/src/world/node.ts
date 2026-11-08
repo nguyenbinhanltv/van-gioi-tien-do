@@ -32,8 +32,11 @@ import {
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import {
+  ANTICHEAT,
+  type AntiCheatState,
   CastReason,
   TileGrid,
+  budgetMs,
   compileSkills,
   createWorld,
   removeEntity,
@@ -51,6 +54,7 @@ import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+import type { InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -103,6 +107,17 @@ interface Last {
 /** Stands in for the transport of a player whose connection dropped and whose entity is being held: everything is discarded. */
 const DETACHED: ClientTransport = { send: () => undefined, close: () => undefined, buffered: () => 0 };
 
+/**
+ * The sim's own sliding rule (docs/08 section 6), applied at the moment of a resume: when the time budget leads the claimed time by
+ * more than `SLIDE_LAG_MS`, pull it back to `claimed + SLIDE_LAG_MS`. The time spent disconnected therefore cannot be banked as a
+ * burst of fast movement, while claimed time, ratio windows, hot windows and the suspicion score carry over untouched.
+ */
+function slideBudget(ac: AntiCheatState, nowMs: number): AntiCheatState {
+  const lag = budgetMs(ac, nowMs) - ac.claimedMs;
+  if (lag <= ANTICHEAT.SLIDE_LAG_MS) return ac;
+  return { ...ac, t0Ms: ac.t0Ms + (lag - ANTICHEAT.SLIDE_LAG_MS) / ANTICHEAT.BUDGET_RATE, lastSlideMs: nowMs };
+}
+
 function newResumeToken(): string {
   return randomBytes(16).toString('hex');
 }
@@ -117,6 +132,8 @@ interface Client {
   transport: ClientTransport;
   /** single-use secret that lets this player's NEXT connection resume the session; rotated on every (re)connect */
   resumeToken: string;
+  /** what the gateway authenticated this session with (opaque here): re-validated on a resume, which presents no access token */
+  authStamp: unknown;
   /** sim time the connection dropped while the entity is held for a resume; null = connected */
   suspendedAtMs: number | null;
   inbox: AimedInput[];
@@ -172,6 +189,8 @@ export interface WorldNodeOptions {
   resumeHoldMs?: number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
   mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
+  /** inventory + drop sink (D77): loads an account's inventory on join and saves it on leave; omit = no inventory */
+  inventory?: InventoryService;
 }
 
 const BAND_PERIOD = [1, 2, 4] as const;
@@ -255,6 +274,8 @@ export class WorldNode {
   readonly combat: CombatSystem | null;
   /** monster spawns / AI (D74); null when the node runs without mobs */
   readonly mobs: MobManager | null;
+  /** inventory + drop sink (D77); null when the node runs without one */
+  readonly inventory: InventoryService | null;
 
   constructor(opts: WorldNodeOptions = {}) {
     const seed = opts.seed ?? 1;
@@ -283,6 +304,7 @@ export class WorldNode {
     });
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
     this.resumeHoldMs = opts.resumeHoldMs ?? WORLD_CONFIG.RESUME_HOLD_MS;
+    this.inventory = opts.inventory ?? null;
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -336,11 +358,13 @@ export class WorldNode {
       hp: stats?.hpMax ?? WORLD_CONFIG.PLAYER_MAX_HP,
       mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
+    this.inventory?.onJoin(accountId);
     this.clients.set(id, {
       id,
       accountId,
       transport,
       resumeToken: newResumeToken(),
+      authStamp: undefined,
       suspendedAtMs: null,
       inbox: [],
       lastVitals: null,
@@ -378,6 +402,7 @@ export class WorldNode {
     const c = this.clients.get(id);
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
+    this.inventory?.onLeave(c.accountId);
     void this.progression?.leave(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -387,6 +412,12 @@ export class WorldNode {
   /** The account that owns a player entity (the gateway needs it after a resume, which presents no access token). */
   accountOf(id: number): string | undefined {
     return this.clients.get(id)?.accountId;
+  }
+
+  /** Record what this session was authenticated with (the gateway calls it right after `addPlayer`); see `resumePlayer`. */
+  stampSession(id: number, stamp: unknown): void {
+    const c = this.clients.get(id);
+    if (c) c.authStamp = stamp;
   }
 
   /** The secret the gateway hands the client in `hello_ack` so its next connection can resume this session. */
@@ -417,12 +448,27 @@ export class WorldNode {
    * Re-attach a new connection to a held (or, for a half-open zombie socket, still attached) player when `token` matches.
    * Same entity, same combat / progression registration (NOT re-added: that would reset profile, shield and alive state).
    * The client is treated as brand new for the wire (empty AOI -> full snapshot + `aoi_enter`s, vitals re-sent, input numbering
-   * restarts) and its anti-cheat clock restarts, so the time spent disconnected cannot be banked as a burst of fast movement.
-   * Returns the rotated token, or null when rejected.
+   * restarts). The anti-cheat accounting is NOT reset (claimed time, ratio windows, hot windows and the suspicion score carry over,
+   * so dropping and resuming never launders a cheater's record); only the sim's sliding rule is applied once (`slideBudget`), so
+   * that idle time cannot be banked as a burst of fast movement either.
+   *
+   * `valid(accountId, authStamp)` re-checks the session the token belongs to (account still exists, token_version unchanged,
+   * session not revoked): a resume must not outlive a revocation. A token that matches but whose session is no longer valid
+   * releases the held entity for good. Returns the rotated token, or null when rejected.
    */
-  resumePlayer(id: number, token: unknown, transport: ClientTransport): { token: string } | null {
+  resumePlayer(
+    id: number,
+    token: unknown,
+    transport: ClientTransport,
+    valid?: (accountId: string, authStamp: unknown) => boolean,
+  ): { token: string } | null {
     const c = this.clients.get(id);
     if (!c || c.dead || !sameToken(c.resumeToken, token)) return null;
+    if (valid && !valid(c.accountId, c.authStamp)) {
+      if (c.suspendedAtMs === null) c.transport.close(ErrorCode.Unauthorized, 'session revoked');
+      this.removePlayer(id);
+      return null;
+    }
     if (c.suspendedAtMs === null) c.transport.close(ErrorCode.Kicked, 'resumed elsewhere'); // the old socket is dead weight
     const now = this.world.timeMs;
     c.transport = transport;
@@ -437,8 +483,6 @@ export class WorldNode {
     c.snapSeq = 0;
     c.lastAckMs = now;
     c.lastResyncMs = -Infinity;
-    c.pktWindowStartMs = clock();
-    c.pktCount = 0;
     this.world = {
       ...this.world,
       entities: this.world.entities.map((e) =>
@@ -449,15 +493,7 @@ export class WorldNode {
               pending: [],
               vi: 0,
               vj: 0,
-              ac: {
-                ...e.ac,
-                t0Ms: now,
-                claimedMs: 0,
-                lastSlideMs: now,
-                windowStartMs: now,
-                windowClaimedMs: 0,
-                hotWindows: 0,
-              },
+              ac: slideBudget(e.ac, now),
             }
           : e,
       ),

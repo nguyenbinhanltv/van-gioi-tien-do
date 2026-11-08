@@ -116,6 +116,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
     /** this connection's handle in the world: every call below is bound to it, never to the bare entity id (ids are recycled) */
     let transport: ClientTransport | undefined;
     let accountId = '';
+    let authed: { accountId: string; sessionId: string; version: number } | undefined;
     const closeWith = (code: ErrorCode, text: string): void => {
       if (ws.readyState === ws.OPEN) {
         ws.send(encode({ type: 'error', code, text }), { binary: true });
@@ -176,7 +177,13 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           // have expired during a long session); a bad / expired token closes the socket and the client logs in again
           const rid = resume.entityId;
           const tr = makeTransport();
-          const ok = typeof rid === 'number' ? world.resumePlayer(rid, resume.token, tr) : null;
+          const ok =
+            typeof rid === 'number'
+              ? world.resumePlayer(rid, resume.token, tr, (acc, stamp) => {
+                  const st = stamp as { sessionId: string; version: number } | undefined;
+                  return !!st && auth.isSessionCurrent(acc, st.sessionId, st.version);
+                })
+              : null;
           if (!ok || typeof rid !== 'number') return closeWith(ErrorCode.Unauthorized, 'resume rejected');
           transport = tr;
           entityId = rid;
@@ -189,7 +196,8 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           return;
         }
         try {
-          accountId = auth.authenticate(hello.token as string).accountId;
+          authed = auth.authenticate(hello.token as string);
+          accountId = authed.accountId;
         } catch (e) {
           const expired = e instanceof TokenError && e.code === 'expired';
           return closeWith(expired ? ErrorCode.SessionExpired : ErrorCode.Unauthorized, 'unauthorized');
@@ -215,6 +223,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
         try {
           transport = makeTransport();
           entityId = world.addPlayer(transport, accountId);
+          world.stampSession(entityId, { sessionId: authed!.sessionId, version: authed!.version });
         } catch (e) {
           if (e instanceof WorldFullError) return closeWith(ErrorCode.ServerFull, 'server full');
           throw e;

@@ -6,8 +6,9 @@ import { afterAll, describe, expect, it, vi } from 'vitest';
 import { WebSocket } from 'ws';
 import { ErrorCode, decode, encode, type BaselinePos, type Message, type SnapshotMsg } from '@vgtd/protocol';
 import { NetClient, type NetDeps } from '@vgtd/client-core/src/net/index.js';
-import { TileGrid } from '@vgtd/sim';
+import { ANTICHEAT, TileGrid, budgetMs } from '@vgtd/sim';
 import {
+  AuthService,
   WorldNode,
   startServer,
   type ClientTransport,
@@ -84,7 +85,7 @@ describe('World Node: hold a dropped player and resume it', () => {
     expect(c.id).not.toBe(a.id);
   });
 
-  it('resume: same entity and id, rotated token, full resync (aoi_enter + full snapshot + vitals), numbering and anti-cheat clock restart', () => {
+  it('resume: same entity and id, rotated token, full resync (aoi_enter + full snapshot + vitals), numbering restarts, anti-cheat budget not banked', () => {
     const n = node();
     const a = join(n);
     const b = join(n);
@@ -100,6 +101,8 @@ describe('World Node: hold a dropped player and resume it', () => {
     expect(before.lastSeq).toBeGreaterThan(0);
     const profile = n.combat!.profileOf(a.id);
     const spy = vi.spyOn(n.combat!, 'addPlayer');
+    const acAtDrop = ent(n, a.id)!.ac;
+    const timeAtDrop = n.world.timeMs;
     expect(n.suspendPlayer(a.id, a)).toBe(true);
     ticks(n, 10);
     const old = a.msgs.length;
@@ -119,8 +122,11 @@ describe('World Node: hold a dropped player and resume it', () => {
     expect(e.id).toBe(a.id);
     expect(e.i).toBe(before.i); // stood still while held
     expect(e.lastSeq).toBe(0);
-    expect(e.ac.claimedMs).toBe(0);
-    expect(e.ac.t0Ms).toBe(n.world.timeMs);
+    // anti-cheat accounting carries over untouched; the sim's sliding rule was applied once, so no time budget was banked while away
+    expect(e.ac.claimedMs).toBe(acAtDrop.claimedMs);
+    expect(e.ac.score).toBe(acAtDrop.score);
+    expect(budgetMs(e.ac, n.world.timeMs) - e.ac.claimedMs).toBeLessThanOrEqual(ANTICHEAT.SLIDE_LAG_MS + 1e-6);
+    void timeAtDrop;
 
     ticks(n, 3);
     const snaps = fresh.of('snapshot') as SnapshotMsg[];
@@ -154,28 +160,80 @@ describe('World Node: hold a dropped player and resume it', () => {
   });
 
   it('the time spent disconnected cannot be banked as fast movement after the resume', () => {
+    // hold of 8.5 s: shorter than the sim's own 10 s sliding period, so only the slide applied AT the resume can prevent banking
+    const n = node({ resumeHoldMs: 9000 });
+    const away = join(n);
+    const idle = join(n); // control: an identical player that stays attached and silent for the same time
+    ticks(n, 20);
+    const token = n.resumeTokenOf(away.id)!;
+    n.suspendPlayer(away.id, away);
+    ticks(n, 170);
+    const fresh = new Fake();
+    expect(n.resumePlayer(away.id, token, fresh)).not.toBeNull();
+    const lead = (id: number): number => {
+      const e = ent(n, id)!;
+      return budgetMs(e.ac, n.world.timeMs) - e.ac.claimedMs; // how much movement time the player may still claim
+    };
+    // the silent attached player has banked ~8.7 s of budget; the resumed one is back at the sim's normal slide lag (1 s)
+    expect(lead(idle.id)).toBeGreaterThan(8000);
+    expect(lead(away.id)).toBeLessThanOrEqual(ANTICHEAT.SLIDE_LAG_MS + 1e-6);
+    expect(lead(away.id)).toBeGreaterThan(0);
+  });
+
+  it('dropping and resuming never launders the anti-cheat record (score, claimed time, ratio windows, hot windows)', () => {
     const n = node({ resumeHoldMs: 20_000 });
     const a = join(n);
-    ticks(n, 20);
+    ticks(n, 10);
+    n.world = {
+      ...n.world,
+      entities: n.world.entities.map((e) =>
+        e.id === a.id ? { ...e, ac: { ...e.ac, score: 7, hotWindows: 1, windowClaimedMs: 1234, claimedMs: 4321 } } : e,
+      ),
+    };
+    let current: Fake = a;
+    for (let round = 0; round < 3; round++) {
+      const token = n.resumeTokenOf(a.id)!;
+      expect(n.suspendPlayer(a.id, current)).toBe(true);
+      ticks(n, 5);
+      const next = new Fake();
+      expect(n.resumePlayer(a.id, token, next)).not.toBeNull();
+      current = next;
+      const acNow = ent(n, a.id)!.ac;
+      expect(acNow.hotWindows).toBe(1);
+      expect(acNow.windowClaimedMs).toBe(1234);
+      expect(acNow.claimedMs).toBe(4321);
+      expect(acNow.score).toBeGreaterThan(6.5); // decays by time only (1/min), never reset
+    }
+  });
+
+  it('a token that matches but whose session is no longer valid (revoked) cannot resume and releases the held player', () => {
+    const n = node();
+    const a = join(n);
+    n.stampSession(a.id, { sessionId: 's1', version: 3 });
     const token = n.resumeTokenOf(a.id)!;
     n.suspendPlayer(a.id, a);
-    ticks(n, 360); // 18 s held
-    const fresh = new Fake();
-    fresh.id = a.id;
-    expect(n.resumePlayer(a.id, token, fresh)).not.toBeNull();
-    const start = ent(n, a.id)!;
-    const v0 = n.metrics.violations.budget ?? 0;
-    // declared 60 ms per tick (five 12 ms inputs) = 1.2x real time for 1.5 s: the time budget (1.02x + 250 ms) must catch it
-    // (with the old clock, 18+ s of unused budget would have let all of it through)
-    for (let k = 0; k < 30; k++) {
-      n.receive(a.id, fresh.input(0, 12, 3), fresh);
-      n.receive(a.id, fresh.input(0, 12, 2), fresh);
-      n.tick();
-    }
-    expect((n.metrics.violations.budget ?? 0) - v0).toBeGreaterThan(0);
-    const moved = ent(n, a.id)!.i - start.i;
-    expect(ent(n, a.id)).toBeDefined(); // short enough not to be kicked outright
-    expect(moved).toBeLessThan(4.5 * (1.5 * 1.02 + 0.25) + 1);
+    const checked: unknown[] = [];
+    // the wrong token never reaches the validity check (and never releases anything)
+    expect(n.resumePlayer(a.id, 'nope', new Fake(), () => false)).toBeNull();
+    expect(n.clients.has(a.id)).toBe(true);
+    expect(
+      n.resumePlayer(a.id, token, new Fake(), (acc, stamp) => {
+        checked.push(acc, stamp);
+        return false;
+      }),
+    ).toBeNull();
+    expect(checked).toEqual([expect.any(String), { sessionId: 's1', version: 3 }]);
+    expect(n.clients.has(a.id)).toBe(false); // released: a revoked session does not keep its character
+    expect(n.combat!.maxHpOf(a.id)).toBeUndefined();
+  });
+
+  it('a live socket resuming on a revoked session is closed and its player removed', () => {
+    const n = node();
+    const a = join(n);
+    const token = n.resumeTokenOf(a.id)!;
+    expect(n.resumePlayer(a.id, token, new Fake(), () => false)).toBeNull();
+    expect(a.closed?.code).toBe(ErrorCode.Unauthorized);
+    expect(n.clients.has(a.id)).toBe(false);
   });
 
   it('a resume while the old socket still looks attached (half-open) takes the session over and closes the old one', () => {
@@ -395,6 +453,68 @@ describe('resume through the real gateway', () => {
     const again = await hello({ entityId: id, token });
     expect(again.ack).toBeNull(); // single use
   }, 30_000);
+
+  it('a resume is refused once the session was revoked (the 10 s hold does not outlive a revocation)', async () => {
+    const s = await server();
+    const post = async (path: string, body: unknown): Promise<Record<string, unknown>> =>
+      (await (
+        await fetch(`http://127.0.0.1:${s.port}${path}`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+      ).json()) as Record<string, unknown>;
+    await post('/auth/register', { username: 'res_rev', password: TEST_ONLY_GOOD });
+    const login = await post('/auth/login', { username: 'res_rev', password: TEST_ONLY_GOOD });
+    const first = await new Promise<{ id: number; token: string }>((resolve, reject) => {
+      const ws = new WebSocket(`ws://127.0.0.1:${s.port}/ws`);
+      ws.on('open', () =>
+        ws.send(JSON.stringify({ type: 'hello', protocolMin: 3, protocolMax: 3, token: login.token })),
+      );
+      ws.on('message', (d, bin) => {
+        if (bin) return;
+        const m = JSON.parse(d.toString()) as { entityId: number; resumeToken: string };
+        resolve({ id: m.entityId, token: m.resumeToken });
+        ws.terminate(); // a drop
+      });
+      ws.on('error', reject);
+    });
+    await until(() => s.world.clients.size === 1);
+    s.auth.revokeSession(login.sessionId as string);
+    const ack = await new Promise<unknown>((resolve) => {
+      const ws = new WebSocket(`ws://127.0.0.1:${s.port}/ws`);
+      let got: unknown = null;
+      ws.on('open', () =>
+        ws.send(
+          JSON.stringify({
+            type: 'hello',
+            protocolMin: 3,
+            protocolMax: 3,
+            resume: { entityId: first.id, token: first.token },
+          }),
+        ),
+      );
+      ws.on('message', (d, bin) => {
+        if (!bin) got = JSON.parse(d.toString());
+      });
+      ws.on('close', () => resolve(got));
+    });
+    expect(ack).toBeNull(); // refused: no hello_ack
+    await until(() => s.world.clients.size === 0); // and the held character was released
+  }, 30_000);
+
+  it('AuthService.isSessionCurrent: valid until revoked or the token_version changes', async () => {
+    const auth = new AuthService({ scrypt: FAST, registerPerIpPerDay: 0, ipFailLimit: 1_000_000 });
+    const reg = await auth.register('iscur1', TEST_ONLY_GOOD, '9.9.9.9');
+    const r = await auth.login('iscur1', TEST_ONLY_GOOD, '9.9.9.9');
+    const who = auth.authenticate(r.token);
+    expect(who.accountId).toBe(reg.accountId);
+    expect(auth.isSessionCurrent(who.accountId, who.sessionId, who.version)).toBe(true);
+    expect(auth.isSessionCurrent(who.accountId, who.sessionId, who.version + 1)).toBe(false); // token_version moved on
+    expect(auth.isSessionCurrent('no-such-account', who.sessionId, who.version)).toBe(false);
+    auth.revokeSession(who.sessionId);
+    expect(auth.isSessionCurrent(who.accountId, who.sessionId, who.version)).toBe(false);
+  });
 
   it('a fresh login of the same account while its character is held releases the old one (no duplicate)', async () => {
     const s = await server();

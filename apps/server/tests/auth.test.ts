@@ -95,7 +95,8 @@ describe('AuthService', () => {
     expect(await code(svc.register(TEST_ONLY_USER, TEST_ONLY_SHORT, '1.1.1.3'))).toBe('bad_password');
     expect(await code(svc.register('b', TEST_ONLY_GOOD, '1.1.1.3'))).toBe('bad_username');
     const r = await svc.login('ALICE', TEST_ONLY_GOOD, '1.1.1.1');
-    expect(svc.authenticate(r.token)).toEqual({ accountId: r.accountId, sessionId: r.sessionId });
+    // `version` (the account's token_version at issue) is what a later resume re-checks via isSessionCurrent
+    expect(svc.authenticate(r.token)).toEqual({ accountId: r.accountId, sessionId: r.sessionId, version: 0 });
     svc.revokeSession(r.sessionId);
     expect(() => svc.authenticate(r.token)).toThrow(/revoked/);
   });

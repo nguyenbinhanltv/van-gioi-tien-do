@@ -396,6 +396,15 @@ Còn mở / lưu ý:
 - **Hết hạn kết quả idempotency**: chỉ giữ 16 kết quả đột phá gần nhất mỗi phiên trong RAM; docs/26 §4 chưa chọn nơi lưu khóa idempotency lâu dài.
 - **Thân thông điệp họ Lạnh** là bố cục nhị phân cố định thay cho Protobuf cho tới khi có pipeline `buf` (docs/24 §2).
 
+## D77 — túi đồ và điểm nhận drop: còn mở (worker39, 2026-11-08)
+
+1. **Số mặc định tạm** (cần game designer): số ô túi (40), hàng chờ (50), giới hạn chồng (99 / 999), `quality` nằm trong khóa chồng (docs/23 §4.3 chưa có), id vật phẩm 1–6, số khóa phát lại giữ lại (10.000).
+2. ~~**Chưa nối chiến đấu**~~ — đã nối bằng `DropSink` (killerId → tài khoản, khóa `mobId@tick`, nguồn faucet từ `MobPort.combatStats` đọc trước `kill`). Còn mở: killer ngắt kết nối cùng tick trước khi `onDrops` chạy thì drop không được cấp cho ai (`DropSink.stats.noOwner`); cần chốt luật (cấp theo tài khoản gần nhất / bỏ) khi có tổ đội và loot cá nhân (07 §6).
+3. **Chưa có giao thức**: client chưa thấy túi đồ / ví (không có thông điệp `inv_*`, `inv_cmd`); thêm sau khi các thay đổi giao thức của 35 và 37 đã merge, tránh va id.
+4. **Chưa có**: trang bị / mặc, độ bền hao theo 07 §7 (mới có API `loseDurability`), sửa chữa (sink `REPAIR`), kho / thư / chợ / ký quỹ, Tiên Ngọc và mọi tiền tệ khác Linh thạch, nhân vật (chủ hiện là tài khoản), `affixes`.
+5. **Lưu trữ thật**: ví thuộc sổ cái và hiện chỉ ở bộ nhớ (mất khi khởi động lại); khóa idempotency chỉ giữ trong tiến trình (docs/26 §4.1: 7 ngày); cần PostgreSQL (docs/23 §4.3-4.4, `item_events` MINT/BURN/MOVE, đối chiếu §3.3), giao dịch đồng thời giữa vật phẩm và sổ cái cho cùng một kill.
+6. **Drop vào túi đầy**: roll không vừa thì cả roll vào hàng chờ (tất cả hoặc không gì); chưa có UI nhắc hay thời hạn hết hạn cho hàng chờ.
+
 ## D79 — resume: còn mở
 
 - **Refresh token** (docs/25 §3: xoay vòng họ token, thu hồi, cookie `__Host-`, kho bền) chưa có; token resume dùng một lần chỉ phủ các lần rớt ≤ 10 s. Quá hạn thì client đăng nhập lại bằng mật khẩu đã lưu, nên một client không lưu mật khẩu (đăng nhập tay) sẽ rơi về màn hình đăng nhập.
@@ -403,4 +412,5 @@ Còn mở / lưu ý:
 - Giữ nhân vật chỉ trong **một** World Node (chưa có nhiều node / chuyển giao ô); nhân vật đang giữ vẫn bị quái đánh và có thể chết (hồi sinh theo luật combat); chưa có "đang ngắt kết nối" hiển thị cho người khác.
 - Chỉ phát hiện nửa mở **phía client** (3 s không có khung): server chưa ngắt khách im lặng bằng ping WebSocket, nên một socket chết giữ thực thể "đang nối" cho tới khi OS báo đóng hoặc client resume và chiếm phiên.
 - Thông điệp trong tay người chơi khi rớt (input chưa ack, cast đang bay) bị bỏ: client dựng lại từ trạng thái server sau khi nối. Client Cocos mới đứng yên khi `reconnecting`; chưa có giao diện báo "mất kết nối".
+- `revokeSession` / đổi `token_version` mới chặn **resume** và `hello` mới; một kết nối **đang sống** của phiên bị thu hồi vẫn không bị đá (đã vậy từ D70): cần đường thu hồi đá cả thực thể đang nối khi có tính năng đổi mật khẩu / thu hồi.
 - Chưa đo resume dưới tải (nhiều người rớt cùng lúc, ví dụ khởi động lại cổng): thêm vào `npm run p2exit` nếu cần.
