@@ -2,6 +2,7 @@
 import { createServer } from 'node:http';
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { dirname, extname, join, normalize, resolve } from 'node:path';
+import { networkInterfaces } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const dir = resolve(dirname(fileURLToPath(import.meta.url)), '../build/web-mobile');
@@ -29,4 +30,11 @@ createServer((req, res) => {
   }
   res.writeHead(200, { 'content-type': types[extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' });
   createReadStream(f).pipe(res);
-}).listen(port, () => console.log(`serving ${dir} on http://localhost:${port}`));
+}).listen(port, () => {
+  console.log(`serving ${dir} on http://localhost:${port}`);
+  // listens on all interfaces: open one of these on a phone on the same Wi-Fi (e.g. ?npcs=20 for the P1 perf scene)
+  for (const list of Object.values(networkInterfaces())) {
+    for (const a of list ?? [])
+      if (a.family === 'IPv4' && !a.internal) console.log(`  LAN: http://${a.address}:${port}/?npcs=20`);
+  }
+});
