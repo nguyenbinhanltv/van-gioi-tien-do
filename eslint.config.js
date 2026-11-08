@@ -11,6 +11,7 @@ export default tseslint.config(
       '**/coverage/**',
       'apps/client-cocos/**',
       'apps/server/scripts/**', // plain Node launcher (.mjs)
+      'scripts/**', // plain Node launcher (`npm run play`)
       'tools/procgen/**',
       'tools/dragonbones-testrig/scripts/**', // plain Node CLI (.mjs), like the procgen scripts
       'tools/rig/scripts/**/*.mjs', // plain Node launcher (.mjs); the TypeScript scripts there are linted

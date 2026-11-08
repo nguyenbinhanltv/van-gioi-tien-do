@@ -3,8 +3,8 @@ import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
 
 const port = Number(process.env.PORT ?? 8080);
-// the Cocos web client is served from http://localhost:7456 (npm run serve -w client-cocos); override with CORS_ORIGINS=a,b
-const corsOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:7456,http://127.0.0.1:7456')
+// the Cocos web client is served from http://localhost:8456 (npm run serve -w client-cocos); override with CORS_ORIGINS=a,b
+const corsOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:8456,http://127.0.0.1:8456')
   .split(',')
   .filter(Boolean);
 // MAP_TILES must match the client map (apps/client-cocos draws a 256x256 map; 256 is also the server default); REGISTER_PER_IP_PER_DAY=0 lifts the

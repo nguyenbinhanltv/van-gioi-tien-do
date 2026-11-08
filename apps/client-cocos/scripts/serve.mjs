@@ -6,7 +6,7 @@ import { networkInterfaces } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const dir = resolve(dirname(fileURLToPath(import.meta.url)), '../build/web-mobile');
-const port = Number(process.argv[2] || 7456);
+const port = Number(process.argv[2] || 8456);
 const types = {
   '.html': 'text/html',
   '.js': 'text/javascript',
