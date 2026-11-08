@@ -1,10 +1,10 @@
 {
   "scope": "D41 full-source compatibility motion; derived D45 PNGs intentionally not committed. Extraction follows all five merged T1 directions.",
-  "command": "npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/dao-tu-chibi-v1/SE/project.json --out \"$env:TEMP/dao-SE-layer-guides-final\"",
+  "command": "node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/layer-template.ts --project assets-src/placeholder/dao-tu-chibi-v1/SE/project.json --out \"$env:TEMP/dao-SE-evidence-layer-guides\"",
   "inputProject": "assets-src/placeholder/dao-tu-chibi-v1/SE/project.json",
-  "projectSha256": "3466fac4f59788421a4c7f3041acef2ec35a39d08405f4e0dc869404a413934e",
+  "projectSha256": "dbe387bdf358262c5f0a6aa794dba54939fb54c2bc1b063749b53c66134bb25c",
   "masterImageSha256": "8e35f096de0f8e5ee4f2d6c6de48d3a2f4feb4c4fa3fad482104028ae99084eb",
-  "layerInputsSha256": "4af34886a76f7325e8ee135ed94a59d306bf4d71d3a4b66e5584d798b8989d4f",
+  "layerInputsSha256": "9de022df582ef67e90d5c997f1c0b34b7397712b51e42035fe386a5a24cdaba4",
   "grid": {
     "cols": 4,
     "rows": 4,
@@ -155,5 +155,11 @@
         }
       ]
     }
-  ]
+  ],
+  "historicalInputBeforeEvidenceCorrection": {
+    "command": "npm run sprite:layer-template -w @vgtd/sprite -- --project assets-src/placeholder/dao-tu-chibi-v1/SE/project.json --out \"$env:TEMP/dao-SE-layer-guides-final\"",
+    "projectSha256": "3466fac4f59788421a4c7f3041acef2ec35a39d08405f4e0dc869404a413934e",
+    "layerInputsSha256": "4af34886a76f7325e8ee135ed94a59d306bf4d71d3a4b66e5584d798b8989d4f"
+  },
+  "guidePixelsUnchanged": true
 }
