@@ -12,10 +12,11 @@ import {
   resources,
   view,
 } from 'cc';
-import { shared } from './vendor/vgtd.mjs';
+import { shared, world as cw } from './vendor/vgtd.mjs';
 import { newNode, cellCenterToWorld } from './IsoAdapter';
 import { buildPlaceholderArt, makeTexture, type ArtFrames } from './PlaceholderArt';
-import { WorldView, type TileMapData, type TilesetData } from './WorldView';
+import { WorldView } from './WorldView';
+import { NpcCrowd } from './Npcs';
 import { YSortLayer } from './YSortLayer';
 import { PlayerActor, addProp, type TilePos } from './Actors';
 import { CameraRig } from './CameraRig';
@@ -54,6 +55,7 @@ function rng(seed: number): () => number {
 export class Bootstrap extends Component {
   private world!: WorldView;
   private ysort!: YSortLayer;
+  private npcs: NpcCrowd | null = null;
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -73,7 +75,9 @@ export class Bootstrap extends Component {
     try {
       await this.build();
       this.ready = true;
-      console.log(`[vgtd] world ready: ${this.world.tileCount} tiles, ${this.ysort.count} L3 objects`);
+      console.log(
+        `[vgtd] world ready: ${this.world.tileCount} tiles in ${this.world.chunkCount} chunks, ${this.ysort.count} L3 objects`,
+      );
     } catch (e) {
       console.error('[Bootstrap] failed to build world', e);
     }
@@ -88,13 +92,18 @@ export class Bootstrap extends Component {
       load('world/iso-tileset', JsonAsset),
       load('world/iso-tileset', ImageAsset),
     ]);
-    const map = mapAsset.json as unknown as TileMapData & { seed?: number };
-    const tileset = tilesetAsset.json as unknown as TilesetData;
+    const map = mapAsset.json as unknown as { width: number; height: number; seed?: number };
+    const tilesetJson = tilesetAsset.json as unknown as { animations?: { water?: { frames: number[]; fps: number } } };
+    const data = cw.parseProcgenMap(tilesetJson, mapAsset.json);
     const tilesetTex = makeTexture(tilesetImage);
     const art: ArtFrames = buildPlaceholderArt();
 
     const worldRoot = newNode('World', this.node);
-    this.world = new WorldView(map, tileset, tilesetTex, worldRoot);
+    // `?tier=low|medium|high` picks the chunk-streaming window (D63); default medium
+    const params = new URLSearchParams(location.search);
+    const tierParam = params.get('tier');
+    const tier: cw.StreamTier = tierParam === 'low' || tierParam === 'high' ? tierParam : 'medium';
+    this.world = new WorldView(data, tilesetJson.animations, tilesetTex, worldRoot, tier);
     newNode('L1_Decal', worldRoot);
     const l2 = newNode('L2_Shadow', worldRoot);
     this.ysort = new YSortLayer(worldRoot);
@@ -117,6 +126,13 @@ export class Bootstrap extends Component {
 
     this.player = new PlayerActor(this.ysort, l2, art, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, walkable);
     this.rig = new CameraRig(worldRoot, this.canvasUi);
+    // P1 perf harness: `?npcs=N` wandering NPCs around the spawn (default 20 = the exit-criterion crowd, 0 = none)
+    const npcParam = params.get('npcs');
+    const npcCount = npcParam === null ? 20 : Math.max(0, Math.min(200, Math.floor(Number(npcParam)) || 0));
+    if (npcCount > 0) {
+      this.npcs = new NpcCrowd(npcCount, this.ysort, l2, art, walkable, { i: spawn.i + 0.5, j: spawn.j + 0.5 }, rng(7));
+    }
+    await this.world.warmup(this.cameraRect());
 
     // destination marker lives on L1 (decal), reused sprite
     this.marker = newNode('Marker', worldRoot.getChildByName('L1_Decal')!);
@@ -130,7 +146,12 @@ export class Bootstrap extends Component {
     this.hud = new PerfHud(hudRoot, art);
     this.hud.trackTexture(tilesetImage.width, tilesetImage.height);
     this.hud.trackTexture(art.texture.width, art.texture.height);
-    this.hud.extra = () => ({ l3Objects: this.ysort.count });
+    this.hud.extra = () => ({
+      l3Objects: this.ysort.count,
+      chunks: this.world.chunkCount,
+      npcs: this.npcs?.count ?? 0,
+    });
+    this.hud.note = `tier ${this.world.tier}`;
     this.input = new InputBridge(
       this.rig,
       { width: map.width, height: map.height, isWalkable: walkable },
@@ -180,6 +201,14 @@ export class Bootstrap extends Component {
     return { i: ci, j: cj };
   }
 
+  /** Camera view in shared screen px (y down, 1x world px) for chunk streaming; centred on the player. */
+  private cameraRect(): shared.Rect {
+    const c = this.playerScreen();
+    const w = this.canvasUi.contentSize.width / this.rig.zoom;
+    const h = this.canvasUi.contentSize.height / this.rig.zoom;
+    return { x: c.x - w / 2, y: c.y - h / 2, width: w, height: h };
+  }
+
   private playerScreen(): { x: number; y: number } {
     const p = this.player.pos;
     return shared.tileToScreen(p.i, p.j);
@@ -192,7 +221,8 @@ export class Bootstrap extends Component {
     this.player.update(dt, frame);
     this.rig.follow(this.playerScreen());
     this.ysort.sort();
-    this.world.update(dt);
+    this.npcs?.update(dt);
+    this.world.update(dt, this.cameraRect());
 
     const dest = this.input.destination(frame);
     this.marker.active = !!dest;

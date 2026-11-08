@@ -20,6 +20,10 @@ export interface PerfStats {
   /** Average CPU ms per frame submitting the render (GPU time is not included). */
   renderMs: number;
   l3Objects: number;
+  chunks: number;
+  npcs: number;
+  /** Sum of transfer sizes of everything fetched so far (Resource Timing), MB: the runtime view of the initial package. */
+  loadedMB: number;
 }
 
 /** Top-left perf overlay. Also publishes the latest numbers on `window.__vgtdPerf` for automation. */
@@ -51,8 +55,11 @@ export class PerfHud {
     updateMs: 0,
     renderMs: 0,
     l3Objects: 0,
+    chunks: 0,
+    npcs: 0,
+    loadedMB: 0,
   };
-  extra: () => { l3Objects: number } = () => ({ l3Objects: 0 });
+  extra: () => { l3Objects: number; chunks?: number; npcs?: number } = () => ({ l3Objects: 0 });
 
   constructor(hudRoot: Node, art: ArtFrames) {
     director.on(Director.EVENT_BEFORE_UPDATE, () => (this.t0 = performance.now()));
@@ -127,7 +134,11 @@ export class PerfHud {
     s.textureEstMB = this.textures.reduce((a, t) => a + t.w * t.h * 4, 0) / 1048576;
     const mem = (performance as unknown as { memory?: { usedJSHeapSize: number } }).memory;
     s.jsHeapMB = mem ? mem.usedJSHeapSize / 1048576 : null;
-    s.l3Objects = this.extra().l3Objects;
+    const ex = this.extra();
+    s.l3Objects = ex.l3Objects;
+    s.chunks = ex.chunks ?? 0;
+    s.npcs = ex.npcs ?? 0;
+    s.loadedMB = this.loadedBytes() / 1048576;
     s.nodes = this.countNodes();
     (globalThis as unknown as { __vgtdPerf?: PerfStats }).__vgtdPerf = s;
 
@@ -151,12 +162,21 @@ export class PerfHud {
       `CPU update ${s.updateMs.toFixed(2)} ms  render ${s.renderMs.toFixed(2)} ms
 ` +
       `JS heap ${heap} (heap + tex / ${B.RAM_MB_WEB} MB ${heapOk})\n` +
-      `Nodes ${s.nodes}   L3 ${s.l3Objects}\n` +
+      `Nodes ${s.nodes}   L3 ${s.l3Objects}   Chunks ${s.chunks}   NPC ${s.npcs}   Loaded ${s.loadedMB.toFixed(1)} MB\n` +
       this.hint +
       (this.note
         ? `
 ${this.note}`
         : '');
+  }
+
+  /** Bytes fetched so far (compressed on the wire when the server compresses; body size otherwise). */
+  private loadedBytes(): number {
+    let n = 0;
+    for (const e of performance.getEntriesByType('resource') as PerformanceResourceTiming[]) {
+      n += e.transferSize || e.encodedBodySize || 0;
+    }
+    return n;
   }
 
   private countNodes(): number {
