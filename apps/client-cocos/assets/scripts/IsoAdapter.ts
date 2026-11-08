@@ -1,5 +1,5 @@
 import { Layers, Node, Vec3 } from 'cc';
-import { shared } from './vendor/vgtd.mjs';
+import { core, shared } from './vendor/vgtd.mjs';
 
 /**
  * THE ONLY Y-FLIP IN THE CLIENT.
@@ -41,10 +41,14 @@ export function cellCenterToWorld(i: number, j: number, elevation = 0, out: Vec3
   return screenToCocos(shared.tileCenterToScreen(i, j, elevation), out);
 }
 
-/** World-root offset that puts a shared-screen point at the centre of the (fixed) Canvas camera. */
-export function cameraOffset(target: ScreenPoint, zoom: number, out: Vec3 = new Vec3()): Vec3 {
+/**
+ * World-root offset that puts a shared-screen point at the centre of the (fixed) Canvas camera.
+ * `pxPerUnit` = device px per design unit: the offset is snapped to the DEVICE pixel grid (at non-integer zoom a
+ * whole-design-unit snap is coarser than a device px on hi-dpi and makes the map shimmer while walking).
+ */
+export function cameraOffset(target: ScreenPoint, zoom: number, pxPerUnit = 1, out: Vec3 = new Vec3()): Vec3 {
   const p = screenToCocos(target);
-  return out.set(Math.round(-p.x * zoom), Math.round(-p.y * zoom), 0);
+  return out.set(core.snapToDevicePx(-p.x * zoom, pxPerUnit), core.snapToDevicePx(-p.y * zoom, pxPerUnit), 0);
 }
 
 /**
