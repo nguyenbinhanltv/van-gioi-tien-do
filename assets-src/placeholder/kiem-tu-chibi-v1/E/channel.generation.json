@@ -1,0 +1,18 @@
+{
+  "clip": "channel",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 12,
+  "cols": 4,
+  "rows": 3,
+  "prompt": "Precise edit-from-MASTER authoring. INPUT1 contains identical canonicalreferenceplaceholdersinagrid: EDIT themintoNEWchronologicalanimationdrawings,notduplicatefrozenframes. PreserveEXACTadultKIEMTUT1identity,headsize/profileface(grayeye,straightbrow,smallnose,softangularjaw),plainivory/navyshortrobe/navysash/trousers/smallboots,blackpony/cyanribbon,simplesteelstraightblade/rectangularsilverguard/navygrip/cyanpommeltassel. NOarmor,crown,gems,embroideredpatterns,newpropsorFX. Eastright-facingorthographicgamecameraeverycell. HEADSIZE mustnotchangeevenonlunge/crouch/flight;dynamicbodyposturesallowed,neverfitbodyheightperframe. Material-tintedoutline,2celtones+1highlight,NWlight,thinrim. Samecellorigins/scaleasINPUT1,groundat232logicalunits@256cellwhenplanted;naturalbodytranslationsonly. Eachposewholeinsideowncellpadding. Hair/ribbon/sleeveslag1-3framesandsettle,notrigidcutouts. REMOVEALLreferencegridlines/markersbeforefinished;OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,no text,labels,borders,shadowsorparticles. Input2iscanonicalhighresEidentity. EXACT4columns x3rows,12activecells,4:3aspect,target2048x1536(oruniformlyscaled4:3),NEVERsquareor3:2.\n12frame LOOP of sustained channelingstance,notattack. Right handloweredswordunchanged,leftpalmheldforward/chestmudra. Subtlecontinuousbreathandwristarc,sleeve/hem/hairribbonlagandsettle;onecleanloop,lastframeincrementbeforefirst. Headsizeandgrayeyefixed,no FX/particles/glow. Do not duplicate12identicalposes.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:03:39.483Z",
+  "inputs": ["templates/channel.master-edit-guide.png", "../reference/E.master.raw.png"],
+  "status": "Full-pose source generated; pending actual frame/pose/head/contact/loop QA and Cocos capture.",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-4585287f-f53b-4ab4-8bb9-6d23f6918d1c.png",
+  "utcCompletedRecorded": "2026-11-07T21:04:25.112Z",
+  "rawSha256": "6c0f02f3a795afa4a1bafa73d51818507943f57c9998c90a65df7599ab11d85e",
+  "utcOutputFileModified": "2026-11-07T21:04:05.505834+00:00"
+}

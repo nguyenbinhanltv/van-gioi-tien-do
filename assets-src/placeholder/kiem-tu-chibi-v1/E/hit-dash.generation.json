@@ -1,0 +1,18 @@
+{
+  "clip": "hit-dash",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 16,
+  "cols": 4,
+  "rows": 4,
+  "prompt": "Precise edit-from-MASTER authoring. INPUT1 contains identical canonicalreferenceplaceholdersinagrid: EDIT themintoNEWchronologicalanimationdrawings,notduplicatefrozenframes. PreserveEXACTadultKIEMTUT1identity,headsize/profileface(grayeye,straightbrow,smallnose,softangularjaw),plainivory/navyshortrobe/navysash/trousers/smallboots,blackpony/cyanribbon,simplesteelstraightblade/rectangularsilverguard/navygrip/cyanpommeltassel. NOarmor,crown,gems,embroideredpatterns,newpropsorFX. Eastright-facingorthographicgamecameraeverycell. HEADSIZE mustnotchangeevenonlunge/crouch/flight;dynamicbodyposturesallowed,neverfitbodyheightperframe. Material-tintedoutline,2celtones+1highlight,NWlight,thinrim. Samecellorigins/scaleasINPUT1,groundat232logicalunits@256cellwhenplanted;naturalbodytranslationsonly. Eachposewholeinsideowncellpadding. Hair/ribbon/sleeveslag1-3framesandsettle,notrigidcutouts. REMOVEALLreferencegridlines/markersbeforefinished;OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,no text,labels,borders,shadowsorparticles. Input2iscanonicalhighresEidentity. EXACT4columns x4rows,squarecanvas,target2048square(oruniformsquareDPI). All16cellsactive.\nGROUPEDTWOCLIPS: cells1-6 are HIT6 then cells7-16 are DASH10,notone16frameclip. HIT6: smallinvisibleimpactrecoil,bodyshouldersback,keeprighthandsword,regainstancebycell6,notarget/injury. DASH10(cells7-16):1anticipation/crouch,2push,3-6dynamicairborneforwardlungewithbentkneesandstreaminghair/sash,7landingcompression,8-10settle/recover. Keepdynamicposture,headsizefixed,feetmayriseandcrownmovebutnobodyscalechange. Oneblade RIGHT hand,wholeposeinsidecell. NOsmearVFX/afterimages,allactualbodydrawings.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:04:27.089Z",
+  "inputs": ["templates/cast.master-edit-guide.png", "../reference/E.master.raw.png"],
+  "status": "Full-pose source generated; pending actual frame/pose/head/contact/loop QA and Cocos capture.",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-d97f7593-c315-483b-a137-0f2fe73473ff.png",
+  "utcCompletedRecorded": "2026-11-07T21:05:37.714Z",
+  "rawSha256": "166760952781279d8f59d57d7563cd84333698d637655f06736de0c922c2aeee",
+  "utcOutputFileModified": "2026-11-07T21:05:36.877657+00:00"
+}

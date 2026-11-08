@@ -1,0 +1,100 @@
+{
+  "counts": {
+    "fail-hard": 38,
+    "fail-soft": 42,
+    "accepted": 0,
+    "regression": 0,
+    "info": 117
+  },
+  "hardByClip": {
+    "run": 14,
+    "dash": 16,
+    "attack": 2,
+    "attack_2": 2,
+    "attack_3": 1,
+    "cast": 2,
+    "tribulation": 1
+  },
+  "hardByGate": {
+    "height": 13,
+    "similarity": 25
+  },
+  "d54": {
+    "totalCells": 202,
+    "d41FreePoseExemptCells": 54,
+    "headReasonSkips": 0,
+    "measuredCells": 148,
+    "passCells": 123,
+    "failCells": 25,
+    "findings": 25
+  },
+  "headEvidenceRequired": [
+    {
+      "clip": "run",
+      "cell": 6,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "run",
+      "cell": 7,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "run",
+      "cell": 14,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "run",
+      "cell": 15,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 0,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 1,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 2,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 3,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 4,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 5,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 6,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 7,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    },
+    {
+      "clip": "dash",
+      "cell": 8,
+      "message": "upright height exception/out-of-band cell needs same-direction head landmarks and a reviewed note"
+    }
+  ],
+  "review": "free-pose-review.json",
+  "status": "Diagnostic only; D55 similarity-only repairs deferred; no source drawings changed."
+}

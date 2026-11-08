@@ -1,0 +1,378 @@
+{
+  "status": "AUTHORING ONLY; actualnativecontacts andidentityQAmandatory",
+  "hashes": {
+    "sheets/walk.canonical-before-leg-edit.png": "8f3e5e19601595a80a7b1fb1a6aabfd1e73e80d27ab38daad4231a0698cebe23",
+    "templates/walk.leg-mask-03.png": "cef0a4ffc0e27af994e238246a7065e6871614e1f56b7d771ace018ad6546e31",
+    "templates/walk.leg-guide-03.png": "c3003ae121f3de6c8d4c58b6bfb1867161a2f4c5ae7ba007e91052612b355816"
+  },
+  "records": [
+    {
+      "cell": 0,
+      "sourceSha256": "01ef2f914993c38c8ea807ab07031dc51e2e99bce65fd760562ab507c4549560",
+      "sourceBootSole": {
+        "x": 132.9441340782123,
+        "y": 235
+      },
+      "bootPixels": 538,
+      "targets": [
+        {
+          "x": 89.01917770419425,
+          "y": 232,
+          "planted": false
+        },
+        {
+          "x": 142.3525110375276,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 790,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 1,
+      "sourceSha256": "6201ed792f41ac928bfbff39e7d19609c90700e5b04d3d50ed048c3a76b58a68",
+      "sourceBootSole": {
+        "x": 127.50857142857143,
+        "y": 235
+      },
+      "bootPixels": 521,
+      "targets": [
+        {
+          "x": 95.68584437086092,
+          "y": 228.1731656763491,
+          "planted": false
+        },
+        {
+          "x": 135.68584437086093,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 801,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 2,
+      "sourceSha256": "cbd29695a733819c677e0985237d5d40b99732c618c2e7f3ed319a77aff6b724",
+      "sourceBootSole": {
+        "x": 104.01298701298701,
+        "y": 235
+      },
+      "bootPixels": 403,
+      "targets": [
+        {
+          "x": 102.35251103752758,
+          "y": 224.92893218813452,
+          "planted": false
+        },
+        {
+          "x": 129.01917770419425,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 785,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 3,
+      "sourceSha256": "db5c7ac48e6b4c8a7bfe5ff597b3a857793b578fbffdf24a974706a8ae304708",
+      "sourceBootSole": {
+        "x": 99.33620689655173,
+        "y": 235
+      },
+      "bootPixels": 421,
+      "targets": [
+        {
+          "x": 109.01917770419425,
+          "y": 222.76120467488713,
+          "planted": false
+        },
+        {
+          "x": 122.35251103752759,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 777,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 4,
+      "sourceSha256": "758e42ddc9adfd5a9e95504884afccddc2a38971f54af648be5d6b3d676a398d",
+      "sourceBootSole": {
+        "x": 97.83783783783784,
+        "y": 236
+      },
+      "bootPixels": 448,
+      "targets": [
+        {
+          "x": 115.6858443708609,
+          "y": 222,
+          "planted": false
+        },
+        {
+          "x": 115.68584437086092,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 783,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 5,
+      "sourceSha256": "21b48159a1a4311ae91a29bc7bcda53f041b2356a728b7e75d53d0118191d8b4",
+      "sourceBootSole": {
+        "x": 97.92700729927007,
+        "y": 237
+      },
+      "bootPixels": 448,
+      "targets": [
+        {
+          "x": 122.35251103752758,
+          "y": 222.76120467488713,
+          "planted": false
+        },
+        {
+          "x": 109.01917770419425,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 784,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 6,
+      "sourceSha256": "cbc37b68a6516a69833fb3b5cf9731b5255fb97d2257df6b5d809ee73357e73b",
+      "sourceBootSole": {
+        "x": 96.49514563106796,
+        "y": 237
+      },
+      "bootPixels": 421,
+      "targets": [
+        {
+          "x": 129.01917770419425,
+          "y": 224.92893218813452,
+          "planted": false
+        },
+        {
+          "x": 102.35251103752759,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 790,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 7,
+      "sourceSha256": "c5c8a9a91f563a8916d08867486a45c251a4687300f163fe27bffb87168c3cd5",
+      "sourceBootSole": {
+        "x": 141.6081871345029,
+        "y": 235
+      },
+      "bootPixels": 496,
+      "targets": [
+        {
+          "x": 135.6858443708609,
+          "y": 228.1731656763491,
+          "planted": false
+        },
+        {
+          "x": 95.68584437086092,
+          "y": 232,
+          "planted": true
+        }
+      ],
+      "weaponProtectedPixels": 792,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 8,
+      "sourceSha256": "908224ca97d6912641da4eeb98ec57b1cb452e138c166ac869eb544949538ff9",
+      "sourceBootSole": {
+        "x": 136.88125,
+        "y": 236
+      },
+      "bootPixels": 520,
+      "targets": [
+        {
+          "x": 142.3525110375276,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 89.01917770419425,
+          "y": 232,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 798,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 9,
+      "sourceSha256": "cd14db2aa5f8fb80c647c502dc8ea5b807f7ae87bbea395c8494d66e94cefca3",
+      "sourceBootSole": {
+        "x": 132.77956989247312,
+        "y": 235
+      },
+      "bootPixels": 517,
+      "targets": [
+        {
+          "x": 135.68584437086093,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 95.68584437086092,
+          "y": 228.1731656763491,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 805,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 10,
+      "sourceSha256": "0f03c6b8829e05ee6d956ddbe96d9412275de4eea7608ae12e27fc4aedbbdb6b",
+      "sourceBootSole": {
+        "x": 129.98830409356725,
+        "y": 236
+      },
+      "bootPixels": 515,
+      "targets": [
+        {
+          "x": 129.01917770419425,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 102.35251103752758,
+          "y": 224.92893218813452,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 797,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 11,
+      "sourceSha256": "126a064b538b857b8abf0d05f245142d42494a993162b425c446de87f573bb60",
+      "sourceBootSole": {
+        "x": 131.3465909090909,
+        "y": 230
+      },
+      "bootPixels": 469,
+      "targets": [
+        {
+          "x": 122.35251103752759,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 109.01917770419425,
+          "y": 222.76120467488713,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 786,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 12,
+      "sourceSha256": "323ff074bb0e0b4bb2a2de7cf307bdd43bd97112299475beb51c1fae9bdb675c",
+      "sourceBootSole": {
+        "x": 99.33333333333333,
+        "y": 234
+      },
+      "bootPixels": 378,
+      "targets": [
+        {
+          "x": 115.68584437086092,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 115.6858443708609,
+          "y": 222,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 784,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 13,
+      "sourceSha256": "09e008c66007b27c31e60f7e97f861bc6883c000048d589a0f983d02d995368c",
+      "sourceBootSole": {
+        "x": 104.82666666666667,
+        "y": 235
+      },
+      "bootPixels": 419,
+      "targets": [
+        {
+          "x": 109.01917770419425,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 122.35251103752758,
+          "y": 222.76120467488713,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 798,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 14,
+      "sourceSha256": "bd52b9684237bee5ff84db1a932b9fadb5dee75703d27bf0165a70d84b3ab304",
+      "sourceBootSole": {
+        "x": 103.72043010752688,
+        "y": 235
+      },
+      "bootPixels": 425,
+      "targets": [
+        {
+          "x": 102.35251103752759,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 129.01917770419425,
+          "y": 224.92893218813452,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 793,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    },
+    {
+      "cell": 15,
+      "sourceSha256": "796159863c6ff06b084d6047119380b3adbb0409d7ef11c802e9404af9989c13",
+      "sourceBootSole": {
+        "x": 128.89583333333334,
+        "y": 235
+      },
+      "bootPixels": 520,
+      "targets": [
+        {
+          "x": 95.68584437086092,
+          "y": 232,
+          "planted": true
+        },
+        {
+          "x": 135.6858443708609,
+          "y": 228.1731656763491,
+          "planted": false
+        }
+      ],
+      "weaponProtectedPixels": 808,
+      "operation": "AUTHORING ONLY: remove lowerleg mask, copy SAMEframe unscaledboot to both officialghosttargets; AI completeslowerlegs. Weapon brightcomponent+2px guard restoredexactly. No stencil counted as contact proof."
+    }
+  ]
+}

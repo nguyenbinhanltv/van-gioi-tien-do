@@ -1,0 +1,17 @@
+{
+  "clip": "run",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "attempt": 3,
+  "frames": 16,
+  "prompt": "Edit the attached MASTER-POPULATED GUIDE into an original 16-frame E-facing KIEM TU T1 run loop, 4 columns x 4 rows, chronological reading order. This SINGLE input is the scale and identity authority. The repeated figures are calibrated whole-master references, not final poses. Preserve EXACT head dimensions, face geometry, grey eye, dark swept hair, plain ivory split robe/navy trousers+sash, small dark boots, cyan ribbons and simple steel sword held in anatomical RIGHT hand. No high-resolution or enlarged alternate head/body reference. Head must remain the same physical size as each guide head through tilt and bob, not enlarged for expressiveness.\nDraw a smooth dynamic sprint with anticipation of foot contact, compression, extension, two flight phases with tucked knees, and recovery. One R+L stride per16 frames. Use guide CYAN near/right and AMBER far/left foot markers as sole-bottom targets, not boot centres. R contact frames1-6, L contact9-14; frames7-8 and15-16 both feet airborne at the guide heights. Planted sole plane stays232/256 of each cell (9.375% cell height padding BELOW soles), never place feet near cell bottom. No extra contacts. Lean torso forward naturally and bend knees dynamically, preserve limb lengths and fixed body scale. Head may tilt, chin and skull shape unchanged. Body/root can travel naturally inside the original fixed source lattice; do NOT independently recenter each pose. Keep every ponytail, ribbon, boot and blade fully inside its cell with at least4logicalpx margin; shorten the hair ARC if necessary, never shrink the body. Sword held low with slight delayed angle, left arm counter-swings, loose hair/ribbon lag2-3 frames and sleeves lag1-2 frames. No swinging sword attack, no weapon glow or VFX. Smooth coherent increments, frame16 one step before frame1; no copied frozen legs.\nRender premium semi-chibi cel shading: two tones +highlight, material-tinted outlines, NW highlight, ivory/navy base+cyan accent. ERASE ALL guide lines, ellipses, triangles, grid, text and shadows. OPAQUE perfectly flat PURE MAGENTA #FF00FF background. Exactly16 full-body drawings, no additional panels. Square output preferably2048x2048; fixed4x4 uniform lattice. Preserve approved face and head scale; do not flatten flight poses to match upright bounding boxes.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T23:00:52.889Z",
+  "inputs": ["templates/run.master-edit-guide.png"],
+  "status": "Diagnostic failed; not selected. Fixed lattice run-only:23hard10soft16INFO, zero canvasLoss; planted contact/foot-slide errors remain, head evidence absent. Full raw retained.",
+  "rawToolOutputPath": "C:/Users/PC/.codex/generated_images/01a1b794-d64b-7b03-9d96-1634cd7274d6/exec-5f115135-ea32-4302-831e-c2d203a64820.png",
+  "rawSha256": "e897d949c2f8759e58e19a7fa7a4682f3ae6c0f8299b4c115251cddec4b6ba5f",
+  "utcOutputFileModified": "2026-11-07T23:01:40Z",
+  "rawDimensions": [1254, 1254]
+}

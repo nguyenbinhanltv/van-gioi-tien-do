@@ -1,0 +1,37 @@
+{
+  "name": "E-die",
+  "start": "2026-11-07T23:44:17.920Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/die.head-stencil.template.png"
+  ],
+  "prompt": "PRODUCTION GAME SPRITE SHEET, THUONG TU T1 MALE, E EXACT RIGHT PROFILE in EVERY FRAME. First input256-square is the locked master: use same adult face/slate almond eye/straight brow/angular jaw, swept black main hair and LOW ponytail, navy plain sleeveless wrap with ivory undercollar, red sash tails, compact dark trousers, wrist wraps and small dark boots; no armor/gems/embroidery. Same dark straight spear, simple steel leaf tip and forked RED pennon. Second input is authoritative4x4 LATTICE plus EXACT MASTER HEAD STENCILS for scale/identity and ground/foot guides. Draw a square2048x2048 sheet with4columns x4rows, each cell512square, exactly16 row-major cells; preserve every cell registration; no overlap between cells. Logical cell256: standing main crown y16, soles y232, head skull+hair about50px tall matching stencil; enlarged2x in512cell so crown32/soles464/head100. Scale fixed; body main-crown-to-sole216logicalpx, NEVER fit individual frame heights. Stencil is size/face guide, head may translate/rotate with pose but must not shrink/grow. Art 2cel tones+one highlight, material-tinted clean outline, NW light. Solid perfectly flat magenta #FF00FF everywhere outside artwork. REMOVE ALL guide lines/foot ghosts/markers, no text/numbers/borders/ground shadows/halos. Entire spear/banner/low ponytail/hands/feet stay inside each cell with safe margin; do not clip at grid edges, do not shrink body to fit spear. First frame must closely match master scale/identity. No perspective zoom, no front face/three-quarter. Small hands/feet, adult compact4.5-head anatomy. DIE one-shot12 unique drawings in first3rows cells0-11, last4cells EMPTY magenta. Non-graphic defeat collapse, no blood/gore:0 standingready,1-2 knees weaken/torso recoil,3-5 fall to one knee and brace hand,6-8 lower gently onto side,9-11 settle side-lying fallen still frame with trailing hair/sash/pennon settling. Same head/face physical size through rotation, no shrinking body tofit sideways. Keep E right-facing orientation/facialidentity until natural facepartiallyoccluded by collapse, do not spinfront. Spear released beside him onground, same full straight spear and red banner visible allcells with tip/buttwithinbounds; use diagonal/horizontal placement tofit, no disappearing/replacingweapon. Preserve neutraldefeated expression adultmale, no horror. Strong smooth weight transfer and clothfollowthrough. No shadows/groundplane/FX, no grid/guide/text.12populated4blank.",
+  "endObserved": "2026-11-07T23:45:01.141Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-6cf7cf33-475a-4304-8140-422fbb54df9e.png",
+  "output": "raw/die.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "outputEvidence": {
+    "path": "E/raw/die.png",
+    "sha256": "0b7e8502dd3e2bd97f6d14f6a440358643c971d814b9d4932aec72168ae87d17",
+    "bytes": 1618625,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/die.head-stencil.template.png",
+      "path": "E/templates/sword_fly.head-stencil.template.png",
+      "sha256": "c1ccd180ca53508dd46399eea606be371c68a92a775fd1efb23c16a266b1869a",
+      "bytes": 41348,
+      "dimensions": [1024, 1024]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

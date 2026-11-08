@@ -1,0 +1,38 @@
+{
+  "name": "E-run-head-correction",
+  "start": "2026-11-07T23:46:39.934Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-a522dd4e-0fcb-4508-801b-35fec0ec5d4e.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png"
+  ],
+  "prompt": "Correct ONLY head/skull size in this exact THUONG TU E continuous RUN4x4 sheet (input1). Input2 locked E master is physical head size/face identity reference. Current leaning run skulls read about6-7% too small after pipeline scale. Uniformly ENLARGE EACH ENTIRE HEAD including skull-attached hair, face and ear by7%, anchored at neck so anatomy joins naturally; do NOT enlarge only face or squash it. Keep exact male slate eye/straight brow/jaw identity, same rightPROFILE direction, same hairline/low ponytail. Low ponytail attachment moves with head but trailing shape retained. Maintain all16 dynamic RUN poses and continuous contact/flight/tuck/landing cycle, bodies/legs/hands/spear/redbanner/waist/feet and cellregistration EXACTLY unchanged. No normalizing body height, no flattening poses, no change to spear angle or groundcontacts. Every cell must retain full silhouette within512cell margins. Same4x4 square dimensions and solid #FF00FF background, no text/lines/shadows/FX. This is a precise skull-scale repair, not a redesign or new pose set.",
+  "endObserved": "2026-11-07T23:47:11.701Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-54d0c986-2c93-4faa-bd5e-4ff5b71b7d14.png",
+  "output": "raw/run.head-corrected.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "status": "Rejected after equal-scale master comparison: head enlargement overshoots the master; retained as raw history. run.cycle.png remains selected pending measured head evidence.",
+  "outputEvidence": {
+    "path": "E/raw/run.head-corrected.png",
+    "sha256": "628fa44b250c4da65418f3db0db01eb36f0fffa82d57ba6f6487b3d8ceec5d7b",
+    "bytes": 2012610,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-a522dd4e-0fcb-4508-801b-35fec0ec5d4e.png",
+      "path": "E/raw/run.cycle.png",
+      "sha256": "c2909ceb52ba729c9d04e1120291c8f41242bf489fc84c2f76924f341f42a7ea",
+      "bytes": 1975500,
+      "dimensions": [1254, 1254]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

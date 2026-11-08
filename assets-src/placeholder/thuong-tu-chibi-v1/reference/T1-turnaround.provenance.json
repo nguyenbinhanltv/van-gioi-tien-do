@@ -1,0 +1,39 @@
+{
+  "name": "thuong-tu-T1-turnaround-final",
+  "start": "2026-11-07T23:29:19.283Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f6ba7364-aa02-4320-a4cf-8681c2f6184a.png"
+  ],
+  "prompt": "Tiny precise face repair only on exact THUONG TU five-direction magenta turnaround1774x887. Keep all heads/skulls/hair/costumes/weapons/poses/scale/baseline unchanged. ONLY first E PROFILE figure: main crown approxy121, soles795, H674. Its eye center currentlyy217=14.2%H, too high. Lower eye+brow to y229 (16%H), nose/mouth coherently a few pixels, keep chin269 and head outline/crown unchanged. Same adult male slate almond eye/straight brow identity as other views; preserve profile nose and jaw. All other FOUR figures unchanged. No re-render of costume/body/hair, no new details/text/FX/shadows. Solid flat opaque #FF00FF background remains. Exactly same five panels and full silhouettes.",
+  "endObserved": "2026-11-07T23:29:57.161Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-3a3108e5-9132-475f-b5d7-063f81e856a0.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "output": "T1-turnaround.raw.png",
+  "operation": "Raw generated PNG copied unchanged; see anatomy-landmarks.json and prepare-masters.ts for derived keyed/calibrated outputs.",
+  "outputEvidence": {
+    "path": "reference/T1-turnaround.raw.png",
+    "sha256": "6e3f3c19cbf0d593a900c4d77067c2dc240704c7b74ee6ece06956acf08a5ce7",
+    "bytes": 1829929,
+    "dimensions": [1774, 887]
+  },
+  "referenceEvidence": [
+    {
+      "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f6ba7364-aa02-4320-a4cf-8681c2f6184a.png",
+      "sha256": "899c8d4a8aa4287bf884556d0291dc1aa95a11c3354b486a7041133090034b81",
+      "bytes": 1808164,
+      "dimensions": [1774, 887],
+      "mtimeUtc": "2026-11-07T23:28:07.955969+00:00"
+    }
+  ],
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-f6ba7364-aa02-4320-a4cf-8681c2f6184a.png",
+      "path": "reference/T1-turnaround.attempt1.raw.png",
+      "sha256": "899c8d4a8aa4287bf884556d0291dc1aa95a11c3354b486a7041133090034b81",
+      "bytes": 1808164,
+      "dimensions": [1774, 887]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

@@ -1,0 +1,128 @@
+{
+  "method": "Public native-DPI sliceSheet before/after optional asymmetric despill; palette protection retained.",
+  "caveat": "Dominant-red mask is only a diagnostic for this class. Legitimate pink/red and ringing still need visual review.",
+  "projectSha256": "6dde3308e1d96268b0971160085cd8e8244a2e6c22345c9226fcd0329afc8adb",
+  "spill": {
+    "threshold": 12,
+    "strength": 1,
+    "keepDistance": 36,
+    "asymmetric": {
+      "maxImbalance": 80,
+      "edgeRadius": 2
+    }
+  },
+  "records": [
+    {
+      "sheet": "raw/idle.png",
+      "sha256": "db820f677e121c7713b061425716110e147a122c5e44ca6f88ca00ebbce77345",
+      "alphaChanged": 0,
+      "colourChanged": 2444,
+      "dominantRedPixels": 23457,
+      "dominantRedChanged": 697
+    },
+    {
+      "sheet": "raw/meditate.png",
+      "sha256": "c3485ba73d2b1e24287dd631b81e8495c9a078087ee5214b03f5749fe2f77281",
+      "alphaChanged": 0,
+      "colourChanged": 3521,
+      "dominantRedPixels": 31273,
+      "dominantRedChanged": 1359
+    },
+    {
+      "sheet": "raw/walk.headroom.png",
+      "sha256": "0ed356f3851aafbaa1ca9f04e3b92138f0196d83d88a5b9e5529169c715e0fbe",
+      "alphaChanged": 0,
+      "colourChanged": 2786,
+      "dominantRedPixels": 23159,
+      "dominantRedChanged": 782
+    },
+    {
+      "sheet": "raw/run.lanczos-selected.png",
+      "sha256": "6ba7fdc6443572a083ccc1040f80f70173508ac24ac5a3c80ff0d45dcf5dee54",
+      "alphaChanged": 0,
+      "colourChanged": 5486,
+      "dominantRedPixels": 34417,
+      "dominantRedChanged": 3011
+    },
+    {
+      "sheet": "raw/sword_fly.png",
+      "sha256": "eaf8cdcab7299ca30f962e689da77e51bfa6bae6fec8cc10bcc78775972169d8",
+      "alphaChanged": 0,
+      "colourChanged": 3844,
+      "dominantRedPixels": 37540,
+      "dominantRedChanged": 2136
+    },
+    {
+      "sheet": "raw/attack.png",
+      "sha256": "6fd041aa0c02eb34fc21d2f3468b745c3e29dcd309a8fbceeea559af78eb3b00",
+      "alphaChanged": 0,
+      "colourChanged": 2068,
+      "dominantRedPixels": 27001,
+      "dominantRedChanged": 799
+    },
+    {
+      "sheet": "raw/attack_2.png",
+      "sha256": "406e67944871e962af2dbbab74faf0e131ab3c6c11adffdce964758bc2384bf4",
+      "alphaChanged": 0,
+      "colourChanged": 2868,
+      "dominantRedPixels": 29358,
+      "dominantRedChanged": 1111
+    },
+    {
+      "sheet": "raw/attack_3.headroom.png",
+      "sha256": "42db9027983fbbf01390cfa237caf5380b18c45228cfb08c3c8e44fc10c4d49e",
+      "alphaChanged": 0,
+      "colourChanged": 1785,
+      "dominantRedPixels": 20985,
+      "dominantRedChanged": 682
+    },
+    {
+      "sheet": "raw/cast.png",
+      "sha256": "1a1466eb0704da8f12ef14e71bc7e6e0db434184ca543cd2d256d3629e3c83fa",
+      "alphaChanged": 0,
+      "colourChanged": 1524,
+      "dominantRedPixels": 25728,
+      "dominantRedChanged": 546
+    },
+    {
+      "sheet": "raw/channel.png",
+      "sha256": "ef06e59c0476c35bcea41f322001fc4d76fc19cc0b7c7c50fc886e317493ea21",
+      "alphaChanged": 0,
+      "colourChanged": 2207,
+      "dominantRedPixels": 19199,
+      "dominantRedChanged": 713
+    },
+    {
+      "sheet": "raw/die.png",
+      "sha256": "0b7e8502dd3e2bd97f6d14f6a440358643c971d814b9d4932aec72168ae87d17",
+      "alphaChanged": 0,
+      "colourChanged": 2451,
+      "dominantRedPixels": 16893,
+      "dominantRedChanged": 647
+    },
+    {
+      "sheet": "raw/tribulation.png",
+      "sha256": "8cfc0f9f5d0681b15038cdc3eb9c8908d4ae178d9b63e30ea63afe72cc9b4062",
+      "alphaChanged": 0,
+      "colourChanged": 1972,
+      "dominantRedPixels": 26239,
+      "dominantRedChanged": 719
+    },
+    {
+      "sheet": "raw/emote.png",
+      "sha256": "49a28f9881be881a88b9841341667e278b21e98c861e3cc514d33927b6f76c28",
+      "alphaChanged": 0,
+      "colourChanged": 2391,
+      "dominantRedPixels": 15977,
+      "dominantRedChanged": 776
+    },
+    {
+      "sheet": "raw/hit-dash.locked.png",
+      "sha256": "97771c9ba7808a7725dbd66d81da33bdee321c8207b32a86111661b4b8a4d031",
+      "alphaChanged": 0,
+      "colourChanged": 2172,
+      "dominantRedPixels": 33141,
+      "dominantRedChanged": 770
+    }
+  ]
+}

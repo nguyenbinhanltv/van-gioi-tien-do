@@ -1,0 +1,56 @@
+{
+  "operation": "public repairCell; selected retained imagegen source cell6 only, fixed calibration unchanged",
+  "cell": 6,
+  "changed": [6],
+  "other15ByteIdentical": true,
+  "files": [
+    {
+      "path": "raw/run.head-selected.png",
+      "sha256": "bf63795309c75a7c0305d2dcf765878711254bda3bab7d4ad6ea278e1861a17d"
+    },
+    {
+      "path": "raw/run.stride-lattice.png",
+      "sha256": "e0c984857d4024ee41a11095952537d81c73a1632849bdef41c9a4c9cd393de6"
+    },
+    {
+      "path": "raw/run.lanczos-selected.png",
+      "sha256": "6ba7fdc6443572a083ccc1040f80f70173508ac24ac5a3c80ff0d45dcf5dee54"
+    }
+  ],
+  "beforeCellSha1": [
+    "9f5b031e8717964541f66fc307f422c8f9651667",
+    "3c2485819005803839455f183e6ffcdc69b6d9c6",
+    "15281f7e73ba0fa3b791a1b886571dc73eca3e04",
+    "c5a15078c00289b26793a76acce6b538f564cae6",
+    "e8769464d25922d25fcdd9087e47a936e644b278",
+    "b12bac26f11fa4dc9957a29a64160449a50ab7f1",
+    "1f93192f49475d4e1cf7bfc919d02b607fffaebe",
+    "f0b74cc364bc0f71573fcbba07fe230c45810228",
+    "05db3526ddee641dcd66382f0c70030dffff9388",
+    "18619e3616bc9cca9e38d8165f51d314fac7fd96",
+    "d71dff5b24cadc26e9bad8794f35f9c8a30480f5",
+    "cdcf77b62f788fb7c3f6a5cd1c72c19ffb957814",
+    "f3a4c32b6654c022936e3af76cb1b366c6a25df8",
+    "e915b265cd2853cc0e844cb8846e70fd369b54ae",
+    "de79395dd3e3039058f6a71ae06f3641a977998a",
+    "3b85bd78ef6c899b7004612eab65d5d826450607"
+  ],
+  "afterCellSha1": [
+    "9f5b031e8717964541f66fc307f422c8f9651667",
+    "3c2485819005803839455f183e6ffcdc69b6d9c6",
+    "15281f7e73ba0fa3b791a1b886571dc73eca3e04",
+    "c5a15078c00289b26793a76acce6b538f564cae6",
+    "e8769464d25922d25fcdd9087e47a936e644b278",
+    "b12bac26f11fa4dc9957a29a64160449a50ab7f1",
+    "326874e3104e7c5341bf799d935ce35a5f1ac132",
+    "f0b74cc364bc0f71573fcbba07fe230c45810228",
+    "05db3526ddee641dcd66382f0c70030dffff9388",
+    "18619e3616bc9cca9e38d8165f51d314fac7fd96",
+    "d71dff5b24cadc26e9bad8794f35f9c8a30480f5",
+    "cdcf77b62f788fb7c3f6a5cd1c72c19ffb957814",
+    "f3a4c32b6654c022936e3af76cb1b366c6a25df8",
+    "e915b265cd2853cc0e844cb8846e70fd369b54ae",
+    "de79395dd3e3039058f6a71ae06f3641a977998a",
+    "3b85bd78ef6c899b7004612eab65d5d826450607"
+  ]
+}

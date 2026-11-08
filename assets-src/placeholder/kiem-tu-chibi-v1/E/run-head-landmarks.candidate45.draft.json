@@ -1,0 +1,128 @@
+{
+  "status": "Frozen visual draft for native support verification; NOT gate input. No ratios used to revise points.",
+  "source": "sheets/run.head-repaired-45.png",
+  "sourceSha256": "d2bf3293239ef9ab35250087be8a61c64bab6908211251605e7b68bee3b2b8bb",
+  "convention": "Aligned256 semantic boundary edges. Attached maincap highlight included, ponytail and tie/knot excluded; true jaw edge excludes neck. Approx1px manual uncertainty.",
+  "frames": [
+    {
+      "frame": 1,
+      "crown": {
+        "x": 146,
+        "y": 26.5
+      },
+      "chin": {
+        "x": 166,
+        "y": 77.5
+      },
+      "alignedCellSha256": "c1a0e32d92f940d0a9fd9628cbeba1207558c09ec21b4a8717657ae6b1dd6c64"
+    },
+    {
+      "frame": 2,
+      "crown": {
+        "x": 145,
+        "y": 28.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 79.5
+      },
+      "alignedCellSha256": "2ccb33c3356ef550c82621536a008f870656c7523eeedcdacd0e51fbfb4126ed"
+    },
+    {
+      "frame": 3,
+      "crown": {
+        "x": 146,
+        "y": 28.5
+      },
+      "chin": {
+        "x": 165,
+        "y": 79.5
+      },
+      "alignedCellSha256": "49c7f0da9461b022e2999f12443993982640e33f068c4399d6a2364a54508266"
+    },
+    {
+      "frame": 6,
+      "crown": {
+        "x": 149,
+        "y": 21.5
+      },
+      "chin": {
+        "x": 169.5,
+        "y": 72.5
+      },
+      "alignedCellSha256": "8cc47a359f2cc032a662dcf62d7a489b1b21875bd630c17210a792f59a47e9ce"
+    },
+    {
+      "frame": 7,
+      "crown": {
+        "x": 149,
+        "y": 19.5
+      },
+      "chin": {
+        "x": 167,
+        "y": 70.5
+      },
+      "alignedCellSha256": "46d39549ca87dd453284c496a99d2a50ab33035d87d7c4dcac5df3b62438c505"
+    },
+    {
+      "frame": 8,
+      "crown": {
+        "x": 155,
+        "y": 23.5
+      },
+      "chin": {
+        "x": 173,
+        "y": 73.5
+      },
+      "alignedCellSha256": "aff225872c344f555eceeed9bef5424bd83d8c12736289a81a46c43048357d7a"
+    },
+    {
+      "frame": 10,
+      "crown": {
+        "x": 157,
+        "y": 27.5
+      },
+      "chin": {
+        "x": 175,
+        "y": 77.5
+      },
+      "alignedCellSha256": "f13396fefcab31752188f495bad4e08e59adaf5a3ace5d8347d72386659345ac"
+    },
+    {
+      "frame": 11,
+      "crown": {
+        "x": 160,
+        "y": 28.5
+      },
+      "chin": {
+        "x": 178,
+        "y": 79.5
+      },
+      "alignedCellSha256": "e4daf1648bf6b6b81bacb8342206fe9597d95037a2ea92abfce9a58fabad5ab6"
+    },
+    {
+      "frame": 14,
+      "crown": {
+        "x": 146,
+        "y": 26.5
+      },
+      "chin": {
+        "x": 164,
+        "y": 76.5
+      },
+      "alignedCellSha256": "64132a15827645508b1f7322028c321317429a3a97eab5e63e109b1897dda0ce"
+    },
+    {
+      "frame": 15,
+      "crown": {
+        "x": 145,
+        "y": 26.5
+      },
+      "chin": {
+        "x": 163,
+        "y": 76.5
+      },
+      "alignedCellSha256": "3b9a8a1281fe385d92fad09790056006ba09202a7282687155c357b96cf89435"
+    }
+  ]
+}

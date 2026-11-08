@@ -1,0 +1,18 @@
+{
+  "clip": "die",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "frames": 12,
+  "cols": 4,
+  "rows": 3,
+  "prompt": "Precise edit-from-MASTER authoring. INPUT1 contains identical canonicalreferenceplaceholdersinagrid: EDIT themintoNEWchronologicalanimationdrawings,notduplicatefrozenframes. PreserveEXACTadultKIEMTUT1identity,headsize/profileface(grayeye,straightbrow,smallnose,softangularjaw),plainivory/navyshortrobe/navysash/trousers/smallboots,blackpony/cyanribbon,simplesteelstraightblade/rectangularsilverguard/navygrip/cyanpommeltassel. NOarmor,crown,gems,embroideredpatterns,newpropsorFX. Eastright-facingorthographicgamecameraeverycell. HEADSIZE mustnotchangeevenonlunge/crouch/flight;dynamicbodyposturesallowed,neverfitbodyheightperframe. Material-tintedoutline,2celtones+1highlight,NWlight,thinrim. Samecellorigins/scaleasINPUT1,groundat232logicalunits@256cellwhenplanted;naturalbodytranslationsonly. Eachposewholeinsideowncellpadding. Hair/ribbon/sleeveslag1-3framesandsettle,notrigidcutouts. REMOVEALLreferencegridlines/markersbeforefinished;OPAQUEFLATPUREMAGENTA#FF00FFoutsidecharacter,no text,labels,borders,shadowsorparticles. Input2iscanonicalhighresEidentity. EXACT4columns x3rows,12activecells,4:3aspect,target2048x1536(oruniformlyscaled4:3),NEVERsquareor3:2.\n12frame NONLOOP game faint/collapse,non-graphic,noinjury. Progressivebodyweightloss:1briefstagger,2kneessoften,3-4oneknietoground,5-6leftpalmbraceandsit,7-9rolltoSIDElyingalongground,10-12settle. Right handretainsswordhilt,bladecomesto restalonggroundinsidecell. Lastposeclearlycollapsed,notstanding. SAMEheadsize/faceevenwhenhorizontal,eyesclose,hairstreamthenlag/settle. No blood,target,newobjects.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:04:27.566Z",
+  "inputs": ["templates/channel.master-edit-guide.png", "../reference/E.master.raw.png"],
+  "status": "Full-pose source generated; pending actual frame/pose/head/contact/loop QA and Cocos capture.",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-2042b2d2-e726-4d5d-9551-43848b10a52d.png",
+  "utcCompletedRecorded": "2026-11-07T21:06:30.051Z",
+  "rawSha256": "07b1120673f6ad2af1d7b1c86206b9c2d3a70d195062d9bcd14b2a5c0252dca9",
+  "utcOutputFileModified": "2026-11-07T21:06:03.760582+00:00"
+}

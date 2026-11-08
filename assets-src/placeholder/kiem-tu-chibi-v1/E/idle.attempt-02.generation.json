@@ -1,0 +1,19 @@
+{
+  "clip": "idle",
+  "direction": "E",
+  "profile": "smooth-v2",
+  "attempt": 2,
+  "frames": 16,
+  "prompt": "Precise EDIT of this MASTER-POPULATED input into16-frame KIEMTU T1 idle. Theexistinghead/bodyposeplacementsandSCALEarelocked. KeepEXACTheadsize/facegeometry/profileeye/costume/swordgeometryfromeachinputcell;doNOTenlargeorredesignanyfigure.4x4chronologicalcells,sameSQUAREcanvasratio. SolesremainATtheguideground232/256ofeachcellheight:9.375%cellheightFOOTPADDINGbelowsole,NOTplacedjustabovecellbottom. Highestponytailtiphasatleast3logicalpixelpaddinginsidecell;keepupperloopheightfromguide,animateTRAILINGhair/ribbontips/sleeveswith1-2pixellaggedarcsinstead. Verysubtlebreathing16frames,chestmoves1logicalpixel,headstable;oneprofileeyeblinksframes7-9,allotherfacesidentical. Feetnevermovenosteps,swordrightneargripeveryframe.2celtones+highlight,tintedoutline,NWlight. ERASEallgraygrid/guide/trianglelines,OPAQUEFLATPUREMAGENTA#FF00FFbackground,noshadow,noFX,textorlabels. Onecleanloop,frame16oneincrementbefore1. TheseidenticalinputplaceholdersareguideONLY;generate16smallbutdistinctbreath/secondarymotiondrawings,nofrozencopyloop. ThisinputistheONLYidentity+scaleauthority.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "utcStarted": "2026-11-07T21:22:55.636Z",
+  "inputs": ["templates/cast.master-edit-guide.png"],
+  "status": "Generated stencil/master-edit repair; raw preserved, acceptance pending head/scale/loop/clip QA",
+  "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-e975586a-b410-4f2a-a586-96dd4a80c22a.png",
+  "utcCompletedRecorded": "2026-11-07T21:24:17.702Z",
+  "rawFile": "sheets/idle.attempt-02.raw.png",
+  "rawSha256": "4698437fa25379b744dee0c26476b4654779be7beb0b5a54c5ffe19af2ba508d",
+  "originalOutputByteIdentical": true,
+  "rawHashVerifiedUTC": "2026-11-08T05:05:28.322770+00:00"
+}

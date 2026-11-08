@@ -1,0 +1,533 @@
+{
+  "command": "npm run capture -w client-cocos -- --out C:/Users/PC/AppData/Local/Temp/vgtd32-cocos-E --animations all --frames 24 --mode single --direction E --src dragonbones/thuong-tu-chibi-v1 --stem thuongtuchibi --zoom 2 --sample midpoint --gif",
+  "wrapperExitCode": 0,
+  "creatorVersion": "3.8.8",
+  "creatorExitCode": 36,
+  "environmentNote": "web-mobile build task finished and fresh index.html was produced. Afterwards editor window recovery failed because global editor/window.json was truncated. Existing wrapper validates fresh output rather than unreliable editor exit; all15 live runtime captures then completed. No global editor profile was modified.",
+  "rendererGitHeadAtCapture": "b16e3d2ee263489899bee2bd8ea32f20de6000ec",
+  "settings": {
+    "zoom": 2,
+    "sample": "midpoint",
+    "samplesPerClip": 24,
+    "mode": "single",
+    "direction": "E"
+  },
+  "animations": {
+    "idle": {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "idle.sheet.png",
+      "gif": "idle.gif"
+    },
+    "meditate": {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "meditate.sheet.png",
+      "gif": "meditate.gif"
+    },
+    "walk": {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "walk.sheet.png",
+      "gif": "walk.gif"
+    },
+    "run": {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "run.sheet.png",
+      "gif": "run.gif"
+    },
+    "dash": {
+      "duration": 0.43333333333333335,
+      "keyFrames": 13,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "dash.sheet.png",
+      "gif": "dash.gif"
+    },
+    "sword_fly": {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "sword_fly.sheet.png",
+      "gif": "sword_fly.gif"
+    },
+    "attack": {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack.sheet.png",
+      "gif": "attack.gif"
+    },
+    "cast": {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "cast.sheet.png",
+      "gif": "cast.gif"
+    },
+    "channel": {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": true,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "channel.sheet.png",
+      "gif": "channel.gif"
+    },
+    "hit": {
+      "duration": 0.26666666666666666,
+      "keyFrames": 8,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "hit.sheet.png",
+      "gif": "hit.gif"
+    },
+    "die": {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "die.sheet.png",
+      "gif": "die.gif"
+    },
+    "tribulation": {
+      "duration": 0.6666666666666666,
+      "keyFrames": 20,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "tribulation.sheet.png",
+      "gif": "tribulation.gif"
+    },
+    "emote": {
+      "duration": 0.5,
+      "keyFrames": 15,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "emote.sheet.png",
+      "gif": "emote.gif"
+    },
+    "attack_2": {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_2.sheet.png",
+      "gif": "attack_2.gif"
+    },
+    "attack_3": {
+      "duration": 0.6,
+      "keyFrames": 18,
+      "seam": {
+        "specLoop": false,
+        "loop": true,
+        "meanStep": 0,
+        "seamStep": 0,
+        "ratio": 0
+      },
+      "sheet": "attack_3.sheet.png",
+      "gif": "attack_3.gif"
+    }
+  },
+  "pixelMotion": [
+    {
+      "clip": "attack",
+      "gifFrames": 18,
+      "uniqueFrameImages": 14,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "attack_2",
+      "gifFrames": 18,
+      "uniqueFrameImages": 14,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "attack_3",
+      "gifFrames": 18,
+      "uniqueFrameImages": 14,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "cast",
+      "gifFrames": 20,
+      "uniqueFrameImages": 16,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "channel",
+      "gifFrames": 15,
+      "uniqueFrameImages": 12,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "dash",
+      "gifFrames": 13,
+      "uniqueFrameImages": 10,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "die",
+      "gifFrames": 15,
+      "uniqueFrameImages": 12,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "emote",
+      "gifFrames": 15,
+      "uniqueFrameImages": 12,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "hit",
+      "gifFrames": 8,
+      "uniqueFrameImages": 6,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "idle",
+      "gifFrames": 20,
+      "uniqueFrameImages": 16,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "meditate",
+      "gifFrames": 20,
+      "uniqueFrameImages": 16,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "run",
+      "gifFrames": 20,
+      "uniqueFrameImages": 16,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "sword_fly",
+      "gifFrames": 15,
+      "uniqueFrameImages": 12,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "tribulation",
+      "gifFrames": 20,
+      "uniqueFrameImages": 16,
+      "dimensions": [600, 470]
+    },
+    {
+      "clip": "walk",
+      "gifFrames": 20,
+      "uniqueFrameImages": 16,
+      "dimensions": [600, 470]
+    }
+  ],
+  "distinctCapturedSourceImages": 202,
+  "outputs": [
+    {
+      "file": "thuong-E-cocos/idle.gif",
+      "sha256": "ed85af78c90826f7a297f930e7254aea0e905addf9856beeed72dbcf6a61ff71",
+      "bytes": 225260
+    },
+    {
+      "file": "thuong-E-cocos/idle.sheet.png",
+      "sha256": "f323c14694e955f84d6055017c9d7f6d76e57cbd213b82e7cba021ddadf31202",
+      "bytes": 4986696
+    },
+    {
+      "file": "thuong-E-cocos/idle.sample.png",
+      "sha256": "5820c5ba8454f970d072e8cc12ec647688fb698a414a262d34388a62039a974f",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/meditate.gif",
+      "sha256": "bac05f38053044bc880349a5ab6e9a039261c648a470052f352204e4a5891861",
+      "bytes": 203167
+    },
+    {
+      "file": "thuong-E-cocos/meditate.sheet.png",
+      "sha256": "ab725424b82d95c7ccc78bb0443b86b2c48e2ece5769a3182e68adc424cca9bb",
+      "bytes": 5338578
+    },
+    {
+      "file": "thuong-E-cocos/meditate.sample.png",
+      "sha256": "764035b41d64a3077e6498c7bd5d1bd5d6384e9a69a8861d51242d59c74dcfba",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/walk.gif",
+      "sha256": "6c09c58c443f744ae3349ca3b41e4414623245c079222ed80f57a2cc535add18",
+      "bytes": 230591
+    },
+    {
+      "file": "thuong-E-cocos/walk.sheet.png",
+      "sha256": "239df3fff31cee89b937edd31227f85be24f460a8aa36faa208084ad837b55e5",
+      "bytes": 5350317
+    },
+    {
+      "file": "thuong-E-cocos/walk.sample.png",
+      "sha256": "de3cc080db78fa02bc892ed88790b5810ef7a292de59b5d40f9eaef3573219f8",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/run.gif",
+      "sha256": "8a1c9960aed2c3bd87a0e0a7f3f6415af2bc54d114fe41a936e44a0a15691a86",
+      "bytes": 264100
+    },
+    {
+      "file": "thuong-E-cocos/run.sheet.png",
+      "sha256": "db6da01e21fb7a3c3c3b049563a761e8366b1f9592837eaba56c4d82813889f1",
+      "bytes": 6359433
+    },
+    {
+      "file": "thuong-E-cocos/run.sample.png",
+      "sha256": "b11686c3cded159b1a0b9c4d7a90e28f4e8c8d56bf941e5592394c946355bb46",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/sword_fly.gif",
+      "sha256": "a21d0707f16a8cf5cec5318af3c0c761a3cf5e76d11cebd8346a3f48cbfe3f97",
+      "bytes": 168993
+    },
+    {
+      "file": "thuong-E-cocos/sword_fly.sheet.png",
+      "sha256": "29e75344744eea4480ab87ef6e23a704477735fa40217e60baf53f2fff539c7d",
+      "bytes": 4798300
+    },
+    {
+      "file": "thuong-E-cocos/sword_fly.sample.png",
+      "sha256": "67f2515eaa5991e6d6e8223285d82ebe444f95c83d5c1e30fc6b68550f34f888",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/attack.gif",
+      "sha256": "29e63456154036e4fdcfddf2f68cf53172381c6743b87d1e2d93d5b7cd76760b",
+      "bytes": 224281
+    },
+    {
+      "file": "thuong-E-cocos/attack.sheet.png",
+      "sha256": "a4209c8bc559de4801b0e0a2926e5479089cfe88058a80152e9b093c8e78b3b4",
+      "bytes": 6249339
+    },
+    {
+      "file": "thuong-E-cocos/attack.sample.png",
+      "sha256": "fde1b752ec04046dd78de4e9ce13e6d3d6e972bdeb90865ec2fd3a2af251c8e4",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/attack_2.gif",
+      "sha256": "2c4cd8f5fc540e58b105ae43107ca52eaea8dec7cdb01b61178d6562a420d9ef",
+      "bytes": 219273
+    },
+    {
+      "file": "thuong-E-cocos/attack_2.sheet.png",
+      "sha256": "be87d618ad9835358493112dd1ab91b5197990eccc10e4256faf20c1863d32ce",
+      "bytes": 6112457
+    },
+    {
+      "file": "thuong-E-cocos/attack_2.sample.png",
+      "sha256": "d7038c2a2b1e2db042267f30d57430de65f4636658362bfc06d6736e6dcb7a7c",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/attack_3.gif",
+      "sha256": "f0dd17f5db6b7ec3992a178ba45538a7b2ca399686444167f7d8a7968301e664",
+      "bytes": 203539
+    },
+    {
+      "file": "thuong-E-cocos/attack_3.sheet.png",
+      "sha256": "89a9428ba89ec1be423837f56c48052d700a57b26983bb82a3dd45166ccb9fab",
+      "bytes": 5617524
+    },
+    {
+      "file": "thuong-E-cocos/attack_3.sample.png",
+      "sha256": "dcdbd2ccd97e7cacccbe61f2b70aae87ebfd5872a004eba4e05296a12e43ae66",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/cast.gif",
+      "sha256": "b542ae6b89d843215aeeb3a5cec7dabe048e37b1099f2bab6a1cad937f559626",
+      "bytes": 237299
+    },
+    {
+      "file": "thuong-E-cocos/cast.sheet.png",
+      "sha256": "d6a419fc6e230e4a250a996149e1eb63509aa431030c0cc9ad80e7b88786d8a2",
+      "bytes": 5339436
+    },
+    {
+      "file": "thuong-E-cocos/cast.sample.png",
+      "sha256": "1f9be244b8a5fc3be51566d1a605e16fd5f8a973332c90e0f83fe0e1fddbaf10",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/channel.gif",
+      "sha256": "527a6c1ae799e616e9f60a3f47aff6f8c11f4969afe411551fcb17666e42d46b",
+      "bytes": 174601
+    },
+    {
+      "file": "thuong-E-cocos/channel.sheet.png",
+      "sha256": "1434bfc67d7e57b54f79697793f2aff84db7ab4adfd6d15fbcfd7b9c3332836a",
+      "bytes": 4324780
+    },
+    {
+      "file": "thuong-E-cocos/channel.sample.png",
+      "sha256": "508fc7c8f7fb0dd0e2574c8bf271a850f2b27340a6a242bed706dd6587b8cc56",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/die.gif",
+      "sha256": "3646e92cca79e60389f183e70d0456c1be695a3c8faf864aa3162b4e88609c5e",
+      "bytes": 166800
+    },
+    {
+      "file": "thuong-E-cocos/die.sheet.png",
+      "sha256": "94083d03abb968cdf9fe799e1028478cad5ea6541614b64d7a64aedeeea644bc",
+      "bytes": 4544682
+    },
+    {
+      "file": "thuong-E-cocos/die.sample.png",
+      "sha256": "7fbbef436335790911a0983e8a119d918a13ddeeb5148b38699af9c409395a45",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/tribulation.gif",
+      "sha256": "a42e00ddde95d6df415cb186f063becb5f35feed010bfccdba37ffcaeca37c06",
+      "bytes": 234612
+    },
+    {
+      "file": "thuong-E-cocos/tribulation.sheet.png",
+      "sha256": "65d4cba0c76e68c8737d5e78c358c3d2e64d87404093a1ab22f19432e80a6de1",
+      "bytes": 5656637
+    },
+    {
+      "file": "thuong-E-cocos/tribulation.sample.png",
+      "sha256": "0da1ec479a311f7f1f235ba90d259e51e8c57b676ef9b824c5295fe3d074950e",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/emote.gif",
+      "sha256": "38efaf7ad9a0c3299344b8064d726c7b516aaf24e3b3c0891a82fbe76d291195",
+      "bytes": 169380
+    },
+    {
+      "file": "thuong-E-cocos/emote.sheet.png",
+      "sha256": "aaeee66e762968ea6d82633d2b4f403ee621ec4557774ff326da9f9f16c34efd",
+      "bytes": 4241378
+    },
+    {
+      "file": "thuong-E-cocos/emote.sample.png",
+      "sha256": "fbaf5f6e7ef23f1cdbccc38216a2d88e711905a303f20b611c173d0663a265d4",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/hit.gif",
+      "sha256": "185fbc6a3fbd171c837c6edfec20d9624d33e7a1c7c80c848e12adeddf915450",
+      "bytes": 99405
+    },
+    {
+      "file": "thuong-E-cocos/hit.sheet.png",
+      "sha256": "8c017267777052dd25d812aa7a61cdfbb3603ede63fe96991d405c62b5dde0fe",
+      "bytes": 2923861
+    },
+    {
+      "file": "thuong-E-cocos/hit.sample.png",
+      "sha256": "ff2e937e47952106a7514071ddfc56d190cd58221a14f24565b3eca03e46c2b1",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    },
+    {
+      "file": "thuong-E-cocos/dash.gif",
+      "sha256": "c566e9223ae8120b8ef9379a73150ab58a0db6850e4b4ef26f4651f701415f1a",
+      "bytes": 167671
+    },
+    {
+      "file": "thuong-E-cocos/dash.sheet.png",
+      "sha256": "b3b54816c443d739675c872ce3a3242ec7f5ee61d8b8efb881da74146b8399bf",
+      "bytes": 4449892
+    },
+    {
+      "file": "thuong-E-cocos/dash.sample.png",
+      "sha256": "587b56adcf384af8674273557d730acd80e32e01ed70f562385d6b0d2f61be18",
+      "note": "Exact first1200x940 tile from native2x capture sheet; no art repaint/resampling."
+    }
+  ],
+  "gifCaveat": "Viewer capture GIF uses a fixed6x6x6 palette. Native PNG samples/sheets are full-colour and authoritative for material/edge inspection."
+}

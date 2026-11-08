@@ -1,0 +1,38 @@
+{
+  "name": "E-run-stride-lattice",
+  "start": "2026-11-07T23:59:17.092Z",
+  "refs": [
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+    "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/run.head-stencil.template.png"
+  ],
+  "prompt": "THUONG TU T1 MALE production RUN LOOP, E exact right PROFILE, same identity/costume/spear as input1. Input2 is exact official16-frame4x4 stride/headstencil guide. Generate a square4x4 MAGENTA #FF00FF sheet with16 unique frames, ONE full RIGHT/LEFT stride cycle, not startup or multiple cycles. Frame0 RIGHT contact/front foot planted and farleft trailing;1 compression;2 stance/push;3 rearstance;4 toe-off;5 flight leftknee forward;6 leftrecovery;7 pre-leftcontact;8 LEFT contact/front foot planted, righttrailing;9 compression;10 stance/push;11 rearstance;12 toe-off;13 flight rightkneeforward;14 rightrecovery;15 pre-Rcontact, blending directly to0. Exactly TWO main landings per16-frame cycle at0 and8. Cyan R/amber L ghosts specify positions; follow them without drawing markers. Maintain dynamic flight tuck and torsolean, don't flatten pose. Fixed head main-cap crown-to-chin physical Euclidean52.55logicalpx matching master, not oversized or shrinking whenleaning. At1254square output eachcell313.5: skull distance about65rawpx; canonical head roughlyonefifth of standing216pxbody. Same small adult slateeye/straightbrow/jaw, sweptblackmainhair, lowpony, plain navy sleevelesswrap ivorycollar redsash darktrousers wristwraps smallboots. Twohandcarry long straight dark SPEAR diagonal forward, simple steelleaf and forked REDpennon, fulltip/buttincell; no swords. Plantedsoles align guide232logical, not celledge; entire hair/weapon/feet have margins, no clipping or bodyrescale. Hair/banner/sash delayedlag andsettle. NW clean material-tinted2-tonecel+highlight. Magentaflatbackground only, REMOVE ALL grid/ghost/line/text/shadow/FX. No standing ready pose in endpoints, no front/3quarterturn, no duplicatepanels, no zoom.",
+  "endObserved": "2026-11-08T00:00:01.043Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-94ae80f3-1a92-45a7-a62d-bc4b1ed786e8.png",
+  "output": "raw/run.stride-lattice.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "status": "Selected gait candidate, pending aligned head evidence",
+  "outputEvidence": {
+    "path": "E/raw/run.stride-lattice.png",
+    "sha256": "e0c984857d4024ee41a11095952537d81c73a1632849bdef41c9a4c9cd393de6",
+    "bytes": 1929918,
+    "dimensions": [1254, 1254]
+  },
+  "retainedReferences": [
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/reference/E.master.png",
+      "path": "reference/E.master.png",
+      "sha256": "97efe1514c54e775e78879d41d20ea835a32cceccb59785691cf249f5dd34287",
+      "bytes": 29490,
+      "dimensions": [256, 256]
+    },
+    {
+      "original": "C:/Users/PC/.ao/data/worktrees/van-gioi-tien-do/van-gioi-tien-do-32/assets-src/placeholder/thuong-tu-chibi-v1/E/templates/run.head-stencil.template.png",
+      "path": "E/templates/run.head-stencil.template.png",
+      "sha256": "c159524b235318c3ed67d730a822c1ea86eb9457c42d55b5fbecc9a19d7f98ef",
+      "bytes": 52150,
+      "dimensions": [1024, 1024]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

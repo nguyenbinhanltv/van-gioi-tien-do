@@ -1,0 +1,55 @@
+{
+  "name": "thuong-tu-T1-master-source",
+  "start": "2026-11-07T23:25:15.469Z",
+  "refs": [
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-914bebac-20a1-4e4d-8428-f5896560e512.png",
+    "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-5cebc306-c7f2-4310-892d-43c6105c53fa.png"
+  ],
+  "prompt": "Production canonical T1 master for THUONG TU, MALE, approved premium semi-chibi. ONE full-body standing front three-quarter facing screen-right (SE), neutral ready stance, no text, no sheet panels. Reference1 locks male face: slate almond eyes, straight brows, softly angular adult jaw, black swept fringe and LOW tied ponytail, NOT high topknot. Reference2 first T1 column locks plain costume only: navy sleeveless wrap with ivory undercollar, plain red sash/split short tails, dark navy compact trousers and small simple boots, dark wrist wraps. NO shoulder armor, NO jewelry/gems, NO embroidery, NO T3/T5 floating objects. Long straight dark spear held comfortably beside body in near hand, narrow simple steel leaf tip, plain forked RED pennon below head (no gold lightning artwork at T1); plain steel socket/pole butt. Distinct clear grip and silhouette, no hands hidden, eyes visible. Shared D44 anatomy MANDATORY main skull-attached hair crown y100 to soles900 on1024-square source = H800; crown-to-chin176px (22%H) ends y276; eyes y228 (16%H). About4.5 heads, compact torso and SHORT legs, small hands/feet, mature adult not toddler, shoulder anatomy 28%H proposal excluding clothing. Main crown excludes ponytail/flyaway. Entire spear/ponytail/feet within image with generous margins; spear may extend above main crown but must fit. Two cel tones+one highlight, clean navy/material-tinted contours, NW light, no airbrush. Solid perfectly flat opaque magenta #FF00FF background edge-to-edge, NO cast shadow, NO background props, NO glow, NO ruler, NO border. Full art centered around x512, feet baseline900; preserve slim male vanguard identity.",
+  "endObserved": "2026-11-07T23:26:17.719Z",
+  "source": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-0e4a02da-fda8-4ae9-8aee-6b3c1e9a99a5.png",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed by tool",
+  "selected": false,
+  "status": "Turnaround identity input; not the locked calibrated master. Raw pixels unchanged.",
+  "output": "T1.master-source.raw.png",
+  "outputEvidence": {
+    "path": "reference/T1.master-source.raw.png",
+    "sha256": "972d1ec155a3c8c8672a6464427ec4aa6601fe1626e7c88ea739fb739234a67b",
+    "bytes": 1470417,
+    "dimensions": [1254, 1254]
+  },
+  "referenceEvidence": [
+    {
+      "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-914bebac-20a1-4e4d-8428-f5896560e512.png",
+      "sha256": "554f3e3363734f18d2bd08550e026fdcfe65b6e258838e160f9dc3ebb0d2924c",
+      "bytes": 2046215,
+      "dimensions": [1536, 1024],
+      "mtimeUtc": "2026-11-07T23:14:13.121589+00:00"
+    },
+    {
+      "path": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-5cebc306-c7f2-4310-892d-43c6105c53fa.png",
+      "sha256": "811e295194973ef30c1cda54ecc905ba49f1a2420339542b2d966ef09e23adf2",
+      "bytes": 2201506,
+      "dimensions": [1774, 887],
+      "mtimeUtc": "2026-11-07T23:20:23.154383+00:00"
+    }
+  ],
+  "retainedReferences": [
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-914bebac-20a1-4e4d-8428-f5896560e512.png",
+      "path": "reference/approved-T3.reference.png",
+      "sha256": "554f3e3363734f18d2bd08550e026fdcfe65b6e258838e160f9dc3ebb0d2924c",
+      "bytes": 2046215,
+      "dimensions": [1536, 1024]
+    },
+    {
+      "original": "C:\\Users\\PC\\.codex\\generated_images\\01a1b844-011b-7c61-8c4c-91d5df937093\\exec-5cebc306-c7f2-4310-892d-43c6105c53fa.png",
+      "path": "reference/approved-tiers.reference.png",
+      "sha256": "811e295194973ef30c1cda54ecc905ba49f1a2420339542b2d966ef09e23adf2",
+      "bytes": 2201506,
+      "dimensions": [1774, 887]
+    }
+  ],
+  "selectionEvidence": "Selected sheets are project.json; composite lineage is in public repair proofs. Historical candidate status is retained, not a current QA assertion."
+}

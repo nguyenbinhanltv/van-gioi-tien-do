@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "character": "kiem-tu-chibi-v1",
+  "tier": "T1",
+  "status": "Five-view visual master lock approved by orchestrator on 2026-11-08; numeric ratios calculated from recorded manual native landmarks.",
+  "tool": "image_gen.imagegen",
+  "model": "undisclosed",
+  "directions": {
+    "S": {
+      "source": "S.master.raw.png",
+      "sourceSize": [1254, 1254],
+      "landmarks": {
+        "crown": [651, 141],
+        "eyeLineY": 303.5,
+        "chin": [651, 389],
+        "shoulderLeft": [503, 442],
+        "shoulderRight": [793, 442],
+        "pelvis": [650, 597],
+        "soleY": 1189
+      },
+      "measurementMethod": "Manual visual selection on native image, approximate anatomical landmark interpretation; no automatic landmark detector is claimed. Crown excludes raised ponytail.",
+      "targetAnatomicalHeight2x": 216,
+      "eyeColor": "grey",
+      "review": "Fixed adult face/features retained from approved Kiếm tu. Main haircap/upper torso corrected; no pixel surgery."
+    },
+    "E": {
+      "source": "E.master.raw.png",
+      "sourceSize": [1254, 1254],
+      "landmarks": {
+        "crown": [643, 140],
+        "eyeLineY": 304,
+        "chin": [710, 389],
+        "pelvis": [660, 597],
+        "soleY": 1183
+      },
+      "measurementMethod": "Manual native anatomical landmark selection, approximate visual interpretation. Projected shoulder span is not the frontal anatomy width gate.",
+      "targetAnatomicalHeight2x": 216,
+      "eyeColor": "grey",
+      "review": "Correct orientation and same fixed face/weapon/costume visually reviewed."
+    },
+    "SE": {
+      "source": "SE.master.raw.png",
+      "sourceSize": [1254, 1254],
+      "landmarks": {
+        "crown": [653, 146],
+        "eyeLineY": 312,
+        "chin": [699, 395],
+        "pelvis": [668, 599],
+        "soleY": 1189
+      },
+      "measurementMethod": "Manual native anatomical landmark selection, approximate visual interpretation. Projected shoulder span is not the frontal anatomy width gate.",
+      "targetAnatomicalHeight2x": 216,
+      "eyeColor": "grey",
+      "review": "Correct orientation and same fixed face/weapon/costume visually reviewed."
+    },
+    "NE": {
+      "source": "NE.master.raw.png",
+      "sourceSize": [1254, 1254],
+      "landmarks": {
+        "crown": [644, 139],
+        "pelvis": [628, 592],
+        "soleY": 1181
+      },
+      "measurementMethod": "Manual native anatomical landmark selection, approximate visual interpretation. Projected shoulder span is not the frontal anatomy width gate.",
+      "targetAnatomicalHeight2x": 216,
+      "eyeColor": "grey",
+      "review": "Rear three-quarter: facial sliver visually checked, not measurable as frontal eye/chin gate."
+    },
+    "N": {
+      "source": "N.master.raw.png",
+      "sourceSize": [1254, 1254],
+      "landmarks": {
+        "crown": [620, 147],
+        "pelvis": [621, 601],
+        "soleY": 1183
+      },
+      "measurementMethod": "Manual native anatomical landmark selection, approximate visual interpretation. Projected shoulder span is not the frontal anatomy width gate.",
+      "targetAnatomicalHeight2x": 216,
+      "eyeColor": "not visible",
+      "review": "Full back: face/chin/eyes unobservable; identity reviewed through hair/costume/handed weapon."
+    }
+  },
+  "generations": [
+    {
+      "prompt": "Create a canonical T1 KIEM TU player master, ONE isolated full-body FRONT view facing directly toward viewer (game direction S), orthographic mild elevated isometric camera, no scene. OPAQUE FLAT PURE MAGENTA #FF00FF backdrop, no transparency, no ground shadow, no labels, no anatomy rulers, no text. Square canvas with full body and all hair/weapon comfortably inside. Use input1 T1 progression column ONLY for outfit and input2 for fixed facial identity. Same adult youthful male face: grey almond eyes, straight firm brows, small straight nose, composed mouth, softly angular jaw; black hair with two swept bangs and a tied ponytail. PREMIUM SEMI-CHIBI compact4.5head construction. Critical anatomical measurements: crown of MAIN hair cap attached to skull to soles = H; head/main cap to chin22%H (20-24 allowed); eye line15-17%H below crown; shoulder joint width28%H (26-30 allowed), small hands/feet. EXCLUDE elevated ponytail/topknot and loose hair from H/head measurement. Main hair cap should have enough height above eyes; do not make a huge head. Ponytail top extends no more than6%H above maincap crown so it fits16px headroom when body is216px tall. Keep all ornament simple, NO gold crown or hair gem. T1: plain IVORY knee-length split robe, navy cloth crossover collar and broad simple navy waist sash with two short tails, navy loose trousers, plain dark navy soft boots with tiny muted metal toe trim. No embroidered motifs, no shoulder armor, no gold robe trim, no gemstone, no aura or magic particles. One oversized SIMPLE straight steel sword with small rectangular silver guard, navy wrapped handle, cyan cloth ribbon tied to pommel. Sword DRAWN and held naturally in anatomical RIGHT hand (image LEFT) pointing diagonally down-left, tip never below sole baseline; other hand relaxed visible. Hair can have restrained cyan cloth tie. Limited ivory/navy/cyan palette, clean material-tinted outline not black, TWO cel tones plus ONE highlight, narrow cool rim light, NW key. Original design, same approved class identity. NO T2/T3 ornate costume. This image will anchor all five-direction turnarounds; prioritize consistent face and simple reproducible geometry. Aim maincap crown at~15%canvas height and soles~92%, with ponytail kept below~10%canvas height.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStarted": "2026-11-07T20:27:01.637Z",
+      "references": ["kiem-tu-tiers.raw.png T1 column only", "kiem-tu-t3.raw.png fixed face"],
+      "status": "Superseded: tall main cap and narrow shoulders",
+      "file": "S.attempt-01.raw.png",
+      "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-06aff8e7-9a65-4fd6-9c5e-6c6339d64c67.png",
+      "sha256": "5895ce1910f92727e04a105033cacf973971f3cf570a08a80ba65aaf76dc6260",
+      "utcOutputFileModified": "2026-11-07T20:27:36.136453+00:00",
+      "utcNote": "Source output file UTC preserved by copy; utcStarted recorded before tool call."
+    },
+    {
+      "prompt": "Targeted correction of attached KIEM TU T1 front master. Keep exact adult face features and face position, eye shapes/brows/nose/mouth, grey eyes, chin, same ivory/navy plain T1 costume, sword and cyan ribbons, magenta background. IMPORTANT current anatomical shoulder joints are much too narrow and haircap too tall. Original1254x1254 image: eyes~302,chin~389,soles~1189. Change ONLY main hair cap top contour from y~120 to~140 (slightly flatten/LOWER the upper main cap, NOT face or fringe); keep face at same coordinates. This gives crown-to-sole1049, head~249=23.7%,eye~162=15.4%, inside shared bands. Shorten upper ponytail loop top from~50 to~70 so it fits16px headroom after216/H scale, keep long trailing ponytail flow. WIDEN upper torso and anatomical shoulder joints visibly to~x500..800, width300px (~28.6%H), not merely widen sleeve tips. Broaden plain upper robe and shoulder anatomy by about40px each side while keeping adult lean swordsman build, not bulky fighter. Arms adapt naturally; hands stay small; sword grip/steel blade geometry retained. Keep body height, waist position and feet unchanged. No armor,gold crown,gems,embroidery,VFX. Opaque flat #FF00FF magenta, no cast shadow. Clean material-tinted contours, TWO cel tones+ONE highlight+thin rim. One full FRONT S character, no text,no rulers. AI drawing correction only; prioritize these measurable contour changes over near-identical regeneration.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStarted": "2026-11-07T20:28:57.038Z",
+      "references": [
+        "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-06aff8e7-9a65-4fd6-9c5e-6c6339d64c67.png"
+      ],
+      "status": "Selected after visible cap and shoulder correction",
+      "file": "S.master.raw.png",
+      "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-60fbb5d4-113e-4b50-aab2-40747844f290.png",
+      "sha256": "8827573b0ce724215d0a857d6dbca934bfa05627c972b2f8f630517fb246cb2b",
+      "utcOutputFileModified": "2026-11-07T20:29:30.085913+00:00",
+      "utcNote": "Source output file UTC preserved by copy; utcStarted recorded before tool call."
+    },
+    {
+      "direction": "E",
+      "prompt": "Edit the attached canonical KIEM TU T1 front master into ONE isolated full-body DIRECTION view. Preserve EXACT character identity, grey eyes/straight brows/small straight nose/composed mouth/soft angular jaw, black main hair cap and ponytail, same plain ivory knee split robe/navy crossed collar/navy belt with two tails/navy trousers/dark small boots, simple straight steel sword/small rectangular silver guard/navy grip/cyan pommel ribbon, same cyan hair ribbon. No armor,crown,gems,gold embroidery,VFX,new ornaments. Same compact premium semi-chibi anatomy and SAME STANDING CROWN-TO-SOLE height and source square canvas as attached master; main haircap crown near11.25%canvas height,solebaseline94.8%,maincap-to-chin23.6%H,eye15.5%H in visible facial views. Head and hands must not enlarge or shrink on rotation. Maincap excludes ponytail raised loop; loop top stays within7%H above crown. Single consistent mild elevated orthographic game camera, material-tinted outlines,2celtones+1highlight,NWlight,thinrim. OPAQUE FLAT PURE MAGENTA #FF00FF background, no transparency,no ground shadow,no text,no labels,no rulers. Character stands neutral feet planted, sword held DRAWN in anatomical RIGHT hand pointing diagonally down,tip above sole line, other hand relaxed. Keep top hair and all blade inside frame. DO NOT change pose,height,costume,weapon design or proportions except turning orientation.\nEAST view: strict RIGHT-facing SIDE PROFILE,face nose points right; torso and feet turned90degrees from front, near arm is anatomical right sword hand. Do not show two frontal eyes, only right profile grey eye/nose/mouth; ponytail trails behind to left. Sword remains anatomically correct grip, blade lowered forward to right.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStarted": "2026-11-07T20:35:13.184Z",
+      "references": ["S.master.raw.png"],
+      "status": "Selected after manual orientation/identity/proportion review",
+      "file": "E.master.raw.png",
+      "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-550352b2-969f-4080-9d14-189e773ceff9.png",
+      "sha256": "acdfb1db31d33d204dea8c60d10152483e4b6776828610c3113caa861395b131",
+      "utcOutputFileModified": "2026-11-07T20:35:40.819209+00:00",
+      "utcNote": "Source output file UTC preserved by copy; utcStarted recorded before tool call."
+    },
+    {
+      "direction": "SE",
+      "prompt": "Edit the attached canonical KIEM TU T1 front master into ONE isolated full-body DIRECTION view. Preserve EXACT character identity, grey eyes/straight brows/small straight nose/composed mouth/soft angular jaw, black main hair cap and ponytail, same plain ivory knee split robe/navy crossed collar/navy belt with two tails/navy trousers/dark small boots, simple straight steel sword/small rectangular silver guard/navy grip/cyan pommel ribbon, same cyan hair ribbon. No armor,crown,gems,gold embroidery,VFX,new ornaments. Same compact premium semi-chibi anatomy and SAME STANDING CROWN-TO-SOLE height and source square canvas as attached master; main haircap crown near11.25%canvas height,solebaseline94.8%,maincap-to-chin23.6%H,eye15.5%H in visible facial views. Head and hands must not enlarge or shrink on rotation. Maincap excludes ponytail raised loop; loop top stays within7%H above crown. Single consistent mild elevated orthographic game camera, material-tinted outlines,2celtones+1highlight,NWlight,thinrim. OPAQUE FLAT PURE MAGENTA #FF00FF background, no transparency,no ground shadow,no text,no labels,no rulers. Character stands neutral feet planted, sword held DRAWN in anatomical RIGHT hand pointing diagonally down,tip above sole line, other hand relaxed. Keep top hair and all blade inside frame. DO NOT change pose,height,costume,weapon design or proportions except turning orientation.\nSOUTH-EAST view: front THREE-QUARTER rotated45degrees toward viewer's RIGHT; both eyes visible, right-profile side slightly near. Chest still visible; face nose points down-right in orthographic game convention. Not side profile. Sword in anatomical right hand on nearer left/front side, lowered.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStarted": "2026-11-07T20:35:20.603Z",
+      "references": ["S.master.raw.png"],
+      "status": "Selected after manual orientation/identity/proportion review",
+      "file": "SE.master.raw.png",
+      "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-caafecdf-536e-4efd-8247-36f678ce8f2c.png",
+      "sha256": "9256a8e8104f6a0721a5a6d0be86b97a5a3e275f22605daa5bc05305864b7692",
+      "utcOutputFileModified": "2026-11-07T20:36:25.065059+00:00",
+      "utcNote": "Source output file UTC preserved by copy; utcStarted recorded before tool call."
+    },
+    {
+      "direction": "NE",
+      "prompt": "Edit the attached canonical KIEM TU T1 front master into ONE isolated full-body DIRECTION view. Preserve EXACT character identity, grey eyes/straight brows/small straight nose/composed mouth/soft angular jaw, black main hair cap and ponytail, same plain ivory knee split robe/navy crossed collar/navy belt with two tails/navy trousers/dark small boots, simple straight steel sword/small rectangular silver guard/navy grip/cyan pommel ribbon, same cyan hair ribbon. No armor,crown,gems,gold embroidery,VFX,new ornaments. Same compact premium semi-chibi anatomy and SAME STANDING CROWN-TO-SOLE height and source square canvas as attached master; main haircap crown near11.25%canvas height,solebaseline94.8%,maincap-to-chin23.6%H,eye15.5%H in visible facial views. Head and hands must not enlarge or shrink on rotation. Maincap excludes ponytail raised loop; loop top stays within7%H above crown. Single consistent mild elevated orthographic game camera, material-tinted outlines,2celtones+1highlight,NWlight,thinrim. OPAQUE FLAT PURE MAGENTA #FF00FF background, no transparency,no ground shadow,no text,no labels,no rulers. Character stands neutral feet planted, sword held DRAWN in anatomical RIGHT hand pointing diagonally down,tip above sole line, other hand relaxed. Keep top hair and all blade inside frame. DO NOT change pose,height,costume,weapon design or proportions except turning orientation.\nNORTH-EAST view: back THREE-QUARTER facing away toward viewer's RIGHT, shoulder blades/backrobe and backofhead dominant, only a narrow right facial profile visible. Nose points upper-right; no front chest pasted on back. Ponytail attachment and navy belt rear wrap visible; sword in anatomical RIGHT hand now on viewerRIGHT side.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStarted": "2026-11-07T20:35:27.181Z",
+      "references": ["S.master.raw.png"],
+      "status": "Selected after manual orientation/identity/proportion review",
+      "file": "NE.master.raw.png",
+      "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-a532d65b-53cd-410e-9d9f-1e488b15d50f.png",
+      "sha256": "bae572b300f6bced0b6e681c29f3ed7bccc7f60c0f1becc016df4e4524df7f8a",
+      "utcOutputFileModified": "2026-11-07T20:35:48.674578+00:00",
+      "utcNote": "Source output file UTC preserved by copy; utcStarted recorded before tool call."
+    },
+    {
+      "direction": "N",
+      "prompt": "Edit the attached canonical KIEM TU T1 front master into ONE isolated full-body DIRECTION view. Preserve EXACT character identity, grey eyes/straight brows/small straight nose/composed mouth/soft angular jaw, black main hair cap and ponytail, same plain ivory knee split robe/navy crossed collar/navy belt with two tails/navy trousers/dark small boots, simple straight steel sword/small rectangular silver guard/navy grip/cyan pommel ribbon, same cyan hair ribbon. No armor,crown,gems,gold embroidery,VFX,new ornaments. Same compact premium semi-chibi anatomy and SAME STANDING CROWN-TO-SOLE height and source square canvas as attached master; main haircap crown near11.25%canvas height,solebaseline94.8%,maincap-to-chin23.6%H,eye15.5%H in visible facial views. Head and hands must not enlarge or shrink on rotation. Maincap excludes ponytail raised loop; loop top stays within7%H above crown. Single consistent mild elevated orthographic game camera, material-tinted outlines,2celtones+1highlight,NWlight,thinrim. OPAQUE FLAT PURE MAGENTA #FF00FF background, no transparency,no ground shadow,no text,no labels,no rulers. Character stands neutral feet planted, sword held DRAWN in anatomical RIGHT hand pointing diagonally down,tip above sole line, other hand relaxed. Keep top hair and all blade inside frame. DO NOT change pose,height,costume,weapon design or proportions except turning orientation.\nNORTH view: FULL BACK facing away, no face or eyes visible. Show backofhead/maincap+ponytail, plain ivory backrobe/navy belt rear wrap, boot heels, exactly same scale/costume; right swordhand on viewerRIGHT lowered, no mirrored left-hand sword.",
+      "tool": "image_gen.imagegen",
+      "model": "undisclosed",
+      "utcStarted": "2026-11-07T20:35:33.880Z",
+      "references": ["S.master.raw.png"],
+      "status": "Selected after manual orientation/identity/proportion review",
+      "file": "N.master.raw.png",
+      "rawToolOutputPath": "C:\\Users\\PC\\.codex\\generated_images\\01a1b794-d64b-7b03-9d96-1634cd7274d6\\exec-896d238c-10a0-4bbc-b05d-ae9804eea90b.png",
+      "sha256": "225d4681755faf76f153a25573bf15f23ffcb973ea608fdc18b1aa8cd9d5dd39",
+      "utcOutputFileModified": "2026-11-07T20:35:52.095128+00:00",
+      "utcNote": "Source output file UTC preserved by copy; utcStarted recorded before tool call."
+    }
+  ]
+}
