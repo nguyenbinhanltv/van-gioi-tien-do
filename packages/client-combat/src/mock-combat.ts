@@ -39,6 +39,8 @@ export const MOCK = {
 
 export interface MockEnemySpec {
   name: string;
+  /** Mob wire id the enemy stands for (art only; the mock fight ignores it). */
+  defId?: number;
   pos: TilePoint;
   /** Fights back (a hostile dummy). Default false: a stationary "mộc nhân". */
   fightsBack?: boolean;
@@ -48,6 +50,7 @@ export interface MockEnemySpec {
 
 export interface MockEnemy extends Targetable {
   name: string;
+  defId?: number;
   hp: number;
   hpMax: number;
   fightsBack: boolean;
@@ -134,6 +137,7 @@ export class MockCombat implements CombatBackend {
         hp: hpMax,
         hpMax,
         fightsBack: e.fightsBack ?? false,
+        defId: e.defId,
         nextAttackAt: 0,
         respawnAt: 0,
       };

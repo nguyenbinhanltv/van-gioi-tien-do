@@ -18,6 +18,8 @@ export interface PlayerView extends Targetable {
 
 export interface EnemyView extends Targetable {
   name: string;
+  /** Mob wire id (`MOB_DEFS[].id`, EnterEntity.defId) when the backend knows it: picks the mob's art. Absent for dummies. */
+  defId?: number;
   hp: number;
   hpMax: number;
 }

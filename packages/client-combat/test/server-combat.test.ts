@@ -260,3 +260,14 @@ describe('ServerCombat', () => {
     expect(c.player.casting).toBeNull();
   });
 });
+
+describe('enemy defId (the mob art key)', () => {
+  it('is stored on first sight, survives snapshot updates that do not repeat it, and is absent for unknown enemies', () => {
+    const { c } = make();
+    c.upsertEnemy({ id: 1_000_050, name: 'Mob 11', defId: 11, pos: { i: 30, j: 30 }, hpPct: 100, hpMax: 5000 });
+    expect(c.enemy(1_000_050)?.defId).toBe(11);
+    c.upsertEnemy({ id: 1_000_050, name: 'Mob 11', pos: { i: 31, j: 30 }, hpPct: 80, hpMax: 5000 });
+    expect(c.enemy(1_000_050)?.defId).toBe(11);
+    expect(c.enemy(1_000_001)?.defId).toBeUndefined();
+  });
+});

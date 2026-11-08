@@ -480,5 +480,5 @@ Còn mở / lưu ý:
 ## Mob hiển thị tạm thời (standee, 2026-11-09): còn mở
 
 - 14 quái đang hiển thị bằng ảnh concept Gemini tĩnh (**INTERIM**, `MobArt.ts`): chưa có hoạt hình đi / đánh / chết, chỉ lật theo hướng đi, nhún nhẹ, nháy đỏ khi trúng đòn và mờ dần khi chết. Thay bằng sprite hoạt hình khi có; giữ nguyên chỗ nối trong `Combat.ts` (`mobArt`).
-- Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ; cần bản @2x khi làm sprite thật.
-- Quái nhận biết qua tên `Mob <id>` của backend (`mobDefIdOfName`) vì `EnemyView` chưa mang `defId`; nên thêm `defId` vào `EnemyView` khi `@vgtd/client-combat` được sửa.
+- Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ. Đã đo bản @2x (2026-11-09): prop @2x + quái @2x cần 3,74 / 4,19 MP, xếp thành **2 trang** 2048² (thêm ~16 MB GPU và Y-sort bị ngắt batch giữa prop và quái), nên chưa làm; làm khi có sprite hoạt hình thật (atlas riêng cho quái, nén ASTC).
+- Quái nhận biết bằng `EnemyView.defId` (id dây của `MOB_DEFS`, do `aoi_enter` mang); tên `Mob <id>` chỉ còn là đường lùi cho backend chưa gán `defId`.
