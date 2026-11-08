@@ -10,6 +10,7 @@
  */
 import { skillDefinitions, statsAt } from '@vgtd/shared';
 import type { PathId, SkillDef, SkillDefinitions, SkillEffect } from '@vgtd/shared';
+import type { CombatBackend } from './backend.js';
 import { Hotbar } from './hotbar.js';
 import type { CastBlock } from './hotbar.js';
 import { TargetSelector } from './targeting.js';
@@ -91,7 +92,7 @@ interface Hit {
 
 const dist = (a: TilePoint, b: TilePoint): number => Math.hypot(a.i - b.i, a.j - b.j);
 
-export class MockCombat {
+export class MockCombat implements CombatBackend {
   readonly hotbar: Hotbar;
   readonly target = new TargetSelector();
   readonly player: MockPlayer;
