@@ -274,8 +274,8 @@ export function runProject(
           c.sheetSelection,
         ).map((f) => (lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f))
       : undefined;
-    // Only inherited cells substitute the pre-edit source in automatic calibration.
-    const calibrationFrames = frames.map((f, i) => (inherited?.verified.has(i) ? referenceFrames![i]! : f));
+    // Preserve the source clip calibration, including its declared reference frames.
+    const calibrationFrames = referenceFrames ?? frames;
     const rows = grid.rows;
     const logicalWidth = deferred ? prepared!.record.normalized[0] : sheet.width;
     const logicalHeight = deferred ? prepared!.record.normalized[1] : sheet.height;

@@ -142,6 +142,21 @@ describe('D57 inherited registration', () => {
 
   it('replays the computed transform through single-pass DPI preparation', () => {
     const f = fixture();
+    const double = (image: typeof f.mask) => {
+      const out = createImage(image.width * 2, image.height * 2);
+      for (let y = 0; y < out.height; y++)
+        for (let x = 0; x < out.width; x++) {
+          const p = (Math.floor(y / 2) * image.width + Math.floor(x / 2)) * 4;
+          out.data.set(image.data.subarray(p, p + 4), (y * out.width + x) * 4);
+        }
+      return out;
+    };
+    const source = encodePng(toPremultiplied(double(f.before)));
+    const mask = encodePng(double(f.mask));
+    writeFileSync(join(f.dir, 'before.png'), source);
+    writeFileSync(join(f.dir, 'after.png'), encodePng(toPremultiplied(double(f.after))));
+    writeFileSync(join(f.dir, 'mask.png'), mask);
+    const inherited = { ...f.inherited, sourceSha256: hash(source), maskSha256: hash(mask) };
     writeFileSync(join(f.dir, 'scale.json'), JSON.stringify({ scale: 1 }));
     const project: Project = {
       ...f.project,
@@ -151,7 +166,7 @@ describe('D57 inherited registration', () => {
     const baseline = runProject({ ...project, clips: [{ ...f.clip, sheet: 'before.png' }] }, f.dir, {
       includeAlignedFrames: true,
     });
-    const edited = runProject({ ...project, clips: [{ ...f.clip, inheritedRegistration: f.inherited }] }, f.dir, {
+    const edited = runProject({ ...project, clips: [{ ...f.clip, inheritedRegistration: inherited }] }, f.dir, {
       includeAlignedFrames: true,
     });
     expect(edited.contract.clips[0]!.records[0]!.dx).toBe(baseline.contract.clips[0]!.records[0]!.dx);
