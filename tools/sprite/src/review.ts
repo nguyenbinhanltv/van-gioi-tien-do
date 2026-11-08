@@ -67,6 +67,12 @@ export interface BatchReport {
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 function headSizeSummary(e: HeadMeasurement): string {
+  if (e.kind === 'clip-relative-proxy') {
+    const c = e.clipRelative;
+    return c
+      ? `clip-relative (not a master-band pass); hair-cap ${c.proxyPx}px vs certified mean ${c.certifiedMeanPx.toFixed(2)}px (cells ${c.certified.map((x) => x.cell).join(', ')}; ratio ${c.ratio.toFixed(4)}); headband row ${c.headbandTopY}; Lab ${c.lab.head.toFixed(4)}/${c.lab.torso.toFixed(4)}; temporal ${c.temporal.map((p) => `${p.from}->${p.to} ${p.head.toFixed(4)}/${p.torso.toFixed(4)}`).join('; ')}`
+      : 'clip-relative (quality record unavailable)';
+  }
   if (e.kind === 'bracketed-occlusion') {
     const b = e.bracketed;
     return b
@@ -78,6 +84,10 @@ function headSizeSummary(e: HeadMeasurement): string {
     : `head ${e.sizePx!.toFixed(2)} / master ${e.masterSizePx!.toFixed(2)} px`;
 }
 function headLandmarkHtml(head: HeadLandmarks | HeadEvidence): string {
+  if (head.kind === 'clip-relative-proxy')
+    return esc(
+      `clip-relative proxy; visible crown (${head.crown.x}, ${head.crown.y}); hidden ${head.hiddenEndpoints.join(', ')}; occluder ${head.occluder}`,
+    );
   if (head.kind === 'bracketed-occlusion')
     return esc(
       `bracketed (unmeasured); visible crown (${head.crown.x}, ${head.crown.y}); hidden ${head.hiddenEndpoints.join(', ')}; occluder ${head.occluder}`,

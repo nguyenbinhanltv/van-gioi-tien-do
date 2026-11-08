@@ -660,6 +660,58 @@ không fallback centroid, không ghi cửa sổ thành anatomy.
 INFO ghi `head_bracketed`, `measurement:unmeasured`, các lân cận, budget, Lab và hai pair SSIM. Không có
 size/span/breadth giả; review hiện `bracketed (unmeasured)`. Giữ nguyên cổng frame/canvas/foot/loop/export.
 
+## Bổ sung D61: clip-relative-proxy cho ô động không có phép đo đầu so được master
+
+[Cập nhật D61: dùng sau tối đa một lần vẽ lại khóa master, khi cả cụm ô dash/run/attack/hit che mất endpoint nên D60 không có lân cận đo thật. Không thay D60 và không phải pass band master.]
+
+Chỉ `dash`, `run`, `attack`, `attack_2`, `attack_3`, `hit`. Ô khai kind `clip-relative-proxy` với crown nhìn thấy
+alpha≥128, `occluder` cụ thể, `hiddenEndpoints` và note review; không thêm chin/nape/breadth suy diễn.
+
+**Định nghĩa proxy** (cấu hình theo project bằng `headProxy`, hàng khai báo từng ô bằng `headbandTopRows` của clip):
+bề rộng ngang của mũ tóc đặc trên hàng mép TRÊN headband. Mặt nạ = pixel alpha≥128 có khoảng cách RGB Euclid
+tới `hairRgb` ≤ `hairTolerance`, trong crop đầu cố định `crop` (`dx,dy,width,height`, offset từ crown, phải chứa
+crown). Chọn thành phần liên thông 8 hướng chứa crown TRƯỚC opening; opening 3×3 (erode rồi dilate, bán kính 1);
+rồi lấy thành phần sống sót lớn nhất (hòa: đầu tiên theo scan). Bề rộng = extent ngang của thành phần đó trên
+hàng headband-top. Hàng này phải nằm trong crop đầu và mũ tóc phải chạm hàng đó, nếu không ô fail.
+
+**Ô chứng nhận:** ô khác cùng clip có head evidence đo thật đạt band so với master (không phải bracketed/proxy) và
+có hàng headband khai báo. Cần ≥2 ô chứng nhận đo được proxy (ưu tiên kẹp hai phía). Ô đạt khi
+|proxy / trung bình proxy các ô chứng nhận − 1| ≤ 3%.
+
+**Điều kiện bắt buộc:** crown nhìn thấy; `headProxy` và hàng headband khai báo; `occluder` + endpoint bị che + note;
+master đo thật hợp lệ (master không dùng proxy); hai lân cận i−1/i+1 (loop wrap; ô ở mép nonloop bị loại) có ô và
+crown; Lab D55 đầu≤15/thân≤23 với cửa sổ neo crown như D60; cả hai pair temporal với lân cận
+min(head,torso)≥0,45; thiếu phép đo/NaN là lỗi cứng. Mọi cổng khác (bbox height band, canvas, contacts) giữ nguyên;
+lý do `clip-relative` không bao giờ miễn similarity (D54).
+
+```json
+{
+  "headProxy": {
+    "hairRgb": [58, 36, 30],
+    "hairTolerance": 24,
+    "crop": { "dx": -40, "dy": -4, "width": 80, "height": 60 }
+  },
+  "clips": [
+    {
+      "name": "dash",
+      "headbandTopRows": { "3": 71, "4": 72, "5": 71 },
+      "headEvidence": {
+        "4": {
+          "kind": "clip-relative-proxy",
+          "crown": { "x": 157, "y": 57 },
+          "occluder": "hunched shoulder and ribbon hide the nape",
+          "hiddenEndpoints": ["skullBase", "breadth.left", "breadth.right"],
+          "note": "Example schema only; crown, row and certified cells must be reviewed on the native source"
+        }
+      }
+    }
+  ]
+}
+```
+
+INFO ghi `head_clip_relative`, `measurement:unmeasured`, proxy px, trung bình ô chứng nhận, tỉ lệ, bracketing, hàng
+headband, Lab và hai pair SSIM; review hiện `clip-relative (not a master-band pass)`. Không có size/span/breadth giả.
+
 ## Bổ sung D62: ngoại lệ sửa HEAD-BAND bằng ROI đầu
 
 [Cập nhật D62: ghi nhận đúng phạm vi orchestrator phê duyệt ngày 2026-11-08; áp dụng mọi lớp/hướng có master đã khóa, không chỉ Đan/Phù S. D41/D47 vẫn cấm scale thân hoặc toàn ô; chỉ ngoại lệ vùng đầu dưới đây được phép.]

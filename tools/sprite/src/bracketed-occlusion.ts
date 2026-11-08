@@ -34,7 +34,7 @@ export interface BracketedMeasurement {
   }[];
 }
 export const BRACKETED_MAX_CELLS = 2;
-const endpoints: readonly string[] = [
+export const HIDDEN_HEAD_ENDPOINTS: readonly string[] = [
   'chin',
   'skullBase',
   'breadth.left',
@@ -44,7 +44,14 @@ const endpoints: readonly string[] = [
   'shoulderTop.right',
   'ornamentAnchor',
 ];
-const dynamic = new Set(['dash', 'run', 'attack', 'attack_2', 'attack_3', 'hit']);
+export const DYNAMIC_HEAD_CLIPS: ReadonlySet<string> = new Set([
+  'dash',
+  'run',
+  'attack',
+  'attack_2',
+  'attack_3',
+  'hit',
+]);
 const isBracketed = (clip: QaClip, frame: number) => clip.headEvidence?.[frame]?.kind === 'bracketed-occlusion';
 
 /** Validate metadata and direct measured neighbours before any expensive image comparisons. */
@@ -60,7 +67,7 @@ export function bracketedPreconditions(
   const e = clip.headEvidence?.[frame];
   if (!e || e.kind !== 'bracketed-occlusion')
     return failure('head_bracket_invalid', 'missing bracketed-occlusion declaration');
-  if (!dynamic.has(clip.name))
+  if (!DYNAMIC_HEAD_CLIPS.has(clip.name))
     return failure('head_bracket_scope', 'bracketed evidence is restricted to dynamic dash/run/attack/hit clips');
   const image = clip.frames[frame]?.image;
   const p = e.crown;
@@ -83,7 +90,7 @@ export function bracketedPreconditions(
     !Array.isArray(e.hiddenEndpoints) ||
     !e.hiddenEndpoints.length ||
     new Set(e.hiddenEndpoints).size !== e.hiddenEndpoints.length ||
-    e.hiddenEndpoints.some((key) => !endpoints.includes(key)) ||
+    e.hiddenEndpoints.some((key) => !HIDDEN_HEAD_ENDPOINTS.includes(key)) ||
     typeof e.note !== 'string' ||
     !e.note.trim() ||
     ['chin', 'skullBase', 'breadth', 'shoulderTop', 'ornamentAnchor'].some((key) => key in e)
