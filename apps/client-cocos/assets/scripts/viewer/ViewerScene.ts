@@ -39,7 +39,6 @@ const FEET_Y = -150;
 /** Review grid order (row-major, 4 columns): the 5 drawn directions and the 3 mirrored ones. */
 const REVIEW_ORDER: readonly Direction[] = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW'];
 const ONION_FRAMES = 2;
-const KEY_FPS = 30;
 
 interface Slot {
   actor: CharacterActor;
@@ -61,7 +60,7 @@ export interface ViewerHook {
   set(patch: Record<string, unknown>): void;
   /** Pause and seek every actor to normalised time 0..1 of its animation. */
   seekNorm(norm: number): void;
-  /** Clock info for A (or the review clock), frame count at 30 fps, loaded rig direction. */
+  /** Clock info for A (or the review clock), actual runtime tick count, loaded rig direction. */
   info(): { time: number; duration: number; frames: number; rig: string | null; mode: string; source: string };
   /** Loop seam of the current animation (realtime rigs). */
   seam(): { loop: boolean; meanStep: number; seamStep: number; ratio: number } | null;
@@ -196,7 +195,7 @@ export class ViewerScene extends Component {
         return {
           time: this.settings.mode === 'review' ? this.reviewT : (a?.time ?? 0),
           duration: a?.duration ?? 0,
-          frames: a ? Math.round(a.duration * KEY_FPS) : 0,
+          frames: a?.frames ?? 0,
           rig: this.mainActor().skeletonDirection,
           mode: this.settings.mode,
           source: this.equipmentConfig ? this.equipmentConfig.folder : `${this.src.folder}/${this.src.stem}`,
@@ -643,7 +642,7 @@ export class ViewerScene extends Component {
   private driveOnion(): void {
     const a = this.slot('A').actor.time();
     if (!a) return;
-    const d = ONION_FRAMES / KEY_FPS;
+    const d = (ONION_FRAMES * a.duration) / a.frames;
     this.slot('G-').actor.seek((((a.time - d) % a.duration) + a.duration) % a.duration);
     this.slot('G+').actor.seek((a.time + d) % a.duration);
   }

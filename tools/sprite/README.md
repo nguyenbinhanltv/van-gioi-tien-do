@@ -174,7 +174,20 @@ Use `--profile smooth-v2` with `sprite:template`, and spread `smoothProjectClipD
 The legacy APIs remain unchanged. `SMOOTH_SPRITE_CLIPS` provides the official counts, duration and inherited table anchors;
 `smoothPoseTags` provides attack anticipation/strike/impact/impact_hold/follow_through labels.
 The first attack remains named `attack` at runtime. Draw every cell; do not duplicate poses to meet the count.
-Nominal playback is 24 fps, duration = drawings / 24, quantized by the existing 30 Hz export clock (at most half a tick).
+D58: playback is exactly 24 ticks/s with `timingProfile: "smooth-v2"` on the project or every clip.
+`smoothProjectClipDefaults` includes this opt-in. Duration is drawings / 24, each drawing lasts one tick, and
+DragonBones animations inherit the data/armature clock. Mixed clocks in one armature/set are rejected; omitted
+profiles retain the byte-compatible legacy 30 Hz path. Tier/costume/weapon variants retain T1 timing.
+
+The timing-only migration of merged chibi directions is reproducible from the pinned baseline:
+
+```sh
+node tools/rig/scripts/run-ts.mjs tools/sprite/scripts/migrate-smooth-clock.ts --write --base 50de2e0edc33b40480bf788f19eca5485152c578 --report docs/art/smooth-clock-migration.json
+```
+
+The report verifies every non-timing skeleton field, unchanged atlas/texture hashes (LFS object SHA256 for PNGs),
+and untouched legacy skeletons. It does not rerun art QA or claim identity approval. Without `--write`, it checks
+and reports the proposed migration without changing projects or runtime files.
 Event phases remain in legacy TABLE coordinates. This is presentation timing, not a simulation/balance change.
 Maximum lattice: 4x4; logical cells remain 256 texture pixels at 2x. A raw 2048-square 4x4 sheet has 512-pixel cells:
 declare DPI preparation and the locked character calibration. Regenerate locomotion ghosts using the new duration.

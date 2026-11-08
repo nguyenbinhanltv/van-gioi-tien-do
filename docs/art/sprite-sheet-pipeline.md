@@ -231,8 +231,7 @@ Mỗi bản vẽ là một pose riêng ở 24 fps danh nghĩa, không nhân bả
 Chọn 14 khung mỗi đòn để có lấy đà, vung, trúng, giữ lực một khung và thu thế; nhãn pose nằm trong manifest.
 `phases` vẫn là chỉ số TABLE cũ, không phải số ô mới; exporter đổi tỉ lệ sự kiện theo thời lượng.
 Không kéo dài hit/cancel gameplay theo clip: đây là profile trình diễn, cần tích hợp gameplay riêng khi nối chiến đấu.
-Clock DragonBones hiện tại là 30 Hz: thời lượng được làm tròn tới tick gần nhất (sai số ≤ 1/60 giây),
-độ dài hiển thị ô có thể khác một tick; test bảo đảm đủ mọi bản vẽ, không tuyên bố cadence 24 Hz chính xác.
+[Cập nhật D58: chọn `timingProfile: "smooth-v2"` trên project hoặc từng clip (`smoothProjectClipDefaults` tự khai). Clock dữ liệu và armature DragonBones là 24 Hz; animation kế thừa clock này, mỗi bản vẽ đúng 1 tick. idle 16/24 giây, attack 14/24 giây. Không trộn profile trong cùng armature/layer set. Legacy bỏ trường này giữ nguyên clock 30 Hz và byte xuất cũ. Variant phải giữ clock T1. Sửa runtime đã merge chỉ thay timing JSON, không đổi atlas/texture PNG hay xác nhận lại similarity.]
 
 Lưới tối đa 4×4. Ô logic giữ 256 px @2x; template 4×4 là 1024², có thể sinh ở 2048²
 (512 px thô mỗi ô) rồi dùng `square-cell-dpi-v1` + calibration nhân vật đã khóa để chuẩn hóa.

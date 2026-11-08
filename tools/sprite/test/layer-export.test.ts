@@ -135,6 +135,29 @@ function projectFixture() {
 }
 
 describe('canonical layer authoring/export', () => {
+  it('uses the same exact smooth clock for independent layers', () => {
+    const image = createImage(1, 1);
+    image.data.fill(255);
+    const clips = [
+      {
+        clock: { name: 'idle', durationSec: 16 / SMOOTH_CLIP_FPS, loop: true, timingProfile: 'smooth-v2' as const },
+        images: Array.from({ length: 16 }, () => image),
+        orders: Array.from({ length: 16 }, () => 'front' as const),
+      },
+    ];
+    const sets = (['body', 'weapon', 'fx'] as const).map((role) => {
+      const result = buildSpriteLayerSet({ id: `test_${role}`, role, direction: 'E', motionId: 'test', clips });
+      expect(result.manifest.frameRate).toBe(24);
+      expect(result.manifest.clips[0]!.duration).toBe(16);
+      expect(result.manifest.clips[0]!.loop).toBe(true);
+      expect(result.manifest.clips[0]!.frames.map((f) => f.at)).toEqual(Array.from({ length: 16 }, (_, i) => i));
+      return result.manifest;
+    });
+    const composed = composeSpriteLayers({ name: 'smooth', body: sets[0]!, weapon: sets[1]!, fx: sets[2]! });
+    expect(composed.skeleton.frameRate).toBe(24);
+    expect(composed.skeleton.armature[0]!.frameRate).toBe(24);
+    expect(composed.skeleton.armature[0]!.animation[0]!.duration).toBe(16);
+  });
   it('packs multiple budgeted pages without dropping drawings, and preserves hidden weapon keys', () => {
     const image = createImage(CELL_PX, CELL_PX);
     image.data.fill(255);

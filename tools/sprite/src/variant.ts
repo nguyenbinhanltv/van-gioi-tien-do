@@ -311,6 +311,7 @@ export function auditProjectVariant(project: Project, baseDir: string): VariantA
     throw new Error('variant changed master slicing controls');
   if ((project.resample ?? 'bilinear') !== (master.resample ?? 'bilinear'))
     throw new Error('variant changed master resampling method');
+  if (project.timingProfile !== master.timingProfile) throw new Error('variant changed master timing profile');
   if (canonical(project.masterHead ?? null) !== canonical(master.masterHead ?? null))
     throw new Error('variant changed master head reference');
   if (
