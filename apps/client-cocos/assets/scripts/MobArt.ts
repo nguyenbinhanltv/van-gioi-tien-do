@@ -17,6 +17,8 @@ export class MobStandee {
   private readonly body: Node;
   private readonly sprite: Sprite;
   private readonly motion: MotionState;
+  /** sprite height above the foot (design px): where an overhead bar goes */
+  readonly heightPx: number;
   /** false once the death fade finished (hide the node) */
   visible = true;
 
@@ -30,6 +32,7 @@ export class MobStandee {
     this.sprite.sizeMode = Sprite.SizeMode.CUSTOM;
     this.sprite.spriteFrame = frame;
     this.motion = newMotion(id);
+    this.heightPx = entry.h * entry.pivot.y;
   }
 
   /** Per frame: `pos` in tiles, `hp` absolute (a drop = a hit), `alive` from the backend. */

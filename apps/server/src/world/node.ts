@@ -56,7 +56,13 @@ import {
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
-import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
+import {
+  CombatSystem,
+  MobAttackSystem,
+  type AimedInput,
+  type CombatOptions,
+  type CombatResult,
+} from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 import { DropSink, InventorySync, type InventoryService } from './inventory/index.js';
 
@@ -158,6 +164,10 @@ interface Client {
   pktWindowStartMs: number;
   pktCount: number;
   joinedTick: number;
+  /** tick-loop drift (ms) when this client joined: its lag credit is the drift that accumulated SINCE then */
+  driftAtJoinMs: number;
+  /** lag credit so far (ms): non-decreasing, handed to `step` as `StepOptions.lagMs` */
+  lagCreditMs: number;
   dead: boolean;
   stats: ClientStats;
 }
@@ -197,6 +207,11 @@ export interface WorldNodeOptions {
   resumeHoldMs?: number;
   /** clock (ms) for the per-client packet-rate window; default real time. Tests and benchmarks that tick faster than real time drive it themselves. */
   packetClock?: () => number;
+  /**
+   * Real-time clock (ms, monotonic) used ONLY to measure how far the tick loop runs behind real time (`lagCreditMs`); default real time.
+   * Tests and benchmarks that tick faster than, or independently of, real time inject their own.
+   */
+  wallClock?: () => number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
   mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
   /** inventory + drop sink (D77): loads an account's inventory on join and saves it on leave; omit = no inventory */
@@ -274,6 +289,14 @@ export class WorldNode {
   /** sim ms a dropped player's entity is held (0 = no resume) */
   readonly resumeHoldMs: number;
   private readonly packetClock: () => number;
+  private readonly wallClock: () => number;
+  /**
+   * wall time that corresponds to sim time 0, fixed at the FIRST tick (time before ticking started is not overload): drift = (wall) - (wall0)
+   * - (sim time), which grows when the tick loop runs behind real time. NaN until the first tick.
+   */
+  private wall0 = Number.NaN;
+  /** drift at the start of the current tick, shared by every client's credit this tick */
+  private tickDriftMs = 0;
   private spawnRng: RngState;
   private readonly spawn: { i0: number; j0: number; side: number };
   private readonly maxVisible: number;
@@ -286,6 +309,8 @@ export class WorldNode {
   readonly progression: ProgressionService | undefined;
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
+  /** Mobs in chase hurt their target (D86); null without mobs + combat or with `combat.mobAttacks: false`. */
+  readonly mobAttacks: MobAttackSystem | null;
   /** monster spawns / AI (D74); null when the node runs without mobs */
   readonly mobs: MobManager | null;
   /** inventory + drop sink (D77); null when the node runs without one */
@@ -323,6 +348,7 @@ export class WorldNode {
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
     this.resumeHoldMs = opts.resumeHoldMs ?? WORLD_CONFIG.RESUME_HOLD_MS;
     this.packetClock = opts.packetClock ?? clock;
+    this.wallClock = opts.wallClock ?? clock;
     this.inventory = opts.inventory ?? null;
     this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
     this.inventory?.subscribe((owner) => this.invSync?.markDirty(owner));
@@ -359,6 +385,10 @@ export class WorldNode {
             : opts.combat.onDrops,
         })
       : null;
+    this.mobAttacks =
+      this.combat && this.mobs && opts.combat?.mobAttacks !== false
+        ? new MobAttackSystem(this.ctx, this.combat, this.mobs, seed)
+        : null;
   }
 
   // ------------------------------------------------------------------ players
@@ -420,6 +450,8 @@ export class WorldNode {
       pktWindowStartMs: this.packetClock(),
       pktCount: 0,
       joinedTick: this.world.tick,
+      driftAtJoinMs: this.driftNow(), // the drift at the real join time: a client never earns credit for overload that predates it
+      lagCreditMs: 0,
       dead: false,
       stats: emptyStats(),
     });
@@ -470,6 +502,26 @@ export class WorldNode {
   stampSession(id: number, stamp: unknown): void {
     const c = this.clients.get(id);
     if (c) c.authStamp = stamp;
+  }
+
+  /** How far the tick loop is behind real time (ms; negative when ticks are driven faster than real time, as tests and benchmarks do). */
+  private driftNow(): number {
+    if (Number.isNaN(this.wall0)) return 0; // ticking has not started: time before the first tick is not overload
+    return this.wallClock() - this.wall0 - this.world.timeMs;
+  }
+
+  /**
+   * Server-overload credit of a client (ms): real time that passed without sim time passing since it joined, i.e. how far behind real
+   * time this node's tick loop has been while the client was here. Honest clients are paced by the wall clock, the anti-cheat by sim
+   * time, so an overloaded server would otherwise kick everybody (queue overflow, claimed-time budget, claimed/real ratio). Never
+   * negative, never decreases (the guards' clock must not run backwards), capped by `ANTICHEAT.MAX_LAG_CREDIT_MS` inside `step`.
+   */
+  lagCreditOf(id: number): number {
+    const c = this.clients.get(id);
+    if (!c) return 0;
+    const d = this.tickDriftMs - c.driftAtJoinMs - WORLD_CONFIG.LAG_CREDIT_TOLERANCE_MS;
+    if (d > c.lagCreditMs) c.lagCreditMs = d;
+    return Math.min(c.lagCreditMs, ANTICHEAT.MAX_LAG_CREDIT_MS);
   }
 
   /** The secret the gateway hands the client in `hello_ack` so its next connection can resume this session. */
@@ -545,7 +597,8 @@ export class WorldNode {
               pending: [],
               vi: 0,
               vj: 0,
-              ac: slideBudget(e.ac, now),
+              // on the clock `step()` judges the guards by (sim time + this client's lag credit), not on bare sim time
+              ac: slideBudget(e.ac, now + this.lagCreditOf(id)),
             }
           : e,
       ),
@@ -671,7 +724,9 @@ export class WorldNode {
       simInputs = pre.inputs;
       for (const res of pre.results) this.sendCombatResult(res);
     }
-    const r = step(this.world, simInputs, this.ctx, NETWORK.TICK_MS);
+    if (Number.isNaN(this.wall0)) this.wall0 = this.wallClock() - this.world.timeMs; // the wall clock starts counting at the first tick
+    this.tickDriftMs = this.driftNow();
+    const r = step(this.world, simInputs, this.ctx, NETWORK.TICK_MS, { lagMs: (id) => this.lagCreditOf(id) });
     const t1 = clock();
     this.world = r.world;
     if (this.combat) {
@@ -681,6 +736,8 @@ export class WorldNode {
     }
     // mob AI after combat, so a mob killed this tick is already despawned (and its respawn timer running)
     if (this.mobs) this.world = this.mobs.step(this.world);
+    // mob attacks resolve after the AI moved the mobs: telegraphs start / land on the new positions
+    if (this.mobAttacks) this.world = this.mobAttacks.step(this.world).world;
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);

@@ -5,6 +5,7 @@ import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 import type { TilePos } from './Actors';
 import type { MobArt, MobStandee } from './MobArt';
+import { OverheadBar, worldUiLayer } from './OverheadBar';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -164,6 +165,12 @@ export class CombatUi {
   /** INTERIM mob standees (MobArt.ts); set by Bootstrap. Enemies it does not know keep the placeholder sprite. */
   mobArt: MobArt | null = null;
   private readonly standees = new Map<number, MobStandee>();
+  private readonly enemyBars = new Map<number, OverheadBar>();
+  private readonly selfBar: OverheadBar;
+  private readonly worldUi: Node;
+  private readonly deathRoot: Node;
+  private readonly deathCount: Label;
+  private diedAtMs: number | null = null;
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
@@ -250,7 +257,9 @@ export class CombatUi {
     this.targetRoot.active = false;
 
     // floating text pool (world space, above the Y-sorted entities)
-    const l6 = worldRoot.getChildByName('L6_WorldUI') ?? newNode('L6_WorldUI', worldRoot);
+    const l6 = worldUiLayer(worldRoot);
+    this.worldUi = l6;
+    this.selfBar = new OverheadBar(l6, art.pixel, 96);
     for (let n = 0; n < 24; n++) {
       const label = text(l6, `Float${n}`, 22, new Color(255, 255, 255, 255));
       label.node.active = false;
@@ -263,6 +272,16 @@ export class CombatUi {
         baseColor: new Color(255, 255, 255, 255),
       });
     }
+
+    // death overlay: full-screen dim + title + respawn countdown, shown while the backend says the player is dead
+    this.deathRoot = newNode('DeathOverlay', hudParent);
+    quad(this.deathRoot, 'Dim', art.pixel, 4000, 4000, new Color(60, 0, 0, 120));
+    const title = text(this.deathRoot, 'Title', 40, new Color(255, 225, 225, 255));
+    title.string = 'Ban da roi / You have fallen';
+    title.node.setPosition(0, 40, 0);
+    this.deathCount = text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255));
+    this.deathCount.node.setPosition(0, -10, 0);
+    this.deathRoot.active = false;
 
     this.keyDown = (e) => this.onKey(e);
     window.addEventListener('keydown', this.keyDown);
@@ -299,7 +318,17 @@ export class CombatUi {
         })),
         gcd: this.backend.hotbar.gcdFraction(this.clock),
         floaters: this.floaters.filter((f) => f.node.active).length,
+        deathOverlay: this.deathRoot.active,
+        deathText: this.deathCount.string,
+        selfBar: this.selfBar.visible,
+        enemyBars: [...this.enemyBarIds()].filter((id) => this.enemyBars.get(id)!.visible),
       }),
+      /** Automation only (scripts/combat-online-smoke.mjs): feed own vitals as the snapshot would, to exercise the death flow. */
+      fakeVitals: (hp: number, hpMax: number) => {
+        const b = this.backend as { setSelfVitals?: (v: object) => void };
+        const pl = this.backend.player;
+        b.setSelfVitals?.({ hp, hpMax, mp: pl.mp, mpMax: pl.mpMax, alive: hp > 0 });
+      },
     };
   }
 
@@ -323,6 +352,7 @@ export class CombatUi {
     this.hudRoot.setScale(this.scale, this.scale, 1);
     this.hudRoot.setPosition(0, -canvasH / 2 + 10, 0);
     this.targetRoot.setPosition(0, (canvasH - 20) / this.scale - 70, 0);
+    this.deathRoot.setPosition(0, 0, 0);
   }
 
   /** Mock targets picked by InputManager arrive as `frame.target`; call once per frame after polling input. */
@@ -402,8 +432,15 @@ export class CombatUi {
         break;
       case 'death':
         if (ev.id === cb.PLAYER_ID) {
-          this.toast.string = 'You are down, respawning...';
-          this.toastLeft = 4;
+          this.diedAtMs = this.clock;
+          this.toastLeft = 0;
+        }
+        break;
+      case 'respawn':
+        if (ev.id === cb.PLAYER_ID) {
+          this.diedAtMs = null;
+          this.toast.string = 'Hoi sinh / Respawned';
+          this.toastLeft = 2.5;
         }
         break;
       default:
@@ -475,6 +512,8 @@ export class CombatUi {
       this.ring.setPosition(cellCenterToWorld(Math.floor(t.pos.i), Math.floor(t.pos.j)));
     }
     this.syncEnemyNodes(dt);
+    this.updateOverheads(dt, tid);
+    this.updateDeathOverlay();
 
     for (const f of this.floaters) {
       if (!f.node.active) continue;
@@ -541,6 +580,51 @@ export class CombatUi {
       this.standees.delete(id);
       this.enemyNodes.delete(id);
     });
+  }
+
+  private enemyBarIds(): number[] {
+    const ids: number[] = [];
+    this.enemyBars.forEach((_b, id) => ids.push(id));
+    return ids;
+  }
+
+  /** Overhead bars: the own one above the character, one per enemy (shown while targeted or just hurt). */
+  private updateOverheads(dt: number, targetId: number | null): void {
+    const p = this.backend.player;
+    const pos = this.playerPos();
+    this.selfBar.place(pos.i, pos.j);
+    this.selfBar.update(dt * 1000, { hp: p.hp, hpMax: p.hpMax, alive: p.alive, kind: 'self' });
+    for (const e of this.backend.enemies) {
+      let b = this.enemyBars.get(e.id);
+      if (!b) {
+        // above the head: 84 px for the placeholder, standee height + a margin for the INTERIM mob art (up to 512 px for a boss)
+        const st = this.standees.get(e.id);
+        b = new OverheadBar(this.worldUi, this.art.pixel, st ? st.heightPx + 14 : 84);
+        this.enemyBars.set(e.id, b);
+      }
+      b.place(e.pos.i, e.pos.j);
+      b.update(dt * 1000, { hp: e.hp, hpMax: e.hpMax, alive: e.alive, kind: 'enemy', targeted: e.id === targetId });
+    }
+    this.enemyBars.forEach((b, id) => {
+      if (this.backend.enemy(id)) return;
+      b.destroy();
+      this.enemyBars.delete(id);
+    });
+  }
+
+  /** While dead: dim the screen and count down the server's respawn delay (the server respawns; the overlay waits for `alive`). */
+  private updateDeathOverlay(): void {
+    const dead = !this.backend.player.alive;
+    this.deathRoot.active = dead;
+    if (!dead) {
+      this.diedAtMs = null;
+      return;
+    }
+    if (this.diedAtMs === null) this.diedAtMs = this.clock; // joined dead / backend without the event
+    const left = cb.respawnLeftMs(this.diedAtMs, this.clock, this.backend.respawnDelayMs);
+    const secs = Math.ceil(left / 1000);
+    this.deathCount.string =
+      left > 0 ? `Hoi sinh sau ${secs} giay / Respawn in ${secs} s` : 'Dang hoi sinh... / Respawning...';
   }
 
   private setBar(fill: Sprite, full: number, fraction: number): void {
