@@ -21,6 +21,7 @@
     "test": "vitest run test",
     "combat:smoke": "node scripts/combat-smoke.mjs",
     "combat:online": "node scripts/combat-online-smoke.mjs",
+    "touch:aim": "node scripts/touch-aim-smoke.mjs",
     "bag:smoke": "node scripts/bag-smoke.mjs",
     "progression:online": "node scripts/progression-online-smoke.mjs",
     "class:online": "node scripts/class-online-smoke.mjs",
