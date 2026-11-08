@@ -29,8 +29,9 @@ const opt = (name, def) => {
 };
 const flag = (name) => args.includes(`--${name}`);
 
-/** docs/10 section 12 exit criteria (P1). Single numbers live here only because @vgtd/shared BUDGETS are read by the HUD. */
-const LIMITS = { drawCalls: 80, ramMB: 500, minFps: 30, packageMB: 25 };
+// Budgets come from @vgtd/shared via PerfHud (`window.__vgtdPerf.budgets`), read below. Only the FPS floor is local: it has no
+// shared constant (docs/10 section 12: >= 30 FPS with 20 NPC).
+const MIN_FPS = 30;
 
 const npcs = Number(opt('npcs', 20));
 const tier = opt('tier', 'medium');
@@ -213,6 +214,9 @@ const result = {
   samples: samples.length,
 };
 const m = result.measured;
+const b = samples[0].budgets;
+if (!b) throw new Error('page did not publish budgets (window.__vgtdPerf.budgets)');
+const LIMITS = { drawCalls: b.drawCalls, ramMB: b.ramMB, packageMB: b.initialDownloadMB, minFps: MIN_FPS };
 const rows = [
   ['Draw calls (max)', m.drawCallsMax, `<= ${LIMITS.drawCalls}`, m.drawCallsMax <= LIMITS.drawCalls, true],
   ['RAM: JS heap + textures MB (max)', m.ramMBMax.toFixed(1), `<= ${LIMITS.ramMB}`, m.ramMBMax <= LIMITS.ramMB, true],

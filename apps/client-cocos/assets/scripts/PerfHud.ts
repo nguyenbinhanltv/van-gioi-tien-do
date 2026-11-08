@@ -24,6 +24,8 @@ export interface PerfStats {
   npcs: number;
   /** Sum of transfer sizes of everything fetched so far (Resource Timing), MB: the runtime view of the initial package. */
   loadedMB: number;
+  /** The @vgtd/shared BUDGETS the HUD judges against; scripts/perf-p1.mjs gates on these (single source of truth). */
+  budgets: { drawCalls: number; ramMB: number; initialDownloadMB: number };
 }
 
 /** Top-left perf overlay. Also publishes the latest numbers on `window.__vgtdPerf` for automation. */
@@ -58,6 +60,11 @@ export class PerfHud {
     chunks: 0,
     npcs: 0,
     loadedMB: 0,
+    budgets: {
+      drawCalls: shared.BUDGETS.DRAW_CALLS_WEB_MOBILE,
+      ramMB: shared.BUDGETS.RAM_MB_WEB,
+      initialDownloadMB: shared.BUDGETS.INITIAL_DOWNLOAD_MB_WEB,
+    },
   };
   extra: () => { l3Objects: number; chunks?: number; npcs?: number } = () => ({ l3Objects: 0 });
 
