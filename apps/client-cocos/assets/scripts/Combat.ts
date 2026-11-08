@@ -280,7 +280,14 @@ export class CombatUi {
         hpMax: this.backend.player.hpMax,
         mp: this.backend.player.mp,
         mpMax: this.backend.player.mpMax,
-        enemies: this.backend.enemies.map((e) => ({ id: e.id, hp: e.hp, hpMax: e.hpMax, alive: e.alive })),
+        enemies: this.backend.enemies.map((e) => ({
+          id: e.id,
+          hp: e.hp,
+          hpMax: e.hpMax,
+          alive: e.alive,
+          i: e.pos.i,
+          j: e.pos.j,
+        })),
         slots: this.backend.hotbar.slots.map((s, i) => ({
           id: s.skill.id,
           castable: s.castable,

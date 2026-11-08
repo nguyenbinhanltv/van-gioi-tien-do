@@ -44,4 +44,19 @@ if (srv.world.dropSink)
           ...r.items.map((i) => `${i.qty}x item ${i.defId} q${i.quality} (${i.where})`),
         ].join(', '),
     );
+// LOG_VIOLATIONS=1: print the anti-cheat violation counters whenever they change (debugging a client that gets kicked)
+if (flag(process.env.LOG_VIOLATIONS)) {
+  let last = '';
+  setInterval(() => {
+    const m = srv.world.metrics;
+    const now = JSON.stringify({
+      violations: m.violations,
+      warns: m.warns,
+      flags: m.flags,
+      disconnects: m.disconnects,
+    });
+    if (now !== last) console.log(`[vgtd/server] anti-cheat ${now}`);
+    last = now;
+  }, 500).unref();
+}
 console.log(`[vgtd/server] listening on ${srv.port} (HTTP auth + WS /ws), tick 20 Hz`);
