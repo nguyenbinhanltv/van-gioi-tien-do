@@ -81,7 +81,7 @@ sequenceDiagram
   Note over C,G: ping/pong 10 s; mất kết nối → resume {sessionId, lastSnapshotSeq} trong 10 s
 ```
 
-- **Resume:** khi rớt mạng ≤ 10 s, `resume{sessionId, lastSeq}` nối lại cùng phiên; World Node giữ nhân vật đứng yên ([08 §7](08-server-architecture.md)). Quá 10 s: `hello` mới, nhân vật được đưa ra khỏi thế giới và lưu.
+- **Resume** [Cập nhật D79: đã hiện thực qua `hello` JSON `{resume:{entityId,token}}` + token dùng một lần trong `hello_ack`, không phải thông điệp Protobuf `resume`; giữ nhân vật 10 s; đồng hồ anti-cheat bắt đầu lại khi nối]**:** khi rớt mạng ≤ 10 s, `resume{sessionId, lastSeq}` nối lại cùng phiên; World Node giữ nhân vật đứng yên ([08 §7](08-server-architecture.md)). Quá 10 s: `hello` mới, nhân vật được đưa ra khỏi thế giới và lưu.
 - **Một nhân vật một kết nối:** kết nối thứ hai của cùng tài khoản đá kết nối cũ bằng `bye{reason: LOGIN_ELSEWHERE}`.
 - **Trình tự đóng:** `bye{reason}` → đóng WS với mã tương ứng (ví dụ 4001 phiên hết hạn, 4003 bị kick, 4008 vi phạm giao thức).
 

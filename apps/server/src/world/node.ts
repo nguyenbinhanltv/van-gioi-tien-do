@@ -46,6 +46,7 @@ import {
   type SimInput,
   type SimWorld,
 } from '@vgtd/sim';
+import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import { CombatSystem, type AimedInput, type CombatOptions, type CombatResult } from './combat/index.js';
@@ -99,10 +100,25 @@ interface Last {
   dir: number;
 }
 
+/** Stands in for the transport of a player whose connection dropped and whose entity is being held: everything is discarded. */
+const DETACHED: ClientTransport = { send: () => undefined, close: () => undefined, buffered: () => 0 };
+
+function newResumeToken(): string {
+  return randomBytes(16).toString('hex');
+}
+function sameToken(a: string, b: unknown): boolean {
+  if (typeof b !== 'string' || b.length !== a.length) return false;
+  return timingSafeEqual(Buffer.from(a), Buffer.from(b));
+}
+
 interface Client {
   id: number;
   accountId: string;
   transport: ClientTransport;
+  /** single-use secret that lets this player's NEXT connection resume the session; rotated on every (re)connect */
+  resumeToken: string;
+  /** sim time the connection dropped while the entity is held for a resume; null = connected */
+  suspendedAtMs: number | null;
   inbox: AimedInput[];
   /** own vitals last sent to this client: they are re-sent only when they change (or on a full / resync snapshot) */
   lastVitals: SelfVitals | null;
@@ -152,6 +168,8 @@ export interface WorldNodeOptions {
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
   playerIdQuarantineMs?: number;
+  /** how long (sim ms) a dropped player's entity is held for a resume; 0 disables resume (default `WORLD_CONFIG.RESUME_HOLD_MS`) */
+  resumeHoldMs?: number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
   mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
 }
@@ -223,6 +241,8 @@ export class WorldNode {
   /** released player ids, oldest first, with the sim time from which each may be reused */
   private readonly freeIds: { id: number; reusableAtMs: number }[] = [];
   private readonly idQuarantineMs: number;
+  /** sim ms a dropped player's entity is held (0 = no resume) */
+  readonly resumeHoldMs: number;
   private spawnRng: RngState;
   private readonly spawn: { i0: number; j0: number; side: number };
   private readonly maxVisible: number;
@@ -262,6 +282,7 @@ export class WorldNode {
       },
     });
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
+    this.resumeHoldMs = opts.resumeHoldMs ?? WORLD_CONFIG.RESUME_HOLD_MS;
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -319,6 +340,8 @@ export class WorldNode {
       id,
       accountId,
       transport,
+      resumeToken: newResumeToken(),
+      suspendedAtMs: null,
       inbox: [],
       lastVitals: null,
       lastRecvSeq: null,
@@ -359,6 +382,93 @@ export class WorldNode {
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
+  }
+
+  /** The account that owns a player entity (the gateway needs it after a resume, which presents no access token). */
+  accountOf(id: number): string | undefined {
+    return this.clients.get(id)?.accountId;
+  }
+
+  /** The secret the gateway hands the client in `hello_ack` so its next connection can resume this session. */
+  resumeTokenOf(id: number): string | undefined {
+    return this.clients.get(id)?.resumeToken;
+  }
+
+  /**
+   * The connection of `id` dropped: keep the entity (same id, standing still, still a target for mobs) for `resumeHoldMs` of sim
+   * time instead of removing it. Combat / progression registrations stay untouched until the hold ends (`removePlayer` then
+   * releases everything and quarantines the id). Returns false when nothing was held (resume disabled, stale `from`): the caller
+   * then removes the player as before.
+   */
+  suspendPlayer(id: number, from: ClientTransport): boolean {
+    const c = this.clients.get(id);
+    if (this.resumeHoldMs <= 0 || !c || c.dead || c.suspendedAtMs !== null || c.transport !== from) return false;
+    c.transport = DETACHED;
+    c.suspendedAtMs = this.world.timeMs;
+    c.inbox.length = 0;
+    this.world = {
+      ...this.world,
+      entities: this.world.entities.map((e) => (e.id === id ? { ...e, pending: [], vi: 0, vj: 0 } : e)),
+    };
+    return true;
+  }
+
+  /**
+   * Re-attach a new connection to a held (or, for a half-open zombie socket, still attached) player when `token` matches.
+   * Same entity, same combat / progression registration (NOT re-added: that would reset profile, shield and alive state).
+   * The client is treated as brand new for the wire (empty AOI -> full snapshot + `aoi_enter`s, vitals re-sent, input numbering
+   * restarts) and its anti-cheat clock restarts, so the time spent disconnected cannot be banked as a burst of fast movement.
+   * Returns the rotated token, or null when rejected.
+   */
+  resumePlayer(id: number, token: unknown, transport: ClientTransport): { token: string } | null {
+    const c = this.clients.get(id);
+    if (!c || c.dead || !sameToken(c.resumeToken, token)) return null;
+    if (c.suspendedAtMs === null) c.transport.close(ErrorCode.Kicked, 'resumed elsewhere'); // the old socket is dead weight
+    const now = this.world.timeMs;
+    c.transport = transport;
+    c.suspendedAtMs = null;
+    c.resumeToken = newResumeToken();
+    c.inbox.length = 0;
+    c.lastRecvSeq = null;
+    c.lastVitals = null;
+    c.visible = new Map();
+    c.slots.fill(0);
+    c.last.fill(undefined);
+    c.snapSeq = 0;
+    c.lastAckMs = now;
+    c.lastResyncMs = -Infinity;
+    c.pktWindowStartMs = clock();
+    c.pktCount = 0;
+    this.world = {
+      ...this.world,
+      entities: this.world.entities.map((e) =>
+        e.id === id
+          ? {
+              ...e,
+              lastSeq: 0,
+              pending: [],
+              vi: 0,
+              vj: 0,
+              ac: {
+                ...e.ac,
+                t0Ms: now,
+                claimedMs: 0,
+                lastSlideMs: now,
+                windowStartMs: now,
+                windowClaimedMs: 0,
+                hotWindows: 0,
+              },
+            }
+          : e,
+      ),
+    };
+    return { token: c.resumeToken };
+  }
+
+  /** A fresh login of an account must not leave its old character standing in the world: release any entity held for it. */
+  releaseSuspended(accountId: string): void {
+    for (const c of [...this.clients.values()])
+      if (c.suspendedAtMs !== null && c.accountId === accountId) this.removePlayer(c.id);
   }
 
   statsOf(id: number): ClientStats | undefined {
@@ -450,6 +560,11 @@ export class WorldNode {
     const t0 = clock();
     if (this.lastTickStart > 0) pushCapped(this.tickIntervalMs, t0 - this.lastTickStart, WORLD_CONFIG.TICK_SAMPLES);
     this.lastTickStart = t0;
+
+    // a dropped player whose hold ran out is released for good (combat / progression leave, id quarantined)
+    for (const c of [...this.clients.values()]) {
+      if (c.suspendedAtMs !== null && this.world.timeMs - c.suspendedAtMs >= this.resumeHoldMs) this.removePlayer(c.id);
+    }
 
     const inputs: AimedInput[] = [];
     for (const c of this.clients.values()) {
@@ -580,7 +695,7 @@ export class WorldNode {
     }
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
-      if (!me || c.dead) continue;
+      if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
       const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
       const { u: u0, w: w0 } = toUW(centre.i, centre.j);
 
@@ -731,7 +846,7 @@ export class WorldNode {
   private sendSnapshots(): void {
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
-      if (!me || c.dead) continue;
+      if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
       if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_SKIP_BYTES) {
         c.stats.snapshotsSkipped++;
         if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_KICK_BYTES) {

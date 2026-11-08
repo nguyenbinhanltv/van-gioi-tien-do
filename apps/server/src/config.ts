@@ -38,6 +38,8 @@ export const WORLD_CONFIG = {
   ACK_TIMEOUT_MS: 1000,
   /** a released player entity id is not reused before this much sim time has passed (stale client indices, D74) */
   PLAYER_ID_QUARANTINE_MS: 30_000,
+  /** a dropped player's entity is kept this long (sim time) so the client can resume the same session (docs/24 section 4) */
+  RESUME_HOLD_MS: 10_000,
   /** open test map side in tiles */
   DEFAULT_MAP_TILES: 256,
   /** tick duration samples kept for p50/p99 */
