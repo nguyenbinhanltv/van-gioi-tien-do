@@ -166,3 +166,14 @@ test/           procgen.test.mjs
 ```
 
 Tích hợp engine (Wang index = N·1 + E·2 + S·4 + W·8; toạ độ đỉnh ô `x = (i − j)·W/2, y = (i + j)·H/2`; thứ tự vẽ liquid → dirt → grass; dán shader vào `CCProgram` của `.effect` cho Cocos Creator) giữ nguyên như tài liệu gói gốc.
+
+## Chibi runtime bundles (D71)
+
+`src/runtime/chibi.mts` turns the exported chibi DragonBones armatures (`apps/client-cocos/assets/resources/dragonbones/<class>-chibi-v1`, read only) into per-direction bundles `chibi-<class>-<dir>` with two resolution tiers (`full`, `1x` = Lanczos3 half size) and two clip groups (`loco` = idle/walk/run, `rest`).
+
+```bash
+npx tsx pipeline/chibi_runtime.mts --src ../../apps/client-cocos/assets/resources/dragonbones --out <dir> [--classes the-tu] [--dirs S,SE]
+npm run budget -w @vgtd/procgen   # also plans the bundles and checks loco / bundle / class GPU budgets (CHIBI_RUNTIME in @vgtd/shared)
+```
+
+The gate is geometry only (no encoder needed): sizes are the fixed-rate ASTC sizes the Cocos build produces (4x4 for `1x`, 6x6 for `full`). Desktop WebP and real downloads are measured on a build with `npm run perf:p1 -w client-cocos`.

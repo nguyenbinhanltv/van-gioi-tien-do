@@ -2,7 +2,7 @@
 /**
  * Asset budget gate CLI.
  *   npx tsx pipeline/budget_gate.mts --atlas build/atlas [--dist build/dist/web] [--platform web|mobile|pc]
- *                                    [--limitMb 25] [--reservedMb 9] [--no-pixels] [--summary path.md]
+ *                                    [--limitMb 25] [--reservedMb 9] [--no-pixels] [--chibi <dragonbones dir>|--no-chibi] [--summary path.md]
  * Prints a Markdown report; appends it to $GITHUB_STEP_SUMMARY when set (GitHub Actions job summary).
  * Exit codes: 0 pass (warnings allowed) · 20 budget violated · 1 usage / unexpected error.
  */
@@ -16,7 +16,7 @@ function parse(argv: string[]): Record<string, string | true> {
     if (!m) continue;
     const key = m[1]!;
     if (m[2] !== undefined) o[key] = m[2];
-    else if (key === 'no-pixels') o[key] = true;
+    else if (key === 'no-pixels' || key === 'no-chibi') o[key] = true;
     else o[key] = argv[++i] ?? '';
   }
   return o;
@@ -33,6 +33,7 @@ try {
     limitMb: a.limitMb ? Number(a.limitMb) : undefined,
     reservedMb: a.reservedMb !== undefined ? Number(a.reservedMb) : undefined,
     checkPixels: a['no-pixels'] !== true,
+    chibiDir: a['no-chibi'] === true ? undefined : String(a.chibi ?? '../../apps/client-cocos/assets/resources/dragonbones'),
   });
   const md = renderMarkdown(report);
   console.log(md);

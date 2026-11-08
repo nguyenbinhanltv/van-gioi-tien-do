@@ -169,6 +169,27 @@ export const BUDGETS = {
   ATLAS_PADDING_PX: 2,
 } as const;
 
+/**
+ * Chibi runtime asset budgets (D71, tune with a game designer / device data). Tiers: `full` = exported pixels,
+ * `1x` = half resolution. GPU formats: ASTC 4x4 (8 bpp) for 1x, ASTC 6x6 (3.56 bpp) for full; RGBA8 is the desktop
+ * fallback after WebP decoding. Sizes are per direction bundle (`chibi-<class>-<dir>`).
+ */
+export const CHIBI_RUNTIME = {
+  /** Clips shipped in the first (loco) group of every direction; all others load on demand. */
+  LOCOMOTION_CLIPS: ['idle', 'walk', 'run'],
+  /** Resolution of the `1x` tier relative to the exported atlases. */
+  HALF_SCALE: 0.5,
+  ASTC_BLOCK: { '1x': 4, full: 6 },
+  /** Download (ASTC, before gzip) of one direction's loco group, KB. */
+  LOCO_GROUP_KB_MAX: { '1x': 768, full: 1536 },
+  /** Download (ASTC, before gzip) of one whole direction bundle (loco + rest), KB. */
+  BUNDLE_KB_MAX: { '1x': 3072, full: 6144 },
+  /** GPU bytes of all 5 authored directions of one class, MB (RGBA8 would be 4x/9x larger). */
+  CLASS_GPU_MB_MAX: { '1x': 16, full: 32 },
+  /** Initial package: bootstrap + map + the player's own class, one direction, loco group only. */
+  INITIAL_PLAYER_DIRECTIONS: 1,
+} as const;
+
 // ---------------------------------------------------------------- characters (canvas / hitbox)
 export const CANVAS_BY_FOOTPRINT = {
   '1x1': 128,

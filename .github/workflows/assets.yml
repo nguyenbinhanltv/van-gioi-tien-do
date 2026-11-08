@@ -7,11 +7,13 @@ on:
     branches: [main]
     paths:
       - 'tools/procgen/**'
+      - 'apps/client-cocos/assets/resources/dragonbones/**'
       - 'packages/shared/src/constants.ts'
       - '.github/workflows/assets.yml'
   pull_request:
     paths:
       - 'tools/procgen/**'
+      - 'apps/client-cocos/assets/resources/dragonbones/**'
       - 'packages/shared/src/constants.ts'
       - '.github/workflows/assets.yml'
 
@@ -41,6 +43,7 @@ jobs:
       - run: npm run pack -w @vgtd/procgen
       # Skips gracefully (exit 0, compress_manifest.json skipped:true) when basisu / cwebp are missing.
       - run: npm run compress:web -w @vgtd/procgen
+      # Also plans the chibi runtime bundles from the committed exports (D71): loco/bundle/class GPU budgets per tier.
       # Fails (exit 20) on: atlas not power of two or over cap, missing padding/extrude, icon sizes, initial package > 25 MB.
       # Prints the budget report to the job summary.
       - run: npm run budget -w @vgtd/procgen

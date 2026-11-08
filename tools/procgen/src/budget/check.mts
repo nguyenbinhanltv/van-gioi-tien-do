@@ -15,6 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { BUDGETS, TILE_WIDTH, TILE_HEIGHT } from '@vgtd/shared';
+import { checkChibi, renderChibiMarkdown, type ChibiReport } from './chibi.mjs';
 
 const require = createRequire(import.meta.url);
 const { decodePNG } = require('../lib/png.js') as { decodePNG: (buf: Buffer) => RGBAImage };
@@ -81,6 +82,8 @@ export interface BudgetOptions {
   limitMb?: number;
   reservedMb?: number;
   checkPixels?: boolean;
+  /** Exported chibi armatures (apps/client-cocos/assets/resources/dragonbones); enables the chibi runtime gate (D71). */
+  chibiDir?: string;
 }
 export interface BudgetReport {
   platform: Platform;
@@ -94,6 +97,7 @@ export interface BudgetReport {
     basis: 'compressed' | 'png-upper-bound';
     enforced: boolean;
   };
+  chibi?: ChibiReport;
   ok: boolean;
 }
 
@@ -300,7 +304,11 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
     : dirBytes(opts.atlasDir, (n) => n.endsWith('.png') || n.endsWith('.json'));
   const reservedMb = opts.reservedMb ?? INITIAL_PACKAGE_RESERVED_MB;
   const limitMb = opts.limitMb ?? BUDGETS.INITIAL_DOWNLOAD_MB_WEB;
-  const totalMb = assetBytes / MB + reservedMb;
+  // D71: the player's own class (worst class), one direction, loco group only, at the `full` tier (desktop worst case).
+  const chibi = opts.chibiDir ? checkChibi(opts.chibiDir) : undefined;
+  if (chibi) findings.push(...chibi.findings);
+  const playerMb = chibi ? chibi.initialPlayerMB.full : 0;
+  const totalMb = assetBytes / MB + reservedMb + playerMb;
   const enforced = platform === 'web';
   if (enforced && totalMb > limitMb) {
     findings.push({
@@ -316,6 +324,7 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
     platform,
     findings,
     rows,
+    chibi,
     estimate: { assetBytes, reservedMb, totalMb, limitMb, basis: useCompressed ? 'compressed' : 'png-upper-bound', enforced },
     ok: !findings.some((f) => f.level === 'error'),
   };
@@ -332,8 +341,10 @@ export function renderMarkdown(r: BudgetReport): string {
   lines.push('', '| Gói tải đầu (Web) | Giá trị |', '| --- | ---: |');
   lines.push(`| Asset procgen (${e.basis}) | ${(e.assetBytes / MB).toFixed(2)} MB |`);
   lines.push(`| Engine + audio + dự phòng (docs/02) | ${e.reservedMb} MB |`);
+  if (r.chibi) lines.push(`| Người chơi: nhóm loco 1 hướng, tier full, ASTC (D71) | ${r.chibi.initialPlayerMB.full.toFixed(2)} MB |`);
   lines.push(`| **Ước tính** | **${e.totalMb.toFixed(2)} MB** |`);
   lines.push(`| Ngân sách | ${e.limitMb} MB${e.enforced ? '' : ' (không áp dụng cho nền tảng này)'} |`);
+  if (r.chibi) lines.push('', renderChibiMarkdown(r.chibi));
   const errs = r.findings.filter((f) => f.level === 'error');
   const warns = r.findings.filter((f) => f.level === 'warn');
   lines.push('', `**${errs.length} lỗi, ${warns.length} cảnh báo**`);
