@@ -253,6 +253,8 @@ const result = {
     loadedMB: Math.max(...col('loadedMB')),
     initialMBRaw: initRaw / MB,
     initialMBGzip: initGzip / MB,
+    lazyFetchedMBRaw: (rawBytes - initRaw) / MB, // fetched after the world was playable (lazy / streamed assets)
+    lazyFetchedMBGzip: (gzipBytes - initGzip) / MB,
     packageMBRaw: rawBytes / MB,
     packageMBGzip: gzipBytes / MB,
     buildOutputMB: buildRaw / MB,
@@ -297,7 +299,7 @@ for (const [name, value, limit, ok, gates] of rows) {
   );
 }
 console.log(
-  `  info  total fetched incl. streamed after playable: ${m.packageMBRaw.toFixed(2)} MB raw / ${m.packageMBGzip.toFixed(2)} MB gzip
+  `  info  fetched after playable (lazy, not in the gate): ${m.lazyFetchedMBRaw.toFixed(2)} MB raw / ${m.lazyFetchedMBGzip.toFixed(2)} MB gzip; whole run ${m.packageMBRaw.toFixed(2)} / ${m.packageMBGzip.toFixed(2)}
 ` +
     `  info  frame ${m.frameMsMedian.toFixed(1)} ms (update ${m.updateMsMedian.toFixed(2)} + render submit ${m.renderMsMedian.toFixed(2)}), ` +
     `heap ${m.jsHeapMBMax.toFixed(1)} MB, tex ${m.textureMBMax.toFixed(1)} MB, nodes ${m.nodesMax}, chunks ${m.chunksMax}, loaded ${m.loadedMB.toFixed(2)} MB, fetched ${fetched.length} files, whole build dir ${m.buildOutputMB.toFixed(0)} MB (lazy resources incl.)`,

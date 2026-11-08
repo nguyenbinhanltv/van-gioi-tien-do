@@ -55,16 +55,16 @@ Hai bài học từ phép đo đầu tiên, đã sửa trong PR này:
 1. Dựng cây node cho **mọi** chunk streamer đã nạp (cả vòng prefetch ngoài màn hình) cho 44 chunk / 82 315 node, **132 draw call**, RAM 520 MB, 21 FPS. `WorldView` nay tách _dữ liệu chunk_ (cửa sổ nạp / prefetch / giữ, rẻ) khỏi _cây node sprite_ (~2000 node / chunk): cây chỉ có cho chunk nằm trong khung nhìn mở rộng 192 px và bị hủy ngay khi rời khỏi. Còn 4–8 chunk dựng, ≤ 15 200 node.
 2. Dựng cả cây trong một frame mất 24 ms trung bình, tới 60 ms. Nay dựng dần mỗi frame tối đa 300 sprite (~7 frame / chunk), mỗi lần chỉ một chunk: frame > 50 ms giảm từ 31 xuống 2 trong 90 s, lát dựng tệ nhất 6,6 ms.
 
-Kết quả (headless Chrome + SwiftShader, 1280 × 720, tier `medium`, đi 60–90 s, 2026-11-08; máy dùng chung nên FPS dao động vài đơn vị, một lần chạy bị nhiễu đã chạy lại):
+Kết quả (headless Chrome + SwiftShader, 1280 × 720, tier `medium`, đi 60–90 s, 2026-11-08; máy dùng chung nên FPS dao động vài đơn vị). "Nền thiếu" = số lần đồng bộ mà một chunk trong khung nhìn (trừ chunk `missing` ngoài map) chưa có dữ liệu hoặc chưa có cây node đầy đủ; gói đầu = file yêu cầu lần đầu cho tới khi world chơi được (cổng 25 MB), phần tải lười sau đó in riêng.
 
-| Cấu hình                           | Draw call (≤ 80) | RAM heap+texture (≤ 500 MB) | FPS (≥ 30, phần mềm) | Chunk dựng (cả cây) tb / max | Lát dựng tệ nhất / frame | Frame > 50 ms / > 100 ms | Nền thiếu |
-| ---------------------------------- | ---------------- | --------------------------- | -------------------- | ---------------------------- | ------------------------ | ------------------------ | --------- |
-| Chibi người chơi, 0 NPC            | 34               | 302                         | 34,0                 | 18,0 / 27,4 ms               | 7,0 ms                   | 3 / 0                    | 0         |
-| 20 NPC placeholder                 | 36               | 330                         | 33,5                 | 18,3 / 23,7 ms               | 6,6 ms                   | 2 / 1                    | 0         |
-| **20 NPC chibi, 6 lớp (mặc định)** | 71               | **700**                     | 31,7                 | 39,5 / 189,7 ms              | 47,1 ms                  | 108 / 5                  | 0         |
+| Cấu hình                           | Draw call (≤ 80) | RAM heap+texture (≤ 500 MB) | FPS (≥ 30, phần mềm) | Gói đầu (≤ 25 MB) | Tải lười sau đó | Dựng chunk tb / max | Lát dựng tệ nhất | Frame > 50 / > 100 ms | Nền thiếu |
+| ---------------------------------- | ---------------- | --------------------------- | -------------------- | ----------------- | --------------- | ------------------- | ---------------- | --------------------- | --------- |
+| Chibi người chơi, 0 NPC            | 35               | 269                         | 33,1                 | 23,56             | 7,54            | 19,1 / 24,6 ms      | 7,2 ms           | 3 / 0                 | 0         |
+| 20 NPC placeholder                 | 36               | 378                         | 33,2                 | 23,56             | 7,54            | 17,8 / 23,6 ms      | 6,9 ms           | 2 / 2                 | 0         |
+| **20 NPC chibi, 6 lớp (mặc định)** | 69               | **771**                     | 32,9                 | **71,32**         | 65,11           | 18,3 / 21,5 ms      | 6,2 ms           | 3 / 0                 | 0         |
 
-- Chunk: 25–37 lần dựng và hủy cây trên một vòng, giữ dữ liệu tối đa 44–46 chunk (cửa sổ giữ 7 × 7 + 30 s hold), khung nhìn **không bao giờ thiếu nền**.
-- Rò rỉ: heap giữ lại sau GC đầu / cuối đoạn đo 63,8 → 58,2 MB (placeholder), 62,4 → 65,5 MB (0 NPC), 85,0 → 77,0 MB (chibi); heap thô tăng trong lúc đi là do GC chưa chạy, không phải rò rỉ.
-- **Gói tải đầu vẫn FAIL trên main trước PR #197 (31 MB với 0 NPC; 136 MB với NPC chibi, đo theo định nghĩa cũ = mọi file đã tải trong cả lần chạy)**: khi đi, người chơi quay đủ 5 hướng nên rig chibi của các hướng được nạp lười và tính vào số liệu. Đây là phần việc nén texture / bundle lười của asset budget, không đổi ở đây.
-- Chibi mặc định: RAM 700 MB (đã tăng so với 537 MB trước vì giờ đi hết hướng và nạp hết rig), 108 frame > 50 ms do nạp / upload texture rig (47 ms một lát), không do dựng chunk; vẫn thuộc việc nén texture + nạp lười.
+- Chunk: 25–38 lần dựng và hủy cây trên một vòng, giữ dữ liệu tối đa 45–46 chunk (cửa sổ giữ 7 × 7 + 30 s hold), khung nhìn không thiếu nền ở lần đo nào (số đếm đã tính cả chunk chưa có dữ liệu).
+- Rò rỉ: heap giữ lại sau GC đầu / cuối đoạn đo 64,0 → 65,5 MB (0 NPC), 63,6 → 58,1 MB (placeholder), 81,0 → 76,8 MB (chibi); heap thô tăng trong lúc đi là do GC chưa chạy, không phải rò rỉ.
+- **Gói đầu**: 23,56 MB với 0 NPC (đạt, sát ngưỡng) và **71,32 MB với 20 NPC chibi (FAIL)**, vì NPC nạp rig trước khi world chơi được; 7,5 / 65 MB còn lại được tải lười khi người chơi quay đủ 5 hướng. Trên main trước PR #197 (bundle theo hướng của worker 39).
+- Chibi mặc định: RAM 771 MB (FAIL) do texture của cả 6 lớp × các hướng (texture 466,8 MB); chưa phải do dựng chunk (lát dựng chunk tệ nhất 6,2 ms). Việc nén texture + nạp lười thuộc asset budget (worker 39), không đổi ở đây.
 - Props L3 hiện chỉ rải quanh điểm spawn (bán kính 40 ô, vì mọi object L3 được sort mỗi frame và chưa stream theo chunk); `objects[]` theo chunk (D67) sẽ thay khi procgen phát ra.

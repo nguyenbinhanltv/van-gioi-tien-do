@@ -217,8 +217,12 @@ export class WorldView {
     for (const c of drop) this.destroyChunk(c);
     for (const c of cw.chunksInRect(camera)) {
       const key = shared.chunkKey(c.ci, c.cj);
+      // the view lacks ground when a chunk that exists (anything but `missing` = outside the map) has no data yet
+      // (queued / loading / failed) or has data but no complete node tree
+      const status = this.streamer.status(c);
+      if (status === 'missing') continue;
       const have = this.loaded.get(key);
-      if (this.chunkData.has(key) && (!have || have.s <= LAST_DIAGONAL)) {
+      if (status !== 'loaded' || !have || have.s <= LAST_DIAGONAL) {
         this.streamStats.notReadyUpdates++;
         break;
       }
