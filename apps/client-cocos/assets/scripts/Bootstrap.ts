@@ -32,6 +32,7 @@ import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
+import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -88,6 +89,8 @@ export class Bootstrap extends Component {
   private online: OnlineSession | null = null;
   /** tu vi panel (D76), only online: the server owns the progression state */
   private progressionHud: ProgressionHud | null = null;
+  /** first-session objective checklist (D84), online only; its own file, fed from here */
+  private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -260,6 +263,9 @@ export class Bootstrap extends Component {
     this.hud.note = `tier ${this.world.tier}`;
     // online (`?online=1`) is created first: with `&combat=1` the HUD then talks to the server instead of the offline mock
     if (onlineRequested()) this.online = new OnlineSession(this.ysort, l2, art);
+    // created before the bag and (later) the combat HUD so both draw above it; fed with the player's own kills in applyServerClass
+    if (this.online && firstSessionRequested())
+      this.firstSession = new FirstSessionHud(hudRoot, art, this.online.net, map.width, this.online.username);
     if (this.combatOn && !this.online) {
       // offline: the local mock combat runs for the class the player picked with ?class= (or the default body class)
       this.makeCombatUi(
@@ -278,6 +284,7 @@ export class Bootstrap extends Component {
     );
     if (this.online)
       this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
+    this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
     this.maybeAutotest();
@@ -324,7 +331,8 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
-      this.makeCombatUi(sc);
+      // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
+      this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
   }
 
@@ -521,6 +529,7 @@ export class Bootstrap extends Component {
       this.combat?.layout(w, this.canvasUi.contentSize.height);
       this.progressionHud?.layout(w, this.canvasUi.contentSize.height);
       this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
+      this.firstSession?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
       this.hud.note = this.online
@@ -529,6 +538,13 @@ export class Bootstrap extends Component {
           ? `${this.chibi.note} | combat mock: 1-8 skills, Tab/click target, Esc clear`
           : `${this.chibi.note} | keys 1-6 class, Shift walk`;
     this.bagPanel?.update(dt);
+    const ps = this.progressionHud?.view.state;
+    this.firstSession?.update(dt, {
+      pos: this.player.pos,
+      bagOpen: this.bagPanel?.isOpen ?? false,
+      meditating: ps?.meditating ?? false,
+      tuViFraction: ps?.fraction ?? 0,
+    });
     this.hud.update(dt);
   }
 
@@ -538,6 +554,7 @@ export class Bootstrap extends Component {
     this.combat?.destroy();
     this.progressionHud?.destroy();
     this.bagPanel?.destroy();
+    this.firstSession?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);
