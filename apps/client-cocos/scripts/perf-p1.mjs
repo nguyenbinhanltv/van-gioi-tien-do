@@ -42,7 +42,7 @@ const npcs = Number(opt('npcs', 20));
 const tier = opt('tier', 'medium');
 const npcart = opt('npcart', 'chibi'); // chibi = real armatures (6 classes), placeholder = tinted sprite
 const route = flag('route');
-const zoom = opt('zoom', ''); // camera zoom override (`?zoom=`), default = the game's default (D79: 1.5)
+const zoom = opt('zoom', ''); // camera zoom override (`?zoom=`), default = the game's default (D81: 1.5)
 const seconds = Number(opt('seconds', route ? 90 : 20));
 const warmup = Number(opt('warmup', 6));
 const out = resolve(opt('out', join(tmpdir(), 'vgtd-perf')));
