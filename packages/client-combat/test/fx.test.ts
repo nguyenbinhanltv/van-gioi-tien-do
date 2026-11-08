@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { COMBAT_RULES } from '@vgtd/shared';
-import { OVERHEAD_BAR, PLAYER_ID, ServerCombat, VitalsWatcher, overheadBar, respawnLeftMs } from '../src/index.js';
+import {
+  MockCombat,
+  OVERHEAD_BAR,
+  PLAYER_ID,
+  ServerCombat,
+  VitalsWatcher,
+  overheadBar,
+  respawnLeftMs,
+} from '../src/index.js';
 
 describe('overheadBar', () => {
   it('hides full-HP and dead entities, shows the targeted one at full alpha', () => {
@@ -39,6 +47,16 @@ describe('respawnLeftMs', () => {
     expect(respawnLeftMs(1000, 4000)).toBe(COMBAT_RULES.RESPAWN_PVE_MS - 3000);
     expect(respawnLeftMs(1000, 1_000_000)).toBe(0);
     expect(respawnLeftMs(0, 2500, 5000)).toBe(2500);
+  });
+});
+
+describe('respawnDelayMs per backend', () => {
+  it('the server backend reports the server delay, the offline mock its own placeholder delay', () => {
+    const server = new ServerCombat({ path: 'kiem', send: () => true });
+    const mock = new MockCombat({ path: 'kiem', enemies: [], rand: () => 0.5 });
+    expect(server.respawnDelayMs).toBe(COMBAT_RULES.RESPAWN_PVE_MS);
+    expect(mock.respawnDelayMs).toBe(5000);
+    expect(mock.respawnDelayMs).not.toBe(server.respawnDelayMs);
   });
 });
 

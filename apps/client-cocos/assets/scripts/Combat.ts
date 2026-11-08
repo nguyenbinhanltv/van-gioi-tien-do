@@ -599,7 +599,7 @@ export class CombatUi {
       return;
     }
     if (this.diedAtMs === null) this.diedAtMs = this.clock; // joined dead / backend without the event
-    const left = cb.respawnLeftMs(this.diedAtMs, this.clock);
+    const left = cb.respawnLeftMs(this.diedAtMs, this.clock, this.backend.respawnDelayMs);
     const secs = Math.ceil(left / 1000);
     this.deathCount.string =
       left > 0 ? `Hoi sinh sau ${secs} giay / Respawn in ${secs} s` : 'Dang hoi sinh... / Respawning...';

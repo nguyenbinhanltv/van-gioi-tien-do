@@ -11,7 +11,7 @@
  *  - hit flags: bit0 crit, bit1 killed.
  *  - GAP: the protocol carries no self HP / MP yet, so `setSelfVitals` must be fed by whatever the online client has (OPEN-ITEMS).
  */
-import { HIT_FLAG_CRIT, HIT_FLAG_KILL, skillDefinitions } from '@vgtd/shared';
+import { COMBAT_RULES, HIT_FLAG_CRIT, HIT_FLAG_KILL, skillDefinitions } from '@vgtd/shared';
 import type { PathId, SkillDefinitions } from '@vgtd/shared';
 import type { CombatBackend, EnemyView, PlayerView } from './backend.js';
 import { VitalsWatcher } from './fx.js';
@@ -74,6 +74,8 @@ interface Inflight {
 }
 
 export class ServerCombat implements CombatBackend {
+  /** The server respawns a dead player after `COMBAT_RULES.RESPAWN_PVE_MS` (the overlay only displays it). */
+  readonly respawnDelayMs: number = COMBAT_RULES.RESPAWN_PVE_MS;
   readonly hotbar: Hotbar;
   readonly target = new TargetSelector();
   readonly player: PlayerView = {

@@ -27,6 +27,8 @@ export interface CombatBackend {
   readonly target: TargetSelector;
   readonly player: PlayerView;
   readonly enemies: readonly EnemyView[];
+  /** How long a dead player waits before respawning (ms): the death overlay counts this down. Each backend owns its number. */
+  readonly respawnDelayMs: number;
   enemy(id: number): EnemyView | undefined;
   /** Tell the backend where the local player is (target range, Tab cycling). */
   setPlayerPos(p: TilePoint): void;
