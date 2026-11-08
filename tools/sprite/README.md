@@ -364,7 +364,11 @@ master. Prefer D50 when both endpoints are visible. Record `crown`, one visible 
 `ribbon`. Frame evidence uses the same kind/occluded side and adds a reviewed `note`; generic `hidden`/`unknown` reasons fail.
 
 The size is the positive **vertical** difference `shoulderTop.y - crown.y`, not the diagonal length. Skull breadth remains
-Euclidean. Both must match the same-direction master within the unchanged head tolerance. Coordinates are resized256px
+Euclidean. On both master and frame, the visible shoulder must lie strictly opposite `occludedSide` relative to the skull
+midline `(breadth.left.x + breadth.right.x) / 2`: right of it for an occluded left shoulder, left of it for an occluded right
+shoulder. A point on the midline or declared occluded side fails. This side check does not identify shoulder anatomy;
+source review must still reject hands, fan tips and other convenience points. Both measurements must match the
+same-direction master within the unchanged head tolerance. Coordinates are resized256px
 on the master and aligned256px in motion cells, using clip-local indices. Never project a hidden shoulder/chin/skull base,
 edit the approved master, or substitute a convenience point. If a frame also hides the remaining shoulder, report it
 instead of supplying invented evidence. INFO/review retains the visible point, occluded side/reason, and master values;

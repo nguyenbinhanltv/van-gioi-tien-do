@@ -72,9 +72,9 @@ describe('D53 one visible rear shoulder', () => {
           frame: { occludedSide: 'left', shoulderTop: { x: 149, y: 154 } },
         },
       });
-    // A diagonal metric would fail: only the vertical distance is authorized by D53.
+    // A diagonal metric would fail, while this visible-side point remains within the skull's horizontal extent.
     expect(
-      checkHeights({ ...clip, headEvidence: { 0: { ...head, shoulderTop: { x: 220, y: 154 } } } }, options)[0]!
+      checkHeights({ ...clip, headEvidence: { 0: { ...head, shoulderTop: { x: 154, y: 154 } } } }, options)[0]!
         .severity,
     ).toBe('info');
     // A tilted breadth with the same Euclidean length remains valid.
@@ -88,6 +88,39 @@ describe('D53 one visible rear shoulder', () => {
         options,
       )[0]!.severity,
     ).toBe('info');
+  });
+
+  it('requires the visible shoulder to be strictly opposite the occluded side on both master and frame', () => {
+    const { clip, options } = fixture();
+    for (const occludedSide of ['left', 'right'] as const) {
+      const mirroredMaster: RearSingleShoulderLandmarks = {
+        ...masterHead,
+        occludedSide,
+        shoulderTop: { x: occludedSide === 'left' ? 161 : 115, y: 78 },
+        occluder: `approved fan and hair hide the ${occludedSide} shoulder`,
+      };
+      const frame: HeadEvidence = {
+        ...head,
+        occludedSide,
+        shoulderTop: { x: occludedSide === 'left' ? 149 : 107, y: 154 },
+        occluder: mirroredMaster.occluder,
+        note: 'The remaining visible shoulder top was reviewed against the same-direction master',
+      };
+      const opts = { ...options, masterHead: mirroredMaster };
+      expect(checkHeights({ ...clip, headEvidence: { 0: frame } }, opts)[0]!.severity).toBe('info');
+      // The breadth midpoint is 128 in the frame and 138 in the master. Crown x may differ.
+      for (const x of [128, occludedSide === 'left' ? 107 : 149])
+        expect(
+          checkHeights({ ...clip, headEvidence: { 0: { ...frame, shoulderTop: { x, y: 154 } } } }, opts)[0],
+        ).toMatchObject({ severity: 'fail', metric: 'head_evidence_invalid' });
+      for (const x of [138, occludedSide === 'left' ? 115 : 161])
+        expect(
+          checkHeights(
+            { ...clip, headEvidence: { 0: frame } },
+            { ...opts, masterHead: { ...mirroredMaster, shoulderTop: { x, y: 78 } } },
+          )[0],
+        ).toMatchObject({ severity: 'fail', metric: 'head_evidence_invalid' });
+    }
   });
 
   it('rejects size/breadth drift, projected anatomy, invalid points and generic/missing occlusion reasons', () => {

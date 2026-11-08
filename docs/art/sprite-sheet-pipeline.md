@@ -432,6 +432,10 @@ MasterHead và headEvidence ô dùng cùng kind và cùng occludedSide (`left`/`
 Euclid giữa hai đầu nhìn thấy. Cả hai ±3% master khóa cùng hướng, tọa độ master resize256/ô aligned256, chỉ số nội bộ clip.
 Occluder bắt buộc là chuỗi chỉ rõ vật che có `fan`, `hair` hoặc `ribbon`; trống hoặc lý do chung như `hidden`/`unknown`
 bị lỗi. Định nghĩa phía bị che không được đổi giữa master/ô. Nếu vai còn lại cũng bị che trong ô, báo ô đó, không bịa điểm.
+Trên cả master và ô, `shoulderTop.x` phải nằm đúng phía còn nhìn thấy so với trung tuyến sọ
+`(breadth.left.x + breadth.right.x) / 2`: lớn hơn nếu `occludedSide:left`, nhỏ hơn nếu `occludedSide:right`.
+Điểm nằm trên trung tuyến hoặc phía bị che bị lỗi. Kiểm tra phía không tự nhận dạng giải phẫu vai; người xem nguồn vẫn
+phải loại điểm ở bàn tay, đầu quạt hoặc điểm tiện đo khác.
 INFO/review hiện trục dọc, vai còn nhìn thấy, phía/lý do bị che, breadth và giá trị master/ô; foot/canvas và scale giữ nguyên.
 
 ## Runtime body/weapon/FX trong Cocos
