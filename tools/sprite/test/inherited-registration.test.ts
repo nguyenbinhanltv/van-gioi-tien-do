@@ -196,6 +196,39 @@ describe('D57 inherited registration', () => {
     ).toBe(true);
   });
 
+  it.each(['character', 'clip'] as const)(
+    'uses edited reference heights for non-inherited cells in %s calibration',
+    (scope) => {
+      const f = fixture();
+      // Cell 0 inherits; cell 1 does not, but its explicit mask permits removing the head.
+      for (let y = 0; y < 70; y++)
+        for (let x = 256; x < 512; x++) {
+          const p = (y * 512 + x) * 4;
+          f.mask.data.set([255, 255, 255, 255], p);
+          f.after.data.set([255, 0, 255, 255], p);
+        }
+      const mask = encodePng(f.mask);
+      writeFileSync(join(f.dir, 'mask.png'), mask);
+      writeFileSync(join(f.dir, 'after.png'), encodePng(toPremultiplied(f.after)));
+      const clip = {
+        ...f.clip,
+        ...(scope === 'clip' ? { calibration: { referenceFrames: [0, 1] } } : {}),
+      };
+      const edited = runProject(
+        {
+          ...f.project,
+          clips: [{ ...clip, inheritedRegistration: { ...f.inherited, maskSha256: hash(mask) } }],
+        },
+        f.dir,
+      );
+      // Lower median of source cell 0 (208) and edited cell 1 (162) is 162, not 208.
+      const calibration = scope === 'clip' ? edited.contract.clips[0]!.calibration : edited.contract.calibration!;
+      expect(calibration.referenceHeight).toBe(162);
+      expect(calibration.referenceFrames).toBe(2);
+      expect(calibration.scale).toBe(208 / 162);
+    },
+  );
+
   it('rejects competing manual origins and still runs the edited-image QA gates', () => {
     const f = fixture();
     expect(() =>

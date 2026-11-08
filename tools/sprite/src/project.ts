@@ -274,8 +274,8 @@ export function runProject(
           c.sheetSelection,
         ).map((f) => (lock ? { ...f, image: lockPalette(f.image, palette, project.palette).image } : f))
       : undefined;
-    // Preserve the source clip calibration, including its declared reference frames.
-    const calibrationFrames = referenceFrames ?? frames;
+    // Only declared inherited cells may contribute their pre-edit measurements.
+    const calibrationFrames = frames.map((frame, i) => (inherited?.verified.has(i) ? referenceFrames![i]! : frame));
     const rows = grid.rows;
     const logicalWidth = deferred ? prepared!.record.normalized[0] : sheet.width;
     const logicalHeight = deferred ? prepared!.record.normalized[1] : sheet.height;
