@@ -37,6 +37,7 @@ import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
 import { FriendsPanel } from './FriendsPanel';
+import { QuestPanel } from './QuestPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -100,6 +101,7 @@ export class Bootstrap extends Component {
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private questPanel: QuestPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -323,6 +325,27 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // quest log + tracker (D107): J or /quest; the buttons only send intents, the server decides and pays
+      const net = this.online.net;
+      this.questPanel = new QuestPanel(
+        new core.QuestModel(),
+        {
+          send: (op, arg, clientMsgId) =>
+            net.sendQuest({
+              op,
+              clientMsgId,
+              ...(op === core.QuestOp.Talk ? { npc: arg } : { questId: arg }),
+            }),
+          position: () => net.selfPosition(),
+          mapTiles: () => map.width,
+        },
+        (line, tone) => chat.log.system(line, tone),
+      );
+      net.questEvents = {
+        onQuestState: (m) => this.questPanel?.onState(m),
+        onQuestResult: (m) => this.questPanel?.onResult(m),
+      };
+      chat.onQuestsToggle = () => this.questPanel?.toggle();
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -576,6 +599,7 @@ export class Bootstrap extends Component {
     this.chatBox?.update();
     this.partyFrames?.update();
     this.friendsPanel?.update();
+    this.questPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -625,6 +649,7 @@ export class Bootstrap extends Component {
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
     this.friendsPanel?.destroy();
+    this.questPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

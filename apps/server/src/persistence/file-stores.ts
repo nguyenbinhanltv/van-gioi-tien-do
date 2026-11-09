@@ -11,6 +11,7 @@
 import { join } from 'node:path';
 import type { Account, AccountStore } from '../auth/accounts.js';
 import type { FriendSnapshot, FriendStore } from '../friends/store.js';
+import type { QuestSnapshot, QuestStore } from '../quests/store.js';
 import type { ProgressRecord } from '../progression/state.js';
 import type { ProgressionStore } from '../progression/store.js';
 import { Ledger, type LedgerSnapshot } from '../world/inventory/ledger.js';
@@ -195,6 +196,41 @@ export class FileFriendStore implements FriendStore {
   }
 }
 
+/** Quest progress per account (D107): see `QuestSnapshot`. `commit()` writes the document NOW and reports whether that worked. */
+export class FileQuestStore implements QuestStore {
+  private readonly rows = new Map<string, QuestSnapshot>();
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    const doc = load(path, 'quests', (d) => {
+      if (typeof d.owners !== 'object' || d.owners === null || Array.isArray(d.owners))
+        throw new Error('quests: missing owners');
+      return d.owners as Record<string, QuestSnapshot>;
+    });
+    for (const [owner, snap] of Object.entries(doc ?? {})) {
+      if ((snap as { v?: unknown } | null)?.v !== 1 || typeof snap.quests !== 'object' || snap.quests === null)
+        throw new Error(`quests: malformed record for ${owner}`);
+      this.rows.set(owner, snap);
+    }
+    this.file = new DocFile(path, () => JSON.stringify({ v: VERSION, owners: Object.fromEntries(this.rows) }), opts);
+  }
+  load(owner: string): QuestSnapshot | undefined {
+    const s = this.rows.get(owner);
+    return s === undefined ? undefined : structuredClone(s);
+  }
+  save(owner: string, snap: QuestSnapshot): void {
+    const prev = this.rows.get(owner);
+    if (prev !== undefined && JSON.stringify(prev) === JSON.stringify(snap)) return;
+    if (prev === undefined && Object.keys(snap.quests).length === 0) return;
+    this.rows.set(owner, structuredClone(snap));
+    this.file.markDirty();
+  }
+  commit(): boolean {
+    const errors = this.file.errors;
+    this.file.flush();
+    return this.file.errors === errors;
+  }
+}
+
 /** The ledger lives in its own document (docs/23 §4.4: separate from the inventory snapshots). */
 export function openFileLedger(path: string, opts: DocFileOptions = {}): { ledger: Ledger; file: DocFile } {
   const snap = load(path, 'ledger', (d) => d as unknown as LedgerSnapshot);
@@ -209,24 +245,27 @@ export interface FileStores {
   progression: FileProgressionStore;
   inventories: FileInventoryStore;
   friends: FileFriendStore;
+  quests: FileQuestStore;
   ledger: Ledger;
   /** write every document now (shutdown, tests) */
   flush(): void;
   readonly dir: string;
 }
 
-/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `friends.json`, `ledger.json`. */
+/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `friends.json`, `quests.json`, `ledger.json`. */
 export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStores {
   const accounts = new FileAccountStore(join(dir, 'accounts.json'), opts);
   const progression = new FileProgressionStore(join(dir, 'progression.json'), opts);
   const inventories = new FileInventoryStore(join(dir, 'inventories.json'), opts);
   const friends = new FileFriendStore(join(dir, 'friends.json'), opts);
+  const quests = new FileQuestStore(join(dir, 'quests.json'), opts);
   const { ledger, file: ledgerFile } = openFileLedger(join(dir, 'ledger.json'), opts);
   return {
     accounts,
     progression,
     inventories,
     friends,
+    quests,
     ledger,
     dir,
     flush: () => {
@@ -234,6 +273,7 @@ export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStor
       progression.file.flush();
       inventories.file.flush();
       friends.file.flush();
+      quests.file.flush();
       ledgerFile.flush();
     },
   };

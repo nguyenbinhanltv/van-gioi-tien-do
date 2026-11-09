@@ -22,6 +22,13 @@ import {
   type FriendServerMessage,
 } from './friends.js';
 import {
+  decodeQuestBody,
+  encodeQuestBody,
+  validateQuestMessage,
+  type QuestClientMessage,
+  type QuestServerMessage,
+} from './quests.js';
+import {
   decodePartyBody,
   encodePartyBody,
   validatePartyMessage,
@@ -55,6 +62,10 @@ export enum ColdMsgId {
   FriendCmd = 92,
   FriendResult = 93,
   FriendState = 94,
+  /** quests (D107, quests.ts); 120-139 is the docs/24 quest block */
+  QuestCmd = 120,
+  QuestResult = 121,
+  QuestState = 122,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -89,6 +100,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.FriendCmd]: 'friend_cmd',
   [ColdMsgId.FriendResult]: 'friend_result',
   [ColdMsgId.FriendState]: 'friend_state',
+  [ColdMsgId.QuestCmd]: 'quest_cmd',
+  [ColdMsgId.QuestResult]: 'quest_result',
+  [ColdMsgId.QuestState]: 'quest_state',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -112,6 +126,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   friend_cmd: ColdMsgId.FriendCmd,
   friend_result: ColdMsgId.FriendResult,
   friend_state: ColdMsgId.FriendState,
+  quest_cmd: ColdMsgId.QuestCmd,
+  quest_result: ColdMsgId.QuestResult,
+  quest_state: ColdMsgId.QuestState,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -212,7 +229,8 @@ export type ColdClientMessage =
   | InvClientMessage
   | ChatClientMessage
   | PartyClientMessage
-  | FriendClientMessage;
+  | FriendClientMessage
+  | QuestClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
   | BreakthroughResultMsg
@@ -220,7 +238,8 @@ export type ColdServerMessage =
   | InvServerMessage
   | ChatServerMessage
   | PartyServerMessage
-  | FriendServerMessage;
+  | FriendServerMessage
+  | QuestServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -285,7 +304,11 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
       };
     default:
       return (
-        validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o) ?? validateFriendMessage(o)
+        validateInventoryMessage(o) ??
+        validateChatMessage(o) ??
+        validatePartyMessage(o) ??
+        validateFriendMessage(o) ??
+        validateQuestMessage(o)
       );
   }
 }
@@ -365,6 +388,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'friend_state':
       encodeFriendBody(w, m);
       break;
+    case 'quest_cmd':
+    case 'quest_result':
+    case 'quest_state':
+      encodeQuestBody(w, m);
+      break;
   }
 }
 
@@ -425,5 +453,9 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'friend_result':
     case 'friend_state':
       return decodeFriendBody(r, type);
+    case 'quest_cmd':
+    case 'quest_result':
+    case 'quest_state':
+      return decodeQuestBody(r, type);
   }
 }

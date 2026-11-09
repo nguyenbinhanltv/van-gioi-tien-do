@@ -64,7 +64,7 @@ const srv = await startServer({
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
-  ...(stores ? { friends: { store: stores.friends } } : {}),
+  ...(stores ? { friends: { store: stores.friends }, quests: { store: stores.quests } } : {}),
   // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)
   progression: {
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),

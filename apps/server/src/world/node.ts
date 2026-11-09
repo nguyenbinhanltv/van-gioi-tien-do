@@ -12,6 +12,7 @@ import {
   NETWORK,
   PARTY,
   aoiCentre,
+  mobDefById,
   classWireId,
   inAoiAt,
   uwDistSq,
@@ -23,6 +24,7 @@ import {
   type RngState,
 } from '@vgtd/shared';
 import {
+  BreakthroughOutcome,
   ErrorCode,
   ProtocolError,
   decode,
@@ -63,6 +65,8 @@ import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
 import type { FriendService } from '../friends/service.js';
+import type { QuestService } from '../quests/service.js';
+import { stageOf as recordStage } from '../progression/state.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -216,6 +220,8 @@ export interface WorldNodeOptions {
   party?: PartyService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
   friends?: FriendService;
+  /** quests module (D107): needs `progression` and `inventory`; absent = quest commands are rejected as unexpected */
+  quests?: QuestService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -327,6 +333,7 @@ export class WorldNode {
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
   readonly friends: FriendService | undefined;
+  readonly quests: QuestService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -372,6 +379,20 @@ export class WorldNode {
         const c = this.clients.get(id);
         if (c && !c.dead) this.send(c, m);
       },
+    });
+    this.quests = opts.quests;
+    this.quests?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
+      realmStage: (id) => {
+        const r = this.progression?.recordOf(id);
+        return r ? { realm: r.realm, stage: recordStage(r) } : undefined;
+      },
+      isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
+      grantTuVi: (id, amount) => this.progression?.grantTuVi(id, amount, this.world.timeMs) ?? 0,
     });
     this.party = opts.party;
     this.party?.attach({
@@ -441,6 +462,7 @@ export class WorldNode {
           onDrops: sink
             ? (e) => {
                 sink.handle(e);
+                this.questKill(e.killerId, e.mobId);
                 opts.combat?.onDrops?.(e);
               }
             : opts.combat.onDrops,
@@ -526,6 +548,7 @@ export class WorldNode {
     this.progression?.join(id, accountId, this.world.timeMs);
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.quests?.join({ entityId: id, accountId });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -566,6 +589,7 @@ export class WorldNode {
     this.chat?.leave(id);
     this.party?.leave(id);
     this.friends?.leave(id);
+    this.quests?.leave(id);
     this.chatHistoryDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -784,6 +808,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.send(c, this.friends.handle(id, msg, this.world.timeMs));
         break;
+      case 'quest_cmd':
+        if (!this.quests) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.quests.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           c.stats.badMessages++;
@@ -861,6 +891,7 @@ export class WorldNode {
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     this.party?.tick(this.world.timeMs, this.world.tick);
     this.friends?.tick();
+    this.quests?.tick(this.world.timeMs);
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -912,6 +943,14 @@ export class WorldNode {
    * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
    * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
    */
+  /** A kill counts for the quest objectives of the killer and the party members who share the credit (D107). The mob is still alive here. */
+  private questKill(killerId: number, mobId: number): void {
+    if (!this.quests || !this.mobs) return;
+    const def = mobDefById(this.mobs.defIdOf(mobId));
+    if (!def) return;
+    for (const id of this.creditGroupOf(killerId)) this.quests.onKill(id, def.key, def.tier);
+  }
+
   private creditGroupOf(killerId: number): number[] {
     const members = this.party?.membersOf(killerId) ?? [];
     if (members.length <= 1) return [killerId];
@@ -943,6 +982,9 @@ export class WorldNode {
     for (const o of out) {
       const c = this.clients.get(o.entityId);
       if (c && !c.dead) this.send(c, o.msg);
+      // a successful breakthrough is a quest event (D107); the roll itself stays the progression module's
+      if (o.msg.type === 'breakthrough_result' && o.msg.outcome === BreakthroughOutcome.Success)
+        this.quests?.onBreakthrough(o.entityId);
     }
   }
 

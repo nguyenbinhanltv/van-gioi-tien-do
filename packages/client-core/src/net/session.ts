@@ -15,6 +15,8 @@ import {
   type ChatResultMsg,
   type FriendResultMsg,
   type FriendStateMsg,
+  type QuestResultMsg,
+  type QuestStateMsg,
   type PartyInviteMsg,
   type PartyResultMsg,
   type PartyStateMsg,
@@ -145,6 +147,14 @@ export interface FriendEvents {
   onFriendState?(msg: FriendStateMsg): void;
   /** The answer to a `sendFriend` (0 = done, otherwise why not). */
   onFriendResult?(msg: FriendResultMsg): void;
+}
+
+/** Quest callbacks (D107), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface QuestEvents {
+  /** The whole quest log, after every change. */
+  onQuestState?(msg: QuestStateMsg): void;
+  /** The answer to a `sendQuest` (0 = done, otherwise why not). */
+  onQuestResult?(msg: QuestResultMsg): void;
 }
 
 /** Party callbacks (D93), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
@@ -281,6 +291,8 @@ export class NetClient {
   partyEvents: PartyEvents = {};
   /** Callbacks for the friends list (own object, see `FriendEvents`). */
   friendEvents: FriendEvents = {};
+  /** Callbacks for the quest log (own object, see `QuestEvents`). */
+  questEvents: QuestEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -585,6 +597,12 @@ export class NetClient {
       case 'friend_result':
         this.emit(() => this.friendEvents.onFriendResult?.(msg));
         break;
+      case 'quest_state':
+        this.emit(() => this.questEvents.onQuestState?.(msg));
+        break;
+      case 'quest_result':
+        this.emit(() => this.questEvents.onQuestResult?.(msg));
+        break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
         if (t0 !== undefined) {
@@ -726,6 +744,24 @@ export class NetClient {
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
       ws.send(encode({ type: 'friend_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one quest command (D107): `op` is a `QuestOp`; `questId` for accept / claim / abandon, `npc` (an NPC key) for talk. Only an intent:
+   * the server derives all progress itself. `clientMsgId` (uint16) comes back in the `quest_result`. False when the socket is not open or
+   * it cannot be encoded.
+   */
+  sendQuest(m: { op: number; questId?: string; npc?: string; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({ type: 'quest_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, questId: m.questId ?? '', npc: m.npc ?? '' }),
+      );
     } catch {
       return false;
     }

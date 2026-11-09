@@ -45,6 +45,8 @@ export class ChatBox {
   readonly friends: InstanceType<typeof core.FriendsModel>;
   /** set by the friends panel: `/friends` toggles it (without one the list is printed as chat lines) */
   onFriendsToggle: (() => void) | null = null;
+  /** set by the quest panel: `/quest` toggles the log (D107) */
+  onQuestsToggle: (() => void) | null = null;
   private readonly root: HTMLDivElement;
   private readonly list: HTMLDivElement;
   private readonly input: HTMLInputElement;
@@ -60,7 +62,11 @@ export class ChatBox {
     username: string,
     parent: HTMLElement = document.body,
   ) {
-    this.log = new core.ChatLog({ myName: () => username, onFriends: () => this.showFriends() });
+    this.log = new core.ChatLog({
+      myName: () => username,
+      onFriends: () => this.showFriends(),
+      onQuests: () => this.onQuestsToggle?.(),
+    });
     this.party = new core.PartyModel({ myId: () => net.entityId, now: () => performance.now() });
     this.friends = new core.FriendsModel();
     // a separate hook object: combat replaces `net.events` wholesale when it attaches

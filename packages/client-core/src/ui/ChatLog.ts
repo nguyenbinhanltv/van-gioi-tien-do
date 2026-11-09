@@ -50,7 +50,7 @@ export const CHAT_HELP = [
   'Chat: gõ nội dung để nói ở kênh Thế giới.',
   '/z nội dung: kênh Vùng (người ở gần bạn) · /w tên nội dung: nhắn riêng · /r nội dung: trả lời người vừa nhắn · //nội dung: gửi tin bắt đầu bằng dấu /',
   'Tổ đội: /invite tên · /accept [tên] · /decline [tên] · /leave · /kick tên (đội trưởng) · /p nội dung: chat tổ đội',
-  'Bạn bè: /friend add tên · /friend accept [tên] · /friend decline [tên] · /friend remove tên · /friends: xem danh sách (phím O mở bảng bạn bè)',
+  'Bạn bè: /friend add tên · /friend accept [tên] · /friend decline [tên] · /friend remove tên · /friends: xem danh sách (phím O mở bảng bạn bè)\nNhiệm vụ: /quest xem sổ nhiệm vụ (phím J mở bảng nhiệm vụ)',
 ].join('\n');
 
 export type ParsedChatInput =
@@ -60,7 +60,8 @@ export type ParsedChatInput =
   | { kind: 'send'; channel: number; target: string; text: string }
   | { kind: 'party'; op: number; name: string }
   | { kind: 'friend'; op: number; name: string }
-  | { kind: 'friends' };
+  | { kind: 'friends' }
+  | { kind: 'quests' };
 
 const utf8Bytes = (s: string): number => new TextEncoder().encode(s).length;
 
@@ -116,6 +117,11 @@ export function parseChatInput(raw: string, ctx: { lastWhisperFrom?: string | nu
     case 'friends':
     case 'banbe':
       return { kind: 'friends' };
+    case 'quest':
+    case 'quests':
+    case 'q':
+    case 'nhiemvu':
+      return { kind: 'quests' };
     case 'friend':
     case 'f':
     case 'ketban': {
@@ -188,6 +194,8 @@ export interface ChatLogOptions {
   max?: number;
   /** `/friends` was typed: show the friend list (the panel, or its text lines) */
   onFriends?: () => void;
+  /** `/quest` was typed: show the quest log (the panel, or its text lines) */
+  onQuests?: () => void;
 }
 
 export type SendChat = (m: { channel: number; text: string; target: string; clientMsgId: number }) => boolean;
@@ -267,6 +275,9 @@ export class ChatLog {
         return false;
       case 'friends':
         this.o.onFriends?.();
+        return false;
+      case 'quests':
+        this.o.onQuests?.();
         return false;
       case 'friend': {
         if (!sendFriend) {

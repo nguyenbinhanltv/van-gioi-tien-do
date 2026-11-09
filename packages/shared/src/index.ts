@@ -21,4 +21,5 @@ export * from './mob-attacks.js';
 export * from './items.js';
 export * from './regen.js';
 export * from './item-use.js';
+export * from './quests.js';
 export * from './validators.js';

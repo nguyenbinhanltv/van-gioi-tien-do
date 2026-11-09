@@ -4,6 +4,9 @@ import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
 import { FriendService } from './friends/service.js';
 import type { FriendStore } from './friends/store.js';
+import { QuestService, type QuestSectPort } from './quests/service.js';
+import type { QuestStore } from './quests/store.js';
+import { WORLD_CONFIG } from './config.js';
 import { ProgressionService, type ProgressionOptions } from './progression/service.js';
 import { WorldNode, type WorldNodeOptions } from './world/node.js';
 
@@ -20,6 +23,8 @@ export interface ServerOptions {
   party?: false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
   friends?: { store?: FriendStore } | false;
+  /** quests options (D107): store (default in memory), wall clock (default `Date.now`), sect port; `false` = no quests. Needs inventory + progression. */
+  quests?: { store?: QuestStore; clock?: () => number; sect?: QuestSectPort } | false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -53,12 +58,25 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
             nameOf: (id) => auth.store.byId(id)?.username,
           },
         }));
+  const inventory = opts.world?.inventory;
+  const quests =
+    opts.quests === false || !inventory || !progression
+      ? undefined
+      : (opts.world?.quests ??
+        new QuestService({
+          ...(opts.quests?.store ? { store: opts.quests.store } : {}),
+          ...(opts.quests?.sect ? { sect: opts.quests.sect } : {}),
+          inventory,
+          clock: opts.quests?.clock ?? (() => Date.now()),
+          mapTiles: opts.world?.mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES,
+        }));
   const world = new WorldNode({
     ...opts.world,
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
     ...(party ? { party } : {}),
     ...(friends ? { friends } : {}),
+    ...(quests ? { quests } : {}),
   });
   const gateway = createGateway(auth, world, opts.gateway);
   await new Promise<void>((resolve, reject) => {
