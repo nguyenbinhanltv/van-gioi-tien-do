@@ -22,6 +22,8 @@ import { PropArt } from './PropArt';
 import { installDrawDebug } from './DrawDebug';
 import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
+import { NpcArt, type NpcStandee } from './NpcArt';
+import { placeSectNpcs } from './NpcPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
@@ -85,6 +87,8 @@ export class Bootstrap extends Component {
   private propArt: PropArt | null = null;
   /** INTERIM mob standees (concept art) */
   private mobArt: MobArt | null = null;
+  /** INTERIM Son Mon NPC standees (concept art) */
+  private sectNpcs: NpcStandee[] = [];
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -180,6 +184,21 @@ export class Bootstrap extends Component {
       for (const [i, j] of placed.blocked) blocked[j * map.width + i] = 1;
       for (const p of placed.courtyard) this.propArt.add(this.ysort, p);
       for (const p of placed.props) this.propArt.add(this.ysort, p);
+      // Son Mon NPC standees around the plaza: they block their tile like props and adapt to the land (INTERIM art, keyed npc_<name>)
+      const npcArt = new NpcArt(this.propArt);
+      const npcs = placeSectNpcs({
+        width: map.width,
+        height: map.height,
+        spawn,
+        isLand: (i, j) => this.world.terrainAt(i, j) === 'dirt' || this.world.terrainAt(i, j) === 'grass',
+        isBlocked: (i, j) => i < 0 || j < 0 || i >= map.width || j >= map.height || blocked[j * map.width + i] === 1,
+      });
+      for (const n of npcs) {
+        const st = npcArt.add(this.ysort, n, art.shadow, l2);
+        if (!st) continue;
+        blocked[n.j * map.width + n.i] = 1;
+        this.sectNpcs.push(st);
+      }
     } else {
       const rand = rng(map.seed ?? 1);
       // props are scattered around the spawn only (L3 objects are not chunk-streamed yet; every one is sorted each frame)
@@ -553,6 +572,7 @@ export class Bootstrap extends Component {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
     }
+    for (const n of this.sectNpcs) n.update(dt);
     this.rig.follow(this.playerScreen(), dt);
     this.ysort.cull(this.cameraRect()); // park what is far outside the view: fewer draw calls (docs/33)
     this.ysort.sort();

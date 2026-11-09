@@ -417,5 +417,26 @@
         14
       ]
     }
+  },
+  "npcs": {
+    "_doc": "INTERIM Son Mon NPC standees (assets-src/concepts/npcs, front-facing, not flipped). Keys = the docs/12 style `npc_<name>` ids (the sect system maps its NPC ids onto these keys). h = standing height in design px @1x (the chibi player is ~90 px; concept art is more detailed, so NPCs stand a little taller). Packed into the shared prop atlas page.",
+    "npc_chuong_mon": {
+      "h": 124
+    },
+    "npc_su_huynh": {
+      "h": 104
+    },
+    "npc_tho_ren": {
+      "h": 108
+    },
+    "npc_thuong_nhan": {
+      "h": 104
+    },
+    "npc_truong_lao_dan": {
+      "h": 100
+    },
+    "npc_ve_binh": {
+      "h": 128
+    }
   }
 }

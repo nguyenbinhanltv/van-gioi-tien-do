@@ -556,3 +556,8 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## NPC Sơn Môn dạng standee (INTERIM, 2026-11-09): còn mở
+
+- 6 NPC (`npc_chuong_mon`, `npc_truong_lao_dan`, `npc_ve_binh`, `npc_su_huynh`, `npc_tho_ren`, `npc_thuong_nhan`) chỉ là ảnh concept tĩnh đứng quanh quảng trường gần spawn; chưa có hội thoại, nhiệm vụ, cửa hàng hay hoạt hình. Khoá `npc_<tên>` theo kiểu docs/12; hệ thống NPC tông môn (D98) ánh xạ NPC id của nó vào các khoá này (`NPC_STANDEE_KEYS` trong `NpcPlacement.ts`), vị trí ưu tiên trong `SECT_NPC_LAYOUT` (chỉ phía client, chưa lấy từ server).
+- Mỗi NPC chiếm một ô đi bộ (chặn như prop); NPC không lật theo người chơi vì ảnh nhìn thẳng.
+

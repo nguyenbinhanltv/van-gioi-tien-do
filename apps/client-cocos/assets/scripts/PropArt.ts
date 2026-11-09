@@ -32,11 +32,18 @@ interface Sidecar {
   skills?: Record<string, { path: string; index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** INTERIM mob standees (MobArt.ts), packed into the SAME pages as the props so the Y-sort batches them together */
   mobs?: Record<string, MobSprite>;
+  /** INTERIM Son Mon NPC standees by key (npc_<name>), same atlas page; front-facing, not flipped */
+  npcs?: Record<string, NpcSprite & { f2: AtlasFrame; f1: AtlasFrame }>;
   /** 9-slice UI frames (panel_jade, button_normal, button_disabled, slot_frame): size and slice insets in @1x design px */
   ui?: Record<
     string,
     { w: number; h: number; inset: [number, number, number, number]; f2: AtlasFrame; f1: AtlasFrame }
   >;
+}
+export interface NpcSprite {
+  w: number;
+  h: number;
+  pivot: { x: number; y: number };
 }
 export interface MobSprite {
   id: number;
@@ -74,6 +81,7 @@ export class PropArt {
   private readonly iconFrames = new Map<string, SpriteFrame>();
   private readonly skillFrames = new Map<string, SpriteFrame>();
   private readonly mobById = new Map<number, { entry: MobSprite; frame: SpriteFrame }>();
+  private readonly npcByKey = new Map<string, { entry: NpcSprite; frame: SpriteFrame }>();
   private readonly uiFrames = new Map<string, SpriteFrame>();
   /** node scale that maps the UI atlas page's pixels to design px: 0.5 on the @2x page, 1 on the @1x page */
   private uiK = 0.5;
@@ -116,6 +124,10 @@ export class PropArt {
         const f = low ? m.f1 : m.f2;
         art.mobById.set(m.id, { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
       }
+      for (const [key, n] of Object.entries(meta.npcs ?? {})) {
+        const f = low ? n.f1 : n.f2;
+        art.npcByKey.set(key, { entry: n, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
+      }
       // 9-slice UI frames: insets are in the frame's own pixels (x2 on the @2x page)
       art.uiK = low ? 1 : 0.5;
       for (const [key, u] of Object.entries(meta.ui ?? {})) {
@@ -152,6 +164,11 @@ export class PropArt {
   /** INTERIM mob standee sprite by mob wire id (MOB_DEFS id), or undefined. */
   mob(id: number): { entry: MobSprite; frame: SpriteFrame } | undefined {
     return this.mobById.get(id);
+  }
+
+  /** INTERIM NPC standee sprite by key (npc_chuong_mon, ...), or undefined. */
+  npc(key: string): { entry: NpcSprite; frame: SpriteFrame } | undefined {
+    return this.npcByKey.get(key);
   }
 
   /** node scale mapping the UI atlas page to design px (0.5 on the @2x page) */

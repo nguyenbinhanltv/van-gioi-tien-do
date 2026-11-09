@@ -514,12 +514,13 @@ function sliceSkillGrid(src, size2 = 128) {
  * INTERIM mob standee: concept art keyed + trimmed, scaled so its longest side is `box` px (design px @1x; mobs ship one
  * @1x tier). Source faces LEFT. Returns the sprite, its foot pivot and the sparkle stats.
  */
-function processMob(src, box) {
+function processMob(src, box, opts = {}) {
   const { image, sparkle } = cleanSprite(src);
   const bb = alphaBBox(image);
   if (!bb) throw new Error('empty sprite after keying');
   const trimmed = crop(image, bb.x, bb.y, bb.w, bb.h);
-  const k = box / Math.max(bb.w, bb.h);
+  // `opts.height`: scale to this height instead (front-facing characters are sized by how tall they stand)
+  const k = opts.height ? opts.height / bb.h : box / Math.max(bb.w, bb.h);
   const x1 = bleedColor(resizeArea(trimmed, Math.max(2, Math.round(bb.w * k)), Math.max(2, Math.round(bb.h * k))));
   return { x1, pivot: footPivot(trimmed), sparkle };
 }
