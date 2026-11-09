@@ -13,5 +13,6 @@ export * from './ui/ChatLog.js';
 export * from './ui/ChatPlacement.js';
 export * from './ui/PartyModel.js';
 export * from './ui/SectModel.js';
+export * from './ui/FriendsModel.js';
 export * from './ui/FirstSessionTracker.js';
 export * from './net/index.js';

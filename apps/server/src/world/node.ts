@@ -63,6 +63,7 @@ import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
 import type { SectService } from '../sect/service.js';
+import type { FriendService } from '../friends/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -216,6 +217,8 @@ export interface WorldNodeOptions {
   party?: PartyService;
   /** NPC sect module (D98): join / leave at the sect NPC, Cống hiến from kills, the library; absent = sect commands are rejected as unexpected */
   sect?: SectService;
+  /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
+  friends?: FriendService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -327,6 +330,7 @@ export class WorldNode {
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
   readonly sect: SectService | undefined;
+  readonly friends: FriendService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -375,6 +379,13 @@ export class WorldNode {
       posOf: (id) => this.byId.get(id),
       // the sect NPC stands in the middle of the spawn area unless the sect service was told otherwise
       defaultNpc: { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
+    });
+    this.friends = opts.friends;
+    this.friends?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
     });
     this.party = opts.party;
     this.party?.attach({
@@ -538,6 +549,7 @@ export class WorldNode {
     this.progression?.join(id, accountId, this.world.timeMs);
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     this.sect?.join({ entityId: id, accountId, path: classPath });
+    this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -578,6 +590,7 @@ export class WorldNode {
     this.chat?.leave(id);
     this.party?.leave(id);
     this.sect?.leave(id);
+    this.friends?.leave(id);
     this.chatHistoryDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -796,6 +809,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.send(c, this.sect.handle(id, msg, this.world.timeMs));
         break;
+      case 'friend_cmd':
+        if (!this.friends) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.friends.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           c.stats.badMessages++;
@@ -873,6 +892,7 @@ export class WorldNode {
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     this.party?.tick(this.world.timeMs, this.world.tick);
     this.sect?.tick();
+    this.friends?.tick();
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);

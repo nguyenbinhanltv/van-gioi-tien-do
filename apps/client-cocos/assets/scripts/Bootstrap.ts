@@ -37,6 +37,7 @@ import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
 import { SectPanel } from './SectPanel';
+import { FriendsPanel } from './FriendsPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -100,6 +101,7 @@ export class Bootstrap extends Component {
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
   private sectPanel: SectPanel | null = null;
+  private friendsPanel: FriendsPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -143,7 +145,9 @@ export class Bootstrap extends Component {
       load('world/iso-tileset', ImageAsset),
     ]);
     const map = mapAsset.json as unknown as { width: number; height: number; seed?: number };
-    const tilesetJson = tilesetAsset.json as unknown as { animations?: { water?: { frames: number[]; fps: number } } };
+    const tilesetJson = tilesetAsset.json as unknown as {
+      animations?: Record<string, { frames: number[]; fps: number }>;
+    };
     const data = cw.parseProcgenMap(tilesetJson, mapAsset.json);
     const tilesetTex = makeTexture(tilesetImage);
     const art: ArtFrames = buildPlaceholderArt();
@@ -322,6 +326,12 @@ export class Bootstrap extends Component {
         position: () => net.selfPosition(),
       });
       chat.onSectToggle = () => this.sectPanel?.toggle();
+      // friends panel (D96): O or /friends; its buttons run the same lines the player could type
+      this.friendsPanel = new FriendsPanel(chat.friends, {
+        run: (cmd) => chat.command(cmd),
+        prefill: (text) => chat.focus(text),
+      });
+      chat.onFriendsToggle = () => this.friendsPanel?.toggle();
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -342,6 +352,9 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToWorld(x, y),
     );
     this.combat.mobArt = this.mobArt;
+    // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
+    (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
+      this.combat?.setEnemyPhase(entityId, phase, ms);
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
@@ -375,7 +388,10 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
-      online.onBossPhase = (entityId, phase) => this.combat?.announceBossPhase(entityId, phase);
+      online.onBossPhase = (entityId, phase, transformMs) => {
+        this.combat?.announceBossPhase(entityId, phase);
+        this.combat?.setEnemyPhase(entityId, phase, transformMs); // skin swap on the boss standee
+      };
       // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
       this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
@@ -569,6 +585,7 @@ export class Bootstrap extends Component {
     this.chatBox?.update();
     this.partyFrames?.update();
     this.sectPanel?.update();
+    this.friendsPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -618,6 +635,7 @@ export class Bootstrap extends Component {
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
     this.sectPanel?.destroy();
+    this.friendsPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

@@ -45,6 +45,10 @@ export class ChatBox {
   readonly sect: InstanceType<typeof core.SectModel>;
   /** set by the sect panel: `/sect` toggles it (without one the sect is printed as chat lines) */
   onSectToggle: (() => void) | null = null;
+  /** the friend list shown by `FriendsPanel` (D96); fed by the same net hooks as the chat */
+  readonly friends: InstanceType<typeof core.FriendsModel>;
+  /** set by the friends panel: `/friends` toggles it (without one the list is printed as chat lines) */
+  onFriendsToggle: (() => void) | null = null;
   private readonly root: HTMLDivElement;
   private readonly list: HTMLDivElement;
   private readonly input: HTMLInputElement;
@@ -60,9 +64,14 @@ export class ChatBox {
     username: string,
     parent: HTMLElement = document.body,
   ) {
-    this.log = new core.ChatLog({ myName: () => username, onSect: () => this.showSect() });
+    this.log = new core.ChatLog({
+      myName: () => username,
+      onSect: () => this.showSect(),
+      onFriends: () => this.showFriends(),
+    });
     this.party = new core.PartyModel({ myId: () => net.entityId, now: () => performance.now() });
     this.sect = new core.SectModel();
+    this.friends = new core.FriendsModel();
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
     net.chatEvents = {
       onChatMsg: (m) => this.log.applyMsg(m),
@@ -93,6 +102,17 @@ export class ChatBox {
       },
       onSectResult: (m) => {
         const refusal = this.sect.applyResult(m);
+        if (refusal) this.log.system(refusal, 'error');
+      },
+    };
+    // friends (D96): the list lives in the panel; only requests / new friends / refusals show up as chat lines
+    net.friendEvents = {
+      onFriendState: (m) => {
+        const line = this.friends.applyState(m);
+        if (line) this.log.system(line, 'system');
+      },
+      onFriendResult: (m) => {
+        const refusal = this.friends.applyResult(m);
         if (refusal) this.log.system(refusal, 'error');
       },
     };
@@ -238,6 +258,7 @@ export class ChatBox {
         return ok;
       },
       (m) => this.net.sendSect(m),
+      (m) => this.net.sendFriend(m),
     );
   }
 
@@ -245,6 +266,12 @@ export class ChatBox {
   private showSect(): void {
     if (this.onSectToggle) this.onSectToggle();
     else for (const l of this.sect.summaryLines()) this.log.system(l);
+  }
+
+  /** `/friends`: toggle the panel when there is one, else print the list. */
+  private showFriends(): void {
+    if (this.onFriendsToggle) this.onFriendsToggle();
+    else for (const l of this.friends.summaryLines()) this.log.system(l);
   }
 
   focus(prefill = ''): void {

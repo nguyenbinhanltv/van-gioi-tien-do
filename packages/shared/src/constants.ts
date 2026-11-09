@@ -289,6 +289,19 @@ export const SECT = {
 } as const;
 
 /**
+ * Friends list (D96, docs/10 §7.1 P4 "bạn bè"). Persisted per ACCOUNT (not per session like a party). Sizes are PLACEHOLDERS "cần game
+ * designer duyệt khi cân bằng": docs/10 only names the feature.
+ */
+export const FRIENDS = {
+  /** friends one account can have */
+  MAX_FRIENDS: 50,
+  /** pending requests one account can hold at once (received) */
+  MAX_INCOMING: 20,
+  /** pending requests one account can have sent at once */
+  MAX_OUTGOING: 20,
+} as const;
+
+/**
  * Party (D93, docs/10 §7.1 P4 "Tổ đội (4)"). Size 4 comes from docs/10 / docs/07 §6; the rest are PLACEHOLDERS "cần game designer duyệt".
  * Session-only: a party is never persisted.
  */

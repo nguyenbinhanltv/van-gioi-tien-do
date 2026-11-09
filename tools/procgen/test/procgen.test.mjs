@@ -108,7 +108,9 @@ describe('tilemap: Wang theo góc (16 mặt nạ)', () => {
           const t = minMat[L.name];
           const mask = (c(i, j) >= t ? 1 : 0) | (c(i + 1, j) >= t ? 2 : 0) | (c(i + 1, j + 1) >= t ? 4 : 0) | (c(i, j + 1) >= t ? 8 : 0);
           const id = map.layers.find((l) => l.name === L.name).data[j * map.width + i];
+          const grassFull = (c(i, j) >= 2 ? 1 : 0) + (c(i + 1, j) >= 2 ? 1 : 0) + (c(i + 1, j + 1) >= 2 ? 1 : 0) + (c(i, j + 1) >= 2 ? 1 : 0) === 4;
           if (mask === 0) expect(id).toBe(-1);
+          else if (L.name === 'dirt' && grassFull) expect(id).toBe(-1); // hidden under an opaque full grass tile: not emitted
           else if (mask === 15) expect(L.full).toContain(id);
           else expect(id).toBe(L.masks[String(mask)]);
           checked++;

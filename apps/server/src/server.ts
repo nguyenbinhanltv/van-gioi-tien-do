@@ -5,6 +5,8 @@ import { PartyService } from './party/service.js';
 import { SectService } from './sect/service.js';
 import type { SectStore } from './sect/store.js';
 import { Ledger } from './world/inventory/ledger.js';
+import { FriendService } from './friends/service.js';
+import type { FriendStore } from './friends/store.js';
 import { ProgressionService, type ProgressionOptions } from './progression/service.js';
 import { WorldNode, type WorldNodeOptions } from './world/node.js';
 
@@ -21,6 +23,8 @@ export interface ServerOptions {
   party?: false;
   /** NPC sect options (D98): the persistence store (default in memory), or `false` to run without the sect */
   sect?: { store?: SectStore; ledger?: Ledger } | false;
+  /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
+  friends?: { store?: FriendStore } | false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -57,12 +61,25 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
           ledger: opts.sect?.ledger ?? opts.world?.inventory?.ledger ?? new Ledger(),
           ...(opts.sect?.store ? { store: opts.sect.store } : {}),
         }));
+  const friends =
+    opts.friends === false
+      ? undefined
+      : (opts.world?.friends ??
+        new FriendService({
+          ...(opts.friends?.store ? { store: opts.friends.store } : {}),
+          // friendship hangs on account ids; the directory is the auth store (usernames are stored lower-cased)
+          directory: {
+            idOf: (nameLower) => auth.store.byUsername(nameLower)?.id,
+            nameOf: (id) => auth.store.byId(id)?.username,
+          },
+        }));
   const world = new WorldNode({
     ...opts.world,
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
     ...(party ? { party } : {}),
     ...(sect ? { sect } : {}),
+    ...(friends ? { friends } : {}),
   });
   const gateway = createGateway(auth, world, opts.gateway);
   await new Promise<void>((resolve, reject) => {
