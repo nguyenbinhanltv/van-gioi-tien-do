@@ -7,7 +7,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "gen:tilemap": "node src/tilemap/generate_tilemap.js --out out/tilemap --ground out/gemini/ground --ext 1",
+    "gen:tilemap": "node src/tilemap/generate_tilemap.js --out out/tilemap --ground out/gemini/ground --ext 1 --zones 1",
     "gen:items": "node src/items/generate_items.js --out out/items",
     "gen:gemini": "node scripts/gemini_assets.js",
     "gen:kiemtu": "vite-node --script scripts/kiem_tu_rig.mjs",

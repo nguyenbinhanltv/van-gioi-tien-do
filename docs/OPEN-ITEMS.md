@@ -562,6 +562,16 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## D95 — bản đồ 4 vùng: còn mở (worker39, 2026-11-09)
+
+1. **Mọi bố cục là mặc định tạm, cần game designer duyệt**: tên và vị trí vùng (bốn góc phần tư của bản đồ thử, chưa phải tọa độ Sơn Môn thật của docs/10 §4 / level designer), bãi trống cây cổ thụ ở giữa `co_thu_trung_tam` (chưa có cây: prop do worker 40), tỉ lệ nước / nham thạch (ngưỡng 0,52 của nham thạch, độ ẩm đầm lầy).
+2. **Đường nét vẫn khá "nhão"**: bản đồ vùng đã dùng nhiễu thưa hơn (`zoneNoiseScale` 0,035, mảng lớn hơn bản đồ cũ), nhưng vẫn chỉ là một trường nhiễu: chưa có đường mòn, hồ lớn, vách, cầu qua nham thạch; một vùng nham thạch lớn không có lối đi riêng cho người chơi bay (chưa có luật ngự kiếm trên nham thạch).
+3. **Mép chuyển vùng là dải đất thẳng** rộng ~6 ô dọc các đường chia vùng và quảng trường vuông ở giữa: nhìn nhân tạo; chưa có tile chuyển tiếp trực tiếp giữa các họ (cỏ ↔ nham thạch...).
+4. **Tile viền của họ bổ sung** (bờ đá có bọt trắng, bờ đầm lầy) vẽ cho viền với nước; trong vùng cổ thụ vòng đá nằm trên cỏ nên viền trắng hơi sáng; cần Gemini / 42 duyệt hoặc vẽ riêng viền đá-trên-cỏ.
+5. **Server vẫn chỉ biết ô đi được hay không**, không biết loại nền: chưa có sát thương nền (nham thạch, độc), chậm chân trong đầm lầy, hay quái theo loại nền; `terrain.json` chỉ có `.` / `#`.
+6. **`MAP_FILE` chỉ ở server dev**: `npm run play` / dev dùng khi file có; server test và loadtest giữ bản đồ mở; đồng bộ client-server do người chạy giữ (cùng lần `prepare:assets`).
+7. **Chi phí**: tileset 1024 × 1024 (tăng gấp đôi so với 1024 × 512); số đo ngân sách và P1 xem PR D95.
+
 ## Asset Gemini PART 2 (props vùng, icon trạng thái, huy hiệu cảnh giới, hạt, key art, 2026-11-09): còn mở
 
 1. **Địa hình vùng chưa có trên bản đồ lát cắt**: bản đồ chỉ có nước / đất / cỏ, không có đầm lầy, rừng cổ thụ hay dung nham. Prop vùng (swamp\_\*, ancient\_\*, lava\_\*) được rải trên đất / cỏ trong bốn góc phần tư mà server dùng cho vùng mob (`mobZoneAt` trong `@vgtd/shared`, trùng `defaultMobZones`), nên là "trang trí theo vùng", không phải địa hình thật. Trang trí vùng là một lượt rải riêng (PRNG riêng, +60 prop trên lượt rải gốc) và chỉ cách điểm xuất phát từ 16 ô (`ZONE_MIN_DIST`): khung nhìn lúc vào game giữ nguyên bố cục cũ, vì prop vùng gần điểm xuất phát làm cổng draw call 65 của `perf:p1 --mobs` vượt (68–70 so với 62). Khi có tọa độ vùng Sơn Môn thật (D83 mục 2) và ground từng vùng (PR Gemini ground), đổi `mobZoneAt` sang hình chữ nhật của bản đồ thật.
