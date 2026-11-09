@@ -55,7 +55,7 @@ export enum ColdMsgId {
   InvCmd = 67,
   InvResult = 68,
   /** Đạo Tâm (D103) */
-  DaoTam = 71,
+  DaoTam = 59,
 }
 
 export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {

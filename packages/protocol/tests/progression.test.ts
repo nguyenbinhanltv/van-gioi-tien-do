@@ -66,7 +66,7 @@ describe('progression (cold family) codec', () => {
       meditate_start: 63,
       meditate_stop: 64,
       meditate_result: 65,
-      dao_tam: 71,
+      dao_tam: 59,
     };
     for (const m of samples) {
       const b = encode(m);
