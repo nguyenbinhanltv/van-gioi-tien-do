@@ -19,6 +19,7 @@ import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
+import { installDrawDebug } from './DrawDebug';
 import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
@@ -309,6 +310,7 @@ export class Bootstrap extends Component {
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
+    if (params.get('drawdbg') !== null) installDrawDebug(this.node); // window.__vgtdDrawDbg(): batch-break report
     this.maybeAutotest();
   }
 
@@ -552,6 +554,7 @@ export class Bootstrap extends Component {
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
     }
     this.rig.follow(this.playerScreen(), dt);
+    this.ysort.cull(this.cameraRect()); // park what is far outside the view: fewer draw calls (docs/33)
     this.ysort.sort();
     this.npcs?.update(dt);
     this.world.update(dt, this.cameraRect());
