@@ -471,50 +471,79 @@ function sliceGrid(src, size2, cols, rows, opts = {}) {
     for (let y = Math.round(H * (1 - eraseCorner)); y < H; y++)
       for (let x = Math.round(W * (1 - eraseCorner)); x < W; x++) d[(y * W + x) * 4 + 3] = 0;
   }
-  const label = new Int32Array(W * H);
-  const comps = [];
-  for (let p0 = 0; p0 < W * H; p0++) {
-    if (label[p0] || d[p0 * 4 + 3] < 128) continue;
-    const id = comps.length + 1;
-    const stack = [p0];
-    label[p0] = id;
-    let x0 = W,
-      y0 = H,
-      x1 = -1,
-      y1 = -1,
-      area = 0;
-    while (stack.length) {
-      const p = stack.pop();
-      const x = p % W,
-        y = (p / W) | 0;
-      area++;
-      if (x < x0) x0 = x;
-      if (x > x1) x1 = x;
-      if (y < y0) y0 = y;
-      if (y > y1) y1 = y;
-      for (const q of [x > 0 ? p - 1 : -1, x < W - 1 ? p + 1 : -1, y > 0 ? p - W : -1, y < H - 1 ? p + W : -1]) {
-        if (q >= 0 && !label[q] && d[q * 4 + 3] >= 128) {
-          label[q] = id;
-          stack.push(q);
+  let ordered;
+  if (opts.cells) {
+    // free-shaped, multi-piece tiles (a pair of boots, a sword and its tassel, a brush and its drips): the grid is regular, so each tile
+    // is the opaque bounding box inside its (cols x rows) cell instead of one connected blob
+    ordered = [];
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++) {
+        const cx0 = Math.round((c * W) / cols),
+          cx1 = Math.round(((c + 1) * W) / cols),
+          cy0 = Math.round((r * H) / rows),
+          cy1 = Math.round(((r + 1) * H) / rows);
+        let x0 = cx1,
+          y0 = cy1,
+          x1 = -1,
+          y1 = -1;
+        for (let y = cy0; y < cy1; y++)
+          for (let x = cx0; x < cx1; x++)
+            if (d[(y * W + x) * 4 + 3] >= 128) {
+              if (x < x0) x0 = x;
+              if (x > x1) x1 = x;
+              if (y < y0) y0 = y;
+              if (y > y1) y1 = y;
+            }
+        if (x1 < 0 || x1 - x0 < 0.1 * (cx1 - cx0) || y1 - y0 < 0.1 * (cy1 - cy0))
+          throw new Error('icon grid: cell ' + r + ',' + c + ' is empty');
+        ordered.push({ x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, area: 0 });
+      }
+  } else {
+    const label = new Int32Array(W * H);
+    const comps = [];
+    for (let p0 = 0; p0 < W * H; p0++) {
+      if (label[p0] || d[p0 * 4 + 3] < 128) continue;
+      const id = comps.length + 1;
+      const stack = [p0];
+      label[p0] = id;
+      let x0 = W,
+        y0 = H,
+        x1 = -1,
+        y1 = -1,
+        area = 0;
+      while (stack.length) {
+        const p = stack.pop();
+        const x = p % W,
+          y = (p / W) | 0;
+        area++;
+        if (x < x0) x0 = x;
+        if (x > x1) x1 = x;
+        if (y < y0) y0 = y;
+        if (y > y1) y1 = y;
+        for (const q of [x > 0 ? p - 1 : -1, x < W - 1 ? p + 1 : -1, y > 0 ? p - W : -1, y < H - 1 ? p + W : -1]) {
+          if (q >= 0 && !label[q] && d[q * 4 + 3] >= 128) {
+            label[q] = id;
+            stack.push(q);
+          }
         }
       }
+      comps.push({ x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, area });
     }
-    comps.push({ x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, area });
-  }
-  const tiles = comps.sort((a, b) => b.area - a.area).slice(0, n);
-  if (tiles.length < n || tiles[n - 1].area < 0.2 * tiles[0].area)
-    throw new Error('icon grid: found ' + tiles.length + ' tiles, need ' + n);
-  // rows: sort by the vertical centre, cut into rows of cols; then left to right inside a row
-  const cy = (t) => t.y + t.h / 2;
-  const byY = tiles.slice().sort((a, b) => cy(a) - cy(b));
-  const ordered = [];
-  for (let r = 0; r < rows; r++) {
-    const row = byY.slice(r * cols, (r + 1) * cols).sort((a, b) => a.x - b.x);
-    // a row must really be one row: its tiles' centres lie within half a tile height of each other
-    const hs = row.map((t) => t.h);
-    if (Math.max(...row.map(cy)) - Math.min(...row.map(cy)) > 0.5 * Math.min(...hs))
-      throw new Error('icon grid: row ' + r + ' is not a row of ' + cols + ' tiles');
-    ordered.push(...row);
+    const tiles = comps.sort((a, b) => b.area - a.area).slice(0, n);
+    if (tiles.length < n || tiles[n - 1].area < 0.2 * tiles[0].area)
+      throw new Error('icon grid: found ' + tiles.length + ' tiles, need ' + n);
+    // rows: sort by the vertical centre, cut into rows of cols; then left to right inside a row
+    const cy = (t) => t.y + t.h / 2;
+    const byY = tiles.slice().sort((a, b) => cy(a) - cy(b));
+    ordered = [];
+    for (let r = 0; r < rows; r++) {
+      const row = byY.slice(r * cols, (r + 1) * cols).sort((a, b) => a.x - b.x);
+      // a row must really be one row: its tiles' centres lie within half a tile height of each other
+      const hs = row.map((t) => t.h);
+      if (Math.max(...row.map(cy)) - Math.min(...row.map(cy)) > 0.5 * Math.min(...hs))
+        throw new Error('icon grid: row ' + r + ' is not a row of ' + cols + ' tiles');
+      ordered.push(...row);
+    }
   }
   const x2 = [],
     x1 = [];
@@ -553,7 +582,11 @@ function processMob(src, box, opts = {}) {
   const trimmed = crop(image, bb.x, bb.y, bb.w, bb.h);
   // `opts.height`: scale to this height instead (front-facing characters are sized by how tall they stand);
   // `opts.area`: scale so the sprite covers that many px (a wide crouched pose must not look smaller than the tall one it replaces)
-  const k = opts.height ? opts.height / bb.h : opts.area ? Math.sqrt(opts.area / (bb.w * bb.h)) : box / Math.max(bb.w, bb.h);
+  const k = opts.height
+    ? opts.height / bb.h
+    : opts.area
+      ? Math.sqrt(opts.area / (bb.w * bb.h))
+      : box / Math.max(bb.w, bb.h);
   const x1 = bleedColor(resizeArea(trimmed, Math.max(2, Math.round(bb.w * k)), Math.max(2, Math.round(bb.h * k))));
   return { x1, pivot: footPivot(trimmed), sparkle };
 }
@@ -569,7 +602,7 @@ const isDark = (r, g, b) => Math.max(r, g, b) <= 24;
  * Cropped to the content, centred in a square with a small margin, scaled to size2 (@2x) / size2/2 (@1x).
  * @returns {{ x2: Image, x1: Image, sparkle: object, gain: number }}
  */
-function processParticle(src, size2 = 256) {
+function luminanceKey(src) {
   const img = new Image(src.width, src.height);
   img.data.set(src.data);
   const sparkle = removeSparkle(img, isDark);
@@ -600,6 +633,11 @@ function processParticle(src, size2 = 256) {
     o[i + 2] = Math.min(255, d[i + 2] * k);
     o[i + 3] = Math.round(a * 255);
   }
+  return { out, sparkle, gain };
+}
+
+function processParticle(src, size2 = 256) {
+  const { out, sparkle, gain } = luminanceKey(src);
   const bb = alphaBBox(out, 10);
   if (!bb) throw new Error('empty particle after luminance key');
   const side = Math.round(Math.max(bb.w, bb.h) * 1.08);
@@ -612,17 +650,39 @@ function processParticle(src, size2 = 256) {
 }
 
 /**
- * Erase the grey Gemini mark from an OPAQUE picture (login backdrop): the mark is the largest connected blob of neutral
+ * PART 3 effect texture on a BLACK background (lightning strike, storm cloud): the same luminance key as `processParticle`, but the
+ * aspect is kept (a strike is tall, a cloud wide): cropped to the content, scaled so the @1x image is `w` x (w * aspect) design px.
+ * `pivotY` (0..1 of the trimmed height from the top) is where the effect touches the ground (the strike's impact point).
+ * @returns {{ x2: Image, x1: Image, sparkle: object, gain: number, pivotY: number }}
+ */
+function processFx(src, w, pivotY = 0.5, h = 0) {
+  const { out, sparkle, gain } = luminanceKey(src);
+  const bb = alphaBBox(out, 10);
+  if (!bb) throw new Error('empty effect after luminance key');
+  const pad = Math.round(Math.max(bb.w, bb.h) * 0.02);
+  const trimmed = crop(out, bb.x - pad, bb.y - pad, bb.w + 2 * pad, bb.h + 2 * pad);
+  // `h` given: size by height (a strike), else by width (a cloud)
+  const wd = h > 0 ? Math.max(2, Math.round((trimmed.width * h) / trimmed.height)) : w;
+  const hd = h > 0 ? h : Math.max(2, Math.round((trimmed.height * w) / trimmed.width));
+  const x2 = bleedColor(resizeArea(trimmed, wd * 2, hd * 2));
+  const x1 = bleedColor(resizeArea(trimmed, wd, hd));
+  return { x2, x1, sparkle, gain, pivotY };
+}
+
+/**
+ * Erase the Gemini mark from an OPAQUE picture (login backdrop, world map). `opts.test(r, g, b)` replaces the default "neutral mid-grey" test (the world map's
+ * mark is a pale cream star on beige parchment). Detail (login backdrop): the mark is the largest connected blob of neutral
  * mid-grey pixels in the bottom-right corner box; it is grown by a few px and filled by diffusion from its border.
  * @returns {{ pixels: number, components: number }}
  */
-function removeBackdropMark(img) {
+function removeBackdropMark(img, opts = {}) {
   const { width: W, height: H, data: d } = img;
   const S = Math.round(0.12 * Math.min(W, H));
   const x0 = W - S,
     y0 = H - S;
   const grey = (x, y) => {
     const i = ((y0 + y) * W + x0 + x) * 4;
+    if (opts.test) return opts.test(d[i], d[i + 1], d[i + 2]);
     const mn = Math.min(d[i], d[i + 1], d[i + 2]),
       mx = Math.max(d[i], d[i + 1], d[i + 2]);
     return mx - mn <= 22 && mn >= 105 && mn <= 225;
@@ -669,6 +729,16 @@ function removeBackdropMark(img) {
   // diffusion fill (Gauss-Seidel): masked pixels converge to the harmonic interpolation of the border
   const px = new Float32Array(S * S * 3);
   const idx = (x, y) => y * S + x;
+  // `opts.skipMagenta`: chroma-key margin pixels inside the box are filled too (but never written back), so the keyed-out magenta cannot
+  // tint the patch
+  const fill = new Uint8Array(grown);
+  if (opts.skipMagenta || opts.borderOk)
+    for (let y = 0; y < S; y++)
+      for (let x = 0; x < S; x++) {
+        const i = ((y0 + y) * W + x0 + x) * 4;
+        if (d[i] > 170 && d[i + 2] > 140 && d[i + 1] < Math.min(d[i], d[i + 2]) - 45) fill[idx(x, y)] = 1;
+        else if (opts.borderOk && !opts.borderOk(d[i], d[i + 1], d[i + 2])) fill[idx(x, y)] = 1;
+      }
   let count = 0;
   for (let y = 0; y < S; y++)
     for (let x = 0; x < S; x++) {
@@ -683,7 +753,7 @@ function removeBackdropMark(img) {
     let nb = 0;
     for (let y = 1; y < S - 1; y++)
       for (let x = 1; x < S - 1; x++) {
-        if (grown[idx(x, y)]) continue;
+        if (fill[idx(x, y)]) continue;
         let near = false;
         for (let dy = -3; dy <= 3 && !near; dy++)
           for (let dx = -3; dx <= 3; dx++) {
@@ -698,17 +768,19 @@ function removeBackdropMark(img) {
         for (let c = 0; c < 3; c++) mean[c] += px[idx(x, y) * 3 + c];
         nb++;
       }
-    if (nb)
-      for (let k = 0; k < S * S; k++)
-        if (grown[k]) for (let c = 0; c < 3; c++) px[k * 3 + c] = mean[c] / nb;
+    if (nb) for (let k = 0; k < S * S; k++) if (fill[k]) for (let c = 0; c < 3; c++) px[k * 3 + c] = mean[c] / nb;
   }
   for (let it = 0; it < 600; it++)
     for (let y = 1; y < S - 1; y++)
       for (let x = 1; x < S - 1; x++) {
-        if (!grown[idx(x, y)]) continue;
+        if (!fill[idx(x, y)]) continue;
         for (let c = 0; c < 3; c++)
           px[idx(x, y) * 3 + c] =
-            (px[idx(x - 1, y) * 3 + c] + px[idx(x + 1, y) * 3 + c] + px[idx(x, y - 1) * 3 + c] + px[idx(x, y + 1) * 3 + c]) / 4;
+            (px[idx(x - 1, y) * 3 + c] +
+              px[idx(x + 1, y) * 3 + c] +
+              px[idx(x, y - 1) * 3 + c] +
+              px[idx(x, y + 1) * 3 + c]) /
+            4;
       }
   for (let y = 0; y < S; y++)
     for (let x = 0; x < S; x++) {
@@ -748,12 +820,46 @@ function processEmblem(src, size2 = 512) {
 }
 
 /**
+ * Remove the magenta residue from the rim of a sprite whose edge is torn / spattered (the chroma key leaves pink in the semi-transparent
+ * spatter): in a band of `radius` px inside the transparent area, red / blue that exceed green are pulled down to green.
+ */
+function despillEdge(img, radius) {
+  const { width: W, height: H, data: d } = img;
+  // integral image of "transparent" -> a pixel is in the rim band when any transparent pixel is within `radius`
+  const I = new Uint32Array((W + 1) * (H + 1));
+  for (let y = 0; y < H; y++) {
+    let row = 0;
+    for (let x = 0; x < W; x++) {
+      row += d[(y * W + x) * 4 + 3] < 128 ? 1 : 0;
+      I[(y + 1) * (W + 1) + x + 1] = I[y * (W + 1) + x + 1] + row;
+    }
+  }
+  const R = Math.round(radius);
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const i = (y * W + x) * 4;
+      if (d[i + 3] === 0) continue;
+      const x0 = Math.max(0, x - R),
+        x1 = Math.min(W, x + R + 1),
+        y0 = Math.max(0, y - R),
+        y1 = Math.min(H, y + R + 1);
+      const t = I[y1 * (W + 1) + x1] - I[y0 * (W + 1) + x1] - I[y1 * (W + 1) + x0] + I[y0 * (W + 1) + x0];
+      if (t === 0) continue;
+      const m = Math.min(d[i], d[i + 2]) - d[i + 1];
+      if (m <= 6) continue;
+      d[i] = Math.max(0, d[i] - m);
+      d[i + 2] = Math.max(0, d[i + 2] - m);
+    }
+}
+
+/**
  * 9-slice UI frame: keyed + trimmed, scaled to `w` design px (@1x) wide (@2x = twice that), no pivot. The slice insets are
  * chosen by the caller from the manifest (fractions of the @1x size) and written next to the frame.
  * @returns {{ x2: Image, x1: Image, sparkle: object }}
  */
-function processUi(src, w) {
-  const { image, sparkle } = cleanSprite(src);
+function processUi(src, w, keyOpts, opts = {}) {
+  const { image, sparkle } = cleanSprite(src, keyOpts);
+  if (opts.despillEdge) despillEdge(image, opts.despillEdge);
   const bb = alphaBBox(image);
   if (!bb) throw new Error('empty sprite after keying');
   const trimmed = crop(image, bb.x, bb.y, bb.w, bb.h);
@@ -768,6 +874,9 @@ module.exports = {
   processMob,
   isDark,
   processParticle,
+  processFx,
+  despillEdge,
+  luminanceKey,
   processBackdrop,
   removeBackdropMark,
   processEmblem,

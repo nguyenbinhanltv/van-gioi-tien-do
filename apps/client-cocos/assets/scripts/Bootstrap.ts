@@ -43,6 +43,7 @@ import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
+import { Minimap, WorldMapPanel } from './MapUi';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -113,6 +114,9 @@ export class Bootstrap extends Component {
   private firstSession: FirstSessionHud | null = null;
   /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
   private tribulationFx: TribulationFx | null = null;
+  /** minimap (corner) and world map panel (M), online only; DOM overlays (PART 3 T) */
+  private minimap: Minimap | null = null;
+  private worldMapPanel: WorldMapPanel | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -341,9 +345,25 @@ export class Bootstrap extends Component {
         (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       );
       this.tribulationFx = new TribulationFx(hudRoot, this.worldRootNode!, art, this.online.net);
+      this.online.skipTelegraphs((v) => this.tribulationFx?.handlesTelegraph(v.id) ?? false);
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
+      {
+        const mapWorld = {
+          width: this.world.width,
+          groundAt: (i: number, j: number) => this.world.groundAt(i, j),
+          zones: this.world.data.zones,
+        };
+        const feed = {
+          self: () => this.online!.net.selfPosition(),
+          remotes: () => this.online!.net.remotes(),
+          isPartyMember: (id: number) => chat.party.members().some((m) => m.entityId === id),
+        };
+        this.minimap = new Minimap(mapWorld, feed);
+        this.worldMapPanel = new WorldMapPanel(mapWorld, feed);
+        this.minimap.onClick(() => this.worldMapPanel?.toggle());
+      }
       // trade panel (D102): opens by itself with a window / an invite, or with T and /trade; its buttons run the lines the player could type
       const net = this.online.net;
       this.tradePanel = new TradePanel(chat.trade, {
@@ -621,6 +641,7 @@ export class Bootstrap extends Component {
     this.updateSkillWheel(frame);
     this.updateStatusRow();
     this.tribulationFx?.update(dt);
+    this.minimap?.update(performance.now());
     this.chatBox?.update();
     this.partyFrames?.update();
     this.tradePanel?.update();
@@ -682,6 +703,8 @@ export class Bootstrap extends Component {
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     this.tribulationFx?.destroy();
+    this.minimap?.destroy();
+    this.worldMapPanel?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

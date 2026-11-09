@@ -643,3 +643,12 @@ Còn mở / lưu ý:
 - `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
+
+## Asset Gemini PART 3 (R tribulation, S equipment, T map): còn mở
+
+- **Phím bản đồ**: docs/05 đặt bản đồ thế giới ở `M`, nhưng `M` đã là Đả tọa (D76), nên bản đồ mở bằng **`L`** hoặc bấm vào minimap; cần game designer chốt phím.
+- **Bản đồ thế giới không theo bố cục D95**: tranh vẽ rừng ở Tây-Bắc, nham thạch Đông-Bắc, cây cổ thụ phía Đông, đầm lầy Tây-Nam, còn bản đồ game là bốn góc phần tư (Bìa rừng TB, Đầm lầy ĐB, Cổ thụ TN, Độc Hỏa Đàm ĐN). Marker người chơi vì vậy đặt **theo vùng** (`worldMapPoint` ở `ArtRegistry.ts`), không theo toạ độ ô thô; vị trí trong vùng chỉ gần đúng. Nên nhờ chủ dự án vẽ lại bản đồ theo bố cục bốn góc phần tư.
+- **Icon trang bị chưa có nơi dùng**: chưa có hệ trang bị / kho trang bị ở client; `getEquipIcon(id)` đã sẵn (trang tải lười `preloadEquipIcons`), cần khung phẩm theo `QUALITY_TIERS` ở UI khi có hệ trang bị.
+- **Minimap chỉ vẽ các marker có dữ liệu**: người chơi, tổ đội, tinh anh, boss (từ `net.remotes()` và đội). Marker nhiệm vụ, cổng, thảo dược chưa có nguồn dữ liệu trong giao thức nên chưa vẽ. Minimap và bản đồ là lớp DOM (không tốn draw call cảnh) và dùng chuỗi tiếng Việt viết thẳng trong `MapUi.ts` (chưa qua bảng chuỗi D104 vì #267 chưa vào main; chuyển sang `t()` khi vào).
+- **Vòng cảnh báo và vết cháy là sprite phẳng 2:1**: vòng cảnh báo co theo đường kính ô trên màn hình (`groundWidth`), không méo theo từng ô như vòng đỏ D89; dùng được vì vùng đòn Lôi Kiếp / Tâm Ma là hình tròn. Tia sét và mây dùng alpha thường (Cocos 3.8 không có blend riêng cho sprite, xem mục PART 2): hơi kém sáng hơn additive thật.
+- **Tâm Ma**: mới chỉnh màu phủ theo concept (tím-đen); chưa có skin bóng đen riêng (concept `r5_tam_ma_concept` chỉ là tham chiếu, `assets-src/concepts/tribulation/tam_ma.png`).

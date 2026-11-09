@@ -841,5 +841,78 @@
       "file": "key_art/logo_emblem",
       "size2": 512
     }
+  },
+  "tribulation": {
+    "_doc": "PART 3 group R (Loi Kiep / Tam Ma presentation, D97). strike + cloud: BLACK background -> luminance alpha (additive look with normal blending: Cocos 3.8 has no per-sprite blend factors); warning + scorch: magenta key, trimmed. w / h = design px @1x (@2x twice). Frames are a LAZY page (atl_fx_*): loaded when the first tribulation starts (PropArt.ensureFx). strike pivotY = where the bolt hits the ground, fraction of the trimmed height from the top. The Tam Ma concept (r5) is reference art only: assets-src/concepts/tribulation/tam_ma.png, not in the build.",
+    "fx": {
+      "fx_strike": {
+        "file": "tribulation/r1_strike",
+        "mode": "black",
+        "h": 384,
+        "pivotY": 0.93
+      },
+      "fx_cloud": {
+        "file": "tribulation/r2_cloud",
+        "mode": "black",
+        "w": 360
+      },
+      "fx_warning": {
+        "file": "tribulation/r3_warning_decal",
+        "mode": "magenta",
+        "w": 256
+      },
+      "fx_scorch": {
+        "file": "tribulation/r4_scorch_decal",
+        "mode": "magenta",
+        "w": 200,
+        "despillEdge": 40
+      }
+    }
+  },
+  "equip": {
+    "_doc": "equip/equipment.png: 4 columns x 3 rows, row-major. ids = the WEAPON TYPES of skills.json classes (sword, fan, gauntlets, whisk_talisman, spear, heavy_saber) then the slots robe, boots, belt, ring, pendant, charm. Neutral art (no quality colour): the UI draws a quality frame / tint (QUALITY_TIERS). getEquipIcon(id); square frame, draw at 48-64 design px.",
+    "file": "equip/equipment",
+    "cols": 4,
+    "rows": 3,
+    "size2": 128,
+    "pad": 0.03,
+    "ids": [
+      "sword",
+      "fan",
+      "gauntlets",
+      "whisk_talisman",
+      "spear",
+      "heavy_saber",
+      "robe",
+      "boots",
+      "belt",
+      "ring",
+      "pendant",
+      "charm"
+    ]
+  },
+  "map": {
+    "_doc": "PART 3 group T. icons: map/minimap_icons.png 4 x 2 round markers, row-major (ids below; MINIMAP_ICON_IDS in ArtRegistry.ts). world: map/world_map.png, the parchment world map (opaque, torn edge keyed), w px @1x (@2x twice), a single lazy texture loaded when the map panel opens (M).",
+    "icons": {
+      "file": "map/minimap_icons",
+      "cols": 4,
+      "rows": 2,
+      "size2": 96,
+      "pad": 0.03,
+      "ids": [
+        "self",
+        "party",
+        "player",
+        "quest",
+        "elite",
+        "boss",
+        "portal",
+        "herb"
+      ]
+    },
+    "world": {
+      "file": "map/world_map",
+      "w": 512
+    }
   }
 }

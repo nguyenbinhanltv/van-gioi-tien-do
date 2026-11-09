@@ -126,7 +126,11 @@ prepareChibiBundles({ root, repo });
   // never leave stale art behind: the sidecar, every atlas page (a page count can change) and the key-art textures
   rmSync(join(worldDir, 'gemini.json'), { force: true });
   for (const f of readdirSync(worldDir)) {
-    if (/^(atl_(prop|gicon|skill|ui|status|realm|ptcl)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png)$/.test(f))
+    if (
+      /^(atl_(prop|gicon|skill|ui|status|realm|ptcl|fx|equip|mmap)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png|map_world_[0-9a-z]+\.png)$/.test(
+        f,
+      )
+    )
       rmSync(join(worldDir, f), { force: true });
   }
   if (existsSync(join(gdir, 'gemini.json'))) {
@@ -136,6 +140,9 @@ prepareChibiBundles({ root, repo });
       for (const p of pages) copyFileSync(join(gdir, 'atlas', p.file), join(worldDir, p.file));
     // login backdrop + emblem: single textures (not atlased), loaded on demand by the class picker
     const ka = sidecar.keyArt ?? {};
+    // PART 3: the parchment world map (two single textures, loaded when the map panel opens)
+    for (const f of [sidecar.worldMap?.f2?.file, sidecar.worldMap?.f1?.file].filter(Boolean))
+      copyFileSync(join(gdir, 'atlas', f), join(worldDir, f));
     for (const f of [ka.backdrop?.file, ka.emblem?.f2?.file, ka.emblem?.f1?.file].filter(Boolean))
       copyFileSync(join(gdir, 'atlas', f), join(worldDir, f));
   }

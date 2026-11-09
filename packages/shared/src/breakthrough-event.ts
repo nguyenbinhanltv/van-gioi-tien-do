@@ -41,6 +41,8 @@ export function majorEventOf(realm: number): MajorEventSpec | undefined {
 }
 
 export const MAJOR_EVENT = {
+  /** wire telegraph ids of the major-event module (Tâm Ma shadow attacks, Lôi Kiếp bolt warnings) start here (u16): above the mob attack counter's usual range. The client uses it to draw them with the tribulation decal. */
+  TELEGRAPH_ID_BASE: 0xf000,
   /** Tâm Ma: the shadow must be killed within this time (docs/01 §5.3, 90 s) */
   TAM_MA_LIMIT_MS: 90_000,
   /** Đạo Tâm assumed for everybody until a Đạo Tâm system exists (docs/01 §5.3 range 0..100). PLACEHOLDER */

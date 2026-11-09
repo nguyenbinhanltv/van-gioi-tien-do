@@ -17,3 +17,4 @@ export * from '../../../packages/shared/src/mob-layout.js'; // tier bands / defa
 export * from '../../../packages/shared/src/first-session.js'; // first-session objective numbers (D84)
 export * from '../../../packages/shared/src/classes.js'; // class wire ids (D82)
 export * from '../../../packages/shared/src/breakthrough-event.js'; // Tâm Ma / Lôi Kiếp event numbers (D97)
+export * from '../../../packages/shared/src/mobs.js'; // mob definitions: tier of a mob wire id for the minimap markers (PART 3)

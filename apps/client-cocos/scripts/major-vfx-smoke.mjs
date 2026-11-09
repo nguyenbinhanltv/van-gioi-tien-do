@@ -151,6 +151,17 @@ try {
   await ev({ phase: 3, wave: 1, remainingMs: 0 });
   await sleep(200);
   const me = await page.evaluate('window.__vgtdOnline().self'); // strike where the player stands so the bolt is on screen
+  // PART 3 R: the effect page loads with the first major_event; wait for it, then the cloud hovers and a warning decal replaces the red circle
+  await page.waitForFunction('window.__vgtdMajor.state().art', { timeout: 30000, polling: 200 }).catch(() => undefined);
+  s = await st();
+  check(s.art, 'the owner tribulation textures are loaded (lazy page)');
+  await page.evaluate(`window.__vgtdMajor.warning(${me.i + 2}, ${me.j + 1}, 1.5, 0.7)`);
+  await sleep(500);
+  s = await st();
+  check(s.cloud, 'the storm cloud hovers above the player during the Lôi Kiếp');
+  check(s.warnings === 1, 'a warning decal is drawn for a major-event telegraph');
+  await page.screenshot({ path: join(out, 'warning-cloud.png') });
+  await page.evaluate('window.__vgtdMajor.clearWarning()');
   await page.evaluate(
     `window.__vgtdMajor.strike({ wave: 1, waves: 3, strike: 0, qi: ${Math.round(me.i * 32)}, qj: ${Math.round(me.j * 32)}, damage: 4200 })`,
   );
@@ -158,10 +169,13 @@ try {
   s = await st();
   check(/Lôi Kiếp: đạo 1\/3/.test(s.title), `Lôi Kiếp headline ("${s.title}")`);
   check(s.bolts >= 1, 'a lightning bolt is drawn when the server reports a hit');
+  check(s.sprites >= 2, 'the bolt texture and the scorch mark are sprites');
   await page.screenshot({ path: join(out, 'lightning.png') });
   await sleep(900);
   s = await st();
   check(s.bolts === 0, 'the bolt fades away');
+  check(s.sprites === 1, 'the scorch mark stays after the bolt (fades over 5 s)');
+  await page.screenshot({ path: join(out, 'scorch.png') });
 
   await ev({ phase: 4, result: 1 });
   await sleep(300);
@@ -175,6 +189,28 @@ try {
     s.cardShown && /Nặng/.test(s.card) && /50%/.test(s.card) && /24 giờ/.test(s.card),
     `Nặng result card ("${s.card.replace(/\n/g, ' | ')}")`,
   );
+  // PART 3 T: the minimap is in the corner; M opens the parchment world map with the player's marker
+  await ev({ phase: 4, result: 1 });
+  await sleep(2500);
+  const mm = await page.evaluate(
+    `(() => { const c = document.getElementById('vgtd-minimap'); return c ? { w: c.width, shown: getComputedStyle(c).display !== 'none' } : null })()`,
+  );
+  check(mm && mm.shown, 'the minimap is shown');
+  await page.screenshot({ path: join(out, 'minimap.png') });
+  await page.keyboard.press('KeyL');
+  await page
+    .waitForFunction(
+      `(() => { const i = document.querySelector('#vgtd-worldmap img'); return i && i.complete && i.naturalWidth > 0 })()`,
+      { timeout: 30000, polling: 200 },
+    )
+    .catch(() => undefined);
+  const wm = await page.evaluate(
+    `(() => { const r = document.getElementById('vgtd-worldmap'); const i = r && r.querySelector('img'); return r ? { open: getComputedStyle(r).display !== 'none', w: i ? i.naturalWidth : 0 } : null })()`,
+  );
+  check(wm && wm.open, 'L opens the world map panel');
+  check(wm && wm.w > 0, 'the parchment world map image loaded');
+  await page.screenshot({ path: join(out, 'world-map.png') });
+  await page.keyboard.press('KeyL');
   console.log(`screenshots: ${out}`);
 } finally {
   await browser.close();
