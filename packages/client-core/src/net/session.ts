@@ -16,6 +16,8 @@ import {
   type FriendResultMsg,
   type FriendStateMsg,
   type PartyInviteMsg,
+  type SectResultMsg,
+  type SectStateMsg,
   type PartyResultMsg,
   type PartyStateMsg,
   type PartyVitalsMsg,
@@ -148,6 +150,14 @@ export interface ChatEvents {
   onChatHistory?(msg: ChatHistoryMsg): void;
   /** The answer to a `sendChat` (0 = delivered, otherwise why not). */
   onChatResult?(msg: ChatResultMsg): void;
+}
+
+/** Sect callbacks (D98), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface SectEvents {
+  /** The whole picture (membership, Cống hiến, library of this class), after every change. */
+  onSectState?(msg: SectStateMsg): void;
+  /** The answer to a `sendSect` (0 = done, otherwise why not). */
+  onSectResult?(msg: SectResultMsg): void;
 }
 
 /** Friends callbacks (D96), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
@@ -291,6 +301,8 @@ export class NetClient {
   chatEvents: ChatEvents = {};
   /** Callbacks for the party (own object, see `PartyEvents`). */
   partyEvents: PartyEvents = {};
+  /** Callbacks for the NPC sect (own object, see `SectEvents`). */
+  sectEvents: SectEvents = {};
   /** Callbacks for the friends list (own object, see `FriendEvents`). */
   friendEvents: FriendEvents = {};
 
@@ -597,6 +609,12 @@ export class NetClient {
       case 'party_result':
         this.emit(() => this.partyEvents.onPartyResult?.(msg));
         break;
+      case 'sect_state':
+        this.emit(() => this.sectEvents.onSectState?.(msg));
+        break;
+      case 'sect_result':
+        this.emit(() => this.sectEvents.onSectResult?.(msg));
+        break;
       case 'friend_state':
         this.emit(() => this.friendEvents.onFriendState?.(msg));
         break;
@@ -729,6 +747,21 @@ export class NetClient {
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
       ws.send(encode({ type: 'party_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one sect command (D98): `op` is a `SectOp` (join / leave at the sect NPC, buy a library manual: `manual` = its index in the
+   * `sect_state` library). `clientMsgId` (uint16) comes back in the `sect_result`. False when the socket is not open or it cannot be encoded.
+   */
+  sendSect(m: { op: number; manual?: number; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(encode({ type: 'sect_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, manual: m.manual ?? 0 }));
     } catch {
       return false;
     }

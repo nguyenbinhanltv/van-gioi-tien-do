@@ -36,6 +36,7 @@ import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
+import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
@@ -100,6 +101,7 @@ export class Bootstrap extends Component {
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
+  private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
@@ -321,6 +323,13 @@ export class Bootstrap extends Component {
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
+      // sect panel (D98): K or /sect; its buttons run the same lines the player could type, the server decides
+      const net = this.online.net;
+      this.sectPanel = new SectPanel(chat.sect, {
+        run: (cmd) => chat.command(cmd),
+        position: () => net.selfPosition(),
+      });
+      chat.onSectToggle = () => this.sectPanel?.toggle();
       // friends panel (D96): O or /friends; its buttons run the same lines the player could type
       this.friendsPanel = new FriendsPanel(chat.friends, {
         run: (cmd) => chat.command(cmd),
@@ -580,6 +589,7 @@ export class Bootstrap extends Component {
     this.tribulationFx?.update(dt);
     this.chatBox?.update();
     this.partyFrames?.update();
+    this.sectPanel?.update();
     this.friendsPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
@@ -630,6 +640,7 @@ export class Bootstrap extends Component {
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
+    this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();

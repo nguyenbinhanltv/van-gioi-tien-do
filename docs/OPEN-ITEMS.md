@@ -593,6 +593,16 @@ Còn mở / lưu ý:
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
 
+## D98 — tông môn NPC: còn mở
+
+- **Số tạm** (docs không ghi, cần game designer): thưởng Cống hiến theo quái (1 / 5 / 25), giá bí tịch cơ bản (3 × cấp), tầm NPC (20 ô), rời tông môn giữ Cống hiến và bí tịch, không trần ngày, không thời gian chờ khi vào lại. Chưa đo tốc độ kiếm so với giá (OPEN-ITEMS X6: Cống hiến chưa có mục tiêu faucet / sink).
+- **Mở khóa bí tịch chưa có tác dụng ở combat**: server ghi và lưu bí tịch đã mua nhưng cast không bị chặn / mở theo đó (combat chưa có cấp mở khóa kỹ năng). Cần nối `SectService.owns()` vào luật tung kỹ năng khi combat có `unlock`.
+- **Chưa làm**: nâng rank bằng Bí Tịch Tàn Trang + Cống hiến (docs/11 §5; rank chưa có ở server), nhiệm vụ tông môn / mốc hành trình đầu thưởng Cống hiến (bộ theo dõi D84 chỉ ở client, server chưa biết mốc), nạp tài nguyên, chức vị, kho tông môn, phe Chính / Tà / Ma và trục xuất theo Nghiệp (docs/01 §9.2).
+- **Tên bí tịch**: dữ liệu kỹ năng chỉ có khóa i18n nên tên hiển thị là id kỹ năng viết hoa chữ đầu, không dấu ("Kim Quang Quet"); cần bảng tên tiếng Việt.
+- **Nhất quán hai tệp**: mua bí tịch ghi sổ cái (`ledger.json`) rồi ghi `sect.json` bằng hai lần ghi tệp riêng; một cú crash đúng giữa hai lần ghi có thể trừ Cống hiến mà chưa ghi bí tịch (và khóa idempotency không lưu qua lần khởi động lại nên mua lại sẽ trừ lần nữa). Adapter PostgreSQL phải làm hai việc đó trong một giao dịch SQL.
+- **Chưa có NPC thật trong thế giới**: chỉ có vị trí (giữa vùng spawn) và khóa giữ chỗ cho standee; chưa có tương tác bấm vào NPC (bảng mở bằng K / `/sect`), chưa có nút mở bảng trên màn hình cảm ứng.
+- Tên hiển thị trong thư viện và Cống hiến chỉ biết trong một World Node; nhiều node cần sổ cái chung (docs/23).
+
 ## D96 — bạn bè: còn mở
 
 - Chưa có danh sách chặn / bỏ qua, chưa có ghi chú bạn bè, nhóm bạn, hay gợi ý bạn (người cùng tổ đội gần đây). Mọi giới hạn (50 / 20 / 20, 5 lệnh burst) là tạm.

@@ -41,6 +41,10 @@ export class ChatBox {
   readonly log: InstanceType<typeof core.ChatLog>;
   /** the party state shown by `PartyFrames` (D93); fed by the same net hooks as the chat */
   readonly party: InstanceType<typeof core.PartyModel>;
+  /** the NPC sect state shown by `SectPanel` (D98); fed by the same net hooks as the chat */
+  readonly sect: InstanceType<typeof core.SectModel>;
+  /** set by the sect panel: `/sect` toggles it (without one the sect is printed as chat lines) */
+  onSectToggle: (() => void) | null = null;
   /** the friend list shown by `FriendsPanel` (D96); fed by the same net hooks as the chat */
   readonly friends: InstanceType<typeof core.FriendsModel>;
   /** set by the friends panel: `/friends` toggles it (without one the list is printed as chat lines) */
@@ -60,8 +64,13 @@ export class ChatBox {
     username: string,
     parent: HTMLElement = document.body,
   ) {
-    this.log = new core.ChatLog({ myName: () => username, onFriends: () => this.showFriends() });
+    this.log = new core.ChatLog({
+      myName: () => username,
+      onSect: () => this.showSect(),
+      onFriends: () => this.showFriends(),
+    });
     this.party = new core.PartyModel({ myId: () => net.entityId, now: () => performance.now() });
+    this.sect = new core.SectModel();
     this.friends = new core.FriendsModel();
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
     net.chatEvents = {
@@ -83,6 +92,17 @@ export class ChatBox {
         const refusal = this.party.applyResult(m);
         if (refusal) this.log.system(refusal, 'error');
         else if (asked && asked.op === core.PartyOp.Decline) this.party.forgetInvite(asked.name);
+      },
+    };
+    // sect (D98): the library lives in the panel; only join / leave / learned manuals / refusals show up as chat lines
+    net.sectEvents = {
+      onSectState: (m) => {
+        const line = this.sect.applyState(m);
+        if (line) this.log.system(line, 'system');
+      },
+      onSectResult: (m) => {
+        const refusal = this.sect.applyResult(m);
+        if (refusal) this.log.system(refusal, 'error');
       },
     };
     // friends (D96): the list lives in the panel; only requests / new friends / refusals show up as chat lines
@@ -237,8 +257,15 @@ export class ChatBox {
         }
         return ok;
       },
+      (m) => this.net.sendSect(m),
       (m) => this.net.sendFriend(m),
     );
+  }
+
+  /** `/sect`: toggle the panel when there is one, else print the sect as chat lines. */
+  private showSect(): void {
+    if (this.onSectToggle) this.onSectToggle();
+    else for (const l of this.sect.summaryLines()) this.log.system(l);
   }
 
   /** `/friends`: toggle the panel when there is one, else print the list. */

@@ -32,13 +32,13 @@ describe('friend commands in the chat input', () => {
     const l = new ChatLog({ myName: () => 'me', onFriends: () => shown++ });
     const got: unknown[] = [];
     const never = () => false;
-    expect(l.submit('/friend add bob', never, never, (m) => (got.push(m), true))).toBe(true);
+    expect(l.submit('/friend add bob', never, never, undefined, (m) => (got.push(m), true))).toBe(true);
     expect(got).toEqual([{ op: FriendOp.Request, name: 'bob', clientMsgId: expect.any(Number) }]);
-    expect(l.submit('/friend add bob', never, never, () => false)).toBe(false);
+    expect(l.submit('/friend add bob', never, never, undefined, () => false)).toBe(false);
     expect(l.entries.at(-1)).toMatchObject({ tone: 'error', text: 'Chưa kết nối máy chủ.' });
     expect(l.submit('/friend add bob', never)).toBe(false); // no friend sender wired
     expect(l.entries.at(-1)).toMatchObject({ tone: 'error' });
-    expect(l.submit('/friends', never, never, () => true)).toBe(false);
+    expect(l.submit('/friends', never, never, undefined, () => true)).toBe(false);
     expect(shown).toBe(1);
   });
 });

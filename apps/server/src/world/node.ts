@@ -63,6 +63,7 @@ import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
+import type { SectService } from '../sect/service.js';
 import type { FriendService } from '../friends/service.js';
 import {
   CombatSystem,
@@ -75,7 +76,7 @@ import {
 } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
 import { MajorBreakthroughs, SHADOW_DEF_ID, ShadowRegistry } from './breakthrough/index.js';
-import { DropSink, InventorySync, itemUseFor, type InventoryService } from './inventory/index.js';
+import { DropSink, InventorySync, dropKillKey, itemUseFor, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -216,6 +217,8 @@ export interface WorldNodeOptions {
   chat?: ChatService;
   /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
   party?: PartyService;
+  /** NPC sect module (D98): join / leave at the sect NPC, Cống hiến from kills, the library; absent = sect commands are rejected as unexpected */
+  sect?: SectService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
   friends?: FriendService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
@@ -332,6 +335,7 @@ export class WorldNode {
   private readonly shadows: ShadowRegistry | null;
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
+  readonly sect: SectService | undefined;
   readonly friends: FriendService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
@@ -375,6 +379,16 @@ export class WorldNode {
       },
       posOf: (id) => this.byId.get(id),
       partyMembers: (id) => this.party?.membersOf(id) ?? [],
+    });
+    this.sect = opts.sect;
+    this.sect?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
+      // the sect NPC stands in the middle of the spawn area unless the sect service was told otherwise
+      defaultNpc: { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
     });
     this.friends = opts.friends;
     this.friends?.attach({
@@ -453,16 +467,25 @@ export class WorldNode {
           canTarget: (casterId, mobId) => shadows?.canTarget(casterId, mobId) ?? true,
           ...opts.combat,
           mobs: mobPort,
-          onDrops: sink
-            ? (e) => {
-                if (shadows?.owns(e.mobId)) return; // a Tâm Ma shadow drops nothing
-                sink.handle(e);
-                opts.combat?.onDrops?.(e);
-              }
-            : (e) => {
-                if (shadows?.owns(e.mobId)) return;
-                opts.combat?.onDrops?.(e);
-              },
+          onDrops:
+            sink || opts.sect
+              ? (e) => {
+                  if (shadows?.owns(e.mobId)) return; // a Tâm Ma shadow drops nothing
+                  sink?.handle(e);
+                  // a sect member's kill pays Cống hiến (D98); the kill key makes a repeated event a replay
+                  const owner = this.clients.get(e.killerId)?.accountId;
+                  if (owner !== undefined && opts.sect)
+                    opts.sect.onKill(
+                      owner,
+                      mobPort?.combatStats(e.mobId)?.dropSource ?? 'field',
+                      dropKillKey(e.mobId, this.world.tick),
+                    );
+                  opts.combat?.onDrops?.(e);
+                }
+              : (e) => {
+                  if (shadows?.owns(e.mobId)) return;
+                  opts.combat?.onDrops?.(e);
+                },
         })
       : null;
     this.mobAttacks =
@@ -555,6 +578,7 @@ export class WorldNode {
     });
     this.progression?.join(id, accountId, this.world.timeMs);
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.sect?.join({ entityId: id, accountId, path: classPath });
     this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
@@ -602,6 +626,7 @@ export class WorldNode {
     void this.progression?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
+    this.sect?.leave(id);
     this.friends?.leave(id);
     this.chatHistoryDue.delete(id);
     this.heldMajor.delete(id);
@@ -822,6 +847,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
         break;
+      case 'sect_cmd':
+        if (!this.sect) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.sect.handle(id, msg, this.world.timeMs));
+        break;
       case 'friend_cmd':
         if (!this.friends) {
           c.stats.badMessages++;
@@ -912,6 +943,7 @@ export class WorldNode {
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     if (this.majorDue.size) this.sendMajorDue();
     this.party?.tick(this.world.timeMs, this.world.tick);
+    this.sect?.tick();
     this.friends?.tick();
     for (const e of this.world.entities) {
       if (!e.connected) {

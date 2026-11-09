@@ -15,6 +15,13 @@ import {
   type ChatServerMessage,
 } from './chat.js';
 import {
+  decodeSectBody,
+  encodeSectBody,
+  validateSectMessage,
+  type SectClientMessage,
+  type SectServerMessage,
+} from './sect.js';
+import {
   decodeFriendBody,
   encodeFriendBody,
   validateFriendMessage,
@@ -52,6 +59,10 @@ export enum ColdMsgId {
   PartyInvite = 46,
   PartyState = 47,
   PartyVitals = 48,
+  /** NPC sect (D98, sect.ts): the docs/24 block 100-119 is reserved for `sect_*` */
+  SectCmd = 100,
+  SectResult = 101,
+  SectState = 102,
   /** major breakthrough events (D97, major.ts) */
   MajorEvent = 69,
   TribulationStrike = 70,
@@ -90,6 +101,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyInvite]: 'party_invite',
   [ColdMsgId.PartyState]: 'party_state',
   [ColdMsgId.PartyVitals]: 'party_vitals',
+  [ColdMsgId.SectCmd]: 'sect_cmd',
+  [ColdMsgId.SectResult]: 'sect_result',
+  [ColdMsgId.SectState]: 'sect_state',
   [ColdMsgId.MajorEvent]: 'major_event',
   [ColdMsgId.TribulationStrike]: 'tribulation_strike',
   [ColdMsgId.FriendCmd]: 'friend_cmd',
@@ -115,6 +129,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_invite: ColdMsgId.PartyInvite,
   party_state: ColdMsgId.PartyState,
   party_vitals: ColdMsgId.PartyVitals,
+  sect_cmd: ColdMsgId.SectCmd,
+  sect_result: ColdMsgId.SectResult,
+  sect_state: ColdMsgId.SectState,
   major_event: ColdMsgId.MajorEvent,
   tribulation_strike: ColdMsgId.TribulationStrike,
   friend_cmd: ColdMsgId.FriendCmd,
@@ -226,6 +243,7 @@ export type ColdClientMessage =
   | InvClientMessage
   | ChatClientMessage
   | PartyClientMessage
+  | SectClientMessage
   | FriendClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
@@ -234,6 +252,7 @@ export type ColdServerMessage =
   | InvServerMessage
   | ChatServerMessage
   | PartyServerMessage
+  | SectServerMessage
   | MajorServerMessage
   | FriendServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
@@ -303,6 +322,7 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validateInventoryMessage(o) ??
         validateChatMessage(o) ??
         validatePartyMessage(o) ??
+        validateSectMessage(o) ??
         validateMajorMessage(o) ??
         validateFriendMessage(o)
       );
@@ -379,6 +399,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'party_vitals':
       encodePartyBody(w, m);
       break;
+    case 'sect_cmd':
+    case 'sect_result':
+    case 'sect_state':
+      encodeSectBody(w, m);
+      break;
     case 'major_event':
     case 'tribulation_strike':
       encodeMajorBody(w, m);
@@ -444,6 +469,10 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'party_state':
     case 'party_vitals':
       return decodePartyBody(r, type);
+    case 'sect_cmd':
+    case 'sect_result':
+    case 'sect_state':
+      return decodeSectBody(r, type);
     case 'major_event':
     case 'tribulation_strike':
       return decodeMajorBody(r, type);
