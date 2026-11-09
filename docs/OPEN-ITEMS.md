@@ -654,6 +654,17 @@ Công cụ `npm run soak -w @vgtd/server` (bot chơi thật qua `NetClient`, kho
 - **Chưa chạy** soak 30 phút / 4-8 giờ / 24 giờ (cổng beta "100 CCU 24 giờ không sự cố"): cần máy riêng, chạy tay (`--hours 24`).
 - Bot chưa gồm bạn bè (D96), đột phá lớn (D97), chợ, nhiều vùng bản đồ.
 
+## Vạn Bảo Lâu (2026-11-09; D112, [docs/38](38-van-bao-lau.md))
+
+Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn, phí 1 % + thuế cố định 5 %, CPI bóng, lưu bằng `market.json`, panel `V`). Còn mở:
+
+- **Bền vững qua crash: ĐÃ nối TxJournal (D102).** `MarketService` commit sổ chợ + túi đồ + sổ cái bằng một bản ghi nhật ký sau mỗi thay đổi (`stores.durableMarket`), lưu túi các chủ liên quan trước khi commit; test giết tiến trình ở từng giai đoạn nhật ký cho đăng / mua / hủy / hết hạn (`market-crash.test.ts`). Còn mở: lỗi commit hiện chỉ được đếm và ghi log (lệnh vẫn trả Ok, store thử lại), chưa có cảnh báo vận hành; ghi nền `DocFile` của D106 (#261) phải giữ thứ tự "hoàn tất nhật ký dở trước mọi lần ghi sau" khi merge; cả sổ vẫn ghi lại toàn bộ mỗi lần (play-test).
+- **Mua một phần** (docs/24 cũ có `qty` ở `market_buy`), **niêm yết bằng trung / thượng phẩm** (chỉ hạ phẩm), **thư (`mail`)** cho hàng hết hạn khi không còn chỗ (hiện: túi, rồi kho nhặt đồ, rồi giữ `returning`).
+- **Cửa sổ giá `P_ref/10 .. P_ref x 10`** (docs/26 §5.2, câu hỏi Q3): chưa có giá tham chiếu nên chưa áp dụng; chưa có phát hiện wash trading (CPI chưa loại giao dịch bị gắn cờ).
+- **Rổ CPI** (`MARKET_BASKET`: đan đột phá, nguyên liệu, bản vẽ trắng-lục) và mọi giá trị mặc định (10 niêm yết / tài khoản, 12 / 24 / 48 giờ, giới hạn tốc độ) là đề xuất **cần game designer duyệt**.
+- **Chưa có smoke trình duyệt cho panel** (cần dựng lại Cocos); `MarketModel` và luồng server-client đã có test; panel mới chỉ qua typecheck của script.
+- `docs/24` cũ nói `requestId` UUID cho mọi lệnh có tác dụng phụ; chợ dùng `clientMsgId` u16 vì lệnh dựa trên trạng thái nên tự idempotent (mua hai lần: lần hai "không còn").
+
 ## D116 — hiệu ứng kỹ năng: còn mở (worker39, 2026-11-09)
 
 1. **Số tạm** (`SKILL_EFFECTS`, mô phỏng thiết kế): trần giảm sát thương 0,75, sàn DEF 0,2, trần `def_shred` 0,5, chia dấu nổ 0,6, boss chậm ×0,5, tầm thú 9 ô, lướt dừng cách 1 ô, bước va chạm 0,25 ô, ngữ cảnh nhóm 12 ô, trần khiên từ hồi thừa; tinh anh nhận khống chế đủ. Cần game designer duyệt khi cân bằng.

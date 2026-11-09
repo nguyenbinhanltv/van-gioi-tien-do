@@ -41,6 +41,7 @@ import { PartyFrames } from './PartyFrames';
 import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
+import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
@@ -109,6 +110,7 @@ export class Bootstrap extends Component {
   private tradePanel: TradePanel | null = null;
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
@@ -370,6 +372,8 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // market panel (D112, Vạn Bảo Lâu): V; it owns net.marketEvents (its own hook object, nobody replaces it)
+      this.marketPanel = new MarketPanel(net);
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -626,6 +630,7 @@ export class Bootstrap extends Component {
     this.tradePanel?.update();
     this.sectPanel?.update();
     this.friendsPanel?.update();
+    this.marketPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -679,6 +684,7 @@ export class Bootstrap extends Component {
     this.tradePanel?.destroy();
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
+    this.marketPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     this.tribulationFx?.destroy();

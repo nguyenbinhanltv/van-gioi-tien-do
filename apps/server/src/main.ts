@@ -71,6 +71,24 @@ const srv = await startServer({
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
   ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
   ...(stores ? { friends: { store: stores.friends } } : {}),
+  // Vạn Bảo Lâu (D112): the book is the market.json document; the weekly SHADOW CPI report goes to the log (telemetry can subscribe later)
+  market: {
+    ...(stores
+      ? {
+          store: stores.market,
+          // the book, the ledger and the bags become durable as ONE unit through the write-ahead journal (D102 / D112)
+          durable: (label: string) => stores.durableMarket.commit(label),
+          onDurableError: (label: string, e: unknown) =>
+            console.error(
+              `[vgtd/market] journal commit failed (${label}): ${e instanceof Error ? e.message : String(e)}; the change stands in memory and the stores retry it`,
+            ),
+        }
+      : {}),
+    report: (r) =>
+      console.log(
+        `[vgtd/market] shadow CPI week ${r.week}: cpi ${r.cpi === null ? 'n/a' : r.cpi.toFixed(3)}, applied tax ${r.appliedBps / 100}%, shadow tax ${r.shadowBps / 100}%, ${r.trades} sales, ${r.volume} hạ phẩm (measured, NOT applied)`,
+      ),
+  },
   // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)
   progression: {
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
