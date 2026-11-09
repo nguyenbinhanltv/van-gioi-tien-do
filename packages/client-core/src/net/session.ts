@@ -28,6 +28,8 @@ import {
   type SelfState,
   type SkillResultMsg,
   type BossPhaseMsg,
+  type SelfStatus,
+  type StatusUpdateMsg,
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
@@ -77,6 +79,8 @@ export interface NetEvents {
   onSkillResult?(msg: SkillResultMsg): void;
   /** a boss in view entered a new phase (D91): `phase` is the new phase index (>= 1); the boss is invulnerable for `transformMs` */
   onBossPhase?(msg: BossPhaseMsg): void;
+  /** another player's root / slow / poison mask changed (D94); also readable through `statusMaskOf` */
+  onStatusUpdate?(msg: StatusUpdateMsg): void;
   onAoiEnter?(entities: readonly EnterEntity[]): void;
   /** Runs BEFORE the entities are dropped from `remote`, so `entityOfIndex(index)` still resolves each of them. */
   onAoiLeave?(indices: readonly number[]): void;
@@ -206,6 +210,10 @@ export class NetClient {
   mapTiles = 0;
   readonly remote: RemoteWorld;
   predictor: Predictor | null = null;
+  /** own status block as received (D94) with the receipt time, for `ownStatus` */
+  private selfStatusAt: { status: SelfStatus; at: number } | null = null;
+  /** other entities' status masks (`StatusBit` flags), from `status_update` */
+  private readonly otherStatus = new Map<number, number>();
   rttMs = 0;
   snapshots = 0;
   /** replaceable at any time (e.g. when combat is attached after the session started) */
@@ -362,6 +370,8 @@ export class NetClient {
     this.remote.clear();
     this.bag.reset();
     this.telegraph.clear();
+    this.selfStatusAt = null;
+    this.otherStatus.clear();
     this.lastSnapshotSeq = 0;
     this.acc = 0;
     this.pings.clear();
@@ -507,6 +517,11 @@ export class NetClient {
         break;
       case 'aoi_leave':
         this.emit(() => this.events.onAoiLeave?.(msg.indices)); // before removal: indices still resolve
+        for (const i of msg.indices) {
+          // an entity that left the view has no known status: its mask-0 `status_update` may never reach us (D94)
+          const id = this.entityOfIndex(i);
+          if (id !== undefined) this.otherStatus.delete(id);
+        }
         this.remote.onLeave(msg);
         break;
       case 'telegraph_start':
@@ -517,6 +532,11 @@ export class NetClient {
         break;
       case 'boss_phase':
         this.emit(() => this.events.onBossPhase?.(msg));
+        break;
+      case 'status_update':
+        if (msg.mask === 0) this.otherStatus.delete(msg.entityId);
+        else this.otherStatus.set(msg.entityId, msg.mask);
+        this.emit(() => this.events.onStatusUpdate?.(msg));
         break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
@@ -586,6 +606,7 @@ export class NetClient {
   private onSelf(self: SelfState): void {
     const p = this.predictor;
     if (!p) return;
+    if (self.status) this.selfStatusAt = { status: self.status, at: this.o.deps.now() };
     if (!p.ready) {
       // first sight of ourselves: adopt the server position
       p.reconcile(self);
@@ -728,6 +749,21 @@ export class NetClient {
   }
 
   /** Where to draw the local character (prediction + decaying correction), or null before the first snapshot. */
+  /** Own root / slow / poison time left now (ms, 0 = not active): the last status block counted down by the time since it arrived. */
+  ownStatus(): { rootMs: number; slowMs: number; slowPct: number; poisonMs: number } {
+    const s = this.selfStatusAt;
+    if (!s) return { rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 };
+    const el = Math.max(0, this.o.deps.now() - s.at);
+    const left = (ms: number): number => Math.max(0, Math.round(ms - el));
+    const slowMs = left(s.status.slowMs);
+    return { rootMs: left(s.status.rootMs), slowMs, slowPct: slowMs > 0 ? s.status.slowPct : 0, poisonMs: left(s.status.poisonMs) };
+  }
+
+  /** Another player's `StatusBit` flags (0 = none known), from `status_update`. */
+  statusMaskOf(entityId: number): number {
+    return this.otherStatus.get(entityId) ?? 0;
+  }
+
   selfPosition(): { i: number; j: number } | null {
     return this.predictor?.display() ?? null;
   }

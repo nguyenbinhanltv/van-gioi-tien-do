@@ -2,10 +2,14 @@
 import { DIRECTIONS } from '@vgtd/shared';
 import { directionOf, type EntityState, type MoveState } from '@vgtd/sim';
 import { dequantizePos, quantizePos } from './binary.js';
-import type { InputPacket, SelfState, SelfVitals, SnapshotEntity } from './types.js';
+import type { InputPacket, SelfState, SelfStatus, SelfVitals, SnapshotEntity } from './types.js';
 
 /** Server → wire: the owner's movement state. Positions travel as float32 (rounded here so JSON and binary agree). */
-export function selfStateOf(e: EntityState, vitals: SelfVitals | null = null): SelfState {
+export function selfStateOf(
+  e: EntityState,
+  vitals: SelfVitals | null = null,
+  status: SelfStatus | null = null,
+): SelfState {
   return {
     lastSeq: e.lastSeq,
     i: Math.fround(e.i),
@@ -18,6 +22,7 @@ export function selfStateOf(e: EntityState, vitals: SelfVitals | null = null): S
     dashCdMs: Math.round(e.dashCdMs),
     invulnMs: Math.round(e.invulnMs),
     vitals,
+    status,
   };
 }
 

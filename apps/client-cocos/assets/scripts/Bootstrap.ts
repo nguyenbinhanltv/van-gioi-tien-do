@@ -490,6 +490,15 @@ export class Bootstrap extends Component {
     return shared.tileToScreen(p.i, p.j);
   }
 
+  /** Online: the own status row (root / slow / poison from the status block, shield from the vitals) next to the HP bar (D94). */
+  private updateStatusRow(): void {
+    const combat = this.combat;
+    if (!combat) return;
+    const own = this.online?.active ? this.online.net.ownStatus() : { rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 };
+    const forced = (globalThis as unknown as Record<string, typeof own | undefined>).__vgtdOwnStatus; // automation: scripts/combat-online-smoke.mjs
+    combat.setStatuses(core.statusRowItems(forced ?? own, combat.backend.player.shield));
+  }
+
   /**
    * Touch input mode: the wheel replaces the bottom hotbar, and the casts the TouchController produced (tap = auto-target, drag = aim point)
    * go to the combat HUD. Pointer mode (desktop) never reads `frame.casts`: keys 1-8 and the hotbar are handled by CombatUi itself.
@@ -543,6 +552,7 @@ export class Bootstrap extends Component {
     this.applyServerClass();
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
+    this.updateStatusRow();
     this.chatBox?.update();
     this.partyFrames?.update();
     this.friendsPanel?.update();
