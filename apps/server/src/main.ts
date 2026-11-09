@@ -1,4 +1,6 @@
 /** Local dev entry: `PORT=8080 node <bundle>` (hosting is local-only for now, D27). */
+import { join } from 'node:path';
+import { openFileStores } from './persistence/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
 
@@ -22,6 +24,17 @@ const centre = ((mapTiles ?? 256) - (spawnSide ?? 0)) / 2;
 // INVENTORY=1 (needs COMBAT) fills the killer's bag and wallet from mob drops (D77): in-memory only, lost on restart; there is no client view of it yet,
 // so each grant is logged here.
 const flag = (v: string | undefined): boolean => v === '1' || v === 'true';
+// STORE=file keeps accounts, characters (class, tu vi), bags and the stone ledger in DATA_DIR (default ./.vgtd-data, gitignored) so a restart
+// keeps the players (D92); STORE=memory (default) is the old in-memory behaviour. Only password HASHES are written, never a password.
+const storeKind = process.env.STORE ?? 'memory';
+if (storeKind !== 'file' && storeKind !== 'memory')
+  throw new Error(`STORE must be "file" or "memory", got "${storeKind}"`);
+const stores =
+  storeKind === 'file'
+    ? openFileStores(process.env.DATA_DIR ?? join(process.cwd(), '.vgtd-data'), {
+        onError: (e) => console.error('[vgtd/server] persistence write failed:', e),
+      })
+    : null;
 const srv = await startServer({
   port,
   host: process.env.HOST ?? '127.0.0.1',
@@ -31,12 +44,37 @@ const srv = await startServer({
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
-    inventory: flag(process.env.INVENTORY) ? new InventoryService() : undefined,
+    inventory: flag(process.env.INVENTORY)
+      ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
+      : undefined,
   },
-  auth: { registerPerIpPerDay },
+  auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
   // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)
-  progression: process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : undefined,
+  progression: {
+    ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
+    ...(stores ? { store: stores.progression } : {}),
+  },
 });
+if (stores) {
+  console.log(`[vgtd/server] STORE=file: data in ${stores.dir}`);
+  // online players' bags are saved when they leave; also save them every few seconds so a hard kill (npm run play stops its children
+  // forcefully on Windows) loses seconds, not a whole session. Unchanged bags cost no disk write.
+  setInterval(() => srv.world.inventory?.flushAll(), 5000).unref();
+  // flush on a clean shutdown: let the gateway release its connections (they save their bags / progress), then write every document
+  let closing = false;
+  const shutdown = async (signal: string): Promise<void> => {
+    if (closing) return;
+    closing = true;
+    console.log(`[vgtd/server] ${signal}: saving and stopping`);
+    await srv.stop().catch(() => undefined);
+    await new Promise((r) => setTimeout(r, 100));
+    srv.world.inventory?.flushAll();
+    stores.flush();
+    process.exit(0);
+  };
+  process.on('SIGINT', () => void shutdown('SIGINT'));
+  process.on('SIGTERM', () => void shutdown('SIGTERM'));
+}
 if (srv.world.dropSink)
   srv.world.dropSink.onGranted = (owner, e, r) =>
     console.log(

@@ -509,3 +509,11 @@ Còn mở / lưu ý:
 - Chưa có telegraph cho boss có bộ kỹ năng riêng và các hiệu ứng (vũng độc, triệu hồi) vì server chưa mô phỏng chúng (xem mục 11).
 - Chưa gộp nhiều telegraph cùng lúc (bầy quái): mỗi đòn một khung 20 B. Nếu đo thực tế thấy tốn, gộp theo tick.
 - Đã có smoke test trình duyệt thật `npm run telegraph:online -w client-cocos` (decal hiện khi `telegraph_start` tới, biến mất khi đòn kết thúc); nó đếm điểm ảnh đỏ nên chỉ là kiểm tra thô, chưa đánh giá thẩm mỹ / độ rõ của decal trên mọi nền bản đồ.
+
+## D92 — lưu trữ bằng tệp: còn mở
+
+- Không phải cơ sở dữ liệu: một tệp JSON mỗi kho, nạp hết vào bộ nhớ lúc khởi động, ghi lại toàn bộ tệp (gộp theo 250 ms). Đủ cho play-test và vài nghìn nhân vật; `ledger.json` tăng vô hạn vì bút toán chỉ thêm (cần JSONL hoặc DB thật trước khi mở cho nhiều người).
+- Một tiến trình duy nhất: không khóa tệp, hai server cùng `DATA_DIR` sẽ ghi đè nhau. Chưa có sao lưu định kỳ ngoài `.bak` (bản trước đó).
+- Chưa lưu: khóa idempotency của sổ cái (xem D92), nhật ký roll (`roll_log`), token nối lại; vị trí / máu hiện tại của nhân vật không được lưu (vào lại ở điểm xuất hiện, như trước). Kỹ năng / hotbar / hồi chiêu không thuộc dữ liệu bền.
+- `npm run play` dừng tiến trình con bằng `taskkill /F` trên Windows nên không có tắt máy sạch: dữ liệu có thể mất tới ~5 s thay đổi túi đồ gần nhất (bản ghi tài khoản / nhân vật ghi sau <= 250 ms).
+- Adapter PostgreSQL chưa viết (giao diện `AccountStore` / `InventoryStore` cần chuyển sang bất đồng bộ; xem D92).
