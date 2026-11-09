@@ -10,6 +10,7 @@ import {
   DEFAULT_CLASS,
   MOB_ID_BASE,
   NETWORK,
+  PARTY,
   aoiCentre,
   classWireId,
   inAoiAt,
@@ -60,6 +61,7 @@ import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
+import type { PartyService } from '../party/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -157,6 +159,8 @@ interface Client {
   inbox: AimedInput[];
   /** own vitals last sent to this client: they are re-sent only when they change (or on a full / resync snapshot) */
   lastVitals: SelfVitals | null;
+  /** `StatusSystem.signature` of the own status block last sent ('' = nothing active): re-sent only on a change (D94) */
+  lastStatusSig: string;
   lastRecvSeq: number | null;
   visible: Map<number, Visible>;
   /** slot -> entity id (0 = free) */
@@ -207,6 +211,8 @@ export interface WorldNodeOptions {
   progression?: ProgressionService;
   /** chat module (D87): World / Zone / Whisper channels; absent = chat messages are rejected as unexpected */
   chat?: ChatService;
+  /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
+  party?: PartyService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -316,6 +322,7 @@ export class WorldNode {
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
   readonly progression: ProgressionService | undefined;
   readonly chat: ChatService | undefined;
+  readonly party: PartyService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -353,6 +360,24 @@ export class WorldNode {
         if (c && !c.dead) this.send(c, m);
       },
       posOf: (id) => this.byId.get(id),
+      partyMembers: (id) => this.party?.membersOf(id) ?? [],
+    });
+    this.party = opts.party;
+    this.party?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      vitalsOf: (id) => {
+        const e = this.byId.get(id);
+        if (!e) return undefined;
+        return {
+          hp: Math.round(e.hp),
+          hpMax: Math.round(this.maxHpOf(e)),
+          mp: Math.round(e.mp),
+          mpMax: Math.round(e.mpMax),
+        };
+      },
     });
     this.progression?.attach({
       isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
@@ -398,6 +423,7 @@ export class WorldNode {
           seed,
           respawnPoint: () => this.spawnPoint(),
           isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
+          partyOf: (id) => this.creditGroupOf(id),
           isInvulnerable: (id) => this.mobAttacks?.isInvulnerable(id) ?? false,
           ...opts.combat,
           mobs: mobPort,
@@ -470,6 +496,7 @@ export class WorldNode {
       suspendedAtMs: null,
       inbox: [],
       lastVitals: null,
+      lastStatusSig: '',
       lastRecvSeq: null,
       visible: new Map(),
       slots: new Array<number>(this.maxVisible).fill(0),
@@ -486,6 +513,7 @@ export class WorldNode {
       stats: emptyStats(),
     });
     this.progression?.join(id, accountId, this.world.timeMs);
+    this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -524,6 +552,7 @@ export class WorldNode {
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
     void this.progression?.leave(id);
     this.chat?.leave(id);
+    this.party?.leave(id);
     this.chatHistoryDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -618,6 +647,7 @@ export class WorldNode {
     c.inbox.length = 0;
     c.lastRecvSeq = null;
     c.lastVitals = null;
+    c.lastStatusSig = '';
     c.visible = new Map();
     c.slots.fill(0);
     c.last.fill(undefined);
@@ -729,6 +759,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.send(c, this.chat.handle(id, msg, this.world.timeMs));
         break;
+      case 'party_cmd':
+        if (!this.party) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           c.stats.badMessages++;
@@ -799,10 +835,12 @@ export class WorldNode {
       if (mobAtk.phases.length > 0) this.sendBossPhases(mobAtk.phases);
     }
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
+    this.sendStatusUpdates(); // other players' root / slow / poison, on change (D94)
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
+    this.party?.tick(this.world.timeMs, this.world.tick);
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -848,6 +886,27 @@ export class WorldNode {
         this.metrics.inventorySendErrors++;
       }
     }
+  }
+
+  /**
+   * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
+   * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
+   */
+  private creditGroupOf(killerId: number): number[] {
+    const members = this.party?.membersOf(killerId) ?? [];
+    if (members.length <= 1) return [killerId];
+    const k = this.byId.get(killerId);
+    const out: number[] = [];
+    for (const m of members) {
+      if (m === killerId) {
+        out.push(m);
+        continue;
+      }
+      const e = this.byId.get(m);
+      if (!e || !k || e.hp <= 0) continue;
+      if (Math.hypot(e.i - k.i, e.j - k.j) <= PARTY.SHARE_RANGE_TILES) out.push(m);
+    }
+    return out;
   }
 
   /** The World channel's recent lines go to each newly joined player once (not before the gateway's `hello_ack` is out: next tick). */
@@ -1032,6 +1091,11 @@ export class WorldNode {
       if (enters.length > 0) {
         this.send(c, { type: 'aoi_enter', entities: enters });
         c.stats.aoiEnter += enters.length;
+        // an entity that comes into view with an active status: tell this client now (status_update otherwise only goes out on a change)
+        for (const en of enters) {
+          const mask = this.statusMasks.get(en.entityId);
+          if (mask) this.send(c, { type: 'status_update', entityId: en.entityId, mask });
+        }
       }
       const n = c.visible.size;
       c.stats.visibleSum += n;
@@ -1137,6 +1201,41 @@ export class WorldNode {
         const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
         const { u, w } = toUW(centre.i, centre.j);
         if (inAoiAt(boss.i, boss.j, u, w, false)) this.send(c, msg);
+      }
+    }
+  }
+
+  /** Last status mask broadcast per entity (D94): `status_update` goes out only when it changes. */
+  private readonly statusMasks = new Map<number, number>();
+
+  /**
+   * Other players' statuses (D94): when the root / slow / poison mask of an entity changes, `status_update` goes to every OTHER client whose
+   * AOI holds it (the entity itself learns through its own status block). A dead or held connection is skipped.
+   */
+  private sendStatusUpdates(): void {
+    const combat = this.combat;
+    if (!combat) return;
+    const now = this.world.timeMs;
+    const ids = new Set<number>([...combat.status.affectedIds(), ...this.statusMasks.keys()]);
+    for (const id of [...ids].sort((a, b) => a - b)) {
+      const mask = combat.status.maskOf(id, now);
+      const prev = this.statusMasks.get(id) ?? 0;
+      if (mask === prev) {
+        if (mask === 0) this.statusMasks.delete(id);
+        continue;
+      }
+      if (mask === 0) this.statusMasks.delete(id);
+      else this.statusMasks.set(id, mask);
+      const e = this.byId.get(id);
+      if (!e) continue;
+      const msg: Message = { type: 'status_update', entityId: id, mask };
+      for (const c of this.clients.values()) {
+        if (c.id === id || c.dead || c.suspendedAtMs !== null) continue;
+        const me = this.byId.get(c.id);
+        if (!me) continue;
+        const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
+        const { u, w } = toUW(centre.i, centre.j);
+        if (inAoiAt(e.i, e.j, u, w, false)) this.send(c, msg);
       }
     }
   }
@@ -1253,6 +1352,9 @@ export class WorldNode {
       // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
       const vitals = this.vitalsOf(me);
       const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
+      // own root / slow / poison (D94): only on a change since what this client last got (or on a full / resync snapshot while something is active)
+      const statusSig = this.combat ? this.combat.status.signature(me.id, this.world.timeMs) : '';
+      const sendStatus = statusSig !== c.lastStatusSig || ((full || resync) && statusSig !== '');
       const seq = (c.snapSeq + 1) & 0xffff;
       const bytes = encode(
         {
@@ -1260,13 +1362,18 @@ export class WorldNode {
           seq,
           baselineSeq: full ? null : c.snapSeq & 0xffff,
           tick: this.world.tick,
-          self: selfStateOf(me, sendVitals ? vitals : null),
+          self: selfStateOf(
+            me,
+            sendVitals ? vitals : null,
+            sendStatus && this.combat ? this.combat.status.statusOf(me.id, this.world.timeMs) : null,
+          ),
           entities,
         },
         { baseline: (index) => c.last[index] },
       );
       for (let k = 0; k < touchedIdx.length; k++) c.last[touchedIdx[k]!] = touchedLast[k];
       if (sendVitals) c.lastVitals = vitals;
+      c.lastStatusSig = statusSig;
       c.snapSeq = seq;
       c.stats.snapshots++;
       this.write(c, bytes);

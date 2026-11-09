@@ -378,5 +378,59 @@
       "mob": "boss_co_mang",
       "phase": 2
     }
+  },
+  "ground": {
+    "_doc": "Top-down ground paintings (2048 px, Gemini sparkle bottom-right on each). Each is cut into `variants` crops of `crop` px (2x2 quadrants), made wrap-periodic and resized to `patch` px; the tile generator samples them through the iso diamond (generate_tilemap.js --ground). maxSeamRatio = largest allowed wrap-seam score after the fix (1 = invisible).",
+    "materials": [
+      "grass",
+      "dirt",
+      "stone",
+      "water",
+      "swamp",
+      "lava"
+    ],
+    "variants": 4,
+    "crop": 1024,
+    "patch": 256,
+    "maxSeamRatio": 1.6
+  },
+  "ui": {
+    "_doc": "9-slice UI frames (magenta bg, sparkle bottom-right). w = design px width @1x (@2x is twice); inset = [left, top, right, bottom] slice insets in @1x px (x2 for the @2x frame); the stretched centre must stay > 0 (checked).",
+    "panel_jade": {
+      "w": 200,
+      "inset": [
+        48,
+        42,
+        48,
+        42
+      ]
+    },
+    "button_normal": {
+      "w": 128,
+      "inset": [
+        20,
+        12,
+        20,
+        12
+      ]
+    },
+    "button_disabled": {
+      "w": 128,
+      "inset": [
+        20,
+        12,
+        20,
+        12
+      ]
+    },
+    "slot_frame": {
+      "w": 56,
+      "inset": [
+        14,
+        14,
+        14,
+        14
+      ]
+    }
   }
 }

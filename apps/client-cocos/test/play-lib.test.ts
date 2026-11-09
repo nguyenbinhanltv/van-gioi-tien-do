@@ -1,6 +1,6 @@
-import { mkdirSync, mkdtempSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 // the helpers of `npm run play` live with the script (repo root scripts/), plain ESM
 import * as lib from '../../../scripts/lib/play-lib.mjs';
@@ -20,6 +20,11 @@ const {
   openCommand,
   newestSource,
   parseArgs,
+  DATA_FILES,
+  hasSavedData,
+  resetCheck,
+  resetData,
+  storePlan,
   pickPort,
   reasonVi,
   variantOf,
@@ -32,6 +37,9 @@ type Opts = {
   open: boolean;
   lan: boolean;
   smoke: boolean;
+  memory: boolean;
+  resetData: boolean;
+  yes: boolean;
   help: boolean;
   clientPort: number;
   serverPort: number;
@@ -52,6 +60,9 @@ describe('play: argument parsing', () => {
       open: false,
       lan: true,
       smoke: false,
+      memory: false,
+      resetData: false,
+      yes: false,
       help: false,
       clientPort: DEFAULTS.clientPort,
       serverPort: DEFAULTS.serverPort,
@@ -407,5 +418,89 @@ describe('openCommand', () => {
   it('passes the URL as a single untouched argument on macOS and Linux', () => {
     expect(openCommand('darwin', url)).toEqual(['open', [url]]);
     expect(openCommand('linux', url)).toEqual(['xdg-open', [url]]);
+  });
+});
+
+describe('play: persistent data flags (D92)', () => {
+  it('parses --memory, --reset-data and --yes, and rejects contradictory or pointless combinations', () => {
+    expect(parse('--memory').opts.memory).toBe(true);
+    const r = parse('--reset-data', '--yes');
+    expect([r.opts.resetData, r.opts.yes, r.errors]).toEqual([true, true, []]);
+    expect(parse('--memory', '--reset-data').errors.join()).toMatch(/nothing to reset/);
+    expect(parse('--yes').errors.join()).toMatch(/only confirms --reset-data/);
+  });
+});
+
+describe('play: store plan', () => {
+  const root = join(tmpdir(), 'vgtd-play-root');
+  it('defaults to the file store in <repo>/.vgtd-data', () => {
+    expect(storePlan({ root, env: {}, opts: { memory: false } })).toEqual({
+      store: 'file',
+      dir: join(root, '.vgtd-data'),
+      custom: false,
+    });
+  });
+  it('--memory and STORE=memory turn it off; a bad STORE is an error; DATA_DIR is custom unless it is the default', () => {
+    expect(storePlan({ root, env: {}, opts: { memory: true } }).store).toBe('memory');
+    expect(storePlan({ root, env: { STORE: 'memory' }, opts: { memory: false } }).store).toBe('memory');
+    expect(storePlan({ root, env: { STORE: 'pg' }, opts: { memory: false } }).error).toMatch(/STORE must be/);
+    const other = join(tmpdir(), 'vgtd-elsewhere');
+    expect(storePlan({ root, env: { DATA_DIR: other }, opts: { memory: false } })).toMatchObject({
+      dir: other,
+      custom: true,
+    });
+    expect(storePlan({ root, env: { DATA_DIR: join(root, '.vgtd-data') }, opts: { memory: false } }).custom).toBe(
+      false,
+    );
+  });
+});
+
+describe('play: --reset-data safety', () => {
+  const dirs: string[] = [];
+  const mk = (): string => {
+    const d = mkdtempSync(join(tmpdir(), 'vgtd-reset-'));
+    dirs.push(d);
+    return d;
+  };
+  afterEach(() => {
+    for (const d of dirs.splice(0)) rmSync(d, { recursive: true, force: true });
+  });
+  const repo = join(tmpdir(), 'some', 'repo');
+  const home = join(tmpdir(), 'some', 'home');
+
+  it('allows the default data dir inside the repo without --yes, a custom one only with --yes', () => {
+    const def = join(repo, '.vgtd-data');
+    expect(resetCheck({ root: repo, dir: def, custom: false, yes: false, home })).toEqual({ ok: true });
+    const other = join(tmpdir(), 'elsewhere', 'data');
+    expect(resetCheck({ root: repo, dir: other, custom: true, yes: false, home })).toMatchObject({ ok: false });
+    expect(resetCheck({ root: repo, dir: other, custom: true, yes: true, home })).toEqual({ ok: true });
+  });
+
+  it('refuses the repo itself, its parents, the filesystem root and the home directory, even with --yes', () => {
+    for (const dir of [repo, join(repo, '..'), join(repo, '..', '..'), home, join(home, '..'), resolve('/')]) {
+      const r = resetCheck({ root: repo, dir, custom: true, yes: true, home });
+      expect(r.ok, dir).toBe(false);
+    }
+  });
+
+  it('deletes ONLY the known documents (+ .bak / .tmp) and leaves every other file; removes the dir only when empty', () => {
+    const d = mk();
+    for (const f of DATA_FILES) writeFileSync(join(d, f), '{}');
+    writeFileSync(join(d, 'accounts.json.bak'), '{}');
+    writeFileSync(join(d, 'ledger.json.tmp'), '{');
+    writeFileSync(join(d, 'notes.txt'), 'keep me');
+    mkdirSync(join(d, 'sub'));
+    expect(hasSavedData(d)).toBe(true);
+    const removed = resetData(d) as string[];
+    expect(removed).toHaveLength(DATA_FILES.length + 2);
+    expect(hasSavedData(d)).toBe(false);
+    expect(readdirSync(d).sort()).toEqual(['notes.txt', 'sub']);
+    // a directory that only held game data goes away with it
+    const e = mk();
+    for (const f of DATA_FILES) writeFileSync(join(e, f), '{}');
+    resetData(e);
+    expect(existsSync(e)).toBe(false);
+    // nothing to reset is not an error
+    expect(resetData(join(e, 'missing'))).toEqual([]);
   });
 });

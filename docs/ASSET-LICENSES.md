@@ -6,11 +6,39 @@
 
 **Dùng tạm trong game (INTERIM):** `gen:gemini` xoá ✦, tách nền, cắt sát, đặt pivot ở chân, scale theo DIỆN TÍCH của standee pha đầu (tư thế bò / cuộn ngang rộng không bị nhỏ đi so với tư thế đứng) và đóng chung trang atlas với prop và quái. `MobStandee.setPhase(phase, transformMs)` (qua `OnlineSession.onBossPhase`, thông điệp `boss_phase`) nháy trắng / đỏ trong cửa sổ biến hình của server rồi đổi skin giữa cửa sổ; chết rồi hồi sinh thì về skin pha đầu.
 
-| Tệp nguồn (nguyên byte) | SHA-256 (12 ký tự đầu) |
-| ----------------------- | ---------------------- |
-| `assets-src/concepts/mobs_phase/boss_co_mang_p2.png` | `b9989b7a9b32` |
-| `assets-src/concepts/mobs_phase/boss_co_mang_p3.png` | `23459eea5ae0` |
-| `assets-src/concepts/mobs_phase/boss_ho_vuong_p2.png` | `859776e5375a` |
+| Tệp nguồn (nguyên byte)                               | SHA-256 (12 ký tự đầu) |
+| ----------------------------------------------------- | ---------------------- |
+| `assets-src/concepts/mobs_phase/boss_co_mang_p2.png`  | `b9989b7a9b32`         |
+| `assets-src/concepts/mobs_phase/boss_co_mang_p3.png`  | `23459eea5ae0`         |
+| `assets-src/concepts/mobs_phase/boss_ho_vuong_p2.png` | `859776e5375a`         |
+
+## GEMINI-GROUND-UI — texture nền 6 chất liệu và khung UI 9-slice do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. Sao nguyên byte vào `assets-src/gemini/ground/` (6 ảnh 2048×2048, nhìn từ trên xuống, KHÔNG nền magenta, dấu ✦ Gemini ở góc dưới-phải của từng ảnh) và `assets-src/gemini/ui/` (4 ảnh 2752×1536 nền magenta, dấu ✦ ở góc dưới-phải).
+
+**Xử lý (tái lập được, `npm run gen:gemini -w @vgtd/procgen`):** _Nền:_ vá dấu ✦ bằng mảng texture cách nửa chu kỳ (kiểm tra độ tương phản vùng dấu trước và sau); các ảnh KHÔNG thật sự liền mạch (độ lệch ở mép gập lại gấp 1,4–8,7 lần độ lệch bình thường giữa hai pixel kề), nên mỗi ảnh được cắt 4 mảnh 1024 px, làm tuần hoàn bằng pha trộn lệch nửa chu kỳ hai lượt (X rồi Y) và thu về patch 256 px; chỉ số mép gập sau xử lý ≤ 1,6 (1 = vô hình, kiểm tra bắt buộc trong công cụ). Bộ sinh tile (`tools/procgen/src/tilemap/generate_tilemap.js --ground`) lấy mẫu patch qua hình thoi 2:1 của từng ô (chu kỳ = một ô nên mép khớp tuyệt đối; biến thể chỉ khác nhau ở phần trong ô), nước chuyển động bằng cách trượt chéo đúng một chu kỳ trong 4 khung. Giữ nguyên định dạng tileset (128×64 @2x, 4 khung nước, 4 ô thuần + 14 mặt nạ Wang góc mỗi lớp phủ) nên client không đổi; thêm `tileset_ext` (bờ đá cạnh nước, vỏ đá trên nham thạch viền sáng đỏ, bờ đầm lầy, nham thạch 4 khung) cho các bản đồ sau. _UI:_ tách magenta, vá ✦, cắt sát, đặt kích thước thiết kế và khoảng cắt 9-slice trong `manifest.json`, đóng `atl_ui_2x` / `atl_ui_1x`.
+
+| Chất liệu | Độ tương phản dấu ✦ trước -> sau vá | Mép gập (4 mảnh): trước -> sau                      |
+| --------- | ----------------------------------- | --------------------------------------------------- |
+| grass     | 77.5 -> 6.6                         | 2.11->0.79 ; 2.13->0.9 ; 2.17->0.78 ; 3.72->1.11    |
+| dirt      | 82.8 -> 15.4                        | 11.84->0.8 ; 11.5->1.34 ; 11.65->1.08 ; 10.73->1.12 |
+| stone     | 72.8 -> 6.8                         | 8.41->0.84 ; 8.23->1.28 ; 9.11->1.14 ; 7.83->0.98   |
+| water     | 43.2 -> 6.7                         | 9.23->1.39 ; 8.23->0.87 ; 7.22->0.77 ; 8.38->1.13   |
+| swamp     | 96.6 -> 1.3                         | 6.87->1.19 ; 7.5->0.77 ; 8.15->0.88 ; 7.63->1.51    |
+| lava      | 103.1 -> 2.7                        | 5.59->0.92 ; 6.7->1.03 ; 6.44->1 ; 5.62->1.32       |
+
+| Tệp nguồn (nguyên byte)                    | Loại             | SHA-256 (12 ký tự đầu) |
+| ------------------------------------------ | ---------------- | ---------------------- |
+| `assets-src/gemini/ground/dirt.png`        | ground texture   | `8285ca8f5521`         |
+| `assets-src/gemini/ground/grass.png`       | ground texture   | `2da13736d516`         |
+| `assets-src/gemini/ground/lava.png`        | ground texture   | `a80903d954fb`         |
+| `assets-src/gemini/ground/stone.png`       | ground texture   | `d10dbb823bf2`         |
+| `assets-src/gemini/ground/swamp.png`       | ground texture   | `4aea1f2e1cab`         |
+| `assets-src/gemini/ground/water.png`       | ground texture   | `7646748009d5`         |
+| `assets-src/gemini/ui/button_disabled.png` | UI frame 9-slice | `a7ec1d557c44`         |
+| `assets-src/gemini/ui/button_normal.png`   | UI frame 9-slice | `ca9f2b047500`         |
+| `assets-src/gemini/ui/panel_jade.png`      | UI frame 9-slice | `5ff2ca3744c7`         |
+| `assets-src/gemini/ui/slot_frame.png`      | UI frame 9-slice | `35afa70ccb0a`         |
 
 ## GEMINI-MOBS — concept 14 quái do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
@@ -18,22 +46,22 @@
 
 **Dùng tạm trong game (INTERIM):** `gen:gemini` xoá ✦, tách nền, cắt sát, đặt pivot ở chân, scale cạnh dài về canvas theo footprint (docs/03 §6: quái thường 128, tinh anh 192, boss 2×2 256, boss 4×4 512 px thiết kế) và đóng chung trang atlas với prop (`atl_prop_2x` / `atl_prop_1x`, ảnh @1x; một texture để Y-sort gộp batch). Client hiển thị mỗi quái là một "standee" tĩnh (lật theo hướng đi, nhún nhẹ khi đứng, nháy đỏ khi bị đánh, mờ dần khi chết) cho tới khi có sprite hoạt hình thật; xem `apps/client-cocos/assets/scripts/MobArt.ts`.
 
-| Tệp nguồn (nguyên byte) | SHA-256 (12 ký tự đầu) |
-| ----------------------- | ---------------------- |
-| `assets-src/concepts/mobs/boss_co_mang.png` | `8460fe5df5f7` |
-| `assets-src/concepts/mobs/boss_ho_vuong.png` | `aeec35f32266` |
-| `assets-src/concepts/mobs/elite_co_can_mau.png` | `b4cc909fb858` |
-| `assets-src/concepts/mobs/elite_lang_vuong.png` | `a975d8d24ed4` |
-| `assets-src/concepts/mobs/elite_thiem_vuong.png` | `62b16c073bae` |
-| `assets-src/concepts/mobs/elite_xich_mang.png` | `9c9f9a5da6a4` |
-| `assets-src/concepts/mobs/mob_co_can.png` | `496c623adfda` |
-| `assets-src/concepts/mobs/mob_doc_chu.png` | `87c82d76dd12` |
-| `assets-src/concepts/mobs/mob_doc_thiem.png` | `1553530dbd05` |
-| `assets-src/concepts/mobs/mob_doc_tho.png` | `70d7f55b083b` |
-| `assets-src/concepts/mobs/mob_hoi_lang.png` | `6a3612e1f59b` |
-| `assets-src/concepts/mobs/mob_huyet_diep.png` | `5a6f1e6de370` |
-| `assets-src/concepts/mobs/mob_thanh_xa.png` | `e01cc899ade3` |
-| `assets-src/concepts/mobs/mob_xich_diem.png` | `3d44c96173d0` |
+| Tệp nguồn (nguyên byte)                          | SHA-256 (12 ký tự đầu) |
+| ------------------------------------------------ | ---------------------- |
+| `assets-src/concepts/mobs/boss_co_mang.png`      | `8460fe5df5f7`         |
+| `assets-src/concepts/mobs/boss_ho_vuong.png`     | `aeec35f32266`         |
+| `assets-src/concepts/mobs/elite_co_can_mau.png`  | `b4cc909fb858`         |
+| `assets-src/concepts/mobs/elite_lang_vuong.png`  | `a975d8d24ed4`         |
+| `assets-src/concepts/mobs/elite_thiem_vuong.png` | `62b16c073bae`         |
+| `assets-src/concepts/mobs/elite_xich_mang.png`   | `9c9f9a5da6a4`         |
+| `assets-src/concepts/mobs/mob_co_can.png`        | `496c623adfda`         |
+| `assets-src/concepts/mobs/mob_doc_chu.png`       | `87c82d76dd12`         |
+| `assets-src/concepts/mobs/mob_doc_thiem.png`     | `1553530dbd05`         |
+| `assets-src/concepts/mobs/mob_doc_tho.png`       | `70d7f55b083b`         |
+| `assets-src/concepts/mobs/mob_hoi_lang.png`      | `6a3612e1f59b`         |
+| `assets-src/concepts/mobs/mob_huyet_diep.png`    | `5a6f1e6de370`         |
+| `assets-src/concepts/mobs/mob_thanh_xa.png`      | `e01cc899ade3`         |
+| `assets-src/concepts/mobs/mob_xich_diem.png`     | `3d44c96173d0`         |
 
 ## GEMINI-PROPS-ICONS — props và icon vật phẩm do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
@@ -43,47 +71,46 @@
 
 **Xử lý (tái lập được):** `npm run gen:gemini -w @vgtd/procgen` (`tools/procgen/scripts/gemini_assets.js`, mã trong `tools/procgen/src/gemini/`): xoá dấu ✦ của Gemini ở góc dưới-phải (kiểm tra mỗi ảnh có đúng một dấu và không còn dấu sau khi xoá), tách nền magenta chỉ trên vùng nối với nền (không key toàn cục nên hoa đào hồng được giữ) kèm unmix màu và despill để quầng sáng / viền không còn viền hồng, cắt sát nội dung, đặt pivot ở điểm chạm đất, xuất @2x và @1x, đóng atlas có padding và extrude (`atl_prop_{2x,1x}`, `atl_gicon_{2x,1x}`). Một vật cản nhỏ do chính ảnh nguồn sinh ra ở đỉnh `tree_peach_blossom` (cành mờ lơ lửng) bị xoá bằng `clear` trong `manifest.json`. Đầu ra nằm ở `tools/procgen/out/gemini/` và `apps/client-cocos/assets/resources/world/` (sinh lại, không commit).
 
-| Tệp nguồn (nguyên byte) | Loại | SHA-256 (12 ký tự đầu) |
-| ----------------------- | ---- | ---------------------- |
-| `assets-src/gemini/props/bush_round_01.png` | prop | `3250fe88a6ca` |
-| `assets-src/gemini/props/fence_wood_segment.png` | prop | `6face4530cc5` |
-| `assets-src/gemini/props/incense_burner.png` | prop | `8aa841ad50d7` |
-| `assets-src/gemini/props/lantern_stone.png` | prop | `fc8666b64927` |
-| `assets-src/gemini/props/pavilion_small.png` | prop | `ef14b8e08db7` |
-| `assets-src/gemini/props/rock_large_spirit.png` | prop | `f47cfc91535c` |
-| `assets-src/gemini/props/rock_lava_cooled.png` | prop | `02860a3fea0f` |
-| `assets-src/gemini/props/rock_mossy_small.png` | prop | `e6da2b5cac16` |
-| `assets-src/gemini/props/sect_gate_paifang.png` | prop | `7978aced4369` |
-| `assets-src/gemini/props/spirit_herb_patch.png` | prop | `f321dfbe95c8` |
-| `assets-src/gemini/props/tree_bamboo_cluster.png` | prop | `3b86c61d7584` |
-| `assets-src/gemini/props/tree_dead_swamp.png` | prop | `dbcfea4057e9` |
-| `assets-src/gemini/props/tree_peach_blossom.png` | prop | `0c1648450d9c` |
-| `assets-src/gemini/props/tree_pine_01.png` | prop | `3f481c990a3f` |
-| `assets-src/gemini/props/tree_pine_02.png` | prop | `464728de68c2` |
-| `assets-src/gemini/props/well_stone.png` | prop | `fa31b2390338` |
-| `assets-src/gemini/items/blueprint_blue_purple.png` | icon | `b81cb714006d` |
-| `assets-src/gemini/items/blueprint_gold_red.png` | icon | `5768ef6dc0de` |
-| `assets-src/gemini/items/blueprint_white_green.png` | icon | `554b3de2f2b4` |
-| `assets-src/gemini/items/breakthrough_pill.png` | icon | `c371c36a350d` |
-| `assets-src/gemini/items/craft_material.png` | icon | `88846c35eddd` |
-| `assets-src/gemini/items/heal_pill.png` | icon | `71d9d7061d52` |
-| `assets-src/gemini/items/stone_high.png` | icon | `019d2b8316a9` |
-| `assets-src/gemini/items/stone_low.png` | icon | `e3df7cccb9b5` |
-| `assets-src/gemini/items/stone_mid.png` | icon | `bfefe9ecc6ea` |
+| Tệp nguồn (nguyên byte)                             | Loại | SHA-256 (12 ký tự đầu) |
+| --------------------------------------------------- | ---- | ---------------------- |
+| `assets-src/gemini/props/bush_round_01.png`         | prop | `3250fe88a6ca`         |
+| `assets-src/gemini/props/fence_wood_segment.png`    | prop | `6face4530cc5`         |
+| `assets-src/gemini/props/incense_burner.png`        | prop | `8aa841ad50d7`         |
+| `assets-src/gemini/props/lantern_stone.png`         | prop | `fc8666b64927`         |
+| `assets-src/gemini/props/pavilion_small.png`        | prop | `ef14b8e08db7`         |
+| `assets-src/gemini/props/rock_large_spirit.png`     | prop | `f47cfc91535c`         |
+| `assets-src/gemini/props/rock_lava_cooled.png`      | prop | `02860a3fea0f`         |
+| `assets-src/gemini/props/rock_mossy_small.png`      | prop | `e6da2b5cac16`         |
+| `assets-src/gemini/props/sect_gate_paifang.png`     | prop | `7978aced4369`         |
+| `assets-src/gemini/props/spirit_herb_patch.png`     | prop | `f321dfbe95c8`         |
+| `assets-src/gemini/props/tree_bamboo_cluster.png`   | prop | `3b86c61d7584`         |
+| `assets-src/gemini/props/tree_dead_swamp.png`       | prop | `dbcfea4057e9`         |
+| `assets-src/gemini/props/tree_peach_blossom.png`    | prop | `0c1648450d9c`         |
+| `assets-src/gemini/props/tree_pine_01.png`          | prop | `3f481c990a3f`         |
+| `assets-src/gemini/props/tree_pine_02.png`          | prop | `464728de68c2`         |
+| `assets-src/gemini/props/well_stone.png`            | prop | `fa31b2390338`         |
+| `assets-src/gemini/items/blueprint_blue_purple.png` | icon | `b81cb714006d`         |
+| `assets-src/gemini/items/blueprint_gold_red.png`    | icon | `5768ef6dc0de`         |
+| `assets-src/gemini/items/blueprint_white_green.png` | icon | `554b3de2f2b4`         |
+| `assets-src/gemini/items/breakthrough_pill.png`     | icon | `c371c36a350d`         |
+| `assets-src/gemini/items/craft_material.png`        | icon | `88846c35eddd`         |
+| `assets-src/gemini/items/heal_pill.png`             | icon | `71d9d7061d52`         |
+| `assets-src/gemini/items/stone_high.png`            | icon | `019d2b8316a9`         |
+| `assets-src/gemini/items/stone_low.png`             | icon | `e3df7cccb9b5`         |
+| `assets-src/gemini/items/stone_mid.png`             | icon | `bfefe9ecc6ea`         |
 
 **Icon kỹ năng (cùng nguồn, cùng ngày):** 6 lưới 4x2 (mỗi ô là một icon vuông có nền riêng, trên nền magenta, kèm dấu ✦ Gemini ở góc dưới-phải). Thứ tự ô trong lưới (theo hàng) = thứ tự 8 kỹ năng của lớp trong `packages/shared/src/data/skills.json`. `gen:gemini` xoá dấu ✦, tách 8 ô bằng thành phần liên thông, xuất 128 px @2x / 64 px @1x vào atlas `atl_skill_{2x,1x}` theo id kỹ năng; ảnh đối chiếu id ↔ icon của cả 48 icon nằm trong artifacts của PR.
 
-| Tệp nguồn (nguyên byte) | Loại | SHA-256 (12 ký tự đầu) |
-| ----------------------- | ---- | ---------------------- |
-| `assets-src/gemini/skills/dan_phu.png` | skill grid 4x2 | `aa880714f42b` |
-| `assets-src/gemini/skills/dao.png` | skill grid 4x2 | `dc70514699b6` |
-| `assets-src/gemini/skills/kiem.png` | skill grid 4x2 | `b24bd1361dc4` |
-| `assets-src/gemini/skills/phap.png` | skill grid 4x2 | `3a89b1935617` |
-| `assets-src/gemini/skills/the.png` | skill grid 4x2 | `f6e60f73f61d` |
-| `assets-src/gemini/skills/thuong.png` | skill grid 4x2 | `f1630b5dc324` |
+| Tệp nguồn (nguyên byte)                | Loại           | SHA-256 (12 ký tự đầu) |
+| -------------------------------------- | -------------- | ---------------------- |
+| `assets-src/gemini/skills/dan_phu.png` | skill grid 4x2 | `aa880714f42b`         |
+| `assets-src/gemini/skills/dao.png`     | skill grid 4x2 | `dc70514699b6`         |
+| `assets-src/gemini/skills/kiem.png`    | skill grid 4x2 | `b24bd1361dc4`         |
+| `assets-src/gemini/skills/phap.png`    | skill grid 4x2 | `3a89b1935617`         |
+| `assets-src/gemini/skills/the.png`     | skill grid 4x2 | `f6e60f73f61d`         |
+| `assets-src/gemini/skills/thuong.png`  | skill grid 4x2 | `f1630b5dc324`         |
 
 Dẫn xuất: `tools/procgen/src/gemini/manifest.json` (kích thước đích, ô bị chặn, biome, trọng số của từng prop), `tools/procgen/out/gemini/*` và các atlas `atl_prop_*`, `atl_gicon_*` ở trên, `apps/client-cocos/assets/resources/world/{gemini.json,atl_prop_*,atl_gicon_*}`.
-
 
 ## KTC1 — Kiếm tu semi-chibi T1: master và motion E smooth-v2 (2026-11-08)
 

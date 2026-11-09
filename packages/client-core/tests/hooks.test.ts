@@ -65,6 +65,7 @@ const SELF: SelfState = {
   dashCdMs: 0,
   invulnMs: 0,
   vitals: null,
+  status: null,
 };
 
 async function client(events: NetEvents): Promise<{ net: NetClient; sock: FakeSocket }> {
@@ -127,6 +128,20 @@ describe('NetClient event hooks', () => {
     expect(seen).toEqual(['1000003:1:1800', '1000003:2:1800']);
     const quiet = await client({});
     expect(() => quiet.sock.push({ type: 'boss_phase', mobEntityId: 1, phase: 1, transformMs: 0 })).not.toThrow();
+  });
+
+  it('a status mask of another player is forgotten when it leaves the view (its mask-0 update may never arrive), and kept while in view', async () => {
+    const { net, sock } = await client({});
+    sock.push(enterMsg(3, 77));
+    sock.push({ type: 'status_update', entityId: 77, mask: 1 });
+    expect(net.statusMaskOf(77)).toBe(1);
+    sock.push({ type: 'aoi_leave', indices: [3] });
+    expect(net.statusMaskOf(77)).toBe(0);
+    // back in view later without a new status_update: nothing stale is shown
+    sock.push(enterMsg(3, 77));
+    expect(net.statusMaskOf(77)).toBe(0);
+    sock.push({ type: 'status_update', entityId: 77, mask: 2 });
+    expect(net.statusMaskOf(77)).toBe(2);
   });
 
   it('entityOfIndex resolves enters and snapshots, and still resolves inside onAoiLeave but not after it', async () => {

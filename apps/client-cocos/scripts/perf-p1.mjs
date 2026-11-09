@@ -1,7 +1,7 @@
 // P1 exit-criteria measurement on Web (docs/10-mvp-scope.md section 12): draw calls, RAM, FPS with 20 NPC, initial package size.
 //
 //   npm run perf:p1 -w client-cocos -- [--skip-build] [--npcs 20] [--npcart chibi|placeholder] [--tier low|medium|high] [--seconds 20] [--warmup 6]
-//                                      [--route] [--zoom 1.5] [--out <dir>] [--gate-fps]
+//                                      [--route] [--zoom 1.5] [--mobs] [--draw-limit N] [--out <dir>] [--gate-fps]
 //
 // --route walks a scripted loop over the whole multi-chunk map (`?route=1`, default 90 s) and adds streaming numbers:
 // chunk node-tree build cost, chunks built / unloaded, frames with unresolved visible chunks, worst frame, hitches > 50 / 100 ms,
@@ -42,6 +42,8 @@ const npcs = Number(opt('npcs', 20));
 const tier = opt('tier', 'medium');
 const npcart = opt('npcart', 'chibi'); // chibi = real armatures (6 classes), placeholder = tinted sprite
 const route = flag('route');
+const mobs = flag('mobs'); // 14 mobs + the combat HUD (`?combat=1&mobdemo=1`): the heavy scenario of docs/33
+const drawLimit = Number(opt('draw-limit', 80));
 const zoom = opt('zoom', ''); // camera zoom override (`?zoom=`), default = the game's default (D81: 1.5)
 const seconds = Number(opt('seconds', route ? 90 : 20));
 const warmup = Number(opt('warmup', 6));
@@ -148,7 +150,7 @@ try {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}`;
+  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}${mobs ? '&combat=1&mobdemo=1' : ''}`;
   console.log('opening', url);
   await page.goto(url);
   await page.waitForFunction('window.__vgtdPerf && window.__vgtdPerf.fps > 0 && window.__vgtdPerf.nodes > 100', {
@@ -274,7 +276,13 @@ const result = {
 const m = result.measured;
 const b = samples[0].budgets;
 if (!b) throw new Error('page did not publish budgets (window.__vgtdPerf.budgets)');
-const LIMITS = { drawCalls: b.drawCalls, ramMB: b.ramMB, packageMB: b.initialDownloadMB, minFps: MIN_FPS };
+// `--draw-limit N` tightens the draw-call gate (the 14-mob scenario targets 65, see docs/33); it can never loosen the shared budget
+const LIMITS = {
+  drawCalls: Math.min(b.drawCalls, drawLimit),
+  ramMB: b.ramMB,
+  packageMB: b.initialDownloadMB,
+  minFps: MIN_FPS,
+};
 const rows = [
   ['Draw calls (max)', m.drawCallsMax, `<= ${LIMITS.drawCalls}`, m.drawCallsMax <= LIMITS.drawCalls, true],
   ['RAM: JS heap + textures MB (max)', m.ramMBMax.toFixed(1), `<= ${LIMITS.ramMB}`, m.ramMBMax <= LIMITS.ramMB, true],

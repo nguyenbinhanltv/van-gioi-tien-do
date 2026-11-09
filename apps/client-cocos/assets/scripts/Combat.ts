@@ -7,6 +7,8 @@ import type { TilePos } from './Actors';
 import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 import { getSkillIcon } from './PropArt';
+import { sharedAtlas } from './UiLabel';
+import { getStatusIcon } from './StatusIcons';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -111,11 +113,14 @@ function text(parent: Node, name: string, size: number, color: Color): Label {
   l.verticalAlign = Label.VerticalAlign.CENTER;
   l.overflow = Label.Overflow.NONE;
   l.color = color;
+  sharedAtlas(l);
   return l;
 }
 
 interface SlotUi {
   root: Node;
+  /** this slot's holder in each of the four hotbar layers (bg / icon / rings / text): toggled and scaled together */
+  holders: Node[];
   bg: Sprite;
   cd: Sprite;
   gcd: Sprite;
@@ -152,6 +157,8 @@ export class CombatUi {
   private readonly hpFill: Sprite;
   private readonly mpFill: Sprite;
   private readonly shieldFill: Sprite;
+  /** every constantly changing label (hp / mp, cooldown numbers, toast) lives here, drawn after all bar / slot art: one text batch */
+  private readonly dynText: Node;
   private readonly hpText: Label;
   private readonly mpText: Label;
   private readonly castBar: Sprite;
@@ -176,6 +183,8 @@ export class CombatUi {
   private diedAtMs: number | null = null;
   /** Touch input: the skill wheel replaces the bottom hotbar (hidden, not tappable). */
   private touchMode = false;
+  /** status row (D94): one tile per active status, left of the HP bar */
+  private readonly statusTiles: Array<{ root: Node; bg: Sprite; icon: Sprite; label: Label; time: Label }> = [];
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
@@ -211,9 +220,28 @@ export class CombatUi {
     this.ring.active = false;
     // --- HUD
     this.hudRoot = newNode('CombatHud', hudParent);
+    this.dynText = newNode('HudDynText', this.hudRoot);
     const bars = SLOT + 8 + BAR_H;
-    const hp = this.makeBar('Hp', -BAR_W / 2 - 5, bars, new Color(200, 50, 50, 255));
-    const mp = this.makeBar('Mp', BAR_W / 2 + 5, bars, new Color(60, 110, 220, 255));
+    const hp = this.makeBar(
+      'Hp',
+      -BAR_W / 2 - 5,
+      bars,
+      new Color(200, 50, 50, 255),
+      BAR_W,
+      BAR_H,
+      this.hudRoot,
+      this.dynText,
+    );
+    const mp = this.makeBar(
+      'Mp',
+      BAR_W / 2 + 5,
+      bars,
+      new Color(60, 110, 220, 255),
+      BAR_W,
+      BAR_H,
+      this.hudRoot,
+      this.dynText,
+    );
     this.hpFill = hp.fill;
     this.mpFill = mp.fill;
     this.hpText = hp.label;
@@ -221,67 +249,105 @@ export class CombatUi {
     this.shieldFill = quad(hp.back, 'Shield', art.pixel, 0, 4, new Color(240, 240, 255, 255));
     this.shieldFill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.shieldFill.node.setPosition(-BAR_W / 2, BAR_H / 2 - 2, 0);
-    const cast = this.makeBar('Cast', 0, bars + BAR_H + 6, new Color(240, 200, 80, 255), HUD_W, 6);
+    // status row: up to 4 tiles growing leftwards from the HP bar
+    const TILE = 34;
+    for (let n = 0; n < 4; n++) {
+      const root = newNode(`Status${n}`, this.hudRoot);
+      root.setPosition(-BAR_W / 2 - 5 - BAR_W / 2 - 22 - n * (TILE + 4), bars, 0);
+      const bg = quad(root, 'Bg', art.pixel, TILE, TILE, new Color(60, 60, 60, 220));
+      const icon = quad(root, 'Icon', art.pixel, TILE - 6, TILE - 6, new Color(255, 255, 255, 255));
+      icon.node.active = false;
+      const label = text(root, 'Label', 11, new Color(255, 255, 255, 255));
+      const time = sharedAtlas(text(root, 'Time', 12, new Color(255, 240, 160, 255)), 'dynamic'); // remaining seconds
+      time.node.setPosition(0, -TILE / 2 - 8, 0);
+      root.active = false;
+      this.statusTiles.push({ root, bg: bg, icon, label, time });
+    }
+    const cast = this.makeBar(
+      'Cast',
+      0,
+      bars + BAR_H + 6,
+      new Color(240, 200, 80, 255),
+      HUD_W,
+      6,
+      this.hudRoot,
+      this.dynText,
+    );
     this.castBar = cast.fill;
     cast.back.active = false;
     this.castBackNode = cast.back;
-    this.toast = text(this.hudRoot, 'Toast', 16, new Color(255, 220, 160, 255));
+    this.toast = sharedAtlas(text(this.dynText, 'Toast', 16, new Color(255, 220, 160, 255)), 'dynamic');
     this.toast.node.setPosition(0, bars + BAR_H + 34, 0);
 
     const bar = this.backend.hotbar;
+    // Draw-call budget: a depth-first slot (bg, icon, key, ring, ...) switches texture 4 times, 8 slots = ~30 draw calls. So the hotbar
+    // is built as four shared layers in this order, one holder per slot in each: all backgrounds (placeholder atlas), then all skill
+    // icons (skill atlas), then the cooldown rings (placeholder atlas), then every label (shared label atlas): ~5 batches in all.
+    const layerBg = newNode('HotbarBg', this.hudRoot);
+    const layerIcon = newNode('HotbarIcon', this.hudRoot);
+    const layerRing = newNode('HotbarRings', this.hudRoot);
+    const layerText = newNode('HotbarText', this.hudRoot);
     bar.slots.forEach((s, i) => {
       const x = -HUD_W / 2 + SLOT / 2 + i * (SLOT + GAP);
-      const root = newNode(`Slot${i + 1}`, this.hudRoot);
-      root.setPosition(x, SLOT / 2, 0);
+      const holder = (layer: Node): Node => {
+        const n = newNode(`Slot${i + 1}`, layer);
+        n.setPosition(x, SLOT / 2, 0);
+        return n;
+      };
+      const root = holder(layerBg);
+      const iconRoot = holder(layerIcon);
+      const ringRoot = holder(layerRing);
+      const textRoot = holder(layerText);
+      const cdRoot = holder(this.dynText); // the countdown changes every frame: dynamic label layer
       const base = ELEMENT_COLOR[s.skill.element] ?? ELEMENT_COLOR.none!;
       const bgColor = s.castable ? base : new Color(base.r * 0.45, base.g * 0.45, base.b * 0.45, 255);
       const bg = quad(root, 'Bg', art.pixel, SLOT, SLOT, bgColor);
       quad(root, 'Frame', art.pixel, SLOT - 4, SLOT - 4, new Color(0, 0, 0, 70));
-      const name = text(root, 'Name', 16, new Color(255, 255, 255, s.castable ? 255 : 150));
+      const name = text(textRoot, 'Name', 16, new Color(255, 255, 255, s.castable ? 255 : 150));
       name.string = initials(s.skill.id);
       // the Gemini skill icon (#228 atlas) when there is one; the coloured tile + initials stay as the fallback
       const iconFrame = getSkillIcon(s.skill.id);
       if (iconFrame) {
         const icon = quad(
-          root,
+          iconRoot,
           'Icon',
           iconFrame,
           SLOT - 8,
           SLOT - 8,
           new Color(255, 255, 255, s.castable ? 255 : 150),
         );
-        icon.node.setSiblingIndex(name.node.getSiblingIndex());
         name.node.active = false;
       }
-      const key = text(root, 'Key', 11, new Color(255, 255, 255, 230));
+      const key = text(textRoot, 'Key', 11, new Color(255, 255, 255, 230));
       key.string = String(i + 1);
       key.node.setPosition(-SLOT / 2 + 8, SLOT / 2 - 8, 0);
-      const tier = text(root, 'Tier', 9, new Color(255, 255, 255, 170));
+      const tier = text(textRoot, 'Tier', 9, new Color(255, 255, 255, 170));
       tier.string = s.castable ? s.skill.tier[0]!.toUpperCase() : 'P';
       tier.node.setPosition(SLOT / 2 - 7, -SLOT / 2 + 7, 0);
-      const cd = quad(root, 'Cd', art.pixel, SLOT, SLOT, new Color(0, 0, 0, 175));
+      const cd = quad(ringRoot, 'Cd', art.pixel, SLOT, SLOT, new Color(0, 0, 0, 175));
       this.radial(cd);
-      const gcd = quad(root, 'Gcd', art.pixel, SLOT, SLOT, new Color(255, 255, 255, 75));
+      const gcd = quad(ringRoot, 'Gcd', art.pixel, SLOT, SLOT, new Color(255, 255, 255, 75));
       this.radial(gcd);
-      const cdText = text(root, 'CdText', 18, new Color(255, 255, 255, 255));
-      this.slots.push({ root, bg, cd, gcd, cdText, x });
+      const cdText = sharedAtlas(text(cdRoot, 'CdText', 18, new Color(255, 255, 255, 255)), 'dynamic'); // counts down
+      this.slots.push({ root, holders: [root, iconRoot, ringRoot, textRoot, cdRoot], bg, cd, gcd, cdText, x });
     });
 
     // target frame (top centre)
     this.targetRoot = newNode('TargetFrame', this.hudRoot);
     const tf = this.makeBar('Target', 0, 0, new Color(200, 80, 80, 255), 260, 16, this.targetRoot);
     this.targetFill = tf.fill;
-    this.targetText = tf.label;
+    this.targetText = sharedAtlas(tf.label, 'dynamic'); // hp numbers
     this.targetName = text(this.targetRoot, 'TargetName', 16, new Color(255, 235, 235, 255));
     this.targetName.node.setPosition(0, 20, 0);
     this.targetRoot.active = false;
+    this.dynText.setSiblingIndex(this.hudRoot.children.length - 1); // after every bar / slot quad: the dynamic labels form the last batch
 
     // floating text pool (world space, above the Y-sorted entities)
     const l6 = worldUiLayer(worldRoot);
     this.worldUi = l6;
     this.selfBar = new OverheadBar(l6, art.pixel, 96);
     for (let n = 0; n < 24; n++) {
-      const label = text(l6, `Float${n}`, 22, new Color(255, 255, 255, 255));
+      const label = sharedAtlas(text(l6, `Float${n}`, 22, new Color(255, 255, 255, 255)), 'dynamic'); // damage numbers
       label.node.active = false;
       this.floaters.push({
         node: label.node,
@@ -299,7 +365,7 @@ export class CombatUi {
     const title = text(this.deathRoot, 'Title', 40, new Color(255, 225, 225, 255));
     title.string = 'Ban da roi / You have fallen';
     title.node.setPosition(0, 40, 0);
-    this.deathCount = text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255));
+    this.deathCount = sharedAtlas(text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255)), 'dynamic'); // counts down
     this.deathCount.node.setPosition(0, -10, 0);
     this.deathRoot.active = false;
 
@@ -340,6 +406,7 @@ export class CombatUi {
         gcd: this.backend.hotbar.gcdFraction(this.clock),
         floaters: this.floaters.filter((f) => f.node.active).length,
         touchMode: this.touchMode,
+        statusTiles: this.statusTiles.filter((t) => t.root.active).map((t) => t.label.string || 'icon'),
         hotbarShown: this.slots.every((s) => s.root.active),
         deathOverlay: this.deathRoot.active,
         deathText: this.deathCount.string,
@@ -404,10 +471,31 @@ export class CombatUi {
     return this.clock;
   }
 
+  /** The own status row (D94): `items` from client-core `statusRowItems`; an icon when `getStatusIcon` has one, else the text glyph. */
+  setStatuses(items: ReadonlyArray<{ id: string; label: string; secs: number | null; note: string }>): void {
+    const colour: Record<string, Color> = {
+      root: new Color(150, 100, 50, 230),
+      slow: new Color(70, 120, 190, 230),
+      poison: new Color(80, 160, 70, 230),
+      shield: new Color(170, 170, 210, 230),
+    };
+    this.statusTiles.forEach((t, k) => {
+      const it = items[k];
+      t.root.active = !!it;
+      if (!it) return;
+      t.bg.color = colour[it.id] ?? new Color(60, 60, 60, 220);
+      const frame = getStatusIcon(it.id);
+      t.icon.node.active = !!frame;
+      if (frame && t.icon.spriteFrame !== frame) t.icon.spriteFrame = frame;
+      t.label.string = frame ? '' : it.label;
+      t.time.string = it.secs !== null ? `${it.secs}s${it.note ? ' ' + it.note : ''}` : it.note;
+    });
+  }
+
   /** Touch input: show the skill wheel instead of the bottom hotbar. */
   setTouchMode(on: boolean): void {
     this.touchMode = on;
-    for (const s of this.slots) s.root.active = !on;
+    for (const s of this.slots) for (const h of s.holders) h.active = !on;
   }
 
   /**
@@ -584,7 +672,7 @@ export class CombatUi {
       s.cdText.string = left > 0 ? (left >= 10 ? String(Math.ceil(left)) : left.toFixed(1)) : '';
       const fl = this.flash.get(i) ?? 0;
       if (fl > 0) this.flash.set(i, fl - dt);
-      s.root.setScale(fl > 0 ? 1.08 : 1, fl > 0 ? 1.08 : 1, 1);
+      for (const h of s.holders) h.setScale(fl > 0 ? 1.08 : 1, fl > 0 ? 1.08 : 1, 1);
     });
 
     const c = p.casting;
@@ -640,10 +728,14 @@ export class CombatUi {
         if (this.shadowLayer) standee.attachShadow(this.art.shadow, this.shadowLayer);
         const id = e.id;
         const key = 3000 + (id % 100000);
-        this.ysort.add(n, () => {
-          const cur = this.backend.enemy(id);
-          return pointSortable(key, 0, cur?.pos.i ?? 0, cur?.pos.j ?? 0);
-        });
+        this.ysort.add(
+          n,
+          () => {
+            const cur = this.backend.enemy(id);
+            return pointSortable(key, 0, cur?.pos.i ?? 0, cur?.pos.j ?? 0);
+          },
+          standee.heightPx + 60,
+        ); // a boss stands 500 px tall: it keeps drawing while its head is on screen
         this.enemyNodes.set(id, n);
       } else if (!n) {
         n = newNode(`Enemy${e.id}`);
@@ -745,13 +837,22 @@ export class CombatUi {
     w = BAR_W,
     h = BAR_H,
     parent: Node = this.hudRoot,
+    textLayer?: Node,
   ): { back: Node; fill: Sprite; label: Label } {
     const back = quad(parent, `${name}Back`, this.art.pixel, w, h, new Color(0, 0, 0, 170));
     back.node.setPosition(x, y, 0);
     const fill = quad(back.node, `${name}Fill`, this.art.pixel, w, h - 2, color);
     fill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     fill.node.setPosition(-w / 2, 0, 0);
-    const label = text(back.node, `${name}Text`, 11, new Color(255, 255, 255, 255));
+    // every bar carries numbers that change with each hit / regen tick: per-character cache, never whole strings (they are not reclaimed)
+    // (a bar whose parent is the HUD root puts its text in `textLayer` at the same spot, so all bar quads batch before all text)
+    let holder = back.node;
+    if (textLayer) {
+      holder = newNode(`${name}TextHolder`, textLayer);
+      holder.setPosition(x, y, 0);
+    }
+    const label = sharedAtlas(text(holder, `${name}Text`, 11, new Color(255, 255, 255, 255)), 'dynamic');
+    label.string = ''; // a Label starts as the engine default text: bars whose text is never set (the cast bar) must draw nothing
     return { back: back.node, fill, label };
   }
 

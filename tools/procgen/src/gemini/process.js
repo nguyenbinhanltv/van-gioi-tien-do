@@ -525,7 +525,24 @@ function processMob(src, box, opts = {}) {
   return { x1, pivot: footPivot(trimmed), sparkle };
 }
 
+/**
+ * 9-slice UI frame: keyed + trimmed, scaled to `w` design px (@1x) wide (@2x = twice that), no pivot. The slice insets are
+ * chosen by the caller from the manifest (fractions of the @1x size) and written next to the frame.
+ * @returns {{ x2: Image, x1: Image, sparkle: object }}
+ */
+function processUi(src, w) {
+  const { image, sparkle } = cleanSprite(src);
+  const bb = alphaBBox(image);
+  if (!bb) throw new Error('empty sprite after keying');
+  const trimmed = crop(image, bb.x, bb.y, bb.w, bb.h);
+  const h = Math.max(2, Math.round((bb.h * w) / bb.w));
+  const x2 = bleedColor(resizeArea(trimmed, w * 2, h * 2));
+  const x1 = bleedColor(resizeArea(trimmed, w, h));
+  return { x2, x1, sparkle };
+}
+
 module.exports = {
+  processUi,
   processMob,
   sliceSkillGrid,
   isStrictBg,

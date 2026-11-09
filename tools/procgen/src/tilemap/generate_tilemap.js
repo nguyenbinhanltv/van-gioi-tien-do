@@ -22,6 +22,7 @@ const path = require('path');
 const { Image } = require('../lib/png');
 const { makeSimplex2D, fbm, periodicFbm, periodicNoise, hash2i } = require('../lib/noise');
 const { clamp, lerp, smoothstep } = require('../lib/rng');
+const G = require('./ground_textures');
 
 // ----------------------------------------------------------------------------
 // Cấu hình
@@ -40,6 +41,8 @@ const DEFAULTS = {
   variants: 4,          // số biến thể ô thuần
   atlasWidth: 1024,
   padding: 2,
+  ground: '',           // thư mục patch tuần hoàn (npm run gen:gemini): có thì lấy màu từ ảnh thay vì texture toán học
+  ext: 0,               // 1 = sinh thêm tileset_ext (bờ đá, vỏ nham thạch, đầm lầy) cạnh tileset chính
 };
 
 const MAT = { WATER: 0, DIRT: 1, GRASS: 2 };
@@ -48,9 +51,19 @@ const CORNER_BITS = { N: 1, E: 2, S: 4, W: 8 };
 
 // Lớp phủ: ngưỡng lệch nhau để luôn lộ một dải đất giữa nước và cỏ.
 const OVERLAYS = [
-  { name: 'dirt', over: 'water', minMat: MAT.DIRT, threshold: 0.40, seed: 1301, rimDark: 0.30, foam: true },
-  { name: 'grass', over: 'dirt', minMat: MAT.GRASS, threshold: 0.58, seed: 2903, rimDark: 0.20, foam: false },
+  { name: 'dirt', material: 'dirt', over: 'water', minMat: MAT.DIRT, threshold: 0.40, seed: 1301, rimDark: 0.30, foam: true },
+  { name: 'grass', material: 'grass', over: 'dirt', minMat: MAT.GRASS, threshold: 0.58, seed: 2903, rimDark: 0.20, foam: false },
 ];
+
+// Họ ghép viền bổ sung (chỉ có khi có ảnh nền): bờ đá cạnh nước, vỏ đá nguội trên nham thạch (viền sáng đỏ), bờ đầm lầy.
+const EXT_LAYERS = [
+  { name: 'stone_bank', material: 'stone', over: 'water', threshold: 0.45, seed: 3301, rimDark: 0.28, foam: true },
+  { name: 'lava_crust', material: 'stone', over: 'lava', threshold: 0.5, seed: 3907, rimDark: 0.35, foam: true, foamColor: [255, 118, 40] },
+  { name: 'swamp_bank', material: 'swamp', over: 'water', threshold: 0.45, seed: 4421, rimDark: 0.3, foam: false },
+];
+
+/** Patch ảnh nền đang dùng (null = texture toán học như trước). */
+let GROUND = null;
 
 function parseArgs(argv) {
   const o = { ...DEFAULTS };
@@ -136,6 +149,7 @@ function pixelToUV(px, py, TW, TH) {
 const interiorWeight = (u, v) => Math.max(0, Math.sin(Math.PI * clamp(u, 0, 1)) * Math.sin(Math.PI * clamp(v, 0, 1)));
 
 function waterColor(u, v, frame, frames) {
+  if (GROUND && GROUND.water) return G.liquidColor(GROUND, 'water', u, v, frame, frames);
   const t = frame / frames; // dịch pha theo frame; f(u + t) vẫn lặp chu kỳ 1 nên vòng lặp liền mạch
   const n1 = periodicFbm(u + t, v, 4, 11, 3);
   const n2 = periodicFbm(u, v - t, 4, 23, 3);
@@ -172,7 +186,10 @@ function grassColor(u, v, variant) {
   return c;
 }
 
-const materialColor = (name, u, v, variant) => (name === 'dirt' ? dirtColor(u, v, variant) : grassColor(u, v, variant));
+const materialColor = (name, u, v, variant) => {
+  if (GROUND && GROUND[name]) return G.landColor(GROUND, name, u, v, variant, interiorWeight(u, v));
+  return name === 'dirt' ? dirtColor(u, v, variant) : grassColor(u, v, variant);
+};
 
 /** Nội suy song tuyến tính giá trị 4 góc theo (u, v). */
 function cornerField(mask, u, v) {
@@ -198,7 +215,7 @@ function renderTile(o, spec) {
       const [u, v] = pixelToUV(px, py, TW, TH);
 
       if (spec.kind === 'water') {
-        const c = waterColor(u, v, spec.frame, o.waterFrames);
+        const c = spec.liquid === 'lava' && GROUND && GROUND.lava ? G.liquidColor(GROUND, 'lava', u, v, spec.frame, o.waterFrames) : waterColor(u, v, spec.frame, o.waterFrames);
         img.setPixel(x, y, c[0], c[1], c[2], 255);
         continue;
       }
@@ -213,10 +230,11 @@ function renderTile(o, spec) {
       const foam = L.foam ? smoothstep(L.threshold - 0.11, L.threshold - 0.015, val) * (1 - cov) : 0;
       if (cov <= 0.001 && foam <= 0.001) continue;
 
-      const m = scale3(materialColor(L.name, u, v, spec.variant), 1 - L.rimDark * rim * cov);
+      const m = scale3(materialColor(L.material || L.name, u, v, spec.variant), 1 - L.rimDark * rim * cov);
       const aM = cov, aF = foam * 0.55;
       const a = aM + aF * (1 - aM);
-      const rgb = [0, 1, 2].map((k) => (m[k] * aM + PALETTE.foam[k] * aF * (1 - aM)) / a);
+      const foamRgb = L.foamColor || PALETTE.foam;
+      const rgb = [0, 1, 2].map((k) => (m[k] * aM + foamRgb[k] * aF * (1 - aM)) / a);
       img.setPixel(x, y, rgb[0], rgb[1], rgb[2], Math.round(a * 255));
     }
   }
@@ -339,6 +357,43 @@ function renderPreview(o, tiles, layers) {
   return out;
 }
 
+/** Danh sách tile của tileset bổ sung: nham thạch (4 khung động) + mỗi họ ghép viền 4 ô thuần + 14 mặt nạ. */
+function buildExtTileList(o) {
+  const list = [];
+  for (let f = 0; f < o.waterFrames; f++) list.push({ name: `lava_${f}`, kind: 'water', liquid: 'lava', frame: f });
+  for (const L of EXT_LAYERS) {
+    for (let v = 0; v < o.variants; v++) list.push({ name: `${L.name}_full_${v}`, kind: 'overlay', layer: L, mask: 15, variant: v });
+    for (let m = 1; m <= 14; m++) list.push({ name: `${L.name}_m${String(m).padStart(2, '0')}`, kind: 'overlay', layer: L, mask: m, variant: 0 });
+  }
+  return list;
+}
+
+function writeExtTileset(o) {
+  const tiles = buildExtTileList(o).map((t) => ({ ...t, image: renderTile(o, t) }));
+  const { sheet, frames } = packAtlas(o, tiles);
+  const idByName = Object.fromEntries(frames.map((f) => [f.name, f.id]));
+  sheet.save(path.join(o.out, 'tileset_ext.png'));
+  const tileset = {
+    format: 'tutien-tileset', version: 1,
+    image: 'tileset_ext.png', imageWidth: sheet.width, imageHeight: sheet.height,
+    tileWidth: o.tileW, tileHeight: o.tileH, padding: o.padding,
+    tiles: frames,
+    animations: { lava: { frames: frames.filter((f) => /^lava_\d+$/.test(f.name)).map((f) => f.id), fps: 4 } },
+    wang: {
+      type: 'corner', cornerBits: CORNER_BITS,
+      note: 'index = N*1 + E*2 + S*4 + W*8; bit = 1 khi góc mang chất liệu của lớp phủ. Họ bổ sung: bờ đá / vỏ nham thạch / bờ đầm lầy (docs/04).',
+      layers: EXT_LAYERS.map((L) => ({
+        name: L.name, material: L.material, over: L.over, threshold: L.threshold,
+        masks: Object.fromEntries(Array.from({ length: 14 }, (_, m) => [String(m + 1), idByName[`${L.name}_m${String(m + 1).padStart(2, '0')}`]])),
+        full: Array.from({ length: o.variants }, (_, v) => idByName[`${L.name}_full_${v}`]),
+        fullWeights: [0.7, ...Array(o.variants - 1).fill(0.3 / (o.variants - 1))],
+      })),
+    },
+  };
+  fs.writeFileSync(path.join(o.out, 'tileset_ext.json'), JSON.stringify(tileset, null, 2));
+  return { count: tiles.length, width: sheet.width, height: sheet.height };
+}
+
 // ----------------------------------------------------------------------------
 // Main
 // ----------------------------------------------------------------------------
@@ -346,6 +401,8 @@ function main() {
   const o = parseArgs(process.argv.slice(2));
   fs.mkdirSync(o.out, { recursive: true });
   const t0 = Date.now();
+  GROUND = o.ground ? G.loadGround(o.ground) : null;
+  if (o.ground && !GROUND) console.warn(`⚠ không có patch ảnh nền trong ${o.ground}: dùng texture toán học`);
 
   const corners = generateCorners(o);
   const tiles = buildTileList(o).map((t) => ({ ...t, image: renderTile(o, t) }));
@@ -397,8 +454,16 @@ function main() {
 
   console.log(`✔ ${tiles.length} tile → ${path.join(o.out, 'tileset.png')} (${sheet.width}×${sheet.height})`);
   console.log(`✔ Bản đồ ${o.width}×${o.height} → map.json  |  ô chủ đạo: ${JSON.stringify(stats)}`);
+  if (o.ext) {
+    if (!GROUND) console.warn('⚠ --ext cần --ground (ảnh nền cho đá / nham thạch / đầm lầy): bỏ qua tileset bổ sung');
+    else {
+      const e = writeExtTileset(o);
+      console.log(`✔ tileset bổ sung ${e.count} tile → ${path.join(o.out, 'tileset_ext.png')} (${e.width}×${e.height})`);
+    }
+  }
+  console.log(`✔ Nguồn màu: ${GROUND ? 'ảnh Gemini (' + Object.keys(GROUND).join(', ') + ')' : 'texture toán học'}`);
   console.log(`✔ Xong sau ${((Date.now() - t0) / 1000).toFixed(1)} s`);
 }
 
 if (require.main === module) main();
-module.exports = { generateCorners, renderTile, buildTileList, packAtlas, buildMap, parseArgs };
+module.exports = { generateCorners, renderTile, buildTileList, buildExtTileList, packAtlas, buildMap, parseArgs, setGround: (g) => { GROUND = g; } };

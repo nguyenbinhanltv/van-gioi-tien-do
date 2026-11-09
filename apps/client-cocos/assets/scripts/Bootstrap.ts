@@ -19,6 +19,7 @@ import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
+import { installDrawDebug } from './DrawDebug';
 import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
@@ -34,6 +35,7 @@ import { OnlineSession, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
+import { PartyFrames } from './PartyFrames';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -95,6 +97,7 @@ export class Bootstrap extends Component {
   private progressionHud: ProgressionHud | null = null;
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
+  private partyFrames: PartyFrames | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -293,12 +296,21 @@ export class Bootstrap extends Component {
       this.combatOn ? (tile) => this.combat?.pick(tile) ?? null : undefined,
     );
     if (this.online) {
-      this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
+      this.progressionHud = new ProgressionHud(
+        hudRoot,
+        art,
+        this.online.net,
+        (x, y) => this.rig.clientToUi(x, y),
+        (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
+      );
       this.chatBox = new ChatBox(this.online.net, this.online.username);
+      const chat = this.chatBox;
+      this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
+    if (params.get('drawdbg') !== null) installDrawDebug(this.node); // window.__vgtdDrawDbg(): batch-break report
     this.maybeAutotest();
   }
 
@@ -374,6 +386,7 @@ export class Bootstrap extends Component {
         quickUse: (key) => (demo ? false : (online?.net.sendBagQuickUse(key) ?? false)),
         clientToUi: (x, y) => this.rig.clientToUi(x, y),
         icon: (key) => this.propArt?.icon(key) ?? null,
+        slice: (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       },
       !!demo,
     );
@@ -477,6 +490,15 @@ export class Bootstrap extends Component {
     return shared.tileToScreen(p.i, p.j);
   }
 
+  /** Online: the own status row (root / slow / poison from the status block, shield from the vitals) next to the HP bar (D94). */
+  private updateStatusRow(): void {
+    const combat = this.combat;
+    if (!combat) return;
+    const own = this.online?.active ? this.online.net.ownStatus() : { rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 };
+    const forced = (globalThis as unknown as Record<string, typeof own | undefined>).__vgtdOwnStatus; // automation: scripts/combat-online-smoke.mjs
+    combat.setStatuses(core.statusRowItems(forced ?? own, combat.backend.player.shield));
+  }
+
   /**
    * Touch input mode: the wheel replaces the bottom hotbar, and the casts the TouchController produced (tap = auto-target, drag = aim point)
    * go to the combat HUD. Pointer mode (desktop) never reads `frame.casts`: keys 1-8 and the hotbar are handled by CombatUi itself.
@@ -530,12 +552,15 @@ export class Bootstrap extends Component {
     this.applyServerClass();
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
+    this.updateStatusRow();
     this.chatBox?.update();
+    this.partyFrames?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
     }
     this.rig.follow(this.playerScreen(), dt);
+    this.ysort.cull(this.cameraRect()); // park what is far outside the view: fewer draw calls (docs/33)
     this.ysort.sort();
     this.npcs?.update(dt);
     this.world.update(dt, this.cameraRect());
@@ -577,6 +602,7 @@ export class Bootstrap extends Component {
     this.combat?.destroy();
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
+    this.partyFrames?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

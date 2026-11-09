@@ -17,6 +17,7 @@ import {
   type InputMsg,
   type Message,
   type SelfState,
+  type SelfStatus,
   type SkillResultMsg,
   type SnapshotEntity,
   type SnapshotMsg,
@@ -178,11 +179,13 @@ const TYPE_IDS: Readonly<Record<Exclude<Message['type'], ColdMessage['type']>, M
   telegraph_start: MsgType.TelegraphStart,
   telegraph_end: MsgType.TelegraphEnd,
   boss_phase: MsgType.BossPhase,
+  status_update: MsgType.StatusUpdate,
 };
 
 const SELF_FLAG_FLYING = 1;
 const SELF_FLAG_QINGGONG = 2;
 const SELF_FLAG_VITALS = 4;
+const SELF_FLAG_STATUS = 8;
 const CAST_FLAG_AIM = 1;
 const SNAP_FLAG_SELF = 1;
 const SNAP_FLAG_BASELINE = 2;
@@ -261,6 +264,10 @@ export function encode(msg: Message, opts: CodecOptions = {}): Uint8Array {
       w.u16(m.id);
       w.u8(m.cancelled ? 1 : 0);
       break;
+    case 'status_update':
+      w.u32(m.entityId);
+      w.u8(m.mask);
+      break;
     case 'boss_phase':
       w.u32(m.mobEntityId);
       w.u8(m.phase);
@@ -286,7 +293,12 @@ function encodeSelf(w: ByteWriter, s: SelfState): void {
   w.f32(s.i);
   w.f32(s.j);
   w.u8(s.layer);
-  w.u8((s.flying ? SELF_FLAG_FLYING : 0) | (s.qinggong ? SELF_FLAG_QINGGONG : 0) | (s.vitals ? SELF_FLAG_VITALS : 0));
+  w.u8(
+    (s.flying ? SELF_FLAG_FLYING : 0) |
+      (s.qinggong ? SELF_FLAG_QINGGONG : 0) |
+      (s.vitals ? SELF_FLAG_VITALS : 0) |
+      (s.status ? SELF_FLAG_STATUS : 0),
+  );
   w.u8(s.facing);
   w.u16(s.dashLeftMs);
   w.u16(s.dashCdMs);
@@ -298,6 +310,17 @@ function encodeSelf(w: ByteWriter, s: SelfState): void {
     w.u32(s.vitals.mpMax);
     w.u32(s.vitals.shield);
   }
+  if (s.status) {
+    // mask, then the remaining ms (u16) of each active effect in bit order, the slow factor (percent, u8) after the slow time
+    const st = s.status;
+    w.u8((st.rootMs > 0 ? 1 : 0) | (st.slowMs > 0 ? 2 : 0) | (st.poisonMs > 0 ? 4 : 0));
+    if (st.rootMs > 0) w.u16(st.rootMs);
+    if (st.slowMs > 0) {
+      w.u16(st.slowMs);
+      w.u8(st.slowPct);
+    }
+    if (st.poisonMs > 0) w.u16(st.poisonMs);
+  }
 }
 
 function decodeSelf(r: ByteReader): SelfState {
@@ -306,7 +329,7 @@ function decodeSelf(r: ByteReader): SelfState {
   const j = r.f32();
   const layer = r.u8();
   const f = r.u8();
-  if ((f & ~(SELF_FLAG_FLYING | SELF_FLAG_QINGGONG | SELF_FLAG_VITALS)) !== 0)
+  if ((f & ~(SELF_FLAG_FLYING | SELF_FLAG_QINGGONG | SELF_FLAG_VITALS | SELF_FLAG_STATUS)) !== 0)
     throw new ProtocolError('malformed', 'unknown self flags');
   const facing = r.u8();
   if (facing > 254) throw new ProtocolError('range', 'facing 255 is not a valid direction code');
@@ -325,7 +348,21 @@ function decodeSelf(r: ByteReader): SelfState {
       (f & SELF_FLAG_VITALS) !== 0
         ? { hp: r.u32(), hpMax: r.u32(), mp: r.u32(), mpMax: r.u32(), shield: r.u32() }
         : null,
+    status: (f & SELF_FLAG_STATUS) !== 0 ? decodeSelfStatus(r) : null,
   };
+}
+
+function decodeSelfStatus(r: ByteReader): SelfStatus {
+  const mask = r.u8();
+  if ((mask & ~7) !== 0) throw new ProtocolError('malformed', 'unknown status bits');
+  const st: SelfStatus = { rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 };
+  if (mask & 1) st.rootMs = r.u16();
+  if (mask & 2) {
+    st.slowMs = r.u16();
+    st.slowPct = r.u8();
+  }
+  if (mask & 4) st.poisonMs = r.u16();
+  return st;
 }
 
 function encodeSnapshot(w: ByteWriter, m: SnapshotMsg, opts: CodecOptions): void {
@@ -555,6 +592,9 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
     }
     case 'boss_phase':
       msg = { type, mobEntityId: r.u32(), phase: r.u8(), transformMs: r.u16() };
+      break;
+    case 'status_update':
+      msg = { type, entityId: r.u32(), mask: r.u8() };
       break;
     default:
       throw new ProtocolError('type', `message ${type} is not a hot-family message`);

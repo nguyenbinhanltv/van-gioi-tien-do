@@ -23,6 +23,36 @@ export const LARGE_ERROR_EASE_MS = 200;
 /** Inputs kept while waiting for the server's ack (about 6 s at 20 Hz); older ones are dropped, never replayed. */
 export const MAX_PENDING_INPUTS = 128;
 
+/**
+ * Movement statuses the server applies to this player's inputs (D94): root = magnitude 0, slow = magnitude x factor. The predictor applies the
+ * SAME rewrite to its predicted inputs and to the replay of pending inputs (the packets it sends stay the original ones: the server rewrites
+ * them itself), so a rooted / slowed player moves exactly as the server moves them instead of rubber-banding. Times count down by each
+ * input's `dtMs` and are re-synced from the server's status block (sent when an effect is applied / refreshed / expires).
+ */
+export interface MoveStatus {
+  rootMs: number;
+  slowMs: number;
+  /** speed factor 0..1 while `slowMs` > 0 */
+  slowFactor: number;
+}
+const NO_STATUS: MoveStatus = { rootMs: 0, slowMs: 0, slowFactor: 1 };
+
+/** The input after root / slow (the same arithmetic as the server's `StatusSystem.adjustMove`). */
+function adjustedInput(pkt: InputPacket, st: MoveStatus): InputPacket {
+  if (st.rootMs > 0) return pkt.mag === 0 ? pkt : { ...pkt, mag: 0 };
+  if (st.slowMs > 0 && st.slowFactor < 1) return { ...pkt, mag: Math.floor(pkt.mag * st.slowFactor) };
+  return pkt;
+}
+
+function consumed(st: MoveStatus, dtMs: number): MoveStatus {
+  if (st.rootMs <= 0 && st.slowMs <= 0) return NO_STATUS;
+  return {
+    rootMs: Math.max(0, st.rootMs - dtMs),
+    slowMs: Math.max(0, st.slowMs - dtMs),
+    slowFactor: st.slowFactor,
+  };
+}
+
 export function selfToMoveState(s: SelfState, agi: number): MoveState {
   return {
     i: s.i,
@@ -46,6 +76,10 @@ export class Predictor {
   /** null until the first snapshot tells us where the server put us */
   state: MoveState | null = null;
   private pending: InputPacket[] = [];
+  /** root / slow time left BEFORE each pending input (parallel to `pending`): the replay after an ack starts from the right values */
+  private pendingStatus: MoveStatus[] = [];
+  /** root / slow time left after the newest pushed input */
+  private status: MoveStatus = NO_STATUS;
   private seq = 0;
   /** displayed position = predicted state + this offset, which decays to zero */
   private offI = 0;
@@ -69,6 +103,10 @@ export class Predictor {
   get lastSeq(): number {
     return this.seq;
   }
+  /** The movement status the predictor currently assumes (for tests / the HUD). */
+  get moveStatus(): Readonly<MoveStatus> {
+    return this.status;
+  }
 
   /** Run one input locally and queue it for resending until acked. Returns the packet to send (null before `ready`). */
   push(intent: MoveIntent, dtMs: number): InputPacket | null {
@@ -81,9 +119,14 @@ export class Predictor {
       mag: Math.min(MAG_MAX, Math.max(0, intent.mag)),
       flags: intent.flags & 0xf,
     };
-    this.state = stepMove(this.state, pkt, this.grid);
+    this.pendingStatus.push(this.status);
+    this.state = stepMove(this.state, adjustedInput(pkt, this.status), this.grid);
+    this.status = consumed(this.status, dtMs);
     this.pending.push(pkt);
-    if (this.pending.length > MAX_PENDING_INPUTS) this.pending.shift();
+    if (this.pending.length > MAX_PENDING_INPUTS) {
+      this.pending.shift();
+      this.pendingStatus.shift();
+    }
     return pkt;
   }
 
@@ -94,9 +137,21 @@ export class Predictor {
 
   /** Apply a snapshot's `self` block: drop acked inputs, adopt the server state, replay the rest. */
   reconcile(self: SelfState): void {
-    this.pending = this.pending.filter((p) => seqNewer(p.seq, self.lastSeq));
+    const first = this.pending.findIndex((p) => seqNewer(p.seq, self.lastSeq));
+    const keepFrom = first < 0 ? this.pending.length : first; // acked inputs are a prefix
+    // the status at the moment of the ack: the server's block when it sent one, else what we had before the first unacked input
+    let st: MoveStatus = self.status
+      ? { rootMs: self.status.rootMs, slowMs: self.status.slowMs, slowFactor: self.status.slowMs > 0 ? self.status.slowPct / 100 : 1 }
+      : (this.pendingStatus[keepFrom] ?? this.status);
+    this.pending = this.pending.slice(keepFrom);
+    this.pendingStatus = this.pendingStatus.slice(keepFrom);
     let s = selfToMoveState(self, this.agi);
-    for (const p of this.pending) s = stepMove(s, p, this.grid);
+    this.pending.forEach((p, k) => {
+      this.pendingStatus[k] = st;
+      s = stepMove(s, adjustedInput(p, st), this.grid);
+      st = consumed(st, p.dtMs);
+    });
+    this.status = st;
     const old = this.state;
     const shown = this.display();
     this.state = s;

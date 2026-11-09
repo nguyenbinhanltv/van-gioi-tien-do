@@ -20,11 +20,15 @@ const { spawnSync } = require('child_process');
 const { decodePNG } = require('../src/lib/png');
 const G = require('../src/gemini/process');
 const { GRID_PATHS, classGrids } = require('../src/gemini/skills');
+const Ground = require('../src/gemini/ground');
 const skillsJson = require('../../../packages/shared/src/data/skills.json');
 const manifest = require('../src/gemini/manifest.json');
 
 const args = process.argv.slice(2);
-const opt = (n, d) => { const i = args.indexOf('--' + n); return i >= 0 ? args[i + 1] : d; };
+const opt = (n, d) => {
+  const i = args.indexOf('--' + n);
+  return i >= 0 ? args[i + 1] : d;
+};
 const flag = (n) => args.includes('--' + n);
 const root = path.resolve(__dirname, '..');
 const SRC = path.resolve(opt('src', path.join(root, '../../assets-src/gemini')));
@@ -40,6 +44,10 @@ const files = [
   ...Object.keys(manifest.mobsPhase)
     .filter((n) => !n.startsWith('_'))
     .map((n) => ['mobs_phase', n]),
+  ...manifest.ground.materials.map((n) => ['ground', n]),
+  ...Object.keys(manifest.ui)
+    .filter((n) => !n.startsWith('_'))
+    .map((n) => ['ui', n]),
 ];
 const srcPath = (dir, name) =>
   dir === 'mobs' || dir === 'mobs_phase' ? path.join(CONCEPTS, dir, `${name}.png`) : path.join(SRC, dir, `${name}.png`);
@@ -49,9 +57,15 @@ function loadSources() {
   const bufs = new Map();
   for (const [dir, name] of files) {
     const f = srcPath(dir, name);
-    if (!fs.existsSync(f)) { missing.push(`${dir}/${name}.png (missing)`); continue; }
+    if (!fs.existsSync(f)) {
+      missing.push(`${dir}/${name}.png (missing)`);
+      continue;
+    }
     const b = fs.readFileSync(f);
-    if (!isPng(b)) { missing.push(`${dir}/${name}.png (not a PNG: Git LFS pointer? run git lfs pull)`); continue; }
+    if (!isPng(b)) {
+      missing.push(`${dir}/${name}.png (not a PNG: Git LFS pointer? run git lfs pull)`);
+      continue;
+    }
     bufs.set(`${dir}/${name}`, b);
   }
   return { missing, bufs };
@@ -59,8 +73,20 @@ function loadSources() {
 
 function stampOf(bufs) {
   const h = crypto.createHash('sha1');
-  for (const k of [...bufs.keys()].sort()) { h.update(k); h.update(bufs.get(k)); }
-  for (const f of ['../src/gemini/process.js', '../src/gemini/manifest.json', '../src/gemini/skills.js', '../../../packages/shared/src/data/skills.json', __filename, '../pipeline/pack_atlas.js', '../src/lib/png.js']) {
+  for (const k of [...bufs.keys()].sort()) {
+    h.update(k);
+    h.update(bufs.get(k));
+  }
+  for (const f of [
+    '../src/gemini/process.js',
+    '../src/gemini/manifest.json',
+    '../src/gemini/skills.js',
+    '../src/gemini/ground.js',
+    '../../../packages/shared/src/data/skills.json',
+    __filename,
+    '../pipeline/pack_atlas.js',
+    '../src/lib/png.js',
+  ]) {
     h.update(fs.readFileSync(path.resolve(__dirname, f)));
   }
   return h.digest('hex');
@@ -69,7 +95,19 @@ function stampOf(bufs) {
 function pack(dir, name) {
   const r = spawnSync(
     process.execPath,
-    [path.join(root, 'pipeline/pack_atlas.js'), '--in', path.join(OUT, dir), '--out', path.join(OUT, 'atlas'), '--name', name, '--padding', '2', '--extrude', '2'],
+    [
+      path.join(root, 'pipeline/pack_atlas.js'),
+      '--in',
+      path.join(OUT, dir),
+      '--out',
+      path.join(OUT, 'atlas'),
+      '--name',
+      name,
+      '--padding',
+      '2',
+      '--extrude',
+      '2',
+    ],
     { stdio: 'inherit' },
   );
   if (r.status !== 0) throw new Error(`pack_atlas failed for ${name}`);
@@ -80,23 +118,44 @@ function main() {
   const { missing, bufs } = loadSources();
   if (missing.length) {
     const msg = `gemini sources unavailable:\n  ${missing.join('\n  ')}`;
-    if (flag('allow-missing')) { console.warn(`⚠ ${msg}\n  (skipped: --allow-missing)`); return 0; }
+    if (flag('allow-missing')) {
+      console.warn(`⚠ ${msg}\n  (skipped: --allow-missing)`);
+      return 0;
+    }
     console.error(`✖ ${msg}`);
     return 3;
   }
   const stamp = stampOf(bufs);
   const stampFile = path.join(OUT, '.stamp');
-  if (!flag('force') && fs.existsSync(stampFile) && fs.readFileSync(stampFile, 'utf8') === stamp && fs.existsSync(path.join(OUT, 'gemini.json'))) {
+  if (
+    !flag('force') &&
+    fs.existsSync(stampFile) &&
+    fs.readFileSync(stampFile, 'utf8') === stamp &&
+    fs.existsSync(path.join(OUT, 'gemini.json'))
+  ) {
     console.log(`✔ gemini assets up to date (${OUT})`);
     return 0;
   }
   fs.rmSync(OUT, { recursive: true, force: true });
-  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x', 'skills_2x', 'skills_1x', 'mobs_1x']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
+  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x', 'skills_2x', 'skills_1x', 'mobs_1x', 'ground', 'ui_2x', 'ui_1x'])
+    fs.mkdirSync(path.join(OUT, d), { recursive: true });
 
   const problems = [];
-  const sidecar = { format: 'vgtd-gemini', version: 1, props: {}, icons: {}, skills: {}, mobs: {}, mobPhases: {}, atlases: {} };
+  const sidecar = {
+    format: 'vgtd-gemini',
+    version: 1,
+    props: {},
+    icons: {},
+    skills: {},
+    mobs: {},
+    mobPhases: {},
+    ground: {},
+    ui: {},
+    atlases: {},
+  };
   const verify = (key, srcBuf, sparkle) => {
-    if (sparkle.components < 1) problems.push(`${key}: no Gemini sparkle found in the corner (unexpected source layout)`);
+    if (sparkle.components < 1)
+      problems.push(`${key}: no Gemini sparkle found in the corner (unexpected source layout)`);
     else {
       // re-run on a fresh copy of the source with the mark removed: nothing may be found a second time
       const img = decodePNG(srcBuf);
@@ -113,9 +172,17 @@ function main() {
     r.x2.save(path.join(OUT, 'props_2x', `${name}.png`));
     r.x1.save(path.join(OUT, 'props_1x', `${name}.png`));
     sidecar.props[name] = {
-      w2: r.x2.width, h2: r.x2.height, pivot: r.pivot, block: def.block, biomes: def.biomes, weight: def.weight, spacing: def.spacing || 1,
+      w2: r.x2.width,
+      h2: r.x2.height,
+      pivot: r.pivot,
+      block: def.block,
+      biomes: def.biomes,
+      weight: def.weight,
+      spacing: def.spacing || 1,
     };
-    console.log(`  props/${name}: ${r.x2.width}x${r.x2.height} @2x, pivot ${r.pivot.x},${r.pivot.y}, sparkle ${r.sparkle.pixels}px`);
+    console.log(
+      `  props/${name}: ${r.x2.width}x${r.x2.height} @2x, pivot ${r.pivot.x},${r.pivot.y}, sparkle ${r.sparkle.pixels}px`,
+    );
   }
   for (const name of manifest.icons) {
     const buf = bufs.get(`items/${name}`);
@@ -163,6 +230,51 @@ function main() {
     sidecar.mobPhases[key] = { id: base.id, phase: def.phase, w: r.x1.width, h: r.x1.height, pivot: r.pivot };
     console.log(`  mobs_phase/${key}: ${r.x1.width}x${r.x1.height} px (mob ${def.mob} id ${base.id}, phase ${def.phase}), sparkle ${r.sparkle.pixels}px`);
   }
+  // 9-slice UI frames: keyed + trimmed, one atlas, slice insets in the sidecar
+  for (const [name, def] of Object.entries(manifest.ui)) {
+    if (name.startsWith('_')) continue;
+    const buf = bufs.get(`ui/${name}`);
+    const r = G.processUi(decodePNG(buf), def.w);
+    verify(`ui/${name}`, buf, r.sparkle);
+    const [l, t, rr, b] = def.inset;
+    if (l + rr >= r.x1.width - 2 || t + b >= r.x1.height - 2)
+      problems.push(`ui/${name}: insets ${def.inset} leave no stretchable centre in ${r.x1.width}x${r.x1.height}`);
+    r.x2.save(path.join(OUT, 'ui_2x', `${name}.png`));
+    r.x1.save(path.join(OUT, 'ui_1x', `${name}.png`));
+    sidecar.ui[name] = { w: r.x1.width, h: r.x1.height, inset: def.inset };
+    console.log(`  ui/${name}: ${r.x1.width}x${r.x1.height} @1x, inset ${def.inset.join(',')}`);
+  }
+  // ground textures (top-down paintings, not magenta): patch the sparkle, make periodic, cut variants
+  const G2 = manifest.ground;
+  for (const mat of G2.materials) {
+    const img = decodePNG(bufs.get(`ground/${mat}`));
+    const mark = Ground.removeGroundMark(img);
+    const left = Ground.markContrast(img);
+    if (mark === 0) problems.push(`ground/${mat}: no Gemini sparkle found at the expected corner position`);
+    else if (left > Math.max(25, mark * 0.5))
+      problems.push(
+        `ground/${mat}: sparkle still visible after patching (contrast ${left.toFixed(1)} of ${mark.toFixed(1)})`,
+      );
+    const seams = [];
+    for (let k = 0; k < G2.variants; k++) {
+      const c = G2.crop;
+      const r = Ground.periodicPatch(img, { x: (k % 2) * c, y: Math.floor(k / 2) * c, size: c, out: G2.patch });
+      if (r.after.ratio > G2.maxSeamRatio)
+        problems.push(
+          `ground/${mat} variant ${k}: wrap seam ratio ${r.after.ratio.toFixed(2)} > ${G2.maxSeamRatio} after the fix`,
+        );
+      r.image.save(path.join(OUT, 'ground', `${mat}_${k}.png`));
+      seams.push([Number(r.before.ratio.toFixed(2)), Number(r.after.ratio.toFixed(2))]);
+    }
+    sidecar.ground[mat] = {
+      markContrast: Number(mark.toFixed(1)),
+      markContrastAfter: Number(left.toFixed(1)),
+      seamBeforeAfter: seams,
+    };
+    console.log(
+      `  ground/${mat}: mark ${mark.toFixed(0)} -> ${left.toFixed(0)}, wrap seam ${seams.map((x) => `${x[0]}->${x[1]}`).join(' ')}`,
+    );
+  }
   if (problems.length) {
     console.error(`✖ verification failed:\n  ${problems.join('\n  ')}`);
     return 4;
@@ -173,9 +285,14 @@ function main() {
   for (const key of [...Object.keys(manifest.mobs), ...Object.keys(manifest.mobsPhase).filter((n) => !n.startsWith('_'))])
     for (const d of ['props_2x', 'props_1x']) fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, d, `${key}.png`));
   for (const [dir, atlasName, kind] of [
-    ['props_2x', 'atl_prop_2x', 'props'], ['props_1x', 'atl_prop_1x', 'props'],
-    ['icons_2x', 'atl_gicon_2x', 'icons'], ['icons_1x', 'atl_gicon_1x', 'icons'],
-    ['skills_2x', 'atl_skill_2x', 'skills'], ['skills_1x', 'atl_skill_1x', 'skills'],
+    ['props_2x', 'atl_prop_2x', 'props'],
+    ['props_1x', 'atl_prop_1x', 'props'],
+    ['icons_2x', 'atl_gicon_2x', 'icons'],
+    ['icons_1x', 'atl_gicon_1x', 'icons'],
+    ['ui_2x', 'atl_ui_2x', 'ui'],
+    ['ui_1x', 'atl_ui_1x', 'ui'],
+    ['skills_2x', 'atl_skill_2x', 'skills'],
+    ['skills_1x', 'atl_skill_1x', 'skills'],
   ]) {
     const a = pack(dir, atlasName);
     const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';
@@ -191,4 +308,9 @@ function main() {
   return 0;
 }
 
-try { process.exit(main()); } catch (e) { console.error('✖', e.message); process.exit(1); }
+try {
+  process.exit(main());
+} catch (e) {
+  console.error('✖', e.message);
+  process.exit(1);
+}

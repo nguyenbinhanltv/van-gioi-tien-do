@@ -4,7 +4,7 @@
  * in by the caller (`WorldNode`), never the wall clock, so behaviour is reproducible in tests.
  *
  * Every `chat_send` gets exactly one `chat_result` (0 = delivered); a refused line is never silent. A whisper answer never reveals whether a
- * name exists: offline and unknown are the same `NoSuchPlayer`.
+ * name exists: offline and unknown are the same `NoSuchPlayer`, and every whisper (even one that resolves to nobody) costs a rate-limit token.
  *
  * Persistence: the World and Zone channels are not stored (docs/22 §7); a ring of the last lines is kept in RAM for `history`. Whispers are
  * not stored either yet (the 30-day `chat_messages` table is OPEN-ITEMS 20).
@@ -41,6 +41,8 @@ export interface ChatHost {
   deliver(entityId: number, msg: ChatMsgMsg): void;
   /** tile position of a player, undefined when gone */
   posOf(entityId: number): { i: number; j: number } | undefined;
+  /** members of the party `entityId` is in (itself included), `[]` when in none: the Party channel's audience (D93) */
+  partyMembers?(entityId: number): readonly number[];
 }
 
 interface Bucket {
@@ -123,14 +125,22 @@ export class ChatService {
     const peer = this.peers.get(entityId);
     if (!peer || !this.host) return result(ChatReason.NotReady);
     const kind = this.kindOf(msg.channel);
-    if (!kind) return result(ChatReason.BadChannel); // unknown, or Party (not open yet)
+    if (!kind) return result(ChatReason.BadChannel); // unknown channel
     if (this.isMuted(peer.accountId, nowMs)) return result(ChatReason.Muted);
 
     const text = maskBanned(sanitize(msg.text), this.banned);
     if (!text) return result(ChatReason.Empty);
     if (new TextEncoder().encode(text).length > CHAT_LIMITS.MAX_TEXT_BYTES) return result(ChatReason.TooLong);
 
-    // validate the target BEFORE spending a token: a typo in a whisper name should not cost the player a message
+    // the Party channel needs a party (the sender's own state, so refusing it reveals nothing about anyone else and needs no token)
+    let partyAudience: readonly number[] = [];
+    if (msg.channel === ChatChannel.Party) {
+      partyAudience = this.host.partyMembers?.(entityId) ?? [];
+      if (!partyAudience.includes(entityId)) return result(ChatReason.NotInParty);
+    }
+    // Spend the token BEFORE resolving a whisper target: `NoSuchPlayer` / `SelfWhisper` are answers about who is online, and an answer
+    // that is free would let a client probe usernames at line rate. A typo in a whisper name therefore costs a token like any line.
+    if (!this.take(peer.accountId, kind, nowMs)) return result(ChatReason.RateLimited);
     let target: ChatPeer | undefined;
     if (msg.channel === ChatChannel.Whisper) {
       const id = this.byName.get(msg.target.toLowerCase());
@@ -138,7 +148,6 @@ export class ChatService {
       if (!target) return result(ChatReason.NoSuchPlayer);
       if (target.entityId === entityId) return result(ChatReason.SelfWhisper);
     }
-    if (!this.take(peer.accountId, kind, nowMs)) return result(ChatReason.RateLimited);
 
     const line: ChatLine = {
       channel: msg.channel,
@@ -152,6 +161,8 @@ export class ChatService {
     if (target) {
       this.host.deliver(target.entityId, out);
       this.host.deliver(entityId, out); // the sender's echo ("me -> target")
+    } else if (msg.channel === ChatChannel.Party) {
+      for (const id of partyAudience) this.host.deliver(id, out);
     } else if (msg.channel === ChatChannel.World) {
       this.ring.push(line);
       if (this.ring.length > this.ringMax) this.ring.splice(0, this.ring.length - this.ringMax);
@@ -179,7 +190,9 @@ export class ChatService {
         ? 'zone'
         : channel === ChatChannel.Whisper
           ? 'whisper'
-          : null;
+          : channel === ChatChannel.Party
+            ? 'party'
+            : null;
   }
 
   /** Token bucket per account and channel kind: `burst` tokens, one refilled every `refillMs`. */
