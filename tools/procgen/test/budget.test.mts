@@ -178,6 +178,15 @@ describe('budget gate: initial package estimate', () => {
     expect(r.findings.some((f) => f.code === 'NOT_COMPRESSED')).toBe(true); // warn, not error
     expect(r.ok).toBe(true);
   });
+  it('keeps lazily loaded atlas pages (atl_mobphase) out of the initial package but reports them', () => {
+    makeAtlas(dir, { name: 'atl_small' });
+    const before = runBudget({ atlasDir: dir });
+    makeAtlas(dir, { name: 'atl_mobphase_1x' });
+    const after = runBudget({ atlasDir: dir });
+    expect(after.estimate.assetBytes).toBe(before.estimate.assetBytes);
+    expect(after.estimate.lazyBytes).toBeGreaterThan(0);
+    expect(after.rows.some((r) => r.name === 'atl_mobphase_1x')).toBe(true); // still checked
+  });
   it('fails on Web when the estimate exceeds 25 MB, but not on PC', () => {
     makeAtlas(dir, { name: 'atl_small' });
     expect(codes(runBudget({ atlasDir: dir, reservedMb: 25 }))).toContain('INITIAL_PACKAGE_OVER');

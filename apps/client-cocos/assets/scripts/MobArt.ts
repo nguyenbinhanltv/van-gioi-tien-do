@@ -2,7 +2,7 @@ import { Color, Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { combat as cb } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { MobSprite, PropArt } from './PropArt';
-import { mobDefIdOfName, newMotion, stepMotion, type MotionState } from './MobMotion';
+import { beginTransform, flashMotion, mobDefIdOfName, newMotion, stepMotion, type MotionState } from './MobMotion';
 
 /**
  * INTERIM mob visuals. Until animated mob sprites exist, every mob in `MOB_DEFS` is a static "standee": the owner-provided
@@ -15,23 +15,32 @@ import { mobDefIdOfName, newMotion, stepMotion, type MotionState } from './MobMo
 const SHADOW_W_FRAC = 0.62;
 const SHADOW_ASPECT = 0.5;
 
+/** Interim tint of a phase that has no skin yet (the boss keeps its current art, redder): a placeholder until the art exists. */
+const PHASE_TINT = new Color(255, 170, 160, 255);
+
+type Skin = { entry: MobSprite; frame: SpriteFrame };
+
 /** A mob's node in the L3 Y-sort layer (`node`, anchored at the foot) plus its visual state. */
 export class MobStandee {
   readonly node: Node;
   private readonly body: Node;
   private readonly sprite: Sprite;
   private readonly motion: MotionState;
-  /** sprite height above the foot (design px): where an overhead bar goes */
-  readonly heightPx: number;
+  /** sprite height above the foot (design px): where an overhead bar goes (follows the current skin) */
+  heightPx: number;
   /** false once the death fade finished (hide the node) */
   visible = true;
 
   private shadow: Node | null = null;
   private shadowSprite: Sprite | null = null;
-  private readonly entry: MobSprite;
+  private entry: MobSprite;
+  private readonly skins: ReadonlyMap<number, Skin>;
+  private pendingPhase = 0;
+  private tinted = false;
 
-  constructor(id: number, entry: MobSprite, frame: SpriteFrame) {
+  constructor(id: number, entry: MobSprite, frame: SpriteFrame, skins?: ReadonlyMap<number, Skin>) {
     this.entry = entry;
+    this.skins = skins ?? new Map([[0, { entry, frame }]]);
     this.node = newNode(`Mob${id}`);
     this.body = newNode('body', this.node);
     const ui = this.body.addComponent(UITransform);
@@ -61,6 +70,32 @@ export class MobStandee {
   }
 
   /**
+   * Boss phase change (the server's `boss_phase`): pulse white / red for `transformMs`, swap to the skin of `phase` half way through.
+   * A phase without a skin keeps the art and gets the interim tint. `transformMs <= 0` swaps at once.
+   */
+  setPhase(phase: number, transformMs = 0): void {
+    this.pendingPhase = phase;
+    beginTransform(this.motion, transformMs);
+  }
+
+  /** One-shot flash (the hit flash) for `seconds`. */
+  flash(seconds = 0.4): void {
+    flashMotion(this.motion, seconds);
+  }
+
+  private applySkin(phase: number): void {
+    const skin = this.skins.get(phase);
+    this.tinted = !skin && phase > 0;
+    if (!skin) return;
+    this.entry = skin.entry;
+    const ui = this.body.getComponent(UITransform)!;
+    ui.setContentSize(skin.entry.w, skin.entry.h);
+    ui.setAnchorPoint(skin.entry.pivot.x, 1 - skin.entry.pivot.y);
+    this.sprite.spriteFrame = skin.frame;
+    this.heightPx = skin.entry.h * skin.entry.pivot.y;
+  }
+
+  /**
    * Per frame: `pos` in tiles, `hp` absolute (a drop = a hit), `alive` from the backend; `face` = the player's tile position
    * (an idle mob turns to it).
    */
@@ -70,6 +105,8 @@ export class MobStandee {
     face?: { i: number; j: number },
   ): void {
     const o = stepMotion(this.motion, dt, e, face);
+    if (o.respawned) this.applySkin(0);
+    if (o.swapNow) this.applySkin(this.pendingPhase);
     this.visible = o.visible;
     if (this.shadow && this.shadowSprite) {
       this.shadow.active = o.visible;
@@ -78,7 +115,11 @@ export class MobStandee {
     }
     this.body.setScale(o.scaleX, 1, 1);
     this.body.setPosition(0, o.bobY, 0);
-    this.sprite.color = o.flashing ? new Color(255, 90, 90, o.alpha) : new Color(255, 255, 255, o.alpha);
+    this.sprite.color = o.flashing
+      ? new Color(255, 90, 90, o.alpha)
+      : this.tinted
+        ? new Color(PHASE_TINT.r, PHASE_TINT.g, PHASE_TINT.b, o.alpha)
+        : new Color(255, 255, 255, o.alpha);
   }
 }
 
@@ -93,7 +134,7 @@ export class MobArt {
   create(entityId: number, name: string, defId?: number): MobStandee | null {
     const id = defId ?? mobDefIdOfName(name);
     const m = id === null ? undefined : this.props.mob(id);
-    return m ? new MobStandee(entityId, m.entry, m.frame) : null;
+    return m ? new MobStandee(entityId, m.entry, m.frame, this.props.mobSkins(id!)) : null;
   }
 }
 

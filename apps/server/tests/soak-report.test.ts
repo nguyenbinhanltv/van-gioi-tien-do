@@ -118,6 +118,12 @@ describe('heap trend', () => {
   });
 });
 
+const tickHist = (v: number[]): TickHistogram => {
+  const h = new TickHistogram();
+  h.add(v);
+  return h;
+};
+
 describe('summarizeSoak / criteria', () => {
   const run = (samples: SoakSample[], cfg = config(), ticks: number[] = [1, 2, 3, 40]) => {
     const h = new TickHistogram();
@@ -185,6 +191,12 @@ describe('summarizeSoak / criteria', () => {
     expect(slow.criteria.some((c) => !c.pass)).toBe(true);
     expect(gateFailures(slow, 100)).toEqual([]);
     expect(gateFailures(slow, 30)).toEqual([expect.stringContaining('tick p99')]);
+    // violation kinds: cooldown (honest bots get a few on a stalling server, docs/35 §3.2) passes the gate, every other kind fails it
+    const withKinds = (kinds: Record<string, number>) =>
+      summarizeSoak(config({ durationS: 60, mobs: 0 }), series(12), tickHist([1, 2, 3]), kinds);
+    expect(gateFailures(withKinds({ cooldown: 500 }), 100)).toEqual([]);
+    expect(gateFailures(withKinds({ cooldown: 500, budget: 1 }), 100).join('|')).toContain('budget 1');
+    expect(gateFailures(withKinds({ distance: 2 }), 100).join('|')).toContain('distance 2');
     const broken = run(
       series(12, () => ({ bots: totals({ online: 19, ended: 1 }) })),
       config({ durationS: 60, mobs: 0 }),

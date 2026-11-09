@@ -610,7 +610,20 @@ export class CombatUi {
     }
   }
 
-  /** A boss entered phase `phase` (wire `boss_phase`, D91): a big floating line above it and a toast; the standee flash / skin swap is the mob art layer's job. */
+  /**
+   * Boss phase change on the standee of `entityId` (OnlineSession.onBossPhase): transform pulse, skin swap half way through
+   * `transformMs`. No-op for an enemy without a standee (the placeholder sprite).
+   */
+  setEnemyPhase(entityId: number, phase: number, transformMs: number): void {
+    this.standees.get(entityId)?.setPhase(phase, transformMs);
+  }
+
+  /** One-shot flash of an enemy's standee. */
+  flashEnemy(entityId: number, seconds?: number): void {
+    this.standees.get(entityId)?.flash(seconds);
+  }
+
+  /** A boss entered phase `phase` (wire `boss_phase`, D91): a big floating line above it and a toast; the standee transform / skin swap is `setEnemyPhase`. */
   announceBossPhase(entityId: number, phase: number): void {
     this.spawnText(entityId, `Bien hinh! Pha ${phase + 1}`, new Color(255, 120, 60, 255), 34);
     this.toast.string = `Boss bien hinh (pha ${phase + 1}) / Boss transforms (phase ${phase + 1})`;
