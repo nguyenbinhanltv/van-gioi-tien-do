@@ -2,7 +2,8 @@ import { Color, Label, Node, Sprite, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
-import { getRealmBadge } from './PropArt';
+import { sharedAtlas } from './UiLabel';
+import { getRealmBadge, type UiSlice } from './PropArt';
 import { LevelUpFx } from './LevelUpFx';
 
 /**
@@ -40,6 +41,16 @@ const COL = {
   info: new Color(240, 220, 150, 255),
 };
 
+/** Factory for a 9-slice frame (PropArt.slice): null when the owner-provided UI art is not available. */
+export type SliceFactory = (
+  parent: Node,
+  name: string,
+  key: string,
+  w: number,
+  h: number,
+  scale?: number,
+) => UiSlice | null;
+
 function quad(parent: Node, name: string, art: ArtFrames, w: number, h: number, color: Color, ax = 0.5): Sprite {
   const n = newNode(name, parent);
   const ui = n.addComponent(UITransform);
@@ -62,6 +73,7 @@ function label(parent: Node, name: string, size: number, align: number): Label {
   l.verticalAlign = Label.VerticalAlign.CENTER;
   l.overflow = Label.Overflow.NONE;
   l.color = COL.text;
+  sharedAtlas(l);
   return l;
 }
 
@@ -72,6 +84,8 @@ interface Button {
   /** centre in panel-local coordinates (origin = panel top-right corner, x <= 0, y <= 0) */
   x: number;
   y: number;
+  /** owner-provided 9-slice frame (swapped normal / disabled), or null for the flat tile */
+  frame: UiSlice | null;
 }
 
 export class ProgressionHud {
@@ -96,6 +110,7 @@ export class ProgressionHud {
     private readonly art: ArtFrames,
     private readonly net: InstanceType<typeof core.NetClient>,
     private readonly clientToUi: (x: number, y: number) => { x: number; y: number },
+    private readonly slice?: SliceFactory,
   ) {
     this.view = new core.ProgressionView({
       now: () => performance.now(),
@@ -111,6 +126,12 @@ export class ProgressionHud {
     this.root = newNode('ProgressionHud', hudParent);
     const bg = quad(this.root, 'Panel', art, PANEL_W, PANEL_H, COL.panel);
     bg.node.setPosition(-PANEL_W / 2, -PANEL_H / 2, 0);
+    // owner-provided jade panel (small ornaments: the panel is only 92 px tall); the flat translucent quad is the fallback
+    const frame = slice?.(this.root, 'PanelFrame', 'panel_jade', PANEL_W, PANEL_H, 0.35) ?? null;
+    if (frame) {
+      frame.node.setPosition(-PANEL_W / 2, -PANEL_H / 2, 0);
+      bg.node.active = false;
+    }
     this.title = label(this.root, 'Stage', 17, Label.HorizontalAlign.LEFT);
     this.title.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.title.node.setPosition(-PANEL_W + 12, -16, 0);
@@ -127,11 +148,11 @@ export class ProgressionHud {
     back.node.setPosition(-PANEL_W / 2, -38, 0);
     this.barFill = quad(this.root, 'BarFill', art, 0, BAR_H - 4, COL.bar, 0);
     this.barFill.node.setPosition(-PANEL_W + 12 + 2, -38, 0);
-    this.barText = label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER);
+    this.barText = sharedAtlas(label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER), 'dynamic'); // tu vi grows every tick
     this.barText.node.setPosition(-PANEL_W / 2, -38, 0);
     this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, 'Đả tọa [M]');
     this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, 'Đột phá [N]');
-    this.toast = label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT);
+    this.toast = sharedAtlas(label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT), 'dynamic');
     this.toast.node.getComponent(UITransform)!.setAnchorPoint(1, 0.5);
     this.toast.node.setPosition(0, -PANEL_H - 14, 0);
 
@@ -157,9 +178,11 @@ export class ProgressionHud {
     const root = newNode(name, this.root);
     root.setPosition(x, y, 0);
     const bg = quad(root, 'Bg', this.art, BTN_W, BTN_H, COL.btnOff);
+    const frame = this.slice?.(root, 'Frame', 'button_disabled', BTN_W, BTN_H, 0.7) ?? null;
+    if (frame) bg.node.active = false; // the owner-provided button frame replaces the flat tile
     const text = label(root, 'Text', 15, Label.HorizontalAlign.CENTER);
     text.string = caption;
-    return { root, bg, text, x, y };
+    return { root, bg, text, x, y, frame };
   }
 
   /** Re-anchor to the canvas size (design units): top-right corner, 8 px margin. */
@@ -207,7 +230,8 @@ export class ProgressionHud {
   private setButton(b: Button, caption: string, enabled: boolean, on: Color): void {
     b.text.string = caption;
     b.text.color = enabled ? COL.text : COL.textOff;
-    b.bg.color = enabled ? on : COL.btnOff;
+    if (b.frame) b.frame.setKey(enabled ? 'button_normal' : 'button_disabled');
+    else b.bg.color = enabled ? on : COL.btnOff;
   }
 
   private send = (m: core.ProgressionCommand): boolean =>

@@ -193,6 +193,21 @@ try {
   await sleep(300);
   s = await st();
   check(!s.deathOverlay, 'respawn clears the overlay');
+
+  // status row (D94): the server owns the statuses (covered by apps/server tests with a real NetClient); here the HUD row is fed a status
+  // block through the automation override to check that it is drawn
+  await page.evaluate('window.__vgtdOwnStatus = { rootMs: 2500, slowMs: 4000, slowPct: 50, poisonMs: 0 }');
+  await sleep(500);
+  s = await st();
+  check(
+    s.statusTiles.length === 2 && s.statusTiles[0] === 'TROI' && s.statusTiles[1] === 'CHAM',
+    `the status row shows root and slow (${JSON.stringify(s.statusTiles)})`,
+  );
+  await page.screenshot({ path: join(out, 'combat-online-status.png') });
+  await page.evaluate('window.__vgtdOwnStatus = undefined');
+  await sleep(400);
+  s = await st();
+  check(s.statusTiles.length === 0, 'the status row clears when no status is active');
 } finally {
   await browser.close();
   server.kill();

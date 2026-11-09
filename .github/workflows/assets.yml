@@ -39,10 +39,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Owner-provided Gemini props / icons / ground patches / UI frames: key + sparkle removal + trim + atlases (fails if the corner mark is not found / still there).
+      - run: npm run gen:gemini -w @vgtd/procgen
+      # tilemap AFTER gen:gemini: it samples the Gemini ground patches (out/gemini/ground); procedural when they are absent
       - run: npm run gen:tilemap -w @vgtd/procgen
       - run: npm run gen:items -w @vgtd/procgen
-      # Owner-provided Gemini props / icons: key + sparkle removal + trim + atlases (fails if the corner mark is not found / still there).
-      - run: npm run gen:gemini -w @vgtd/procgen
       # SVG -> PNG (resvg). glslangValidator / Xvfb are absent, so shader compile + snapshots are skipped with a notice.
       - run: npm run render -w @vgtd/procgen
       - run: npm run validate -w @vgtd/procgen

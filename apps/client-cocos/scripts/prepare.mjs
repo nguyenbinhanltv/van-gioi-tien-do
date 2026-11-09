@@ -69,6 +69,14 @@ writeFileSync(
 // 2. tilemap -----------------------------------------------------------------
 const procgen = join(repo, 'tools/procgen');
 const out = join(procgen, 'out/tilemap');
+// owner-provided Gemini art first (ground patches feed the tile generator below via `gen:tilemap --ground`, props / icons are copied in step 5);
+// `--allow-missing`: without the LFS sources the tilemap stays procedural and the client keeps its placeholder props / text bag tiles
+{
+  const g = spawnSync(process.execPath, [join(procgen, 'scripts/gemini_assets.js'), '--allow-missing'], {
+    stdio: 'inherit',
+  });
+  if (g.status !== 0) throw new Error('gen:gemini failed');
+}
 // always regenerate (0.6 s) so the copied tilemap can never be stale vs tools/procgen
 {
   // Slice map = Son Mon (docs/04 section 5, docs/10 section 12): 256 x 256 tiles = 8 x 8 chunks, so the ChunkStreamer really
@@ -102,15 +110,11 @@ prepareChibiBundles({ root, repo });
 // 5. owner-provided Gemini props + item icons (assets-src/gemini, Git LFS): keyed / trimmed / packed by tools/procgen, copied next to
 // the tilemap. `--allow-missing`: without the LFS sources the client falls back to its placeholder props and text bag tiles.
 {
-  const g = spawnSync(process.execPath, [join(procgen, 'scripts/gemini_assets.js'), '--allow-missing'], {
-    stdio: 'inherit',
-  });
-  if (g.status !== 0) throw new Error('gen:gemini failed');
   const gdir = join(procgen, 'out/gemini');
   // never leave stale art behind: the sidecar, every atlas page (a page count can change) and the key-art textures
   rmSync(join(worldDir, 'gemini.json'), { force: true });
   for (const f of readdirSync(worldDir)) {
-    if (/^(atl_(prop|gicon|skill|status|realm|ptcl)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png)$/.test(f))
+    if (/^(atl_(prop|gicon|skill|ui|status|realm|ptcl)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png)$/.test(f))
       rmSync(join(worldDir, f), { force: true });
   }
   if (existsSync(join(gdir, 'gemini.json'))) {

@@ -2,6 +2,8 @@ import { Color, Label, Node, Sprite, SpriteFrame, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
+import { sharedAtlas } from './UiLabel';
+import type { UiSlice } from './PropArt';
 
 type Bag = InstanceType<typeof core.BagModel>;
 
@@ -20,6 +22,8 @@ export interface BagPanelHooks {
   clientToUi(clientX: number, clientY: number): { x: number; y: number };
   /** item / stone icon by item key (`heal_pill`, `stone_low`, ...), or null when there is no art (the coloured tile stays) */
   icon?(key: string): SpriteFrame | null;
+  /** a 9-slice frame (owner-provided UI art) under `parent`, or null when there is none (the flat quads stay) */
+  slice?(parent: Node, name: string, key: string, w: number, h: number, scale?: number): UiSlice | null;
 }
 
 /** Wallet currencies in display order -> the stone icon of each (hạ / trung / thượng phẩm). */
@@ -51,6 +55,7 @@ function label(parent: Node, name: string, size: number, color: Color): Label {
   l.verticalAlign = Label.VerticalAlign.CENTER;
   l.overflow = Label.Overflow.NONE;
   l.color = color;
+  sharedAtlas(l);
   return l;
 }
 
@@ -105,12 +110,15 @@ export class BagPanel {
     this.visible = startVisible;
     this.root = newNode('BagPanel', parent);
     this.root.addComponent(UITransform).setContentSize(this.size.w, this.size.h);
-    quad(this.root, 'bg', art, this.size.w, this.size.h, new Color(18, 20, 28, 240));
-    quad(this.root, 'border', art, this.size.w, 2, new Color(120, 110, 80, 255)).node.setPosition(
-      0,
-      this.size.h / 2 - 1,
-      0,
-    );
+    // owner-provided jade panel (corners at half size so they stay clear of the header and the footer), else the flat dark panel
+    if (!hooks.slice?.(this.root, 'frame', 'panel_jade', this.size.w, this.size.h, 0.5)) {
+      quad(this.root, 'bg', art, this.size.w, this.size.h, new Color(18, 20, 28, 240));
+      quad(this.root, 'border', art, this.size.w, 2, new Color(120, 110, 80, 255)).node.setPosition(
+        0,
+        this.size.h / 2 - 1,
+        0,
+      );
+    }
     this.title = label(this.root, 'title', 16, new Color(235, 225, 190, 255));
     this.title.string = 'BAG  [B]';
     this.title.node.setPosition(0, this.size.h / 2 - 16, 0);
@@ -123,7 +131,7 @@ export class BagPanel {
       const icon = quad(this.root, `walletIcon${k}`, art, 22, 22, new Color(255, 255, 255, 255));
       icon.spriteFrame = frame;
       icon.node.setPosition(cx - 24, this.size.h / 2 - 38, 0);
-      const count = label(this.root, `walletCount${k}`, 13, new Color(200, 210, 230, 255));
+      const count = sharedAtlas(label(this.root, `walletCount${k}`, 13, new Color(200, 210, 230, 255)), 'dynamic');
       count.node.setPosition(cx + 18, this.size.h / 2 - 38, 0);
       this.walletIcons.push({ icon, count });
     });
@@ -134,25 +142,30 @@ export class BagPanel {
       const outline = quad(holder, 'outline', art, r.w + 4, r.h + 4, new Color(255, 230, 90, 255));
       outline.node.active = false;
       const bg = quad(holder, 'bg', art, r.w, r.h, new Color(44, 48, 62, 255));
-      const item = quad(holder, 'item', art, r.w - 8, r.h - 8, new Color(255, 255, 255, 255));
+      // bronze slot frame as a child of bg (it follows the slot's visibility); the flat tile is disabled then
+      const framed = !!hooks.slice?.(bg.node, 'frame', 'slot_frame', r.w, r.h, 0.55);
+      if (framed) bg.enabled = false; // keep the node (it carries the frame and the slot visibility), drop the flat tile
+      const pad = framed ? 14 : 8; // the icon sits in the frame's recess
+      const item = quad(holder, 'item', art, r.w - pad, r.h - pad, new Color(255, 255, 255, 255));
       item.node.active = false;
-      const icon = quad(holder, 'icon', art, r.w - 8, r.h - 8, new Color(255, 255, 255, 255));
+      const icon = quad(holder, 'icon', art, r.w - pad, r.h - pad, new Color(255, 255, 255, 255));
       icon.node.active = false;
       const quality = quad(holder, 'quality', art, r.w - 8, 4, new Color(255, 255, 255, 255));
       quality.node.setPosition(0, (r.h - 8) / 2 - 2, 0);
       quality.node.active = false;
       const code = label(holder, 'code', 14, new Color(255, 255, 255, 255));
-      const qty = label(holder, 'qty', 11, new Color(255, 255, 255, 255));
+      const qty = sharedAtlas(label(holder, 'qty', 11, new Color(255, 255, 255, 255)), 'dynamic'); // stack sizes change with every pickup
       qty.node.setPosition(10, -14, 0);
       this.slots.push({ outline, bg, item, icon, quality, code, qty });
     }
     const cb = core.claimButtonRect(SLOTS_DRAWN);
     this.claimBtn = newNode('claim', this.root);
     this.claimBtn.setPosition(cb.x + cb.w / 2 - this.size.w / 2, this.size.h / 2 - (cb.y + cb.h / 2), 0);
-    quad(this.claimBtn, 'bg', art, cb.w, cb.h, new Color(70, 120, 80, 255));
-    this.claimText = label(this.claimBtn, 'text', 13, new Color(255, 255, 255, 255));
+    if (!hooks.slice?.(this.claimBtn, 'frame', 'button_normal', cb.w, cb.h, 0.7))
+      quad(this.claimBtn, 'bg', art, cb.w, cb.h, new Color(70, 120, 80, 255));
+    this.claimText = sharedAtlas(label(this.claimBtn, 'text', 13, new Color(255, 255, 255, 255)), 'dynamic'); // 'Claim loot (N)'
     this.claimBtn.active = false;
-    this.toast = label(this.root, 'toast', 12, new Color(255, 170, 120, 255));
+    this.toast = sharedAtlas(label(this.root, 'toast', 12, new Color(255, 170, 120, 255)), 'dynamic');
     this.toast.node.setPosition(60, -this.size.h / 2 + 20, 0);
     this.hint = label(this.root, 'hint', 14, new Color(190, 190, 190, 255));
     this.hint.node.setPosition(0, 0, 0);

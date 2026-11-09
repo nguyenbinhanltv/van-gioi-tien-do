@@ -1,6 +1,8 @@
 import type {
   TelegraphEndMsg,
   BossPhaseMsg,
+  SelfStatus,
+  StatusUpdateMsg,
   TelegraphStartMsg,
   ColdMessage,
   AoiEnterMsg,
@@ -32,6 +34,16 @@ export function lcg(seed: number) {
 }
 export type Rng = ReturnType<typeof lcg>;
 
+export function randStatus(r: Rng): SelfStatus {
+  const slowMs = r.bool() ? r.int(1, 65535) : 0;
+  return {
+    rootMs: r.bool() ? r.int(1, 65535) : 0,
+    slowMs,
+    slowPct: slowMs > 0 ? r.int(0, 100) : 0,
+    poisonMs: r.bool() ? r.int(1, 65535) : 0,
+  };
+}
+
 export function randSelf(r: Rng): SelfState {
   return {
     lastSeq: r.int(0, 65535),
@@ -44,6 +56,7 @@ export function randSelf(r: Rng): SelfState {
     dashLeftMs: r.int(0, 250),
     dashCdMs: r.int(0, 1500),
     invulnMs: r.int(0, 150),
+    status: r.bool() ? randStatus(r) : null,
     vitals: r.bool()
       ? {
           hp: r.int(0, 2 ** 32 - 1),
@@ -77,6 +90,7 @@ export function randMessage(r: Rng, type?: HotType): Message {
     'telegraph_start',
     'telegraph_end',
     'boss_phase',
+    'status_update',
   ];
   const t = type ?? types[r.int(0, types.length - 1)]!;
   switch (t) {
@@ -178,6 +192,10 @@ export function randMessage(r: Rng, type?: HotType): Message {
         extra: r.int(0, 65535),
         durationMs: r.int(0, 65535),
       };
+      return m;
+    }
+    case 'status_update': {
+      const m: StatusUpdateMsg = { type: 'status_update', entityId: r.int(0, 2 ** 32 - 1), mask: r.int(0, 7) };
       return m;
     }
     case 'boss_phase': {

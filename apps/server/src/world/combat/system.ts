@@ -515,20 +515,28 @@ export class CombatSystem {
     const mobs = this.opts.mobs;
     const stats = mobs?.combatStats(mobId);
     if (!mobs || !stats) return world;
-    const ctx: DropContext = {
-      source: stats.dropSource,
-      monsterRealm: stats.realm,
-      realmGap: Math.max(0, killer.profile.realm - stats.realm),
-      partySize: 1,
-    };
     const rng = (): number => {
       const [v, n] = rngFloat(this.dropRng);
       this.dropRng = n;
       return v;
     };
-    const rolls = resolveDrops(ctx, rng);
-    events.push({ type: 'drops', killerId, mobId, rolls });
-    this.opts.onDrops?.({ killerId, mobId, rolls });
+    // personal loot (D93, docs/07 §6): every party member who shares the kill rolls on their own with partySize = the group size; without
+    // a party the group is just the killer, so the roll and the rng draws are exactly the solo ones
+    const group = [...new Set([killerId, ...(this.opts.partyOf?.(killerId) ?? [])])]
+      .filter((id) => id === killerId || this.players.has(id))
+      .sort((a, b) => a - b);
+    for (const id of group) {
+      const member = id === killerId ? killer : this.players.get(id)!;
+      const ctx: DropContext = {
+        source: stats.dropSource,
+        monsterRealm: stats.realm,
+        realmGap: Math.max(0, member.profile.realm - stats.realm),
+        partySize: group.length,
+      };
+      const rolls = resolveDrops(ctx, rng);
+      events.push({ type: 'drops', killerId: id, mobId, rolls });
+      this.opts.onDrops?.({ killerId: id, mobId, rolls });
+    }
     return mobs.kill(world, mobId);
   }
 

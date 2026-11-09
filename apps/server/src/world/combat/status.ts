@@ -97,6 +97,48 @@ export class StatusSystem {
   isPoisoned(id: number, nowMs: number): boolean {
     return (this.poisons.get(id)?.untilMs ?? 0) > nowMs;
   }
+  /** Remaining time of each effect of `id` at `nowMs`, 0 = not active, for the wire (`SelfStatus`): ms are capped at u16. */
+  statusOf(id: number, nowMs: number): { rootMs: number; slowMs: number; slowPct: number; poisonMs: number } {
+    const left = (until: number): number =>
+      until > nowMs ? Math.min(65535, Math.max(1, Math.round(until - nowMs))) : 0;
+    const slow = this.slows.get(id);
+    const slowMs = slow ? left(slow.untilMs) : 0;
+    return {
+      rootMs: left(this.rootUntil.get(id) ?? 0),
+      slowMs,
+      slowPct: slowMs > 0 ? Math.round(slow!.factor * 100) : 0,
+      poisonMs: left(this.poisons.get(id)?.untilMs ?? 0),
+    };
+  }
+
+  /**
+   * A string that changes exactly when an effect of `id` is applied, refreshed or expires ('' = nothing active). Built from absolute end
+   * times, so the wire sends a status block only on a change (the client counts the times down itself).
+   */
+  signature(id: number, nowMs: number): string {
+    const root = this.rootUntil.get(id) ?? 0;
+    const slow = this.slows.get(id);
+    const poison = this.poisons.get(id)?.untilMs ?? 0;
+    const r = root > nowMs ? root : 0;
+    const s = slow && slow.untilMs > nowMs ? `${slow.untilMs}x${slow.factor}` : '0';
+    const p = poison > nowMs ? poison : 0;
+    return r === 0 && s === '0' && p === 0 ? '' : `${r}|${s}|${p}`;
+  }
+
+  /** `StatusBit` flags (1 root, 2 slow, 4 poison) of the effects active now. */
+  maskOf(id: number, nowMs: number): number {
+    return (
+      ((this.rootUntil.get(id) ?? 0) > nowMs ? 1 : 0) |
+      ((this.slows.get(id)?.untilMs ?? 0) > nowMs ? 2 : 0) |
+      ((this.poisons.get(id)?.untilMs ?? 0) > nowMs ? 4 : 0)
+    );
+  }
+
+  /** Ids that have any effect entry (active or not yet swept), ascending. */
+  affectedIds(): number[] {
+    return [...new Set([...this.rootUntil.keys(), ...this.slows.keys(), ...this.poisons.keys()])].sort((a, b) => a - b);
+  }
+
   get poolCount(): number {
     return this.pools.length;
   }
