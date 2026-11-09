@@ -6,12 +6,12 @@ import { viVN } from './vi-VN.js';
  * key is never reused for a different meaning. Placeholders are named, `{name}`, so another language can reorder words; text is
  * never built by concatenating pieces. The server sends codes, the client turns them into text here (`chatReasonText`, ...).
  *
- * Tables are plain JSON (`vi-VN.json`, one flat object) so translators and tests read them without the code. A second language is a
+ * The source table is a TypeScript module (`vi-VN.ts`, one flat object of plain strings, so it can be exported for translators) that tests read without the app. A second language is a
  * second table with the same keys, installed with `setStrings`; `pseudoLocalize` makes a long, accented, bracketed copy of any table
  * to find clipped or concatenated text (docs/19 §2.4).
  */
 
-/** Every key of the source table (`vi-VN.json`): `t('typo')` is a compile error. */
+/** Every key of the source table (`vi-VN.ts`): `t('typo')` is a compile error. */
 export type StringKey = keyof typeof viVN;
 /** Values of `{name}` placeholders. */
 export type StringParams = Readonly<Record<string, string | number>>;

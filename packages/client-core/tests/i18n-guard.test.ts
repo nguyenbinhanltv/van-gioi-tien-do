@@ -6,7 +6,7 @@ import ts from 'typescript';
 import { placeholdersOf, sourceStrings, unsupportedGlyphs, VIETNAMESE_LETTERS } from '../src/index.js';
 
 /**
- * i18n guard (D104, docs/19 §2): player-facing text lives in `src/i18n/vi-VN.json` behind `t(key, params)`. This test reads the client
+ * i18n guard (D104, docs/19 §2): player-facing text lives in `src/i18n/vi-VN.ts` behind `t(key, params)`. This test reads the client
  * sources (TypeScript AST, no engine needed) and fails on
  *   - a hard-coded player-facing string (rules below),
  *   - a `t('key')` whose key is not in the table, a table key nothing uses, a placeholder without a parameter,
@@ -134,7 +134,7 @@ const result = scan();
 
 describe('i18n guard (D104)', () => {
   it('no hard-coded player-facing string in client-core, client-combat, client-world and the Cocos client', () => {
-    expect(result.violations, `Move these into src/i18n/vi-VN.json and use t(key), or add "// i18n-exempt: <reason>":\n${result.violations.join('\n')}`).toEqual([]);
+    expect(result.violations, `Move these into src/i18n/vi-VN.ts and use t(key), or add "// i18n-exempt: <reason>":\n${result.violations.join('\n')}`).toEqual([]);
   });
 
   it('every t() key exists in the table and gets all its placeholders', () => {
