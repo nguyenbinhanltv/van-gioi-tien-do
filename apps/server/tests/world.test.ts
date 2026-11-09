@@ -58,7 +58,14 @@ class FakeClient implements ClientTransport {
 }
 
 function node(opts: WorldNodeOptions = {}): WorldNode {
-  return new WorldNode({ mapTiles: 160, spawn: { i0: 60, j0: 60, side: 40 }, ...opts });
+  // these tests tick far faster than real time: the packet / message budgets (D101) run on sim time here, so 20 Hz of play is 20 Hz
+  const n: WorldNode = new WorldNode({
+    mapTiles: 160,
+    spawn: { i0: 60, j0: 60, side: 40 },
+    packetClock: () => n.world.timeMs,
+    ...opts,
+  });
+  return n;
 }
 function join(n: WorldNode): FakeClient {
   const c = new FakeClient();

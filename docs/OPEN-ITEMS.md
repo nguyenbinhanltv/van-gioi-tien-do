@@ -562,6 +562,14 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## D101 — làm cứng đầu vào: còn mở (worker39, 2026-11-09)
+
+1. **Chưa giới hạn theo IP** cho kết nối WebSocket chưa xác thực và số kết nối đồng thời: cần quyết định về proxy ngược / `X-Forwarded-For` (docs/25 §5) trước khi tin vào địa chỉ. Hiện chỉ có hello timeout 5 s và `MAX_PLAYERS`.
+2. **Số của `SECURITY_CONFIG` là ước lượng** theo nhịp client hiện tại (20 Hz input); cần đo trên bài tải 37 và trên thiết bị thật (tab nền, mạng chập chờn) rồi chỉnh.
+3. **Điểm nghi vấn xuyên phiên + hàng đợi xem xét thủ công** (docs/25 §7.3) chưa có; nhật ký an ninh hiện chỉ là dòng log, chưa đẩy vào `audit_log` / cảnh báo (docs/27 §3).
+4. **Thực thể chỉ-chủ-sở-hữu** (loot / NPC riêng) chưa có trong giao thức; khi thêm phải lọc theo chủ ở lựa chọn mục tiêu của combat và ở AOI.
+5. **HTTP auth** chưa được fuzz bằng thân yêu cầu đột biến (đã có giới hạn 4 KB, JSON lỗi trả 400).
+
 ## D99 — sao lưu / khôi phục: còn mở (worker39, 2026-11-09)
 
 1. **Bản sao nằm cùng ổ đĩa mặc định** (`DATA_DIR/backups`): chưa có đẩy ra máy khác, mã hóa hay lịch chép ngoài; bản sao chứa băm mật khẩu như dữ liệu gốc. Người vận hành phải chép tay (docs/27 §9.1).

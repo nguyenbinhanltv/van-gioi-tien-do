@@ -3,6 +3,8 @@ export * from './auth/accounts.js';
 export * from './auth/jwt.js';
 export * from './auth/password.js';
 export * from './world/node.js';
+export * from './world/guard.js';
+export * from './world/security-log.js';
 export * from './world/terrain.js';
 export * from './world/combat/index.js';
 export * from './world/mobs/index.js';
