@@ -31,7 +31,7 @@ import { chibiStreamer } from './ChibiAssets';
 import { CHIBI_CLASSES, ChibiBody, chibiIdOfPath, pathOfChibiId } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
-import { OnlineSession, onlineRequested } from './OnlineSession';
+import { OnlineSession, markInviteUsed, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
@@ -387,6 +387,7 @@ export class Bootstrap extends Component {
     if (!path) return;
     this.classApplied = true;
     rememberClass(online.accountKey, path);
+    markInviteUsed(online.accountKey);
     const chibiId = chibiIdOfPath(path);
     if (chibiId) this.chibi.setClass(chibiId);
     if (this.combatOn && !this.combat) {

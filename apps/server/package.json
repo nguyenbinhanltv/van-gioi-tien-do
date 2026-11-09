@@ -11,6 +11,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "dev": "node scripts/dev.mjs",
+    "invites": "node scripts/invites.mjs",
     "loadtest": "node scripts/loadtest.mjs",
     "p2exit": "node scripts/p2-exit.mjs",
     "bench:tick": "node scripts/bench-tick.mjs"

@@ -1,6 +1,7 @@
 /** Local dev entry: `PORT=8080 node <bundle>` (hosting is local-only for now, D27). */
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { FileInviteLog, InviteService, defaultInviteFile } from './invites/index.js';
 import { openFileStores } from './persistence/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
@@ -49,6 +50,19 @@ if (process.env.MAP_FILE) {
     `[vgtd/server] terrain from ${process.env.MAP_FILE}: ${t.width}x${t.height}, ${t.rows.join('').split('#').length - 1} blocked tiles`,
   );
 }
+// BETA_INVITE_ONLY=1 (D111): registration needs a single-use invitation code minted with `npm run invites -w @vgtd/server -- mint`; the codes
+// live (hashed) in INVITES_FILE (default <DATA_DIR>/invites.jsonl). Existing accounts keep logging in without a code.
+const inviteOnly = flag(process.env.BETA_INVITE_ONLY);
+const invites = inviteOnly
+  ? new InviteService({
+      log: new FileInviteLog(defaultInviteFile(process.env)),
+      onError: (e) => console.error('[vgtd/server] invite log write failed:', e),
+    })
+  : undefined;
+if (invites)
+  console.log(
+    `[vgtd/server] BETA_INVITE_ONLY: registration needs an invitation code (${invites.list().filter((r) => r.status === 'unused').length} unused)`,
+  );
 const srv = await startServer({
   port,
   host: process.env.HOST ?? '127.0.0.1',
@@ -63,7 +77,7 @@ const srv = await startServer({
       ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
       : undefined,
   },
-  auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
+  auth: { registerPerIpPerDay, ...(invites ? { invites } : {}), ...(stores ? { store: stores.accounts } : {}) },
   ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
   ...(stores ? { friends: { store: stores.friends } } : {}),
   // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)

@@ -16,3 +16,4 @@ export * from './persistence/index.js';
 export * from './sect/index.js';
 export * from './world/breakthrough/index.js';
 export * from './friends/index.js';
+export * from './invites/index.js';

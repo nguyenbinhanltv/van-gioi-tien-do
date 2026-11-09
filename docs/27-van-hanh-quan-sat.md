@@ -155,3 +155,61 @@ Cảnh báo (Alertmanager hoặc Grafana alerting) ở MVP gửi vào **thông b
 ## Câu hỏi cần chốt
 
 Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (27 Q1–Q7). Nội dung gốc của mục này nằm trong lịch sử git.
+
+## 10. Sổ tay vận hành local cho closed beta _[Cập nhật D111, P5]_
+
+Phạm vi: **một máy, một tiến trình server** (D27: chạy local, không CD). Mọi lệnh chạy từ thư mục gốc repo. Lệnh nào thuộc PR chưa vào main được đánh dấu **(chờ #N)**.
+
+### 10.1 Khởi động, dừng, nâng cấp
+
+| Việc                    | Lệnh / cách làm                                                                                                                                                                                                                                | Ghi chú                                                                                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Khởi động để tester vào | `BETA_INVITE_ONLY=1 STORE=file DATA_DIR=./.vgtd-data npm run dev -w @vgtd/server` (hoặc `npm run play` để chạy cả client tĩnh)                                                                                                                 | `STORE=file` giữ tài khoản, nhân vật, túi, sổ cái qua lần khởi động lại (D92). `HOST=0.0.0.0` chỉ khi tester ở cùng mạng; `CORS_ORIGINS` phải liệt kê nguồn của client |
+| Kiểm sống               | `GET /health` → `{ok, players, tick, inviteOnly}`                                                                                                                                                                                              | `players` là số người đang online                                                                                                                                      |
+| Dừng sạch               | Ctrl+C (`STORE=file` lưu túi và ghi mọi tài liệu), hoặc dòng `quit` trên stdin khi `QUIT_ON_STDIN=1` (`npm run play` đặt sẵn)                                                                                                                  | Không dùng `kill -9`: mất tối đa vài giây dữ liệu túi (lưu mỗi 5 giây)                                                                                                 |
+| Nâng cấp                | (1) báo tester, (2) dừng sạch, (3) **sao lưu** (§10.2), (4) `git fetch` rồi `git merge origin/main` hoặc checkout thẻ, (5) `npm ci`, (6) `npm run build` và `npm test -w @vgtd/server`, (7) khởi động lại, (8) kiểm `/health` và đăng nhập thử | Tệp dữ liệu có số phiên bản: server mới từ chối khởi động với dữ liệu phiên bản lạ thay vì ghi đè; khi đó khôi phục bản sao lưu và hỏi người phát triển                |
+| Quay lại bản cũ         | Dừng, checkout bản trước, `npm ci`, khởi động; nếu dữ liệu đã nâng phiên bản, khôi phục bản sao lưu bước (3)                                                                                                                                   |                                                                                                                                                                        |
+
+### 10.2 Sao lưu và khôi phục
+
+Dùng bộ công cụ D99 **(chờ #254)**: `BACKUP_EVERY_MIN=15 BACKUP_KEEP=10` khi chạy server (bản sao nhất quán từ bộ nhớ), `npm run backup` / `backups` / `verify` / `restore -w @vgtd/server`. Quy trình và bài thử khôi phục nằm ở docs/27 §9.1 (do #254 thêm): dừng server, `verify --data-dir D`, `restore --from <id> --yes`, khởi động lại, kiểm đăng nhập và số dư, giữ `pre-restore-<id>/` tới khi chắc chắn. **Trước mỗi lần nâng cấp và mỗi đêm** chạy một bản; thư mục sao lưu chứa băm mật khẩu: để mode 0700 và **không** đưa lên repo hay chia sẻ. Hai tệp của vận hành nằm cạnh dữ liệu và **không** nằm trong bản sao lưu D99: `invites.jsonl` (sao chép tay) và `telemetry/pid.key` (§10.4).
+
+### 10.3 Đọc số liệu
+
+| Nơi xem                                   | Cho biết gì                                                            | Truy cập                                                                                                                                       |
+| ----------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/ops/crash` (D110)                       | **Phiên không sập %** (đích ≥ 99%), theo bản dựng, top crash với stack | Loopback, hoặc `Authorization: Bearer $DASHBOARD_TOKEN` (qua proxy bắt buộc token). `?hours=N` đổi cửa sổ (mặc định 24 giờ)                    |
+| `/dashboard` (D109) **(chờ #264)**        | KPI: người chơi hoạt động, giữ chân, phễu 10 phút đầu, lỗi tải         | Cùng quy tắc truy cập; `DASHBOARD_TOKEN` đặt trong môi trường server. Khi #264 vào main, trang crash được gộp vào đây (D110, hàng "Bộ chuyển") |
+| `<DATA_DIR>/crash/crash-YYYY-MM-DD.jsonl` | Sự kiện thô (không PII), mỗi dòng một sự kiện                          | Xem bằng `jq`; xóa tệp cũ tay (chưa có thời hạn lưu, OPEN-ITEMS)                                                                               |
+
+Đọc crash-free %: con số thấp hơn 99 nghĩa là có crash hàng đầu cần sửa trước khi mời thêm; đọc "top crash" theo **số phiên bị ảnh hưởng** trước, số lần sau. Số này **lạc quan** nếu tab bị hệ điều hành giết (OPEN-ITEMS, D110).
+
+### 10.4 Xoay khóa pseudonym (`player_pid`) và token **(chờ #264 cho khóa pid)**
+
+- `<DATA_DIR>/telemetry/pid.key` (32 byte hex, mode 0600) là khóa HMAC của `player_pid`. Ai giữ khóa có thể nối tài khoản với pid, nên nó là bí mật vận hành: không đưa vào repo, không gửi qua chat, không có endpoint nào trả nó.
+- **Khi nào xoay**: nghi lộ khóa, hoặc kết thúc một đợt beta và muốn các đợt không nối được với nhau.
+- **Cách xoay**: dừng sạch server → đổi tên `pid.key` thành `pid.key.<ngày>.old` (hoặc xóa nếu không cần nối) → khởi động lại (server tạo khóa mới) → ghi ngày xoay vào nhật ký vận hành. **Hệ quả**: mọi `player_pid` đổi, nên giữ chân (D1 / D7) và phễu **đứt ở mốc xoay**; số liệu cũ trong `rollups.json` vẫn đọc được nhưng không nối với số mới. Chỉ xoay khi chấp nhận điều đó.
+- `DASHBOARD_TOKEN`: đổi giá trị trong môi trường rồi khởi động lại; token cũ hết hiệu lực ngay. Khóa ký access token (JWT, D70) hiện là khóa tạm mỗi lần chạy (đăng nhập lại sau khởi động lại là bình thường).
+
+### 10.5 Quy trình mời tester
+
+1. Bật `BETA_INVITE_ONLY=1` khi khởi động (§10.1).
+2. Tạo mã: `npm run invites -w @vgtd/server -- mint --count 10 --days 14 > codes.txt`. Mã chỉ hiện **một lần** (stdout); id và hạn ở stderr. Để `codes.txt` ngoài repo, xóa sau khi gửi.
+3. Gửi mỗi tester một liên kết: `http://<máy chủ>:<cổng client>/?online=1&server=<máy chủ>:8080&invite=<mã>`. Mã dùng **một lần** cho tài khoản đầu tiên; lần sau họ vào cùng liên kết (hoặc không có `invite`) và đăng nhập như thường.
+4. Theo dõi: `npm run invites -w @vgtd/server -- list` (số mã chưa dùng / đã dùng / hết hạn / thu hồi, không in mã hay tên).
+5. Thu hồi mã chưa dùng (gửi nhầm, lộ): `npm run invites -w @vgtd/server -- revoke <id>`; có hiệu lực ngay, không cần khởi động lại. Mã đã dùng không thu hồi được (tài khoản đã tạo); muốn chặn người đó thì dùng công cụ quản trị tài khoản (chưa có, OPEN-ITEMS).
+6. Không lưu e-mail hay tên trong hệ thống để gắn với mã (D111); nếu cần biết mã nào gửi cho ai, ghi **id** cạnh người nhận ở nơi riêng của người vận hành.
+
+### 10.6 Danh sách kiểm sự cố
+
+| Triệu chứng                  | Kiểm tra đầu tiên                                                             | Hành động                                                                                                                                                                                                     |
+| ---------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tester không vào được        | `/health`; log server; `inviteOnly` có đúng không                             | Không có mã → 403 `invite_invalid` (cấp mã mới); 429 `invite_limited` → chờ `Retry-After` (quá 10 mã sai từ một IP / 15 phút); 429 `register_limited` → 3 đăng ký / IP / ngày, nâng `REGISTER_PER_IP_PER_DAY` |
+| Server không khởi động       | Dòng cuối của log: "unsupported data version", "not a JSON object", "terrain" | Dữ liệu hỏng hoặc sai phiên bản → `verify --data-dir D`, khôi phục bản sao lưu (§10.2); `MAP_FILE` không khớp `MAP_TILES` → sửa một trong hai                                                                 |
+| Tick chậm, giật              | `/health` (`tick`), CPU / bộ nhớ của tiến trình                               | Giảm người chơi / quái (`MOBS=0`), khởi động lại sạch, ghi hồ sơ CPU (§9)                                                                                                                                     |
+| Crash-free % tụt             | `/ops/crash`: top crash, bản dựng, cảnh                                       | Ngừng mời thêm; sửa crash hàng đầu; nếu chỉ một bản dựng, quay lại bản trước (§10.1)                                                                                                                          |
+| Người chơi báo mất đồ / tiền | Sổ cái, log server theo thời điểm                                             | Dừng ghi nếu nghi lỗi hệ thống, khôi phục bản sao lưu gần nhất vào thư mục khác để đối chiếu trước khi quyết định (§10.2)                                                                                     |
+| Nghi lộ mã mời hoặc token    | `invites list`, số mã đã dùng bất thường                                      | Thu hồi mã (§10.5); đổi `DASHBOARD_TOKEN`; xoay `pid.key` nếu nghi lộ khóa (§10.4)                                                                                                                            |
+| Đĩa đầy                      | Kích thước `DATA_DIR` (crash, telemetry, sao lưu)                             | Xóa `crash-*.jsonl` / bản sao lưu cũ; server không dừng khi ghi log lỗi (chỉ ghi cảnh báo), nhưng dữ liệu chính cần chỗ trống                                                                                 |
+
+Sau sự cố: ghi lại giờ, triệu chứng, nguyên nhân, hành động; sửa mục tương ứng ở đây nếu quy trình thiếu.
