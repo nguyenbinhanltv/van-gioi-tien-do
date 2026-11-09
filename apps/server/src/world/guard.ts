@@ -24,6 +24,11 @@ export function budgetClassOf(type: string): BudgetClass | null {
       return 'sect';
     case 'friend_cmd':
       return 'friend';
+    case 'market_search':
+    case 'market_list':
+    case 'market_buy':
+    case 'market_cancel':
+      return 'market';
     case 'trade_cmd':
       return 'trade';
     case 'meditate_start':

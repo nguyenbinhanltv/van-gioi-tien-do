@@ -136,6 +136,8 @@ Giá trị từ [07 §7](07-cong-thuc-data-schema.md); không đổi:
 - Giao dịch trực tiếp giữa người chơi: **3%** cố định.
 - Mọi Linh thạch thu qua các kênh này **bị hủy**, không chuyển cho người chơi khác.
 
+[Cập nhật D112: Vạn Bảo Lâu cơ bản đã cài ([docs/38](38-van-bao-lau.md)): thuế bán **cố định 5 %** trong beta, CPI tuần chạy bóng và không áp dụng; dạng số nguyên của phí / thuế (`listingFeeInt`, `marketTaxInt`, `sellerProceedsInt`, quy tắc làm tròn §2.1) đã có trong `@vgtd/shared` `formulas/market.ts`, nên "Khoảng trống" ở §5.3 về làm tròn đã đóng; hạng mục `SYSTEM_SINK_LISTING_FEE` / `SYSTEM_SINK_MARKET_TAX` đã có trong sổ cái. Hàng hết hạn về túi, rồi kho nhặt đồ (chưa có thư `mail`).]
+
 ### 5.1 Niêm yết – hủy – hết hạn
 
 ```mermaid
