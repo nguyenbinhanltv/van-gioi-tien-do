@@ -34,6 +34,7 @@ const TYPES: HotType[] = [
   'telegraph_start',
   'telegraph_end',
   'boss_phase',
+  'status_update',
 ];
 
 describe('binary round trip', () => {
@@ -289,6 +290,7 @@ describe('v3: skill_cast aim point and self vitals (D78)', () => {
     dashCdMs: 0,
     invulnMs: 0,
     vitals,
+    status: null,
   });
   const snap = (s: SelfState): Message => ({
     type: 'snapshot',
@@ -327,5 +329,68 @@ describe('v3: skill_cast aim point and self vitals (D78)', () => {
     expect(() => encode({ type: 'skill_cast', seq: 1, skillId: 2, targetId: 3, aim: { qi: 70000, qj: 0 } })).toThrow(
       ProtocolError,
     );
+  });
+});
+
+describe('own status block (D94)', () => {
+  const base = (status: SelfState['status']): SelfState => ({
+    lastSeq: 1,
+    i: 10.5,
+    j: 20.25,
+    layer: 0,
+    flying: false,
+    qinggong: false,
+    facing: 3,
+    dashLeftMs: 0,
+    dashCdMs: 0,
+    invulnMs: 0,
+    vitals: null,
+    status,
+  });
+  const snap = (self: SelfState): SnapshotMsg => ({
+    type: 'snapshot',
+    seq: 1,
+    baselineSeq: null,
+    tick: 5,
+    self,
+    entities: [],
+  });
+
+  it('round trips every combination of active effects, with the slow factor, and zeros for "all expired"', () => {
+    const cases = [
+      { rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 },
+      { rootMs: 1500, slowMs: 0, slowPct: 0, poisonMs: 0 },
+      { rootMs: 0, slowMs: 2000, slowPct: 50, poisonMs: 0 },
+      { rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 4000 },
+      { rootMs: 1500, slowMs: 2000, slowPct: 25, poisonMs: 4000 },
+    ];
+    for (const status of cases) {
+      const m = snap(base(status));
+      expect(decode(encode(m))).toEqual(m);
+    }
+    const m = snap(base(null));
+    expect(decode(encode(m))).toEqual(m);
+  });
+
+  it('costs 0 bytes while nothing changed, 1 byte for "all clear" and at most 8 bytes with all three effects', () => {
+    const none = encode(snap(base(null))).length;
+    expect(encode(snap(base({ rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 }))).length - none).toBe(1);
+    expect(encode(snap(base({ rootMs: 1500, slowMs: 0, slowPct: 0, poisonMs: 0 }))).length - none).toBe(3);
+    expect(encode(snap(base({ rootMs: 1500, slowMs: 2000, slowPct: 50, poisonMs: 4000 }))).length - none).toBe(8);
+  });
+
+  it('rejects unknown status bits and a slow factor without a slow time', () => {
+    const bytes = encode(snap(base({ rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 })));
+    const bad = bytes.slice();
+    bad[bad.length - 1] = 0x10; // the status mask is the last byte of this snapshot: set a bit that does not exist
+    expect(() => decode(bad)).toThrow();
+    expect(() => encode(snap(base({ rootMs: 0, slowMs: 0, slowPct: 50, poisonMs: 0 })))).toThrow();
+  });
+
+  it('status_update is 7 bytes with the stable hot id 18', () => {
+    const b = encode({ type: 'status_update', entityId: 12345, mask: 3 });
+    expect(b.length).toBe(7);
+    expect(b[1]).toBe(18);
+    expect(decode(b)).toEqual({ type: 'status_update', entityId: 12345, mask: 3 });
   });
 });
