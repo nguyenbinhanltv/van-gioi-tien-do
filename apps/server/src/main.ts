@@ -5,7 +5,9 @@ import { join } from 'node:path';
 import { createBackup, openFileStores } from './persistence/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
-import { parseTerrain, terrainGrid } from './world/terrain.js';
+import { TileGrid } from '@vgtd/sim';
+import { WORLD_CONFIG } from './config.js';
+import { blockSectBuildings, openRows, parseTerrain } from './world/terrain.js';
 
 const port = Number(process.env.PORT ?? 8080);
 // the Cocos web client is served from http://localhost:8456 (npm run serve -w client-cocos); override with CORS_ORIGINS=a,b
@@ -40,16 +42,23 @@ const stores =
     : null;
 // MAP_FILE=<terrain.json> (D95): the walkability grid the tile generator wrote, so water / lava block the server like they block the client
 // (mobs spawn and walk on land, prediction sees the same obstacles). Default: an open map. A file that does not match MAP_TILES is refused.
-let grid;
+let terrainRows: string[] | undefined;
 if (process.env.MAP_FILE) {
   const t = parseTerrain(JSON.parse(readFileSync(process.env.MAP_FILE, 'utf8')));
   if (mapTiles !== undefined && (t.width !== mapTiles || t.height !== mapTiles))
     throw new Error(`MAP_FILE is ${t.width}x${t.height} but MAP_TILES is ${mapTiles}`);
-  grid = terrainGrid(t);
+  terrainRows = t.rows;
   console.log(
     `[vgtd/server] terrain from ${process.env.MAP_FILE}: ${t.width}x${t.height}, ${t.rows.join('').split('#').length - 1} blocked tiles`,
   );
 }
+// the Son Mon sect buildings (D115) block their tiles on the server grid, exactly the tiles the client draws and blocks them on (shared
+// SECT_BUILDINGS); SECT_BUILDINGS=0 leaves the map as the terrain file / open map says (A/B measurements, old clients)
+let grid: TileGrid | undefined;
+if (process.env.SECT_BUILDINGS !== '0') {
+  const n = terrainRows?.length ?? mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES;
+  grid = TileGrid.fromRows(blockSectBuildings(terrainRows ?? openRows(n)));
+} else if (terrainRows) grid = TileGrid.fromRows(terrainRows);
 const srv = await startServer({
   port,
   host: process.env.HOST ?? '127.0.0.1',

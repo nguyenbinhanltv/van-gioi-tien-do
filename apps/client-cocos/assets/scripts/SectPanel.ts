@@ -9,6 +9,8 @@
  * (`npc_su_huynh` welcomes, `npc_truong_lao_dan` keeps the library), so the standees can bind to those ids later.
  */
 import { core, shared } from './vendor/vgtd.mjs';
+import { domIcon } from './DomIcons';
+import { manualIconKey } from './ArtRegistry';
 
 const BTN_STYLE: Partial<CSSStyleDeclaration> = {
   marginLeft: '6px',
@@ -70,7 +72,11 @@ export class SectPanel {
     this.title.style.fontWeight = 'bold';
     this.title.style.color = '#e8c872';
     const close = document.createElement('button');
-    close.textContent = '×';
+    const closeIcon = domIcon('hud', 'close', 20);
+    if (closeIcon) {
+      closeIcon.style.marginRight = '0';
+      close.append(closeIcon);
+    } else close.textContent = '×';
     close.title = 'Đóng (K)';
     Object.assign(close.style, BTN_STYLE);
     close.addEventListener('click', () => this.toggle(false));
@@ -159,6 +165,8 @@ export class SectPanel {
     this.nearShown = near;
     const v = this.model.view();
     this.title.textContent = shared.SECT.NAME;
+    const sectIcon = domIcon('hud', 'sect', 20);
+    if (sectIcon) this.title.prepend(sectIcon);
     const frag = document.createDocumentFragment();
     if (!v.ready) {
       frag.appendChild(this.line('Đang tải…', '#b6bccb'));
@@ -186,7 +194,10 @@ export class SectPanel {
       (row.firstElementChild as HTMLElement).style.marginLeft = '0';
       frag.appendChild(row);
     } else {
-      frag.appendChild(this.line(`Cống hiến: ${v.contribution}`, '#e8c872'));
+      const ch = this.line(`Cống hiến: ${v.contribution}`, '#e8c872');
+      const token = domIcon('item', 'cong_hien_token', 18);
+      if (token) ch.prepend(token);
+      frag.appendChild(ch);
       frag.appendChild(
         this.line('Trưởng lão Tàng Kinh Các: "Bí tịch cơ bản của Đạo Lộ ngươi, đổi bằng Cống hiến."', '#d6d9e6'),
       );
@@ -210,6 +221,9 @@ export class SectPanel {
         });
         label.textContent = `${m.index + 1}. ${m.name} (cấp ${m.levelMin}) · ${m.price} CH`;
         label.style.color = m.owned ? '#8a8fa0' : '#f0f0f5';
+        // the manual's icon: tier by level, form by position in the library (PART 3 group O art)
+        const manualIcon = domIcon('item', manualIconKey(m.levelMin, m.index), 28);
+        if (manualIcon) row.appendChild(manualIcon);
         row.appendChild(label);
         if (m.owned) {
           const owned = document.createElement('span');

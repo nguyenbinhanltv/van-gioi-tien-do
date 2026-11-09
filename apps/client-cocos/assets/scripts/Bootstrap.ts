@@ -196,6 +196,9 @@ export class Bootstrap extends Component {
         defs: this.propArt.defs(),
         count: 110,
         radius: 40,
+        // the Son Mon sect buildings (D115): the same list and origin the server blocks its grid with (shared SECT_BUILDINGS)
+        sect: shared.SECT_BUILDINGS,
+        sectOrigin: shared.sectOrigin(map.width),
       });
       for (const [i, j] of placed.blocked) blocked[j * map.width + i] = 1;
       for (const p of placed.courtyard) this.propArt.add(this.ysort, p);

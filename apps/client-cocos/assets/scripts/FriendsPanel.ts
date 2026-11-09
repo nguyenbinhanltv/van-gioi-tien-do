@@ -8,6 +8,7 @@
  * It sits below the chat box (z-index 450 < 500) and above the party frames; on small screens it shrinks to the available width.
  */
 import { core } from './vendor/vgtd.mjs';
+import { domIcon } from './DomIcons';
 
 const CLASS_COLOR: Record<number, string> = {
   1: '#e8c872',
@@ -76,7 +77,11 @@ export class FriendsPanel {
     this.title = document.createElement('div');
     this.title.style.fontWeight = 'bold';
     const close = document.createElement('button');
-    close.textContent = '×';
+    const closeIcon = domIcon('hud', 'close', 20);
+    if (closeIcon) {
+      closeIcon.style.marginRight = '0';
+      close.append(closeIcon);
+    } else close.textContent = '×';
     close.title = 'Đóng (O)';
     Object.assign(close.style, BTN_STYLE);
     close.addEventListener('click', () => this.toggle(false));
@@ -91,6 +96,8 @@ export class FriendsPanel {
     Object.assign(this.input.style, { flex: '1 1 auto', minWidth: '0', font: '12px sans-serif', padding: '3px 5px' });
     const send = document.createElement('button');
     send.textContent = 'Kết bạn';
+    const addIcon = domIcon('hud', 'friend_add', 16);
+    if (addIcon) send.prepend(addIcon); // an <img> adds no text: the label stays 'Kết bạn'
     Object.assign(send.style, BTN_STYLE);
     const submit = (): void => {
       const name = this.input.value.trim().split(/\s+/)[0] ?? '';
@@ -155,9 +162,11 @@ export class FriendsPanel {
     if (!this.open) this.input.blur();
   }
 
-  private button(label: string, command: string, prefill = false): HTMLButtonElement {
+  private button(label: string, command: string, prefill = false, icon?: string): HTMLButtonElement {
     const b = document.createElement('button');
     b.textContent = label;
+    const ic = icon ? domIcon('hud', icon, 16) : null;
+    if (ic) b.prepend(ic); // an <img> adds no text: the label stays the label
     Object.assign(b.style, BTN_STYLE);
     b.addEventListener('click', () => (prefill ? this.hooks.prefill(command) : this.hooks.run(command)));
     return b;
@@ -180,7 +189,11 @@ export class FriendsPanel {
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     });
-    label.textContent = `${dot} ${name}`; // text only, never markup
+    // online / offline: the round HUD icon when the art is there (text glyph otherwise); the name is text only, never markup
+    const status = domIcon('hud', dot === '●' ? 'online' : 'offline', 14);
+    if (status) {
+      label.append(status, name);
+    } else label.textContent = `${dot} ${name}`;
     label.style.color = color;
     row.append(label, ...buttons);
     return row;
@@ -203,9 +216,9 @@ export class FriendsPanel {
     const frag = document.createDocumentFragment();
     for (const f of this.model.friends()) {
       const buttons: HTMLButtonElement[] = [];
-      if (f.canWhisper) buttons.push(this.button('Nhắn', this.model.whisperPrefill(f.name), true));
-      if (f.canInvite) buttons.push(this.button('Mời', this.model.inviteCommand(f.name)));
-      buttons.push(this.button('Xóa', `/friend remove ${f.name}`));
+      if (f.canWhisper) buttons.push(this.button('Nhắn', this.model.whisperPrefill(f.name), true, 'chat'));
+      if (f.canInvite) buttons.push(this.button('Mời', this.model.inviteCommand(f.name), false, 'party_invite'));
+      buttons.push(this.button('Xóa', `/friend remove ${f.name}`, false, 'friend_remove'));
       frag.appendChild(
         this.row(f.name, f.online ? (CLASS_COLOR[f.classId] ?? '#f0f0f5') : '#8a8fa0', f.online ? '●' : '○', buttons),
       );

@@ -38,6 +38,13 @@ export interface PlacedProp {
   j: number;
 }
 
+/** One building of the Sơn Môn sect layout (`SECT_BUILDINGS` of @vgtd/shared: the SAME list the server blocks its grid with). */
+export interface SectPlacement {
+  name: string;
+  di: number;
+  dj: number;
+}
+
 export interface PlacementInput {
   width: number;
   height: number;
@@ -54,6 +61,14 @@ export interface PlacementInput {
   radius: number;
   /** Zone dressing props on top of `count` (default ZONE_COUNT); only used with `zoneAt`. */
   zoneCount?: number;
+  /**
+   * The Sơn Môn sect buildings (D115): offsets from `sectOrigin` (default: the spawn), placed at EXACTLY those tiles with no nudging (the
+   * server blocks the very same tiles, so a building that moved would leave an invisible wall) and only when every tile of its footprint is
+   * land inside the map; a building that does not fit is skipped. Like the courtyard they block tiles and keep scatter away.
+   */
+  sect?: ReadonlyArray<SectPlacement>;
+  /** reference tile of `sect` (the map centre, `sectOrigin` of @vgtd/shared); default `spawn` */
+  sectOrigin?: { i: number; j: number };
 }
 
 export interface PlacementResult {
@@ -172,6 +187,23 @@ export function placeProps(input: PlacementInput): PlacementResult {
     if (!at) continue;
     take(c.name, at[0], at[1]);
     courtyard.push({ name: c.name, i: at[0], j: at[1] });
+  }
+  // 1b. sect buildings (D115): fixed tiles shared with the server grid, never nudged
+  if (input.sect) {
+    const o = input.sectOrigin ?? spawn;
+    for (const b of input.sect) {
+      if (!defs[b.name]) continue;
+      const bi = o.i + b.di,
+        bj = o.j + b.dj;
+      const tiles = [[bi, bj] as [number, number], ...tilesOf(b.name, bi, bj)];
+      // land under the whole footprint and around the anchor (a coast tile only shows a rim of land), free, inside the map
+      const ok =
+        tiles.every(([ti, tj]) => inMap(ti, tj) && isLand(terrain(ti, tj)) && !occupied.has(key(ti, tj))) &&
+        !clear(bi, bj);
+      if (!ok) continue;
+      take(b.name, bi, bj);
+      courtyard.push({ name: b.name, i: bi, j: bj });
+    }
   }
   // the passage under the gate must stay walkable: nothing may be scattered on the approach line either
   const reserve = new Set<number>();

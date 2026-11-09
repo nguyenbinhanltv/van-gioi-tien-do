@@ -1,9 +1,26 @@
 import { createRequire } from 'node:module';
 import { describe, expect, it } from 'vitest';
-import { MOB_BANDS, fieldBandStart, mobAreaHalfSize, mobZoneMargin } from '@vgtd/shared';
+import {
+  MOB_BANDS,
+  SECT_BUILDINGS,
+  fieldBandStart,
+  mobAreaHalfSize,
+  mobZoneMargin,
+  sectBlockedTiles,
+  sectOrigin,
+} from '@vgtd/shared';
 import { TILE_WALKABLE, TileGrid, circleBlocked } from '@vgtd/sim';
 import { COLLIDER_RADIUS_TILES } from '@vgtd/shared';
-import { MobManager, TerrainFormatError, defaultMobZones, isMobId, parseTerrain, terrainGrid } from '../src/index.js';
+import {
+  MobManager,
+  TerrainFormatError,
+  blockSectBuildings,
+  defaultMobZones,
+  isMobId,
+  openRows,
+  parseTerrain,
+  terrainGrid,
+} from '../src/index.js';
 
 // the tile generator is plain CommonJS next to the server tests' reach: read its zone module the way the generator does
 const require = createRequire(import.meta.url);
@@ -86,5 +103,73 @@ describe('mobs on a generated zone map', () => {
       expect(rows[Math.floor(info.home.j)]![Math.floor(info.home.i)]).toBe('.');
     }
     expect(make().stateHash()).toBe(m.stateHash());
+  });
+});
+
+describe('Son Mon sect buildings on the server grid (D115)', () => {
+  const N = 256;
+  const o = { ...Gen.parseArgs([]), width: N, height: N };
+  const zoneRows: string[] = Gen.buildZoneMap(
+    o,
+    Z.generateZoneCorners(o, Gen.zoneFields(o)),
+    new Proxy({}, { get: () => 1 }),
+  ).rows;
+
+  it('blocks exactly the shared tiles on an open map and leaves every other tile alone', () => {
+    const rows = blockSectBuildings(openRows(N));
+    const mine = new Set(sectBlockedTiles(N).map(([i, j]) => `${i},${j}`));
+    let blocked = 0;
+    for (let j = 0; j < N; j++)
+      for (let i = 0; i < N; i++) {
+        const b = rows[j]![i] === '#';
+        expect(b, `${i},${j}`).toBe(mine.has(`${i},${j}`));
+        if (b) blocked++;
+      }
+    expect(blocked).toBe(mine.size);
+    const g = TileGrid.fromRows(rows);
+    const c = sectOrigin(N);
+    expect(walk(g, c.i, c.j)).toBe(true); // the spawn centre stays open
+    expect(walk(g, c.i - 17, c.j - 17)).toBe(false); // the main hall
+    expect(circleBlocked(g, c.i - 17 + 0.5, c.j - 17 + 0.5, COLLIDER_RADIUS_TILES, 0, false)).toBe(true);
+  });
+
+  it('on the D95 zone map every footprint tile is land (the buildings stand on the open plaza, never on water / lava) and the plaza stays connected', () => {
+    for (const [i, j] of sectBlockedTiles(N)) expect(zoneRows[j]![i], `${i},${j}`).toBe('.');
+    for (const b of SECT_BUILDINGS) expect(zoneRows[sectOrigin(N).j + b.dj]![sectOrigin(N).i + b.di], b.name).toBe('.');
+    // from the centre every side of the plaza is still reachable: breadth-first over walkable tiles reaches the field distance
+    const rows = blockSectBuildings(zoneRows);
+    const c = sectOrigin(N);
+    const target = fieldBandStart(N) + 2;
+    const seen = new Set<number>([c.j * N + c.i]);
+    const queue: Array<[number, number]> = [[c.i, c.j]];
+    const sides = new Set<string>();
+    while (queue.length) {
+      const [i, j] = queue.shift()!;
+      const d = Math.max(Math.abs(i - c.i), Math.abs(j - c.j));
+      if (d >= target) sides.add(Math.abs(i - c.i) >= Math.abs(j - c.j) ? (i > c.i ? 'E' : 'W') : j > c.j ? 'S' : 'N');
+      for (const [di, dj] of [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+      ] as const) {
+        const a = i + di;
+        const b = j + dj;
+        if (a < 0 || b < 0 || a >= N || b >= N || rows[b]![a] !== '.' || seen.has(b * N + a)) continue;
+        seen.add(b * N + a);
+        queue.push([a, b]);
+      }
+    }
+    expect([...sides].sort()).toEqual(['E', 'N', 'S', 'W']);
+  });
+
+  it('does not touch a map that is not square, and never changes the input rows', () => {
+    const ragged = ['....', '...'];
+    expect(blockSectBuildings(ragged)).toEqual(ragged);
+    const rows = openRows(64);
+    const before = rows.join('\n');
+    const out = blockSectBuildings(rows);
+    expect(rows.join('\n')).toBe(before);
+    expect(out.join('\n')).not.toBe(before);
   });
 });
