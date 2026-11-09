@@ -181,6 +181,8 @@ GDD ghi Đấu Giá Hội là kênh **hủy tiền** ([01 §10](01-gdd.md)); chi
 
 Hai bên mời → đặt vật phẩm/tiền → **khóa** (mỗi bên xác nhận hai bước; đổi nội dung thì hủy xác nhận) → server giữ đồ của hai bên trong `ESCROW` → một giao dịch hoàn tất: chuyển chéo + thuế 3% → `SYSTEM_SINK_TRADE_TAX`. Hết hạn 60 s không hoạt động thì hoàn trả. Tốc độ/giá trị tối đa/ngày để chống RMT: tham số.
 
+[Cập nhật D102: đã làm ở `apps/server/src/trade` (`InventoryService.exchange`, ledger `TRADE`, `SYSTEM_SINK_TRADE_TAX`; thuế `directTradeTaxUnits` = làm tròn lên 3% mỗi chiều và mỗi loại tiền, chỉ trên Linh thạch). Vật phẩm không rời túi chủ tới bước thực hiện, nên không dùng tài khoản `ESCROW`; một bước trao đổi nguyên tử trong bộ nhớ thay cho việc giữ trong ESCROW. Trần tốc độ / giá trị / ngày chưa có.]
+
 ## 6. Rơi đồ, đột phá và nhật ký roll
 
 - **Công thức/hằng:** `@vgtd/shared` (`formulas/economy.ts`, `combat.ts`, `breakthrough.ts`); Economy/World **truyền** số ngẫu nhiên vào, công thức không tự rút (như hiện tại).

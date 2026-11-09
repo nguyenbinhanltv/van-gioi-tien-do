@@ -406,7 +406,7 @@ Còn mở / lưu ý:
 - **Đả tọa ở mọi nơi**: mặc định ρ = 1,0 và đất ngũ hành đều (Match = 1) cho tới khi có dữ liệu map/Linh Mạch (`MeditationEnv`); thành chính 0,6 và Linh Mạch của 07 §5 chưa nối.
 - **Linh căn nhân vật mới** roll từ PRNG theo `characterId` (tỷ lệ loại và 2% biến dị của 07 §5; mỗi hệ có trọng số bằng nhau, biến dị chỉ ở Mộc/Kim/Thủy vì chỉ ba hệ này có dạng biến dị). Cách người chơi chọn hay đổi linh căn chưa có.
 - **Cột dữ liệu**: `n_fail` (bộ đếm pity) chưa có trong docs/23 §4.2; hiện lưu cùng bản ghi (`ProgressRecord.nFail`) và cần thêm cột/`jsonb` khi viết migration.
-- **Đột phá đại cảnh bị khóa** (D76): docs/01 §5 định nghĩa ngưỡng lớn là Tâm Ma → roll → Lôi Kiếp (thất bại có ý nghĩa, P1); các cơ chế đó chưa có nên server từ chối mọi lần đột phá đại cảnh bằng `ProgressionReason.TribulationRequired` (9), đồng thời cooldown 3 s và việc giữ nguyên tu vi khi thất bại là mốc kỹ thuật tạm. Bật lại bằng `allowMajorBreakthrough` khi Tâm Ma/Lôi Kiếp xong; cần quyết định hậu quả thất bại.
+- **[Cập nhật D97: Trúc Cơ → Kim Đan và Kim Đan → Nguyên Anh đã chạy (Tâm Ma + Lôi Kiếp, mục 22); Luyện Khí → Trúc Cơ roll thẳng; cảnh giới cao hơn vẫn bị `TribulationRequired`.]** **Đột phá đại cảnh bị khóa** (D76): docs/01 §5 định nghĩa ngưỡng lớn là Tâm Ma → roll → Lôi Kiếp (thất bại có ý nghĩa, P1); các cơ chế đó chưa có nên server từ chối mọi lần đột phá đại cảnh bằng `ProgressionReason.TribulationRequired` (9), đồng thời cooldown 3 s và việc giữ nguyên tu vi khi thất bại là mốc kỹ thuật tạm. Bật lại bằng `allowMajorBreakthrough` khi Tâm Ma/Lôi Kiếp xong; cần quyết định hậu quả thất bại.
 - **Giai đoạn cuối**: tầng 41 (Độ Kiếp viên mãn) không thể đột phá tiếp (Phi Thăng chưa thiết kế).
 - **Hết hạn kết quả idempotency**: chỉ giữ 16 kết quả đột phá gần nhất mỗi phiên trong RAM; docs/26 §4 chưa chọn nơi lưu khóa idempotency lâu dài.
 - **Thân thông điệp họ Lạnh** là bố cục nhị phân cố định thay cho Protobuf cho tới khi có pipeline `buf` (docs/24 §2).
@@ -562,6 +562,36 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## D101 — làm cứng đầu vào: còn mở (worker39, 2026-11-09)
+
+1. **Chưa giới hạn theo IP** cho kết nối WebSocket chưa xác thực và số kết nối đồng thời: cần quyết định về proxy ngược / `X-Forwarded-For` (docs/25 §5) trước khi tin vào địa chỉ. Hiện chỉ có hello timeout 5 s và `MAX_PLAYERS`.
+2. **Số của `SECURITY_CONFIG` là ước lượng** theo nhịp client hiện tại (20 Hz input); cần đo trên bài tải 37 và trên thiết bị thật (tab nền, mạng chập chờn) rồi chỉnh.
+3. **Điểm nghi vấn xuyên phiên + hàng đợi xem xét thủ công** (docs/25 §7.3) chưa có; nhật ký an ninh hiện chỉ là dòng log, chưa đẩy vào `audit_log` / cảnh báo (docs/27 §3).
+4. **Thực thể chỉ-chủ-sở-hữu** (loot / NPC riêng) chưa có trong giao thức; khi thêm phải lọc theo chủ ở lựa chọn mục tiêu của combat và ở AOI.
+5. **HTTP auth** chưa được fuzz bằng thân yêu cầu đột biến (đã có giới hạn 4 KB, JSON lỗi trả 400).
+
+## D99 — sao lưu / khôi phục: còn mở (worker39, 2026-11-09)
+
+1. **Bản sao nằm cùng ổ đĩa mặc định** (`DATA_DIR/backups`): chưa có đẩy ra máy khác, mã hóa hay lịch chép ngoài; bản sao chứa băm mật khẩu như dữ liệu gốc. Người vận hành phải chép tay (docs/27 §9.1).
+2. **Phát hiện "server đang chạy" chỉ bằng mtime** (3 s): không có tệp khóa / pid; `restore --force` bỏ qua. Cần khóa thư mục dữ liệu khi có nhiều tiến trình.
+3. **Sao lưu ngoại tuyến khi server chạy** đọc tệp trên đĩa, trễ tới `flushMs` + chu kỳ lưu túi (5 s) so với bộ nhớ; chỉ sao lưu trực tiếp của server (`BACKUP_EVERY_MIN`, stdin `backup`) là đúng thời điểm.
+4. **Không có**: sao lưu tăng dần / nén, khôi phục một tài khoản, kiểm định kỳ tự động của bản sao cũ (chỉ `verify` thủ công), cảnh báo khi sao lưu lỗi ngoài dòng log (docs/27 §3 alert).
+5. **Kho PostgreSQL** (docs/08) cần sao lưu riêng (`pg_dump` + WAL / PITR) và thử khôi phục tương tự; giao diện lệnh ở đây chỉ phủ kho tệp D92.
+
+## NPC Sơn Môn dạng standee (INTERIM, 2026-11-09): còn mở
+
+- 6 NPC (`npc_chuong_mon`, `npc_truong_lao_dan`, `npc_ve_binh`, `npc_su_huynh`, `npc_tho_ren`, `npc_thuong_nhan`) chỉ là ảnh concept tĩnh đứng quanh quảng trường gần spawn; chưa có hội thoại, nhiệm vụ, cửa hàng hay hoạt hình. Khoá `npc_<tên>` theo kiểu docs/12; hệ thống NPC tông môn (D98) ánh xạ NPC id của nó vào các khoá này (`NPC_STANDEE_KEYS` trong `NpcPlacement.ts`), vị trí ưu tiên trong `SECT_NPC_LAYOUT` (chỉ phía client, chưa lấy từ server).
+- Mỗi NPC chiếm một ô đi bộ (chặn như prop); NPC không lật theo người chơi vì ảnh nhìn thẳng.
+
+## 22. Đột phá đại cảnh: Tâm Ma + Lôi Kiếp (D97, worker37): còn mở
+
+- **Số liệu tạm, cần game designer duyệt**: độ khó Tâm Ma (Đạo Tâm mặc định 60), 90 s, vòng đánh 2,5 s / r2 / 0,8 s, Khí Huyết ≥ 80 % để vào, mây tụ 3 s, cảnh báo tia 1,2 s, nghỉ Thiên Mệnh 2 s, khóa 30 phút / 24 giờ, mất tu vi 25 % / 50 %. Công thức tỉ lệ và sát thương sét **không đổi** (07 §2-§3).
+- **Chưa có hệ để làm**: buff "Đạo Cơ Chấn Động" (24 / 72 giờ, −10 / −20 % chỉ số gốc), mất 15 % độ bền trang bị, mất Đạo Tâm (không có hệ Đạo Tâm), nguồn giảm trừ kiếp (trận bàn, pháp bảo khiên, hộ pháp ×2, Thể tu) và khóa đan hồi máu thường trong kiếp (D90 là việc của lõi dùng vật phẩm).
+- **Tâm Cảnh chưa là instance riêng**: bóng Tâm Ma hiện cạnh người chơi ở thế giới mở nhưng **chỉ chủ nhân thấy và đánh được** (người khác không thấy, không gây sát thương, quái không nhắm); thế giới mở vẫn là nơi chủ nhân đứng (quái xung quanh vẫn tấn công họ), và Kiếp Đài do server cấp (docs/01 §5.4 bước 1) chưa có nên sét chỉ nhắm chủ kiếp. "Nghiệp Ảnh" (bóng phụ theo nghiệp âm) và Tâm Ma đa người chưa làm.
+- **Client**: overlay và sét là placeholder procedural (không art); bóng Tâm Ma vẽ bằng ô quái mặc định (defId 200 chưa có tranh); không có BGM / rung camera.
+- **Khóa đột phá** tính theo đồng hồ mô phỏng và lưu theo thời gian còn lại tại lần ghi gần nhất; một khoảng ngoại tuyến không làm khóa chạy tiếp (cần quyết định: tính theo giờ thật).
+- **Rời / ngắt kết nối giữa sự kiện** tính là thua (Tâm Ma) hoặc gục (Kiếp, theo số đợt đã qua); chưa có chế độ "nối lại phiên giữa kiếp".
+
 ## D95 — bản đồ 4 vùng: còn mở (worker39, 2026-11-09)
 
 1. **Mọi bố cục là mặc định tạm, cần game designer duyệt**: tên và vị trí vùng (bốn góc phần tư của bản đồ thử, chưa phải tọa độ Sơn Môn thật của docs/10 §4 / level designer), bãi trống cây cổ thụ ở giữa `co_thu_trung_tam` (chưa có cây: prop do worker 40), tỉ lệ nước / nham thạch (ngưỡng 0,52 của nham thạch, độ ẩm đầm lầy).
@@ -578,11 +608,41 @@ Còn mở / lưu ý:
 2. **Số đo prop vùng là ước lượng**: kích thước `target` (ancient_tree_giant 520 px @2x cho nền 4×4 ô, lava_charred_tree cao 342 px) bị ép để trang atlas prop @2x vẫn là MỘT trang 2048×2048 (đang dùng ~74 % diện tích; thêm prop lớn nữa sẽ tràn sang trang 2 và phá batch Y-sort: cần nâng trần trang hoặc tách atlas theo vùng). Ô chặn (khối 2×2 cho fire_vent / obsidian / sulfur, 4×4 cho cây cổ thụ, 2×2 cho cổng rễ và đền đá) chưa qua level designer; `swamp_lilypads` là prop phẳng bằng chuẩn "lá sen trên nước" nhưng chưa có nước trong vùng đầm, nên đang đặt ven bờ.
 3. **Hàng trạng thái của HUD (D94) đã dùng icon**: `Combat.setStatuses` gọi `getStatusIcon(id)` của `PropArt.ts` (ids root, slow, poison, shield; bản stub `StatusIcons.ts` đã xóa). Còn mở: `burn`, `regen`, `atk_up`, `def_up`, `invulnerable`, `breakthrough_buff` đã có icon nhưng chưa có hiệu ứng tương ứng ở server / client-core (`statusRowItems` mới có root / slow / poison / shield).
 4. **Huy hiệu cảnh giới chỉ ở HUD tu luyện** (cạnh tên cảnh giới, 30 px); chưa có ở khung nhân vật / bảng xếp hạng / chat. Huy hiệu thứ 9 (Độ Kiếp) có quầng sáng bị cắt nhẹ ở góc dưới-phải do dấu ✦ chồng lên nó (xoá bằng hộp góc 7,5 %).
-5. **Hạt chỉ là kho texture + registry** (`ArtRegistry.ts`, `getParticleFrame`): chưa hệ VFX nào dùng; chế độ blend (additive / alpha) chỉ là gợi ý trong `ParticleSpec`, node dùng chúng phải đặt blend riêng. Chưa kiểm hiển thị trên máy thật với `tier low` (trang @1x, 96 px).
+5. **Hạt chỉ là kho texture + registry** (`ArtRegistry.ts`, `getParticleFrame`): chưa hệ VFX nào dùng; chế độ blend (additive / alpha) chỉ là gợi ý (Cocos 3.8 không có hệ số blend theo sprite; thử vật liệu custom `builtin-sprite` với blend cộng thì render lỗi `localSetLayout`, nên `LevelUpFx` vẽ bằng alpha thường) trong `ParticleSpec`, node dùng chúng phải đặt blend riêng. Chưa kiểm hiển thị trên máy thật với `tier low` (trang @1x, 96 px).
 6. **Màn "đăng nhập" chỉ là hộp chọn Đạo Lộ**: client chưa có màn đăng nhập thật (tài khoản tự sinh), nên nền `login_bg` và emblem hiện ở hộp chọn Đạo Lộ của lần đăng nhập online đầu tiên; thêm màn đăng nhập / tạo nhân vật thật (D82 mục "Nhiều nhân vật") thì chuyển sang đó. URL ảnh cho DOM lấy từ `ImageAsset` (nguồn `HTMLImageElement.src`, dự phòng `nativeUrl`); chưa kiểm trong mọi cấu hình build (đóng bundle từ xa / CDN).
 7. **Dung lượng key art**: `login_bg` 1024×576 PNG ≈ 1,4 MB và emblem 512 px ≈ 0,6 MB (tải theo yêu cầu, chỉ khi hộp chọn Đạo Lộ hiện); chưa có preset nén WebP/ASTC cho hai ảnh này. Cần nén nếu gói tải đầu sát trần 25 MB.
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
+
+## D102 — giao dịch trực tiếp: còn mở
+
+- Sao lưu (D99) và nhật ký ghi trước (D102): `readLiveDocs` từ chối sao lưu nguội khi còn `journal.json` (một commit nhiều tài liệu bị cắt ngang: hãy khởi động server một lần để nó hoàn tất rồi mới sao lưu; khi đang chạy thì tệp biến mất sau vài ms và việc đọc lại tự thử lại), và `restoreBackup` chuyển `journal.json` vào `pre-restore-<id>/` cùng các tài liệu cũ để một nhật ký cũ không bị áp lại lên dữ liệu vừa khôi phục. `--reset-data` cũng xóa `journal.json`. Sao lưu sống (`FileStores.snapshot`) lấy trạng thái trong bộ nhớ nên không bị ảnh hưởng.
+- **Số tạm** (docs không ghi): tầm 12 ô, hạn lời mời 30 s, 8 dòng vật phẩm, nhịp lệnh (burst 8). Chưa có trần tốc độ / giá trị mỗi ngày chống RMT (docs/26 §5.5 và docs/25 §6.1: tham số, chưa có số), chưa phát hiện wash trading giữa hai tài khoản.
+- **Cam kết nhiều tệp** (đã đóng cho giao dịch): bước thực hiện đi qua nhật ký ghi trước (`TxJournal`, xem D102 và D92), nên crash giữa các lần ghi không còn nhân đôi / mất đồ. Còn mở: các thao tác nhiều tệp khác chưa dùng nó (mua bí tịch tông môn D98 = sect + sổ cái, dùng vật phẩm = túi + sổ cái; `FileStores.commitAtomic` dùng lại được); nhật ký chưa tự nén / chưa có mã khóa tiến trình duy nhất (hai server cùng `DATA_DIR` vẫn ghi đè nhau); adapter PostgreSQL thay bằng một giao dịch SQL.
+- **Khóa idempotency của sổ cái chỉ sống một tiến trình** (như D92): sau khởi động lại cửa sổ đang mở cũng không còn, nên không có gì để phát lại.
+- Thuế chỉ đánh Linh thạch (docs không định giá vật phẩm): hoán đổi vật phẩm lấy vật phẩm không tốn thuế; nếu muốn thuế theo giá trị vật phẩm cần bảng giá tham chiếu (có liên quan CPI của Vạn Bảo Lâu).
+- Cửa sổ vẫn mở khi hai bên đi xa nhau (chỉ kiểm tầm lúc mời). Nếu cần: hủy khi cách > 2 × tầm.
+- Cống hiến (`CONG_HIEN`) và vật phẩm khóa không giao dịch được; chưa có giao dịch gửi cho người **ngoại tuyến** (thư, docs/26 chợ).
+- Panel: tên vật phẩm là tên giữ chỗ (chưa có bảng i18n), chưa có icon vật phẩm, chưa có nút mở bảng trên màn hình cảm ứng (dùng `/trade`); smoke trình duyệt chỉ chạy cửa sổ rỗng (tài khoản mới không có đồ): việc chuyển đồ / thuế được kiểm bằng test server.
+
+## D98 — tông môn NPC: còn mở
+
+- **Số tạm** (docs không ghi, cần game designer): thưởng Cống hiến theo quái (1 / 5 / 25), giá bí tịch cơ bản (3 × cấp), tầm NPC (20 ô), rời tông môn giữ Cống hiến và bí tịch, không trần ngày, không thời gian chờ khi vào lại. Chưa đo tốc độ kiếm so với giá (OPEN-ITEMS X6: Cống hiến chưa có mục tiêu faucet / sink).
+- **Mở khóa bí tịch chưa có tác dụng ở combat**: server ghi và lưu bí tịch đã mua nhưng cast không bị chặn / mở theo đó (combat chưa có cấp mở khóa kỹ năng). Cần nối `SectService.owns()` vào luật tung kỹ năng khi combat có `unlock`.
+- **Chưa làm**: nâng rank bằng Bí Tịch Tàn Trang + Cống hiến (docs/11 §5; rank chưa có ở server), nhiệm vụ tông môn / mốc hành trình đầu thưởng Cống hiến (bộ theo dõi D84 chỉ ở client, server chưa biết mốc), nạp tài nguyên, chức vị, kho tông môn, phe Chính / Tà / Ma và trục xuất theo Nghiệp (docs/01 §9.2).
+- **Tên bí tịch**: dữ liệu kỹ năng chỉ có khóa i18n nên tên hiển thị là id kỹ năng viết hoa chữ đầu, không dấu ("Kim Quang Quet"); cần bảng tên tiếng Việt.
+- **Nhất quán hai tệp**: mua bí tịch ghi sổ cái (`ledger.json`) rồi ghi `sect.json` bằng hai lần ghi tệp riêng; một cú crash đúng giữa hai lần ghi có thể trừ Cống hiến mà chưa ghi bí tịch (và khóa idempotency không lưu qua lần khởi động lại nên mua lại sẽ trừ lần nữa). Adapter PostgreSQL phải làm hai việc đó trong một giao dịch SQL.
+- **Chưa có NPC thật trong thế giới**: chỉ có vị trí (giữa vùng spawn) và khóa giữ chỗ cho standee; chưa có tương tác bấm vào NPC (bảng mở bằng K / `/sect`), chưa có nút mở bảng trên màn hình cảm ứng.
+- Tên hiển thị trong thư viện và Cống hiến chỉ biết trong một World Node; nhiều node cần sổ cái chung (docs/23).
+
+## D96 — bạn bè: còn mở
+
+- Chưa có danh sách chặn / bỏ qua, chưa có ghi chú bạn bè, nhóm bạn, hay gợi ý bạn (người cùng tổ đội gần đây). Mọi giới hạn (50 / 20 / 20, 5 lệnh burst) là tạm.
+- Lời mời không hết hạn (chỉ mất khi nhận, từ chối hoặc thu hồi); cần quyết định của game designer (hạn dùng, hoặc xóa lời mời cũ khi đầy hộp thư).
+- Gửi lời mời cho tên không tồn tại vẫn trả `NoSuchPlayer` (đã tốn token nên không dò nhanh được); vẫn có thể dò chậm tên tài khoản đã đăng ký, giống `/auth/register` (`username_taken`). Nếu cần kín hơn: luôn trả `Ok` và chỉ báo "đã gửi" (đổi UX).
+- `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
+- Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
+- Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
 
 ## P5 load test (2026-11-09; D100, [docs/35](35-p5-load-test.md))
 
