@@ -10,6 +10,30 @@ import type { BagItemView, BagModel } from '../net/bag.js';
 
 export const BAG_GRID = { cols: 8, cell: 44, gap: 4, pad: 10, headerH: 58, footerH: 44 } as const;
 
+/** UI input timing / keys of the bag (not gameplay values): a second tap on the same slot within this long uses the item; H quick-uses a heal pill. */
+export const BAG_USE = { doubleTapMs: 350, quickUseCode: 'KeyH', quickUseItem: 'heal_pill' } as const;
+
+/**
+ * Double-tap / double-click detector for "use this item" (touch has no right-click). `tap` returns true on the SECOND tap of the same
+ * slot within `BAG_USE.doubleTapMs` and then forgets it, so a third tap starts over.
+ */
+export class UseGesture {
+  private slot = -1;
+  private atMs = -Infinity;
+  tap(slot: number, nowMs: number): boolean {
+    if (slot === this.slot && nowMs - this.atMs <= BAG_USE.doubleTapMs) {
+      this.slot = -1;
+      return true;
+    }
+    this.slot = slot;
+    this.atMs = nowMs;
+    return false;
+  }
+  reset(): void {
+    this.slot = -1;
+  }
+}
+
 export interface BagRect {
   x: number;
   y: number;

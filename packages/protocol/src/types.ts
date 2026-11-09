@@ -10,6 +10,7 @@ import type { ColdClientMessage, ColdServerMessage } from './progression.js';
 /** v3 (D78): `SkillCastMsg.aim` (ground / direction aim point) and `SelfState.vitals` (own HP / MP / shield). */
 /** v4 (D79): inventory messages inv_state / inv_cmd / inv_result (cold ids 66-68); one bump shared with the reconnect work. */
 /** v5 (D89): mob attack telegraphs telegraph_start / telegraph_end (hot ids 15-16; 10-14 stay reserved for the docs/24 hello family). */
+/** Additive since v5, no bump (D91): hot message boss_phase (id 17); decoders of the same build know it, clients and server ship together (D27). */
 export const PROTOCOL_VERSION = 5;
 
 export enum MsgType {
@@ -24,6 +25,7 @@ export enum MsgType {
   Pong = 9,
   TelegraphStart = 15,
   TelegraphEnd = 16,
+  BossPhase = 17,
 }
 
 export const MSG_TYPE_NAMES: Readonly<Record<number, Message['type']>> = {
@@ -38,6 +40,7 @@ export const MSG_TYPE_NAMES: Readonly<Record<number, Message['type']>> = {
   [MsgType.Pong]: 'pong',
   [MsgType.TelegraphStart]: 'telegraph_start',
   [MsgType.TelegraphEnd]: 'telegraph_end',
+  [MsgType.BossPhase]: 'boss_phase',
 };
 
 // ---------------------------------------------------------------- limits (single source for codec + validation)
@@ -235,6 +238,18 @@ export interface TelegraphEndMsg {
   cancelled: boolean;
 }
 
+/**
+ * A boss entered a new phase (D91): `phase` is the index of the NEW phase (1 = the first transform; 0 is never sent). The boss is invulnerable
+ * and attack-less for `transformMs` (docs/03 §6 transform window): the client can flash / swap its skin for that long.
+ */
+export interface BossPhaseMsg {
+  type: 'boss_phase';
+  mobEntityId: number;
+  phase: number;
+  /** transform window (ms, u16) */
+  transformMs: number;
+}
+
 export enum ErrorCode {
   BadVersion = 1,
   BadMessage = 2,
@@ -267,5 +282,6 @@ export type ServerMessage =
   | PongMsg
   | TelegraphStartMsg
   | TelegraphEndMsg
+  | BossPhaseMsg
   | ColdServerMessage;
 export type Message = ClientMessage | ServerMessage;
