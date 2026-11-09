@@ -295,7 +295,13 @@ export class Bootstrap extends Component {
       this.combatOn ? (tile) => this.combat?.pick(tile) ?? null : undefined,
     );
     if (this.online) {
-      this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
+      this.progressionHud = new ProgressionHud(
+        hudRoot,
+        art,
+        this.online.net,
+        (x, y) => this.rig.clientToUi(x, y),
+        (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
+      );
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
@@ -372,6 +378,7 @@ export class Bootstrap extends Component {
         quickUse: (key) => (demo ? false : (online?.net.sendBagQuickUse(key) ?? false)),
         clientToUi: (x, y) => this.rig.clientToUi(x, y),
         icon: (key) => this.propArt?.icon(key) ?? null,
+        slice: (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       },
       !!demo,
     );
