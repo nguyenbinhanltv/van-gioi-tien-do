@@ -233,6 +233,11 @@ export class AuthService {
     return { accountId: claims.sub, sessionId: claims.sid, version: claims.ver };
   }
 
+  /** Username (lowercase, unique) of an account, for display names (chat); undefined for an unknown id. */
+  usernameOf(accountId: string): string | undefined {
+    return this.store.byId(accountId)?.username;
+  }
+
   /**
    * Is a session that was authenticated earlier still valid (account exists, token_version unchanged, session not revoked)?
    * Resuming a held session presents no access token, so the gateway re-checks the stamp taken at login with this (docs/25 section 3.2).
