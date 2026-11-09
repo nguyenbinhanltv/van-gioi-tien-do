@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { skillDefinitions } from '@vgtd/shared';
-import { PARTICLE_NAMES, particleSpec } from '../assets/scripts/ArtRegistry';
+import { PARTICLE_NAMES } from '../assets/scripts/ArtRegistry';
 import { ParticlePool, VfxRng } from '../assets/scripts/ParticleSim';
 import {
   CLASS_OVERRIDES,
@@ -12,14 +12,7 @@ import {
   resolveVfx,
   unknownTextures,
 } from '../assets/scripts/SkillVfxPresets';
-import {
-  ADDITIVE_CAPACITY,
-  ALPHA_CAPACITY,
-  type FxPlace,
-  VfxPlayer,
-  makePools,
-  trailTravelS,
-} from '../assets/scripts/VfxPlayer';
+import { type FxPlace, POOL_CAPACITY, VfxPlayer, makePool, trailTravelS } from '../assets/scripts/VfxPlayer';
 
 const skills = skillDefinitions.skills as unknown as Array<SkillLike & { path: string; kind: string }>;
 const active = skills.filter((s) => s.kind === 'active');
@@ -139,23 +132,26 @@ describe('ParticlePool', () => {
 });
 
 describe('VfxPlayer', () => {
-  it('routes by blend mode: alpha textures to the alpha pool, glows to the additive pool', () => {
-    const pl = new VfxPlayer(makePools());
+  it('emits every texture into the one pool and recycles when it is full (capacity is fixed)', () => {
+    const pl = new VfxPlayer(makePool());
     pl.emit({ tex: 'p_smoke', count: 3, life: 1, size: [10, 20], tint: 'primary', alpha: 1 }, [1, 2, 3], place());
     pl.emit({ tex: 'p_flame', count: 2, life: 1, size: [10, 20], tint: 'primary', alpha: 1 }, [1, 2, 3], place());
-    expect(particleSpec('p_smoke')!.blend).toBe('alpha');
-    expect(pl.pools.alpha.count).toBe(3);
-    expect(pl.pools.additive.count).toBe(2);
-    expect(ADDITIVE_CAPACITY).toBeGreaterThan(ALPHA_CAPACITY);
+    expect(pl.count).toBe(5);
+    pl.emit(
+      { tex: 'p_spark', count: POOL_CAPACITY * 2, life: 1, size: [10, 20], tint: 'primary', alpha: 1 },
+      [1, 2, 3],
+      place(),
+    );
+    expect(pl.count).toBe(POOL_CAPACITY);
   });
   it('sweeps a trail along the segment with staggered births, and sizes rings from the diameter', () => {
-    const pl = new VfxPlayer(makePools());
+    const pl = new VfxPlayer(makePool());
     pl.emit(
       { tex: 'p_slash', count: 5, life: 1, size: [10, 10], along: true, stagger: 0.1, tint: 'primary', alpha: 1 },
       [0, 0, 0],
       place({ tx: 400 }),
     );
-    const a = pl.pools.additive;
+    const a = pl.pool;
     const xs = [...a.x.slice(0, 5)];
     expect(xs[0]).toBeCloseTo(0);
     expect(xs[4]).toBeCloseTo(400);
@@ -169,7 +165,7 @@ describe('VfxPlayer', () => {
     expect(a.sq[5]).toBeCloseTo(0.5);
   });
   it('plays a whole resolved cast + hit, then everything ends', () => {
-    const pl = new VfxPlayer(makePools());
+    const pl = new VfxPlayer(makePool());
     const s = skills.find((x) => x.id === 'thien_hoa_luu_tinh')!;
     const v = resolveVfx(s.path, classElement(s.path), s);
     pl.cast(v, place());
@@ -180,10 +176,10 @@ describe('VfxPlayer', () => {
   });
   it('the same casts always look the same (seeded jitter) and the trail travel time is bounded', () => {
     const run = () => {
-      const pl = new VfxPlayer(makePools(), new VfxRng(7));
+      const pl = new VfxPlayer(makePool(), new VfxRng(7));
       const s = skills.find((x) => x.id === 'kinh_loi_thich')!;
       pl.cast(resolveVfx(s.path, classElement(s.path), s), place());
-      return Array.from(pl.pools.additive.x.slice(0, 20));
+      return Array.from(pl.pool.x.slice(0, 20));
     };
     expect(run()).toEqual(run());
     expect(trailTravelS(0)).toBeGreaterThan(0);

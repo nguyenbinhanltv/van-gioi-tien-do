@@ -1,25 +1,21 @@
 /**
- * Plays resolved skill VFX (SkillVfxPresets.ts) into two particle pools, one per blend mode (engine-free, unit-tested). Additive and
- * alpha particles live in separate pools because the view keeps them in two node groups: one batch run each on the shared particle
- * atlas page, so a scene full of effects costs at most two extra draw calls.
+ * Plays resolved skill VFX (SkillVfxPresets.ts) into one particle pool (engine-free, unit-tested). Positions are Cocos world px (y up):
+ * the caller converts tiles with IsoAdapter. Nothing here allocates per call: `emit` reads the static def and writes numbers into the
+ * pool's typed arrays.
  *
- * Positions are Cocos world px (y up): the caller converts tiles with IsoAdapter. Nothing here allocates per call: `emit` reads the
- * static def, writes numbers into the pools' typed arrays.
+ * Blending: every particle draws with NORMAL alpha blending. Cocos 3.8 `Sprite` has no per-sprite blend factors (setting them is a
+ * no-op) and a custom additive `builtin-sprite` material breaks rendering (OPEN-ITEMS "Asset Gemini PART 2" item 5), so the
+ * `ParticleSpec.blend` of the registry is only the blend the art was made for; the textures are luminance -> alpha, so they read fine
+ * as soft translucent shapes. The presets' `alpha` (peak opacity) values are tuned for that.
  */
-import { PARTICLE_NAMES, particleSpec } from './ArtRegistry';
+import { PARTICLE_NAMES } from './ArtRegistry';
 import { ParticlePool, VfxRng } from './ParticleSim';
 import type { EmitterDef, ResolvedVfx, Rgb } from './SkillVfxPresets';
 
-export interface VfxPools {
-  additive: ParticlePool;
-  alpha: ParticlePool;
-}
+export const POOL_CAPACITY = 160;
 
-export const ADDITIVE_CAPACITY = 128;
-export const ALPHA_CAPACITY = 40;
-
-export function makePools(): VfxPools {
-  return { additive: new ParticlePool(ADDITIVE_CAPACITY), alpha: new ParticlePool(ALPHA_CAPACITY) };
+export function makePool(): ParticlePool {
+  return new ParticlePool(POOL_CAPACITY);
 }
 
 const TEX_INDEX = new Map(PARTICLE_NAMES.map((n, i) => [n, i] as const));
@@ -40,7 +36,7 @@ export interface FxPlace {
 
 export class VfxPlayer {
   constructor(
-    readonly pools: VfxPools,
+    readonly pool: ParticlePool,
     private readonly rng: VfxRng = new VfxRng(),
   ) {}
 
@@ -48,8 +44,7 @@ export class VfxPlayer {
   emit(def: EmitterDef, rgb: Rgb, place: FxPlace, delay0 = 0, scale = 1): number {
     const tex = TEX_INDEX.get(def.tex);
     if (tex === undefined) return 0; // unknown name: skip (the registry test catches typos)
-    const spec = particleSpec(def.tex);
-    const pool = spec && spec.blend === 'alpha' ? this.pools.alpha : this.pools.additive;
+    const pool = this.pool;
     const rng = this.rng;
     const base = Math.atan2(place.dy, place.dx);
     const sq = def.squash ?? 1;
@@ -100,17 +95,15 @@ export class VfxPlayer {
   }
 
   step(dt: number): void {
-    this.pools.additive.step(dt);
-    this.pools.alpha.step(dt);
+    this.pool.step(dt);
   }
 
   get count(): number {
-    return this.pools.additive.count + this.pools.alpha.count;
+    return this.pool.count;
   }
 
   clear(): void {
-    this.pools.additive.clear();
-    this.pools.alpha.clear();
+    this.pool.clear();
   }
 }
 

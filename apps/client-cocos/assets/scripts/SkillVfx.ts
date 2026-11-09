@@ -1,24 +1,24 @@
-import { Color, Node, Sprite, UITransform, gfx } from 'cc';
+import { Color, Node, Sprite, UITransform } from 'cc';
 import { shared } from './vendor/vgtd.mjs';
 import { newNode, tileToWorld } from './IsoAdapter';
 import { getParticleFrame, preloadParticles } from './PropArt';
 import { PARTICLE_NAMES } from './ArtRegistry';
 import { ParticlePool } from './ParticleSim';
-import { type FxPlace, VfxPlayer, makePools, trailTravelS } from './VfxPlayer';
+import { type FxPlace, VfxPlayer, makePool, trailTravelS } from './VfxPlayer';
 import { type ResolvedVfx, type SkillLike, resolveVfx } from './SkillVfxPresets';
 
 /**
  * INTERIM skill VFX (client decoration only: it reads cast / hit events the combat HUD already receives and never sends anything).
  * The preset table (SkillVfxPresets.ts) decides what each class / archetype throws; the simulation is ParticleSim.ts + VfxPlayer.ts
- * (engine-free, tested); this file is the thin Cocos view: two node groups (additive, alpha) with one pre-built Sprite per pool slot,
- * created once. Per frame it only moves, resizes and recolours the live ones: no node creation, no allocation. All sprites use the
- * one particle atlas page, so the whole effect layer is at most two batches (one per blend mode).
+ * (engine-free, tested); this file is the thin Cocos view: one node group with one pre-built Sprite per pool slot, created once. Per
+ * frame it only moves, resizes and recolours the live ones: no node creation, no allocation. All sprites use the one particle atlas
+ * page and normal alpha blending (Cocos 3.8 Sprite has no per-sprite blend factors; additive needs a custom material, an open item),
+ * so the whole effect layer is one batch.
  */
 export class SkillVfx {
   private readonly root: Node;
   private readonly player: VfxPlayer;
-  private readonly add: PoolView;
-  private readonly alpha: PoolView;
+  private readonly view: PoolView;
   /** reused placement + colour scratch objects (no per-cast allocation) */
   private readonly place: FxPlace = { x: 0, y: 0, dx: 1, dy: 0, tx: 0, ty: 0, diameter: 0 };
   /** design px of one tile step along i, and the ground ellipse semi-axes of a circle of radius 1 tile (derived from the iso projection) */
@@ -29,9 +29,8 @@ export class SkillVfx {
   constructor(layer: Node) {
     this.root = newNode('Vfx', layer);
     this.root.setSiblingIndex(0); // under the floating damage numbers and overhead bars of the same layer
-    this.player = new VfxPlayer(makePools());
-    this.add = new PoolView(this.root, 'VfxAdd', this.player.pools.additive, true);
-    this.alpha = new PoolView(this.root, 'VfxAlpha', this.player.pools.alpha, false);
+    this.player = new VfxPlayer(makePool());
+    this.view = new PoolView(this.root, 'VfxParticles', this.player.pool);
     const o = tileToWorld(0, 0);
     const a = tileToWorld(1, 0);
     const b = tileToWorld(0, 1);
@@ -126,10 +125,9 @@ export class SkillVfx {
   }
 
   update(dt: number): void {
-    if (this.player.count === 0 && !this.add.dirty && !this.alpha.dirty) return;
+    if (this.player.count === 0 && !this.view.dirty) return;
     this.player.step(dt);
-    this.add.sync();
-    this.alpha.sync();
+    this.view.sync();
   }
 
   /** Live particles (tests / debug). */
@@ -140,15 +138,14 @@ export class SkillVfx {
   /** Stops everything at once (scene change / respawn). */
   clear(): void {
     this.player.clear();
-    this.add.sync();
-    this.alpha.sync();
+    this.view.sync();
   }
 }
 
 /** Chest height above the feet, design px. */
 const CHEST = 44;
 
-/** One pre-built Sprite node per pool slot, in one group (= one batch: same texture + blend). */
+/** One pre-built Sprite node per pool slot, in one group (= one batch: one texture page, normal alpha blending). */
 class PoolView {
   private readonly nodes: Node[] = [];
   private readonly sprites: Sprite[] = [];
@@ -163,7 +160,6 @@ class PoolView {
     parent: Node,
     name: string,
     private readonly pool: ParticlePool,
-    additive: boolean,
   ) {
     const group = newNode(name, parent);
     for (let i = 0; i < pool.capacity; i++) {
@@ -172,10 +168,6 @@ class PoolView {
       this.uis.push(n.addComponent(UITransform));
       const sp = n.addComponent(Sprite);
       sp.sizeMode = Sprite.SizeMode.CUSTOM;
-      if (additive) {
-        sp.srcBlendFactor = gfx.BlendFactor.SRC_ALPHA;
-        sp.dstBlendFactor = gfx.BlendFactor.ONE;
-      }
       this.nodes.push(n);
       this.sprites.push(sp);
       this.texOf.push(-1);
