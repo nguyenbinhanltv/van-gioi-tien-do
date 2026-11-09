@@ -43,8 +43,9 @@ const telemetryFiles = stores
 const telemetry = new TelemetryService(
   telemetryFiles ? { key: telemetryFiles.key, log: telemetryFiles.log, rollups: telemetryFiles.rollups } : {},
 );
+// the instance above goes in through `world.telemetry`: `startServer` prefers it, wires the ledger and the gateway to it, and main.ts keeps
+// the handle to flush and read it
 const srv = await startServer({
-  telemetry: false, // the instance above is passed through `world` so main.ts can flush and read it
   dashboardToken: process.env.DASHBOARD_TOKEN || undefined,
   port,
   host: process.env.HOST ?? '127.0.0.1',

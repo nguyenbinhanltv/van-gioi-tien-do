@@ -13,6 +13,7 @@ import {
 import { ErrorCode, decode, encode, type Message } from '@vgtd/protocol';
 import {
   FileEventLog,
+  InventoryService,
   Ledger,
   MemoryEventLog,
   Rollups,
@@ -579,6 +580,53 @@ describe('the KPI dashboard (HTTP)', () => {
     } finally {
       await open.stop();
       await locked.stop();
+    }
+  });
+
+  it('started the way main.ts does (the instance only in `world`): the dashboard is served, the ledger feeds the economy table, register is recorded', async () => {
+    const telemetry = new TelemetryService({ key: KEY });
+    const inventory = new InventoryService();
+    const srv = await startServer({
+      port: 0,
+      auth: { scrypt: FAST, registerPerIpPerDay: 0 },
+      world: { mapTiles: 64, spawn: { i0: 30, j0: 30, side: 4 }, telemetry, inventory },
+    });
+    try {
+      inventory.ledger.post({
+        reason: 'DROP',
+        idempotencyKey: 'main-style',
+        entries: [
+          { account: { kind: 'SYSTEM_FAUCET_DROP_MOB', ownerId: null, currency: 'LT_HA' }, delta: -50n },
+          { account: { kind: 'PLAYER_WALLET', ownerId: 'acc-x', currency: 'LT_HA' }, delta: 50n },
+        ],
+      });
+      telemetry.tick(0); // the world does this every tick; the test drives it once
+      const sum = await get(srv.port, '/dashboard/summary.json');
+      expect(sum.status).toBe(200);
+      const json = JSON.parse(sum.body) as ReturnType<TelemetryService['summary']>;
+      expect(json.economy.currencies).toMatchObject([{ currency: 'lt_ha', faucet: 50, sink: 0 }]);
+      expect((await get(srv.port, '/dashboard')).status).toBe(200);
+      const body = JSON.stringify({ username: 'main_style', password: 'Correct-Horse-9' });
+      await new Promise<void>((resolve, reject) => {
+        const req = request(
+          {
+            host: '127.0.0.1',
+            port: srv.port,
+            path: '/auth/register',
+            method: 'POST',
+            headers: { 'content-type': 'application/json', 'content-length': Buffer.byteLength(body) },
+          },
+          (res) => {
+            res.resume();
+            res.on('end', () => resolve());
+          },
+        );
+        req.on('error', reject);
+        req.end(body);
+      });
+      expect((telemetry.log as MemoryEventLog).lines.some((l) => l.includes('account.register'))).toBe(true);
+    } finally {
+      await srv.stop();
     }
   });
 
