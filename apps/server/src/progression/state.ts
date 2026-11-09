@@ -62,6 +62,11 @@ export interface ProgressRecord {
   readonly daoTam?: number;
   /** K gained through the daily-capped sources in the current server day (D103, docs/14 §3.3 "+100 mỗi ngày"); absent = nothing yet */
   readonly karmaGain?: { readonly day: number; readonly gained: number };
+  /**
+   * Remaining lock of the MAJOR breakthrough (ms) as of the last write (D97): after a lost Tâm Ma (30 min) or a Nặng death in a Lôi Kiếp (24 h).
+   * The service turns it into an absolute time on load and refreshes it on every write, so it survives a restart. Absent / 0 = not locked.
+   */
+  readonly majorLockMs?: number;
 }
 
 type Position = Pick<ProgressRecord, 'realm' | 'subRealm'>;

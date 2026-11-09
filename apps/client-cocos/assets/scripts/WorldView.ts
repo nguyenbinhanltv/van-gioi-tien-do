@@ -6,11 +6,23 @@ import { makeFrame } from './PlaceholderArt';
 /** Parsed procgen map (@vgtd/client-world `parseProcgenMap`). */
 export type ProcgenWorld = cw.ProcgenWorld;
 
-/** Water ground tile of one loaded chunk (animated by WorldView.update). */
+/** Animated liquid ground tile (water, lava) of one loaded chunk, cycled by WorldView.update. */
 interface WaterTile {
   sprite: Sprite;
   variant: number;
+  /** index into `WorldView.anims` */
+  anim: number;
 }
+
+/** One tile animation of the tileset (`animations.water`, `animations.lava`): its frame ids and sprite frames, same texture. */
+interface TileAnim {
+  ids: number[];
+  frames: SpriteFrame[];
+  fps: number;
+}
+
+/** Ground of a tile for biome logic (prop scatter): the top layer drawn there. `water` / `lava` = liquid only (not walkable). */
+export type GroundKind = 'water' | 'lava' | 'dirt' | 'grass' | 'swamp' | 'stone';
 
 interface LoadedChunk {
   node: Node;
@@ -48,12 +60,16 @@ export class WorldView {
   private readonly walkable: Uint8Array;
   private readonly dirtLayer: Int16Array | undefined;
   private readonly grassLayer: Int16Array | undefined;
+  private readonly swampLayer: Int16Array | undefined;
+  private readonly stoneLayer: Int16Array | undefined;
+  private readonly crustLayer: Int16Array | undefined;
+  private readonly liquidLayer: Int16Array | undefined;
   private readonly frames = new Map<number, SpriteFrame>();
-  private readonly waterFrames: SpriteFrame[] = [];
-  private waterIds: number[] = [];
-  private waterFps = 0;
-  private waterClock = 0;
-  private waterShown = -1;
+  private readonly anims: TileAnim[] = [];
+  private animClock = 0;
+  private animShown: number[] = [];
+  /** tile ids of the lava frames (empty on a map without lava) */
+  private readonly lavaIds = new Set<number>();
   /** Chunks with a node tree (rendered). */
   private readonly loaded = new Map<string, LoadedChunk>();
   /** Chunk data the streamer currently holds (loaded, maybe not rendered). */
@@ -73,7 +89,7 @@ export class WorldView {
 
   constructor(
     readonly data: ProcgenWorld,
-    tilesetAnimations: { water?: { frames: number[]; fps: number } } | undefined,
+    tilesetAnimations: Record<string, { frames: number[]; fps: number }> | undefined,
     texture: Texture2D,
     parent: Node,
     tier: cw.StreamTier = 'medium',
@@ -83,21 +99,36 @@ export class WorldView {
     this.height = data.height;
     this.tierName = tier;
     for (const t of data.tileset.tiles) this.frames.set(t.id, makeFrame(texture, t.x, t.y, t.w, t.h));
-    const anim = tilesetAnimations?.water;
-    if (anim) {
-      this.waterFps = anim.fps;
-      this.waterIds = anim.frames;
-      for (const id of anim.frames) this.waterFrames.push(this.frames.get(id)!);
+    // animated liquids: `animations.water` (every map) and `animations.lava` (zone map, D95); object key order is stable
+    if (tilesetAnimations) {
+      for (const key of Object.keys(tilesetAnimations)) {
+        const a = tilesetAnimations[key]!;
+        if (key === 'lava') for (const id of a.frames) this.lavaIds.add(id);
+        this.anims.push({ ids: a.frames, frames: a.frames.map((id) => this.frames.get(id)!), fps: a.fps });
+        this.animShown.push(-1);
+      }
     }
-    // layers keep the procgen draw order (liquid -> dirt -> grass); a cell is walkable when it has land
+    // layers keep the procgen draw order (liquid, dirt, grass, then the zone layers); a cell is walkable when any layer above the
+    // liquid is drawn in it (water-only and lava-only cells are blocked)
     this.layerNames = data.layers.map((l) => l.name);
-    const dirt = data.layers.find((l) => l.name === 'dirt')?.data;
-    const grass = data.layers.find((l) => l.name === 'grass')?.data;
+    const layer = (name: string): Int16Array | undefined => data.layers.find((l) => l.name === name)?.data;
+    const dirt = layer('dirt');
+    const grass = layer('grass');
     this.dirtLayer = dirt;
     this.grassLayer = grass;
+    this.swampLayer = layer('swamp_bank');
+    this.stoneLayer = layer('stone_bank');
+    this.crustLayer = layer('lava_crust');
+    this.liquidLayer = layer('liquid');
+    const land = data.layers.filter((l) => l.name !== 'liquid').map((l) => l.data);
     this.walkable = new Uint8Array(this.width * this.height);
     for (let k = 0; k < this.walkable.length; k++) {
-      if ((dirt && dirt[k] >= 0) || (grass && grass[k] >= 0)) this.walkable[k] = 1; // water-only cells are blocked
+      for (let l = 0; l < land.length; l++) {
+        if (land[l]![k]! >= 0) {
+          this.walkable[k] = 1;
+          break;
+        }
+      }
     }
     this.streamer = new cw.ChunkStreamer(new cw.ProcgenChunkLoader(data), {
       tier,
@@ -154,6 +185,28 @@ export class WorldView {
     if (this.grassLayer && this.grassLayer[k]! >= 0) return 'grass';
     if (this.dirtLayer && this.dirtLayer[k]! >= 0) return 'dirt';
     return 'water';
+  }
+
+  /**
+   * What the ground of a tile is (the top layer drawn there), null outside the map. Zone aware (D95): swamp / stone (also the lava
+   * crust) / lava next to the old water / dirt / grass. `terrainAt` keeps its three-way answer for existing callers.
+   */
+  groundAt(i: number, j: number): GroundKind | null {
+    if (i < 0 || j < 0 || i >= this.width || j >= this.height) return null;
+    const k = j * this.width + i;
+    if (this.crustLayer && this.crustLayer[k]! >= 0) return 'stone';
+    if (this.stoneLayer && this.stoneLayer[k]! >= 0) return 'stone';
+    if (this.swampLayer && this.swampLayer[k]! >= 0) return 'swamp';
+    if (this.grassLayer && this.grassLayer[k]! >= 0) return 'grass';
+    if (this.dirtLayer && this.dirtLayer[k]! >= 0) return 'dirt';
+    // liquid only: lava when the liquid tile is one of the lava frames, else water
+    return this.lavaIds.has(this.liquidLayer?.[k] ?? -1) ? 'lava' : 'water';
+  }
+
+  /** Zone id (`bia_rung`, `dam_lay_doc`, `co_thu_trung_tam`, `doc_hoa_dam`) of a tile on a zone map, null elsewhere. */
+  zoneAt(i: number, j: number): string | null {
+    for (const z of this.data.zones) if (i >= z.i0 && i < z.i1 && j >= z.j0 && j < z.j1) return z.id;
+    return null;
   }
 
   isTerrainWalkable(i: number, j: number): boolean {
@@ -301,8 +354,15 @@ export class WorldView {
           sp.sizeMode = Sprite.SizeMode.CUSTOM;
           sp.spriteFrame = this.frames.get(id)!;
           n.setPosition(tileToWorld(i, j));
-          const variant = this.layerNames[l] === 'liquid' ? this.waterIds.indexOf(id) : -1;
-          if (variant >= 0) ch.water.push({ sprite: sp, variant });
+          if (this.layerNames[l] === 'liquid') {
+            for (let a = 0; a < this.anims.length; a++) {
+              const variant = this.anims[a]!.ids.indexOf(id);
+              if (variant >= 0) {
+                ch.water.push({ sprite: sp, variant, anim: a });
+                break;
+              }
+            }
+          }
           ch.tiles++;
           made++;
         }
@@ -337,16 +397,20 @@ export class WorldView {
     ordered.forEach((ch, idx) => ch.node.setSiblingIndex(idx));
   }
 
-  /** Cycle the 4 water frames at the tileset's fps (same texture -> no extra draw calls). */
+  /** Cycle the animated liquid frames (water 6 fps, lava 4 fps) at each animation's fps (same texture -> no extra draw calls). */
   private animateWater(dt: number): void {
-    if (this.waterFrames.length === 0) return;
-    this.waterClock += dt;
-    const step = Math.floor(this.waterClock * this.waterFps);
-    if (step === this.waterShown) return;
-    this.waterShown = step;
-    const n = this.waterFrames.length;
-    this.loaded.forEach((ch) => {
-      for (const w of ch.water) w.sprite.spriteFrame = this.waterFrames[(w.variant + step) % n];
-    });
+    if (this.anims.length === 0) return;
+    this.animClock += dt;
+    for (let a = 0; a < this.anims.length; a++) {
+      const anim = this.anims[a]!;
+      if (anim.frames.length === 0) continue;
+      const step = Math.floor(this.animClock * anim.fps);
+      if (step === this.animShown[a]) continue;
+      this.animShown[a] = step;
+      const n = anim.frames.length;
+      this.loaded.forEach((ch) => {
+        for (const w of ch.water) if (w.anim === a) w.sprite.spriteFrame = anim.frames[(w.variant + step) % n]!;
+      });
+    }
   }
 }

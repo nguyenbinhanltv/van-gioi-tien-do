@@ -28,6 +28,9 @@ export const PROGRESSION_REASON_TEXT: Readonly<Record<number, string>> = {
   [ProgressionReason.AtMaxStage]: 'Đã đạt cảnh giới cao nhất.',
   [ProgressionReason.Cooldown]: 'Vừa đột phá xong, hãy chờ giây lát.',
   [ProgressionReason.TribulationRequired]: 'Đột phá đại cảnh cần Tâm Ma và Lôi Kiếp, chưa mở ở bản này.',
+  [ProgressionReason.EventActive]: 'Tâm Ma / Lôi Kiếp đang diễn ra.',
+  [ProgressionReason.NotPrepared]: 'Cần gần đầy Khí Huyết để bước vào đại cảnh.',
+  [ProgressionReason.Locked]: 'Đột phá đại cảnh đang bị khóa (sau thất bại).',
 };
 
 export interface ProgressionSnapshot {
@@ -152,6 +155,7 @@ export class ProgressionView {
     const pct = `${(m.chance / 100).toFixed(m.chance % 100 === 0 ? 0 : 1)}%`;
     if (m.outcome === BreakthroughOutcome.Success)
       this.say(`Đột phá ${kind} thành công: ${stageLabel(m.toStage)} (tỉ lệ ${pct}).`, 'good');
+    else if (m.kind === BreakthroughKind.Major) this.say(`Đột phá ${kind} thất bại (tỉ lệ ${pct}).`, 'bad');
     else this.say(`Đột phá ${kind} thất bại (tỉ lệ ${pct}). Tu vi được giữ nguyên, hãy thử lại.`, 'bad');
   }
 

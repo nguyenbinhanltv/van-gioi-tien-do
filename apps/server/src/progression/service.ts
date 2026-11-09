@@ -12,6 +12,7 @@ import {
   BreakthroughKind,
   BreakthroughOutcome,
   CHAR_FLAG,
+  PROGRESSION_LIMITS,
   ProgressionReason,
   type BreakthroughResultMsg,
   type CharStateMsg,
@@ -23,9 +24,18 @@ import {
 } from '@vgtd/protocol';
 import {
   DAO_TAM,
+  ConsequenceTier,
   DEFAULT_CLASS,
+  MAJOR_EVENT,
+  MajorPhase,
+  MajorResult,
+  NETWORK,
   ROOT_TYPES,
   applyKarmaEvent,
+  TIER_EXP_LOSS,
+  consequenceTier,
+  majorEventOf,
+  tierLockMs,
   breakthroughPillChance,
   clampDaoTam,
   effectiveDaoTam,
@@ -54,6 +64,36 @@ import {
   type ProgressRecord,
 } from './state.js';
 import { InMemoryProgressionStore, InMemoryRollLog, type ProgressionStore, type RollLog } from './store.js';
+
+/** What the major-event module needs to start an event (D97). */
+export interface MajorStartInfo {
+  entityId: number;
+  requestId: string;
+  realm: number;
+  subRealm: number;
+  karma: number;
+  /** Đạo Tâm that counts (D103: under the ceiling of the Nghiệp band); omitted = `MAJOR_EVENT.DEFAULT_DAO_TAM` */
+  daoTam?: number;
+  nFail: number;
+  fromStage: number;
+  toStage: number;
+  nowMs: number;
+}
+/** The world-node side of a major breakthrough: Tâm Ma shadow, bolts, timers (apps/server world/breakthrough). */
+export interface MajorEventPort {
+  /** can the event start for this entity right now? `Ok` = yes; otherwise the reason the attempt is refused (nothing is consumed) */
+  canStart(entityId: number): ProgressionReason;
+  /** begin the event; it ends with `ProgressionService.finishMajor` */
+  start(info: MajorStartInfo): void;
+}
+/** How a major event ended, reported back by the event module. */
+export interface MajorFinish {
+  result: MajorResult;
+  /** Lôi Kiếp: waves fully survived / total waves (for the consequence tier); 0 / 0 without a Kiếp */
+  wavesSurvived: number;
+  waves: number;
+  strengthPct: number;
+}
 
 export interface Outbound {
   readonly entityId: number;
@@ -111,6 +151,10 @@ interface Session {
   pill: number | null;
   /** Đạo Tâm last sent to the client (-1 = nothing sent yet); `dao_tam` goes out when the value that counts changes (D103) */
   lastSentDao: number;
+  /** a major event (Tâm Ma / Lôi Kiếp, D97) is running for this character */
+  event: { requestId: string; chance: number } | null;
+  /** sim time until which the major breakthrough is locked (D97), null = not locked; persisted as the remaining time */
+  lockUntilMs: number | null;
 }
 
 export interface ProgressionMetrics {
@@ -148,6 +192,8 @@ export class ProgressionService {
   private onStageChange: ((entityId: number, realm: number, subRealm: number) => void) | undefined;
   private onPersistFailure: ((entityId: number) => void) | undefined;
   private readonly allowMajor: boolean;
+  /** the world-node half of major events (D97); without it a major threshold with an event is refused (`TribulationRequired`) */
+  private major: MajorEventPort | null = null;
   private readonly devSpeed: number;
   /** in-flight writes per character: a new session of the same character loads only after the previous one is stored */
   private readonly pendingWrites = new Map<string, Promise<void>>();
@@ -181,6 +227,23 @@ export class ProgressionService {
     if (port.tickOf) this.tickOf = port.tickOf;
   }
 
+  /** Let the world node provide the Tâm Ma / Lôi Kiếp event machinery (D97). */
+  attachMajor(port: MajorEventPort): void {
+    this.major = port;
+  }
+  private simNow(): number {
+    return this.tickOf() * NETWORK.TICK_MS;
+  }
+  /** Is a major event running for this entity? */
+  isEventActive(entityId: number): boolean {
+    return this.sessions.get(entityId)?.event != null;
+  }
+  /** Remaining major-breakthrough lock (ms) of a character, 0 = none (tests / HUD). */
+  majorLockLeftMs(entityId: number, nowMs: number): number {
+    const l = this.sessions.get(entityId)?.lockUntilMs ?? null;
+    return l === null ? 0 : Math.max(0, l - nowMs);
+  }
+
   /** PRNG state of the `breakthrough` stream (for the world state hash and for tests). */
   rngState(): RngState {
     return this.rng;
@@ -210,6 +273,8 @@ export class ProgressionService {
       answers: new Map(),
       pill: null,
       lastSentDao: -1,
+      event: null,
+      lockUntilMs: null,
     });
     this.metrics.joins++;
     // load only after any in-flight write of the same character (re-login right after a leave) has finished
@@ -222,6 +287,7 @@ export class ProgressionService {
         if (loaded) {
           s.rec = loaded;
           s.version = loaded.version;
+          if ((loaded.majorLockMs ?? 0) > 0) s.lockUntilMs = this.simNow() + loaded.majorLockMs!;
         } else {
           // creation roll: seeded by the character id, so it does not depend on login order
           const [root] = rollSpiritRoot(rngFork(rngSeed(this.seed), `root:${characterId}`));
@@ -391,15 +457,15 @@ export class ProgressionService {
     if (!s) return [];
     const cached = s.answers.get(msg.requestId);
     if (cached) return [{ entityId, msg: cached }]; // idempotent re-send: same answer, no second roll
-    let reply: ColdServerMessage;
+    let reply: ColdServerMessage | null;
     if (msg.type === 'breakthrough_start') reply = this.breakthrough(s, msg.requestId, nowMs);
     else reply = this.meditateCommand(s, msg.type === 'meditate_start', msg.requestId, nowMs);
     // only a rolled breakthrough is cached: a re-send after a lost reply must not roll twice (docs/24 §5.1)
-    if (reply.type === 'breakthrough_result' && reply.outcome !== BreakthroughOutcome.Rejected) {
+    if (reply && reply.type === 'breakthrough_result' && reply.outcome !== BreakthroughOutcome.Rejected) {
       s.answers.set(msg.requestId, reply);
       if (s.answers.size > PROGRESSION_CONFIG.RESULT_CACHE) s.answers.delete(s.answers.keys().next().value as string);
     }
-    const out: Outbound[] = [{ entityId, msg: reply }];
+    const out: Outbound[] = reply ? [{ entityId, msg: reply }] : []; // null: a major event started, its result comes when it ends
     // flush any state change this command caused right behind the answer
     for (const o of this.outbox.splice(0)) out.push(o);
     return out;
@@ -417,6 +483,7 @@ export class ProgressionService {
   /** Why the player cannot sit or break through right now, or Ok. */
   private blocked(s: Session, nowMs: number): ProgressionReason {
     if (!s.rec) return ProgressionReason.NotReady;
+    if (s.event) return ProgressionReason.EventActive;
     if (!this.isAlive(s.entityId)) return ProgressionReason.Dead;
     if (nowMs - s.lastCombatMs < PROGRESSION_CONFIG.COMBAT_LOCK_MS) return ProgressionReason.InCombat;
     if (nowMs - s.lastMoveMs < PROGRESSION_CONFIG.MOVE_GRACE_MS) return ProgressionReason.Moving;
@@ -451,7 +518,7 @@ export class ProgressionService {
     return result(ProgressionReason.Ok);
   }
 
-  private breakthrough(s: Session, requestId: string, nowMs: number): BreakthroughResultMsg {
+  private breakthrough(s: Session, requestId: string, nowMs: number): BreakthroughResultMsg | null {
     const rec = s.rec;
     const base = {
       type: 'breakthrough_result' as const,
@@ -472,11 +539,38 @@ export class ProgressionService {
     const r = s.rec!;
     const plan = planBreakthrough(r);
     if (!plan) return rejected(ProgressionReason.AtMaxStage);
-    if (plan.kind === 'major' && !this.allowMajor) return rejected(ProgressionReason.TribulationRequired);
+    const ev = plan.kind === 'major' ? majorEventOf(r.realm) : undefined;
+    if (plan.kind === 'major') {
+      // major thresholds (D97): the MVP ones run a server-side event; `allowMajorBreakthrough` (tests) keeps the old instant roll
+      if (s.lockUntilMs !== null && nowMs < s.lockUntilMs) return rejected(ProgressionReason.Locked);
+      const eventRuns = !!this.major && !!ev && ev.kind !== 'none';
+      if (!eventRuns && !this.allowMajor && !(this.major && ev?.kind === 'none'))
+        return rejected(ProgressionReason.TribulationRequired);
+    }
     if (nowMs - s.lastAttemptMs < PROGRESSION_CONFIG.BREAKTHROUGH_COOLDOWN_MS)
       return rejected(ProgressionReason.Cooldown);
     if (r.exp < tuViRequired(r)) return rejected(ProgressionReason.NotEnoughTuVi);
 
+    if (plan.kind === 'major' && this.major && ev && ev.kind !== 'none') {
+      const ready = this.major.canStart(s.entityId);
+      if (ready !== ProgressionReason.Ok) return rejected(ready);
+      if (s.meditating) this.stopMeditation(s, nowMs);
+      s.lastAttemptMs = nowMs;
+      s.event = { requestId, chance: 0 };
+      this.major.start({
+        entityId: s.entityId,
+        requestId,
+        realm: r.realm,
+        subRealm: r.subRealm,
+        karma: r.karma,
+        daoTam: effectiveDaoTam(r.daoTam ?? DAO_TAM.START, r.karma),
+        nFail: r.nFail,
+        fromStage: plan.fromStage,
+        toStage: plan.toStage,
+        nowMs,
+      });
+      return null; // the answer comes with `finishMajor`
+    }
     if (s.meditating) this.stopMeditation(s, nowMs);
     s.lastAttemptMs = nowMs;
     let draw: number;
@@ -515,6 +609,115 @@ export class ProgressionService {
     };
   }
 
+  // ------------------------------------------------------------------ major events (D97)
+  /**
+   * The Thiên Mệnh roll of a running major event: the same success chance, pill bonus, `breakthrough` PRNG stream and roll log as an
+   * ordinary breakthrough (docs/07 §2). Returns null when there is no running event.
+   */
+  rollDestiny(entityId: number): { success: boolean; chance: number; draw: number } | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec || !s.event) return null;
+    const plan = planBreakthrough(s.rec);
+    if (!plan) return null;
+    let draw: number;
+    [draw, this.rng] = rngFloat(this.rng);
+    const chance = s.pill === null ? plan.chance : breakthroughPillChance(plan.chance, s.pill);
+    s.pill = null; // spent by the attempt, whatever the outcome
+    const success = draw < chance;
+    s.event.chance = chance;
+    this.rollLog.append({
+      stream: 'breakthrough',
+      tick: this.tickOf(),
+      characterId: s.characterId,
+      kind: 'major',
+      fromStage: plan.fromStage,
+      chance,
+      draw,
+      success,
+      nFailBefore: s.rec.nFail,
+    });
+    this.metrics.breakthroughs++;
+    return { success, chance, draw };
+  }
+
+  /**
+   * A major event ended: apply the outcome (stage up / pity / tu vi loss / lock), persist it, answer the `breakthrough_start` that began
+   * it with the normal `breakthrough_result` and tell the client how it ended with the final `major_event`. Returns the messages to send.
+   */
+  finishMajor(entityId: number, f: MajorFinish, nowMs: number): Outbound[] {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec || !s.event) return [];
+    const r = s.rec;
+    const plan = planBreakthrough(r)!;
+    const requestId = s.event.requestId;
+    const chance = s.event.chance;
+    s.event = null;
+    let next = r;
+    let tier = ConsequenceTier.None;
+    let lockMs = 0;
+    let expLost = 0;
+    if (f.result === MajorResult.Success) {
+      next = applyBreakthrough(r, plan, true);
+      this.metrics.successes++;
+    } else if (f.result === MajorResult.TamMaLost) {
+      lockMs = MAJOR_EVENT.TAM_MA_LOSS_LOCK_MS; // no roll happened: the pity counter is not touched (docs/01 §5.2)
+    } else if (f.result === MajorResult.RollFailed) {
+      next = applyBreakthrough(r, plan, false);
+    } else if (f.result === MajorResult.Died) {
+      next = applyBreakthrough(r, plan, false);
+      tier = consequenceTier(f.wavesSurvived, f.waves);
+      const frac = TIER_EXP_LOSS[tier];
+      expLost = frac;
+      next = { ...next, exp: Math.floor(next.exp * (1 - frac)) };
+      lockMs = tierLockMs(tier);
+    }
+    if (lockMs > 0) {
+      s.lockUntilMs = nowMs + lockMs;
+      next = { ...next, majorLockMs: lockMs };
+    }
+    s.rec = next;
+    s.dirty = true;
+    s.lastAttemptMs = nowMs;
+    const success = f.result === MajorResult.Success;
+    if (success) this.onStageChange?.(entityId, next.realm, next.subRealm);
+    void this.save(s);
+    this.queueState(s);
+    const result: BreakthroughResultMsg = {
+      type: 'breakthrough_result',
+      requestId,
+      outcome: success ? BreakthroughOutcome.Success : BreakthroughOutcome.Failure,
+      kind: BreakthroughKind.Major,
+      reason: ProgressionReason.Ok,
+      fromStage: plan.fromStage,
+      toStage: success ? plan.toStage : plan.fromStage,
+      chance: Math.round(chance * PROGRESSION_LIMITS.CHANCE_SCALE),
+      nFail: next.nFail,
+    };
+    s.answers.set(requestId, result);
+    if (s.answers.size > PROGRESSION_CONFIG.RESULT_CACHE) s.answers.delete(s.answers.keys().next().value as string);
+    const out: Outbound[] = [
+      {
+        entityId,
+        msg: {
+          type: 'major_event',
+          phase: MajorPhase.Ended,
+          wave: f.wavesSurvived,
+          waves: f.waves,
+          remainingMs: 0,
+          strengthPct: f.strengthPct,
+          result: f.result,
+          tier,
+          expLostPct: Math.round(expLost * 100),
+          lockMin: Math.round(lockMs / 60_000),
+          tamMaId: 0,
+        },
+      },
+      { entityId, msg: result },
+    ];
+    for (const o of this.outbox.splice(0)) out.push(o);
+    return out;
+  }
+
   // ------------------------------------------------------------------ tick
   /** One world tick: accumulate tu vi for meditators (ascending entity id), emit progress and autosave. */
   tick(nowMs: number, dtMs: number): Outbound[] {
@@ -532,6 +735,15 @@ export class ProgressionService {
       if (full)
         this.stopMeditation(s, nowMs); // stage requirement reached: ready to break through
       else if (nowMs - s.lastSentMs >= c.PROGRESS_INTERVAL_MS) this.queueState(s, nowMs);
+    }
+    for (const s of this.sessions.values()) {
+      if (s.lockUntilMs !== null && nowMs >= s.lockUntilMs && s.rec) {
+        s.lockUntilMs = null; // the lock ran out: forget it (and the stored remainder)
+        if ((s.rec.majorLockMs ?? 0) > 0) {
+          s.rec = { ...s.rec, majorLockMs: 0 };
+          s.dirty = true;
+        }
+      }
     }
     for (const s of this.sessions.values())
       if (s.dirty && s.rec && !s.saving && nowMs - s.lastSaveMs >= c.AUTOSAVE_MS) {
@@ -608,7 +820,13 @@ export class ProgressionService {
           s.resave = false;
           const rec = s.rec;
           if (!rec) break;
-          const next = { ...rec, version: s.version + 1 };
+          // the stored lock is the time LEFT as of this write (it is re-based on load), so it keeps running through a restart
+          const left = s.lockUntilMs === null ? 0 : Math.max(0, s.lockUntilMs - this.simNow());
+          const next = {
+            ...rec,
+            version: s.version + 1,
+            ...(left > 0 || rec.majorLockMs ? { majorLockMs: left } : {}),
+          };
           const ok = await this.store.save(next, s.version);
           if (!ok) {
             this.metrics.saveConflicts++;

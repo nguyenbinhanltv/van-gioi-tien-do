@@ -200,6 +200,8 @@ Quy tắc:
 
 ### 5.3 Tâm Ma _[Thiết kế mới – chờ duyệt]_
 
+> _[Cập nhật D97: bản MVP chạy phía server cho Trúc Cơ → Kim Đan (Tâm Ma nhẹ) và Kim Đan → Nguyên Anh (Tâm Ma + Lôi Kiếp 3 đạo): bóng thật cạnh người chơi thay cho Tâm Cảnh instance, Đạo Tâm mặc định 60; chi tiết và phần chưa làm: DECISIONS D97.]_
+
 Tâm Ma là **trận chiến trong "Tâm Cảnh"** — một instance riêng, tileset sẵn có + shader đảo màu / méo hình, bố cục sinh theo dữ liệu người chơi, 9 biến thể (02 §2 "Tâm cảnh").
 
 | Loại                       | Ngưỡng (07 §2)                           | Hình thức _(Đề xuất)_                                                                                                                                |
