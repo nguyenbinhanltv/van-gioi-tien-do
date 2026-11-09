@@ -1,7 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { TileGrid } from '@vgtd/sim';
 import { CHAT_LIMITS, ChatChannel, ChatReason, decode, encode, type ChatLine, type Message } from '@vgtd/protocol';
-import { CHAT_REASON_KEY, ChatLog, chatReasonText, NetClient, parseChatInput, type NetDeps, type SocketLike } from '@vgtd/client-core';
+import {
+  CHAT_REASON_KEY,
+  ChatLog,
+  chatReasonText,
+  NetClient,
+  parseChatInput,
+  type NetDeps,
+  type SocketLike,
+} from '@vgtd/client-core';
 
 const send = (channel: number, text: string, target = '') => ({ kind: 'send', channel, target, text });
 

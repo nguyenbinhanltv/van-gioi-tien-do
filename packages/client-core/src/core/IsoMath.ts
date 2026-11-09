@@ -8,8 +8,14 @@ export const TILE_H = 32;
 const HW = TILE_W / 2;
 const HH = TILE_H / 2;
 
-export interface Vec2 { x: number; y: number }
-export interface TilePos { i: number; j: number }
+export interface Vec2 {
+  x: number;
+  y: number;
+}
+export interface TilePos {
+  i: number;
+  j: number;
+}
 
 export function tileToScreen(p: TilePos): Vec2 {
   return { x: (p.i - p.j) * HW, y: (p.i + p.j) * HH };

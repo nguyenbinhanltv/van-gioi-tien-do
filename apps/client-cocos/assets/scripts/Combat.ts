@@ -8,6 +8,8 @@ import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 import { getSkillIcon, getStatusIcon } from './PropArt';
 import { sharedAtlas } from './UiLabel';
+import { SkillVfx, classElementOf } from './SkillVfx';
+import { type ResolvedVfx, resolveVfx } from './SkillVfxPresets';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -192,6 +194,14 @@ export class CombatUi {
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
+  /** INTERIM skill VFX (SkillVfx.ts): played on cast_done / on every enemy hit; client decoration only */
+  private vfx: SkillVfx | null = null;
+  private lastVfx: ResolvedVfx | null = null;
+  private lastVfxAtMs = -1e9;
+  private lastVfxFrom: { i: number; j: number } | null = null;
+  /** `?vfxdemo=1`: cast the hotbar slots in turn every second or so (art review, perf gate with effects on screen) */
+  private vfxDemoNext = -1;
+  private vfxDemoAt = 0;
   private scale = 1;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly pointerDown: (e: PointerEvent) => void;
@@ -349,6 +359,8 @@ export class CombatUi {
     // floating text pool (world space, above the Y-sorted entities)
     const l6 = worldUiLayer(worldRoot);
     this.worldUi = l6;
+    // `?vfxoff=1`: effects disabled (A/B for the draw-call gate: the cast HUD / floating numbers alone vs with the effects)
+    this.vfx = new URLSearchParams(location.search).get('vfxoff') !== null ? null : new SkillVfx(l6);
     this.selfBar = new OverheadBar(l6, art.pixel, 96);
     for (let n = 0; n < 24; n++) {
       const label = sharedAtlas(text(l6, `Float${n}`, 22, new Color(255, 255, 255, 255)), 'dynamic'); // damage numbers
@@ -463,6 +475,8 @@ export class CombatUi {
       }
     }
     for (const ev of this.backend.update(now)) this.onEvent(ev);
+    this.updateVfxDemo(now);
+    this.vfx?.update(dt);
     this.refresh(now, dt);
   }
 
@@ -584,8 +598,12 @@ export class CombatUi {
               : new Color(255, 255, 255, 255),
           ev.crit ? 32 : 22,
         );
+        if (!onPlayer && ev.sourceId === cb.PLAYER_ID) this.playHitVfx(ev.targetId);
         break;
       }
+      case 'cast_done':
+        this.playCastVfx(ev.slot);
+        break;
       case 'heal':
         this.spawnText(ev.targetId, `+${ev.amount}`, new Color(110, 235, 130, 255), 22);
         break;
@@ -626,6 +644,79 @@ export class CombatUi {
   /** One-shot flash of an enemy's standee. */
   flashEnemy(entityId: number, seconds?: number): void {
     this.standees.get(entityId)?.flash(seconds);
+  }
+
+  /** Where the cast goes: the selected enemy, else the nearest living one within reach, else null (direction skills fire along a default). */
+  private vfxTarget(rangeTiles: number): { i: number; j: number } | null {
+    const p = this.playerPos();
+    const sel = this.backend.target.current;
+    const t = sel === null ? undefined : this.backend.enemy(sel);
+    if (t && t.alive) return t.pos;
+    let best: { i: number; j: number } | null = null;
+    let bd = (rangeTiles + 2) * (rangeTiles + 2);
+    for (const e of this.backend.enemies) {
+      if (!e.alive) continue;
+      const d = (e.pos.i - p.i) ** 2 + (e.pos.j - p.j) ** 2;
+      if (d < bd) {
+        bd = d;
+        best = e.pos;
+      }
+    }
+    return best;
+  }
+
+  private playCastVfx(slot: number): void {
+    const bar = this.backend.hotbar;
+    const skill = bar.slots[slot]?.skill;
+    if (!this.vfx || !skill) return;
+    const from = this.playerPos();
+    this.lastVfxFrom = { i: from.i, j: from.j };
+    this.lastVfxAtMs = this.clock;
+    this.lastVfx = this.vfx.cast(
+      bar.path,
+      classElementOf(bar.path),
+      skill,
+      from,
+      this.vfxTarget(skill.targeting.range_tiles ?? 3),
+    );
+  }
+
+  private playHitVfx(targetId: number): void {
+    const pos = this.backend.enemy(targetId)?.pos;
+    if (!this.vfx || !pos) return;
+    let vfx = this.lastVfx;
+    if (!vfx || this.clock - this.lastVfxAtMs > 1500) {
+      // damage over time / hits whose cast we did not see: the class' basic attack look
+      const bar = this.backend.hotbar;
+      const s = bar.slots[0]?.skill;
+      if (!s) return;
+      vfx = resolveVfx(bar.path, classElementOf(bar.path), s);
+    }
+    this.vfx.hit(vfx, pos, this.lastVfxFrom);
+  }
+
+  /** Live skill-VFX particles (debug hook / capture scripts). */
+  get vfxLive(): number {
+    return this.vfx?.live ?? 0;
+  }
+
+  /** `?vfxdemo=1`: keep casting the hotbar in turn (offline mock combat), for art review and the perf gate. */
+  startVfxDemo(): void {
+    this.vfxDemoNext = 0;
+    this.vfxDemoAt = 0;
+  }
+
+  private updateVfxDemo(now: number): void {
+    if (this.vfxDemoNext < 0 || now < this.vfxDemoAt) return;
+    this.vfxDemoAt = now + 1100;
+    const bar = this.backend.hotbar;
+    for (let n = 0; n < bar.slots.length; n++) {
+      const slot = (this.vfxDemoNext + n) % bar.slots.length;
+      if (!bar.slots[slot]?.castable) continue;
+      this.vfxDemoNext = slot + 1;
+      this.castSlot(slot);
+      return;
+    }
   }
 
   /** A boss entered phase `phase` (wire `boss_phase`, D91): a big floating line above it and a toast; the standee transform / skin swap is `setEnemyPhase`. */

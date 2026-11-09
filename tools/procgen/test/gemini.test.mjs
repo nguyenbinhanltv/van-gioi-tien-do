@@ -263,6 +263,18 @@ describe('keyMagenta never eats neutral / pale bodies that touch the background'
   });
 });
 
+describe('processMob with a height target (NPC standees)', () => {
+  it('scales a front-facing character to a standing height, keeping the aspect', () => {
+    const img = new Image(400, 500);
+    for (let y = 0; y < 500; y++) for (let x = 0; x < 400; x++) img.setPixel(x, y, 250, 40, 248, 255);
+    for (let y = 60; y < 360; y++) for (let x = 150; x < 270; x++) img.setPixel(x, y, 60, 90, 160, 255); // 120 x 300
+    const r = G.processMob(img, 0, { height: 100 });
+    expect(r.x1.height).toBe(100);
+    expect(Math.abs(r.x1.width - 40)).toBeLessThanOrEqual(1);
+    expect(r.pivot.y).toBeCloseTo(0.95);
+  });
+});
+
 describe('processMob with an area target (boss phase skins)', () => {
   it('scales a wide pose to the area of the sprite it replaces instead of the longest side', () => {
     const img = new Image(400, 300);
@@ -278,3 +290,61 @@ describe('processMob with an area target (boss phase skins)', () => {
   });
 });
 
+describe('processVfxSheet (PART 3 skill VFX stills)', () => {
+  /** 900 x 300 black sheet: a vertical comet (head bulky at the bottom) | a round burst | a ring, plus the Gemini mark bottom-right. */
+  function sheet() {
+    const img = new Image(900, 300);
+    for (let p = 0; p < 900 * 300; p++) img.data[p * 4 + 3] = 255; // opaque black
+    const put = (x, y, r, g, b) => img.setPixel(x, y, r, g, b, 255);
+    for (let y = 40; y < 260; y++) {
+      const w = 4 + ((y - 40) * 22) / 220; // thin tail on top, bulky head at the bottom
+      for (let x = Math.round(150 - w); x <= Math.round(150 + w); x++) put(x, y, 255, 140, 40);
+    }
+    for (let y = 100; y < 200; y++)
+      for (let x = 400; x < 500; x++) if ((x - 450) ** 2 + (y - 150) ** 2 < 2500) put(x, y, 90, 200, 255);
+    for (let y = 60; y < 240; y++)
+      for (let x = 660; x < 840; x++) {
+        const d = Math.hypot(x - 750, y - 150);
+        if (d < 90 && d > 70) put(x, y, 255, 220, 80);
+      }
+    // 4-point Gemini mark, bottom-right
+    for (let k = -14; k <= 14; k++) {
+      put(870 + k, 270, 235, 235, 235);
+      put(870, 270 + k, 235, 235, 235);
+    }
+    return img;
+  }
+  it('cuts the panels apart, trims each, scales the longest side, and turns the projectile to point +x', () => {
+    const r = G.processVfxSheet(sheet(), [128, 160, 200], [true, false, false]);
+    // (the synthetic mark is too small for the corner detector, the stray-blob filter has to remove it from the last panel)
+    expect(r.panels).toHaveLength(3);
+    const [proj, burst, ring] = r.panels;
+    expect(Math.max(proj.x2.width, proj.x2.height)).toBe(128);
+    expect(proj.x2.width).toBeGreaterThan(proj.x2.height * 2); // the vertical comet now lies along x
+    expect(Math.max(burst.x2.width, burst.x2.height)).toBe(160);
+    expect(Math.abs(burst.x2.width - burst.x2.height)).toBeLessThanOrEqual(2);
+    expect(Math.max(ring.x2.width, ring.x2.height)).toBe(200);
+    expect(Math.abs(ring.x2.width - ring.x2.height)).toBeLessThanOrEqual(2); // a round ring: the mark did not widen its box
+    expect(proj.x1.width).toBe(Math.round(proj.x2.width / 2));
+    // no piece of another panel / the mark survived: every panel is one blob (opaque centre of a ring is empty, so test the burst)
+    const px = (img, x, y) => img.getPixel(x, y);
+    expect(px(burst.x2, burst.x2.width >> 1, burst.x2.height >> 1)[3]).toBeGreaterThan(200);
+    // head (bulky end, orange) is on the right: more mass in the right half than the left
+    const half = (img, from, to) => {
+      let m = 0;
+      for (let y = 0; y < img.height; y++) for (let x = from; x < to; x++) m += img.getPixel(x, y)[3];
+      return m;
+    };
+    expect(half(proj.x2, proj.x2.width >> 1, proj.x2.width)).toBeGreaterThan(half(proj.x2, 0, proj.x2.width >> 1));
+  });
+  it('panelCuts picks the emptiest columns near the thirds', () => {
+    const img = new Image(300, 10);
+    for (let y = 0; y < 10; y++)
+      for (let x = 0; x < 300; x++) img.setPixel(x, y, 255, 255, 255, x === 97 || x === 205 ? 0 : 255);
+    const cuts = G.panelCuts(img, 3);
+    expect(cuts[0]).toBe(0);
+    expect(Math.abs(cuts[1] - 97)).toBeLessThanOrEqual(4);
+    expect(Math.abs(cuts[2] - 205)).toBeLessThanOrEqual(4);
+    expect(cuts[3]).toBe(300);
+  });
+});

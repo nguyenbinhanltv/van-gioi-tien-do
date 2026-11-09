@@ -146,6 +146,8 @@ export interface ServerClientStats {
 
 export interface ServerSample {
   tickMs: number[];
+  /** per-phase tick samples of the window (D106); absent when the node predates the profile */
+  profile?: { samples: Record<string, number[]>; slowTicks: number; slowBy: Record<string, number> };
   tickIntervalMs: number[];
   /** per-client counters accumulated during the measured window only */
   clients: ServerClientStats[];

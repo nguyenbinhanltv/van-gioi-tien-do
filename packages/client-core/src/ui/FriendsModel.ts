@@ -123,7 +123,9 @@ export class FriendsModel {
   /** The list as plain lines (for `/friends` in the chat log). */
   summaryLines(): string[] {
     if (!this.seen) return [t('friends.summary.not_loaded')];
-    const lines = [t('friends.summary.header', { count: this.count, max: FRIENDS.MAX_FRIENDS, online: this.onlineCount })];
+    const lines = [
+      t('friends.summary.header', { count: this.count, max: FRIENDS.MAX_FRIENDS, online: this.onlineCount }),
+    ];
     for (const f of this.friends()) lines.push(`  ${f.online ? '●' : '○'} ${f.name}`);
     if (this.count === 0) lines.push(t('friends.summary.empty'));
     if (this.inc.length) lines.push(t('friends.summary.incoming', { names: this.inc.join(', ') }));

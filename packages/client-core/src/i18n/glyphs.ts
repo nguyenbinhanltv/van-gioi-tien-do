@@ -31,7 +31,12 @@ export const SUPPORTED_SYMBOLS = '·—–…→←↑↓×±≥≤°•★✓';
 const PRINTABLE_ASCII = Array.from({ length: 95 }, (_, i) => String.fromCharCode(0x20 + i)).join('');
 
 /** All characters a string of the table may use (newline allowed for multi-line texts). */
-export const SUPPORTED_GLYPHS: ReadonlySet<string> = new Set([...PRINTABLE_ASCII, ...VIETNAMESE_LETTERS, ...SUPPORTED_SYMBOLS, '\n']);
+export const SUPPORTED_GLYPHS: ReadonlySet<string> = new Set([
+  ...PRINTABLE_ASCII,
+  ...VIETNAMESE_LETTERS,
+  ...SUPPORTED_SYMBOLS,
+  '\n',
+]);
 
 /** Characters of `text` outside the supported set (each listed once), after NFC normalization. */
 export function unsupportedGlyphs(text: string): string[] {

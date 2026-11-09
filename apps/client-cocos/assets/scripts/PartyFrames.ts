@@ -9,6 +9,7 @@
  * only the invite buttons do.
  */
 import { core } from './vendor/vgtd.mjs';
+import { domIcon } from './DomIcons';
 
 const CLASS_COLOR: Record<number, string> = {
   1: '#e8c872',
@@ -168,7 +169,11 @@ export class PartyFrames {
         textShadow: '0 1px 2px #000',
       } as Partial<CSSStyleDeclaration>);
       const title = document.createElement('div');
-      title.textContent = `${m.isLeader ? '★ ' : ''}${m.name}`; // text only, never markup
+      // the leader's crown icon when the art is there (the ★ glyph otherwise); the name is text only, never markup
+      const crown = m.isLeader ? domIcon('hud', 'leader', 14) : null;
+      title.dataset.leader = m.isLeader ? '1' : '0';
+      if (crown) title.append(crown, m.name);
+      else title.textContent = `${m.isLeader ? '★ ' : ''}${m.name}`;
       title.style.color = CLASS_COLOR[m.classId] ?? '#f0f0f5';
       title.style.whiteSpace = 'nowrap';
       title.style.overflow = 'hidden';
@@ -185,7 +190,11 @@ export class PartyFrames {
     this.rows.replaceChildren(frag);
 
     this.card.style.display = inv ? 'block' : 'none';
-    if (inv) this.cardText.textContent = core.t('party.invite.banner', { from: inv.fromName }); // text only
+    if (inv) {
+      this.cardText.textContent = core.t('party.invite.banner', { from: inv.fromName }); // text only
+      const ic = domIcon('hud', 'party_invite', 18);
+      if (ic) this.cardText.prepend(ic);
+    }
   }
 
   destroy(): void {

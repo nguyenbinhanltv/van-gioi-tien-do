@@ -167,4 +167,3 @@ describe('UseGesture (double-tap / double-click uses an item, D90)', () => {
     expect(g.tap(5, 5100)).toBe(false);
   });
 });
-

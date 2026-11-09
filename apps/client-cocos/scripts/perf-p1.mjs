@@ -1,7 +1,7 @@
 // P1 exit-criteria measurement on Web (docs/10-mvp-scope.md section 12): draw calls, RAM, FPS with 20 NPC, initial package size.
 //
 //   npm run perf:p1 -w client-cocos -- [--skip-build] [--npcs 20] [--npcart chibi|placeholder] [--tier low|medium|high] [--seconds 20] [--warmup 6]
-//                                      [--route] [--zoom 1.5] [--mobs] [--draw-limit N] [--out <dir>] [--gate-fps]
+//                                      [--route] [--zoom 1.5] [--mobs] [--vfxdemo] [--class the-tu] [--draw-limit N] [--out <dir>] [--gate-fps]
 //
 // --route walks a scripted loop over the whole multi-chunk map (`?route=1`, default 90 s) and adds streaming numbers:
 // chunk node-tree build cost, chunks built / unloaded, frames with unresolved visible chunks, worst frame, hitches > 50 / 100 ms,
@@ -150,7 +150,7 @@ try {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}${mobs ? '&combat=1&mobdemo=1' : ''}${flag('drawdbg') ? '&drawdbg=1' : ''}`;
+  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}${mobs ? '&combat=1&mobdemo=1' : ''}${flag('drawdbg') ? '&drawdbg=1' : ''}${flag('vfxdemo') ? '&vfxdemo=1' : ''}${flag('vfxoff') ? '&vfxoff=1' : ''}${opt('class', '') ? `&class=${opt('class', '')}` : ''}`; // --vfxdemo: the hotbar keeps casting (skill VFX on screen); --class <id>
   console.log('opening', url);
   await page.goto(url);
   await page.waitForFunction('window.__vgtdPerf && window.__vgtdPerf.fps > 0 && window.__vgtdPerf.nodes > 100', {
@@ -160,6 +160,7 @@ try {
   tPlayable = Date.now();
   console.log(`running: warm-up ${warmup}s, sampling ${seconds}s (SwiftShader software WebGL)`);
   await sleep(warmup * 1000);
+  if (opt('shot', '')) await page.screenshot({ path: resolve(opt('shot', '')) }); // `--shot <file.png>`: viewport after the warm-up
   const heapAfterGc = async () => {
     await page.evaluate('window.gc && window.gc()');
     return (await page.metrics()).JSHeapUsedSize / MB;

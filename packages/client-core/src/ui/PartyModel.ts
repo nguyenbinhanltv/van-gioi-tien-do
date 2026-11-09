@@ -5,7 +5,13 @@
  */
 import { PARTY } from '@vgtd/shared';
 import { t, type StringKey } from '../i18n/strings.js';
-import { PartyReason, type PartyInviteMsg, type PartyResultMsg, type PartyStateMsg, type PartyVitalsMsg } from '@vgtd/protocol';
+import {
+  PartyReason,
+  type PartyInviteMsg,
+  type PartyResultMsg,
+  type PartyStateMsg,
+  type PartyVitalsMsg,
+} from '@vgtd/protocol';
 
 /** re-exported so engine scripts (which only see client-core) can name the ops */
 export { PartyOp } from '@vgtd/protocol';
@@ -127,7 +133,8 @@ export class PartyModel {
     const now = names(this.roster);
     const joined = this.roster.filter((x) => !was.has(x.entityId)).map((x) => x.name);
     const left = before.filter((x) => !now.has(x.entityId)).map((x) => x.name);
-    if (joined.length && left.length) return t('party.event.joined_and_left', { joined: joined.join(', '), left: left.join(', ') });
+    if (joined.length && left.length)
+      return t('party.event.joined_and_left', { joined: joined.join(', '), left: left.join(', ') });
     if (joined.length) return t('party.event.joined', { names: joined.join(', ') });
     if (left.length) return t('party.event.left', { names: left.join(', ') });
     return null;
@@ -161,4 +168,3 @@ export class PartyModel {
     this.version++;
   }
 }
-

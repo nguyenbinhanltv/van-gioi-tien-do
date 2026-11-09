@@ -5,9 +5,17 @@
  * The server is authoritative: the model never edits the bag locally. A move shows up when the next `inv_state` arrives.
  * In-game stone currencies only: no price / shop / real-money notions.
  */
-import { CURRENCIES, isUsableItem, itemDefById, type Currency, type DropItem } from '@vgtd/shared';
+import { CURRENCIES, isUsableItem, itemDefById, type Currency, type ItemKey } from '@vgtd/shared';
 import { t } from '../i18n/strings.js';
-import { InvOp, InvReason, type InvCmdMsg, type InvPending, type InvResultMsg, type InvSlot, type InvStateMsg } from '@vgtd/protocol';
+import {
+  InvOp,
+  InvReason,
+  type InvCmdMsg,
+  type InvPending,
+  type InvResultMsg,
+  type InvSlot,
+  type InvStateMsg,
+} from '@vgtd/protocol';
 
 export type WalletView = Readonly<Record<Currency, number>>;
 
@@ -15,8 +23,8 @@ export interface BagItemView {
   slot: number;
   kind: 'stack' | 'instance';
   defId: number;
-  /** `DropItem` key of the definition, undefined for an id this client does not know (a newer server) */
-  key: DropItem | undefined;
+  /** `ItemKey` of the definition, undefined for an id this client does not know (a newer server) */
+  key: ItemKey | undefined;
   quality: number;
   /** stacks: quantity; instances: 1 */
   qty: number;
@@ -95,8 +103,36 @@ export class BagModel {
     const s = this._slots[slot];
     if (!s) return null;
     const def = itemDefById(s.defId);
-    if (s.kind === 'stack') return { slot, kind: 'stack', defId: s.defId, key: def?.key, quality: s.quality, qty: s.qty, durability: null, bound: false };
-    return { slot, kind: 'instance', defId: s.defId, key: def?.key, quality: s.quality, qty: 1, durability: s.durability, bound: s.bound };
+    if (s.kind === 'stack')
+      return {
+        slot,
+        kind: 'stack',
+        defId: s.defId,
+        key: def?.key,
+        quality: s.quality,
+        qty: s.qty,
+        durability: null,
+        bound: false,
+      };
+    return {
+      slot,
+      kind: 'instance',
+      defId: s.defId,
+      key: def?.key,
+      quality: s.quality,
+      qty: 1,
+      durability: s.durability,
+      bound: s.bound,
+    };
+  }
+  /** Units of an item (any quality) across the bag slots: stacks count their quantity, instances count one each. */
+  count(defId: number): number {
+    let n = 0;
+    for (let i = 0; i < this.slotCount; i++) {
+      const it = this.itemAt(i);
+      if (it && it.defId === defId) n += it.qty;
+    }
+    return n;
   }
   freeSlots(): number {
     return this._slots.reduce((n, s) => n + (s ? 0 : 1), 0);

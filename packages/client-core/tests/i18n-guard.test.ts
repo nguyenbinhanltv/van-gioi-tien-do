@@ -16,7 +16,12 @@ import { placeholdersOf, sourceStrings, unsupportedGlyphs, VIETNAMESE_LETTERS } 
  */
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
-const ROOTS = ['packages/client-core/src', 'packages/client-combat/src', 'packages/client-world/src', 'apps/client-cocos/assets/scripts'];
+const ROOTS = [
+  'packages/client-core/src',
+  'packages/client-combat/src',
+  'packages/client-world/src',
+  'apps/client-cocos/assets/scripts',
+];
 /** Never player-facing: the vendored bundle, the animation viewer (a developer tool), the table itself. */
 const SKIP_DIRS = new Set(['node_modules', 'vendor', 'viewer', 'i18n']);
 /** Developer overlays (frame stats, batch-break report): English by design, not part of the game UI. */
@@ -26,7 +31,19 @@ const VIET = /[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúý�
 /** `x.string = ...` (Cocos Label), DOM text properties. */
 const SINKS = new Set(['string', 'textContent', 'innerText', 'placeholder']);
 /** Object properties that hold text shown to the player. */
-const TEXT_PROPS = new Set(['label', 'text', 'caption', 'title', 'hint', 'message', 'note', 'placeholder', 'tooltip', 'toast', 'name']);
+const TEXT_PROPS = new Set([
+  'label',
+  'text',
+  'caption',
+  'title',
+  'hint',
+  'message',
+  'note',
+  'placeholder',
+  'tooltip',
+  'toast',
+  'name',
+]);
 const TEXTY_CONST = /(TEXT|LABEL|CAPTION|MESSAGES?|TITLES?|NAMES)$/;
 const KEY_SHAPE = /^[a-z0-9_]+(\.[a-z0-9_]+)+$/;
 
@@ -48,8 +65,14 @@ function listFiles(): string[] {
   return out;
 }
 
-const isStr = (n: ts.Node): n is ts.StringLiteral | ts.NoSubstitutionTemplateLiteral | ts.TemplateHead | ts.TemplateMiddle | ts.TemplateTail =>
-  ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isTemplateHead(n) || ts.isTemplateMiddle(n) || ts.isTemplateTail(n);
+const isStr = (
+  n: ts.Node,
+): n is ts.StringLiteral | ts.NoSubstitutionTemplateLiteral | ts.TemplateHead | ts.TemplateMiddle | ts.TemplateTail =>
+  ts.isStringLiteral(n) ||
+  ts.isNoSubstitutionTemplateLiteral(n) ||
+  ts.isTemplateHead(n) ||
+  ts.isTemplateMiddle(n) ||
+  ts.isTemplateTail(n);
 
 interface Scan {
   violations: string[];
@@ -66,7 +89,8 @@ function scan(): Scan {
     const src = fs.readFileSync(file, 'utf8');
     const lines = src.split(/\r?\n/);
     const sf = ts.createSourceFile(file, src, ts.ScriptTarget.ES2020, true);
-    const exempt = (line: number): boolean => /i18n-exempt/.test(lines[line - 1] ?? '') || /i18n-exempt/.test(lines[line - 2] ?? '');
+    const exempt = (line: number): boolean =>
+      /i18n-exempt/.test(lines[line - 1] ?? '') || /i18n-exempt/.test(lines[line - 2] ?? '');
     const lineOf = (n: ts.Node): number => sf.getLineAndCharacterOfPosition(n.getStart()).line + 1;
     const report = (n: ts.Node, rule: string, text: string): void => {
       const line = lineOf(n);
@@ -89,7 +113,9 @@ function scan(): Scan {
       const p = lit.parent;
       return (
         !!p &&
-        ((ts.isBinaryExpression(p) && /^(===|!==|==|!=)$/.test(p.operatorToken.getText())) || ts.isCaseClause(p) || ts.isElementAccessExpression(p))
+        ((ts.isBinaryExpression(p) && /^(===|!==|==|!=)$/.test(p.operatorToken.getText())) ||
+          ts.isCaseClause(p) ||
+          ts.isElementAccessExpression(p))
       );
     };
     /** A literal is fine when it is a table key (a reference, not text), has <2 letters (a glyph, a unit), is compared, or sits inside t(). */
@@ -108,19 +134,39 @@ function scan(): Scan {
       if (ts.isCallExpression(n) && /^(t|core\.t)$/.test(n.expression.getText())) {
         const [k, p] = n.arguments;
         if (k && isStr(k)) {
-          const params = p && ts.isObjectLiteralExpression(p) && !p.properties.some((x) => ts.isSpreadAssignment(x))
-            ? p.properties.map((x) => (x.name && (ts.isIdentifier(x.name) || ts.isStringLiteral(x.name)) ? x.name.text : '?'))
-            : p ? null : [];
+          const params =
+            p && ts.isObjectLiteralExpression(p) && !p.properties.some((x) => ts.isSpreadAssignment(x))
+              ? p.properties.map((x) =>
+                  x.name && (ts.isIdentifier(x.name) || ts.isStringLiteral(x.name)) ? x.name.text : '?',
+                )
+              : p
+                ? null
+                : [];
           res.calls.push({ where: `${rel}:${lineOf(n)}`, key: k.text, params });
         }
       }
-      if (ts.isBinaryExpression(n) && n.operatorToken.kind === ts.SyntaxKind.EqualsToken && ts.isPropertyAccessExpression(n.left) && SINKS.has(n.left.name.text)) {
+      if (
+        ts.isBinaryExpression(n) &&
+        n.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+        ts.isPropertyAccessExpression(n.left) &&
+        SINKS.has(n.left.name.text)
+      ) {
         for (const lit of literalsIn(n.right)) flag(lit, 'sink');
       }
-      if (ts.isPropertyAssignment(n) && (ts.isIdentifier(n.name) || ts.isStringLiteral(n.name)) && TEXT_PROPS.has(n.name.text)) {
+      if (
+        ts.isPropertyAssignment(n) &&
+        (ts.isIdentifier(n.name) || ts.isStringLiteral(n.name)) &&
+        TEXT_PROPS.has(n.name.text)
+      ) {
         for (const lit of literalsIn(n.initializer)) flag(lit, 'prop', n.name.text);
       }
-      if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && TEXTY_CONST.test(n.name.text) && n.initializer && ts.isObjectLiteralExpression(n.initializer)) {
+      if (
+        ts.isVariableDeclaration(n) &&
+        ts.isIdentifier(n.name) &&
+        TEXTY_CONST.test(n.name.text) &&
+        n.initializer &&
+        ts.isObjectLiteralExpression(n.initializer)
+      ) {
         for (const lit of literalsIn(n.initializer)) flag(lit, 'text-table');
       }
       ts.forEachChild(n, visit);
@@ -134,7 +180,10 @@ const result = scan();
 
 describe('i18n guard (D104)', () => {
   it('no hard-coded player-facing string in client-core, client-combat, client-world and the Cocos client', () => {
-    expect(result.violations, `Move these into src/i18n/vi-VN.ts and use t(key), or add "// i18n-exempt: <reason>":\n${result.violations.join('\n')}`).toEqual([]);
+    expect(
+      result.violations,
+      `Move these into src/i18n/vi-VN.ts and use t(key), or add "// i18n-exempt: <reason>":\n${result.violations.join('\n')}`,
+    ).toEqual([]);
   });
 
   it('every t() key exists in the table and gets all its placeholders', () => {
@@ -146,7 +195,8 @@ describe('i18n guard (D104)', () => {
         continue;
       }
       if (c.params === null) continue; // spread / variable: cannot be checked here
-      for (const name of placeholdersOf(template)) if (!c.params.includes(name)) problems.push(`${c.where}: ${c.key} needs {${name}}`);
+      for (const name of placeholdersOf(template))
+        if (!c.params.includes(name)) problems.push(`${c.where}: ${c.key} needs {${name}}`);
     }
     expect(problems).toEqual([]);
   });

@@ -175,7 +175,12 @@ describe('ProgressionView (mirror of the server state)', () => {
 
   it('a rejected meditation shows its reason; accepted ones show nothing', () => {
     const { v } = view();
-    v.applyMeditateResult({ type: 'meditate_result', requestId: REQ(1), meditating: false, reason: ProgressionReason.Moving });
+    v.applyMeditateResult({
+      type: 'meditate_result',
+      requestId: REQ(1),
+      meditating: false,
+      reason: ProgressionReason.Moving,
+    });
     expect(v.currentToast()).toMatchObject({ tone: 'info', text: reasonText(ProgressionReason.Moving) });
     const quiet = view().v;
     quiet.applyMeditateResult({ type: 'meditate_result', requestId: REQ(1), meditating: true, reason: 0 });
@@ -183,7 +188,9 @@ describe('ProgressionView (mirror of the server state)', () => {
   });
 
   it('every wire reason has a Vietnamese text and unknown codes get a fallback', () => {
-    for (const k of Object.keys(ProgressionReason).filter((x) => /^\d+$/.test(x)).map(Number)) {
+    for (const k of Object.keys(ProgressionReason)
+      .filter((x) => /^\d+$/.test(x))
+      .map(Number)) {
       expect(k in PROGRESSION_REASON_KEY, `reason ${k}`).toBe(true);
       if (k !== ProgressionReason.Ok) expect(reasonText(k).length).toBeGreaterThan(5);
     }
@@ -192,7 +199,7 @@ describe('ProgressionView (mirror of the server state)', () => {
 
   it('requestIdFrom builds 32 lowercase hex characters from any rng and is deterministic', () => {
     let s = 7;
-    const rng = () => ((s = (s * 48271) % 2147483647) / 2147483647);
+    const rng = () => (s = (s * 48271) % 2147483647) / 2147483647;
     const a = requestIdFrom(rng);
     expect(a).toMatch(/^[0-9a-f]{32}$/);
     s = 7;
@@ -219,7 +226,14 @@ class FakeSocket implements SocketLike {
     if (typeof d === 'string')
       queueMicrotask(() =>
         this.onmessage?.({
-          data: JSON.stringify({ type: 'hello_ack', entityId: 1, serverTimeMs: 0, tickHz: 20, protocol: 4, mapTiles: 64 }),
+          data: JSON.stringify({
+            type: 'hello_ack',
+            entityId: 1,
+            serverTimeMs: 0,
+            tickHz: 20,
+            protocol: 4,
+            mapTiles: 64,
+          }),
         }),
       );
   }
@@ -248,7 +262,51 @@ async function connected(): Promise<{ net: NetClient; sock: FakeSocket }> {
   return { net, sock: FakeSocket.last };
 }
 
+describe('Nghiệp Lực / Đạo Tâm display (D103)', () => {
+  it('shows the Nghiệp band label and the Đạo Tâm the server sent; labels only', () => {
+    const { v } = view();
+    expect(v.standingText()).toBe('');
+    v.applyCharState(charState({ karma: 0 }));
+    expect(v.state).toMatchObject({ faction: 'tan_tu', factionLabel: 'Tán tu', daoTam: 60 }); // the start value until told otherwise
+    expect(v.standingText()).toBe('Tán tu (0) · Đạo Tâm 60');
+    v.applyDaoTam({ type: 'dao_tam', daoTam: 72 });
+    expect(v.standingText()).toBe('Tán tu (0) · Đạo Tâm 72');
+    v.applyCharState(charState({ karma: 350 }));
+    expect(v.standingText()).toBe('Chính đạo (+350) · Đạo Tâm 72');
+    v.applyCharState(charState({ karma: -700 }));
+    expect(v.state?.faction).toBe('ma');
+    expect(v.standingText()).toBe('Ma đạo (-700) · Đạo Tâm 72');
+    v.applyCharState(charState({ karma: -400 }));
+    expect(v.standingText()).toBe('Tà đạo (-400) · Đạo Tâm 72');
+  });
+
+  it('a dao_tam that arrives before the first char_state is kept and shown with it', () => {
+    const { v } = view();
+    v.applyDaoTam({ type: 'dao_tam', daoTam: 33 });
+    expect(v.state).toBeNull();
+    v.applyCharState(charState());
+    expect(v.state?.daoTam).toBe(33);
+  });
+
+  it('a progression command never depends on the faction (no faction-exclusive behaviour)', () => {
+    const { v } = view();
+    const ma = charState({ karma: -900, tuVi: 2000, tuViReq: 2000, flags: CHAR_FLAG.BREAKTHROUGH_READY });
+    v.applyCharState(ma);
+    const maCan = [v.canMeditate(), v.canBreakthrough()];
+    v.applyCharState({ ...ma, karma: 900 });
+    expect([v.canMeditate(), v.canBreakthrough()]).toEqual(maCan);
+  });
+});
+
 describe('NetClient progression hooks', () => {
+  it('delivers dao_tam to its own hook', async () => {
+    const { net, sock } = await connected();
+    const got: number[] = [];
+    net.progressionEvents = { onDaoTam: (m) => got.push(m.daoTam) };
+    sock.push({ type: 'dao_tam', daoTam: 61 });
+    expect(got).toEqual([61]);
+  });
+
   it('delivers char_state / meditate_result / breakthrough_result, survives `events` being replaced, and isolates a throwing hook', async () => {
     const { net, sock } = await connected();
     const log: string[] = [];

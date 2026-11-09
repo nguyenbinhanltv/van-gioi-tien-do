@@ -86,7 +86,18 @@ export function hasKey(key: string): key is StringKey {
  * `[! ... !]`; `{placeholders}` are kept intact. Install with `setStrings(pseudoLocalize(sourceStrings()), 'pseudo')`.
  */
 export function pseudoLocalize(table: StringTable): StringTable {
-  const map: Record<string, string> = { a: 'á', e: 'é', i: 'í', o: 'ó', u: 'ú', A: 'Á', E: 'É', I: 'Í', O: 'Ó', U: 'Ú' };
+  const map: Record<string, string> = {
+    a: 'á',
+    e: 'é',
+    i: 'í',
+    o: 'ó',
+    u: 'ú',
+    A: 'Á',
+    E: 'É',
+    I: 'Í',
+    O: 'Ó',
+    U: 'Ú',
+  };
   const out: Record<string, string> = {};
   for (const [k, v] of Object.entries(table)) {
     let s = '';
@@ -104,5 +115,23 @@ export function pseudoLocalize(table: StringTable): StringTable {
 
 /** Number text in the installed language (docs/19 §2.3: `vi-VN`, "1.200", "0,6"); `Intl` is used, never hand-made separators. */
 export function formatNumber(n: number, maximumFractionDigits = 0): string {
-  return new Intl.NumberFormat(currentLocale === 'pseudo' ? 'vi-VN' : currentLocale, { maximumFractionDigits }).format(n);
+  return new Intl.NumberFormat(currentLocale === 'pseudo' ? 'vi-VN' : currentLocale, { maximumFractionDigits }).format(
+    n,
+  );
+}
+
+/**
+ * A table of texts indexed by a wire code (refusal reasons): `reasonTexts({ [Reason.Busy]: 'craft.reason.busy', [Reason.Ok]: null })`.
+ * Each entry is a getter that runs `t(key, params())` at read time, so it follows the installed language (and `setStrings`) and the
+ * values can carry live numbers (`params`). `null` = no text ('').
+ */
+export function reasonTexts(
+  keys: Readonly<Record<number, StringKey | null>>,
+  params?: () => StringParams,
+): Readonly<Record<number, string>> {
+  const out: Record<number, string> = {};
+  for (const [code, key] of Object.entries(keys)) {
+    Object.defineProperty(out, code, { enumerable: true, get: () => (key === null ? '' : t(key, params?.())) });
+  }
+  return out;
 }

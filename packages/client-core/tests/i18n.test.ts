@@ -21,7 +21,9 @@ describe('t(key, params)', () => {
   it('returns the Vietnamese source text and fills named placeholders', () => {
     expect(t('chat.reason.rate_limited')).toBe('Bạn nói quá nhanh, hãy chờ giây lát.');
     expect(t('party.event.you_joined', { leader: 'Lan', size: 2, max: 5 })).toBe('Bạn đã vào tổ đội của Lan (2/5).');
-    expect(t('chat.line.whisper', { channel: 'Thì thầm', from: 'bạn', to: 'Minh', text: 'chào' })).toBe('[Thì thầm] bạn → Minh: chào');
+    expect(t('chat.line.whisper', { channel: 'Thì thầm', from: 'bạn', to: 'Minh', text: 'chào' })).toBe(
+      '[Thì thầm] bạn → Minh: chào',
+    );
   });
 
   it('keeps an unfilled placeholder visible and ignores extra params', () => {
@@ -95,7 +97,8 @@ describe('glyph set', () => {
 
   it('the full sheet has every supported glyph (ASCII, 146 letter forms, symbols)', () => {
     const sheet = allSupportedGlyphs();
-    for (const ch of 'aàảãáạăằẳẵắặâầẩẫấậeèẻẽéẹêềểễếệiìỉĩíịoòỏõóọôồổỗốộơờởỡớợuùủũúụưừửữứựyỳỷỹýỵđĐ') expect(sheet).toContain(ch);
+    for (const ch of 'aàảãáạăằẳẵắặâầẩẫấậeèẻẽéẹêềểễếệiìỉĩíịoòỏõóọôồổỗốộơờởỡớợuùủũúụưừửữứựyỳỷỹýỵđĐ')
+      expect(sheet).toContain(ch);
     expect(unsupportedGlyphs(sheet)).toEqual([]);
   });
 });

@@ -6,18 +6,18 @@ import { InputFrame, PlayerLocator, Rect, inRect } from './types.js';
  * AnchorLayout cung cấp các giá trị này (xem touchLayoutFromRects trong ui/AnchorLayout.ts).
  */
 export interface TouchLayout {
-  joystickZone: Rect;        // vùng ngón cái trái được phép gọi Joystick
+  joystickZone: Rect; // vùng ngón cái trái được phép gọi Joystick
   joystickRadius: number;
-  wheelCenter: Vec2;         // tâm nút đánh thường
+  wheelCenter: Vec2; // tâm nút đánh thường
   mainRadius: number;
-  arcRadius: number;         // bán kính vòng cung các nút kỹ năng
+  arcRadius: number; // bán kính vòng cung các nút kỹ năng
   skillRadius: number;
-  arcFromDeg: number;        // góc màn hình (y hướng xuống), ví dụ 165
-  arcToDeg: number;          // ví dụ 285
+  arcFromDeg: number; // góc màn hình (y hướng xuống), ví dụ 165
+  arcToDeg: number; // ví dụ 285
   dodgeButton: Vec2;
   flyButton: Vec2;
   smallRadius: number;
-  cancelRect: Rect;          // kéo kỹ năng vào đây để hủy
+  cancelRect: Rect; // kéo kỹ năng vào đây để hủy
   /** Bao nhiêu ô của thế giới ứng với 1 px kéo khi nhắm (theo zoom camera). */
   tilesPerPixel: number;
 }
@@ -30,7 +30,7 @@ const PAGE_SWIPE_DEG = 20;
 
 type ButtonId =
   | { kind: 'attack' }
-  | { kind: 'skill'; index: number }   // 0..4 trong trang hiện tại
+  | { kind: 'skill'; index: number } // 0..4 trong trang hiện tại
   | { kind: 'dodge' }
   | { kind: 'fly' };
 
@@ -43,9 +43,17 @@ interface Press {
   overCancel: boolean;
 }
 
-interface RingSwipe { pointerId: number; startAngle: number; angle: number }
+interface RingSwipe {
+  pointerId: number;
+  startAngle: number;
+  angle: number;
+}
 
-interface Joystick { pointerId: number; base: Vec2; knob: Vec2 }
+interface Joystick {
+  pointerId: number;
+  base: Vec2;
+  knob: Vec2;
+}
 
 export interface TouchVisualState {
   joystick: { base: Vec2; knob: Vec2; radius: number } | null;
@@ -75,9 +83,14 @@ export class TouchController {
   /** Camera zoom hiện tại: kéo nhắm cùng số px màn hình đi ít ô hơn khi phóng to (tilesPerPixel là ở zoom 1). */
   aimZoom = 1;
 
-  constructor(private readonly player: PlayerLocator, private readonly elementOrigin: () => Vec2) {}
+  constructor(
+    private readonly player: PlayerLocator,
+    private readonly elementOrigin: () => Vec2,
+  ) {}
 
-  setLayout(l: TouchLayout): void { this.layout = l; }
+  setLayout(l: TouchLayout): void {
+    this.layout = l;
+  }
 
   reset(): void {
     this.joy = null;
@@ -132,7 +145,14 @@ export class TouchController {
     const p = this.local(e);
     const btn = this.hitButton(p);
     if (btn) {
-      this.presses.set(e.pointerId, { pointerId: e.pointerId, button: btn, origin: p, current: p, aiming: false, overCancel: false });
+      this.presses.set(e.pointerId, {
+        pointerId: e.pointerId,
+        button: btn,
+        origin: p,
+        current: p,
+        aiming: false,
+        overCancel: false,
+      });
       return true;
     }
     if (this.onRing(p)) {
@@ -141,7 +161,7 @@ export class TouchController {
       return true;
     }
     if (!this.joy && inRect(this.layout.joystickZone, p.x, p.y)) {
-      this.joy = { pointerId: e.pointerId, base: p, knob: p };   // Joystick hiện đúng chỗ ngón tay
+      this.joy = { pointerId: e.pointerId, base: p, knob: p }; // Joystick hiện đúng chỗ ngón tay
       return true;
     }
     return false;
@@ -152,13 +172,15 @@ export class TouchController {
     const p = this.local(e);
     if (this.joy && this.joy.pointerId === e.pointerId) {
       const R = this.layout.joystickRadius;
-      let dx = p.x - this.joy.base.x, dy = p.y - this.joy.base.y;
+      let dx = p.x - this.joy.base.x,
+        dy = p.y - this.joy.base.y;
       const len = Math.hypot(dx, dy);
       if (len > R) {
         // Joystick nổi: đế đi theo ngón tay khi kéo quá bán kính
         const k = (len - R) / len;
         this.joy.base = { x: this.joy.base.x + dx * k, y: this.joy.base.y + dy * k };
-        dx = p.x - this.joy.base.x; dy = p.y - this.joy.base.y;
+        dx = p.x - this.joy.base.x;
+        dy = p.y - this.joy.base.y;
       }
       this.joy.knob = { x: this.joy.base.x + dx, y: this.joy.base.y + dy };
       return;
@@ -175,7 +197,10 @@ export class TouchController {
   }
 
   pointerUp(e: PointerEvent): void {
-    if (this.joy && this.joy.pointerId === e.pointerId) { this.joy = null; return; }
+    if (this.joy && this.joy.pointerId === e.pointerId) {
+      this.joy = null;
+      return;
+    }
     const press = this.presses.get(e.pointerId);
     if (press) {
       this.presses.delete(e.pointerId);
@@ -184,7 +209,7 @@ export class TouchController {
     }
     if (this.ring && this.ring.pointerId === e.pointerId) {
       let d = this.ring.angle - this.ring.startAngle;
-      d = ((d + 540) % 360) - 180;                          // về khoảng (−180°, 180°]
+      d = ((d + 540) % 360) - 180; // về khoảng (−180°, 180°]
       if (Math.abs(d) >= PAGE_SWIPE_DEG) this.page = (this.page + (d > 0 ? 1 : SKILL_PAGES - 1)) % SKILL_PAGES;
       this.ring = null;
     }
@@ -192,11 +217,23 @@ export class TouchController {
 
   private release(p: Press): void {
     const b = p.button;
-    if (b.kind === 'dodge') { this.pendingDodge = true; return; }
-    if (b.kind === 'fly') { this.pendingFly = true; return; }
-    if (p.overCancel) { this.pendingCancel = true; return; }
+    if (b.kind === 'dodge') {
+      this.pendingDodge = true;
+      return;
+    }
+    if (b.kind === 'fly') {
+      this.pendingFly = true;
+      return;
+    }
+    if (p.overCancel) {
+      this.pendingCancel = true;
+      return;
+    }
     const slot = b.kind === 'attack' ? 0 : 1 + this.page * SKILLS_PER_PAGE + b.index;
-    if (!p.aiming) { this.pendingCasts.push({ slot }); return; }      // chạm nhanh: tự nhắm
+    if (!p.aiming) {
+      this.pendingCasts.push({ slot });
+      return;
+    } // chạm nhanh: tự nhắm
     // Kéo rồi kéo ngược về nút = hủy (không thi triển): docs/05 "kéo ngược để hủy"
     if (this.backAtOrigin(p)) return;
     this.pendingCasts.push({ slot, aimTile: this.aimTileOf(p) });
@@ -204,9 +241,10 @@ export class TouchController {
 
   /** Kéo để nhắm: hướng kéo trên màn hình -> hướng trong không gian ô, độ dài kéo -> tầm. */
   private aimTileOf(p: Press): TilePos {
-    const dx = p.current.x - p.origin.x, dy = p.current.y - p.origin.y;
+    const dx = p.current.x - p.origin.x,
+      dy = p.current.y - p.origin.y;
     const dir = screenDirToTileDir(dx, dy);
-    const range = Math.hypot(dx, dy) * this.layout!.tilesPerPixel / (this.aimZoom > 0 ? this.aimZoom : 1);
+    const range = (Math.hypot(dx, dy) * this.layout!.tilesPerPixel) / (this.aimZoom > 0 ? this.aimZoom : 1);
     const pos = this.player.position();
     return { i: pos.i + dir.i * range, j: pos.j + dir.j * range };
   }
@@ -223,7 +261,8 @@ export class TouchController {
 
   update(frame: InputFrame): void {
     if (this.joy && this.layout) {
-      const dx = this.joy.knob.x - this.joy.base.x, dy = this.joy.knob.y - this.joy.base.y;
+      const dx = this.joy.knob.x - this.joy.base.x,
+        dy = this.joy.knob.y - this.joy.base.y;
       const m = Math.min(1, Math.hypot(dx, dy) / this.layout.joystickRadius);
       if (m > DEAD_ZONE) {
         const dir = screenDirToTileDir(dx, dy);
@@ -248,8 +287,11 @@ export class TouchController {
     const buttons: TouchVisualState['buttons'] = [
       { id: 'attack', center: L.wheelCenter, radius: L.mainRadius, pressed: isPressed({ kind: 'attack' }), slot: 0 },
       ...this.skillCenters().map((c, k) => ({
-        id: `skill-${k}`, center: c, radius: L.skillRadius,
-        pressed: isPressed({ kind: 'skill', index: k }), slot: 1 + this.page * SKILLS_PER_PAGE + k,
+        id: `skill-${k}`,
+        center: c,
+        radius: L.skillRadius,
+        pressed: isPressed({ kind: 'skill', index: k }),
+        slot: 1 + this.page * SKILLS_PER_PAGE + k,
       })),
       { id: 'dodge', center: L.dodgeButton, radius: L.smallRadius, pressed: isPressed({ kind: 'dodge' }), slot: null },
       { id: 'fly', center: L.flyButton, radius: L.smallRadius, pressed: isPressed({ kind: 'fly' }), slot: null },

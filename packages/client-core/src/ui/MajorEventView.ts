@@ -123,7 +123,11 @@ export class MajorEventView {
     else lines.push(t('major.result.died', { tier: TIER_KEY[m.tier] ? t(TIER_KEY[m.tier]!) : '?' }));
     if (m.expLostPct > 0) lines.push(t('major.result.exp_lost', { pct: m.expLostPct }));
     if (m.lockMin > 0)
-      lines.push(m.lockMin >= 120 ? t('major.result.lock_hours', { n: Math.round(m.lockMin / 60) }) : t('major.result.lock_minutes', { n: m.lockMin }));
+      lines.push(
+        m.lockMin >= 120
+          ? t('major.result.lock_hours', { n: Math.round(m.lockMin / 60) })
+          : t('major.result.lock_minutes', { n: m.lockMin }),
+      );
     return { lines, tone: 'bad' };
   }
 }

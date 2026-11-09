@@ -28,8 +28,14 @@ export function statusRowItems(own: OwnStatusView, shield: number): StatusRowIte
   const out: StatusRowItem[] = [];
   if (own.rootMs > 0) out.push({ id: 'root', label: t('status.root'), secs: Math.ceil(own.rootMs / 1000), note: '' });
   if (own.slowMs > 0)
-    out.push({ id: 'slow', label: t('status.slow'), secs: Math.ceil(own.slowMs / 1000), note: t('status.slow_note', { pct: Math.max(0, 100 - own.slowPct) }) });
-  if (own.poisonMs > 0) out.push({ id: 'poison', label: t('status.poison'), secs: Math.ceil(own.poisonMs / 1000), note: '' });
+    out.push({
+      id: 'slow',
+      label: t('status.slow'),
+      secs: Math.ceil(own.slowMs / 1000),
+      note: t('status.slow_note', { pct: Math.max(0, 100 - own.slowPct) }),
+    });
+  if (own.poisonMs > 0)
+    out.push({ id: 'poison', label: t('status.poison'), secs: Math.ceil(own.poisonMs / 1000), note: '' });
   if (shield > 0) out.push({ id: 'shield', label: t('status.shield'), secs: null, note: String(Math.round(shield)) });
   return out;
 }
@@ -40,5 +46,6 @@ export function statusMaskGlyphs(mask: number): string {
   if (mask & StatusBit.Root) parts.push(t('status.root'));
   if (mask & StatusBit.Slow) parts.push(t('status.slow'));
   if (mask & StatusBit.Poison) parts.push(t('status.poison'));
+  if (mask & StatusBit.Stun) parts.push(t('status.stun'));
   return parts.join(' ');
 }
