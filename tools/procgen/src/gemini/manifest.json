@@ -1025,6 +1025,32 @@
       "p_spark"
     ]
   },
+  "vfx": {
+    "_doc": "PART 3 group Q: vfx/<class>.png, 3 panels side by side on BLACK (projectile, impact burst, ground ring), luminance -> alpha, full colour kept. Panel k is trimmed and scaled to a longest side of panels[k].size2 px @2x (@1x half); the projectile is rotated to point +x. Packed into the PARTICLE atlas as vfx_<class>_<panel>; registry in ArtRegistry.ts, presets in SkillVfxPresets.ts.",
+    "classes": [
+      "kiem",
+      "phap",
+      "the",
+      "dan_phu",
+      "thuong",
+      "dao"
+    ],
+    "panels": [
+      {
+        "id": "proj",
+        "size2": 256,
+        "rotate": true
+      },
+      {
+        "id": "burst",
+        "size2": 320
+      },
+      {
+        "id": "ring",
+        "size2": 512
+      }
+    ]
+  },
   "keyArt": {
     "_doc": "key_art: login backdrop (opaque, w x h design px) and emblem (keyed, trimmed, longest side px @2x; @1x half). Loaded as single textures, not atlased.",
     "backdrop": {

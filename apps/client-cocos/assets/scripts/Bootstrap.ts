@@ -410,6 +410,10 @@ export class Bootstrap extends Component {
     // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
     (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
       this.combat?.setEnemyPhase(entityId, phase, ms);
+    if (new URLSearchParams(location.search).get('vfxdemo') !== null) this.combat.startVfxDemo(); // casts the hotbar in turn: art review / perf gate
+    // debug hook: window.__vgtdVfx(slot) casts hotbar slot `slot` (0-based) through the normal combat path
+    (globalThis as unknown as Record<string, unknown>).__vgtdVfx = (slot: number) => this.combat?.castFromWheel(slot);
+    (globalThis as unknown as Record<string, unknown>).__vgtdVfxLive = () => this.combat?.vfxLive ?? 0;
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 

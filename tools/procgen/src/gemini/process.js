@@ -651,7 +651,11 @@ function processMob(src, box, opts = {}) {
   const trimmed = crop(image, bb.x, bb.y, bb.w, bb.h);
   // `opts.height`: scale to this height instead (front-facing characters are sized by how tall they stand);
   // `opts.area`: scale so the sprite covers that many px (a wide crouched pose must not look smaller than the tall one it replaces)
-  const k = opts.height ? opts.height / bb.h : opts.area ? Math.sqrt(opts.area / (bb.w * bb.h)) : box / Math.max(bb.w, bb.h);
+  const k = opts.height
+    ? opts.height / bb.h
+    : opts.area
+      ? Math.sqrt(opts.area / (bb.w * bb.h))
+      : box / Math.max(bb.w, bb.h);
   const x1 = bleedColor(resizeArea(trimmed, Math.max(2, Math.round(bb.w * k)), Math.max(2, Math.round(bb.h * k))));
   return { x1, pivot: footPivot(trimmed), sparkle };
 }
@@ -707,6 +711,255 @@ function processParticle(src, size2 = 256) {
   const x2 = bleedColor(resizeArea(sq, size2, size2));
   const x1 = bleedColor(resizeArea(sq, size2 / 2, size2 / 2));
   return { x2, x1, sparkle, gain };
+}
+
+/**
+ * Heading of a projectile picture: the alpha-weighted principal axis, oriented towards the denser end (a comet / bolt has a bulky
+ * head and a thin tail). Returns the angle in radians in image space (y down) of the direction from the tail to the head.
+ */
+function projectileHeading(img) {
+  const { width: W, height: H, data: d } = img;
+  let m = 0,
+    mx = 0,
+    my = 0;
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const a = d[(y * W + x) * 4 + 3];
+      if (a < 8) continue;
+      m += a;
+      mx += a * x;
+      my += a * y;
+    }
+  mx /= m;
+  my /= m;
+  let sxx = 0,
+    syy = 0,
+    sxy = 0;
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const a = d[(y * W + x) * 4 + 3];
+      if (a < 8) continue;
+      sxx += a * (x - mx) ** 2;
+      syy += a * (y - my) ** 2;
+      sxy += a * (x - mx) * (y - my);
+    }
+  const axis = 0.5 * Math.atan2(2 * sxy, sxx - syy);
+  const ux = Math.cos(axis),
+    uy = Math.sin(axis);
+  // projections along the axis: the head is the end whose outer quarter holds more mass
+  let lo = Infinity,
+    hi = -Infinity;
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++)
+      if (d[(y * W + x) * 4 + 3] >= 8) {
+        const t = (x - mx) * ux + (y - my) * uy;
+        if (t < lo) lo = t;
+        if (t > hi) hi = t;
+      }
+  let massLo = 0,
+    massHi = 0;
+  const span = hi - lo;
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const a = d[(y * W + x) * 4 + 3];
+      if (a < 8) continue;
+      const t = (x - mx) * ux + (y - my) * uy;
+      if (t < lo + span * 0.25) massLo += a;
+      else if (t > hi - span * 0.25) massHi += a;
+    }
+  return massHi >= massLo ? axis : axis + Math.PI;
+}
+
+/** Rotates by `ang` radians (counter-clockwise on screen, y down) around the centre onto an enlarged canvas (bilinear, premultiplied). */
+function rotateImage(src, ang) {
+  const { width: W, height: H } = src;
+  const c = Math.abs(Math.cos(ang)),
+    s = Math.abs(Math.sin(ang));
+  const nw = Math.ceil(W * c + H * s),
+    nh = Math.ceil(W * s + H * c);
+  const out = new Image(nw, nh);
+  const cos = Math.cos(ang),
+    sin = Math.sin(ang);
+  for (let y = 0; y < nh; y++)
+    for (let x = 0; x < nw; x++) {
+      const dx = x + 0.5 - nw / 2,
+        dy = y + 0.5 - nh / 2;
+      // inverse mapping
+      const sx = dx * cos - dy * sin + W / 2 - 0.5;
+      const sy = dx * sin + dy * cos + H / 2 - 0.5;
+      const x0 = Math.floor(sx),
+        y0 = Math.floor(sy),
+        fx = sx - x0,
+        fy = sy - y0;
+      let r = 0,
+        g = 0,
+        b = 0,
+        a = 0;
+      for (let j = 0; j < 2; j++)
+        for (let i = 0; i < 2; i++) {
+          const xx = x0 + i,
+            yy = y0 + j;
+          if (xx < 0 || yy < 0 || xx >= W || yy >= H) continue;
+          const w = (i ? fx : 1 - fx) * (j ? fy : 1 - fy);
+          const k = (yy * W + xx) * 4,
+            al = src.data[k + 3] / 255;
+          r += src.data[k] * al * w;
+          g += src.data[k + 1] * al * w;
+          b += src.data[k + 2] * al * w;
+          a += al * w;
+        }
+      if (a > 0.002) out.setPixel(x, y, r / a, g / a, b / a, a * 255);
+    }
+  return out;
+}
+
+/**
+ * Cut positions between `n` side-by-side panels: for each boundary near k * W / n the column (within +-14 % of W / n) with the
+ * least alpha mass, so a panel's glow is not sliced where the neighbouring art is faint.
+ */
+function panelCuts(img, n) {
+  const { width: W, height: H, data: d } = img;
+  const col = new Float64Array(W);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) col[x] += d[(y * W + x) * 4 + 3];
+  const cuts = [0];
+  for (let k = 1; k < n; k++) {
+    const mid = Math.round((k * W) / n),
+      win = Math.round((0.14 * W) / n);
+    let best = mid,
+      bv = Infinity;
+    for (let x = mid - win; x <= mid + win; x++) {
+      // a 9 px smoothed column sum so one thin streak does not decide
+      let v = 0;
+      for (let q = -4; q <= 4; q++) v += col[Math.min(W - 1, Math.max(0, x + q))];
+      if (v < bv) {
+        bv = v;
+        best = x;
+      }
+    }
+    cuts.push(best);
+  }
+  cuts.push(W);
+  return cuts;
+}
+
+/**
+ * Keeps the main artwork of a cut panel: alpha pixels are grouped into blobs (dilated 3 cells on a 1/4 grid so a glow and its sparks
+ * stay one blob); blobs holding at least 12 % of the biggest blob's mass are kept, the rest (pieces of the neighbouring panel's art
+ * that cross the cut) are erased.
+ */
+function keepMainBlobs(img) {
+  const { width: W, height: H, data: d } = img;
+  const S = 4,
+    gw = Math.ceil(W / S),
+    gh = Math.ceil(H / S);
+  const mass = new Float64Array(gw * gh);
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) mass[Math.floor(y / S) * gw + Math.floor(x / S)] += d[(y * W + x) * 4 + 3];
+  const solid = new Uint8Array(gw * gh);
+  for (let i = 0; i < solid.length; i++) solid[i] = mass[i] > 40 * S ? 1 : 0;
+  const R = 3;
+  const grown = new Uint8Array(gw * gh);
+  for (let y = 0; y < gh; y++)
+    for (let x = 0; x < gw; x++)
+      if (solid[y * gw + x])
+        for (let j = -R; j <= R; j++)
+          for (let i = -R; i <= R; i++) {
+            const xx = x + i,
+              yy = y + j;
+            if (xx >= 0 && yy >= 0 && xx < gw && yy < gh) grown[yy * gw + xx] = 1;
+          }
+  const label = new Int32Array(gw * gh).fill(-1);
+  const sums = [];
+  const stack = [];
+  for (let start = 0; start < grown.length; start++) {
+    if (!grown[start] || label[start] >= 0) continue;
+    const id = sums.length;
+    let total = 0;
+    stack.push(start);
+    label[start] = id;
+    while (stack.length) {
+      const c = stack.pop();
+      total += mass[c];
+      const cx = c % gw,
+        cy = (c / gw) | 0;
+      for (const [ox, oy] of [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+      ]) {
+        const nx = cx + ox,
+          ny = cy + oy;
+        if (nx < 0 || ny < 0 || nx >= gw || ny >= gh) continue;
+        const ni = ny * gw + nx;
+        if (grown[ni] && label[ni] < 0) {
+          label[ni] = id;
+          stack.push(ni);
+        }
+      }
+    }
+    sums.push(total);
+  }
+  const big = Math.max(...sums);
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const l = label[Math.floor(y / S) * gw + Math.floor(x / S)];
+      if (l < 0 || sums[l] < 0.12 * big) d[(y * W + x) * 4 + 3] = 0;
+    }
+  return img;
+}
+
+/**
+ * PART 3 group Q: a skill VFX sheet (black background, N panels side by side: projectile / impact burst / ground ring, Gemini mark
+ * bottom-right). Same luminance -> alpha key as the particles (colour kept at full brightness, alpha = max channel, so on a dark
+ * ground it reproduces the picture and over bright ground it reads as a soft translucent shape; the art keeps its own colours).
+ * Each panel is cut out (equal-width columns), trimmed, and scaled so its longest side is `sizes[k]` px @2x (@1x half). Panels
+ * flagged in `rotate` (the projectile) are turned so they point to +x (the tail on the left), which is what `face` in the VFX presets
+ * expects.
+ * @returns {{ panels: Array<{ x2: Image, x1: Image }>, sparkle: object }}
+ */
+function processVfxSheet(src, sizes, rotate = []) {
+  const img = new Image(src.width, src.height);
+  img.data.set(src.data);
+  const sparkle = removeSparkle(img, isDark);
+  const { width: W, height: H, data: d } = img;
+  const keyed = new Image(W, H);
+  const o = keyed.data;
+  for (let p = 0; p < W * H; p++) {
+    const i = p * 4;
+    const m = Math.max(d[i], d[i + 1], d[i + 2]);
+    const a = Math.min(1, Math.max(0, (m - 6) / 249));
+    if (a <= 0.004) continue;
+    const k = 255 / Math.max(m, 1);
+    o[i] = Math.min(255, d[i] * k);
+    o[i + 1] = Math.min(255, d[i + 1] * k);
+    o[i + 2] = Math.min(255, d[i + 2] * k);
+    o[i + 3] = Math.round(a * 255);
+  }
+  const n = sizes.length;
+  const panels = [];
+  const cuts = panelCuts(keyed, n);
+  for (let k = 0; k < n; k++) {
+    let panel = keepMainBlobs(crop(keyed, cuts[k], 0, cuts[k + 1] - cuts[k], H));
+    if (rotate[k]) {
+      const first = alphaBBox(panel, 10);
+      if (!first) throw new Error(`empty VFX panel ${k}`);
+      panel = crop(panel, first.x, first.y, first.w, first.h);
+      panel = rotateImage(panel, projectileHeading(panel)); // the content turns by -heading: heading -> +x
+    }
+    const bb = alphaBBox(panel, 10);
+    if (!bb) throw new Error(`empty VFX panel ${k}`);
+    const trimmed = crop(panel, bb.x, bb.y, bb.w, bb.h);
+    const long = Math.max(trimmed.width, trimmed.height);
+    const sc = sizes[k] / long;
+    const w2 = Math.max(1, Math.round(trimmed.width * sc)),
+      h2 = Math.max(1, Math.round(trimmed.height * sc));
+    panels.push({
+      x2: bleedColor(resizeArea(trimmed, w2, h2)),
+      x1: bleedColor(resizeArea(trimmed, Math.max(1, Math.round(w2 / 2)), Math.max(1, Math.round(h2 / 2)))),
+    });
+  }
+  return { panels, sparkle };
 }
 
 /**
@@ -796,9 +1049,7 @@ function removeBackdropMark(img) {
         for (let c = 0; c < 3; c++) mean[c] += px[idx(x, y) * 3 + c];
         nb++;
       }
-    if (nb)
-      for (let k = 0; k < S * S; k++)
-        if (grown[k]) for (let c = 0; c < 3; c++) px[k * 3 + c] = mean[c] / nb;
+    if (nb) for (let k = 0; k < S * S; k++) if (grown[k]) for (let c = 0; c < 3; c++) px[k * 3 + c] = mean[c] / nb;
   }
   for (let it = 0; it < 600; it++)
     for (let y = 1; y < S - 1; y++)
@@ -806,7 +1057,11 @@ function removeBackdropMark(img) {
         if (!grown[idx(x, y)]) continue;
         for (let c = 0; c < 3; c++)
           px[idx(x, y) * 3 + c] =
-            (px[idx(x - 1, y) * 3 + c] + px[idx(x + 1, y) * 3 + c] + px[idx(x, y - 1) * 3 + c] + px[idx(x, y + 1) * 3 + c]) / 4;
+            (px[idx(x - 1, y) * 3 + c] +
+              px[idx(x + 1, y) * 3 + c] +
+              px[idx(x, y - 1) * 3 + c] +
+              px[idx(x, y + 1) * 3 + c]) /
+            4;
       }
   for (let y = 0; y < S; y++)
     for (let x = 0; x < S; x++) {
@@ -866,6 +1121,11 @@ module.exports = {
   processMob,
   isDark,
   processParticle,
+  processVfxSheet,
+  panelCuts,
+  keepMainBlobs,
+  projectileHeading,
+  rotateImage,
   processBackdrop,
   removeBackdropMark,
   processEmblem,

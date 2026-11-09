@@ -1,5 +1,20 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## GEMINI-VFX — hiệu ứng kỹ năng 6 lớp (PART 3 nhóm Q) do chủ dự án tự tạo bằng Google Gemini (2026-11-10)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-10, prompts per the orchestrator prompt pack part 3 (nhóm Q); chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. Mỗi lớp một ảnh 2752×1536, nền ĐEN, 3 khung cạnh nhau (đạn bay / nổ khi trúng / vòng mặt đất), dấu ✦ Gemini ở góc dưới-phải. Sao nguyên byte vào `assets-src/gemini/vfx/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba.
+
+**Xử lý (tái lập được, `npm run gen:gemini -w @vgtd/procgen`):** xoá ✦ (cùng bộ dò với particle), khoá độ sáng -> alpha (giữ nguyên màu), cắt 3 khung ở cột ít alpha nhất gần 1/3 và 2/3, bỏ mảnh tranh của khung bên cạnh lọt qua đường cắt (chỉ giữ cụm lớn), cắt sát, co về cạnh dài 256 / 320 / 512 px @2x (@1x một nửa); đạn xoay cho đầu hướng +x. Đóng chung trang atlas hạt (`atl_ptcl_*`) với tên `vfx_<lớp>_<proj|burst|ring>`; bảng preset `SkillVfxPresets.ts` (`stillsPreset`).
+
+| Tệp nguồn (nguyên byte)             | SHA-256 (12 ký tự đầu) |
+| ----------------------------------- | ---------------------- |
+| `assets-src/gemini/vfx/kiem.png`    | `28c36844e920`         |
+| `assets-src/gemini/vfx/phap.png`    | `811b795d95a2`         |
+| `assets-src/gemini/vfx/the.png`     | `65de666d5193`         |
+| `assets-src/gemini/vfx/dan_phu.png` | `07b0fe5e06fa`         |
+| `assets-src/gemini/vfx/thuong.png`  | `ba0b2bbe33d6`         |
+| `assets-src/gemini/vfx/dao.png`     | `d7744f04acfa`         |
+
 ## GEMINI-PART3 — công trình tông môn, icon bí tịch / luyện đan và icon HUD / xã hội do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per orchestrator prompt pack (nhóm N, O, P). Ảnh là owner-provided Gemini exports (nằm ngoài repo ở thư mục nhập của chủ dự án), sao nguyên byte vào `assets-src/gemini/{sect,items2,ui2}/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba. Chủ dự án không lưu prompt gốc từng ảnh (như các phần trước): chỉ còn pack prompt của orchestrator làm đặc tả. Mọi ảnh 2048×2048 nền magenta, dấu ✦ Gemini ở góc dưới-phải.
