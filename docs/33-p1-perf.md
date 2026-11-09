@@ -59,6 +59,8 @@ Cách sửa: macro `BATCHER2D_MEM_INCREMENT` = **2048** (KB) trong `apps/client-
 - **Giới hạn trên 2303 KB**: chỉ số đỉnh trong bộ đệm là `Uint16` (tối đa 65535 đỉnh; đỉnh 36 byte). 4096 KB cho 116508 đỉnh và vượt giới hạn, nên KHÔNG tăng quá ~2300.
 - **Bộ nhớ**: mỗi bộ đệm = 2048 KB đỉnh + 455 KB chỉ số (`IB_SCALE` 4 × 2 B) ≈ 2,5 MB trên CPU và cùng cỡ đó trên GPU. Cảnh 14 quái + 20 NPC cần khoảng 80 nghìn đỉnh: 2 bộ đệm (~5 MB CPU + ~5 MB GPU), so với ~20 bộ đệm × 176 KB (~3,5 MB) ở mặc định; chênh vài MB là do làm tròn lên bộ đệm cuối. Đường RAM của cổng đo (heap JS + texture) không đổi trong sai số (160-173 MB cả hai bên); ArrayBuffer nằm ngoài heap JS nên số này không thấy phần chênh ~1-3 MB.
 
+**Còn mở: chưa kiểm tra bộ nhớ trên máy mobile thật.** Phần chênh bộ nhớ ở trên (~1-3 MB CPU + GPU) là số TÍNH, không phải số đo: ArrayBuffer nằm ngoài heap JS nên cổng đo không thấy. Cần đo trên thiết bị thật (Android tầm thấp và iOS Safari: bộ nhớ GPU của hai bộ đệm 2048 KB, nguy cơ bị hệ điều hành đóng tab) trước khi coi là đã chốt; xem mục "Cách đo trên máy mobile thật" bên dưới và `docs/OPEN-ITEMS.md`.
+
 Đo sạch (hai bản dựng release trên **stage mới** cho mỗi bên, cùng commit, chỉ khác dòng macro; `--mobs`, tối đa draw call 30 giây): zoom 1,5: **64 -> 38**; zoom 1,0: **70 -> 44**; zoom 2,0: **59 -> 35**. Kịch bản tung chiêu liên tục (nhánh PR #274, `--casting`): **70-76 -> 40-47** (zoom 1,5) trước khi gom tiếp bất cứ thứ gì khác. Lưu ý đo: bản dựng release chạy trên bản sao `build/stage-release` có Library riêng; muốn so sánh hai giá trị macro phải dùng `VGTD_STAGE_DIR` mới cho từng bên, nếu không bản dựng cũ có thể giữ cấu hình cũ.
 
 ## Cách đo trên Web (headless)
