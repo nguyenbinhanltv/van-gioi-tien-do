@@ -56,6 +56,8 @@ export enum CraftReason {
   Dead = 14,
   /** cancelled because the player left the furnace range or a requirement stopped holding */
   Interrupted = 15,
+  /** the requestId was already used by this character (a command id is single-use) */
+  Replayed = 16,
 }
 
 /** Value used as `index` for the answer to a command (a real craft index is 0..QUEUE_MAX-1). */

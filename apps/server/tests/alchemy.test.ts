@@ -406,6 +406,100 @@ describe('replay and atomicity', () => {
   });
 });
 
+describe('the client can never pick or repeat a roll (review: replayable requestId)', () => {
+  it('the outcome does not depend on the client requestId: two requests with different ids on the same server state roll identically', async () => {
+    const roll = async (rid: string): Promise<number[]> => {
+      const r = await rig({ seed: 31 });
+      r.grant(100, 2000);
+      r.cmd(CraftOp.Start, 'pill_hoi_huyet_dan', 6, rid);
+      r.run(ALCHEMY.CRAFT_MS * 6 + 500);
+      return r.log.map((e) => e.drawA);
+    };
+    const a = await roll(hex(1));
+    const b = await roll(hex(999_999));
+    expect(a).toHaveLength(6);
+    expect(a).toEqual(b);
+  });
+
+  it('reusing a requestId after the answer cache forgot it is refused: no new draws, no mastery, nothing consumed', async () => {
+    const r = await rig();
+    r.grant(200, 3000);
+    r.cmd(CraftOp.Start, 'pill_hoi_huyet_dan', 1, hex(500));
+    r.run(ALCHEMY.CRAFT_MS + 300);
+    expect(r.log).toHaveLength(1);
+    const state = {
+      mat: r.mat(),
+      stones: r.stones(),
+      mastery: r.prog.masteryOf(r.a.id, 'pill_hoi_huyet_dan'),
+      draws: r.log[0]!.drawA,
+    };
+    // evict the stored answer: more than ANSWERS_KEPT other commands (cancels with fresh ids also fill it)
+    for (let k = 0; k < 40; k++) {
+      r.run(1100); // keep under the command rate limit
+      r.cmd(CraftOp.Cancel, undefined, 1, hex(1000 + k));
+    }
+    const before = r.a.t.results().length;
+    r.cmd(CraftOp.Start, 'pill_hoi_huyet_dan', 1, hex(500));
+    expect(r.a.t.results().length).toBe(before + 1);
+    expect(last(r.a.t.results())).toMatchObject({ outcome: CraftOutcome.Rejected, reason: CraftReason.Replayed });
+    r.run(ALCHEMY.CRAFT_MS * 2);
+    expect(r.log).toHaveLength(1);
+    expect({
+      mat: r.mat(),
+      stones: r.stones(),
+      mastery: r.prog.masteryOf(r.a.id, 'pill_hoi_huyet_dan'),
+      draws: r.log[0]!.drawA,
+    }).toEqual(state);
+  });
+
+  it('a relog or a restart does not reset it: the used ids and the roll counter are saved with the character', async () => {
+    const store = new InMemoryProgressionStore();
+    const inv = new InventoryService();
+    const first = await rig({ store, inv, seed: 5 });
+    first.grant(300, 3000);
+    first.cmd(CraftOp.Start, 'pill_hoi_huyet_dan', 2, hex(77));
+    first.run(ALCHEMY.CRAFT_MS * 2 + 500);
+    expect(first.log.map((e) => e.drawA)).toHaveLength(2);
+    await first.prog.leave(first.a.id);
+    const rec = await store.load(first.a.acc);
+    expect(rec?.craftNonce).toBe(2);
+    expect(rec?.craftRequests).toContain(hex(77));
+    // a new session (a restart: new services over the same stores) tries the same request id
+    const second = await rig({ store, inv, seed: 5 });
+    second.cmd(CraftOp.Start, 'pill_hoi_huyet_dan', 1, hex(77));
+    expect(last(second.a.t.results())).toMatchObject({ outcome: CraftOutcome.Rejected, reason: CraftReason.Replayed });
+    // a fresh id works and its draws are NOT the ones the first session saw (the counter went on)
+    second.cmd(CraftOp.Start, 'pill_hoi_huyet_dan', 2, hex(78));
+    second.run(ALCHEMY.CRAFT_MS * 2 + 500);
+    expect(second.log.map((e) => e.drawA)).not.toEqual(first.log.map((e) => e.drawA));
+    expect((await store.load(first.a.acc))?.craftNonce).toBeGreaterThanOrEqual(2);
+  });
+
+  it('InventoryService.craftExchange reports a replayed key, and the service treats it as no craft', () => {
+    const inv = new InventoryService();
+    inv.onJoin('o');
+    inv.grantDrops(
+      'o',
+      [
+        { item: 'craft_material', qty: 10, quality: 0 },
+        { item: 'stone_ha', qty: 50, quality: 0 },
+      ] as DropRoll[],
+      'field',
+      'g',
+    );
+    const ex = {
+      key: 'o:n1',
+      materialDefId: MAT,
+      consume: 3,
+      fee: 1n,
+      produce: { defId: itemDefByKey('heal_pill')!.id, quality: 1, qty: 1 },
+    };
+    expect(inv.craftExchange('o', ex)).toEqual({ ok: true, replayed: false });
+    expect(inv.craftExchange('o', ex)).toEqual({ ok: true, replayed: true });
+    expect(inv.bagOf('o').count(itemDefByKey('heal_pill')!.id)).toBe(1); // applied once
+  });
+});
+
 describe('mastery and persistence (D92)', () => {
   it('successful crafts raise the mastery of that recipe only; it is saved with the character and survives a restart', async () => {
     const dir = mkdtempSync(join(tmpdir(), 'vgtd-alch-'));

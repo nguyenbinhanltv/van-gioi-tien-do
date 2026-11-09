@@ -46,6 +46,7 @@ export const CRAFT_REASON_TEXT: Readonly<Record<number, string>> = {
   [CraftReason.ByPlayer]: 'Đã dừng luyện, không mất gì.',
   [CraftReason.Dead]: 'Nhân vật đã tử vong.',
   [CraftReason.Interrupted]: 'Rời xa đan lô: dừng luyện, không mất gì.',
+  [CraftReason.Replayed]: 'Lệnh này đã được gửi rồi.',
 };
 
 export interface RecipeView {

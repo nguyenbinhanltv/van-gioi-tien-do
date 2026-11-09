@@ -5,8 +5,8 @@
  *    COMPLETES, so cancelling (the player moves, enters combat, walks away from the furnace, asks to stop) never loses anything;
  *  - each completed craft is one atomic exchange in `InventoryService.craftExchange`: materials destroyed, furnace fee posted to the ledger
  *    (wallet -> `SYSTEM_SINK_CRAFT_FEE`), product added; a failed roll destroys 60 % of the materials and still pays the fee;
- *  - the roll is seeded per (character, request, index) so it is deterministic, independent of the order other players craft in, and the
- *    same on a replay; every roll is recorded (`log`, plus `onLog`);
+ *  - the roll is seeded from the server seed and a per-character SERVER counter (`craftNonce`, persisted), never from anything the client
+ *    sends: a client cannot replay or scan for a good roll, and a reused command id is refused; every roll is recorded (`log`, plus `onLog`);
  *  - the server decides everything: realm, recipe, distance to the furnace, materials, stones, room in the bag, rate of commands.
  *
  * Deterministic: time comes from the caller (sim time), randomness from the seeded RNG. In-game items and stones only.
@@ -68,6 +68,8 @@ export const CRAFT_CONFIG = {
   CMD_PER_S: 1,
   /** how many answers per player are kept for replay detection */
   ANSWERS_KEPT: 32,
+  /** craft requestIds remembered per character in its saved record (a reused one is refused, also after a relog / restart) */
+  REQUESTS_KEPT: 64,
   LOG_KEPT: 5000,
 } as const;
 
@@ -203,13 +205,19 @@ export class CraftService {
       else answer(CraftOutcome.Cancelled, CraftReason.Ok, 0);
       return out;
     }
-    // Start
+    // Start: a command id is single use. Within a session the stored answer is replayed (above); an id this character used before (an older
+    // one, or before a relog / restart) is refused, so no client-chosen value can ever repeat a craft.
+    if (this.o.progression.seenCraftRequest(entityId, msg.requestId)) {
+      answer(CraftOutcome.Rejected, CraftReason.Replayed);
+      return out;
+    }
     const recipe = recipeByWireId(msg.recipeId);
     const why = this.refusal(s, recipe, msg.count, pos);
     if (why !== CraftReason.Ok || !recipe) {
       answer(CraftOutcome.Rejected, why === CraftReason.Ok ? CraftReason.UnknownRecipe : why);
       return out;
     }
+    this.o.progression.rememberCraftRequest(entityId, msg.requestId, CRAFT_CONFIG.REQUESTS_KEPT);
     s.job = { requestId: msg.requestId, recipe, total: msg.count, done: 0, readyAtMs: nowMs + ALCHEMY.CRAFT_MS };
     this.metrics.started++;
     answer(CraftOutcome.Accepted, CraftReason.Ok);
@@ -313,11 +321,17 @@ export class CraftService {
     const { recipe } = job;
     const mastery = this.o.progression.masteryOf(s.entityId, recipe.key);
     const score = craftScore(mastery);
-    const [roll] = rollCraft(recipe, score, rngFork(this.baseRng, `${s.accountId}|${job.requestId}|${job.done}`));
+    // the roll is seeded from a SERVER counter of this character, never from the (client-chosen) requestId
+    const nonce = this.o.progression.takeCraftNonce(s.entityId);
+    if (nonce === null) {
+      out.push(...this.cancel(s, CraftReason.NotReady, nowMs));
+      return;
+    }
+    const [roll] = rollCraft(recipe, score, rngFork(this.baseRng, `${s.accountId}|n${nonce}`));
     const fee = craftFee(recipe);
     const lost = roll.success ? recipe.materials : failedMaterialLoss(recipe.materials);
     const ex = this.o.inventory.craftExchange(s.accountId, {
-      key: `${s.accountId}:${job.requestId}:${job.done}`,
+      key: `${s.accountId}:n${nonce}`,
       materialDefId: this.materialDefId,
       consume: lost,
       fee: BigInt(fee),
@@ -336,6 +350,11 @@ export class CraftService {
           nowMs,
         ),
       );
+      return;
+    }
+    if (ex.replayed) {
+      // this nonce was already applied: nothing changed in the bag or the ledger, so this is NOT a craft (no mastery, no log, no success message)
+      out.push(...this.cancel(s, CraftReason.Interrupted, nowMs));
       return;
     }
     if (roll.success) {

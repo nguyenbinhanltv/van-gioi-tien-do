@@ -290,6 +290,29 @@ export class ProgressionService {
   masteryOf(entityId: number, recipeKey: string): number {
     return this.sessions.get(entityId)?.rec?.craftMastery?.[recipeKey] ?? 0;
   }
+  /** The next craft nonce of a character (never repeats, persisted): the only thing a craft roll is seeded from besides the server seed. Null when not loaded. */
+  takeCraftNonce(entityId: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const n = (s.rec.craftNonce ?? 0) + 1;
+    s.rec = { ...s.rec, craftNonce: n };
+    s.dirty = true;
+    void this.save(s);
+    return n;
+  }
+  /** Has this character already used `requestId` for a craft command (one of its last `craftRequests` ids)? */
+  seenCraftRequest(entityId: number, requestId: string): boolean {
+    return this.sessions.get(entityId)?.rec?.craftRequests?.includes(requestId) ?? false;
+  }
+  /** Remember a craft requestId (a ring of the last `keep`), persisted. */
+  rememberCraftRequest(entityId: number, requestId: string, keep: number): void {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return;
+    const ring = [...(s.rec.craftRequests ?? []).filter((x) => x !== requestId), requestId].slice(-keep);
+    s.rec = { ...s.rec, craftRequests: ring };
+    s.dirty = true;
+    void this.save(s);
+  }
   /** All the character's mastery entries (recipe key -> points). */
   masteryAll(entityId: number): Readonly<Record<string, number>> {
     return this.sessions.get(entityId)?.rec?.craftMastery ?? {};
