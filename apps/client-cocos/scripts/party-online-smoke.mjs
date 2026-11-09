@@ -250,7 +250,10 @@ try {
   await say(a, `/kick ${nameB}`);
   const left = await until('B is out of the party', b, async (p) => ((await members(p)).length === 0 ? true : null));
   check(!!left && !!(await hasLine(b, 'Bạn đã rời tổ đội')), 'after /kick B is out and is told');
-  check((await members(a)).length === 0, 'the party of two disbanded for A as well');
+  check(
+    !!(await until('A is alone', a, async (p) => ((await members(p)).length === 0 ? true : null))),
+    'the party of two disbanded for A as well',
+  );
 
   // ---- party chat outside a party is answered
   await say(b, '/p alo?');
