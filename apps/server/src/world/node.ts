@@ -26,6 +26,7 @@ import {
   ProtocolError,
   decode,
   encode,
+  LIMITS,
   dequantizePos,
   quantizePos,
   type SelfVitals,
@@ -35,6 +36,7 @@ import {
   type EnterEntity,
   type Message,
   type SnapshotEntity,
+  TelegraphShape,
 } from '@vgtd/protocol';
 import {
   ANTICHEAT,
@@ -61,6 +63,7 @@ import type { ChatService } from '../chat/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
+  type MobTelegraphEvent,
   type AimedInput,
   type CombatOptions,
   type CombatResult,
@@ -775,7 +778,11 @@ export class WorldNode {
     // mob AI after combat, so a mob killed this tick is already despawned (and its respawn timer running)
     if (this.mobs) this.world = this.mobs.step(this.world);
     // mob attacks resolve after the AI moved the mobs: telegraphs start / land on the new positions
-    if (this.mobAttacks) this.world = this.mobAttacks.step(this.world).world;
+    if (this.mobAttacks) {
+      const mobAtk = this.mobAttacks.step(this.world);
+      this.world = mobAtk.world;
+      if (mobAtk.telegraphs.length > 0) this.sendTelegraphs(mobAtk.telegraphs);
+    }
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
     this.handleEvents(r.events);
@@ -1029,6 +1036,71 @@ export class WorldNode {
   }
 
   /** Turn a combat result into a `skill_result`: target / caster ids become the receiving client's visible-list indices. */
+  /** Live telegraphs (D89): wire id -> the clients that were told about the start (the end goes to the same ones). */
+  private readonly telegraphAudience = new Map<number, number[]>();
+
+  /**
+   * Mob attack telegraphs (D89): `telegraph_start` goes only to the clients whose AOI holds the anchor (the circle centre, or the
+   * mob for a cone / line), `telegraph_end` to exactly those that got the start (a client that left the area just drops the decal
+   * when its time is up). A held (dropped) or dead connection is skipped.
+   */
+  private sendTelegraphs(list: readonly MobTelegraphEvent[]): void {
+    for (const t of list) {
+      if (t.kind === 'end') {
+        const to = this.telegraphAudience.get(t.id);
+        this.telegraphAudience.delete(t.id);
+        if (!to) continue;
+        const msg: Message = { type: 'telegraph_end', id: t.id, cancelled: t.cancelled };
+        for (const id of to) {
+          const c = this.clients.get(id);
+          if (c && !c.dead && c.suspendedAtMs === null) this.send(c, msg);
+        }
+        continue;
+      }
+      const s = t.attack.shape;
+      let shape: TelegraphShape;
+      let size: number;
+      let extra: number;
+      if (s.type === 'circle') {
+        shape = TelegraphShape.Circle;
+        size = s.radius ?? 0;
+        extra = 0;
+      } else if (s.type === 'cone') {
+        shape = TelegraphShape.Cone;
+        size = s.radius ?? 0;
+        extra = Math.round(s.angle_deg ?? 360);
+      } else if (s.type === 'line') {
+        shape = TelegraphShape.Line;
+        size = s.length ?? 0;
+        extra = Math.round((s.width ?? 1) * LIMITS.POS_SCALE);
+      } else continue; // mob attacks only use circle / cone / line
+      const msg: Message = {
+        type: 'telegraph_start',
+        id: t.id,
+        mobEntityId: t.mobId,
+        shape,
+        qi: quantizePos(t.i),
+        qj: quantizePos(t.j),
+        facing: shape === TelegraphShape.Circle ? 0 : Math.min(254, t.facing),
+        size: Math.min(0xffff, Math.round(size * LIMITS.POS_SCALE)),
+        extra: Math.min(0xffff, extra),
+        durationMs: Math.min(0xffff, t.durationMs),
+      };
+      const to: number[] = [];
+      for (const c of this.clients.values()) {
+        if (c.dead || c.suspendedAtMs !== null) continue;
+        const me = this.byId.get(c.id);
+        if (!me) continue;
+        const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
+        const { u, w } = toUW(centre.i, centre.j);
+        if (!inAoiAt(t.i, t.j, u, w, false)) continue;
+        to.push(c.id);
+        this.send(c, msg);
+      }
+      if (to.length > 0) this.telegraphAudience.set(t.id, to);
+    }
+  }
+
   private sendCombatResult(res: CombatResult): void {
     const c = this.clients.get(res.entityId);
     if (!c) return;

@@ -28,6 +28,7 @@ import type { CollisionGrid } from '@vgtd/sim';
 import { IDLE_INTENT, Predictor, type MoveIntent } from './predictor.js';
 import { RemoteWorld, type RemoteView } from './remote.js';
 import { BagModel, makeRequestId } from './bag.js';
+import { TelegraphTracker, type TelegraphView } from './telegraphs.js';
 
 /** The slice of the WebSocket API we use (browser WebSocket and `ws` both satisfy it). */
 export interface SocketLike {
@@ -195,6 +196,7 @@ export class NetClient {
   /** the server answered a resume `hello` with an Unauthorized error frame: the token is unknown / the hold is over */
   private resumeRejected = false;
   private lastRxMs = 0;
+  private readonly telegraph = new TelegraphTracker();
   /** wall time of the previous `update()`: a gap means the client's OWN loop stalled, not the link */
   private lastUpdateMs = 0;
   private reconnecting = false;
@@ -276,6 +278,7 @@ export class NetClient {
     } catch (e) {
       this.status = 'closed';
       this.bag.reset();
+      this.telegraph.clear();
       this.lastError = (e as Error).message;
       throw e;
     }
@@ -311,6 +314,7 @@ export class NetClient {
     this.predictor = new Predictor(this.o.makeGrid(ack.mapTiles), this.o.agi);
     this.remote.clear();
     this.bag.reset();
+    this.telegraph.clear();
     this.lastSnapshotSeq = 0;
     this.acc = 0;
     this.pings.clear();
@@ -382,12 +386,14 @@ export class NetClient {
       if (!this.userClosed && !this.fatal && this.rc) {
         this.lastError = `connection lost (${ev.code} ${ev.reason})`;
         this.bag.reset(); // belonged to the lost connection; the server re-sends state to the next one
+        this.telegraph.clear();
         this.emit(() => this.events.onConnectionLost?.());
         void this.reconnectLoop();
         return;
       }
       this.status = 'closed';
       this.bag.reset();
+      this.telegraph.clear();
       if (!this.lastError) this.lastError = `closed ${ev.code} ${ev.reason}`;
     }
   }
@@ -425,6 +431,7 @@ export class NetClient {
       if (!this.userClosed) this.lastError = `${this.lastError || 'connection lost'} (gave up reconnecting)`;
       this.status = 'closed';
       this.bag.reset();
+      this.telegraph.clear();
     } finally {
       this.reconnecting = false;
     }
@@ -454,6 +461,12 @@ export class NetClient {
       case 'aoi_leave':
         this.emit(() => this.events.onAoiLeave?.(msg.indices)); // before removal: indices still resolve
         this.remote.onLeave(msg);
+        break;
+      case 'telegraph_start':
+        this.telegraph.start(msg, now);
+        break;
+      case 'telegraph_end':
+        this.telegraph.end(msg);
         break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
@@ -621,6 +634,11 @@ export class NetClient {
     return this.predictor?.display() ?? null;
   }
 
+  /** Mob attack danger areas to draw this frame (D89); empty offline / when no mob is winding up near the player. */
+  telegraphs(): TelegraphView[] {
+    return this.telegraph.active(this.o.deps.now());
+  }
+
   /** Other entities interpolated at the current time. */
   remotes(): RemoteView[] {
     return this.remote.sample(this.o.deps.now()).filter((r) => r.entityId !== this.entityId);
@@ -630,6 +648,7 @@ export class NetClient {
     this.userClosed = true;
     this.status = 'closed';
     this.bag.reset();
+    this.telegraph.clear();
     this.ws?.close(1000, 'bye'); // a normal close: the server removes the character at once instead of holding it for a resume
   }
 }
