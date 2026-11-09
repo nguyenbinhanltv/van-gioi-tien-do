@@ -15,7 +15,7 @@ import { LevelUpFx } from './LevelUpFx';
  * so this panel never overlaps them. A pointer press on a button is consumed here and must not also start click-to-move.
  */
 export const PANEL_W = 300;
-export const PANEL_H = 92;
+export const PANEL_H = 104;
 const MARGIN = 8;
 const BAR_W = PANEL_W - 24;
 const BAR_H = 14;
@@ -101,6 +101,8 @@ export class ProgressionHud {
   private readonly meditate: Button;
   private readonly breakthrough: Button;
   private readonly toast: Label;
+  /** Nghiệp Lực band, K and Đạo Tâm (D103): display only */
+  private readonly standing: Label;
   private scale = 1;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly pointerDown: (e: PointerEvent) => void;
@@ -119,6 +121,7 @@ export class ProgressionHud {
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
     net.progressionEvents = {
       onCharState: (m) => this.view.applyCharState(m),
+      onDaoTam: (m) => this.view.applyDaoTam(m),
       onMeditateResult: (m) => this.view.applyMeditateResult(m),
       onBreakthroughResult: (m) => this.view.applyBreakthroughResult(m),
     };
@@ -152,6 +155,9 @@ export class ProgressionHud {
     this.barText.node.setPosition(-PANEL_W / 2, -38, 0);
     this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, 'Đả tọa [M]');
     this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, 'Đột phá [N]');
+    this.standing = sharedAtlas(label(this.root, 'Standing', 12, Label.HorizontalAlign.CENTER), 'dynamic');
+    this.standing.node.setPosition(-PANEL_W / 2, -94, 0);
+    this.standing.color = COL.info;
     this.toast = sharedAtlas(label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT), 'dynamic');
     this.toast.node.getComponent(UITransform)!.setAnchorPoint(1, 0.5);
     this.toast.node.setPosition(0, -PANEL_H - 14, 0);
@@ -222,6 +228,7 @@ export class ProgressionHud {
       s?.meditating ? COL.btnMeditating : COL.btnOn,
     );
     this.setButton(this.breakthrough, 'Đột phá [N]', v.canBreakthrough(), COL.btnBreak);
+    this.standing.string = v.standingText();
     const t = v.currentToast();
     this.toast.string = t?.text ?? '';
     this.toast.color = t ? COL[t.tone] : COL.text;
