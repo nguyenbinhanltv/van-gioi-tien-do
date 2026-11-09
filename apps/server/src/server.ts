@@ -2,6 +2,7 @@ import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
+import { TutorialService, type TutorialOptions } from './tutorial/service.js';
 import { TradeService } from './trade/service.js';
 import { SectService } from './sect/service.js';
 import type { SectStore } from './sect/store.js';
@@ -24,6 +25,8 @@ export interface ServerOptions {
   chat?: ChatOptions | false;
   /** `false` to run without parties (default: enabled, in-memory, session-only: D93) */
   party?: false;
+  /** tutorial / FTUE tracker options, or `false` to run without it (default: enabled, in-memory store: D105) */
+  tutorial?: TutorialOptions | false;
   /** direct trade (D102): on whenever the world has an inventory, or `false` to run without it */
   trade?: false;
   /** NPC sect options (D98): the persistence store (default in memory), or `false` to run without the sect */
@@ -57,6 +60,10 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
       : (opts.world?.progression ?? new ProgressionService({ seed: opts.world?.seed, ...opts.progression }));
   const chat = opts.chat === false ? undefined : (opts.world?.chat ?? new ChatService(opts.chat));
   const party = opts.party === false ? undefined : (opts.world?.party ?? new PartyService());
+  const tutorial =
+    opts.tutorial === false
+      ? undefined
+      : (opts.world?.tutorial ?? new TutorialService({ mapTiles: opts.world?.mapTiles, ...opts.tutorial }));
   // a trade moves bag items and stones, so it only exists where the world has an inventory
   const trade =
     opts.trade === false
@@ -113,6 +120,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
     ...(party ? { party } : {}),
+    ...(tutorial ? { tutorial } : {}),
     ...(trade ? { trade } : {}),
     ...(sect ? { sect } : {}),
     ...(friends ? { friends } : {}),

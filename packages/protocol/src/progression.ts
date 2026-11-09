@@ -51,6 +51,13 @@ import {
 } from './party.js';
 import { decodeMajorBody, encodeMajorBody, validateMajorMessage, type MajorServerMessage } from './major.js';
 import {
+  decodeTutorialBody,
+  encodeTutorialBody,
+  validateTutorialMessage,
+  type TutorialClientMessage,
+  type TutorialServerMessage,
+} from './tutorial.js';
+import {
   decodeInventoryBody,
   encodeInventoryBody,
   validateInventoryMessage,
@@ -73,6 +80,9 @@ export enum ColdMsgId {
   PartyInvite = 46,
   PartyState = 47,
   PartyVitals = 48,
+  /** tutorial / FTUE (D105, tutorial.ts) */
+  TutorialState = 49,
+  TutorialSkip = 50,
   /** direct trade (D102, trade.ts); 69-70 are the major-breakthrough messages of D97, so the docs/24 trade block starts at 71 here */
   TradeCmd = 71,
   TradeResult = 72,
@@ -131,6 +141,8 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyInvite]: 'party_invite',
   [ColdMsgId.PartyState]: 'party_state',
   [ColdMsgId.PartyVitals]: 'party_vitals',
+  [ColdMsgId.TutorialState]: 'tutorial_state',
+  [ColdMsgId.TutorialSkip]: 'tutorial_skip',
   [ColdMsgId.TradeCmd]: 'trade_cmd',
   [ColdMsgId.TradeResult]: 'trade_result',
   [ColdMsgId.TradeState]: 'trade_state',
@@ -171,6 +183,8 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_invite: ColdMsgId.PartyInvite,
   party_state: ColdMsgId.PartyState,
   party_vitals: ColdMsgId.PartyVitals,
+  tutorial_state: ColdMsgId.TutorialState,
+  tutorial_skip: ColdMsgId.TutorialSkip,
   trade_cmd: ColdMsgId.TradeCmd,
   trade_result: ColdMsgId.TradeResult,
   trade_state: ColdMsgId.TradeState,
@@ -308,6 +322,7 @@ export type ColdClientMessage =
   | PartyClientMessage
   | TradeClientMessage
   | SectClientMessage
+  | TutorialClientMessage
   | FriendClientMessage
   | MarketClientMessage;
 export type ColdServerMessage =
@@ -321,6 +336,7 @@ export type ColdServerMessage =
   | TradeServerMessage
   | SectServerMessage
   | MajorServerMessage
+  | TutorialServerMessage
   | FriendServerMessage
   | MarketServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
@@ -395,6 +411,7 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validateTradeMessage(o) ??
         validateSectMessage(o) ??
         validateMajorMessage(o) ??
+        validateTutorialMessage(o) ??
         validateFriendMessage(o) ??
         validateMarketMessage(o)
       );
@@ -473,6 +490,10 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'party_state':
     case 'party_vitals':
       encodePartyBody(w, m);
+      break;
+    case 'tutorial_state':
+    case 'tutorial_skip':
+      encodeTutorialBody(w, m);
       break;
     case 'trade_cmd':
     case 'trade_result':
@@ -561,6 +582,9 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'party_state':
     case 'party_vitals':
       return decodePartyBody(r, type);
+    case 'tutorial_state':
+    case 'tutorial_skip':
+      return decodeTutorialBody(r, type);
     case 'trade_cmd':
     case 'trade_result':
     case 'trade_state':

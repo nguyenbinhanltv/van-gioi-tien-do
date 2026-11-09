@@ -184,6 +184,8 @@ Ghi chú: mọi thông điệp C→S là **ý định**; không có thông đi�
 
 > **[Cập nhật D93]** Tổ đội dùng phong bì họ Lạnh, thân nhị phân cố định: id 44 `party_cmd {op u8, clientMsgId u16, name}` (op: 1 mời, 2 nhận, 3 từ chối, 4 rời, 5 kick), 45 `party_result {clientMsgId u16, reason u8}`, 46 `party_invite {fromName, ttlMs u16}`, 47 `party_state {leaderId u32, members[{entityId u32, name, classId u8}]}` (0 thành viên = không ở đội), 48 `party_vitals {members[{entityId, hp, hpMax, mp, mpMax u32}]}`. `PartyReason`: 0 xong, 1 quá nhanh, 2 không có người này, 3 tự chọn mình, 4 đội đầy, 5 người kia đã ở đội, 6 không phải đội trưởng, 7 không ở trong đội, 8 không có lời mời, 9 đang ở đội, 10 quá nhiều lời mời, 11 chưa vào game. Kênh chat 4 = Đội (`ChatReason.NotInParty` = 9 khi không ở đội). Tối đa 4 người (`PARTY.MAX_SIZE`). Hiện thực: `packages/protocol/src/party.ts`.
 
+> **[Cập nhật D105]** Tutorial dùng phong bì họ Lạnh: id 49 `tutorial_state {done u16, kills u8, flags u8}` (bit k của `done` = bước k của `TUTORIAL_STEPS`, flags 1 = đã bỏ qua, 2 = hoàn thành) và id 50 `tutorial_skip {}` (không thân). Server là bên duy nhất quyết định bước; client chỉ gửi bỏ qua. Hiện thực: `packages/protocol/src/tutorial.ts`.
+
 ### 5.1 Quy tắc ứng dụng
 
 - **Lệnh có tác dụng phụ** (`inv_cmd`, `market_*`, `craft_*`, `breakthrough_*`) mang `requestId` (UUIDv7 do client sinh) → ánh xạ thành khóa idempotency; gửi lại sau mất kết nối là an toàn ([26 §4](26-kinh-te-ledger.md)). Server trả đúng kết quả cũ cho cùng `requestId`.

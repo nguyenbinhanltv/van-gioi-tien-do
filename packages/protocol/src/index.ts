@@ -11,6 +11,7 @@ export * from './friends.js';
 export * from './market.js';
 export * from './chat.js';
 export * from './party.js';
+export * from './tutorial.js';
 export * from './major.js';
 export * from './adapt.js';
 export { BitReader, BitWriter } from './bits.js';
