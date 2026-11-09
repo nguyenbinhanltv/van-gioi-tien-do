@@ -36,6 +36,7 @@ import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
+import { TribulationFx } from './TribulationFx';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -99,6 +100,8 @@ export class Bootstrap extends Component {
   private partyFrames: PartyFrames | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
+  /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
+  private tribulationFx: TribulationFx | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -302,6 +305,7 @@ export class Bootstrap extends Component {
         (x, y) => this.rig.clientToUi(x, y),
         (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       );
+      this.tribulationFx = new TribulationFx(hudRoot, this.worldRootNode!, art, this.online.net);
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
@@ -545,6 +549,7 @@ export class Bootstrap extends Component {
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
     this.updateStatusRow();
+    this.tribulationFx?.update(dt);
     this.chatBox?.update();
     this.partyFrames?.update();
     if (this.progressionHud) {
@@ -569,6 +574,7 @@ export class Bootstrap extends Component {
       this.progressionHud?.layout(w, this.canvasUi.contentSize.height);
       this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
       this.firstSession?.layout(w, this.canvasUi.contentSize.height);
+      this.tribulationFx?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
       this.hud.note = this.online
@@ -596,6 +602,7 @@ export class Bootstrap extends Component {
     this.partyFrames?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
+    this.tribulationFx?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

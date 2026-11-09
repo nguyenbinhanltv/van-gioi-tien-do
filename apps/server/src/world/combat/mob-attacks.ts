@@ -83,6 +83,8 @@ export type MobTelegraphEvent =
       i: number;
       j: number;
       durationMs: number;
+      /** only this client gets the decal (D97: a Tâm Ma shadow's attacks are the owner's business); absent = everyone whose view holds the anchor */
+      audience?: number;
     }
   | { kind: 'end'; id: number; cancelled: boolean };
 

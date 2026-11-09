@@ -21,6 +21,7 @@ import {
   type PartyClientMessage,
   type PartyServerMessage,
 } from './party.js';
+import { decodeMajorBody, encodeMajorBody, validateMajorMessage, type MajorServerMessage } from './major.js';
 import {
   decodeInventoryBody,
   encodeInventoryBody,
@@ -44,6 +45,9 @@ export enum ColdMsgId {
   PartyInvite = 46,
   PartyState = 47,
   PartyVitals = 48,
+  /** major breakthrough events (D97, major.ts) */
+  MajorEvent = 69,
+  TribulationStrike = 70,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -75,6 +79,8 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyInvite]: 'party_invite',
   [ColdMsgId.PartyState]: 'party_state',
   [ColdMsgId.PartyVitals]: 'party_vitals',
+  [ColdMsgId.MajorEvent]: 'major_event',
+  [ColdMsgId.TribulationStrike]: 'tribulation_strike',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -95,6 +101,8 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_invite: ColdMsgId.PartyInvite,
   party_state: ColdMsgId.PartyState,
   party_vitals: ColdMsgId.PartyVitals,
+  major_event: ColdMsgId.MajorEvent,
+  tribulation_strike: ColdMsgId.TribulationStrike,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -111,6 +119,12 @@ export enum ProgressionReason {
   Cooldown = 8,
   /** a major threshold needs Tâm Ma and Lôi Kiếp (docs/01 §5), which do not exist yet: major attempts are refused */
   TribulationRequired = 9,
+  /** a major event (Tâm Ma / Lôi Kiếp) of this character is already running (D97) */
+  EventActive = 10,
+  /** the character must be nearly at full HP to start a major breakthrough (D97) */
+  NotPrepared = 11,
+  /** the major breakthrough is locked after a lost Tâm Ma or a Nặng death in a Kiếp (D97) */
+  Locked = 12,
 }
 export enum BreakthroughOutcome {
   Success = 1,
@@ -191,7 +205,13 @@ export interface MeditateResultMsg {
 export type ColdClientMessage =
   BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg | InvClientMessage | ChatClientMessage | PartyClientMessage;
 export type ColdServerMessage =
-  CharStateMsg | BreakthroughResultMsg | MeditateResultMsg | InvServerMessage | ChatServerMessage | PartyServerMessage;
+  | CharStateMsg
+  | BreakthroughResultMsg
+  | MeditateResultMsg
+  | InvServerMessage
+  | ChatServerMessage
+  | PartyServerMessage
+  | MajorServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -255,7 +275,9 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         reason: int(o.reason, 0, 255, 'reason'),
       };
     default:
-      return validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o);
+      return (
+        validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o) ?? validateMajorMessage(o)
+      );
   }
 }
 
@@ -329,6 +351,10 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'party_vitals':
       encodePartyBody(w, m);
       break;
+    case 'major_event':
+    case 'tribulation_strike':
+      encodeMajorBody(w, m);
+      break;
   }
 }
 
@@ -385,5 +411,8 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'party_state':
     case 'party_vitals':
       return decodePartyBody(r, type);
+    case 'major_event':
+    case 'tribulation_strike':
+      return decodeMajorBody(r, type);
   }
 }

@@ -406,7 +406,7 @@ Còn mở / lưu ý:
 - **Đả tọa ở mọi nơi**: mặc định ρ = 1,0 và đất ngũ hành đều (Match = 1) cho tới khi có dữ liệu map/Linh Mạch (`MeditationEnv`); thành chính 0,6 và Linh Mạch của 07 §5 chưa nối.
 - **Linh căn nhân vật mới** roll từ PRNG theo `characterId` (tỷ lệ loại và 2% biến dị của 07 §5; mỗi hệ có trọng số bằng nhau, biến dị chỉ ở Mộc/Kim/Thủy vì chỉ ba hệ này có dạng biến dị). Cách người chơi chọn hay đổi linh căn chưa có.
 - **Cột dữ liệu**: `n_fail` (bộ đếm pity) chưa có trong docs/23 §4.2; hiện lưu cùng bản ghi (`ProgressRecord.nFail`) và cần thêm cột/`jsonb` khi viết migration.
-- **Đột phá đại cảnh bị khóa** (D76): docs/01 §5 định nghĩa ngưỡng lớn là Tâm Ma → roll → Lôi Kiếp (thất bại có ý nghĩa, P1); các cơ chế đó chưa có nên server từ chối mọi lần đột phá đại cảnh bằng `ProgressionReason.TribulationRequired` (9), đồng thời cooldown 3 s và việc giữ nguyên tu vi khi thất bại là mốc kỹ thuật tạm. Bật lại bằng `allowMajorBreakthrough` khi Tâm Ma/Lôi Kiếp xong; cần quyết định hậu quả thất bại.
+- **[Cập nhật D97: Trúc Cơ → Kim Đan và Kim Đan → Nguyên Anh đã chạy (Tâm Ma + Lôi Kiếp, mục 22); Luyện Khí → Trúc Cơ roll thẳng; cảnh giới cao hơn vẫn bị `TribulationRequired`.]** **Đột phá đại cảnh bị khóa** (D76): docs/01 §5 định nghĩa ngưỡng lớn là Tâm Ma → roll → Lôi Kiếp (thất bại có ý nghĩa, P1); các cơ chế đó chưa có nên server từ chối mọi lần đột phá đại cảnh bằng `ProgressionReason.TribulationRequired` (9), đồng thời cooldown 3 s và việc giữ nguyên tu vi khi thất bại là mốc kỹ thuật tạm. Bật lại bằng `allowMajorBreakthrough` khi Tâm Ma/Lôi Kiếp xong; cần quyết định hậu quả thất bại.
 - **Giai đoạn cuối**: tầng 41 (Độ Kiếp viên mãn) không thể đột phá tiếp (Phi Thăng chưa thiết kế).
 - **Hết hạn kết quả idempotency**: chỉ giữ 16 kết quả đột phá gần nhất mỗi phiên trong RAM; docs/26 §4 chưa chọn nơi lưu khóa idempotency lâu dài.
 - **Thân thông điệp họ Lạnh** là bố cục nhị phân cố định thay cho Protobuf cho tới khi có pipeline `buf` (docs/24 §2).
@@ -556,3 +556,11 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## 22. Đột phá đại cảnh: Tâm Ma + Lôi Kiếp (D97, worker37): còn mở
+
+- **Số liệu tạm, cần game designer duyệt**: độ khó Tâm Ma (Đạo Tâm mặc định 60), 90 s, vòng đánh 2,5 s / r2 / 0,8 s, Khí Huyết ≥ 80 % để vào, mây tụ 3 s, cảnh báo tia 1,2 s, nghỉ Thiên Mệnh 2 s, khóa 30 phút / 24 giờ, mất tu vi 25 % / 50 %. Công thức tỉ lệ và sát thương sét **không đổi** (07 §2-§3).
+- **Chưa có hệ để làm**: buff "Đạo Cơ Chấn Động" (24 / 72 giờ, −10 / −20 % chỉ số gốc), mất 15 % độ bền trang bị, mất Đạo Tâm (không có hệ Đạo Tâm), nguồn giảm trừ kiếp (trận bàn, pháp bảo khiên, hộ pháp ×2, Thể tu) và khóa đan hồi máu thường trong kiếp (D90 là việc của lõi dùng vật phẩm).
+- **Tâm Cảnh chưa là instance riêng**: bóng Tâm Ma hiện cạnh người chơi ở thế giới mở nhưng **chỉ chủ nhân thấy và đánh được** (người khác không thấy, không gây sát thương, quái không nhắm); thế giới mở vẫn là nơi chủ nhân đứng (quái xung quanh vẫn tấn công họ), và Kiếp Đài do server cấp (docs/01 §5.4 bước 1) chưa có nên sét chỉ nhắm chủ kiếp. "Nghiệp Ảnh" (bóng phụ theo nghiệp âm) và Tâm Ma đa người chưa làm.
+- **Client**: overlay và sét là placeholder procedural (không art); bóng Tâm Ma vẽ bằng ô quái mặc định (defId 200 chưa có tranh); không có BGM / rung camera.
+- **Khóa đột phá** tính theo đồng hồ mô phỏng và lưu theo thời gian còn lại tại lần ghi gần nhất; một khoảng ngoại tuyến không làm khóa chạy tiếp (cần quyết định: tính theo giờ thật).
+- **Rời / ngắt kết nối giữa sự kiện** tính là thua (Tâm Ma) hoặc gục (Kiếp, theo số đợt đã qua); chưa có chế độ "nối lại phiên giữa kiếp".

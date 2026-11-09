@@ -7,5 +7,6 @@ export * from './progression.js';
 export * from './inventory.js';
 export * from './chat.js';
 export * from './party.js';
+export * from './major.js';
 export * from './adapt.js';
 export { BitReader, BitWriter } from './bits.js';
