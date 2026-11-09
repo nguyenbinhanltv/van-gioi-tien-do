@@ -270,21 +270,14 @@ export const SECT = {
   /** the ledger currency code of Cống hiến (docs/26 §2.1) */
   CURRENCY: 'CONG_HIEN',
   /**
-   * PLACEHOLDER NPC ids for the six Sơn Môn NPC standees (art by worker 42): they bind to these keys. Only the first two have a function in
-   * D98 (join / leave, library); the others are decoration until their systems exist.
+   * The six Sơn Môn NPC ids: the stable string keys of the client standees (worker 42's `NPC_STANDEE_KEYS`, docs/12 style, no numeric ids).
+   * Only `JOIN_NPC` and `LIBRARY_NPC` have a function in D98; the others are decoration until their systems exist.
    */
-  NPCS: [
-    'son_mon_tiep_dan',
-    'son_mon_tang_kinh',
-    'son_mon_chuong_mon',
-    'son_mon_dan_phong',
-    'son_mon_luyen_khi',
-    'son_mon_nhiem_vu',
-  ],
-  /** NPC where a character joins / leaves the sect */
-  JOIN_NPC: 'son_mon_tiep_dan',
-  /** NPC (Tàng Kinh Các) where the library is used */
-  LIBRARY_NPC: 'son_mon_tang_kinh',
+  NPCS: ['npc_su_huynh', 'npc_truong_lao_dan', 'npc_chuong_mon', 'npc_ve_binh', 'npc_tho_ren', 'npc_thuong_nhan'],
+  /** NPC where a character joins / leaves the sect (the "sư huynh" who receives disciples) */
+  JOIN_NPC: 'npc_su_huynh',
+  /** NPC of the library, Tàng Kinh Các (the elder) */
+  LIBRARY_NPC: 'npc_truong_lao_dan',
   /** how close (tiles) a character must stand to the sect NPC to join, leave or buy (placeholder; wide enough for the whole 24-tile dev spawn square) */
   NPC_RANGE_TILES: 20,
   /** Cống hiến earned per kill by drop source, only while a member (placeholder; docs only give the quest `contribution` as fixed data) */

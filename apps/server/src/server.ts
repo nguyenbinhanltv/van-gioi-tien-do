@@ -20,7 +20,7 @@ export interface ServerOptions {
   /** `false` to run without parties (default: enabled, in-memory, session-only: D93) */
   party?: false;
   /** NPC sect options (D98): the persistence store (default in memory), or `false` to run without the sect */
-  sect?: { store?: SectStore } | false;
+  sect?: { store?: SectStore; ledger?: Ledger } | false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -42,13 +42,19 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
       : (opts.world?.progression ?? new ProgressionService({ seed: opts.world?.seed, ...opts.progression }));
   const chat = opts.chat === false ? undefined : (opts.world?.chat ?? new ChatService(opts.chat));
   const party = opts.party === false ? undefined : (opts.world?.party ?? new PartyService());
-  // Cống hiến lives in the same ledger as the stones, so one durable `ledger.json` (D92) covers both
+  // Cống hiến lives in the same ledger as the stones, so one durable `ledger.json` (D92) covers both. `sect.ledger` is the ledger of the
+  // file stores (given by main.ts whenever STORE=file, with or without an inventory); when an inventory is also given it MUST be the same
+  // object, or stones and Cống hiến would be booked in two ledgers and only one of them would be durable.
+  if (opts.sect && opts.sect.ledger && opts.world?.inventory && opts.sect.ledger !== opts.world.inventory.ledger)
+    throw new Error(
+      'sect.ledger and world.inventory.ledger must be the same Ledger (one durable ledger for stones and Cống hiến)',
+    );
   const sect =
     opts.sect === false
       ? undefined
       : (opts.world?.sect ??
         new SectService({
-          ledger: opts.world?.inventory?.ledger ?? new Ledger(),
+          ledger: opts.sect?.ledger ?? opts.world?.inventory?.ledger ?? new Ledger(),
           ...(opts.sect?.store ? { store: opts.sect.store } : {}),
         }));
   const world = new WorldNode({

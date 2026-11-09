@@ -302,3 +302,66 @@ describe('the sect survives a server restart on the durable file store (D92)', (
     b.close();
   });
 });
+
+describe('STORE=file with combat but WITHOUT inventory: the sect still has the durable ledger', () => {
+  it('Cống hiến earned by a real kill survives a restart even though no InventoryService exists', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'vgtd-sect-noinv-'));
+    dirs.push(dir);
+    const boot = async (mobs: FakeMobs): Promise<{ s: RunningServer; stores: FileStores }> => {
+      const stores = openFileStores(dir, { flushMs: -1 });
+      const s = await startServer({
+        port: 0,
+        auth: { scrypt: FAST, registerPerIpPerDay: 0, ipFailLimit: 1_000_000, store: stores.accounts },
+        world: { ...SERVER_OPTS, combat: { mobs } }, // combat on, NO inventory: the pre-fix sect fell back to an in-memory ledger here
+        progression: { store: stores.progression },
+        sect: { store: stores.sect, ledger: stores.ledger },
+      });
+      srv = s;
+      return { s, stores };
+    };
+    const mobs = new FakeMobs('boss');
+    let { s, stores } = await boot(mobs);
+    expect(s.world.inventory).toBeNull();
+    const a = await player(s, 'sect_noinv');
+    await until('state', () => a.sect.ready);
+    a.say('/sect join');
+    await until('member', () => a.sect.member);
+    // a real kill: the mob stands two tiles from the player, the player casts at it
+    const id = [...s.world.clients.keys()][0]!;
+    const me = s.world.world.entities.find((e) => e.id === id)!;
+    s.world.world = spawnEntity(s.world.world, { id: MOB, i: me.i + 2, j: me.j, hp: 1, mpMax: 0 });
+    await sleep(1500); // cooldowns / the player's first ticks
+    a.net.sendSkillCast({
+      seq: 1,
+      skillId: wireSkillIds().get('kiem_khi_tram')!,
+      targetId: 0,
+      aim: { i: me.i + 3, j: me.j },
+    });
+    await until('the kill paid Cống hiến', () => a.sect.contribution === SECT.KILL_REWARD.boss);
+    expect(mobs.killed).toEqual([MOB]);
+    a.close();
+    await sleep(200);
+    await s.stop();
+    stores.flush();
+    srv = undefined;
+
+    ({ s, stores } = await boot(new FakeMobs('boss')));
+    const b = await player(s, 'sect_noinv');
+    await until('restored', () => b.sect.ready && b.sect.member);
+    expect(b.sect.contribution).toBe(SECT.KILL_REWARD.boss); // the balance was NOT lost with the restart
+    void stores;
+    b.close();
+  });
+
+  it('startServer refuses a sect ledger that is not the inventory ledger (stones and Cống hiến must share one durable ledger)', async () => {
+    const stores = openFileStores(mkdtempSync(join(tmpdir(), 'vgtd-sect-mix-')), { flushMs: -1 });
+    dirs.push(stores.dir);
+    await expect(
+      startServer({
+        port: 0,
+        world: { ...SERVER_OPTS, inventory: new InventoryService() }, // its own in-memory ledger
+        sect: { ledger: stores.ledger },
+      }),
+    ).rejects.toThrow(/same Ledger/);
+  });
+});

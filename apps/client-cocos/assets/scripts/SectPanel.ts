@@ -6,7 +6,7 @@
  * could type, and the server decides everything (the NPC range, the balance, the price): a button that looks disabled is only a hint.
  *
  * Placeholder for the six Sơn Môn NPC standees (art by another worker): the dialog speaks as the NPC keys of `SECT.NPCS`
- * (`son_mon_tiep_dan` welcomes, `son_mon_tang_kinh` keeps the library), so the standees can bind to those ids later.
+ * (`npc_su_huynh` welcomes, `npc_truong_lao_dan` keeps the library), so the standees can bind to those ids later.
  */
 import { core, shared } from './vendor/vgtd.mjs';
 
