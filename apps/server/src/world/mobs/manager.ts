@@ -230,11 +230,19 @@ export class MobManager {
   kindOf(id: number): number {
     return isMobId(id) ? MOB_ENTITY_KIND : 0;
   }
-  /** What the mob attack system reads (D86): AI state, chase target, level, def. No allocation; undefined for dead / unknown mobs. */
-  attackView(id: number): { state: MobBrain['state']; target: number; level: number; def: MobDef } | undefined {
+  /** What the mob attack system reads (D86): AI state, chase target, level, def and the mob's own element (variant, D114). No allocation; undefined for dead / unknown mobs. */
+  attackView(
+    id: number,
+  ): { state: MobBrain['state']; target: number; level: number; def: MobDef; element: ElementId | null } | undefined {
     const s = this.slots[id - MOB_ID_BASE];
     if (!s || s.id !== id || !s.alive) return undefined;
-    return { state: s.brain.state, target: s.brain.target, level: s.level, def: s.def };
+    return {
+      state: s.brain.state,
+      target: s.brain.target,
+      level: s.level,
+      def: s.def,
+      element: s.def.elements[s.variant] ?? s.def.elements[0] ?? null,
+    };
   }
 
   // ------------------------------------------------------------------ spawning

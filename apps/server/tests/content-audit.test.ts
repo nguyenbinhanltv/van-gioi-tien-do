@@ -215,6 +215,8 @@ describe('elemental variants (docs/10 "8 loại x 2 biến thể", D114)', () =>
       }
     }
     for (const i of infos) expect(m.combatStats(i.id)!.element).toBe(i.element);
+    // ... and so does the attack side: the telegraphed hits of a variant use the variant element too (review of #271)
+    for (const i of infos) expect(m.attackView(i.id)!.element, `${i.def.key} #${i.slot}`).toBe(i.element);
   });
 
   it('is deterministic and draws no extra randomness: positions and levels equal a manager built again', () => {
