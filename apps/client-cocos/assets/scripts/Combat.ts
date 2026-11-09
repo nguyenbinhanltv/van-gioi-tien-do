@@ -6,9 +6,8 @@ import type { YSortLayer } from './YSortLayer';
 import type { TilePos } from './Actors';
 import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
-import { getSkillIcon } from './PropArt';
+import { getSkillIcon, getStatusIcon } from './PropArt';
 import { sharedAtlas } from './UiLabel';
-import { getStatusIcon } from './StatusIcons';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
