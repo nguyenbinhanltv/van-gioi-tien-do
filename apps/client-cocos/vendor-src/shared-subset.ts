@@ -11,6 +11,7 @@ export * from '../../../packages/shared/src/formulas/tribulation.js';
 export * from '../../../packages/shared/src/formulas/combat.js';
 export * from '../../../packages/shared/src/formulas/cultivation.js';
 export * from '../../../packages/shared/src/formulas/economy.js';
+export * from '../../../packages/shared/src/formulas/market.js'; // Vạn Bảo Lâu integer fee / tax + board limits for the market panel (D112)
 export * from '../../../packages/shared/src/formulas/skills.js'; // class skill kits (D49) for the combat HUD
 export * from '../../../packages/shared/src/items.js'; // item / currency definitions for the bag panel (D79)
 export * from '../../../packages/shared/src/mob-layout.js'; // tier bands / default mob area (D83)
