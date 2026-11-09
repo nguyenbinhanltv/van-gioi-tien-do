@@ -33,6 +33,7 @@ const TYPES: HotType[] = [
   'pong',
   'telegraph_start',
   'telegraph_end',
+  'boss_phase',
 ];
 
 describe('binary round trip', () => {

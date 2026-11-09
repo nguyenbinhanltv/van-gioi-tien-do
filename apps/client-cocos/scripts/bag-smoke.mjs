@@ -347,6 +347,31 @@ try {
       pendingBefore > 0 && afterClaim.pending === 0,
       `${name}: tapping Claim empties the pending queue (${pendingBefore} -> ${afterClaim.pending})`,
     );
+    // using items (D90), against the demo bag's stand-in server: after the swap above slot 1 holds the heal pill stack (12) and slot 9
+    // the breakthrough pill stack (2). A double tap uses one heal pill; a right click uses one breakthrough pill.
+    const qtyOf = (st, i) => {
+      const e = st.slots.find((x) => x.startsWith(`${i}:`));
+      const m = e && /x(\d+)$/.exec(e);
+      return m ? Number(m[1]) : e ? 1 : 0;
+    };
+    const q1 = qtyOf(afterClaim, 1);
+    const q9 = qtyOf(afterClaim, 9);
+    await tap(slot1);
+    await sleep(120);
+    await tap(slot1);
+    await sleep(400);
+    const afterUse = await bagState(p);
+    check(
+      q1 > 1 && qtyOf(afterUse, 1) === q1 - 1,
+      `${name}: a double tap uses one heal pill (${q1} -> ${qtyOf(afterUse, 1)})`,
+    );
+    await p.mouse.click(slot9.x, slot9.y, { button: 'right' });
+    await sleep(400);
+    const afterRight = await bagState(p);
+    check(
+      q9 > 1 && qtyOf(afterRight, 9) === q9 - 1,
+      `${name}: a right click uses one breakthrough pill (${q9} -> ${qtyOf(afterRight, 9)})`,
+    );
     await p.close();
   }
 } finally {

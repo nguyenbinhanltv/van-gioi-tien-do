@@ -34,6 +34,7 @@ import { OnlineSession, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
+import { PartyFrames } from './PartyFrames';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -95,6 +96,7 @@ export class Bootstrap extends Component {
   private progressionHud: ProgressionHud | null = null;
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
+  private partyFrames: PartyFrames | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -295,6 +297,8 @@ export class Bootstrap extends Component {
     if (this.online) {
       this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
       this.chatBox = new ChatBox(this.online.net, this.online.username);
+      const chat = this.chatBox;
+      this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -344,6 +348,7 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
+      online.onBossPhase = (entityId, phase) => this.combat?.announceBossPhase(entityId, phase);
       // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
       this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
@@ -363,6 +368,8 @@ export class Bootstrap extends Component {
         bag: () => (demo ? demo.bag : (online?.net.bag ?? null)),
         move: (from, to) => (demo ? demo.move(from, to) : (online?.net.sendBagMove(from, to) ?? false)),
         claim: () => (demo ? demo.claim() : (online?.net.sendBagClaim() ?? false)),
+        use: (slot) => (demo ? demo.use(slot) : (online?.net.sendBagUse(slot) ?? false)),
+        quickUse: (key) => (demo ? false : (online?.net.sendBagQuickUse(key) ?? false)),
         clientToUi: (x, y) => this.rig.clientToUi(x, y),
         icon: (key) => this.propArt?.icon(key) ?? null,
       },
@@ -522,6 +529,7 @@ export class Bootstrap extends Component {
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
     this.chatBox?.update();
+    this.partyFrames?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -568,6 +576,7 @@ export class Bootstrap extends Component {
     this.combat?.destroy();
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
+    this.partyFrames?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {
@@ -582,6 +591,7 @@ function makeDemoBag(): {
   bag: InstanceType<typeof core.BagModel>;
   move: (a: number, b: number) => boolean;
   claim: () => boolean;
+  use: (slot: number) => boolean;
 } {
   const bag = new core.BagModel();
   const slots: Array<unknown> = Array.from({ length: 40 }, () => null);
@@ -602,6 +612,15 @@ function makeDemoBag(): {
       const tmp = slots[a];
       slots[a] = slots[b] ?? null;
       slots[b] = tmp ?? null;
+      push();
+      return true;
+    },
+    use: (slot) => {
+      // a local stand-in for the server: only to see the panel react in a headless capture
+      const s = slots[slot] as { kind: string; qty: number } | null | undefined;
+      if (!s || s.kind !== 'stack' || !bag.canUse(slot)) return false;
+      s.qty -= 1;
+      if (s.qty <= 0) slots[slot] = null;
       push();
       return true;
     },

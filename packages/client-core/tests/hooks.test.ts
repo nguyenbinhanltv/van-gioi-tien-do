@@ -117,6 +117,18 @@ describe('NetClient event hooks', () => {
     expect(log).toEqual(['enter 3=77', 'snap tick=42 n=1 hp=60 self=y', 'skill 4 reason=0 hits=1', 'leave 3']);
   });
 
+  it('delivers boss_phase to onBossPhase (D91) and ignores it when no hook is set', async () => {
+    const seen: string[] = [];
+    const { sock } = await client({
+      onBossPhase: (m) => seen.push(`${m.mobEntityId}:${m.phase}:${m.transformMs}`),
+    });
+    sock.push({ type: 'boss_phase', mobEntityId: 1_000_003, phase: 1, transformMs: 1800 });
+    sock.push({ type: 'boss_phase', mobEntityId: 1_000_003, phase: 2, transformMs: 1800 });
+    expect(seen).toEqual(['1000003:1:1800', '1000003:2:1800']);
+    const quiet = await client({});
+    expect(() => quiet.sock.push({ type: 'boss_phase', mobEntityId: 1, phase: 1, transformMs: 0 })).not.toThrow();
+  });
+
   it('entityOfIndex resolves enters and snapshots, and still resolves inside onAoiLeave but not after it', async () => {
     const seen: (number | undefined)[] = [];
     const { net, sock } = await client({

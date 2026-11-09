@@ -13,6 +13,10 @@ import {
   type ChatHistoryMsg,
   type ChatMsgMsg,
   type ChatResultMsg,
+  type PartyInviteMsg,
+  type PartyResultMsg,
+  type PartyStateMsg,
+  type PartyVitalsMsg,
   type CharStateMsg,
   type EnterEntity,
   type MeditateResultMsg,
@@ -21,6 +25,7 @@ import {
   type Message,
   type SelfState,
   type SkillResultMsg,
+  type BossPhaseMsg,
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
@@ -68,6 +73,8 @@ export type NetStatus = 'idle' | 'connecting' | 'online' | 'reconnecting' | 'clo
  */
 export interface NetEvents {
   onSkillResult?(msg: SkillResultMsg): void;
+  /** a boss in view entered a new phase (D91): `phase` is the new phase index (>= 1); the boss is invulnerable for `transformMs` */
+  onBossPhase?(msg: BossPhaseMsg): void;
   onAoiEnter?(entities: readonly EnterEntity[]): void;
   /** Runs BEFORE the entities are dropped from `remote`, so `entityOfIndex(index)` still resolves each of them. */
   onAoiLeave?(indices: readonly number[]): void;
@@ -124,6 +131,18 @@ export interface ChatEvents {
   onChatHistory?(msg: ChatHistoryMsg): void;
   /** The answer to a `sendChat` (0 = delivered, otherwise why not). */
   onChatResult?(msg: ChatResultMsg): void;
+}
+
+/** Party callbacks (D93), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface PartyEvents {
+  /** The roster changed (0 members = you are in no party). */
+  onPartyState?(msg: PartyStateMsg): void;
+  /** Members' HP / MP. */
+  onPartyVitals?(msg: PartyVitalsMsg): void;
+  /** Someone invited you. */
+  onPartyInvite?(msg: PartyInviteMsg): void;
+  /** The answer to a `sendParty` (0 = done, otherwise why not). */
+  onPartyResult?(msg: PartyResultMsg): void;
 }
 
 export interface NetOptions {
@@ -240,6 +259,8 @@ export class NetClient {
   inventoryEvents: InventoryEvents = {};
   /** Callbacks for chat (own object, see `ChatEvents`). */
   chatEvents: ChatEvents = {};
+  /** Callbacks for the party (own object, see `PartyEvents`). */
+  partyEvents: PartyEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -249,6 +270,20 @@ export class NetClient {
     if (!cmd) return false;
     ws.send(encode(cmd));
     return true;
+  }
+  /** Use the item in bag slot `slot` (a pill; the server validates, applies the effect and consumes one unit). False when not usable or the socket is not open. */
+  sendBagUse(slot: number): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    const cmd = this.bag.useCmd(slot, () => makeRequestId(this.o.deps.random ?? Math.random));
+    if (!cmd) return false;
+    ws.send(encode(cmd));
+    return true;
+  }
+  /** Quick-use: use the first stack of item `key` in the bag (the key bound to a pill). False when there is none or the socket is not open. */
+  sendBagQuickUse(key: string): boolean {
+    const slot = this.bag.slotOfKey(key);
+    return slot === null ? false : this.sendBagUse(slot);
   }
   /** Ask the server to move pending loot into the bag. False when nothing is pending or the socket is not open. */
   sendBagClaim(): boolean {
@@ -468,6 +503,9 @@ export class NetClient {
       case 'telegraph_end':
         this.telegraph.end(msg);
         break;
+      case 'boss_phase':
+        this.emit(() => this.events.onBossPhase?.(msg));
+        break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
         break;
@@ -496,6 +534,18 @@ export class NetClient {
         break;
       case 'chat_result':
         this.emit(() => this.chatEvents.onChatResult?.(msg));
+        break;
+      case 'party_state':
+        this.emit(() => this.partyEvents.onPartyState?.(msg));
+        break;
+      case 'party_vitals':
+        this.emit(() => this.partyEvents.onPartyVitals?.(msg));
+        break;
+      case 'party_invite':
+        this.emit(() => this.partyEvents.onPartyInvite?.(msg));
+        break;
+      case 'party_result':
+        this.emit(() => this.partyEvents.onPartyResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -607,6 +657,21 @@ export class NetClient {
           text: m.text,
         }),
       );
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one party command (D93): `op` is a `PartyOp`, `name` the other player (invite / kick) or the inviter (accept / decline, '' = the
+   * newest). `clientMsgId` (uint16) comes back in the `party_result`. False when the socket is not open or the command cannot be encoded.
+   */
+  sendParty(m: { op: number; name?: string; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(encode({ type: 'party_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
     } catch {
       return false;
     }
