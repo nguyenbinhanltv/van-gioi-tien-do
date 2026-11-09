@@ -15,6 +15,13 @@ import {
   type ChatServerMessage,
 } from './chat.js';
 import {
+  decodeCraftBody,
+  encodeCraftBody,
+  validateCraftMessage,
+  type CraftClientMessage,
+  type CraftServerMessage,
+} from './craft.js';
+import {
   decodeTradeBody,
   encodeTradeBody,
   validateTradeMessage,
@@ -107,6 +114,10 @@ export enum ColdMsgId {
   FriendCmd = 92,
   FriendResult = 93,
   FriendState = 94,
+  /** crafting (D108, craft.ts): docs/24 ids 90-91, the state message sits after the friends range */
+  CraftCmd = 90,
+  CraftResult = 91,
+  CraftState = 95,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -162,6 +173,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.FriendCmd]: 'friend_cmd',
   [ColdMsgId.FriendResult]: 'friend_result',
   [ColdMsgId.FriendState]: 'friend_state',
+  [ColdMsgId.CraftCmd]: 'craft_cmd',
+  [ColdMsgId.CraftResult]: 'craft_result',
+  [ColdMsgId.CraftState]: 'craft_state',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -204,6 +218,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   friend_cmd: ColdMsgId.FriendCmd,
   friend_result: ColdMsgId.FriendResult,
   friend_state: ColdMsgId.FriendState,
+  craft_cmd: ColdMsgId.CraftCmd,
+  craft_result: ColdMsgId.CraftResult,
+  craft_state: ColdMsgId.CraftState,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -324,7 +341,8 @@ export type ColdClientMessage =
   | SectClientMessage
   | TutorialClientMessage
   | FriendClientMessage
-  | MarketClientMessage;
+  | MarketClientMessage
+  | CraftClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
   | DaoTamMsg
@@ -338,7 +356,8 @@ export type ColdServerMessage =
   | MajorServerMessage
   | TutorialServerMessage
   | FriendServerMessage
-  | MarketServerMessage;
+  | MarketServerMessage
+  | CraftServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -413,7 +432,8 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validateMajorMessage(o) ??
         validateTutorialMessage(o) ??
         validateFriendMessage(o) ??
-        validateMarketMessage(o)
+        validateMarketMessage(o) ??
+        validateCraftMessage(o)
       );
   }
 }
@@ -515,6 +535,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'friend_state':
       encodeFriendBody(w, m);
       break;
+    case 'craft_cmd':
+    case 'craft_result':
+    case 'craft_state':
+      encodeCraftBody(w, m);
+      break;
     case 'market_search':
     case 'market_results':
     case 'market_list':
@@ -601,6 +626,10 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'friend_result':
     case 'friend_state':
       return decodeFriendBody(r, type);
+    case 'craft_cmd':
+    case 'craft_result':
+    case 'craft_state':
+      return decodeCraftBody(r, type);
     case 'market_search':
     case 'market_results':
     case 'market_list':

@@ -19,6 +19,7 @@ export function budgetClassOf(type: string): BudgetClass | null {
     case 'party_cmd':
       return 'party';
     case 'inv_cmd':
+    case 'craft_cmd': // alchemy (D108) mutates the bag like an inventory command
       return 'inventory';
     case 'sect_cmd':
       return 'sect';

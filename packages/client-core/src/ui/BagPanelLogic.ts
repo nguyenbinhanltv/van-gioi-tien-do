@@ -173,6 +173,8 @@ const KEY_STYLE: Record<string, { code: string; color: Rgb }> = {
   blueprint_blue_purple: { code: 'B2', color: [90, 100, 190] },
   blueprint_gold_red: { code: 'B3', color: [160, 90, 170] },
   craft_material: { code: 'MA', color: [120, 120, 110] },
+  ho_mach_pill: { code: 'HM', color: [90, 170, 150] }, // support pills (D108)
+  dinh_tam_pill: { code: 'DT', color: [150, 120, 200] },
 };
 /** Placeholder look of an item; an id this client does not know (a newer server) shows as `??` instead of failing. */
 export function itemStyle(item: BagItemView): ItemStyle {

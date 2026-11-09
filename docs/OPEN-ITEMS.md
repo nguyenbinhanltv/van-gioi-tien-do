@@ -741,3 +741,14 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 - **Hiệu năng**: mỗi sự kiện ghi qua bộ đệm 1 s; tổng hợp trong RAM (DAU lưu danh sách 16 hex mỗi người mỗi ngày, ~10 KB cho 1.000 người; chưa đo ở 5.000 CCU). Ước lượng khối lượng docs/17 §2 chưa đo.
 - **Nhiều tiến trình**: một World Node duy nhất ghi rollups; khi tách nhiều node (docs/20) cần ghi qua bus + người tổng hợp, không chia sẻ file.
 - **Telemetry fuera del backup (D109, D99)**: `<DATA_DIR>/telemetry/` (log thô, `rollups.json`, `pid.key`) **không** nằm trong `STORE_DOC_NAMES` nên không có trong bản sao lưu; khôi phục không đụng tới thư mục này (test trong `backup.test.ts`). Mất `pid.key` (ví dụ máy mới) làm đổi mọi `player_pid` và cắt tính liên tục của giữ chân; cần quyết định có sao lưu riêng `pid.key` + `rollups.json` (bí mật vận hành: chỉ người vận hành) hay chấp nhận.
+
+## D108 — luyện đan tối giản: còn mở (worker39, 2026-11-09)
+
+1. **Số liệu tạm cần duyệt** (docs/13 giao cho `recipes.json` chưa có): số nguyên liệu mỗi lần chế (3 / 15 / 25 / 10 / 10), phẩm trần Tím cho mọi công thức, làm tròn phí lò (lên, ≥ 1), mức cộng điểm thạo luyện (`round(5·(1 − m/100))`), tầm lò 20 ô, xô lệnh 5 + 1/s. Chưa mô phỏng kinh tế (OPEN-ITEMS #7): phí lò 3 % × V theo `κ` phẩm trần Tím cho phí ≈ 1 / 34 / 51 / 26 LT hạ.
+2. **Chưa có đan phương / học công thức**: mọi công thức bậc ≤ cảnh giới đều dùng được; docs/13 §2.1 và §4.3 muốn phẩm trần theo đan phương và Vàng–Đỏ chỉ từ Boss.
+3. **Nguyên liệu chưa có họ và bậc** (`mat_herb_` …, bậc nguyên liệu = cảnh giới quái): chỉ có `craft_material`. Điểm thu hái chưa có.
+4. **Đan chủ chưa phân biệt ngưỡng**: `breakthrough_pill` là một vật phẩm cho Trúc Cơ Đan và Kết Kim Đan (D90 chưa phân biệt "đúng cảnh giới × 0,3"). `ho_mach_pill`, `dinh_tam_pill` chưa có công dụng (chờ Lôi Kiếp / Tâm Ma của #252). Đan hồi máu chưa phụ thuộc phẩm.
+5. **Thiếu so với docs/13**: dụng cụ phẩm cao / xúc tác / _Hộ Lô Phù_ (chỉ Score từ thạo luyện), độ bền lò và sửa, hạn ngạch đan chủ b ≥ 3, cấm đan hồi trong đấu trường, telemetry `craft.start / craft.result`, "hai thất bại liên tiếp hiện nhắc thạo luyện còn thiếu", `pill_tu_khi_dan`, `pill_hoi_khi_dan`, Luyện Khí, Chế Phù.
+6. **Chế tạo cần Trúc Cơ**: người mới ở Luyện Khí không chế được `pill_hoi_huyet_dan` (đúng docs/13 §1, docs/10 §3); có nghĩa là bảng chế tạo chỉ dùng được sau Trúc Cơ và chưa kiểm thử trên người chơi thật.
+7. **Cùng sửa `ledger.ts` với #253** (thêm loại tài khoản sink và lý do sổ cái): hợp nhất khi merge.
+8. **Chưa chạy trên trình duyệt**: bảng DOM chưa được chụp / thử bằng smoke Cocos; được thử bằng `CraftModel` + NetClient thật (apps/server/tests/alchemy-netclient.test.ts).

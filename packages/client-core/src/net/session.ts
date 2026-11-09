@@ -15,6 +15,8 @@ import {
   type ChatResultMsg,
   type FriendResultMsg,
   type FriendStateMsg,
+  type CraftResultMsg,
+  type CraftStateMsg,
   type MarketBuyMsg,
   type MarketCancelMsg,
   type MarketListMsg,
@@ -202,6 +204,14 @@ export interface FriendEvents {
   onFriendResult?(msg: FriendResultMsg): void;
 }
 
+/** Crafting callbacks (D108), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface CraftEvents {
+  /** Furnace position, the running job and the mastery of every recipe, after every change. */
+  onCraftState?(msg: CraftStateMsg): void;
+  /** The answer to a `sendCraft` or one finished / cancelled craft. */
+  onCraftResult?(msg: CraftResultMsg): void;
+}
+
 /** Party callbacks (D93), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
 export interface PartyEvents {
   /** The roster changed (0 members = you are in no party). */
@@ -349,6 +359,8 @@ export class NetClient {
   sectEvents: SectEvents = {};
   /** Callbacks for the friends list (own object, see `FriendEvents`). */
   friendEvents: FriendEvents = {};
+  /** Callbacks for alchemy (own object, see `CraftEvents`). */
+  craftEvents: CraftEvents = {};
   /** Callbacks for Vạn Bảo Lâu (own object, see `MarketEvents`). */
   marketEvents: MarketEvents = {};
 
@@ -682,6 +694,12 @@ export class NetClient {
       case 'friend_result':
         this.emit(() => this.friendEvents.onFriendResult?.(msg));
         break;
+      case 'craft_state':
+        this.emit(() => this.craftEvents.onCraftState?.(msg));
+        break;
+      case 'craft_result':
+        this.emit(() => this.craftEvents.onCraftResult?.(msg));
+        break;
       case 'market_results':
         this.emit(() => this.marketEvents.onMarketResults?.(msg));
         break;
@@ -908,6 +926,14 @@ export class NetClient {
     const ws = this.ws;
     if (!ws || ws.readyState !== WS_OPEN) return false;
     ws.send(encode({ type: start ? 'meditate_start' : 'meditate_stop', requestId }));
+    return true;
+  }
+
+  /** Start `count` crafts of a recipe, or cancel the running job (D108). Returns false when the socket is not open. */
+  sendCraft(m: { op: number; requestId: string; recipeId: number; count: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: 'craft_cmd', ...m }));
     return true;
   }
 

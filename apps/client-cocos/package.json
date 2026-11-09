@@ -25,6 +25,7 @@
     "trade:online": "node scripts/trade-online-smoke.mjs",
     "sect:online": "node scripts/sect-online-smoke.mjs",
     "friends:online": "node scripts/friends-online-smoke.mjs",
+    "craft:online": "node scripts/craft-online-smoke.mjs",
     "touch:aim": "node scripts/touch-aim-smoke.mjs",
     "major:vfx": "node scripts/major-vfx-smoke.mjs",
     "bag:smoke": "node scripts/bag-smoke.mjs",

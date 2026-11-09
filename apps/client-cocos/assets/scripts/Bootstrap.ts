@@ -42,6 +42,7 @@ import { TutorialHints, tutorialRequested } from './TutorialHints';
 import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
+import { CraftPanel } from './CraftPanel';
 import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
@@ -112,6 +113,7 @@ export class Bootstrap extends Component {
   private tradePanel: TradePanel | null = null;
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private craftPanel: CraftPanel | null = null;
   private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
@@ -385,6 +387,19 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // alchemy panel (D108): P; the numbers come from the same shared formulas the server uses, the server decides everything
+      const craft = new core.CraftModel({
+        now: () => performance.now(),
+        newRequestId: () => core.requestIdFrom(Math.random),
+        bagCount: (id) => net.bag.count(id),
+        stones: () => Number(net.bag.wallet.LT_HA ?? 0),
+        realm: () => this.progressionHud?.view.state?.realm ?? null,
+      });
+      net.craftEvents = {
+        onCraftState: (m) => craft.applyState(m),
+        onCraftResult: (m) => craft.applyResult(m),
+      };
+      this.craftPanel = new CraftPanel(craft, { position: () => net.selfPosition(), send: (m) => net.sendCraft(m) });
       // market panel (D112, Vạn Bảo Lâu): V; it owns net.marketEvents (its own hook object, nobody replaces it)
       this.marketPanel = new MarketPanel(net);
     }
@@ -651,6 +666,7 @@ export class Bootstrap extends Component {
     this.tradePanel?.update();
     this.sectPanel?.update();
     this.friendsPanel?.update();
+    this.craftPanel?.update();
     this.marketPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
@@ -706,6 +722,7 @@ export class Bootstrap extends Component {
     this.tradePanel?.destroy();
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
+    this.craftPanel?.destroy();
     this.marketPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();

@@ -19,5 +19,6 @@ export * from '../../../packages/shared/src/first-session.js'; // first-session 
 export * from '../../../packages/shared/src/tutorial.js'; // tutorial steps (D105)
 export * from '../../../packages/shared/src/sect-layout.js'; // sect building layout (D118)
 export * from '../../../packages/shared/src/classes.js'; // class wire ids (D82)
+export * from '../../../packages/shared/src/alchemy.js'; // alchemy recipes / formulas for the crafting panel (D108)
 export * from '../../../packages/shared/src/formulas/market.js'; // Van Bao Lau constants (D112): protocol / client-core market import them from @vgtd/shared
 export * from '../../../packages/shared/src/breakthrough-event.js'; // Tâm Ma / Lôi Kiếp event numbers (D97)

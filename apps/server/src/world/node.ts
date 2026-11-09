@@ -74,6 +74,7 @@ import type { SecurityEvent } from './security-log.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
+import { CraftService, type CraftLogEntry } from '../craft/service.js';
 import type { TutorialService } from '../tutorial/service.js';
 import type { TradeService } from '../trade/service.js';
 import type { SectService } from '../sect/service.js';
@@ -248,6 +249,11 @@ export interface WorldNodeOptions {
   sect?: SectService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
   friends?: FriendService;
+  /**
+   * Minimal alchemy (D108): needs `inventory` and `progression`. `true` = the furnace NPC in the middle of the spawn area; absent / false = no crafting
+   * (craft messages are rejected as unexpected).
+   */
+  craft?: boolean | { furnaceAt?: { i: number; j: number }; seed?: number; onLog?: (e: CraftLogEntry) => void };
   /** Vạn Bảo Lâu (D112): list / search / buy / cancel with escrow and fee + tax through the ledger; absent = market commands are rejected as unexpected */
   market?: MarketService;
   /** telemetry pipeline (D109): session / progression / combat / drop events; absent = nothing is recorded */
@@ -401,6 +407,8 @@ export class WorldNode {
   readonly trade: TradeService | undefined;
   readonly sect: SectService | undefined;
   readonly friends: FriendService | undefined;
+  /** alchemy (D108); null when the node runs without it */
+  readonly craft: CraftService | null = null;
   readonly market: MarketService | undefined;
   readonly telemetry: TelemetryService | undefined;
   /**
@@ -522,6 +530,18 @@ export class WorldNode {
     this.inventory = opts.inventory ?? null;
     this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
     this.inventory?.subscribe((owner) => this.invSync?.markDirty(owner));
+    if (opts.craft && this.inventory && this.progression) {
+      const co = opts.craft === true ? {} : opts.craft;
+      this.craft = new CraftService({
+        inventory: this.inventory,
+        progression: this.progression,
+        furnaceAt: co.furnaceAt ?? { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
+        seed: co.seed ?? seed,
+        onLog: co.onLog,
+        isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
+        tickOf: () => this.world.tick,
+      });
+    }
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -636,6 +656,7 @@ export class WorldNode {
       mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
     this.inventory?.onJoin(accountId);
+    this.craft?.join(id, accountId, this.world.timeMs);
     this.invSync?.markDirty(accountId); // the joining client gets its first inv_state this tick
     this.clients.set(id, {
       id,
@@ -816,6 +837,7 @@ export class WorldNode {
       this.deliver(mj.outbound);
     }
     void this.progression?.leave(id);
+    this.craft?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
     this.tutorial?.leave(id);
@@ -1002,7 +1024,10 @@ export class WorldNode {
       case 'input': {
         c.lastAckMs = this.world.timeMs;
         for (const p of msg.inputs) {
-          if (p.mag > 0) this.progression?.onInput(id, p.mag, this.world.timeMs);
+          if (p.mag > 0) {
+            this.progression?.onInput(id, p.mag, this.world.timeMs);
+            if (this.craft) this.deliver(this.craft.onMove(id, this.world.timeMs));
+          }
           // the packet re-sends the previous inputs; apply each seq once (uint16 wrap-aware)
           if (c.lastRecvSeq !== null && !seqNewer(p.seq, c.lastRecvSeq)) continue;
           c.lastRecvSeq = p.seq;
@@ -1020,6 +1045,7 @@ export class WorldNode {
       }
       case 'skill_cast':
         this.progression?.onCombat(id, this.world.timeMs);
+        if (this.craft) this.deliver(this.craft.onCombat(id, this.world.timeMs));
         c.inbox.push({
           kind: 'cast',
           entityId: c.id,
@@ -1057,6 +1083,14 @@ export class WorldNode {
               });
             }
           }
+        }
+        break;
+      case 'craft_cmd':
+        if (!this.craft) {
+          this.badFrame(c, 'unexpected');
+        } else {
+          const e = this.byId.get(id);
+          this.deliver(this.craft.handle(id, msg, this.world.timeMs, e ? { i: e.i, j: e.j } : null));
         }
         break;
       case 'chat_send':
@@ -1224,6 +1258,13 @@ export class WorldNode {
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
+    if (this.craft)
+      this.deliver(
+        this.craft.tick(this.world.timeMs, (id) => {
+          const e = this.byId.get(id);
+          return e ? { i: e.i, j: e.j } : null;
+        }),
+      );
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     if (this.majorDue.size) this.sendMajorDue();
     this.party?.tick(this.world.timeMs, this.world.tick);
