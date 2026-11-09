@@ -694,3 +694,9 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 2. **Chưa áp**: `move_speed_pct` (đồng bộ dự đoán), `timing.invuln_ms` của lướt, `silence`, `tribulation_reduction`, `ClassDef.trait`, nhấc quái khi knock-up, buff cho người ngoài tổ đội.
 3. **Client**: trạng thái quái chỉ có chữ `CHOANG` / `TROI` / `CHAM` (chưa icon, chưa hoạt ảnh choáng); quái bị đẩy / kéo dịch chuyển tức thời (chưa nội suy riêng).
 4. **Cân bằng**: sau D116 thứ hạng lớp thay đổi (xem báo cáo D115 chạy lại): cần xem lại hệ số trên cơ sở mới trước khi chỉnh bất kỳ số nào; `stat_weights` của lớp vẫn bị bỏ qua (D117).
+
+## D117 — trọng số chỉ số của lớp (worker39, 2026-11-10)
+
+1. `packages/client-combat` (mô phỏng ngoại tuyến cho HUD) và HP tham chiếu của Lôi Kiếp (`breakthrough-event.ts`) chưa dùng `classStatsAt`: cần quyết định có nên tính theo lớp hay không (Lôi Kiếp hiện theo cảnh giới, không theo lớp).
+2. `agi` đã có trọng số nhưng máy chủ chưa dùng `agi` (tốc độ di chuyển cố định theo D95): chờ quyết định thiết kế.
+3. Cần game designer duyệt khi cân bằng: tank (the) và hỗ trợ (dan_phu) vẫn chậm hơn ~2× trong TTK đơn độc trước D116 (xem D116 để biết khi hiệu ứng được cài).

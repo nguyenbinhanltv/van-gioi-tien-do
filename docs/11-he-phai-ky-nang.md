@@ -540,6 +540,8 @@ Phần schema và dữ liệu mẫu dài trước đây trong mục này **đã 
 
 > **[Cập nhật D116]** Máy chủ đã mô phỏng mọi loại hiệu ứng của bộ kỹ năng MVP (dot / hot, khống chế, buff / debuff, dấu, lướt, khiêu khích, thú triệu hồi ...) theo cùng quy tắc với mô phỏng thiết kế §4.5; còn thiếu `move_speed_pct`, `invuln_ms` của lướt, `silence`, `trait` của lớp. Xem DECISIONS D116 và báo cáo cân bằng D115 chạy lại.
 
+> **[Cập nhật D117]** `stat_weights` của lớp nay được máy chủ áp lên HP / MP / ATK / DEF / AGI của người chơi (`classStatsAt` trong `@vgtd/shared`); xem DECISIONS D117.
+
 ## Câu hỏi cần chốt
 
 Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (S1–S14). Nội dung gốc của mục này nằm trong lịch sử git.

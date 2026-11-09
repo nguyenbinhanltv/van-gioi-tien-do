@@ -3,7 +3,7 @@
  * Realm / sub-stage are inputs: progression feeds them through `CombatSystem.setRealm` (`onStageChange`, wired in `WorldNode`); a player
  * starts at Luyện Khí 1 until their profile has loaded.
  */
-import { COMBAT_RULES, PEN_MAX, classOf, effectActive, roundedStatsAt, skillDefinitions } from '@vgtd/shared';
+import { COMBAT_RULES, PEN_MAX, classOf, classStatsAt, effectActive, skillDefinitions } from '@vgtd/shared';
 import type { PathId, SkillDefinitions } from '@vgtd/shared';
 import type { CombatProfile } from './types.js';
 
@@ -55,7 +55,7 @@ export function makeProfile(
     realm,
     substage,
     element: classOf(path, defs).element as CombatProfile['element'],
-    stats: roundedStatsAt(realm, substage), // integers: the server stores and sends whole HP / MP, and hp must never exceed hpMax
+    stats: classStatsAt(path, realm, substage, defs), // realm stats x the class stat_weights (D117), integers: whole HP / MP, hp never exceeds hpMax
     critChance: Math.min(COMBAT_RULES.CRIT_CHANCE_CAP, COMBAT_RULES.BASE_CRIT_CHANCE + bonus.crit),
     pen: Math.min(PEN_MAX, bonus.pen),
     lifesteal: bonus.lifesteal,

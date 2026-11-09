@@ -40,7 +40,8 @@ describe('snapshot stream golden (byte-identical to the pre-optimisation impleme
     // re-captured for D114: the odd packs of a normal mob now carry their variant element, which changes the Ngũ hành multiplier of the
     // fights in this run (the combat outcomes, so frames / bytes move with the checksum); nothing else about the stream changed
     // re-pinned again for D116: the skill effects now act (mobs stunned / slowed, `status_update` frames for mobs)
-    expect(stream(r)).toEqual({ checksum: 'b2ae758b', frames: 32223, bytes: 5760427 });
+    // re-pinned again for D117: the class stat weights change HP / ATK per class
+    expect(stream(r)).toEqual({ checksum: '9c354f7c', frames: 31635, bytes: 5761002 });
   });
 
   it('the benchmark itself is deterministic: two runs of the same config give the same checksum', () => {
