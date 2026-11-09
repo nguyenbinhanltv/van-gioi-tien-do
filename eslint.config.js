@@ -14,6 +14,7 @@ export default tseslint.config(
       'scripts/**', // plain Node launcher (`npm run play`)
       'tools/procgen/**',
       'tools/dragonbones-testrig/scripts/**', // plain Node CLI (.mjs), like the procgen scripts
+      'tools/econ-sim/scripts/**/*.mjs', // plain Node launcher (.mjs), same as the rig one
       'tools/rig/scripts/**/*.mjs', // plain Node launcher (.mjs); the TypeScript scripts there are linted
     ],
   },
