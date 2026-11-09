@@ -30,3 +30,7 @@ jobs:
       - run: npm run build
       - run: npm run lint
       - run: npm run docs:links
+      # P5 load smoke (docs/35): 20 gameplay bots (real NetClient) on the real gateway + world node + file store for 60 s; the gate fails on
+      # correctness (bots dropped, kicks, protocol violations, nobody playing) and gross tick overruns only, never on the design budgets
+      - run: npm run soak -w @vgtd/server -- --ci
+        timeout-minutes: 5
