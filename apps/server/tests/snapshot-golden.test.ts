@@ -35,9 +35,9 @@ describe('snapshot stream golden (byte-identical to the pre-optimisation impleme
     expect(stream(r)).toEqual({ checksum: 'a4e17b5c', frames: 20983, bytes: 5676093 });
   });
 
-  it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged', () => {
+  it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged (checksum re-pinned by D116: the skill effects now act)', () => {
     const r = runTickBench({ players: 150, ticks: 120, warm: 30, area: 20, mobs: 30, mobAttacks: false, hash: true });
-    expect(stream(r)).toEqual({ checksum: 'c5a80ca4', frames: 23508, bytes: 5868270 });
+    expect(stream(r)).toEqual({ checksum: 'ecbb17ef', frames: 31637, bytes: 5758889 });
   });
 
   it('the benchmark itself is deterministic: two runs of the same config give the same checksum', () => {

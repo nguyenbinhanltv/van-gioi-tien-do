@@ -11,8 +11,14 @@
  * (resolve time, caster, seq). All state is plain data, `stateDigest()` exposes it for the replay tests.
  */
 import {
+  COLLIDER_RADIUS_TILES,
   COMBAT_RULES,
   HIT_FLAG_CRIT,
+  MOB_ID_BASE,
+  SKILL_EFFECTS,
+  damageBreakdown,
+  effectActive,
+  type SkillEffect,
   HIT_FLAG_KILL,
   resolveDrops,
   rngFloat,
@@ -31,7 +37,11 @@ import {
 } from '@vgtd/shared';
 import {
   CastReason,
+  DIR_COS,
+  DIR_SIN,
+  circleBlocked,
   emptyCooldowns,
+  hypot,
   lineOfSight,
   type EntityState,
   type SimContext,
@@ -41,7 +51,8 @@ import {
 } from '@vgtd/sim';
 import { DEFAULT_PATH, makeProfile } from './profile.js';
 import { StatusSystem } from './status.js';
-import { resolveCast, type ResolveTarget } from './resolve.js';
+import { EffectSystem } from './effects.js';
+import { resolveCast, type CastOutcome, type ResolveTarget } from './resolve.js';
 import {
   type AimedInput,
   type CombatEvent,
@@ -57,6 +68,8 @@ interface PlayerCombat {
   respawnAtMs: number;
   shield: number;
   shieldUntilMs: number;
+  /** the shield bursts into damage around the player when it ends or breaks (`explode` of the shield effect, D116) */
+  shieldExplode: { coeff: number; radius: number; srcId: number } | null;
   /** sim time of the last damage dealt or taken (regeneration is slower in combat, D88) */
   lastCombatMs: number;
   /** sim time at which the shared pill cooldown ends (D90) */
@@ -85,6 +98,8 @@ export interface PostStep {
 }
 
 const TWO_32 = 4294967296;
+/** hurtbox radius used for the reach checks of state effects, as in `geometry.ts` */
+const SKILL_HURTBOX = 0.45;
 const castKey = (id: number, seq: number): number => id * 65536 + (seq & 0xffff);
 
 export class CombatSystem {
@@ -98,6 +113,10 @@ export class CombatSystem {
   private readonly respawnDelayMs: number;
   /** root / slow / poison / pools put on players by elite and boss skills (D91) */
   readonly status = new StatusSystem();
+  /** buffs, heal-over-time zones, pets, and the control / marks / debuffs / dots on mobs put by player skills (D116) */
+  readonly effects = new EffectSystem();
+  /** mobs whose current attack was interrupted (a hard CC or a knock-back on a boss): `MobAttackSystem` cancels their telegraph and clears this */
+  readonly interrupted = new Set<number>();
 
   constructor(
     private readonly ctx: SimContext,
@@ -123,11 +142,13 @@ export class CombatSystem {
       respawnAtMs: 0,
       shield: 0,
       shieldUntilMs: 0,
+      shieldExplode: null,
       lastCombatMs: -REGEN.outOfCombatDelayMs, // a new player starts out of combat
       pillReadyAtMs: 0,
       hpFrac: 0,
       mpFrac: 0,
     });
+    this.effects.setPet(id, profile.pet ? { ...profile.pet, nextMs: 0 } : null);
     return { hpMax: profile.stats.hp, mpMax: profile.stats.mp };
   }
 
@@ -154,6 +175,8 @@ export class CombatSystem {
 
   removePlayer(id: number): void {
     this.status.clear(id);
+    this.effects.clearPlayer(id);
+    this.effects.setPet(id, null);
     this.players.delete(id);
     this.pending = this.pending.filter((p) => p.casterId !== id);
   }
@@ -272,6 +295,7 @@ export class CombatSystem {
       .sort((a, b) => a.resolveAtMs - b.resolveAtMs || a.casterId - b.casterId || a.seq - b.seq);
     this.pending = this.pending.filter((p) => p.resolveAtMs > now);
     for (const p of due) w = this.resolve(w, p, results, events);
+    w = this.tickEffects(w, events);
     w = this.respawnDue(w, events);
     w = this.regenerate(w);
     w = this.applyStatus(w, events);
@@ -305,16 +329,20 @@ export class CombatSystem {
     const e = world.entities.find((x) => x.id === id);
     if (!p || !e || !p.alive || e.hp <= 0 || amount <= 0) return { world, events };
     p.lastCombatMs = world.timeMs;
+    amount *= 1 - this.drOf(id, world.timeMs); // `dr_pct` buffs (D116)
     let dmg = Math.round(amount);
+    let burst = false;
     if (world.timeMs < p.shieldUntilMs && p.shield > 0) {
       const absorbed = Math.min(p.shield, dmg);
       p.shield -= absorbed;
       dmg -= absorbed;
+      burst = p.shield <= 0 && p.shieldExplode !== null;
     }
     const hp = Math.max(0, e.hp - dmg);
     const killed = hp <= 0;
     events.push({ type: 'damage', sourceId, targetId: id, amount: Math.round(amount), crit: false, killed });
     let w = patch(world, new Map([[id, { hp }]]));
+    if (burst) w = this.explodeShield(w, id, events);
     if (killed) {
       p.alive = false;
       p.respawnAtMs = world.timeMs + this.respawnDelayMs;
@@ -346,7 +374,8 @@ export class CombatSystem {
     if (!p.alive || e.hp <= 0) return none('dead');
     if (world.timeMs < p.pillReadyAtMs) return none('cooldown');
     if (e.hp >= p.hpMax) return none('full');
-    const healed = Math.min(p.hpMax - e.hp, Math.max(1, Math.round(p.hpMax * ITEM_USE.healPill.healPct)));
+    const power = 1 + p.profile.potionPower; // `potion_power` passive (D116)
+    const healed = Math.min(p.hpMax - e.hp, Math.max(1, Math.round(p.hpMax * ITEM_USE.healPill.healPct * power)));
     p.pillReadyAtMs = world.timeMs + ITEM_USE.healPill.cooldownMs;
     return {
       world: patch(world, new Map([[id, { hp: e.hp + healed }]])),
@@ -403,6 +432,399 @@ export class CombatSystem {
     return patches ? patch(world, patches) : world;
   }
 
+  // ------------------------------------------------------------------ skill effects (D116)
+  /** The caster and its living party members (alive players only), caster first. A solo player's group is just itself. */
+  private groupOf(world: SimWorld, casterId: number, includeDead = false): number[] {
+    const at = world.entities.find((e) => e.id === casterId);
+    const out = [casterId];
+    if (!at) return out;
+    for (const id of [...new Set(this.opts.partyOf?.(casterId) ?? [])].sort((a, b) => a - b)) {
+      const pl = this.players.get(id);
+      if (id === casterId || !pl || (!includeDead && !pl.alive)) continue;
+      const e = world.entities.find((x) => x.id === id);
+      if (e && (includeDead || e.hp > 0) && hypot(e.i - at.i, e.j - at.j) <= SKILL_EFFECTS.GROUP_RANGE_TILES)
+        out.push(id);
+    }
+    return out;
+  }
+
+  /** Outgoing-damage modifiers of a player from its buffs and passives (the design simulation's `dmgMods` / `critChance`). */
+  private modsOf(id: number, nowMs: number, hp: number): { dmgMult: number; critBonus: number; penBonus: number } {
+    const p = this.players.get(id);
+    const low = p && hp < p.hpMax * SKILL_EFFECTS.LOW_HP ? p.profile.lowHpDmgPct : 0;
+    return {
+      dmgMult: 1 + this.effects.buffSum(id, 'dmg_pct', nowMs) + low,
+      critBonus: this.effects.buffSum(id, 'crit_chance', nowMs),
+      penBonus: this.effects.buffSum(id, 'pen', nowMs),
+    };
+  }
+  private lifestealOf(id: number, nowMs: number): number {
+    return (this.players.get(id)?.profile.lifesteal ?? 0) + this.effects.buffSum(id, 'lifesteal', nowMs);
+  }
+  /** Damage reduction of a player (`dr_pct` buffs), capped. */
+  drOf(id: number, nowMs: number): number {
+    return Math.min(SKILL_EFFECTS.DR_CAP, Math.max(0, this.effects.buffSum(id, 'dr_pct', nowMs)));
+  }
+  /** DEF a mob attack is resolved against: the realm DEF x (1 + def_pct of the passives and buffs), floored. */
+  defenseOf(id: number, nowMs: number): number {
+    const p = this.players.get(id);
+    if (!p) return 0;
+    return (
+      p.profile.stats.def *
+      Math.max(SKILL_EFFECTS.DEF_FACTOR_MIN, 1 + p.profile.defPct + this.effects.buffSum(id, 'def_pct', nowMs))
+    );
+  }
+
+  private lifestealHeal(world: SimWorld, id: number, dealt: number, events: CombatEvent[]): SimWorld {
+    const ls = this.lifestealOf(id, world.timeMs);
+    const p = this.players.get(id);
+    const e = world.entities.find((x) => x.id === id);
+    if (ls <= 0 || dealt <= 0 || !p || !p.alive || !e || e.hp <= 0) return world;
+    const healed = Math.min(p.hpMax - e.hp, Math.round(dealt * ls));
+    if (healed <= 0) return world;
+    events.push({ type: 'heal', targetId: id, amount: healed });
+    return patch(world, new Map([[id, { hp: e.hp + healed }]]));
+  }
+
+  /** One fixed hit (no crit, mid jitter) of `coeff` x the caster's ATK on a mob: dot ticks, detonations, bursts, pets. */
+  private fixedHit(world: SimWorld, casterId: number, mob: ResolveTarget, coeff: number, extraDmgMult = 1): number {
+    const pc = this.players.get(casterId);
+    if (!pc) return 0;
+    const m = this.modsOf(casterId, world.timeMs, world.entities.find((e) => e.id === casterId)?.hp ?? pc.hpMax);
+    const b = damageBreakdown({
+      atk: pc.profile.stats.atk,
+      def: mob.defense,
+      cSkill: coeff,
+      attackerElement: pc.profile.element,
+      defenderElement: mob.element ?? undefined,
+      pen: pc.profile.pen + m.penBonus,
+      crit: false,
+      attackerRealm: pc.profile.realm,
+      defenderRealm: mob.realm,
+      rand: 0.5,
+    });
+    return Math.max(1, Math.round(b.damage * m.dmgMult * extraDmgMult));
+  }
+
+  /** Damage a mob from a source that is not a cast hit: patch HP, event, threat, lifesteal, kill and loot. */
+  private hurtMob(world: SimWorld, mobId: number, dmg: number, srcId: number, events: CombatEvent[]): SimWorld {
+    const e = world.entities.find((x) => x.id === mobId);
+    if (!e || e.hp <= 0 || dmg <= 0) return world;
+    const hp = Math.max(0, e.hp - dmg);
+    const dead = hp <= 0;
+    events.push({ type: 'damage', sourceId: srcId, targetId: mobId, amount: dmg, crit: false, killed: dead });
+    let w = patch(world, new Map([[mobId, { hp }]]));
+    const pc = this.players.get(srcId);
+    if (pc) pc.lastCombatMs = world.timeMs;
+    if (!dead) this.opts.mobs?.onDamage?.(mobId, srcId, dmg);
+    w = this.lifestealHeal(w, srcId, dmg, events);
+    if (dead) {
+      events.push({ type: 'death', id: mobId, killerId: srcId });
+      if (pc) w = this.onMobKilled(w, mobId, srcId, pc, events);
+    }
+    return w;
+  }
+
+  private tierOf(mobId: number): string | undefined {
+    return this.opts.mobs?.combatStats(mobId)?.tier;
+  }
+
+  /** Walk an entity up to `dist` tiles along (di, dj), stopping before anything blocked on the grid (walls, water, lava: D95 grid). */
+  private moveEntity(world: SimWorld, id: number, di: number, dj: number, dist: number): SimWorld {
+    const e = world.entities.find((x) => x.id === id);
+    const len = hypot(di, dj);
+    if (!e || len < 1e-9 || dist <= 0) return world;
+    const ux = di / len;
+    const uy = dj / len;
+    const mob = id >= MOB_ID_BASE;
+    let i = e.i;
+    let j = e.j;
+    for (let d = 0; d < dist - 1e-9;) {
+      const step = Math.min(SKILL_EFFECTS.MOVE_STEP_TILES, dist - d);
+      const ni = i + ux * step;
+      const nj = j + uy * step;
+      if (circleBlocked(this.ctx.grid, ni, nj, COLLIDER_RADIUS_TILES, e.layer, e.flying)) break;
+      i = ni;
+      j = nj;
+      d += step;
+    }
+    if (i === e.i && j === e.j) return world;
+    return patch(world, new Map([[id, mob ? { i, j } : { i, j, vi: 0, vj: 0 }]]));
+  }
+
+  private applyStateEffects(world: SimWorld, c: Pending, out: CastOutcome, events: CombatEvent[]): SimWorld {
+    if (out.effects.length === 0) return world;
+    let w = world;
+    const now = world.timeMs;
+    const casterId = c.casterId;
+    const grouped = this.groupOf(world, casterId, true).length > 1; // the group context needs a party member near, alive or not (revive)
+    const pc = this.players.get(casterId)!;
+    const aimPt = c.skill.targeting.mode === 'ground' ? c.aim : null;
+    for (const e of out.effects) {
+      if (!effectActive(e, grouped)) continue;
+      const me = w.entities.find((x) => x.id === casterId);
+      if (!me) break;
+      const centre = aimPt && Number.isFinite(aimPt.i) && Number.isFinite(aimPt.j) ? aimPt : { i: me.i, j: me.j };
+      switch (e.type) {
+        case 'status':
+          for (const v of out.victims) this.applyMobStatus(v.id, e, now);
+          break;
+        case 'debuff':
+          if (e.stat === 'def_shred')
+            for (const v of out.victims) this.effects.shredMob(v.id, now, e.duration_ms ?? 0, e.magnitude ?? 0);
+          break;
+        case 'dot':
+          if (e.scale)
+            for (const v of out.victims)
+              this.effects.dots.push({
+                src: casterId,
+                target: v.id,
+                perTick: this.fixedHit(w, casterId, v, e.scale.coeff),
+                intervalMs: Math.max(1, e.tick_interval_ms ?? 1000),
+                nextMs: now + Math.max(1, e.tick_interval_ms ?? 1000),
+                untilMs: now + (e.duration_ms ?? 0),
+                skill: c.skill.id,
+              });
+          break;
+        case 'mark':
+          for (const v of out.victims) w = this.applyMark(w, casterId, v, e, events);
+          break;
+        case 'detonate': {
+          const r = e.radius ?? 5;
+          for (const t of this.enemiesNear(w, casterId)) {
+            if (hypot(t.i - me.i, t.j - me.j) > r + SKILL_HURTBOX) continue;
+            const stacks = this.effects.marksOf(t.id, e.mark_id ?? '', now);
+            if (stacks <= 0 || !e.scale) continue;
+            this.effects.clearMark(t.id, e.mark_id ?? '');
+            for (let k = 0; k < stacks; k++)
+              w = this.hurtMob(w, t.id, this.fixedHit(w, casterId, t, e.scale.coeff), casterId, events);
+          }
+          break;
+        }
+        case 'hot': {
+          if (!e.scale) break;
+          const stat = e.scale.stat === 'hp_max' ? pc.profile.stats.hp : pc.profile.stats.atk;
+          const self = e.applies_to === 'self';
+          this.effects.zones.push({
+            src: casterId,
+            group: self ? [casterId] : this.groupOf(w, casterId),
+            i: centre.i,
+            j: centre.j,
+            radius: self ? 0 : (e.radius ?? 4),
+            perTick: Math.round(stat * e.scale.coeff),
+            intervalMs: Math.max(1, e.tick_interval_ms ?? 1000),
+            nextMs: now + Math.max(1, e.tick_interval_ms ?? 1000),
+            untilMs: now + (e.duration_ms ?? 0),
+          });
+          break;
+        }
+        case 'buff': {
+          const recv =
+            e.applies_to === 'all'
+              ? this.groupOf(w, casterId).filter((id) => {
+                  const q = w.entities.find((x) => x.id === id);
+                  return !!q && hypot(q.i - centre.i, q.j - centre.j) <= (e.radius ?? 12);
+                })
+              : [casterId];
+          for (const id of recv)
+            this.effects.addBuff(id, {
+              stat: e.stat ?? '',
+              mag: e.magnitude ?? 0,
+              untilMs: now + (e.duration_ms ?? 0),
+              src: casterId,
+            });
+          break;
+        }
+        case 'restore_mp': {
+          w = patch(
+            w,
+            new Map([[casterId, { mp: Math.min(me.mpMax, me.mp + Math.round(me.mpMax * (e.magnitude ?? 0))) }]]),
+          );
+          break;
+        }
+        case 'knockback':
+          for (const v of out.victims) {
+            if (this.tierOf(v.id) === 'boss') this.interrupted.add(v.id);
+            else w = this.moveEntity(w, v.id, v.i - me.i, v.j - me.j, e.distance_tiles ?? 0);
+          }
+          break;
+        case 'pull':
+          for (const t of this.enemiesNear(w, casterId)) {
+            const cur = hypot(t.i - me.i, t.j - me.j);
+            if (cur > (e.radius ?? 4) + SKILL_HURTBOX || this.tierOf(t.id) === 'boss') continue;
+            const go = Math.max(0, cur - Math.max(SKILL_EFFECTS.PULL_MIN_TILES, cur - (e.distance_tiles ?? 0)));
+            w = this.moveEntity(w, t.id, me.i - t.i, me.j - t.j, go);
+          }
+          break;
+        case 'taunt':
+          for (const t of this.enemiesNear(w, casterId))
+            if (hypot(t.i - me.i, t.j - me.j) <= (e.radius ?? 4) + SKILL_HURTBOX)
+              this.effects.tauntMob(t.id, casterId, now, e.duration_ms ?? 0);
+          break;
+        case 'dash':
+          w = this.dash(w, c, out, e);
+          break;
+        case 'revive': {
+          const target = this.players.get(c.targetId);
+          if (!target || target.alive || c.targetId === casterId) break;
+          target.alive = true;
+          target.respawnAtMs = 0;
+          const hp = Math.max(1, Math.round(target.hpMax * (e.magnitude ?? 0.4)));
+          w = patch(w, new Map([[c.targetId, { hp, invulnMs: 1000 }]]));
+          events.push({ type: 'respawn', id: c.targetId });
+          break;
+        }
+        default:
+          break;
+      }
+    }
+    return w;
+  }
+
+  /** Control on a mob. Bosses ignore it: a hard CC interrupts their current attack, a slow works at a share (D49, docs/11). */
+  private applyMobStatus(mobId: number, e: SkillEffect, now: number): void {
+    const ms = e.duration_ms ?? 0;
+    const id = e.status_id;
+    const hard = id === 'stun' || id === 'freeze' || id === 'knockup' || id === 'root';
+    if (this.tierOf(mobId) === 'boss') {
+      if (hard) this.interrupted.add(mobId);
+      else if (id === 'slow') this.effects.slowMob(mobId, now, ms, (e.magnitude ?? 0) * SKILL_EFFECTS.BOSS_SLOW_MULT);
+      return;
+    }
+    if (id === 'stun' || id === 'freeze' || id === 'knockup') this.effects.stunMob(mobId, now, ms);
+    else if (id === 'root') this.effects.rootMob(mobId, now, ms);
+    else if (id === 'slow') this.effects.slowMob(mobId, now, ms, e.magnitude ?? 0);
+    // `silence`: mobs cast nothing a player can silence yet (and no skill of the data uses it)
+  }
+
+  private applyMark(
+    world: SimWorld,
+    casterId: number,
+    v: ResolveTarget,
+    e: SkillEffect,
+    events: CombatEvent[],
+  ): SimWorld {
+    const id = e.mark_id ?? '';
+    const now = world.timeMs;
+    let w = world;
+    const stacks = this.effects.stackMark(v.id, id, now, e.duration_ms ?? 0);
+    if (stacks < (e.max_stacks ?? 3)) return w;
+    // the last stack detonates at once: `stacks` hits on the marked mob, a share of it on its neighbours
+    this.effects.clearMark(v.id, id);
+    const coeff = e.detonate_coeff ?? 1;
+    for (let k = 0; k < stacks; k++) w = this.hurtMob(w, v.id, this.fixedHit(w, casterId, v, coeff), casterId, events);
+    const r = e.detonate_radius ?? 0;
+    if (r > 0) {
+      for (const o of this.enemiesNear(w, casterId)) {
+        if (o.id === v.id || hypot(o.i - v.i, o.j - v.j) > r + SKILL_HURTBOX) continue;
+        w = this.hurtMob(w, o.id, this.fixedHit(w, casterId, o, coeff, SKILL_EFFECTS.MARK_SPLASH), casterId, events);
+      }
+    }
+    return w;
+  }
+
+  /** Dash of the caster (D95 grid: it stops at anything blocked). Forward: toward the aim / target / facing, stopping at the victims or short of the nearest mob. */
+  private dash(world: SimWorld, c: Pending, out: CastOutcome, e: SkillEffect): SimWorld {
+    const me = world.entities.find((x) => x.id === c.casterId);
+    if (!me) return world;
+    const d = e.distance_tiles ?? 0;
+    const near = (list: ResolveTarget[]): ResolveTarget | undefined =>
+      [...list].sort((a, b) => hypot(a.i - me.i, a.j - me.j) - hypot(b.i - me.i, b.j - me.j) || a.id - b.id)[0];
+    const code = me.facing;
+    if (e.direction === 'back') {
+      const n = near(out.victims) ?? near(this.enemiesNear(world, c.casterId));
+      const away = n ? { di: me.i - n.i, dj: me.j - n.j } : { di: -(DIR_COS[code] ?? 1), dj: -(DIR_SIN[code] ?? 0) };
+      return this.moveEntity(world, c.casterId, away.di, away.dj, d);
+    }
+    const aim = c.aim && Number.isFinite(c.aim.i) && Number.isFinite(c.aim.j) ? c.aim : null;
+    const tgt = c.targetId ? world.entities.find((x) => x.id === c.targetId) : undefined;
+    const dir = aim
+      ? { di: aim.i - me.i, dj: aim.j - me.j }
+      : tgt && tgt.id >= MOB_ID_BASE
+        ? { di: tgt.i - me.i, dj: tgt.j - me.j }
+        : { di: DIR_COS[code] ?? 1, dj: DIR_SIN[code] ?? 0 };
+    let go = d;
+    // PROVISIONAL (the design simulation lets the dasher end on the farthest victim): stop DASH_STOP_TILES short of it instead of overlapping
+    if (out.victims.length > 0)
+      go = Math.max(
+        0,
+        Math.min(d, Math.max(...out.victims.map((v) => hypot(v.i - me.i, v.j - me.j))) - SKILL_EFFECTS.DASH_STOP_TILES),
+      );
+    else {
+      const n = near(this.enemiesNear(world, c.casterId));
+      if (n) go = Math.max(0, Math.min(d, hypot(n.i - me.i, n.j - me.j) - SKILL_EFFECTS.DASH_STOP_TILES));
+    }
+    return this.moveEntity(world, c.casterId, dir.di, dir.dj, go);
+  }
+
+  /** A shield that ended or broke bursts into damage around its owner (the `explode` of the shield effect). */
+  private explodeShield(world: SimWorld, ownerId: number, events: CombatEvent[]): SimWorld {
+    const p = this.players.get(ownerId);
+    const x = p?.shieldExplode;
+    const owner = world.entities.find((e) => e.id === ownerId);
+    if (!p || !x || !owner) return world;
+    p.shieldExplode = null;
+    let w = world;
+    for (const t of this.enemiesNear(world, x.srcId)) {
+      if (hypot(t.i - owner.i, t.j - owner.j) > x.radius + SKILL_HURTBOX) continue;
+      w = this.hurtMob(w, t.id, this.fixedHit(w, x.srcId, t, x.coeff), x.srcId, events);
+    }
+    return w;
+  }
+
+  /** Per tick: damage / heal over time, pets, shields that ran out, and housekeeping of expired effects. Deterministic order: dots, zones, pets, shields. */
+  private tickEffects(world: SimWorld, events: CombatEvent[]): SimWorld {
+    const now = world.timeMs;
+    let w = world;
+    const fx = this.effects;
+    for (const d of [...fx.dots]) {
+      while (d.nextMs <= now && d.nextMs <= d.untilMs) {
+        d.nextMs += d.intervalMs;
+        w = this.hurtMob(w, d.target, d.perTick, d.src, events);
+      }
+    }
+    for (const z of [...fx.zones]) {
+      while (z.nextMs <= now && z.nextMs <= z.untilMs) {
+        z.nextMs += z.intervalMs;
+        for (const id of z.group) {
+          const p = this.players.get(id);
+          const e = w.entities.find((x) => x.id === id);
+          if (!p || !p.alive || !e || e.hp <= 0 || e.hp >= p.hpMax) continue;
+          if (z.radius > 0 && hypot(e.i - z.i, e.j - z.j) > z.radius) continue;
+          const healed = Math.min(p.hpMax - e.hp, z.perTick);
+          if (healed <= 0) continue;
+          events.push({ type: 'heal', targetId: id, amount: healed });
+          w = patch(w, new Map([[id, { hp: e.hp + healed }]]));
+        }
+      }
+    }
+    for (const [id, pet] of fx.petsInOrder()) {
+      const p = this.players.get(id);
+      const me = w.entities.find((x) => x.id === id);
+      if (!p || !p.alive || !me || me.hp <= 0 || now < pet.nextMs) continue;
+      let best: ResolveTarget | undefined;
+      let bd = Infinity;
+      for (const t of this.enemiesNear(w, id)) {
+        const dd = hypot(t.i - me.i, t.j - me.j);
+        if (dd < SKILL_EFFECTS.PET_RANGE && dd < bd) {
+          bd = dd;
+          best = t;
+        }
+      }
+      if (!best) continue; // nothing to strike: the pet waits (no interval is spent)
+      pet.nextMs = now + pet.intervalMs;
+      w = this.hurtMob(w, best.id, this.fixedHit(w, id, best, pet.coeff), id, events);
+    }
+    for (const [id, p] of [...this.players.entries()].sort((a, b) => a[0] - b[0])) {
+      if (p.shield > 0 && now >= p.shieldUntilMs) {
+        p.shield = 0;
+        w = this.explodeShield(w, id, events);
+      }
+    }
+    fx.prune(now);
+    return w;
+  }
+
   // ------------------------------------------------------------------ internals
   private enemiesNear(world: SimWorld, casterId: number): ResolveTarget[] {
     const mobs = this.opts.mobs;
@@ -413,7 +835,15 @@ export class CombatSystem {
       if (this.opts.canTarget && !this.opts.canTarget(casterId, e.id)) continue;
       const s = mobs.combatStats(e.id);
       if (s)
-        out.push({ id: e.id, i: e.i, j: e.j, hpMax: s.hpMax, defense: s.defense, realm: s.realm, element: s.element });
+        out.push({
+          id: e.id,
+          i: e.i,
+          j: e.j,
+          hpMax: s.hpMax,
+          defense: s.defense * this.effects.defMult(e.id, world.timeMs), // `def_shred` debuffs (D116)
+          realm: s.realm,
+          element: s.element,
+        });
     }
     return out;
   }
@@ -453,6 +883,8 @@ export class CombatSystem {
       rand,
       losClear: (a, b) => lineOfSight(this.ctx.grid, a.i, a.j, b.i, b.j, caster.layer, caster.flying),
       defs: this.defs,
+      grouped: this.groupOf(world, c.casterId, true).length > 1,
+      mods: this.modsOf(c.casterId, world.timeMs, caster.hp),
     });
     for (const u of new Set(out.unsupported))
       events.push({ type: 'unsupported_effect', skillKey: c.skill.id, effect: u });
@@ -486,18 +918,31 @@ export class CombatSystem {
           : c.casterId
         : c.casterId;
     const sup = this.players.get(ally)!;
+    let overShield = 0;
     if (out.heal > 0) {
       const e = world.entities.find((x) => x.id === ally)!;
       const healed = Math.max(0, Math.min(out.heal, sup.hpMax - e.hp));
       patches.set(ally, { ...(patches.get(ally) ?? {}), hp: (patches.get(ally)?.hp ?? e.hp) + healed });
       events.push({ type: 'heal', targetId: ally, amount: healed });
+      // `overheal_to_shield`: the part of the heal beyond max HP becomes a shield (PROVISIONAL: capped at the target's max HP)
+      overShield = Math.min(sup.hpMax, Math.round((out.heal - healed) * out.overhealRatio));
     }
-    if (out.shield > 0) {
-      sup.shield = out.shield;
-      sup.shieldUntilMs = world.timeMs + out.shieldDurationMs;
-      events.push({ type: 'shield', targetId: ally, amount: out.shield });
+    const shieldAmount = out.shield + overShield;
+    if (shieldAmount > 0) {
+      sup.shield = shieldAmount;
+      sup.shieldUntilMs = world.timeMs + Math.max(out.shieldDurationMs, overShield > 0 ? out.overhealShieldMs : 0);
+      sup.shieldExplode = out.shield > 0 && out.shieldExplode ? { ...out.shieldExplode, srcId: c.casterId } : null;
+      events.push({ type: 'shield', targetId: ally, amount: shieldAmount });
     }
     w = patch(w, patches);
+    // lifesteal of the damage this cast dealt (class passive + buffs), then every other state effect of the skill
+    w = this.lifestealHeal(
+      w,
+      c.casterId,
+      out.hits.reduce((n, h) => n + h.damage, 0),
+      events,
+    );
+    w = this.applyStateEffects(w, c, out, events);
     for (const id of killed) {
       events.push({ type: 'death', id, killerId: c.casterId });
       w = this.onMobKilled(w, id, c.casterId, pc, events);
@@ -515,6 +960,7 @@ export class CombatSystem {
   ): SimWorld {
     const mobs = this.opts.mobs;
     const stats = mobs?.combatStats(mobId);
+    this.effects.clearMob(mobId);
     if (!mobs || !stats) return world;
     const rng = (): number => {
       const [v, n] = rngFloat(this.dropRng);
@@ -551,6 +997,8 @@ export class CombatSystem {
       this.status.clear(id);
       p.shield = 0;
       p.shieldUntilMs = 0;
+      p.shieldExplode = null;
+      this.effects.clearPlayer(id);
       const at = this.opts.respawnPoint?.(id) ?? { i: e.i, j: e.j };
       w = patch(
         w,
@@ -598,6 +1046,7 @@ export class CombatSystem {
       pending: this.pending.map((p) => [p.resolveAtMs, p.casterId, p.seq, p.wireId, p.targetId]),
       drop: this.dropRng,
       status: this.status.digest(),
+      effects: this.effects.digest(),
     });
   }
 }

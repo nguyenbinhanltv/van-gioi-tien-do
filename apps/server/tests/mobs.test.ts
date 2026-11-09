@@ -232,6 +232,7 @@ describe('combatStats (seam for the combat step)', () => {
         element: info.def.elements[0],
         dropSource: info.def.tier === 'normal' ? 'field' : info.def.tier,
         hpMax: info.maxHp,
+        tier: info.def.tier,
       });
       expect(cs.realm).toBeGreaterThanOrEqual(1);
     }

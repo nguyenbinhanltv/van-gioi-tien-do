@@ -518,6 +518,7 @@ export class WorldNode {
                 },
         })
       : null;
+    if (this.combat && this.mobs) this.mobs.control = this.combat.effects; // stun / root / slow / taunt from player skills (D116)
     this.mobAttacks =
       this.combat && this.mobs && opts.combat?.mobAttacks !== false
         ? new MobAttackSystem(this.ctx, this.combat, this.mobs, seed)
@@ -1499,9 +1500,14 @@ export class WorldNode {
     const combat = this.combat;
     if (!combat) return;
     const now = this.world.timeMs;
-    const ids = new Set<number>([...combat.status.affectedIds(), ...this.statusMasks.keys()]);
+    const ids = new Set<number>([
+      ...combat.status.affectedIds(),
+      ...combat.effects.mobIds(),
+      ...this.statusMasks.keys(),
+    ]);
     for (const id of [...ids].sort((a, b) => a - b)) {
-      const mask = combat.status.maskOf(id, now);
+      // players: root / slow / poison from mob attacks (D94); mobs: stun / root / slow from player skills (D116)
+      const mask = combat.status.maskOf(id, now) | combat.effects.maskOfMob(id, now);
       const prev = this.statusMasks.get(id) ?? 0;
       if (mask === prev) {
         if (mask === 0) this.statusMasks.delete(id);

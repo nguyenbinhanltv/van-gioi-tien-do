@@ -195,7 +195,7 @@ export function randMessage(r: Rng, type?: HotType): Message {
       return m;
     }
     case 'status_update': {
-      const m: StatusUpdateMsg = { type: 'status_update', entityId: r.int(0, 2 ** 32 - 1), mask: r.int(0, 7) };
+      const m: StatusUpdateMsg = { type: 'status_update', entityId: r.int(0, 2 ** 32 - 1), mask: r.int(0, 15) };
       return m;
     }
     case 'boss_phase': {

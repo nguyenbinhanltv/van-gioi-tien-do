@@ -632,3 +632,10 @@ Còn mở / lưu ý:
 - `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
+
+## D116 — hiệu ứng kỹ năng: còn mở (worker39, 2026-11-09)
+
+1. **Số tạm** (`SKILL_EFFECTS`, mô phỏng thiết kế): trần giảm sát thương 0,75, sàn DEF 0,2, trần `def_shred` 0,5, chia dấu nổ 0,6, boss chậm ×0,5, tầm thú 9 ô, lướt dừng cách 1 ô, bước va chạm 0,25 ô, ngữ cảnh nhóm 12 ô, trần khiên từ hồi thừa; tinh anh nhận khống chế đủ. Cần game designer duyệt khi cân bằng.
+2. **Chưa áp**: `move_speed_pct` (đồng bộ dự đoán), `timing.invuln_ms` của lướt, `silence`, `tribulation_reduction`, `ClassDef.trait`, nhấc quái khi knock-up, buff cho người ngoài tổ đội.
+3. **Client**: trạng thái quái chỉ có chữ `CHOANG` / `TROI` / `CHAM` (chưa icon, chưa hoạt ảnh choáng); quái bị đẩy / kéo dịch chuyển tức thời (chưa nội suy riêng).
+4. **Cân bằng**: sau D116 thứ hạng lớp thay đổi (xem báo cáo D115 chạy lại): cần xem lại hệ số trên cơ sở mới trước khi chỉnh bất kỳ số nào; `stat_weights` của lớp vẫn bị bỏ qua (D117).
