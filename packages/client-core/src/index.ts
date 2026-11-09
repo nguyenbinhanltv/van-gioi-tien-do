@@ -16,3 +16,4 @@ export * from './ui/PartyModel.js';
 export * from './ui/FriendsModel.js';
 export * from './ui/FirstSessionTracker.js';
 export * from './net/index.js';
+export * from './crash/CrashReporter.js';

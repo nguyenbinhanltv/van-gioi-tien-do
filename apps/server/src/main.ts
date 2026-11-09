@@ -52,7 +52,13 @@ if (process.env.MAP_FILE) {
 const srv = await startServer({
   port,
   host: process.env.HOST ?? '127.0.0.1',
-  gateway: { corsOrigins },
+  // D110: client crash reports land in CRASH_DIR (default <DATA_DIR>/crash with STORE=file, else memory); /ops/crash is loopback-only
+  // unless DASHBOARD_TOKEN is set (then Bearer <token> also works)
+  crash: {
+    ...(process.env.CRASH_DIR || stores ? { dir: process.env.CRASH_DIR ?? join(stores!.dir, 'crash') } : {}),
+    onError: (e) => console.error('[vgtd/server] crash store write failed:', e),
+  },
+  gateway: { corsOrigins, ...(process.env.DASHBOARD_TOKEN ? { dashboardToken: process.env.DASHBOARD_TOKEN } : {}) },
   world: {
     mapTiles,
     grid,

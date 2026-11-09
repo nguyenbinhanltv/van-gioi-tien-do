@@ -1,5 +1,6 @@
 import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
+import { CrashService, type CrashOptions } from './crash/index.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
 import { FriendService } from './friends/service.js';
@@ -20,6 +21,8 @@ export interface ServerOptions {
   party?: false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
   friends?: { store?: FriendStore } | false;
+  /** crash report intake (D110): options, or `false` to run without it (default: enabled, in memory unless `dir` is given) */
+  crash?: CrashOptions | false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -29,6 +32,7 @@ export interface RunningServer {
   auth: AuthService;
   world: WorldNode;
   gateway: GatewayHandle;
+  crash?: CrashService;
   port: number;
   stop(): Promise<void>;
 }
@@ -60,7 +64,8 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     ...(party ? { party } : {}),
     ...(friends ? { friends } : {}),
   });
-  const gateway = createGateway(auth, world, opts.gateway);
+  const crash = opts.crash === false ? undefined : new CrashService(opts.crash);
+  const gateway = createGateway(auth, world, { ...(crash ? { crash } : {}), ...opts.gateway });
   await new Promise<void>((resolve, reject) => {
     gateway.http.once('error', reject);
     gateway.http.listen(opts.port ?? 0, opts.host ?? '127.0.0.1', resolve);
@@ -70,6 +75,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     auth,
     world,
     gateway,
+    ...(crash ? { crash } : {}),
     port: gateway.port(),
     stop: async () => {
       world.stop();

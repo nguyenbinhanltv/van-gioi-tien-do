@@ -15,3 +15,4 @@ export * from './party/index.js';
 export * from './persistence/index.js';
 export * from './world/breakthrough/index.js';
 export * from './friends/index.js';
+export * from './crash/index.js';

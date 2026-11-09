@@ -5,6 +5,8 @@
  *  POST /auth/login     {username,password}  -> 200 {token, accountId, sessionId, expiresAtS}
  *  OPTIONS *            -> 204 CORS preflight (only for origins in GatewayOptions.corsOrigins)
  *  GET  /health         -> 200 {ok, players, tick}
+ *  POST /crash/report   crash / session-marker batch (D110, `CRASH_REPORT` limits) -> 202 {ok, accepted}; 400 invalid; 413 too large; 429 rate limited
+ *  GET  /ops/crash, /ops/crash/summary.json   crash-free sessions % + top crashes (operator only: loopback or Bearer `dashboardToken`)
  *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":5,"protocolMax":5,"token":"...","classId"?}
  *                       `classId` (D82, optional): class path id or wire id; used only when the character does not exist yet (the stored
  *                       class wins afterwards); an invalid value is refused with BadMessage
@@ -15,11 +17,12 @@
  */
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
 import { WebSocketServer, type WebSocket } from 'ws';
-import { DEFAULT_CLASS, NETWORK, parseClass, type PathId } from '@vgtd/shared';
+import { CRASH_REPORT, DEFAULT_CLASS, NETWORK, parseClass, type PathId } from '@vgtd/shared';
 import { ErrorCode, PROTOCOL_VERSION, encode } from '@vgtd/protocol';
 import { AuthError, type AuthService } from './auth/accounts.js';
 import { TokenError } from './auth/jwt.js';
 import { GATEWAY_CONFIG } from './config.js';
+import { CRASH_PAGE_HTML, operatorAllowed, type CrashService } from './crash/index.js';
 import { WorldFullError, type ClientTransport, type WorldNode } from './world/node.js';
 
 export interface GatewayHandle {
@@ -59,6 +62,10 @@ export interface GatewayOptions {
   helloTimeoutMs?: number;
   /** browser origins allowed to call the HTTP endpoints (the web client is served from another port); default none */
   corsOrigins?: readonly string[];
+  /** crash report intake (D110); without it the crash routes answer 404 */
+  crash?: CrashService;
+  /** Bearer token that lets a non-loopback operator read /ops/crash (env DASHBOARD_TOKEN in main) */
+  dashboardToken?: string;
 }
 
 export function createGateway(auth: AuthService, world: WorldNode, opts: GatewayOptions = {}): GatewayHandle {
@@ -83,6 +90,38 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
         }
         if (req.method === 'GET' && req.url === '/health') {
           return json(res, 200, { ok: true, players: world.clients.size, tick: world.world.tick });
+        }
+        if (opts.crash) {
+          const path = (req.url ?? '').split('?')[0];
+          if (req.method === 'POST' && path === '/crash/report') {
+            const len = Number(req.headers['content-length'] ?? 0);
+            if (len > CRASH_REPORT.MAX_BODY_BYTES) return json(res, 413, { ok: false, error: 'too_large' });
+            let body: unknown;
+            try {
+              body = await readJson(req, CRASH_REPORT.MAX_BODY_BYTES);
+            } catch (e) {
+              const tooBig = e instanceof AuthError && e.code === 'too_large';
+              return json(res, tooBig ? 413 : 400, { ok: false, error: tooBig ? 'too_large' : 'bad_json' });
+            }
+            const r = opts.crash.submit(body, remoteIp(req));
+            return json(res, r.status, r.body, r.retryAfterS ? { 'retry-after': String(r.retryAfterS) } : {});
+          }
+          if (req.method === 'GET' && (path === '/ops/crash' || path === '/ops/crash/summary.json')) {
+            if (!operatorAllowed(req, opts.dashboardToken)) return json(res, 403, { error: 'forbidden' });
+            if (path === '/ops/crash/summary.json') {
+              const h = Number(new URL(req.url ?? '', 'http://x').searchParams.get('hours'));
+              return json(res, 200, opts.crash.summary(h > 0 && h <= 24 * 30 ? h * 3_600_000 : undefined), {
+                'cache-control': 'no-store',
+              });
+            }
+            res.writeHead(200, {
+              'content-type': 'text/html; charset=utf-8',
+              'cache-control': 'no-store',
+              'content-security-policy':
+                "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'",
+            });
+            return void res.end(CRASH_PAGE_HTML);
+          }
         }
         if (req.method === 'POST' && (req.url === '/auth/register' || req.url === '/auth/login')) {
           const body = (await readJson(req)) as { username?: unknown; password?: unknown } | null;

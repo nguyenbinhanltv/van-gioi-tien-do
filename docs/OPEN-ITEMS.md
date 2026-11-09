@@ -601,3 +601,12 @@ Còn mở / lưu ý:
 - `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
+
+## Báo cáo sập (D110): còn mở
+
+- **Dashboard telemetry chưa hợp nhất**: #264 (D109) chưa vào main nên `/ops/crash` là bộ chuyển riêng (xem D110 hàng "Bộ chuyển"); khi #264 vào, đưa vào `/dashboard` và xóa route. Ngân sách D101 (#256) cũng chưa vào main; giới hạn của endpoint nằm trong `CRASH_REPORT`.
+- **Id bản dựng**: client gửi `dev` trừ khi trang đặt `globalThis.__VGTD_BUILD__`; `build-web` / `release-stage` chưa đặt (cần số commit hoặc phiên bản để chia crash-free % theo bản).
+- **Chưa có source map**: stack là mã đã gói; trước beta cần ánh xạ ngược (hoặc gửi bản dựng không nén cho tester) để top-crash đọc được.
+- **Lỗi engine không qua `console.error`** (crash native, WebGL context lost, hết bộ nhớ làm tab bị giết) không có sự kiện nào; tab bị giết chỉ thấy là phiên "bỏ dở" (tính là không sập), nên crash-free % có thể **lạc quan**. Cần heartbeat hoặc dấu "lần chạy trước không kết thúc sạch" (localStorage) để tính phiên bị giết.
+- **Server chưa có nhóm báo cáo cho lỗi server** (`uncaughtException` ở docs/27 §7 vẫn chỉ log); D110 chỉ đo phiên phía client.
+- **Quay vòng tệp**: JSONL theo ngày, chưa xóa tệp cũ (đặt thời hạn lưu khi có chính sách dữ liệu).
