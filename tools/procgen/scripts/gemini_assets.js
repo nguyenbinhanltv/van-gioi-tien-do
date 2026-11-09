@@ -47,13 +47,16 @@ const files = [
   ...manifest.icons.map((n) => ['items', n]),
   ...GRID_PATHS.map((n) => ['skills', n]),
   ...Object.keys(manifest.mobs).map((n) => ['mobs', n]),
+  ...Object.keys(manifest.mobsPhase)
+    .filter((n) => !n.startsWith('_'))
+    .map((n) => ['mobs_phase', n]),
   ...manifest.ground.materials.map((n) => ['ground', n]),
   ...Object.keys(manifest.ui)
     .filter((n) => !n.startsWith('_'))
     .map((n) => ['ui', n]),
 ];
 const srcPath = (dir, name) =>
-  dir === 'mobs' ? path.join(CONCEPTS, 'mobs', `${name}.png`) : path.join(SRC, dir, `${name}.png`);
+  dir === 'mobs' || dir === 'mobs_phase' ? path.join(CONCEPTS, dir, `${name}.png`) : path.join(SRC, dir, `${name}.png`);
 
 function loadSources() {
   const missing = [];
@@ -169,6 +172,7 @@ function main() {
     icons: {},
     skills: {},
     mobs: {},
+    mobPhases: {},
     ground: {},
     ui: {},
     status: {},
@@ -293,6 +297,21 @@ function main() {
     sidecar.mobs[key] = { id: def.id, w: r.x1.width, h: r.x1.height, pivot: r.pivot };
     console.log(`  mobs/${key}: ${r.x1.width}x${r.x1.height} px (id ${def.id}), sparkle ${r.sparkle.pixels}px`);
   }
+  // INTERIM boss-phase skins (the skin a boss takes at an HP threshold): same pipeline, scaled to the AREA of the base sprite
+  for (const [key, def] of Object.entries(manifest.mobsPhase)) {
+    if (key.startsWith('_')) continue;
+    const base = sidecar.mobs[def.mob];
+    if (!base) {
+      problems.push(`mobs_phase/${key}: unknown mob ${def.mob}`);
+      continue;
+    }
+    const buf = bufs.get(`mobs_phase/${key}`);
+    const r = G.processMob(decodePNG(buf), 0, { area: base.w * base.h });
+    verify(`mobs_phase/${key}`, buf, r.sparkle);
+    r.x1.save(path.join(OUT, 'mobs_1x', `${key}.png`));
+    sidecar.mobPhases[key] = { id: base.id, phase: def.phase, w: r.x1.width, h: r.x1.height, pivot: r.pivot };
+    console.log(`  mobs_phase/${key}: ${r.x1.width}x${r.x1.height} px (mob ${def.mob} id ${base.id}, phase ${def.phase}), sparkle ${r.sparkle.pixels}px`);
+  }
   // 9-slice UI frames: keyed + trimmed, one atlas, slice insets in the sidecar
   for (const [name, def] of Object.entries(manifest.ui)) {
     if (name.startsWith('_')) continue;
@@ -346,13 +365,19 @@ function main() {
   // INTERIM mob standees share the PROP atlas pages (one texture for props + mobs: the Y-sort interleaves them, separate
   // pages would break the batch at every switch). Mobs are @1x pixels in both pages (drawn 1:1).
   for (const key of Object.keys(manifest.mobs))
-    for (const d of ['props_2x', 'props_1x'])
-      fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, d, `${key}.png`));
+    for (const d of ['props_2x', 'props_1x']) fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, d, `${key}.png`));
+  // boss-phase skins: their OWN @1x page for both tiers (loaded lazily by the client). In the prop pages they overflowed the
+  // 2048 page (a second texture breaks the L3 batch) and added ~2 MB to the initial package.
+  fs.rmSync(path.join(OUT, 'mobphase_1x'), { recursive: true, force: true });
+  fs.mkdirSync(path.join(OUT, 'mobphase_1x'), { recursive: true });
+  for (const key of Object.keys(manifest.mobsPhase).filter((n) => !n.startsWith('_')))
+    fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, 'mobphase_1x', `${key}.png`));
   for (const [dir, atlasName, kind] of [
     ['props_2x', 'atl_prop_2x', 'props'],
     ['props_1x', 'atl_prop_1x', 'props'],
     ['icons_2x', 'atl_gicon_2x', 'icons'],
     ['icons_1x', 'atl_gicon_1x', 'icons'],
+    ['mobphase_1x', 'atl_mobphase_1x', 'mobPhases'],
     ['ui_2x', 'atl_ui_2x', 'ui'],
     ['ui_1x', 'atl_ui_1x', 'ui'],
     ['skills_2x', 'atl_skill_2x', 'skills'],

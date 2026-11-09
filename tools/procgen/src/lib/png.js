@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Bộ mã hóa PNG tối giản, không phụ thuộc thư viện ngoài (chỉ dùng zlib của Node).
- * Ảnh RGBA 8 bit, filter 0 cho mọi dòng. Đủ dùng cho sprite sheet và ảnh xem trước.
+ * Ảnh RGBA 8 bit, ghi với filter thích nghi từng dòng. Đủ dùng cho sprite sheet và ảnh xem trước.
  */
 const zlib = require('zlib');
 const fs = require('fs');
@@ -91,11 +91,38 @@ class Image {
 
   toPNG() {
     const { width, height, data } = this;
-    const stride = width * 4 + 1;
+    const bpp = 4;
+    const rowBytes = width * bpp;
+    const stride = rowBytes + 1;
     const raw = Buffer.alloc(stride * height);
+    // adaptive row filter (None / Sub / Up / Average / Paeth, the one with the smallest sum of |signed byte| wins): the pixels are
+    // identical, the file is smaller (flat colour and soft gradients compress far better filtered). It counts against the P1 package budget.
+    const cand = [0, 1, 2, 3, 4].map(() => Buffer.alloc(rowBytes));
+    const zero = Buffer.alloc(rowBytes);
     for (let y = 0; y < height; y++) {
-      raw[y * stride] = 0; // filter: None
-      Buffer.from(data.buffer, data.byteOffset + y * width * 4, width * 4).copy(raw, y * stride + 1);
+      const cur = Buffer.from(data.buffer, data.byteOffset + y * rowBytes, rowBytes);
+      const prev = y > 0 ? Buffer.from(data.buffer, data.byteOffset + (y - 1) * rowBytes, rowBytes) : zero;
+      const sums = [0, 0, 0, 0, 0];
+      for (let i = 0; i < rowBytes; i++) {
+        const x = cur[i];
+        const a = i >= bpp ? cur[i - bpp] : 0;
+        const b = prev[i];
+        const c = i >= bpp ? prev[i - bpp] : 0;
+        const p = a + b - c;
+        const pa = Math.abs(p - a);
+        const pb = Math.abs(p - b);
+        const pc = Math.abs(p - c);
+        const paeth = pa <= pb && pa <= pc ? a : pb <= pc ? b : c;
+        const v = [x, (x - a) & 255, (x - b) & 255, (x - ((a + b) >> 1)) & 255, (x - paeth) & 255];
+        for (let f = 0; f < 5; f++) {
+          cand[f][i] = v[f];
+          sums[f] += v[f] < 128 ? v[f] : 256 - v[f];
+        }
+      }
+      let best = 0;
+      for (let f = 1; f < 5; f++) if (sums[f] < sums[best]) best = f;
+      raw[y * stride] = best;
+      cand[best].copy(raw, y * stride + 1);
     }
     const ihdr = Buffer.alloc(13);
     ihdr.writeUInt32BE(width, 0);

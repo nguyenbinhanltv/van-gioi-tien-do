@@ -540,6 +540,12 @@ Còn mở / lưu ý:
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ. Đã đo bản @2x (2026-11-09): prop @2x + quái @2x cần 3,74 / 4,19 MP, xếp thành **2 trang** 2048² (thêm ~16 MB GPU và Y-sort bị ngắt batch giữa prop và quái), nên chưa làm; làm khi có sprite hoạt hình thật (atlas riêng cho quái, nén ASTC).
 - Quái nhận biết bằng `EnemyView.defId` (id dây của `MOB_DEFS`, do `aoi_enter` mang); tên `Mob <id>` chỉ còn là đường lùi cho backend chưa gán `defId`.
 
+## Skin pha boss (INTERIM, 2026-11-09): còn mở
+
+- Skin pha đổi khi client nhận `boss_phase`; client vào tầm nhìn SAU lúc boss đã đổi pha (AOI) chưa nhận lại thông điệp nên vẫn thấy skin pha đầu cho tới lần đổi pha kế: cần `phase` trong `aoi_enter` / snapshot (giao thức) để dựng đúng skin ngay.
+- Thanh máu trên đầu boss giữ độ cao của skin pha đầu (skin pha sau thấp hơn); chưa dùng sprite hoạt hình: chỉ nháy + đổi ảnh tĩnh trong cửa sổ biến hình (`TRANSFORM_SWAP_AT` = giữa cửa sổ).
+- Skin pha boss nằm trong trang atlas riêng `atl_mobphase_1x` (@1x cho mọi tier, ~0,9 MB PNG, tải lười khi có boss có pha trong tầm nhìn; cổng ngân sách tính riêng qua `LAZY_ATLAS_PREFIXES`, không vào gói tải đầu). Trang prop vẫn một trang (`atl_prop_2x` 2048², `atl_prop_1x` 2048×1024). Còn mở: nếu boss đổi pha trước khi trang tải xong thì dùng tạm màu pha (hiếm: trang tải ngay khi boss vào tầm nhìn).
+
 ## 21. Tổ đội (D93, worker35): còn mở
 
 - **Chia chiến lợi phẩm là PLACEHOLDER**: mỗi người trong 20 ô tự roll với hệ số 1/√n (docs/07 §6). Cần game designer duyệt: bán kính chia, có tính người đã chết / ngoại tuyến không, nhặt chung hay riêng (Need / Greed), chia **kinh nghiệm** (MVP chưa có XP khi hạ quái), boss bí cảnh "1 lần mỗi tuần mỗi người" khi đi đội.
@@ -555,6 +561,16 @@ Còn mở / lưu ý:
 - Mỗi ô lặp lại cùng một patch (chu kỳ = một ô, biến thể chỉ khác phần trong ô), nên thấy lưới hình thoi nhạt trên mặt nước / cỏ rộng; muốn bớt cần patch lớn hơn một ô (thêm lớp biến thể theo vị trí ô) hoặc nhiều biến thể hơn.
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
+
+## D95 — bản đồ 4 vùng: còn mở (worker39, 2026-11-09)
+
+1. **Mọi bố cục là mặc định tạm, cần game designer duyệt**: tên và vị trí vùng (bốn góc phần tư của bản đồ thử, chưa phải tọa độ Sơn Môn thật của docs/10 §4 / level designer), bãi trống cây cổ thụ ở giữa `co_thu_trung_tam` (chưa có cây: prop do worker 40), tỉ lệ nước / nham thạch (ngưỡng 0,52 của nham thạch, độ ẩm đầm lầy).
+2. **Đường nét vẫn khá "nhão"**: bản đồ vùng đã dùng nhiễu thưa hơn (`zoneNoiseScale` 0,035, mảng lớn hơn bản đồ cũ), nhưng vẫn chỉ là một trường nhiễu: chưa có đường mòn, hồ lớn, vách, cầu qua nham thạch; một vùng nham thạch lớn không có lối đi riêng cho người chơi bay (chưa có luật ngự kiếm trên nham thạch).
+3. **Mép chuyển vùng là dải đất thẳng** rộng ~6 ô dọc các đường chia vùng và quảng trường vuông ở giữa: nhìn nhân tạo; chưa có tile chuyển tiếp trực tiếp giữa các họ (cỏ ↔ nham thạch...).
+4. **Tile viền của họ bổ sung** (bờ đá có bọt trắng, bờ đầm lầy) vẽ cho viền với nước; trong vùng cổ thụ vòng đá nằm trên cỏ nên viền trắng hơi sáng; cần Gemini / 42 duyệt hoặc vẽ riêng viền đá-trên-cỏ.
+5. **Server vẫn chỉ biết ô đi được hay không**, không biết loại nền: chưa có sát thương nền (nham thạch, độc), chậm chân trong đầm lầy, hay quái theo loại nền; `terrain.json` chỉ có `.` / `#`.
+6. **`MAP_FILE` chỉ ở server dev**: `npm run play` / dev dùng khi file có; server test và loadtest giữ bản đồ mở; đồng bộ client-server do người chạy giữ (cùng lần `prepare:assets`).
+7. **Chi phí**: tileset 1024 × 1024 (tăng gấp đôi so với 1024 × 512); số đo ngân sách và P1 xem PR D95.
 
 ## Asset Gemini PART 2 (props vùng, icon trạng thái, huy hiệu cảnh giới, hạt, key art, 2026-11-09): còn mở
 
