@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 import type { InvStateMsg } from '@vgtd/protocol';
 import {
   BAG_GRID,
+  BAG_USE,
   BagModel,
   BagSelection,
+  UseGesture,
   QUALITY_RGB,
   bagPanelSize,
   claimButtonRect,
@@ -146,3 +148,23 @@ describe('item styling and texts', () => {
     expect(durabilityPercent(b.itemAt(0)!)).toBeNull();
   });
 });
+
+describe('UseGesture (double-tap / double-click uses an item, D90)', () => {
+  it('fires on the second tap of the same slot inside the window, then starts over', () => {
+    const g = new UseGesture();
+    expect(g.tap(3, 1000)).toBe(false);
+    expect(g.tap(3, 1000 + BAG_USE.doubleTapMs)).toBe(true);
+    expect(g.tap(3, 1000 + BAG_USE.doubleTapMs + 10)).toBe(false); // a third tap is a new first tap
+    expect(g.tap(3, 1000 + BAG_USE.doubleTapMs + 20)).toBe(true);
+  });
+  it('does not fire for another slot, a late second tap, or after reset', () => {
+    const g = new UseGesture();
+    g.tap(3, 0);
+    expect(g.tap(4, 100)).toBe(false);
+    expect(g.tap(4, 100 + BAG_USE.doubleTapMs + 1)).toBe(false);
+    g.tap(5, 5000);
+    g.reset();
+    expect(g.tap(5, 5100)).toBe(false);
+  });
+});
+

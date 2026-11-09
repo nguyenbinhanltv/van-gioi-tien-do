@@ -136,6 +136,59 @@ async function client(inv: InventoryEvents = {}): Promise<{ net: NetClient; sock
   return { net, sock: FakeSocket.last };
 }
 
+describe('using items (D90)', () => {
+  const USE_STATE: InvStateMsg = {
+    ...STATE,
+    slots: [
+      { kind: 'stack', defId: 6, quality: 0, qty: 40 }, // craft material: no use
+      { kind: 'stack', defId: 2, quality: 3, qty: 2 }, // breakthrough pill
+      { kind: 'instance', defId: 5, quality: 5, durability: 8000, bound: false }, // blueprint: no use
+      { kind: 'stack', defId: 1, quality: 2, qty: 5 }, // heal pill
+      null,
+      { kind: 'stack', defId: 1, quality: 0, qty: 1 }, // a second heal stack
+    ],
+  };
+  it('only stacks of a usable kind can be used; the command carries the slot and nothing else', () => {
+    const b = new BagModel();
+    expect(b.useCmd(3, ids)).toBeNull(); // nothing loaded yet
+    b.applyState(USE_STATE);
+    expect([0, 1, 2, 3, 4, 9].map((i) => b.canUse(i))).toEqual([false, true, false, true, false, false]);
+    expect(b.useCmd(0, ids)).toBeNull();
+    expect(b.useCmd(2, ids)).toBeNull();
+    expect(b.useCmd(4, ids)).toBeNull();
+    const cmd = b.useCmd(3, ids)!;
+    expect(cmd).toMatchObject({ type: 'inv_cmd', op: InvOp.Use, from: 3, to: 0 });
+    expect(b.waitingCount).toBe(1);
+    expect(b.itemAt(3)!.qty).toBe(5); // never edited locally: the server state is the truth
+  });
+  it('slotOfKey finds the lowest slot of an item (the quick-use key target) and null when there is none', () => {
+    const b = new BagModel();
+    b.applyState(USE_STATE);
+    expect(b.slotOfKey('heal_pill')).toBe(3);
+    expect(b.slotOfKey('breakthrough_pill')).toBe(1);
+    expect(b.slotOfKey('blueprint_gold_red')).toBeNull(); // an instance, not a stack
+    expect(new BagModel().slotOfKey('heal_pill')).toBeNull();
+  });
+  it('reason texts exist for the new refusals', () => {
+    for (const r of [InvReason.NotUsable, InvReason.OnCooldown, InvReason.Dead, InvReason.NothingToHeal, InvReason.PillActive])
+      expect(invReasonText(r)).not.toContain('refused');
+  });
+  it('through NetClient: sendBagUse / sendBagQuickUse send a decodable Use command, and nothing for an unusable slot', async () => {
+    const { net, sock } = await client();
+    sock.push(USE_STATE);
+    const before = sock.sent.length;
+    expect(net.sendBagUse(0)).toBe(false); // craft material
+    expect(sock.sent.length).toBe(before);
+    expect(net.sendBagUse(3)).toBe(true);
+    expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({ type: 'inv_cmd', op: InvOp.Use, from: 3, to: 0 });
+    expect(net.sendBagQuickUse('heal_pill')).toBe(true);
+    expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({ op: InvOp.Use, from: 3 });
+    expect(net.sendBagQuickUse('nope')).toBe(false);
+    sock.readyState = 3;
+    expect(net.sendBagUse(3)).toBe(false);
+  });
+});
+
 describe('NetClient bag wiring', () => {
   it('inv_state updates net.bag and fires onInventory; sendBagMove sends a decodable inv_cmd; inv_result clears it and fires onInvResult', async () => {
     const seen: string[] = [];
