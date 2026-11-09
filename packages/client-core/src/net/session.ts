@@ -17,7 +17,19 @@ import {
   type FriendStateMsg,
   type QuestResultMsg,
   type QuestStateMsg,
+  type MarketBuyMsg,
+  type MarketCancelMsg,
+  type MarketListMsg,
+  type MarketNoticeMsg,
+  type MarketResultMsg,
+  type MarketResultsMsg,
+  type MarketSearchMsg,
   type PartyInviteMsg,
+  type TradeInviteMsg,
+  type TradeResultMsg,
+  type TradeStateMsg,
+  type SectResultMsg,
+  type SectStateMsg,
   type PartyResultMsg,
   type PartyStateMsg,
   type PartyVitalsMsg,
@@ -30,6 +42,8 @@ import {
   type SelfState,
   type SkillResultMsg,
   type BossPhaseMsg,
+  type MajorEventMsg,
+  type TribulationStrikeMsg,
   type SelfStatus,
   type StatusUpdateMsg,
   type SnapshotEntity,
@@ -118,6 +132,15 @@ export interface ProgressionEvents {
 }
 
 /**
+ * Major breakthrough callbacks (D97), a SEPARATE object from `NetEvents` (the scene replaces `events` wholesale). The Tâm Ma / Lôi Kiếp
+ * overlay listens here; a throwing hook never breaks the session.
+ */
+export interface MajorEvents {
+  onMajorEvent?(msg: MajorEventMsg): void;
+  onTribulationStrike?(msg: TribulationStrikeMsg): void;
+}
+
+/**
  * Inventory callbacks (D79), a SEPARATE object from `NetEvents` on purpose: the scene replaces `events` wholesale (combat attaches its own),
  * which would silently drop hooks living there. Set `net.inventoryEvents`; `net.bag` is always up to date whether or not anyone listens.
  */
@@ -139,6 +162,34 @@ export interface ChatEvents {
   onChatHistory?(msg: ChatHistoryMsg): void;
   /** The answer to a `sendChat` (0 = delivered, otherwise why not). */
   onChatResult?(msg: ChatResultMsg): void;
+}
+
+/** Trade callbacks (D102), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface TradeEvents {
+  /** The trade window changed (phase Open), was closed (Closed) or executed (Done). */
+  onTradeState?(msg: TradeStateMsg): void;
+  /** Someone asked to trade with you. */
+  onTradeInvite?(msg: TradeInviteMsg): void;
+  /** The answer to a `sendTrade` (0 = done, otherwise why not). */
+  onTradeResult?(msg: TradeResultMsg): void;
+}
+
+/** Sect callbacks (D98), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface SectEvents {
+  /** The whole picture (membership, Cống hiến, library of this class), after every change. */
+  onSectState?(msg: SectStateMsg): void;
+  /** The answer to a `sendSect` (0 = done, otherwise why not). */
+  onSectResult?(msg: SectResultMsg): void;
+}
+
+/** Vạn Bảo Lâu callbacks (D112), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface MarketEvents {
+  /** A page of listings (the answer to a `market_search`). */
+  onMarketResults?(msg: MarketResultsMsg): void;
+  /** The answer to a list / buy / cancel (or a refused search). */
+  onMarketResult?(msg: MarketResultMsg): void;
+  /** One of your listings sold or expired. */
+  onMarketNotice?(msg: MarketNoticeMsg): void;
 }
 
 /** Friends callbacks (D96), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
@@ -230,6 +281,7 @@ export class NetClient {
   events: NetEvents;
   /** progression listeners (tu vi state, meditation / breakthrough answers); survives `events` being replaced */
   progressionEvents: ProgressionEvents = {};
+  majorEvents: MajorEvents = {};
   private ws: SocketLike | null = null;
   private lastSnapshotSeq = 0;
   private acc = 0;
@@ -289,10 +341,16 @@ export class NetClient {
   chatEvents: ChatEvents = {};
   /** Callbacks for the party (own object, see `PartyEvents`). */
   partyEvents: PartyEvents = {};
+  /** Callbacks for the direct trade (own object, see `TradeEvents`). */
+  tradeEvents: TradeEvents = {};
+  /** Callbacks for the NPC sect (own object, see `SectEvents`). */
+  sectEvents: SectEvents = {};
   /** Callbacks for the friends list (own object, see `FriendEvents`). */
   friendEvents: FriendEvents = {};
   /** Callbacks for the quest log (own object, see `QuestEvents`). */
   questEvents: QuestEvents = {};
+  /** Callbacks for Vạn Bảo Lâu (own object, see `MarketEvents`). */
+  marketEvents: MarketEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -559,6 +617,12 @@ export class NetClient {
       case 'meditate_result':
         this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
         break;
+      case 'major_event':
+        this.emit(() => this.majorEvents.onMajorEvent?.(msg));
+        break;
+      case 'tribulation_strike':
+        this.emit(() => this.majorEvents.onTribulationStrike?.(msg));
+        break;
       case 'breakthrough_result':
         this.emit(() => this.progressionEvents.onBreakthroughResult?.(msg));
         break;
@@ -591,6 +655,21 @@ export class NetClient {
       case 'party_result':
         this.emit(() => this.partyEvents.onPartyResult?.(msg));
         break;
+      case 'trade_state':
+        this.emit(() => this.tradeEvents.onTradeState?.(msg));
+        break;
+      case 'trade_invite':
+        this.emit(() => this.tradeEvents.onTradeInvite?.(msg));
+        break;
+      case 'trade_result':
+        this.emit(() => this.tradeEvents.onTradeResult?.(msg));
+        break;
+      case 'sect_state':
+        this.emit(() => this.sectEvents.onSectState?.(msg));
+        break;
+      case 'sect_result':
+        this.emit(() => this.sectEvents.onSectResult?.(msg));
+        break;
       case 'friend_state':
         this.emit(() => this.friendEvents.onFriendState?.(msg));
         break;
@@ -602,6 +681,15 @@ export class NetClient {
         break;
       case 'quest_result':
         this.emit(() => this.questEvents.onQuestResult?.(msg));
+        break;
+      case 'market_results':
+        this.emit(() => this.marketEvents.onMarketResults?.(msg));
+        break;
+      case 'market_result':
+        this.emit(() => this.marketEvents.onMarketResult?.(msg));
+        break;
+      case 'market_notice':
+        this.emit(() => this.marketEvents.onMarketNotice?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -736,6 +824,48 @@ export class NetClient {
   }
 
   /**
+   * Send one trade command (D102): `op` is a `TradeOp`. `name` = the other player (invite) or the inviter (accept / decline, '' = the newest);
+   * `slot` / `qty` = a bag slot and a quantity for set-item (qty 0 takes the line out); `currency` / `amount` for set-stones. `clientMsgId` (uint16)
+   * comes back in the `trade_result`. False when the socket is not open or the command cannot be encoded.
+   */
+  sendTrade(m: { op: number; clientMsgId: number; name?: string; slot?: number; qty?: number; currency?: number; amount?: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({
+          type: 'trade_cmd',
+          op: m.op,
+          clientMsgId: m.clientMsgId & 0xffff,
+          name: m.name ?? '',
+          slot: m.slot ?? 0,
+          qty: m.qty ?? 0,
+          currency: m.currency ?? 0,
+          amount: m.amount ?? 0,
+        }),
+      );
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one sect command (D98): `op` is a `SectOp` (join / leave at the sect NPC, buy a library manual: `manual` = its index in the
+   * `sect_state` library). `clientMsgId` (uint16) comes back in the `sect_result`. False when the socket is not open or it cannot be encoded.
+   */
+  sendSect(m: { op: number; manual?: number; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(encode({ type: 'sect_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, manual: m.manual ?? 0 }));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * Send one friend command (D96): `op` is a `FriendOp`, `name` the other player (request / remove) or the requester (accept / decline,
    * '' = the oldest). `clientMsgId` (uint16) comes back in the `friend_result`. False when the socket is not open or it cannot be encoded.
    */
@@ -762,6 +892,21 @@ export class NetClient {
       ws.send(
         encode({ type: 'quest_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, questId: m.questId ?? '', npc: m.npc ?? '' }),
       );
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one Vạn Bảo Lâu command (D112): a search, list, buy or cancel built by `MarketModel`. `clientMsgId` comes back in the answer.
+   * False when the socket is not open or it cannot be encoded.
+   */
+  sendMarket(m: MarketSearchMsg | MarketListMsg | MarketBuyMsg | MarketCancelMsg): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(encode(m));
     } catch {
       return false;
     }

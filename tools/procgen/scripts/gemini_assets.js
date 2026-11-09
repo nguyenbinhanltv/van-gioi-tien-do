@@ -47,6 +47,9 @@ const files = [
   ...manifest.icons.map((n) => ['items', n]),
   ...GRID_PATHS.map((n) => ['skills', n]),
   ...Object.keys(manifest.mobs).map((n) => ['mobs', n]),
+  ...Object.keys(manifest.npcs)
+    .filter((n) => !n.startsWith('_'))
+    .map((n) => ['npcs', n]),
   ...Object.keys(manifest.mobsPhase)
     .filter((n) => !n.startsWith('_'))
     .map((n) => ['mobs_phase', n]),
@@ -56,7 +59,9 @@ const files = [
     .map((n) => ['ui', n]),
 ];
 const srcPath = (dir, name) =>
-  dir === 'mobs' || dir === 'mobs_phase' ? path.join(CONCEPTS, dir, `${name}.png`) : path.join(SRC, dir, `${name}.png`);
+  dir === 'mobs' || dir === 'mobs_phase' || dir === 'npcs'
+    ? path.join(CONCEPTS, dir, `${name}.png`)
+    : path.join(SRC, dir, `${name}.png`);
 
 function loadSources() {
   const missing = [];
@@ -172,6 +177,7 @@ function main() {
     icons: {},
     skills: {},
     mobs: {},
+    npcs: {},
     mobPhases: {},
     ground: {},
     ui: {},
@@ -357,6 +363,16 @@ function main() {
       `  ground/${mat}: mark ${mark.toFixed(0)} -> ${left.toFixed(0)}, wrap seam ${seams.map((x) => `${x[0]}->${x[1]}`).join(' ')}`,
     );
   }
+  // INTERIM Son Mon NPC standees (front-facing concept art, no flip): sized by height, shared prop atlas page, keyed npc_<name>
+  for (const [key, def] of Object.entries(manifest.npcs)) {
+    if (key.startsWith('_')) continue;
+    const buf = bufs.get(`npcs/${key}`);
+    const r = G.processMob(decodePNG(buf), 0, { height: def.h });
+    verify(`npcs/${key}`, buf, r.sparkle);
+    r.x1.save(path.join(OUT, 'mobs_1x', `${key}.png`));
+    sidecar.npcs[key] = { w: r.x1.width, h: r.x1.height, pivot: r.pivot };
+    console.log(`  npcs/${key}: ${r.x1.width}x${r.x1.height} px, sparkle ${r.sparkle.pixels}px`);
+  }
   if (problems.length) {
     console.error(`✖ verification failed:\n  ${problems.join('\n  ')}`);
     return 4;
@@ -364,8 +380,9 @@ function main() {
 
   // INTERIM mob standees share the PROP atlas pages (one texture for props + mobs: the Y-sort interleaves them, separate
   // pages would break the batch at every switch). Mobs are @1x pixels in both pages (drawn 1:1).
-  for (const key of Object.keys(manifest.mobs))
-    for (const d of ['props_2x', 'props_1x']) fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, d, `${key}.png`));
+  for (const key of [...Object.keys(manifest.mobs), ...Object.keys(manifest.npcs).filter((n) => !n.startsWith('_'))])
+    for (const d of ['props_2x', 'props_1x'])
+      fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, d, `${key}.png`));
   // boss-phase skins: their OWN @1x page for both tiers (loaded lazily by the client). In the prop pages they overflowed the
   // 2048 page (a second texture breaks the L3 batch) and added ~2 MB to the initial package.
   fs.rmSync(path.join(OUT, 'mobphase_1x'), { recursive: true, force: true });
@@ -393,7 +410,7 @@ function main() {
     const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';
     sidecar.atlases[atlasName] = a.pages.map((p) => ({ file: p.file, width: p.width, height: p.height }));
     for (const [n, f] of Object.entries(a.frames)) {
-      const target = sidecar[kind][n] || sidecar.mobs[n];
+      const target = sidecar[kind][n] || sidecar.mobs[n] || sidecar.npcs[n];
       target[scale] = { file: a.pages[f.page].file, x: f.x, y: f.y, w: f.w, h: f.h };
     }
   }

@@ -13,6 +13,7 @@ import {
   AuthService,
   DocFile,
   FileAccountStore,
+  FileSectStore,
   FileFriendStore,
   FileProgressionStore,
   Ledger,
@@ -138,6 +139,22 @@ describe('file stores round trip', () => {
     expect(await b.save({ ...v1, exp: 99 }, 0)).toBe(false);
   });
 
+  it('progression: the major-breakthrough lock (time left, D97) is written to the file and read back', async () => {
+    const d = tmp();
+    const p = join(d, 'progression.json');
+    const a = new FileProgressionStore(p, { flushMs: -1 });
+    const rec = {
+      ...newRecord('char2', { type: 'don', elements: ['moc'], mutation: null }, 'kiem'),
+      nFail: 2,
+      majorLockMs: 86_400_000,
+    };
+    expect(await a.save(rec, 0)).toBe(true);
+    a.file.flush();
+    const b = new FileProgressionStore(p, { flushMs: -1 });
+    expect(await b.load('char2')).toEqual(rec);
+    expect((await b.load('char2'))!.majorLockMs).toBe(86_400_000);
+  });
+
   it('inventories + ledger: bags, pending loot and bigint balances come back exactly, and the ledger keeps working', () => {
     const d = tmp();
     const s1 = openFileStores(d, { flushMs: -1 });
@@ -167,6 +184,25 @@ describe('file stores round trip', () => {
     expect(() => inv2.grantDrops('acc', [{ item: 'stone_ha', qty: 5 }], 'field', 'k1')).not.toThrow();
     expect(inv2.wallet('acc', HA)).toBe(walletBefore + 5n);
     expect(s2.ledger.reconcile()).toEqual([]);
+  });
+
+  it('sect: members and bought manuals round trip, an unchanged save costs no write, malformed data is refused', () => {
+    const d = tmp();
+    const p = join(d, 'sect.json');
+    const a = new FileSectStore(p, { flushMs: -1 });
+    expect(a.load()).toBeUndefined(); // first start
+    const snap = { members: ['acc-a', 'acc-b'], manuals: [['acc-a', 'kiem_tu.kim_quang_quet']] as [string, string][] };
+    a.save(snap);
+    a.file.flush();
+    const writes = a.file.writes;
+    a.save(structuredClone(snap));
+    a.file.flush();
+    expect(a.file.writes).toBe(writes);
+    expect(new FileSectStore(p, { flushMs: -1 }).load()).toEqual(snap);
+    writeFileAtomic(p, JSON.stringify({ v: 1, members: [1], manuals: [] }));
+    expect(() => new FileSectStore(p)).toThrow(/malformed members/);
+    writeFileAtomic(p, JSON.stringify({ v: 1, members: [], manuals: [['only-one']] }));
+    expect(() => new FileSectStore(p)).toThrow(/malformed manuals/);
   });
 
   it('friends: pairs and requests round trip, an unchanged save costs no write, malformed data is refused', () => {

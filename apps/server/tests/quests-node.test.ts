@@ -5,7 +5,14 @@
 import { describe, expect, it } from 'vitest';
 import { QuestStatus, mobDefByKey, mobDefById, type MobDef } from '@vgtd/shared';
 import { QuestOp, QuestReason, ErrorCode, encode } from '@vgtd/protocol';
-import { InventoryService, ProgressionService, QuestService, WorldNode, type ClientTransport } from '../src/index.js';
+import {
+  InventoryService,
+  ProgressionService,
+  QuestService,
+  SectService,
+  WorldNode,
+  type ClientTransport,
+} from '../src/index.js';
 
 class Quiet implements ClientTransport {
   send(): void {}
@@ -101,6 +108,19 @@ describe('WorldNode feeds quests', () => {
     expect(node.inventory!.wallet('acc-1', 'LT_HA')).toBeGreaterThan(0n);
     expect(node.inventory!.ledger.reconcile()).toEqual([]);
     expect(QuestReason.Ok).toBe(0);
+  });
+
+  it('sect quests pay Cống hiến through the real SectService (members only, idempotent key)', () => {
+    const sect = new SectService({ ledger: new InventoryService().ledger });
+    sect.join({ entityId: 1, accountId: 'm', path: undefined });
+    expect(sect.grantContribution('m', 10, 'k')).toBe(false); // not a member yet
+    (sect as unknown as { members: Set<string> }).members.add('m');
+    expect(sect.grantContribution('m', 10, 'k')).toBe(true);
+    expect(sect.grantContribution('m', 10, 'k')).toBe(true); // replay: still true, nothing paid twice
+    expect(sect.contribution('m')).toBe(10n);
+    expect(sect.grantContribution('m', 0, 'z')).toBe(false);
+    expect(sect.grantContribution('m', 1.5, 'z')).toBe(false);
+    expect(sect.ledger.reconcile()).toEqual([]);
   });
 
   it('a node without the module rejects quest commands and leaves the rest alone', () => {

@@ -22,7 +22,7 @@ export const USAGE = `npm run play -- [options]
   --smoke              start, wait until healthy, print the URLs, then stop again (used to check the setup / CI)
   --memory             keep nothing between runs (STORE=memory). Default: STORE=file, accounts / characters / bags in
                        ./.vgtd-data (or $DATA_DIR) survive a restart
-  --reset-data         delete the saved play-test data (only accounts.json, progression.json, inventories.json, friends.json, quests.json, ledger.json and
+  --reset-data         delete the saved play-test data (only accounts.json, progression.json, inventories.json, sect.json, friends.json, quests.json, ledger.json, journal.json and
                        their .bak) before starting; with a custom $DATA_DIR it also needs --yes
   --yes                confirm --reset-data on a custom $DATA_DIR
   --help               this text
@@ -138,6 +138,9 @@ export const DATA_FILES = Object.freeze([
   'accounts.json',
   'progression.json',
   'inventories.json',
+  // the write-ahead journal of a multi-document commit (D102): a leftover one would be re-applied over a reset
+  'journal.json',
+  'sect.json',
   'friends.json',
   'quests.json',
   'ledger.json',

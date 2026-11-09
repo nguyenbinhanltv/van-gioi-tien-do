@@ -1,7 +1,8 @@
 /** Local dev entry: `PORT=8080 node <bundle>` (hosting is local-only for now, D27). */
+import { jsonLineSink } from './world/security-log.js';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { openFileStores } from './persistence/index.js';
+import { createBackup, openFileStores } from './persistence/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
 import { parseTerrain, terrainGrid } from './world/terrain.js';
@@ -59,12 +60,36 @@ const srv = await startServer({
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
+    // structured security events (kicks, flood drops, malformed frames, anti-cheat violations; D101): one JSON line each, no PII; SECURITY_LOG=0 silences
+    securityLog: process.env.SECURITY_LOG === '0' ? undefined : jsonLineSink((line) => console.log(line)),
     inventory: flag(process.env.INVENTORY)
-      ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
+      ? new InventoryService(
+          stores ? { store: stores.inventories, ledger: stores.ledger, durable: stores.durable } : {},
+        )
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
   ...(stores ? { friends: { store: stores.friends }, quests: { store: stores.quests } } : {}),
+  ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
+  ...(stores ? { friends: { store: stores.friends } } : {}),
+  // Vạn Bảo Lâu (D112): the book is the market.json document; the weekly SHADOW CPI report goes to the log (telemetry can subscribe later)
+  market: {
+    ...(stores
+      ? {
+          store: stores.market,
+          // the book, the ledger and the bags become durable as ONE unit through the write-ahead journal (D102 / D112)
+          durable: (label: string) => stores.durableMarket.commit(label),
+          onDurableError: (label: string, e: unknown) =>
+            console.error(
+              `[vgtd/market] journal commit failed (${label}): ${e instanceof Error ? e.message : String(e)}; the change stands in memory and the stores retry it`,
+            ),
+        }
+      : {}),
+    report: (r) =>
+      console.log(
+        `[vgtd/market] shadow CPI week ${r.week}: cpi ${r.cpi === null ? 'n/a' : r.cpi.toFixed(3)}, applied tax ${r.appliedBps / 100}%, shadow tax ${r.shadowBps / 100}%, ${r.trades} sales, ${r.volume} hạ phẩm (measured, NOT applied)`,
+      ),
+  },
   // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)
   progression: {
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
@@ -77,6 +102,29 @@ if (stores) {
   // Unchanged bags cost no disk write.
   setInterval(() => srv.world.inventory?.flushAll(), 5000).unref();
 }
+// Backups of the file store (D99): BACKUP_EVERY_MIN=N writes a consistent snapshot of every document each N minutes (0 / unset = off),
+// BACKUP_DIR (default DATA_DIR/backups), BACKUP_KEEP (default 10) rotates; a line `backup` on stdin (QUIT_ON_STDIN=1) writes one now, and
+// BACKUP_ON_EXIT=1 writes one at a clean stop. The snapshot serialises all documents in one synchronous turn (after the bags are saved),
+// so the files are one consistent moment. The log carries counts only, never document content.
+const backupEveryMin = Number(process.env.BACKUP_EVERY_MIN ?? 0);
+const backupNow = (reason: string): void => {
+  if (!stores) return;
+  try {
+    const docs = stores.snapshot(() => srv.world.inventory?.flushAll());
+    const info = createBackup(process.env.BACKUP_DIR ?? join(stores.dir, 'backups'), docs, {
+      keep: Number(process.env.BACKUP_KEEP ?? 10) || 10,
+      source: 'live',
+    });
+    const c = info.manifest.counts;
+    console.log(
+      `[vgtd/server] backup ${info.id} (${reason}): ${c.accounts} accounts, ${c.characters} characters, ${c.inventories} bags, ${c.ledgerEntries} ledger entries` +
+        (info.removed.length ? `; rotated out ${info.removed.length}` : ''),
+    );
+  } catch (e) {
+    console.error(`[vgtd/server] backup FAILED (${reason}): ${e instanceof Error ? e.message : 'error'}`);
+  }
+};
+if (stores && backupEveryMin > 0) setInterval(() => backupNow('scheduled'), backupEveryMin * 60_000).unref();
 // Clean shutdown: let the gateway release its connections (they save their bags / progress), then write every document.
 let closing = false;
 const shutdown = async (reason: string): Promise<void> => {
@@ -88,6 +136,7 @@ const shutdown = async (reason: string): Promise<void> => {
     await new Promise((r) => setTimeout(r, 100));
     srv.world.inventory?.flushAll();
     stores.flush();
+    if (process.env.BACKUP_ON_EXIT === '1') backupNow('exit');
   }
   process.exit(0);
 };
@@ -102,6 +151,10 @@ if (process.env.QUIT_ON_STDIN === '1') {
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', (d: string) => {
     buf += d;
+    if (/^backup\s*$/m.test(buf)) {
+      buf = buf.replace(/^backup\s*$/m, '');
+      backupNow('stdin');
+    }
     if (/^quit\s*$/m.test(buf)) void shutdown('stdin quit');
     if (buf.length > 1024) buf = buf.slice(-64);
   });
