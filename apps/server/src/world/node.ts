@@ -22,6 +22,7 @@ import {
   toUW,
   type PathId,
   type RngState,
+  type ZoneSpawnTable,
   MajorResult,
   COLLIDER_RADIUS_TILES,
 } from '@vgtd/shared';
@@ -251,7 +252,16 @@ export interface WorldNodeOptions {
    */
   wallClock?: () => number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
-  mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
+  mobs?:
+    | boolean
+    | {
+        zones?: readonly MobZone[];
+        density?: number;
+        /** spawn tables override (the class-balance harness spawns exactly one mob of a chosen def, D115); default `ZONE_SPAWN_TABLES` */
+        tables?: readonly ZoneSpawnTable[];
+        /** centre of the mob area for the tier bands (tiles); default: the centre of the bounding box of `zones` */
+        center?: { i: number; j: number };
+      };
   /** inventory + drop sink (D77): loads an account's inventory on join and saves it on leave; omit = no inventory */
   inventory?: InventoryService;
 }
@@ -467,7 +477,14 @@ export class WorldNode {
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
-      this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
+      this.mobs = new MobManager({
+        seed,
+        grid,
+        zones: o.zones ?? defaultMobZones(n),
+        density: o.density,
+        tables: o.tables,
+        center: o.center,
+      });
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
     // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it

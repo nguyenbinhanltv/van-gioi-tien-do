@@ -632,3 +632,13 @@ Còn mở / lưu ý:
 - `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
+
+## D115 — cân bằng 6 Đạo Lộ: còn mở (worker39, 2026-11-09)
+
+1. **Quyết định cần chủ dự án / game designer** (báo cáo `docs/35` mục 9): áp `stat_weights` của lớp vào `makeProfile` hay bỏ khỏi dữ liệu; cài hiệu ứng còn thiếu trên máy chủ (dot, khống chế, buff, đánh dấu, triệu hồi, dịch chuyển, khiêu khích) **trước** khi chỉnh số; cài nhánh solo / team; sau đó chạy lại `npm run balance` và mới chỉnh số bằng `vgtd-formula-change`.
+2. **Dải ±15% là mặc định tạm** và lớp tank / hỗ trợ cố ý chậm hơn về sát thương (docs/11): cần chốt dải cho từng vai trò (vd. tank / hỗ trợ ≥ X% DPS trung vị nếu đóng góp đội bù lại).
+3. **Người chơi kịch bản không né, không di chuyển, không dùng kỹ năng dịch chuyển**: sát thương nhận và mọi số boss là cận dưới sống sót; cần bản biết né telegraph (cần API nhận telegraph cho bot) để đo boss và đội.
+4. **Boss Kim Đan không hạ được bởi đội 4 người cùng cảnh giới trong 600 s** khi không né: kiểm tra HP × 45 / ATK × 1,5 (docs/10 §4.1) hoặc đo lại với bot biết né.
+5. **Khống chế (uptime) và đóng góp debuff / buff của đội không đo được trên mã thật**; mục 2 của báo cáo chỉ cho tiềm năng theo dữ liệu.
+6. **Đấu tay đôi chỉ là mô hình tham khảo** (chưa có PvP trên máy chủ, docs/14): không dùng để chốt cân bằng PvP.
+7. **Ma trận đội** chỉ có một đội tham chiếu (the, dan_phu, dao, kiem); chưa có ma trận đội đầy đủ vai trò, chưa đo đội 2 / 3 người.
