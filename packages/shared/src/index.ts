@@ -17,6 +17,7 @@ export * from './data.js';
 export * from './mobs.js';
 export * from './mob-layout.js';
 export * from './first-session.js';
+export * from './tutorial.js';
 export * from './mob-attacks.js';
 export * from './items.js';
 export * from './regen.js';

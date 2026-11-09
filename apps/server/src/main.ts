@@ -54,6 +54,8 @@ const srv = await startServer({
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
     ...(stores ? { store: stores.progression } : {}),
   },
+  // tutorial progress is stored with the other documents when STORE=file (D105)
+  tutorial: { mapTiles, ...(stores ? { store: stores.tutorial } : {}) },
 });
 if (stores) {
   console.log(`[vgtd/server] STORE=file: data in ${stores.dir}`);

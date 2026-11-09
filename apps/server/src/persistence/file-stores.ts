@@ -14,6 +14,8 @@ import type { ProgressRecord } from '../progression/state.js';
 import type { ProgressionStore } from '../progression/store.js';
 import { Ledger, type LedgerSnapshot } from '../world/inventory/ledger.js';
 import type { InventorySnapshot, InventoryStore } from '../world/inventory/store.js';
+import type { TutorialRecord, TutorialStore } from '../tutorial/store.js';
+import { TUTORIAL_ALL_MASK } from '@vgtd/shared';
 import { readJsonFile, removeStray } from './atomic.js';
 import { DocFile, type DocFileOptions } from './doc-file.js';
 
@@ -161,6 +163,57 @@ export class FileInventoryStore implements InventoryStore {
   }
 }
 
+/** Tutorial progress (D105): one tiny record per account. */
+export class FileTutorialStore implements TutorialStore {
+  private readonly rows = new Map<string, TutorialRecord>();
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    const doc = load(path, 'tutorial', (d) => {
+      if (!Array.isArray(d.records)) throw new Error('tutorial: missing records');
+      return d.records as unknown[];
+    });
+    for (const r of doc ?? []) {
+      const o = r as Record<string, unknown>;
+      if (
+        typeof r !== 'object' ||
+        r === null ||
+        !isStr(o.accountId) ||
+        !isNum(o.done) ||
+        !Number.isInteger(o.done) ||
+        o.done < 0 ||
+        o.done > TUTORIAL_ALL_MASK ||
+        !isNum(o.kills) ||
+        typeof o.skipped !== 'boolean' ||
+        typeof o.complete !== 'boolean' ||
+        !isNum(o.sessions)
+      )
+        throw new Error('tutorial: malformed record');
+      this.rows.set(o.accountId, {
+        accountId: o.accountId,
+        done: o.done,
+        kills: o.kills,
+        skipped: o.skipped,
+        complete: o.complete,
+        sessions: o.sessions,
+      });
+    }
+    this.file = new DocFile(path, () => JSON.stringify({ v: VERSION, records: [...this.rows.values()] }), opts);
+  }
+  load(accountId: string): TutorialRecord | undefined {
+    const r = this.rows.get(accountId);
+    return r ? { ...r } : undefined;
+  }
+  save(record: TutorialRecord): void {
+    const prev = this.rows.get(record.accountId);
+    if (prev && JSON.stringify(prev) === JSON.stringify(record)) return;
+    this.rows.set(record.accountId, { ...record });
+    this.file.markDirty();
+  }
+  all(): TutorialRecord[] {
+    return [...this.rows.values()].map((r) => ({ ...r }));
+  }
+}
+
 /** The ledger lives in its own document (docs/23 §4.4: separate from the inventory snapshots). */
 export function openFileLedger(path: string, opts: DocFileOptions = {}): { ledger: Ledger; file: DocFile } {
   const snap = load(path, 'ledger', (d) => d as unknown as LedgerSnapshot);
@@ -174,28 +227,32 @@ export interface FileStores {
   accounts: FileAccountStore;
   progression: FileProgressionStore;
   inventories: FileInventoryStore;
+  tutorial: FileTutorialStore;
   ledger: Ledger;
   /** write every document now (shutdown, tests) */
   flush(): void;
   readonly dir: string;
 }
 
-/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `ledger.json`. */
+/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `tutorial.json`, `ledger.json`. */
 export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStores {
   const accounts = new FileAccountStore(join(dir, 'accounts.json'), opts);
   const progression = new FileProgressionStore(join(dir, 'progression.json'), opts);
   const inventories = new FileInventoryStore(join(dir, 'inventories.json'), opts);
+  const tutorial = new FileTutorialStore(join(dir, 'tutorial.json'), opts);
   const { ledger, file: ledgerFile } = openFileLedger(join(dir, 'ledger.json'), opts);
   return {
     accounts,
     progression,
     inventories,
+    tutorial,
     ledger,
     dir,
     flush: () => {
       accounts.file.flush();
       progression.file.flush();
       inventories.file.flush();
+      tutorial.file.flush();
       ledgerFile.flush();
     },
   };

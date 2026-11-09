@@ -22,6 +22,13 @@ import {
   type PartyServerMessage,
 } from './party.js';
 import {
+  decodeTutorialBody,
+  encodeTutorialBody,
+  validateTutorialMessage,
+  type TutorialClientMessage,
+  type TutorialServerMessage,
+} from './tutorial.js';
+import {
   decodeInventoryBody,
   encodeInventoryBody,
   validateInventoryMessage,
@@ -44,6 +51,9 @@ export enum ColdMsgId {
   PartyInvite = 46,
   PartyState = 47,
   PartyVitals = 48,
+  /** tutorial / FTUE (D105, tutorial.ts) */
+  TutorialState = 49,
+  TutorialSkip = 50,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -75,6 +85,8 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyInvite]: 'party_invite',
   [ColdMsgId.PartyState]: 'party_state',
   [ColdMsgId.PartyVitals]: 'party_vitals',
+  [ColdMsgId.TutorialState]: 'tutorial_state',
+  [ColdMsgId.TutorialSkip]: 'tutorial_skip',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -95,6 +107,8 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_invite: ColdMsgId.PartyInvite,
   party_state: ColdMsgId.PartyState,
   party_vitals: ColdMsgId.PartyVitals,
+  tutorial_state: ColdMsgId.TutorialState,
+  tutorial_skip: ColdMsgId.TutorialSkip,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -189,9 +203,21 @@ export interface MeditateResultMsg {
   reason: number;
 }
 export type ColdClientMessage =
-  BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg | InvClientMessage | ChatClientMessage | PartyClientMessage;
+  | BreakthroughStartMsg
+  | MeditateStartMsg
+  | MeditateStopMsg
+  | InvClientMessage
+  | ChatClientMessage
+  | PartyClientMessage
+  | TutorialClientMessage;
 export type ColdServerMessage =
-  CharStateMsg | BreakthroughResultMsg | MeditateResultMsg | InvServerMessage | ChatServerMessage | PartyServerMessage;
+  | CharStateMsg
+  | BreakthroughResultMsg
+  | MeditateResultMsg
+  | InvServerMessage
+  | ChatServerMessage
+  | PartyServerMessage
+  | TutorialServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -255,7 +281,9 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         reason: int(o.reason, 0, 255, 'reason'),
       };
     default:
-      return validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o);
+      return (
+        validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o) ?? validateTutorialMessage(o)
+      );
   }
 }
 
@@ -329,6 +357,10 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'party_vitals':
       encodePartyBody(w, m);
       break;
+    case 'tutorial_state':
+    case 'tutorial_skip':
+      encodeTutorialBody(w, m);
+      break;
   }
 }
 
@@ -385,5 +417,8 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'party_state':
     case 'party_vitals':
       return decodePartyBody(r, type);
+    case 'tutorial_state':
+    case 'tutorial_skip':
+      return decodeTutorialBody(r, type);
   }
 }
