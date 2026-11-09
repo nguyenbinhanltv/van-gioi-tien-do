@@ -333,6 +333,9 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToWorld(x, y),
     );
     this.combat.mobArt = this.mobArt;
+    // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
+    (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
+      this.combat?.setEnemyPhase(entityId, phase, ms);
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
@@ -366,7 +369,10 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
-      online.onBossPhase = (entityId, phase) => this.combat?.announceBossPhase(entityId, phase);
+      online.onBossPhase = (entityId, phase, transformMs) => {
+        this.combat?.announceBossPhase(entityId, phase);
+        this.combat?.setEnemyPhase(entityId, phase, transformMs); // skin swap on the boss standee
+      };
       // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
       this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
