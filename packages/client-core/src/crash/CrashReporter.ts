@@ -19,6 +19,8 @@ import {
  * at most `CLIENT_MAX_REPORTS_PER_SESSION` distinct reports, batches at least `CLIENT_MIN_SEND_GAP_MS` apart (fatal errors and the
  * end marker bypass the gap so a dying page still reports).
  */
+const byteLength = (s: string): number => new TextEncoder().encode(s).length;
+
 export interface CrashReporterOptions {
   build: string;
   /** random per-page-load id, 8..32 chars of [a-z0-9] */
@@ -44,7 +46,10 @@ export class CrashReporter {
   readonly stats: CrashReporterStats = { reported: 0, deduped: 0, droppedOverCap: 0, batchesSent: 0 };
   private readonly now: () => number;
   private readonly queue: CrashEvent[] = [];
-  private readonly seen = new Map<string, { extra: number; source: CrashSource; message: string; fatal: boolean }>();
+  private readonly seen = new Map<
+    string,
+    { extra: number; source: CrashSource; message: string; stack: string | undefined; fatal: boolean }
+  >();
   private t0 = 0;
   private lastSend = -Infinity;
   private started = false;
@@ -88,7 +93,7 @@ export class CrashReporter {
         this.stats.droppedOverCap++;
         return;
       }
-      this.seen.set(fp, { extra: 0, source, message: msg, fatal });
+      this.seen.set(fp, { extra: 0, source, message: msg, stack: stk, fatal });
       this.stats.reported++;
       this.queue.push({ kind: 'error', atMs: this.elapsed(), source, message: msg, ...(stk ? { stack: stk } : {}), fatal });
       this.flush(fatal);
@@ -102,7 +107,16 @@ export class CrashReporter {
     if (this.ended || !this.started) return;
     for (const [, s] of this.seen) {
       if (s.extra > 0)
-        this.queue.push({ kind: 'error', atMs: this.elapsed(), source: s.source, message: s.message, fatal: s.fatal, count: s.extra });
+        // the repeat count carries the same message AND stack as the first report, so the server gives it the same fingerprint
+        this.queue.push({
+          kind: 'error',
+          atMs: this.elapsed(),
+          source: s.source,
+          message: s.message,
+          ...(s.stack ? { stack: s.stack } : {}),
+          fatal: s.fatal,
+          count: s.extra,
+        });
     }
     this.queue.push({ kind: 'session_end', atMs: this.elapsed() });
     this.flush(true, true);
@@ -125,23 +139,47 @@ export class CrashReporter {
     }
     this.lastSend = t;
     while (this.queue.length > 0) {
-      const events = this.queue.splice(0, CRASH_REPORT.MAX_EVENTS_PER_BATCH);
-      const cls = this.o.getClass?.();
-      const batch: CrashBatch = {
-        v: CRASH_REPORT.VERSION,
-        sid: this.o.sid,
-        build: this.o.build,
-        scene: this.o.getScene(),
-        ...(cls ? { class: cls } : {}),
-        events,
-      };
+      const events: CrashEvent[] = [];
+      let json = this.encode(events);
+      while (this.queue.length > 0 && events.length < CRASH_REPORT.MAX_EVENTS_PER_BATCH) {
+        // split by SERIALIZED SIZE too: the server refuses a body over MAX_BODY_BYTES (413) and drops all of it, markers included
+        const ev = this.fit(this.queue[0]!);
+        const next = this.encode([...events, ev]);
+        if (events.length > 0 && byteLength(next) > CRASH_REPORT.MAX_BODY_BYTES) break;
+        events.push(ev);
+        json = next;
+        this.queue.shift();
+      }
       this.stats.batchesSent++;
       try {
-        this.o.send(JSON.stringify(batch), final);
+        this.o.send(json, final);
       } catch {
         /* offline / blocked: reports are best effort */
       }
     }
+  }
+
+  private encode(events: CrashEvent[]): string {
+    const cls = this.o.getClass?.();
+    const batch: CrashBatch = {
+      v: CRASH_REPORT.VERSION,
+      sid: this.o.sid,
+      build: this.o.build,
+      scene: this.o.getScene(),
+      ...(cls ? { class: cls } : {}),
+      events,
+    };
+    return JSON.stringify(batch);
+  }
+
+  /** an event alone must fit the cap (multi-byte text, JSON escapes): halve its stack until it does */
+  private fit(ev: CrashEvent): CrashEvent {
+    let e = ev;
+    while (byteLength(this.encode([e])) > CRASH_REPORT.MAX_BODY_BYTES && e.stack) {
+      e = { ...e, stack: e.stack.length > 200 ? e.stack.slice(0, e.stack.length >> 1) : undefined };
+      if (e.stack === undefined) delete e.stack;
+    }
+    return e;
   }
 
   private elapsed(): number {

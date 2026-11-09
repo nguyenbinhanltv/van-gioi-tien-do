@@ -51,6 +51,7 @@ describe('CrashService', () => {
     const svc = new CrashService({ now: () => t });
     expect(svc.summary().crashFreePct).toBe(100);
     svc.submit(batch(1, [start()]), 'a');
+    t += CRASH_REPORT.SERVER_SUMMARY_CACHE_MS + 1; // the summary is cached for a few seconds
     expect(svc.summary().liveSessions).toBe(1);
     t += CRASH_REPORT.SESSION_IDLE_MS + 1;
     const r = svc.summary();

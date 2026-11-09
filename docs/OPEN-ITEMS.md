@@ -609,4 +609,4 @@ Còn mở / lưu ý:
 - **Chưa có source map**: stack là mã đã gói; trước beta cần ánh xạ ngược (hoặc gửi bản dựng không nén cho tester) để top-crash đọc được.
 - **Lỗi engine không qua `console.error`** (crash native, WebGL context lost, hết bộ nhớ làm tab bị giết) không có sự kiện nào; tab bị giết chỉ thấy là phiên "bỏ dở" (tính là không sập), nên crash-free % có thể **lạc quan**. Cần heartbeat hoặc dấu "lần chạy trước không kết thúc sạch" (localStorage) để tính phiên bị giết.
 - **Server chưa có nhóm báo cáo cho lỗi server** (`uncaughtException` ở docs/27 §7 vẫn chỉ log); D110 chỉ đo phiên phía client.
-- **Quay vòng tệp**: JSONL theo ngày, chưa xóa tệp cũ (đặt thời hạn lưu khi có chính sách dữ liệu).
+- **Giới hạn kho crash (đã làm)**: bộ nhớ giữ tối đa 20 000 bản ghi, mỗi ngày tối đa 16 MiB (lô vượt bị bỏ và đếm), giữ 14 ngày, mỗi lần đọc tối đa 48 MiB, kết quả tổng hợp được nhớ đệm 10 giây. Chưa có cảnh báo khi bản ghi bị bỏ (số đếm `storeDropped` chỉ có trong mã).

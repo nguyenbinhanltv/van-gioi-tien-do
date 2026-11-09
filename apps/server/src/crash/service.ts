@@ -35,6 +35,7 @@ export class CrashService {
   private readonly now: () => number;
   private readonly ipHits = new Map<string, number[]>();
   private readonly sessionEvents = new Map<string, number>();
+  private readonly cache = new Map<string, { at: number; value: CrashRollup }>();
   private minuteStart = 0;
   private minuteEvents = 0;
 
@@ -79,7 +80,19 @@ export class CrashService {
   /** crash-free sessions % and the top crashes over the last `windowMs` (default 24 h) */
   summary(windowMs = 24 * 3_600_000, topN = 10): CrashRollup {
     const t = this.now();
-    return rollupCrashes(this.store.read(t - windowMs), t, windowMs, topN);
+    const key = `${windowMs}|${topN}`;
+    const hit = this.cache.get(key);
+    // the rollup reads the day files synchronously: repeated page loads / polling reuse one result for a few seconds
+    if (hit && t - hit.at < CRASH_REPORT.SERVER_SUMMARY_CACHE_MS && t >= hit.at) return hit.value;
+    const value = rollupCrashes(this.store.read(t - windowMs), t, windowMs, topN);
+    this.cache.set(key, { at: t, value });
+    if (this.cache.size > 16) this.cache.clear();
+    return value;
+  }
+
+  /** records refused by the store (daily byte budget, failed write) */
+  get storeDropped(): number {
+    return this.store.dropped;
   }
 
   private limited(retryAfterS: number): CrashReply {

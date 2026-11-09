@@ -24,6 +24,13 @@ export const CRASH_REPORT = {
   SERVER_REQUESTS_PER_IP_PER_MIN: 30,
   SERVER_EVENTS_PER_SESSION: 60,
   SERVER_EVENTS_PER_MIN: 3000,
+  /** store bounds: in-memory records, bytes written per UTC day (extra batches are dropped and counted), retention, bytes read per summary */
+  SERVER_MAX_MEM_RECORDS: 20_000,
+  SERVER_MAX_BYTES_PER_DAY: 16 * 1024 * 1024,
+  SERVER_RETENTION_DAYS: 14,
+  SERVER_MAX_READ_BYTES: 48 * 1024 * 1024,
+  /** the rollup is cached this long (it reads the files synchronously) */
+  SERVER_SUMMARY_CACHE_MS: 10_000,
   /** a session with no event for this long and no end marker is "abandoned" (closed tab), not crashed */
   SESSION_IDLE_MS: 30 * 60_000,
 } as const;

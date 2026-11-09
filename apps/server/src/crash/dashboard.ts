@@ -3,6 +3,9 @@
  * small page and JSON with the same access rule as that dashboard (loopback, or `Authorization: Bearer <DASHBOARD_TOKEN>`). When #264
  * merges, replace `operatorAllowed` with its `dashboardAllowed` and render `crashPanel(service)` as one more panel of
  * `/dashboard/summary.json` (the shape is `CrashRollup`); the routes in the gateway can then be deleted.
+ *
+ * The HTML page works over loopback only (or behind a proxy that adds the credentials): its own fetch cannot send an `Authorization`
+ * header. A token holder reads the JSON endpoint (`curl -H "Authorization: Bearer $DASHBOARD_TOKEN" .../ops/crash/summary.json`).
  */
 import { timingSafeEqual } from 'node:crypto';
 import type { IncomingMessage } from 'node:http';
@@ -37,7 +40,7 @@ pre{margin:0;white-space:pre-wrap;max-width:60em;font-size:12px;color:#aaa}.bad{
 <script>
 const el=(t,x,c)=>{const e=document.createElement(t);if(x!==undefined)e.textContent=String(x);if(c)e.className=c;return e};
 const row=(tb,cells,head)=>{const tr=document.createElement('tr');for(const c of cells){const th=el(head?'th':'td');th.append(c instanceof Node?c:document.createTextNode(String(c)));tr.append(th)}tb.append(tr)};
-fetch('summary.json'+location.search).then(r=>r.json()).then(s=>{
+fetch('/ops/crash/summary.json'+location.search).then(r=>r.json()).then(s=>{
  document.getElementById('head').append(el('b',s.crashFreePct+'%',s.crashFreePct>=s.target?'ok':'bad'),
   document.createTextNode(' crash-free (target '+s.target+'%): '+s.sessions+' sessions, '+s.crashedSessions+' crashed, '+s.liveSessions+' live, '+s.abandonedSessions+' abandoned'));
  const b=document.getElementById('builds');row(b,['build','sessions','crashed','crash-free %'],1);for(const x of s.byBuild)row(b,[x.build,x.sessions,x.crashed,x.crashFreePct]);
