@@ -21,6 +21,7 @@ import {
   toUW,
   type PathId,
   type RngState,
+  MajorResult,
 } from '@vgtd/shared';
 import {
   ErrorCode,
@@ -73,6 +74,7 @@ import {
   type CombatResult,
 } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
+import { MajorBreakthroughs, SHADOW_DEF_ID, ShadowRegistry } from './breakthrough/index.js';
 import { DropSink, InventorySync, itemUseFor, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
@@ -324,6 +326,10 @@ export class WorldNode {
   /** per-tick cache of what a snapshot says about each entity (see `currentOf`) */
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
   readonly progression: ProgressionService | undefined;
+  /** Tâm Ma / Lôi Kiếp events of major breakthroughs (D97); null without combat + progression */
+  readonly major: MajorBreakthroughs | null;
+  /** Tâm Ma shadows as combat targets (the `MobPort` of the combat core wraps the mob manager); null without combat + progression */
+  private readonly shadows: ShadowRegistry | null;
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
   readonly friends: FriendService | undefined;
@@ -332,6 +338,10 @@ export class WorldNode {
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
    */
   private readonly chatHistoryDue = new Map<number, ChatLine[]>();
+  /** Major-event messages a player missed while held (D97): their final answer, kept until they resume. */
+  private readonly heldMajor = new Map<number, Message[]>();
+  /** Major-event state to re-send to resumed players on the next tick (after the client has reset its overlay on `hello_ack`). */
+  private readonly majorDue = new Map<number, Message[]>();
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
   /** Mobs in chase hurt their target (D86); null without mobs + combat or with `combat.mobAttacks: false`. */
@@ -417,7 +427,11 @@ export class WorldNode {
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
     // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it
-    const mobPort = opts.combat?.mobs ?? this.mobs ?? undefined;
+    const basePort = opts.combat?.mobs ?? this.mobs ?? undefined;
+    // Tâm Ma shadows (D97) are combat targets too: the combat core talks to a registry that answers for them and forwards the rest
+    this.shadows = opts.combat && this.progression ? new ShadowRegistry(basePort) : null;
+    const mobPort = this.shadows ?? basePort;
+    const shadows = this.shadows;
     // kills fill the killer's bag: combat's `onDrops` feeds the inventory (the caller's own `onDrops` still runs)
     this.dropSink =
       opts.combat && this.inventory
@@ -436,20 +450,36 @@ export class WorldNode {
           isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
           partyOf: (id) => this.creditGroupOf(id),
           isInvulnerable: (id) => this.mobAttacks?.isInvulnerable(id) ?? false,
+          canTarget: (casterId, mobId) => shadows?.canTarget(casterId, mobId) ?? true,
           ...opts.combat,
           mobs: mobPort,
           onDrops: sink
             ? (e) => {
+                if (shadows?.owns(e.mobId)) return; // a Tâm Ma shadow drops nothing
                 sink.handle(e);
                 opts.combat?.onDrops?.(e);
               }
-            : opts.combat.onDrops,
+            : (e) => {
+                if (shadows?.owns(e.mobId)) return;
+                opts.combat?.onDrops?.(e);
+              },
         })
       : null;
     this.mobAttacks =
       this.combat && this.mobs && opts.combat?.mobAttacks !== false
         ? new MobAttackSystem(this.ctx, this.combat, this.mobs, seed)
         : null;
+    this.major =
+      this.combat && this.progression && this.shadows
+        ? new MajorBreakthroughs({
+            ctx: this.ctx,
+            combat: this.combat,
+            progression: this.progression,
+            shadows: this.shadows,
+            world: () => this.world,
+          })
+        : null;
+    if (this.major) this.progression!.attachMajor(this.major);
   }
 
   // ------------------------------------------------------------------ players
@@ -562,11 +592,20 @@ export class WorldNode {
     this.clients.delete(id);
     this.inventory?.onLeave(c.accountId);
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
+    if (this.major?.isActive(id)) {
+      // leaving in the middle of a Tâm Ma / Kiếp counts as losing it (the outcome is applied before the character is written)
+      const mj = this.major.onLeave(this.world, id);
+      this.world = mj.world;
+      if (mj.telegraphs.length > 0) this.sendTelegraphs(mj.telegraphs);
+      this.deliver(mj.outbound);
+    }
     void this.progression?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
     this.friends?.leave(id);
     this.chatHistoryDue.delete(id);
+    this.heldMajor.delete(id);
+    this.majorDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
@@ -667,6 +706,11 @@ export class WorldNode {
     c.snapSeq = 0;
     c.lastAckMs = now;
     c.lastResyncMs = -Infinity;
+    // a Tâm Ma / Kiếp that ran (or ended) while the player was held: tell the client where it stands, next tick (D97)
+    const snap = this.major?.snapshotMsg(id, now);
+    const missed = this.heldMajor.get(id);
+    this.heldMajor.delete(id);
+    if (snap || missed?.length) this.majorDue.set(id, snap ? [snap] : missed!);
     this.world = {
       ...this.world,
       entities: this.world.entities.map((e) =>
@@ -853,12 +897,20 @@ export class WorldNode {
       if (mobAtk.telegraphs.length > 0) this.sendTelegraphs(mobAtk.telegraphs);
       if (mobAtk.phases.length > 0) this.sendBossPhases(mobAtk.phases);
     }
+    if (this.major) {
+      // Tâm Ma / Lôi Kiếp of running major breakthroughs (D97): after combat and mobs, so a killed shadow is already gone
+      const mj = this.major.step(this.world);
+      this.world = mj.world;
+      if (mj.telegraphs.length > 0) this.sendTelegraphs(mj.telegraphs);
+      if (mj.outbound.length > 0) this.deliver(mj.outbound);
+    }
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.sendStatusUpdates(); // other players' root / slow / poison, on change (D94)
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
+    if (this.majorDue.size) this.sendMajorDue();
     this.party?.tick(this.world.timeMs, this.world.tick);
     this.friends?.tick();
     for (const e of this.world.entities) {
@@ -938,11 +990,29 @@ export class WorldNode {
     this.chatHistoryDue.clear();
   }
 
+  private sendMajorDue(): void {
+    for (const [id, msgs] of this.majorDue) {
+      const c = this.clients.get(id);
+      if (c && !c.dead) for (const m of msgs) this.send(c, m);
+    }
+    this.majorDue.clear();
+  }
+
   /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
   private deliver(out: Outbound[]): void {
     for (const o of out) {
       const c = this.clients.get(o.entityId);
-      if (c && !c.dead) this.send(c, o.msg);
+      if (!c || c.dead) continue;
+      if (c.suspendedAtMs !== null) {
+        // held player: the final answer of an event is kept for the resume (the rest is rebuilt from the live event)
+        const m = o.msg;
+        if ((m.type === 'major_event' && m.result !== MajorResult.Running) || m.type === 'breakthrough_result') {
+          const q = this.heldMajor.get(o.entityId) ?? [];
+          q.push(m);
+          this.heldMajor.set(o.entityId, q);
+        }
+      }
+      this.send(c, o.msg);
     }
   }
 
@@ -1013,6 +1083,7 @@ export class WorldNode {
       if (l) l.push(e);
       else cells.set(k, [e]);
     }
+    const hideShadows = !!this.shadows && this.shadows.size > 0;
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
       if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
@@ -1062,6 +1133,7 @@ export class WorldNode {
             if (!l) continue;
             for (const e of l) {
               if (e.id === c.id || c.visible.has(e.id)) continue;
+              if (hideShadows && this.shadows!.hiddenFor(e.id, c.id)) continue; // a Tâm Ma shadow is seen by its owner only (D97)
               if (!inAoiAt(e.i, e.j, u0, w0, false)) continue;
               cand.push({ e, d: uwDistSq(e.i, e.j, u0, w0) + e.id * 1e-9 });
             }
@@ -1084,9 +1156,10 @@ export class WorldNode {
           enters.push({
             index,
             entityId: e.id,
-            kind: this.mobs?.kindOf(e.id) ?? 0,
+            kind: this.mobs?.kindOf(e.id) ?? (this.shadows?.owns(e.id) ? 1 : 0),
             // monsters: their definition id; players: the class wire id (D82, 0 when unknown)
-            defId: this.mobs?.defIdOf(e.id) || this.classWireIdOf(e.id),
+            defId:
+              this.mobs?.defIdOf(e.id) || (this.shadows?.owns(e.id) ? SHADOW_DEF_ID : 0) || this.classWireIdOf(e.id),
             qi,
             qj,
             anim: se.anim,
@@ -1188,6 +1261,7 @@ export class WorldNode {
       const to: number[] = [];
       for (const c of this.clients.values()) {
         if (c.dead || c.suspendedAtMs !== null) continue;
+        if (t.audience !== undefined && c.id !== t.audience) continue;
         const me = this.byId.get(c.id);
         if (!me) continue;
         const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);

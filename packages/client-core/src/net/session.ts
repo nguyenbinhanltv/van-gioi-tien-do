@@ -28,6 +28,8 @@ import {
   type SelfState,
   type SkillResultMsg,
   type BossPhaseMsg,
+  type MajorEventMsg,
+  type TribulationStrikeMsg,
   type SelfStatus,
   type StatusUpdateMsg,
   type SnapshotEntity,
@@ -113,6 +115,15 @@ export interface ProgressionEvents {
   onCharState?(msg: CharStateMsg): void;
   onMeditateResult?(msg: MeditateResultMsg): void;
   onBreakthroughResult?(msg: BreakthroughResultMsg): void;
+}
+
+/**
+ * Major breakthrough callbacks (D97), a SEPARATE object from `NetEvents` (the scene replaces `events` wholesale). The Tâm Ma / Lôi Kiếp
+ * overlay listens here; a throwing hook never breaks the session.
+ */
+export interface MajorEvents {
+  onMajorEvent?(msg: MajorEventMsg): void;
+  onTribulationStrike?(msg: TribulationStrikeMsg): void;
 }
 
 /**
@@ -220,6 +231,7 @@ export class NetClient {
   events: NetEvents;
   /** progression listeners (tu vi state, meditation / breakthrough answers); survives `events` being replaced */
   progressionEvents: ProgressionEvents = {};
+  majorEvents: MajorEvents = {};
   private ws: SocketLike | null = null;
   private lastSnapshotSeq = 0;
   private acc = 0;
@@ -546,6 +558,12 @@ export class NetClient {
         break;
       case 'meditate_result':
         this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
+        break;
+      case 'major_event':
+        this.emit(() => this.majorEvents.onMajorEvent?.(msg));
+        break;
+      case 'tribulation_strike':
+        this.emit(() => this.majorEvents.onTribulationStrike?.(msg));
         break;
       case 'breakthrough_result':
         this.emit(() => this.progressionEvents.onBreakthroughResult?.(msg));
