@@ -16,5 +16,6 @@ export * from './ui/PartyModel.js';
 export * from './ui/TradeModel.js';
 export * from './ui/SectModel.js';
 export * from './ui/FriendsModel.js';
+export * from './ui/MarketModel.js';
 export * from './ui/FirstSessionTracker.js';
 export * from './net/index.js';
