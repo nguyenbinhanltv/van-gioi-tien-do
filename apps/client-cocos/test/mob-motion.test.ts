@@ -1,7 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import { MOB_DEFS } from '@vgtd/shared';
 import manifest from '../../../tools/procgen/src/gemini/manifest.json';
-import { BOB_PX, DEATH_FADE_S, HIT_FLASH_S, mobDefIdOfName, newMotion, stepMotion } from '../assets/scripts/MobMotion';
+import {
+  BOB_PX,
+  DEATH_FADE_S,
+  FACE_DEADZONE,
+  HIT_FLASH_S,
+  IDLE_FACE_AFTER_S,
+  mobDefIdOfName,
+  newMotion,
+  stepMotion,
+} from '../assets/scripts/MobMotion';
 
 const alive = (i: number, j: number, hp = 100) => ({ pos: { i, j }, hp, alive: true });
 
@@ -64,6 +73,59 @@ describe('stepMotion', () => {
     expect(back.visible).toBe(true);
     expect(back.alpha).toBe(255);
     expect(back.flashing).toBe(false); // a respawn is not a hit
+  });
+});
+
+describe('idle facing', () => {
+  const at = (i: number, j: number) => ({ i, j });
+  const idleFrames = (
+    s: ReturnType<typeof newMotion>,
+    face: { i: number; j: number },
+    secs: number,
+    pos = at(10, 10),
+  ) => {
+    let o = stepMotion(s, 0.016, alive(pos.i, pos.j), face);
+    for (let t = 0.016; t < secs; t += 0.016) o = stepMotion(s, 0.016, alive(pos.i, pos.j), face);
+    return o;
+  };
+
+  it('turns to the player after IDLE_FACE_AFTER_S, on either side', () => {
+    const s = newMotion(1);
+    // the player is to the screen-right (+i, -j): the mob mirrors to face right
+    expect(idleFrames(s, at(14, 6), IDLE_FACE_AFTER_S + 0.1).scaleX).toBe(-1);
+    // now the player runs round to the screen-left
+    expect(idleFrames(s, at(6, 14), IDLE_FACE_AFTER_S + 0.1).scaleX).toBe(1);
+  });
+
+  it('does not turn before it has been idle for a moment', () => {
+    const s = newMotion(2);
+    expect(stepMotion(s, 0.016, alive(10, 10), at(14, 6)).scaleX).toBe(1);
+    expect(stepMotion(s, 0.016, alive(10, 10), at(14, 6)).scaleX).toBe(1);
+  });
+
+  it('a moving mob keeps facing its movement even with the player behind it', () => {
+    const s = newMotion(3);
+    stepMotion(s, 0.016, alive(10, 10), at(0, 20)); // player to the screen-left
+    for (let k = 1; k <= 20; k++) {
+      // walks to the screen-right (+i) while the player is on the left
+      expect(stepMotion(s, 0.016, alive(10 + k * 0.1, 10), at(0, 20)).scaleX).toBe(-1);
+    }
+  });
+
+  it('does not flicker when the player is level with the mob (dead zone)', () => {
+    const s = newMotion(4);
+    idleFrames(s, at(14, 6), IDLE_FACE_AFTER_S + 0.1); // facing right
+    const level = at(10 + FACE_DEADZONE / 2, 10);
+    expect(idleFrames(s, level, 1).scaleX).toBe(-1); // keeps facing right
+    const level2 = at(10 - FACE_DEADZONE / 2, 10);
+    expect(idleFrames(s, level2, 1).scaleX).toBe(-1);
+  });
+
+  it('without a face target an idle mob keeps its last facing', () => {
+    const s = newMotion(5);
+    stepMotion(s, 0.016, alive(10, 10));
+    stepMotion(s, 0.016, alive(10.3, 10)); // moved right -> mirrored
+    for (let k = 0; k < 40; k++) expect(stepMotion(s, 0.016, alive(10.3, 10)).scaleX).toBe(-1);
   });
 });
 

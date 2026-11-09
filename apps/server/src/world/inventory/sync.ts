@@ -9,7 +9,7 @@
  *    client may retry it with the same id later.
  * Deterministic: no clocks, no randomness; owners are drained in sorted order.
  */
-import { CURRENCIES } from '@vgtd/shared';
+import { CURRENCIES, itemDefById } from '@vgtd/shared';
 import {
   INV_LIMITS,
   InvOp,
@@ -20,6 +20,12 @@ import {
   type InvStateMsg,
 } from '@vgtd/protocol';
 import type { InventoryService } from './service.js';
+
+/**
+ * What using an item does (D90), supplied by the node: apply the effect for the player who sent the command and answer `Ok`, or
+ * refuse with a reason and change nothing. The sync consumes the item only after `Ok`, so a refusal never eats it.
+ */
+export type UseItemFn = (item: { key: string; defId: number; quality: number }) => InvReason;
 
 export const INV_SYNC_CONFIG = {
   /** commands per second per owner (PLACEHOLDER, D79) */
@@ -88,7 +94,22 @@ export class InventorySync {
     return st;
   }
 
-  handle(owner: string, msg: InvCmdMsg, nowMs: number): InvResultMsg {
+  /** Use the stack in `slot`: validate, apply the effect through `use`, then consume exactly one unit. */
+  private useSlot(owner: string, slot: number, use: UseItemFn | undefined): InvReason {
+    const bag = this.inventory.bagOf(owner);
+    if (slot >= bag.capacity) return InvReason.BadSlot;
+    const s = bag.slots[slot];
+    if (!s) return InvReason.EmptySlot;
+    if (s.kind !== 'stack') return InvReason.NotUsable; // instances (blueprints, gear) have no use yet
+    const def = itemDefById(s.defId);
+    if (!def || !use) return InvReason.NotUsable;
+    const reason = use({ key: def.key, defId: s.defId, quality: s.quality });
+    if (reason !== InvReason.Ok) return reason;
+    const taken = bag.takeOne(slot);
+    return taken.ok ? InvReason.Ok : InvReason.EmptySlot; // cannot fail: the slot was just read
+  }
+
+  handle(owner: string, msg: InvCmdMsg, nowMs: number, use?: UseItemFn): InvResultMsg {
     const reply = (reason: InvReason, count = 0): InvResultMsg => ({
       type: 'inv_result',
       requestId: msg.requestId,
@@ -119,6 +140,9 @@ export class InventorySync {
           result = reply(InvReason.Ok);
         } else result = reply(r.reason === 'EMPTY_SLOT' ? InvReason.EmptySlot : InvReason.BadSlot);
       }
+    } else if (msg.op === InvOp.Use) {
+      result = reply(this.useSlot(owner, msg.from, use));
+      if (result.reason === InvReason.Ok) this.markDirty(owner);
     } else {
       const moved = this.inventory.claimPending(owner);
       if (moved > 0) this.markDirty(owner);
