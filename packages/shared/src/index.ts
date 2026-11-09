@@ -18,6 +18,7 @@ export * from './mobs.js';
 export * from './mob-layout.js';
 export * from './first-session.js';
 export * from './mob-attacks.js';
+export * from './breakthrough-event.js';
 export * from './items.js';
 export * from './regen.js';
 export * from './item-use.js';

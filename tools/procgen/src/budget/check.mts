@@ -26,6 +26,13 @@ export const INITIAL_PACKAGE_RESERVED_MB =
   BUDGETS.INITIAL_RESERVED_MB_WEB.ENGINE_CODE + BUDGETS.INITIAL_RESERVED_MB_WEB.AUDIO + BUDGETS.INITIAL_RESERVED_MB_WEB.SPARE;
 /** PC map atlases (only these may reach ATLAS_MAX_PC) are named with this prefix. */
 export const PC_MAP_ATLAS_PREFIX = 'atl_map';
+/**
+ * Atlas pages the client fetches on demand after the world is playable (boss phase skins: only when a boss with phases is in
+ * view), so they are NOT part of the initial download estimate. Their size is still reported (`estimate.lazyBytes`) and every
+ * page is still checked against the per-atlas caps. Add a prefix here only for art the client really loads lazily.
+ */
+export const LAZY_ATLAS_PREFIXES: readonly string[] = ['atl_mobphase'];
+const isLazy = (name: string) => LAZY_ATLAS_PREFIXES.some((p) => name.startsWith(p));
 const COMPRESSED_EXT = ['.ktx2', '.webp', '.astc'];
 const MB = 1024 * 1024;
 
@@ -88,6 +95,8 @@ export interface BudgetReport {
   rows: AtlasRow[];
   estimate: {
     assetBytes: number;
+    /** lazily loaded atlas pages (LAZY_ATLAS_PREFIXES), excluded from assetBytes */
+    lazyBytes: number;
     reservedMb: number;
     totalMb: number;
     limitMb: number;
@@ -294,11 +303,12 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
     }
   }
 
-  const compressedBytes = opts.distDir ? dirBytes(opts.distDir, (n) => COMPRESSED_EXT.some((e) => n.endsWith(e))) : 0;
+  const compressedBytes = opts.distDir ? dirBytes(opts.distDir, (n) => !isLazy(n) && COMPRESSED_EXT.some((e) => n.endsWith(e))) : 0;
   const useCompressed = compressedBytes > 0;
   const assetBytes = useCompressed
-    ? compressedBytes + dirBytes(opts.distDir!, (n) => n.endsWith('.json') && n !== 'compress_manifest.json')
-    : dirBytes(opts.atlasDir, (n) => n.endsWith('.png') || n.endsWith('.json'));
+    ? compressedBytes + dirBytes(opts.distDir!, (n) => !isLazy(n) && n.endsWith('.json') && n !== 'compress_manifest.json')
+    : dirBytes(opts.atlasDir, (n) => !isLazy(n) && (n.endsWith('.png') || n.endsWith('.json')));
+  const lazyBytes = dirBytes(opts.atlasDir, (n) => isLazy(n) && (n.endsWith('.png') || n.endsWith('.json')));
   const reservedMb = opts.reservedMb ?? INITIAL_PACKAGE_RESERVED_MB;
   const limitMb = opts.limitMb ?? BUDGETS.INITIAL_DOWNLOAD_MB_WEB;
   // D71: the player's own class (worst class), one direction, loco group only, at the `full` tier (desktop worst case).
@@ -322,7 +332,7 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
     findings,
     rows,
     chibi,
-    estimate: { assetBytes, reservedMb, totalMb, limitMb, basis: useCompressed ? 'compressed' : 'png-upper-bound', enforced },
+    estimate: { assetBytes, lazyBytes, reservedMb, totalMb, limitMb, basis: useCompressed ? 'compressed' : 'png-upper-bound', enforced },
     ok: !findings.some((f) => f.level === 'error'),
   };
 }
@@ -337,6 +347,7 @@ export function renderMarkdown(r: BudgetReport): string {
   const e = r.estimate;
   lines.push('', '| Gói tải đầu (Web) | Giá trị |', '| --- | ---: |');
   lines.push(`| Asset procgen (${e.basis}) | ${(e.assetBytes / MB).toFixed(2)} MB |`);
+  if (e.lazyBytes > 0) lines.push(`| Lazy atlas (not in the initial download) | ${(e.lazyBytes / MB).toFixed(2)} MB |`);
   lines.push(`| Engine + audio + dự phòng (docs/02) | ${e.reservedMb} MB |`);
   if (r.chibi) lines.push(`| Người chơi: nhóm loco 1 hướng, tier full, ASTC (D71) | ${r.chibi.initialPlayerMB.full.toFixed(2)} MB |`);
   lines.push(`| **Ước tính** | **${e.totalMb.toFixed(2)} MB** |`);

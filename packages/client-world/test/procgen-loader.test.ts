@@ -95,6 +95,40 @@ describe('format validation & chunk slicing', () => {
     ...extra,
   });
 
+  it('reads the zone rectangles of a zone map (D95) and extra ground layers by name; a map without zones has none', () => {
+    expect(parseProcgenMap(tilesetRaw, smallMap(2, 2)).zones).toEqual([]);
+    const zones = [
+      { id: 'bia_rung', i0: 0, j0: 0, i1: 1, j1: 1 },
+      { id: 'doc_hoa_dam', i0: 1, j0: 1, i1: 2, j1: 2 },
+    ];
+    const m = smallMap(2, 2, {
+      zones,
+      landmarks: [{ id: 'co_thu_clearing', i: 1, j: 1.5, radius: 3 }],
+      layers: [
+        { name: 'liquid', data: [-1, -1, -1, -1] },
+        { name: 'dirt', data: [4, 4, 4, 4] },
+        { name: 'lava_crust', data: [-1, -1, -1, 4] },
+      ],
+    });
+    const w = parseProcgenMap(tilesetRaw, m);
+    expect(w.zones).toEqual(zones);
+    expect(w.landmarks).toEqual([{ id: 'co_thu_clearing', i: 1, j: 1.5, radius: 3 }]);
+    expect(w.layers.map((l) => l.name)).toEqual(['liquid', 'dirt', 'lava_crust']);
+    const c = sliceChunk(w, { ci: 0, cj: 0 })!;
+    // chunk layers are CHUNK_SIZE wide: cell (1, 1) of the 2x2 map is entry 1 * 32 + 1
+    expect(c.tileLayers.lava_crust![33]).toBe(4);
+    expect(c.tileLayers.lava_crust![0]).toBe(-1);
+  });
+
+  it('rejects malformed zones', () => {
+    expect(() =>
+      parseProcgenMap(tilesetRaw, smallMap(2, 2, { zones: [{ id: 5, i0: 0, j0: 0, i1: 1, j1: 1 }] })),
+    ).toThrow(ProcgenFormatError);
+    expect(() =>
+      parseProcgenMap(tilesetRaw, smallMap(2, 2, { zones: [{ id: 'x', i0: 0, j0: 0, i1: 'a', j1: 1 }] })),
+    ).toThrow(/zones\[0\]\.i1/);
+  });
+
   it('rejects wrong format, version, tile ratio, unknown tile ids and wrong data length', () => {
     expect(() => parseProcgenMap(tilesetRaw, { ...smallMap(2, 2), format: 'x' })).toThrow(ProcgenFormatError);
     expect(() => parseProcgenMap(tilesetRaw, { ...smallMap(2, 2), version: 2 })).toThrow(/version/);
