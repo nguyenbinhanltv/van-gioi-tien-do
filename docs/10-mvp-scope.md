@@ -115,6 +115,8 @@ Cơ sở nguồn: 02 §1 ("Quái thường 25 loại × 4 biến thể; Tinh anh
 
 Tổng: **8 thường + 4 tinh anh + 2 boss = 14 loại** (+ mộc nhân tutorial). Biến thể ngũ hành dùng **tint / palette shader**, không vẽ lại (02 §1). Hệ hiển thị khớp v_e của Rừng Độc (Mộc 0,5 · Thủy 0,3 · Hỏa 0,2; 07 §5).
 
+> **[Cập nhật D114]** Roster trên đã được kiểm chéo với dữ liệu: cả 14 loại có def, đòn, pha và art 1x; test `content-audit.test.ts` phân tích chính bảng này. "2 biến thể ngũ hành" của quái thường nay được sinh thật: các bầy của một loại xen kẽ hệ chính và hệ biến thể, ngũ hành (07 §4) áp theo hệ của từng con. Chưa có: tint biến thể trên client (cần trường mới trên dây), mộc nhân của tutorial và hệ phụ của boss; xem [OPEN-ITEMS.md](OPEN-ITEMS.md) "Kiểm toán nội dung quái (D114)".
+
 ### 4.1 Chỉ số quái so với người chơi cùng nấc _(Đề xuất)_
 
 Quái dùng **cùng đường cong chỉ số 07 §1** theo cảnh giới / nấc của quái, rồi nhân hệ số — để không cần bảng chỉ số quái riêng:

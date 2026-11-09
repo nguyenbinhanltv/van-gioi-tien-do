@@ -678,3 +678,12 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 
 - **Chưa đo bộ nhớ trên máy mobile thật**: số chênh ~1-3 MB (CPU + GPU) là tính toán (docs/33, mục "Bộ đệm đỉnh của Batcher2D"), ArrayBuffer ngoài heap JS nên cổng perf không thấy. Cần chạy trên Android tầm thấp và iOS Safari (tier low) và xem bộ nhớ GPU / tab bị đóng.
 - **Trần 2303 KB** vì chỉ số đỉnh là `Uint16`; nếu sau này cần buffer lớn hơn phải có chỉ số 32-bit cho bộ đệm tĩnh của batcher 2D (chưa kiểm tra engine 3.8.8 có hỗ trợ không).
+
+## Kiểm toán nội dung quái (D114): còn mở
+
+- **Client chưa biết biến thể**: server đã sinh hai hệ cho mỗi quái thường (docs/10 §4: "tint / palette shader, không vẽ lại" theo 02 §1) nhưng `EnterEntity` chỉ mang `defId`, nên client chưa tô màu theo hệ và người chơi chưa nhìn thấy sự khác nhau giữa hai bầy. Cần một trường biến thể trên dây (cộng thêm) hoặc ghi vào bit cao của `defId`, và bảng tint 5 hệ ở client; việc này đụng giao thức nên chưa làm trong D114.
+- **Mộc nhân của tutorial** (docs/10 §3.1 và ghi chú: "tutorial dùng mộc nhân, bất động, không phản công, trong Quảng trường luyện võ"; câu hỏi M3): chưa có def. Thêm cần quyết định thiết kế: một `MobTier` mới (hoặc cờ) cho mục tiêu tập bắn không AI / không đòn / không rớt đồ, một vùng Sơn Môn để đặt (hiện `MobZoneId` chỉ có 4 vùng Rừng Độc và quảng trường quanh tâm là vùng an toàn không sinh quái), và có tính vào bước `kills` của tutorial (D105) hay không. Tới lúc đó quái thật đầu tiên là ở dải thường (≥ 0,12 R quanh tâm).
+- **Hệ phụ của boss / tinh anh**: bảng docs/10 §4 ghi "Hỏa / Mộc" cho Độc Hỏa Cổ Mãng nhưng cột gọi là "Hệ chính / biến thể" và doc không nói boss có biến thể hay là hệ kép; hiện chỉ dùng hệ chính. Cần game designer chốt (hệ kép nghĩa là gì với ma trận 07 §4).
+- **Số lượng và dải level**: số con mỗi vùng (12 thường theo bầy 3, tinh anh 2, boss 1), bán kính bầy, tỷ lệ 50/50 giữa hai biến thể, xen theo bầy là **placeholder** (D74 / D83 / D114). Level của mỗi con rút đều trong `[levelMin, levelMax]` của def; doc chưa quy định phân bố (ví dụ lệch theo khoảng cách tới tâm).
+- **Kỹ năng quái**: 7 trong 8 quái thường có đúng 1 kỹ năng, Độc Thố chỉ có đòn thường (đúng doc); tổng ~28 kỹ năng của docs/10 §5 gồm cả đòn thường; "Tru gọi" của Hôi Lang Vương vẫn là kéo 2 Hôi Lang có sẵn (D91, chưa sinh thực thể mới); 8 × 8 và quái pha lê (docs/03 §6: Giao Long, Thao Thiết...) ngoài beta.
+- **Roster đầy đủ (docs/02 §1)**: 25 thường × 4 biến thể, 20 tinh anh, 12 boss là mục tiêu dài hạn; beta dừng ở 14 loại.
