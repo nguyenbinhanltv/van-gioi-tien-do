@@ -344,6 +344,7 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
+      online.onBossPhase = (entityId, phase) => this.combat?.announceBossPhase(entityId, phase);
       // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
       this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
