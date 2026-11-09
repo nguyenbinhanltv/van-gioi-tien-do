@@ -63,7 +63,9 @@ const srv = await startServer({
     // structured security events (kicks, flood drops, malformed frames, anti-cheat violations; D101): one JSON line each, no PII; SECURITY_LOG=0 silences
     securityLog: process.env.SECURITY_LOG === '0' ? undefined : jsonLineSink((line) => console.log(line)),
     inventory: flag(process.env.INVENTORY)
-      ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
+      ? new InventoryService(
+          stores ? { store: stores.inventories, ledger: stores.ledger, durable: stores.durable } : {},
+        )
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },

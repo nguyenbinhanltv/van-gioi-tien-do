@@ -23,9 +23,10 @@ export type AccountKind =
   | 'SYSTEM_FAUCET_DROP_MOB'
   | 'SYSTEM_FAUCET_DROP_ELITE'
   | 'SYSTEM_FAUCET_DROP_BOSS'
+  | 'SYSTEM_SINK_TRADE_TAX'
   | 'SYSTEM_FAUCET_SECT_KILL'
   | 'SYSTEM_SINK_SECT_LIBRARY';
-export type LedgerReason = 'DROP' | 'SECT_REWARD' | 'SECT_PURCHASE';
+export type LedgerReason = 'DROP' | 'TRADE' | 'SECT_REWARD' | 'SECT_PURCHASE';
 
 export interface AccountRef {
   kind: AccountKind;

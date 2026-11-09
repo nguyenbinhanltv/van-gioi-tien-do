@@ -41,6 +41,10 @@ export class ChatBox {
   readonly log: InstanceType<typeof core.ChatLog>;
   /** the party state shown by `PartyFrames` (D93); fed by the same net hooks as the chat */
   readonly party: InstanceType<typeof core.PartyModel>;
+  /** the trade window shown by `TradePanel` (D102); fed by the same net hooks as the chat */
+  readonly trade: InstanceType<typeof core.TradeModel>;
+  /** set by the trade panel: `/trade` alone toggles it (without one the window is printed as chat lines) */
+  onTradeToggle: (() => void) | null = null;
   /** the NPC sect state shown by `SectPanel` (D98); fed by the same net hooks as the chat */
   readonly sect: InstanceType<typeof core.SectModel>;
   /** set by the sect panel: `/sect` toggles it (without one the sect is printed as chat lines) */
@@ -66,10 +70,12 @@ export class ChatBox {
   ) {
     this.log = new core.ChatLog({
       myName: () => username,
+      onTrade: () => this.showTrade(),
       onSect: () => this.showSect(),
       onFriends: () => this.showFriends(),
     });
     this.party = new core.PartyModel({ myId: () => net.entityId, now: () => performance.now() });
+    this.trade = new core.TradeModel({ now: () => performance.now() });
     this.sect = new core.SectModel();
     this.friends = new core.FriendsModel();
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
@@ -92,6 +98,18 @@ export class ChatBox {
         const refusal = this.party.applyResult(m);
         if (refusal) this.log.system(refusal, 'error');
         else if (asked && asked.op === core.PartyOp.Decline) this.party.forgetInvite(asked.name);
+      },
+    };
+    // trade (D102): the window lives in the panel; invites, a window opening / closing / completing and refusals show up as chat lines
+    net.tradeEvents = {
+      onTradeInvite: (m) => this.log.system(this.trade.applyInvite(m), 'system'),
+      onTradeState: (m) => {
+        const line = this.trade.applyState(m);
+        if (line) this.log.system(line, 'system');
+      },
+      onTradeResult: (m) => {
+        const refusal = this.trade.applyResult(m);
+        if (refusal) this.log.system(refusal, 'error');
       },
     };
     // sect (D98): the library lives in the panel; only join / leave / learned manuals / refusals show up as chat lines
@@ -259,7 +277,14 @@ export class ChatBox {
       },
       (m) => this.net.sendSect(m),
       (m) => this.net.sendFriend(m),
+      (m) => this.net.sendTrade(m),
     );
+  }
+
+  /** `/trade` alone: toggle the panel when there is one, else print the window as chat lines. */
+  private showTrade(): void {
+    if (this.onTradeToggle) this.onTradeToggle();
+    else for (const l of this.trade.summaryLines()) this.log.system(l);
   }
 
   /** `/sect`: toggle the panel when there is one, else print the sect as chat lines. */

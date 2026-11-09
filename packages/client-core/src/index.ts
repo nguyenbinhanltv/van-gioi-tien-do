@@ -13,6 +13,7 @@ export * from './ui/MajorEventView.js';
 export * from './ui/ChatLog.js';
 export * from './ui/ChatPlacement.js';
 export * from './ui/PartyModel.js';
+export * from './ui/TradeModel.js';
 export * from './ui/SectModel.js';
 export * from './ui/FriendsModel.js';
 export * from './ui/FirstSessionTracker.js';

@@ -17,6 +17,7 @@ import type { ProgressionStore } from '../progression/store.js';
 import { Ledger, type LedgerSnapshot } from '../world/inventory/ledger.js';
 import type { InventorySnapshot, InventoryStore } from '../world/inventory/store.js';
 import { readJsonFile, removeStray } from './atomic.js';
+import { TxJournal, recoverJournal, type JournalOptions } from './journal.js';
 import { DocFile, type DocFileOptions } from './doc-file.js';
 
 const VERSION = 1;
@@ -268,16 +269,33 @@ export interface FileStores {
    */
   snapshot(prepare?: () => void): StoreDocs;
   readonly dir: string;
+  /**
+   * Make the current state of several documents durable as ONE unit (write-ahead journal, `TxJournal`): after a crash either all of it or none
+   * of it is on disk. Used by a trade (bags + ledger); a sect purchase (sect + ledger) or an item use (bag + ledger) can use it too.
+   */
+  commitAtomic(label: string, docs: readonly DocFile[]): void;
+  /** The hook `InventoryService` calls after an exchange: commits the inventories and the ledger together. */
+  readonly durable: { commit(label: string): void };
+  /** True while a multi-document commit's journal is still waiting to be finished after an error (it is finished before the next write). */
+  readonly journalPending: () => boolean;
+  /** The journal recovered at open (the label of the interrupted commit it finished), or null. */
+  readonly recovered: string | null;
 }
 
 /** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `friends.json`, `ledger.json`. */
-export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStores {
+export function openFileStores(dir: string, opts: DocFileOptions & JournalOptions = {}): FileStores {
+  // FIRST finish a commit a crash interrupted: every document below is then loaded in its committed state
+  const recovered = recoverJournal(dir);
+  const journal = new TxJournal(dir, opts);
+  // every ordinary document write first finishes a pending journal (see `DocFileOptions.beforeWrite`)
+  opts = { ...opts, beforeWrite: () => journal.settle() };
   const accounts = new FileAccountStore(join(dir, 'accounts.json'), opts);
   const progression = new FileProgressionStore(join(dir, 'progression.json'), opts);
   const inventories = new FileInventoryStore(join(dir, 'inventories.json'), opts);
   const sect = new FileSectStore(join(dir, 'sect.json'), opts);
   const friends = new FileFriendStore(join(dir, 'friends.json'), opts);
   const { ledger, file: ledgerFile } = openFileLedger(join(dir, 'ledger.json'), opts);
+  const commitAtomic = (label: string, docs: readonly DocFile[]): void => journal.commit(label, docs);
   return {
     accounts,
     progression,
@@ -286,6 +304,10 @@ export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStor
     friends,
     ledger,
     dir,
+    recovered,
+    commitAtomic,
+    journalPending: () => journal.pending,
+    durable: { commit: (label) => commitAtomic(label, [inventories.file, ledgerFile]) },
     flush: () => {
       accounts.file.flush();
       progression.file.flush();
