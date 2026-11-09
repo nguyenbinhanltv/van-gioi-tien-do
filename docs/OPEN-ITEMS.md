@@ -496,3 +496,11 @@ Còn mở / lưu ý:
 - Chưa có telegraph cho boss có bộ kỹ năng riêng và các hiệu ứng (vũng độc, triệu hồi) vì server chưa mô phỏng chúng (xem mục 11).
 - Chưa gộp nhiều telegraph cùng lúc (bầy quái): mỗi đòn một khung 20 B. Nếu đo thực tế thấy tốn, gộp theo tick.
 - Đã có smoke test trình duyệt thật `npm run telegraph:online -w client-cocos` (decal hiện khi `telegraph_start` tới, biến mất khi đòn kết thúc); nó đếm điểm ảnh đỏ nên chỉ là kiểm tra thô, chưa đánh giá thẩm mỹ / độ rõ của decal trên mọi nền bản đồ.
+
+## Nền đất và khung UI từ Gemini (2026-11-09): còn mở
+
+- Map lát cắt chỉ có nước / đất / cỏ: **chưa có** địa hình đá, đầm lầy, nham thạch. Các họ ghép viền tương ứng (bờ đá, vỏ nham thạch, bờ đầm lầy, 16 Wang mỗi họ) đã được sinh vào `tileset_ext` nhưng client chưa tải; cần bản đồ có các chất liệu đó (bộ sinh bản đồ chỉ có 3 chất liệu).
+- Mỗi ô lặp lại cùng một patch (chu kỳ = một ô, biến thể chỉ khác phần trong ô), nên thấy lưới hình thoi nhạt trên mặt nước / cỏ rộng; muốn bớt cần patch lớn hơn một ô (thêm lớp biến thể theo vị trí ô) hoặc nhiều biến thể hơn.
+- Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat chưa có** trên `main` (PR chat chưa merge) nên chưa áp khung; nút của bộ chọn lớp và các HUD khác vẫn phẳng.
+- `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
+

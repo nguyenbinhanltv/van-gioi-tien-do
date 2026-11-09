@@ -290,7 +290,13 @@ export class Bootstrap extends Component {
       this.combatOn ? (tile) => this.combat?.pick(tile) ?? null : undefined,
     );
     if (this.online)
-      this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
+      this.progressionHud = new ProgressionHud(
+        hudRoot,
+        art,
+        this.online.net,
+        (x, y) => this.rig.clientToUi(x, y),
+        (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
+      );
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
@@ -360,6 +366,7 @@ export class Bootstrap extends Component {
         claim: () => (demo ? demo.claim() : (online?.net.sendBagClaim() ?? false)),
         clientToUi: (x, y) => this.rig.clientToUi(x, y),
         icon: (key) => this.propArt?.icon(key) ?? null,
+        slice: (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       },
       !!demo,
     );
