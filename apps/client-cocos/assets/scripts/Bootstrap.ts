@@ -19,6 +19,7 @@ import { WorldView } from './WorldView';
 import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
+import { installDrawDebug } from './DrawDebug';
 import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
@@ -161,7 +162,12 @@ export class Bootstrap extends Component {
     const blocked = new Uint8Array(map.width * map.height);
     const walkable = (i: number, j: number) => this.world.isTerrainWalkable(i, j) && blocked[j * map.width + i] === 0;
 
-    const spawn = this.findSpawn(Math.floor(map.width / 2), Math.floor(map.height / 2));
+    // `?at=i,j` (offline QA): start near that tile instead of the map centre, e.g. to look at a mob zone's dressing
+    const at = /^(\d+),(\d+)$/.exec(params.get('at') ?? '');
+    const spawn = this.findSpawn(
+      at ? Math.min(map.width - 1, Number(at[1])) : Math.floor(map.width / 2),
+      at ? Math.min(map.height - 1, Number(at[2])) : Math.floor(map.height / 2),
+    );
     // Owner-provided Gemini props (one atlas, Y-sorted with the actors); falls back to the placeholder tree / rock when the
     // assets were not generated (`npm run prepare:assets` needs the LFS sources in assets-src/gemini)
     this.propArt = await PropArt.load(tier === 'low');
@@ -174,6 +180,8 @@ export class Bootstrap extends Component {
         seed: map.seed ?? 1,
         spawn,
         terrain: (i, j) => this.world.terrainAt(i, j),
+        // zone dressing (swamp / old forest / lava props) in the quadrants the server spawns each zone's mobs in
+        zoneAt: (i, j) => shared.mobZoneAt(i, j, map.width),
         defs: this.propArt.defs(),
         count: 110,
         radius: 40,
@@ -311,6 +319,7 @@ export class Bootstrap extends Component {
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
+    if (params.get('drawdbg') !== null) installDrawDebug(this.node); // window.__vgtdDrawDbg(): batch-break report
     this.maybeAutotest();
   }
 
@@ -338,7 +347,10 @@ export class Bootstrap extends Component {
     const q =
       new URLSearchParams(location.search).get('class') ?? new URLSearchParams(location.hash.slice(1)).get('class');
     const fromUrl = q ? (shared.parseClass(pathOfChibiId(q) ?? q) ?? null) : null;
-    const asked = fromUrl ?? rememberedClass(online.accountKey) ?? (await pickClass());
+    const asked =
+      fromUrl ??
+      rememberedClass(online.accountKey) ??
+      (await pickClass(undefined, (await this.propArt?.keyArt()) ?? null));
     online.net.classRequest = shared.classWireId(asked);
     online.connect();
   }
@@ -484,6 +496,15 @@ export class Bootstrap extends Component {
     return shared.tileToScreen(p.i, p.j);
   }
 
+  /** Online: the own status row (root / slow / poison from the status block, shield from the vitals) next to the HP bar (D94). */
+  private updateStatusRow(): void {
+    const combat = this.combat;
+    if (!combat) return;
+    const own = this.online?.active ? this.online.net.ownStatus() : { rootMs: 0, slowMs: 0, slowPct: 0, poisonMs: 0 };
+    const forced = (globalThis as unknown as Record<string, typeof own | undefined>).__vgtdOwnStatus; // automation: scripts/combat-online-smoke.mjs
+    combat.setStatuses(core.statusRowItems(forced ?? own, combat.backend.player.shield));
+  }
+
   /**
    * Touch input mode: the wheel replaces the bottom hotbar, and the casts the TouchController produced (tap = auto-target, drag = aim point)
    * go to the combat HUD. Pointer mode (desktop) never reads `frame.casts`: keys 1-8 and the hotbar are handled by CombatUi itself.
@@ -537,6 +558,7 @@ export class Bootstrap extends Component {
     this.applyServerClass();
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
+    this.updateStatusRow();
     this.chatBox?.update();
     this.partyFrames?.update();
     if (this.progressionHud) {
@@ -544,6 +566,7 @@ export class Bootstrap extends Component {
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
     }
     this.rig.follow(this.playerScreen(), dt);
+    this.ysort.cull(this.cameraRect()); // park what is far outside the view: fewer draw calls (docs/33)
     this.ysort.sort();
     this.npcs?.update(dt);
     this.world.update(dt, this.cameraRect());

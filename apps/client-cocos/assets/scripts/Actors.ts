@@ -1,10 +1,12 @@
-import { Node, Sprite, SpriteFrame, UITransform } from 'cc';
+import { Color, Label, Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { character, shared } from './vendor/vgtd.mjs';
 import { footprintSortable, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
+import { CHIBI_REACH } from './CullMath';
 import { ChibiBody } from './ChibiBody';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
+import { sharedAtlas } from './UiLabel';
 
 let nextId = 1; // id 0 = player
 
@@ -155,6 +157,9 @@ export class RemotePlayer {
   private readonly chibi: ChibiBody;
   private facing: shared.Direction = 'S';
   private readonly bar: OverheadBar | null;
+  private statusLabel: Label | null = null;
+  private statusParent: Node | null = null;
+  private statusText = '';
 
   constructor(
     private readonly ysort: YSortLayer,
@@ -171,8 +176,9 @@ export class RemotePlayer {
     this.body = this.chibi.root;
     this.shadow = spriteNode(`RemoteShadow${entityId}`, art.shadow, 48, 24, 0.5, 0.5);
     shadowLayer.addChild(this.shadow);
-    ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j));
+    ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j), CHIBI_REACH);
     this.bar = shadowLayer.parent ? new OverheadBar(worldUiLayer(shadowLayer.parent), art.pixel, 96) : null;
+    this.statusParent = shadowLayer.parent ? worldUiLayer(shadowLayer.parent) : null;
     this.place();
   }
 
@@ -187,10 +193,40 @@ export class RemotePlayer {
       this.bar.place(this.pos.i, this.pos.j);
       this.bar.update(dtMs, { hp: hpPct, hpMax: 100, kind: 'ally' });
     }
+    if (this.statusLabel) {
+      const p = tileToWorld(this.pos.i, this.pos.j);
+      this.statusLabel.node.setPosition(p.x, p.y + 118, 0);
+    }
+  }
+
+  /** Root / slow / poison glyphs above this player (D94 `status_update`); '' hides them. */
+  setStatusText(text: string): void {
+    if (text === this.statusText) return;
+    this.statusText = text;
+    if (!text) {
+      if (this.statusLabel) this.statusLabel.node.active = false;
+      return;
+    }
+    if (!this.statusLabel && this.statusParent) {
+      const n = newNode('Status', this.statusParent);
+      n.addComponent(UITransform);
+      const l = n.addComponent(Label);
+      l.fontSize = 14;
+      l.lineHeight = 16;
+      l.overflow = Label.Overflow.NONE;
+      l.color = new Color(255, 230, 120, 255);
+      sharedAtlas(l); // a handful of glyph combinations (root / slow / poison): a small fixed set of strings
+      this.statusLabel = l;
+    }
+    if (this.statusLabel) {
+      this.statusLabel.string = text;
+      this.statusLabel.node.active = true;
+    }
   }
 
   destroy(): void {
     this.bar?.destroy();
+    this.statusLabel?.node.destroy();
     this.ysort.remove(this.body);
     this.shadow.destroy();
     this.body.destroy();

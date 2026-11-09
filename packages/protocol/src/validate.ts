@@ -21,6 +21,8 @@ import {
   type SnapshotMsg,
   type TelegraphEndMsg,
   type BossPhaseMsg,
+  type SelfStatus,
+  type StatusUpdateMsg,
   type TelegraphStartMsg,
 } from './types.js';
 
@@ -81,6 +83,18 @@ function vitals(x: unknown): SelfVitals {
   };
 }
 
+function selfStatus(x: unknown): SelfStatus {
+  const o = rec(x, 'self.status');
+  const st: SelfStatus = {
+    rootMs: int(o.rootMs, 0, U16, 'status.rootMs'),
+    slowMs: int(o.slowMs, 0, U16, 'status.slowMs'),
+    slowPct: int(o.slowPct, 0, 100, 'status.slowPct'),
+    poisonMs: int(o.poisonMs, 0, U16, 'status.poisonMs'),
+  };
+  if (st.slowMs === 0 && st.slowPct !== 0) throw new ProtocolError('range', 'status.slowPct without slowMs');
+  return st;
+}
+
 export function validateSelf(x: unknown): SelfState {
   const o = rec(x, 'self');
   return {
@@ -95,6 +109,7 @@ export function validateSelf(x: unknown): SelfState {
     dashCdMs: int(o.dashCdMs, 0, U16, 'self.dashCdMs'),
     invulnMs: int(o.invulnMs, 0, U16, 'self.invulnMs'),
     vitals: o.vitals === null ? null : vitals(o.vitals),
+    status: o.status === null || o.status === undefined ? null : selfStatus(o.status),
   };
 }
 
@@ -232,6 +247,14 @@ export function validateMessage(x: unknown): Message {
     case 'telegraph_end': {
       if (typeof o.cancelled !== 'boolean') throw new ProtocolError('malformed', 'cancelled must be a boolean');
       const m: TelegraphEndMsg = { type: 'telegraph_end', id: int(o.id, 0, U16, 'id'), cancelled: o.cancelled };
+      return m;
+    }
+    case 'status_update': {
+      const m: StatusUpdateMsg = {
+        type: 'status_update',
+        entityId: int(o.entityId, 0, U32, 'entityId'),
+        mask: int(o.mask, 0, 7, 'mask'),
+      };
       return m;
     }
     case 'boss_phase': {

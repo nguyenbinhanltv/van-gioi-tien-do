@@ -2,7 +2,9 @@ import { Color, Label, Node, Sprite, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
-import type { UiSlice } from './PropArt';
+import { sharedAtlas } from './UiLabel';
+import { getRealmBadge, type UiSlice } from './PropArt';
+import { LevelUpFx } from './LevelUpFx';
 
 /**
  * Progression panel (D76 wire): stage label, tu vi bar, "Đả tọa [M]" and "Đột phá [N]" buttons and a toast line. Everything it shows
@@ -19,6 +21,9 @@ const BAR_W = PANEL_W - 24;
 const BAR_H = 14;
 const BTN_W = (PANEL_W - 36) / 2;
 const BTN_H = 28;
+/** Realm badge next to the stage label (Gemini art, PART 2): square, design px; the label moves right by BADGE_SHIFT while it shows. */
+const BADGE = 30;
+const BADGE_SHIFT = BADGE + 6;
 
 const COL = {
   panel: new Color(10, 12, 20, 150),
@@ -68,6 +73,7 @@ function label(parent: Node, name: string, size: number, align: number): Label {
   l.verticalAlign = Label.VerticalAlign.CENTER;
   l.overflow = Label.Overflow.NONE;
   l.color = COL.text;
+  sharedAtlas(l);
   return l;
 }
 
@@ -86,6 +92,10 @@ export class ProgressionHud {
   readonly view: InstanceType<typeof core.ProgressionView>;
   private readonly root: Node;
   private readonly title: Label;
+  private readonly badge: Sprite;
+  private readonly levelUpFx: LevelUpFx;
+  /** last stage the server told us (0 = none yet): a higher one plays the level-up flourish */
+  private lastStage = 0;
   private readonly barFill: Sprite;
   private readonly barText: Label;
   private readonly meditate: Button;
@@ -125,15 +135,24 @@ export class ProgressionHud {
     this.title = label(this.root, 'Stage', 17, Label.HorizontalAlign.LEFT);
     this.title.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.title.node.setPosition(-PANEL_W + 12, -16, 0);
+    // realm badge (additive: hidden until the Gemini art is loaded and the server has told us the realm)
+    const badgeNode = newNode('RealmBadge', this.root);
+    const badgeUi = badgeNode.addComponent(UITransform);
+    badgeUi.setContentSize(BADGE, BADGE);
+    badgeNode.setPosition(-PANEL_W + 12 + BADGE / 2, -16, 0);
+    this.badge = badgeNode.addComponent(Sprite);
+    this.badge.sizeMode = Sprite.SizeMode.CUSTOM;
+    badgeNode.active = false;
+    this.levelUpFx = new LevelUpFx(this.root);
     const back = quad(this.root, 'BarBack', art, BAR_W, BAR_H, COL.barBack);
     back.node.setPosition(-PANEL_W / 2, -38, 0);
     this.barFill = quad(this.root, 'BarFill', art, 0, BAR_H - 4, COL.bar, 0);
     this.barFill.node.setPosition(-PANEL_W + 12 + 2, -38, 0);
-    this.barText = label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER);
+    this.barText = sharedAtlas(label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER), 'dynamic'); // tu vi grows every tick
     this.barText.node.setPosition(-PANEL_W / 2, -38, 0);
     this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, 'Đả tọa [M]');
     this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, 'Đột phá [N]');
-    this.toast = label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT);
+    this.toast = sharedAtlas(label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT), 'dynamic');
     this.toast.node.getComponent(UITransform)!.setAnchorPoint(1, 0.5);
     this.toast.node.setPosition(0, -PANEL_H - 14, 0);
 
@@ -177,6 +196,17 @@ export class ProgressionHud {
     const v = this.view;
     const s = v.state;
     this.title.string = s ? s.label : 'Tu luyện…';
+    // realm badge: the server's realm is 1-based, the art index 0-based (REALM_NAMES order)
+    // level-up flourish (PART 2 particle demo): only when a stage is gained while we are watching, never on the first state
+    if (s) {
+      if (this.lastStage > 0 && s.stage > this.lastStage) this.levelUpFx.play(-PANEL_W + 12 + BADGE / 2, -16);
+      this.lastStage = s.stage;
+    }
+    this.levelUpFx.update();
+    const badgeFrame = s ? getRealmBadge(s.realm - 1) : null;
+    if (badgeFrame) this.badge.spriteFrame = badgeFrame;
+    this.badge.node.active = badgeFrame !== null;
+    this.title.node.setPosition(-PANEL_W + 12 + (badgeFrame ? BADGE_SHIFT : 0), -16, 0);
     const frac = s ? s.fraction : 0;
     this.barFill.node.getComponent(UITransform)!.setContentSize(Math.max(0, (BAR_W - 4) * frac), BAR_H - 4);
     this.barFill.color = s?.ready ? COL.barReady : COL.bar;
@@ -229,6 +259,7 @@ export class ProgressionHud {
   }
 
   destroy(): void {
+    this.levelUpFx.clear();
     window.removeEventListener('keydown', this.keyDown);
     game.canvas?.removeEventListener('pointerdown', this.pointerDown, { capture: true });
   }

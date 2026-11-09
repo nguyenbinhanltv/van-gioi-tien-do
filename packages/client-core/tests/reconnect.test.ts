@@ -72,6 +72,7 @@ const SELF: SelfState = {
   dashCdMs: 0,
   invulnMs: 0,
   vitals: null,
+  status: null,
 };
 
 interface Rig {

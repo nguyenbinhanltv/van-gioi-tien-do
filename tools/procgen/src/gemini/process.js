@@ -174,14 +174,16 @@ function backgroundColor(img) {
  * Chroma key + despill. Returns a new RGBA image; `img` is not modified.
  * @returns {{ image: Image, stats: { region: number, band: number, bg: number[] } }}
  */
-function keyMagenta(img, bgOverride) {
+function keyMagenta(img, bgOverride, keyOpts = {}) {
   const { width: W, height: H, data: d } = img;
   const bg = bgOverride || estimateBackground(img);
   const isBg = bgTest(bg);
   // family: still clearly magenta (R about equal to B) even when the background is darkened by a dim glow / smoke; a saturated R
   // (a bright warm glow over the background) may have any B
-  const famR = 0.62 * bg[0],
-    famB = 0.6 * bg[2];
+  // keyOpts.famFrac (manifest "key": { famFrac }) lowers both floors for art with dark translucent smoke over the magenta
+  // (it stays purple at 40-55 % of the background level and would otherwise survive as opaque purple wisps)
+  const famR = (keyOpts.famFrac ?? 0.62) * bg[0],
+    famB = (keyOpts.famFrac !== undefined ? keyOpts.famFrac * 0.97 : 0.6) * bg[2];
   // ...and it must actually LOOK magenta: red and blue clearly above green, with the margin scaled to this background. Neutral
   // greys, pale stone, mist or white touching the background never qualify (their min(R, B) - G is about 0).
   const famMagenta = 0.15 * (Math.min(bg[0], bg[2]) - bg[1]);
@@ -393,12 +395,12 @@ function edgeFade(img, fade) {
 }
 
 /** Common first stage: sparkle removal + key + colour bleed (keeps the full canvas). */
-function cleanSprite(src) {
+function cleanSprite(src, keyOpts) {
   const img = new Image(src.width, src.height);
   img.data.set(src.data);
   const bg = estimateBackground(img);
   const sparkle = removeSparkle(img, bgTest(bg));
-  const keyed = keyMagenta(img, bg);
+  const keyed = keyMagenta(img, bg, keyOpts);
   bleedColor(keyed.image);
   return { image: keyed.image, sparkle, key: keyed.stats };
 }
@@ -408,7 +410,7 @@ function cleanSprite(src) {
  * @returns {{ x2: Image, x1: Image, pivot: {x:number,y:number}, sparkle: object }}
  */
 function processProp(src, target, opts = {}) {
-  const { image, sparkle } = cleanSprite(src);
+  const { image, sparkle } = cleanSprite(src, opts.key);
   let bb = alphaBBox(image);
   if (!bb) throw new Error('empty sprite after keying');
   if (opts.clear && opts.clear.length) {
@@ -452,14 +454,23 @@ function processIcon(src, size2 = 128) {
 }
 
 /**
- * Skill-icon grid (4 columns x 2 rows of self-contained rounded tiles on the magenta background): sparkle removal + key,
- * then the 8 tiles are the 8 largest connected opaque components, ordered row-major. Each tile is trimmed to its box and
- * scaled to size2 (@2x, 128) / size2/2 (@1x, 64). The rounded corners of a tile become transparent.
+ * Icon grid (cols x rows of self-contained tiles on the magenta background): sparkle removal + key, then the cols*rows
+ * largest connected opaque components are the tiles, ordered row-major. Each tile is cropped to its box (grown by opts.pad,
+ * a fraction of the tile size, so glows survive) and scaled to size2 (@2x) / size2/2 (@1x). opts.fit: 'stretch' (default,
+ * square tiles such as the skill and status icons: bbox stretched to the square) or 'contain' (differently shaped tiles such
+ * as the realm badges: aspect kept, centred in the square). The rounded corners of a tile become transparent.
  * @returns {{ x2: Image[], x1: Image[], sparkle: object }}
  */
-function sliceSkillGrid(src, size2 = 128) {
+function sliceGrid(src, size2, cols, rows, opts = {}) {
+  const { fit = 'stretch', pad = 0, eraseCorner = 0 } = opts;
+  const n = cols * rows;
   const { image, sparkle } = cleanSprite(src);
   const { width: W, height: H, data: d } = image;
+  if (eraseCorner > 0) {
+    // the Gemini mark can sit on a tile's glow (not separable by connectivity): erase a box in the bottom-right corner
+    for (let y = Math.round(H * (1 - eraseCorner)); y < H; y++)
+      for (let x = Math.round(W * (1 - eraseCorner)); x < W; x++) d[(y * W + x) * 4 + 3] = 0;
+  }
   const label = new Int32Array(W * H);
   const comps = [];
   for (let p0 = 0; p0 < W * H; p0++) {
@@ -490,24 +501,45 @@ function sliceSkillGrid(src, size2 = 128) {
     }
     comps.push({ x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, area });
   }
-  const tiles = comps.sort((a, b) => b.area - a.area).slice(0, 8);
-  if (tiles.length < 8 || tiles[7].area < 0.2 * tiles[0].area)
-    throw new Error(`skill grid: found ${tiles.length} tiles, need 8`);
-  // rows: split by the vertical centre; then left to right
+  const tiles = comps.sort((a, b) => b.area - a.area).slice(0, n);
+  if (tiles.length < n || tiles[n - 1].area < 0.2 * tiles[0].area)
+    throw new Error('icon grid: found ' + tiles.length + ' tiles, need ' + n);
+  // rows: sort by the vertical centre, cut into rows of cols; then left to right inside a row
   const cy = (t) => t.y + t.h / 2;
-  const mid = (Math.min(...tiles.map(cy)) + Math.max(...tiles.map(cy))) / 2;
-  const top = tiles.filter((t) => cy(t) < mid).sort((a, b) => a.x - b.x);
-  const bottom = tiles.filter((t) => cy(t) >= mid).sort((a, b) => a.x - b.x);
-  if (top.length !== 4 || bottom.length !== 4)
-    throw new Error(`skill grid: rows have ${top.length} + ${bottom.length} tiles, need 4 + 4`);
+  const byY = tiles.slice().sort((a, b) => cy(a) - cy(b));
+  const ordered = [];
+  for (let r = 0; r < rows; r++) {
+    const row = byY.slice(r * cols, (r + 1) * cols).sort((a, b) => a.x - b.x);
+    // a row must really be one row: its tiles' centres lie within half a tile height of each other
+    const hs = row.map((t) => t.h);
+    if (Math.max(...row.map(cy)) - Math.min(...row.map(cy)) > 0.5 * Math.min(...hs))
+      throw new Error('icon grid: row ' + r + ' is not a row of ' + cols + ' tiles');
+    ordered.push(...row);
+  }
   const x2 = [],
     x1 = [];
-  for (const t of [...top, ...bottom]) {
-    const tile = crop(image, t.x, t.y, t.w, t.h);
-    x2.push(bleedColor(resizeArea(tile, size2, size2)));
-    x1.push(bleedColor(resizeArea(tile, size2 / 2, size2 / 2)));
+  const place = (tile, size) => {
+    if (fit === 'stretch') return resizeArea(tile, size, size);
+    const k = size / Math.max(tile.width, tile.height);
+    const w = Math.max(2, Math.round(tile.width * k)),
+      h = Math.max(2, Math.round(tile.height * k));
+    const out = new Image(size, size);
+    out.blit(resizeArea(tile, w, h), Math.round((size - w) / 2), Math.round((size - h) / 2));
+    return out;
+  };
+  for (const t of ordered) {
+    const gx = Math.round(pad * t.w),
+      gy = Math.round(pad * t.h);
+    const tile = crop(image, t.x - gx, t.y - gy, t.w + 2 * gx, t.h + 2 * gy);
+    x2.push(bleedColor(place(tile, size2)));
+    x1.push(bleedColor(place(tile, size2 / 2)));
   }
   return { x2, x1, sparkle };
+}
+
+/** Skill-icon grid: 4 columns x 2 rows (see sliceGrid). */
+function sliceSkillGrid(src, size2 = 128) {
+  return sliceGrid(src, size2, 4, 2);
 }
 
 /**
@@ -522,6 +554,195 @@ function processMob(src, box) {
   const k = box / Math.max(bb.w, bb.h);
   const x1 = bleedColor(resizeArea(trimmed, Math.max(2, Math.round(bb.w * k)), Math.max(2, Math.round(bb.h * k))));
   return { x1, pivot: footPivot(trimmed), sparkle };
+}
+
+/** Black-background test of the particle exports: every channel dark. */
+const isDark = (r, g, b) => Math.max(r, g, b) <= 24;
+
+/**
+ * Particle texture (white / coloured glow on a BLACK background, Gemini mark in the bottom-right corner): the mark is erased,
+ * then luminance (max channel) becomes alpha and the colour is un-multiplied (rgb = c / alpha), so additive blending
+ * (src * alpha) reproduces the original glow and normal alpha blending shows the same shape. The brightest content is
+ * lifted to alpha 1 (99.95th percentile gain, capped at 3x) so dim objects such as the leaf do not come out half transparent.
+ * Cropped to the content, centred in a square with a small margin, scaled to size2 (@2x) / size2/2 (@1x).
+ * @returns {{ x2: Image, x1: Image, sparkle: object, gain: number }}
+ */
+function processParticle(src, size2 = 256) {
+  const img = new Image(src.width, src.height);
+  img.data.set(src.data);
+  const sparkle = removeSparkle(img, isDark);
+  const { width: W, height: H, data: d } = img;
+  const hist = new Uint32Array(256);
+  for (let p = 0; p < W * H; p++) hist[Math.max(d[p * 4], d[p * 4 + 1], d[p * 4 + 2])]++;
+  let acc = 0,
+    top = 255;
+  for (let v = 255; v >= 0; v--) {
+    acc += hist[v];
+    if (acc >= 0.0005 * W * H) {
+      top = v;
+      break;
+    }
+  }
+  const gain = Math.min(3, 255 / Math.max(top, 85));
+  const out = new Image(W, H);
+  const o = out.data;
+  for (let p = 0; p < W * H; p++) {
+    const i = p * 4;
+    const m = Math.max(d[i], d[i + 1], d[i + 2]);
+    // black level: the export background is not exactly 0 (compression noise)
+    const a = Math.min(1, Math.max(0, ((m - 6) / 249) * gain));
+    if (a <= 0.004) continue;
+    const k = 255 / Math.max(m, 1);
+    o[i] = Math.min(255, d[i] * k);
+    o[i + 1] = Math.min(255, d[i + 1] * k);
+    o[i + 2] = Math.min(255, d[i + 2] * k);
+    o[i + 3] = Math.round(a * 255);
+  }
+  const bb = alphaBBox(out, 10);
+  if (!bb) throw new Error('empty particle after luminance key');
+  const side = Math.round(Math.max(bb.w, bb.h) * 1.08);
+  const cx = bb.x + bb.w / 2,
+    cy = bb.y + bb.h / 2;
+  const sq = crop(out, Math.round(cx - side / 2), Math.round(cy - side / 2), side, side);
+  const x2 = bleedColor(resizeArea(sq, size2, size2));
+  const x1 = bleedColor(resizeArea(sq, size2 / 2, size2 / 2));
+  return { x2, x1, sparkle, gain };
+}
+
+/**
+ * Erase the grey Gemini mark from an OPAQUE picture (login backdrop): the mark is the largest connected blob of neutral
+ * mid-grey pixels in the bottom-right corner box; it is grown by a few px and filled by diffusion from its border.
+ * @returns {{ pixels: number, components: number }}
+ */
+function removeBackdropMark(img) {
+  const { width: W, height: H, data: d } = img;
+  const S = Math.round(0.12 * Math.min(W, H));
+  const x0 = W - S,
+    y0 = H - S;
+  const grey = (x, y) => {
+    const i = ((y0 + y) * W + x0 + x) * 4;
+    const mn = Math.min(d[i], d[i + 1], d[i + 2]),
+      mx = Math.max(d[i], d[i + 1], d[i + 2]);
+    return mx - mn <= 22 && mn >= 105 && mn <= 225;
+  };
+  const seen = new Uint8Array(S * S);
+  let best = null;
+  for (let sy = 0; sy < S; sy++)
+    for (let sx = 0; sx < S; sx++) {
+      if (seen[sy * S + sx] || !grey(sx, sy)) continue;
+      const stack = [[sx, sy]];
+      const comp = [];
+      seen[sy * S + sx] = 1;
+      while (stack.length) {
+        const [cx, cy] = stack.pop();
+        comp.push(cy * S + cx);
+        for (const [nx, ny] of [
+          [cx + 1, cy],
+          [cx - 1, cy],
+          [cx, cy + 1],
+          [cx, cy - 1],
+        ]) {
+          if (nx < 0 || ny < 0 || nx >= S || ny >= S || seen[ny * S + nx] || !grey(nx, ny)) continue;
+          seen[ny * S + nx] = 1;
+          stack.push([nx, ny]);
+        }
+      }
+      if (!best || comp.length > best.length) best = comp;
+    }
+  if (!best || best.length < 600) return { pixels: 0, components: 0 };
+  const mask = new Uint8Array(S * S);
+  for (const k of best) mask[k] = 1;
+  const grown = new Uint8Array(S * S);
+  const R = 13;
+  for (let y = 0; y < S; y++)
+    for (let x = 0; x < S; x++) {
+      if (!mask[y * S + x]) continue;
+      for (let dy = -R; dy <= R; dy++)
+        for (let dx = -R; dx <= R; dx++) {
+          const nx = x + dx,
+            ny = y + dy;
+          if (nx >= 0 && ny >= 0 && nx < S && ny < S) grown[ny * S + nx] = 1;
+        }
+    }
+  // diffusion fill (Gauss-Seidel): masked pixels converge to the harmonic interpolation of the border
+  const px = new Float32Array(S * S * 3);
+  const idx = (x, y) => y * S + x;
+  let count = 0;
+  for (let y = 0; y < S; y++)
+    for (let x = 0; x < S; x++) {
+      const i = ((y0 + y) * W + x0 + x) * 4;
+      for (let c = 0; c < 3; c++) px[idx(x, y) * 3 + c] = d[i + c];
+      if (grown[idx(x, y)]) count++;
+    }
+  // start from the mean colour of the unmasked ring around the mark (Gauss-Seidel alone converges far too slowly from the
+  // light mark colour), then relax
+  {
+    const mean = [0, 0, 0];
+    let nb = 0;
+    for (let y = 1; y < S - 1; y++)
+      for (let x = 1; x < S - 1; x++) {
+        if (grown[idx(x, y)]) continue;
+        let near = false;
+        for (let dy = -3; dy <= 3 && !near; dy++)
+          for (let dx = -3; dx <= 3; dx++) {
+            const nx = x + dx,
+              ny = y + dy;
+            if (nx >= 0 && ny >= 0 && nx < S && ny < S && grown[idx(nx, ny)]) {
+              near = true;
+              break;
+            }
+          }
+        if (!near) continue;
+        for (let c = 0; c < 3; c++) mean[c] += px[idx(x, y) * 3 + c];
+        nb++;
+      }
+    if (nb)
+      for (let k = 0; k < S * S; k++)
+        if (grown[k]) for (let c = 0; c < 3; c++) px[k * 3 + c] = mean[c] / nb;
+  }
+  for (let it = 0; it < 600; it++)
+    for (let y = 1; y < S - 1; y++)
+      for (let x = 1; x < S - 1; x++) {
+        if (!grown[idx(x, y)]) continue;
+        for (let c = 0; c < 3; c++)
+          px[idx(x, y) * 3 + c] =
+            (px[idx(x - 1, y) * 3 + c] + px[idx(x + 1, y) * 3 + c] + px[idx(x, y - 1) * 3 + c] + px[idx(x, y + 1) * 3 + c]) / 4;
+      }
+  for (let y = 0; y < S; y++)
+    for (let x = 0; x < S; x++) {
+      if (!grown[idx(x, y)]) continue;
+      const i = ((y0 + y) * W + x0 + x) * 4;
+      for (let c = 0; c < 3; c++) d[i + c] = Math.round(px[idx(x, y) * 3 + c]);
+    }
+  return { pixels: count, components: 1 };
+}
+
+/**
+ * Login backdrop: opaque picture, mark removed, area-scaled to w x h (design px; the 16:9 source is 2752 x 1536).
+ * @returns {{ image: Image, sparkle: object }}
+ */
+function processBackdrop(src, w, h) {
+  const img = new Image(src.width, src.height);
+  img.data.set(src.data);
+  const sparkle = removeBackdropMark(img);
+  for (let p = 3; p < img.data.length; p += 4) img.data[p] = 255;
+  return { image: resizeArea(img, w, h), sparkle };
+}
+
+/**
+ * Emblem on magenta: sparkle removal + key (enclosed background such as the hole of the disc is keyed too), trimmed to the
+ * content and scaled so the longest side is size2 (@2x) / size2/2 (@1x).
+ */
+function processEmblem(src, size2 = 512) {
+  const { image, sparkle } = cleanSprite(src);
+  const bb = alphaBBox(image);
+  if (!bb) throw new Error('empty sprite after keying');
+  const trimmed = crop(image, bb.x, bb.y, bb.w, bb.h);
+  const fit = (s) => {
+    const k = s / Math.max(bb.w, bb.h);
+    return bleedColor(resizeArea(trimmed, Math.max(2, Math.round(bb.w * k)), Math.max(2, Math.round(bb.h * k))));
+  };
+  return { x2: fit(size2), x1: fit(size2 / 2), sparkle };
 }
 
 /**
@@ -543,6 +764,12 @@ function processUi(src, w) {
 module.exports = {
   processUi,
   processMob,
+  isDark,
+  processParticle,
+  processBackdrop,
+  removeBackdropMark,
+  processEmblem,
+  sliceGrid,
   sliceSkillGrid,
   isStrictBg,
   isFamily,

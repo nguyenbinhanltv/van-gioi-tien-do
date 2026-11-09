@@ -159,6 +159,8 @@ interface Client {
   inbox: AimedInput[];
   /** own vitals last sent to this client: they are re-sent only when they change (or on a full / resync snapshot) */
   lastVitals: SelfVitals | null;
+  /** `StatusSystem.signature` of the own status block last sent ('' = nothing active): re-sent only on a change (D94) */
+  lastStatusSig: string;
   lastRecvSeq: number | null;
   visible: Map<number, Visible>;
   /** slot -> entity id (0 = free) */
@@ -494,6 +496,7 @@ export class WorldNode {
       suspendedAtMs: null,
       inbox: [],
       lastVitals: null,
+      lastStatusSig: '',
       lastRecvSeq: null,
       visible: new Map(),
       slots: new Array<number>(this.maxVisible).fill(0),
@@ -644,6 +647,7 @@ export class WorldNode {
     c.inbox.length = 0;
     c.lastRecvSeq = null;
     c.lastVitals = null;
+    c.lastStatusSig = '';
     c.visible = new Map();
     c.slots.fill(0);
     c.last.fill(undefined);
@@ -831,6 +835,7 @@ export class WorldNode {
       if (mobAtk.phases.length > 0) this.sendBossPhases(mobAtk.phases);
     }
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
+    this.sendStatusUpdates(); // other players' root / slow / poison, on change (D94)
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
@@ -1086,6 +1091,11 @@ export class WorldNode {
       if (enters.length > 0) {
         this.send(c, { type: 'aoi_enter', entities: enters });
         c.stats.aoiEnter += enters.length;
+        // an entity that comes into view with an active status: tell this client now (status_update otherwise only goes out on a change)
+        for (const en of enters) {
+          const mask = this.statusMasks.get(en.entityId);
+          if (mask) this.send(c, { type: 'status_update', entityId: en.entityId, mask });
+        }
       }
       const n = c.visible.size;
       c.stats.visibleSum += n;
@@ -1191,6 +1201,41 @@ export class WorldNode {
         const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
         const { u, w } = toUW(centre.i, centre.j);
         if (inAoiAt(boss.i, boss.j, u, w, false)) this.send(c, msg);
+      }
+    }
+  }
+
+  /** Last status mask broadcast per entity (D94): `status_update` goes out only when it changes. */
+  private readonly statusMasks = new Map<number, number>();
+
+  /**
+   * Other players' statuses (D94): when the root / slow / poison mask of an entity changes, `status_update` goes to every OTHER client whose
+   * AOI holds it (the entity itself learns through its own status block). A dead or held connection is skipped.
+   */
+  private sendStatusUpdates(): void {
+    const combat = this.combat;
+    if (!combat) return;
+    const now = this.world.timeMs;
+    const ids = new Set<number>([...combat.status.affectedIds(), ...this.statusMasks.keys()]);
+    for (const id of [...ids].sort((a, b) => a - b)) {
+      const mask = combat.status.maskOf(id, now);
+      const prev = this.statusMasks.get(id) ?? 0;
+      if (mask === prev) {
+        if (mask === 0) this.statusMasks.delete(id);
+        continue;
+      }
+      if (mask === 0) this.statusMasks.delete(id);
+      else this.statusMasks.set(id, mask);
+      const e = this.byId.get(id);
+      if (!e) continue;
+      const msg: Message = { type: 'status_update', entityId: id, mask };
+      for (const c of this.clients.values()) {
+        if (c.id === id || c.dead || c.suspendedAtMs !== null) continue;
+        const me = this.byId.get(c.id);
+        if (!me) continue;
+        const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
+        const { u, w } = toUW(centre.i, centre.j);
+        if (inAoiAt(e.i, e.j, u, w, false)) this.send(c, msg);
       }
     }
   }
@@ -1307,6 +1352,9 @@ export class WorldNode {
       // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
       const vitals = this.vitalsOf(me);
       const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
+      // own root / slow / poison (D94): only on a change since what this client last got (or on a full / resync snapshot while something is active)
+      const statusSig = this.combat ? this.combat.status.signature(me.id, this.world.timeMs) : '';
+      const sendStatus = statusSig !== c.lastStatusSig || ((full || resync) && statusSig !== '');
       const seq = (c.snapSeq + 1) & 0xffff;
       const bytes = encode(
         {
@@ -1314,13 +1362,18 @@ export class WorldNode {
           seq,
           baselineSeq: full ? null : c.snapSeq & 0xffff,
           tick: this.world.tick,
-          self: selfStateOf(me, sendVitals ? vitals : null),
+          self: selfStateOf(
+            me,
+            sendVitals ? vitals : null,
+            sendStatus && this.combat ? this.combat.status.statusOf(me.id, this.world.timeMs) : null,
+          ),
           entities,
         },
         { baseline: (index) => c.last[index] },
       );
       for (let k = 0; k < touchedIdx.length; k++) c.last[touchedIdx[k]!] = touchedLast[k];
       if (sendVitals) c.lastVitals = vitals;
+      c.lastStatusSig = statusSig;
       c.snapSeq = seq;
       c.stats.snapshots++;
       this.write(c, bytes);
