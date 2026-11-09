@@ -4,6 +4,7 @@ import { RemotePlayer, type TilePos } from './Actors';
 import { CHIBI_CLASSES, chibiIdOfPath } from './ChibiBody';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
+import { TelegraphLayer } from './TelegraphLayer';
 
 type InputFrame = ReturnType<InstanceType<typeof core.InputManager>['poll']>;
 
@@ -67,6 +68,8 @@ export class OnlineSession {
   /** `<server origin>|<username>`: key of per-account browser storage (the remembered class) */
   readonly accountKey: string;
   private readonly actors = new Map<number, RemotePlayer>();
+  /** mob attack danger areas (D89): ground decals under the actors */
+  private readonly telegraphs: TelegraphLayer;
   private failed = '';
   /** server-authoritative combat backend (`?online=1&combat=1`); null = no combat HUD */
   private serverCombat: InstanceType<typeof cb.ServerCombat> | null = null;
@@ -78,6 +81,7 @@ export class OnlineSession {
     private readonly shadowLayer: Node,
     private readonly art: ArtFrames,
   ) {
+    this.telegraphs = new TelegraphLayer(shadowLayer);
     const cred = onlineCredentials();
     this.username = cred.username;
     this.accountKey = `${cred.baseUrl}|${cred.username}`;
@@ -149,6 +153,7 @@ export class OnlineSession {
       rttMs: this.net.rttMs,
       snapshots: this.net.snapshots,
       reconnects: this.net.reconnects,
+      telegraphs: this.net.telegraphs().map((t) => ({ id: t.id, shape: t.shape, progress: t.progress })),
       lastError: this.net.lastError,
       others: Array.from(this.actors.values()).map((a) => ({
         entityId: a.entityId,
@@ -183,6 +188,7 @@ export class OnlineSession {
     this.net.update(dt * 1000, core.InputManager.toPacket(f));
     this.syncRemotes(dt * 1000);
     this.syncMobs();
+    this.telegraphs.update(this.net.telegraphs());
     return this.net.selfPosition();
   }
 
@@ -240,6 +246,7 @@ export class OnlineSession {
 
   destroy(): void {
     this.net.close();
+    this.telegraphs.destroy();
     this.actors.forEach((a) => a.destroy());
     this.actors.clear();
   }
