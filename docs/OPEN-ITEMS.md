@@ -515,5 +515,5 @@ Còn mở / lưu ý:
 - Không phải cơ sở dữ liệu: một tệp JSON mỗi kho, nạp hết vào bộ nhớ lúc khởi động, ghi lại toàn bộ tệp (gộp theo 250 ms). Đủ cho play-test và vài nghìn nhân vật; `ledger.json` tăng vô hạn vì bút toán chỉ thêm (cần JSONL hoặc DB thật trước khi mở cho nhiều người).
 - Một tiến trình duy nhất: không khóa tệp, hai server cùng `DATA_DIR` sẽ ghi đè nhau. Chưa có sao lưu định kỳ ngoài `.bak` (bản trước đó).
 - Chưa lưu: khóa idempotency của sổ cái (xem D92), nhật ký roll (`roll_log`), token nối lại; vị trí / máu hiện tại của nhân vật không được lưu (vào lại ở điểm xuất hiện, như trước). Kỹ năng / hotbar / hồi chiêu không thuộc dữ liệu bền.
-- `npm run play` dừng tiến trình con bằng `taskkill /F` trên Windows nên không có tắt máy sạch: dữ liệu có thể mất tới ~5 s thay đổi túi đồ gần nhất (bản ghi tài khoản / nhân vật ghi sau <= 250 ms).
+- `npm run play` dừng game server bằng dòng `quit` trên stdin (tắt máy sạch, lưu hết; không có cổng điều khiển mới) rồi mới kill sau 3,5 s nếu chưa thoát. Chỉ khi tiến trình bị kill cứng (đóng cửa sổ, `taskkill /F`) mới có thể mất tới ~5 s thay đổi túi đồ gần nhất (bản ghi tài khoản / nhân vật ghi sau <= 250 ms).
 - Adapter PostgreSQL chưa viết (giao diện `AccountStore` / `InventoryStore` cần chuyển sang bất đồng bộ; xem D92).
