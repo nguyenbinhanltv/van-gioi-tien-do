@@ -48,6 +48,20 @@ export class BitWriter {
     }
   }
 
+  /**
+   * Like `finish()` but returns a VIEW of the writer's own buffer instead of a copy: valid only until the next `reset()` / `write()`. For a
+   * caller that copies the bytes straight away (the snapshot encoder appends them to its message): no allocation per message.
+   */
+  finishView(): Uint8Array {
+    if (this.nbits > 0) {
+      if (this.len === this.buf.length) this.grow();
+      this.buf[this.len++] = (this.acc << (8 - this.nbits)) & 0xff;
+      this.acc = 0;
+      this.nbits = 0;
+    }
+    return this.buf.subarray(0, this.len);
+  }
+
   /** Pad the last byte with zero bits and return the bytes. */
   finish(): Uint8Array {
     if (this.nbits > 0) {

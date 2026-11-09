@@ -30,6 +30,8 @@ import {
   ProtocolError,
   decode,
   encode,
+  encodeSnapshotRecords,
+  SnapshotRecords,
   LIMITS,
   dequantizePos,
   quantizePos,
@@ -39,7 +41,7 @@ import {
   type ChatLine,
   type EnterEntity,
   type Message,
-  type SnapshotEntity,
+  type SnapshotEntity, // TEMP-AB
   TelegraphShape,
 } from '@vgtd/protocol';
 import {
@@ -359,6 +361,10 @@ export class WorldNode {
   private byId = new Map<number, EntityState>();
   /** per-tick cache of what a snapshot says about each entity (see `currentOf`) */
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
+  /** the records of the snapshot being built, reused for every client of every tick (D119) */
+  private readonly snapRec = new SnapshotRecords();
+  /** per record of the snapshot being built: the shared per-tick state it was taken from (to update the client's `last` after encoding) */
+  private readonly snapTouched: Array<{ qi: number; qj: number; anim: number; dir: number; hp: number }> = [];
   readonly progression: ProgressionService | undefined;
   /** Tâm Ma / Lôi Kiếp events of major breakthroughs (D97); null without combat + progression */
   readonly major: MajorBreakthroughs | null;
@@ -1626,6 +1632,100 @@ export class WorldNode {
   }
 
   private sendSnapshots(): void {
+    if (process.env.VGTD_OLD_SNAP) return this.sendSnapshotsOld(); // TEMP-AB
+    this.snapCache.clear();
+    for (const c of this.clients.values()) {
+      const me = this.byId.get(c.id);
+      if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
+      if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_SKIP_BYTES) {
+        c.stats.snapshotsSkipped++;
+        if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_KICK_BYTES) {
+          this.metrics.kicksBackpressure++;
+          this.kick(c, ErrorCode.Internal, 'slow consumer');
+        }
+        continue;
+      }
+      const timedOut = this.world.timeMs - c.lastAckMs > WORLD_CONFIG.ACK_TIMEOUT_MS;
+      const full = timedOut || c.snapSeq === 0;
+      // D73: a resync (first snapshot, or no ack for ACK_TIMEOUT_MS) carries EVERY visible entity with absolute coordinates and HP,
+      // ignoring band turns and the unchanged-record skip, so a client whose state is wrong recovers; once per ACK_TIMEOUT_MS
+      const resync = c.snapSeq === 0 || (timedOut && this.world.timeMs - c.lastResyncMs >= WORLD_CONFIG.ACK_TIMEOUT_MS);
+      if (resync) c.lastResyncMs = this.world.timeMs;
+      // the records of this snapshot go into the node's ONE reusable parallel-array buffer (no per-entity object, D119)
+      const rec = this.snapRec;
+      const touched = this.snapTouched;
+      let n = 0;
+      for (const [eid, v] of c.visible) {
+        if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
+        const cur = this.currentOf(eid);
+        if (!cur) continue;
+        const last = c.last[v.index];
+        const hp = cur.hp;
+        // D73: nothing changed since the last record we sent for this slot -> the client keeps its state, send nothing
+        if (
+          !resync &&
+          last &&
+          last.hp === hp &&
+          last.qi === cur.qi &&
+          last.qj === cur.qj &&
+          last.anim === cur.anim &&
+          last.dir === cur.dir
+        )
+          continue;
+        rec.index[n] = v.index;
+        rec.qi[n] = cur.qi;
+        rec.qj[n] = cur.qj;
+        rec.anim[n] = cur.anim;
+        rec.dir[n] = cur.dir;
+        rec.hp[n] = !resync && last && last.hp === hp ? -1 : hp;
+        touched[n] = cur;
+        n++;
+      }
+      rec.count = n;
+      // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
+      const vitals = this.vitalsOf(me);
+      const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
+      // own root / slow / poison (D94): only on a change since what this client last got (or on a full / resync snapshot while something is active)
+      const statusSig = this.combat ? this.combat.status.signature(me.id, this.world.timeMs) : '';
+      const sendStatus = statusSig !== c.lastStatusSig || ((full || resync) && statusSig !== '');
+      const seq = (c.snapSeq + 1) & 0xffff;
+      const bytes = encodeSnapshotRecords(
+        {
+          seq,
+          baselineSeq: full ? null : c.snapSeq & 0xffff,
+          tick: this.world.tick,
+          self: selfStateOf(
+            me,
+            sendVitals ? vitals : null,
+            sendStatus && this.combat ? this.combat.status.statusOf(me.id, this.world.timeMs) : null,
+          ),
+        },
+        rec,
+        c.last,
+      );
+      // what this client now holds per slot: updated in place AFTER encoding (the encoder read the old positions as its delta baseline)
+      for (let k = 0; k < n; k++) {
+        const idx = rec.index[k]!;
+        const cur = touched[k]!;
+        const l = c.last[idx];
+        if (l) {
+          l.qi = cur.qi;
+          l.qj = cur.qj;
+          l.hp = cur.hp;
+          l.anim = cur.anim;
+          l.dir = cur.dir;
+        } else c.last[idx] = { qi: cur.qi, qj: cur.qj, hp: cur.hp, anim: cur.anim, dir: cur.dir };
+      }
+      if (sendVitals) c.lastVitals = vitals;
+      c.lastStatusSig = statusSig;
+      c.snapSeq = seq;
+      c.stats.snapshots++;
+      this.write(c, bytes);
+    }
+  }
+
+  // TEMP-AB-BEGIN
+  private sendSnapshotsOld(): void {
     this.snapCache.clear();
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
@@ -1705,6 +1805,8 @@ export class WorldNode {
       this.write(c, bytes);
     }
   }
+
+  // TEMP-AB-END
 
   // ------------------------------------------------------------------ output
   private send(c: Client, msg: Message): void {
