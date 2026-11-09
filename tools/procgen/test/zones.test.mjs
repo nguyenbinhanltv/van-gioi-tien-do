@@ -16,7 +16,7 @@ const GEN = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(
 /** Corner levels of an `n` map in zone mode with the real noise fields (no tile rendering: fast). */
 function zoneCorners(n, seed = 20261031) {
   const o = { ...Gen.parseArgs([]), width: n, height: n, seed };
-  return { o, zc: Z.generateZoneCorners(o, Gen.makeFields(o)) };
+  return { o, zc: Z.generateZoneCorners(o, Gen.zoneFields(o)) };
 }
 const at = (zc, i, j) => zc.level[j * zc.W1 + i];
 
@@ -225,6 +225,28 @@ describe('generate_tilemap --zones (end to end on a small map with synthetic gro
       }
     }
     expect(checked).toBeGreaterThan(100);
+  });
+
+  it('the base 3-material map prunes the dirt under a full grass tile too, and walkability is unchanged by it', () => {
+    const out = path.join(dir, 'g');
+    run(out);
+    const map = read(out, 'map.json');
+    const terrain = read(out, 'terrain.json');
+    const layer = (name) => map.layers.find((l) => l.name === name).data;
+    const [liquid, dirt, grass] = [layer('liquid'), layer('dirt'), layer('grass')];
+    const ts = read(out, 'tileset.json');
+    const grassFull = new Set(ts.tiles.filter((t) => /^grass_full_\d+$/.test(t.name)).map((t) => t.id));
+    let covered = 0;
+    for (let k = 0; k < N * N; k++) {
+      if (grassFull.has(grass[k])) {
+        expect(dirt[k]).toBe(-1);
+        expect(liquid[k]).toBe(-1);
+        covered++;
+      }
+      // the walkability rule is the client's: any layer above the liquid
+      expect(terrain.rows[Math.floor(k / N)][k % N]).toBe(dirt[k] >= 0 || grass[k] >= 0 ? '.' : '#');
+    }
+    expect(covered).toBeGreaterThan(100);
   });
 
   it('the spawn plaza at the map centre is walkable', () => {

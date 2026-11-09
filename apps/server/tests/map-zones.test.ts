@@ -53,7 +53,7 @@ describe('terrain.json (D95)', () => {
 describe('mobs on a generated zone map', () => {
   const N = 256;
   const o = { ...Gen.parseArgs([]), width: N, height: N };
-  const zc = Z.generateZoneCorners(o, Gen.makeFields(o));
+  const zc = Z.generateZoneCorners(o, Gen.zoneFields(o));
   // walkability rows exactly as the generator derives them (tile ids are irrelevant here)
   const rows: string[] = Gen.buildZoneMap(o, zc, new Proxy({}, { get: () => 1 })).rows;
   const grid = TileGrid.fromRows(rows);

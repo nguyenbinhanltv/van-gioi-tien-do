@@ -559,7 +559,7 @@ Còn mở / lưu ý:
 ## D95 — bản đồ 4 vùng: còn mở (worker39, 2026-11-09)
 
 1. **Mọi bố cục là mặc định tạm, cần game designer duyệt**: tên và vị trí vùng (bốn góc phần tư của bản đồ thử, chưa phải tọa độ Sơn Môn thật của docs/10 §4 / level designer), bãi trống cây cổ thụ ở giữa `co_thu_trung_tam` (chưa có cây: prop do worker 40), tỉ lệ nước / nham thạch (ngưỡng 0,52 của nham thạch, độ ẩm đầm lầy).
-2. **Đường nét còn "đốm"**: nhiễu nền giữ nguyên độ mịn của bản đồ cũ (đốm nước / đất / cỏ nhỏ); chưa có đường mòn, hồ lớn, vách, cầu qua nham thạch; một vùng nham thạch lớn không có lối đi riêng cho người chơi bay (chưa có luật ngự kiếm trên nham thạch).
+2. **Đường nét vẫn khá "nhão"**: bản đồ vùng đã dùng nhiễu thưa hơn (`zoneNoiseScale` 0,035, mảng lớn hơn bản đồ cũ), nhưng vẫn chỉ là một trường nhiễu: chưa có đường mòn, hồ lớn, vách, cầu qua nham thạch; một vùng nham thạch lớn không có lối đi riêng cho người chơi bay (chưa có luật ngự kiếm trên nham thạch).
 3. **Mép chuyển vùng là dải đất thẳng** rộng ~6 ô dọc các đường chia vùng và quảng trường vuông ở giữa: nhìn nhân tạo; chưa có tile chuyển tiếp trực tiếp giữa các họ (cỏ ↔ nham thạch...).
 4. **Tile viền của họ bổ sung** (bờ đá có bọt trắng, bờ đầm lầy) vẽ cho viền với nước; trong vùng cổ thụ vòng đá nằm trên cỏ nên viền trắng hơi sáng; cần Gemini / 42 duyệt hoặc vẽ riêng viền đá-trên-cỏ.
 5. **Server vẫn chỉ biết ô đi được hay không**, không biết loại nền: chưa có sát thương nền (nham thạch, độc), chậm chân trong đầm lầy, hay quái theo loại nền; `terrain.json` chỉ có `.` / `#`.

@@ -43,6 +43,7 @@ const DEFAULTS = {
   atlasWidth: 1024,
   padding: 2,
   ground: '',           // thư mục patch tuần hoàn (npm run gen:gemini): có thì lấy màu từ ảnh thay vì texture toán học
+  zoneNoiseScale: 0.035, // tần số noise của bản đồ vùng (D95): thấp hơn bản đồ 3 chất liệu = mảng lớn hơn, ít ô viền hơn, ít sprite hơn
   zones: 0,             // 1 = bản đồ 4 vùng docs/10 §4 (D95): cần --ground; gộp tileset bổ sung vào tileset chính
   ext: 0,               // 1 = sinh thêm tileset_ext (bờ đá, vỏ nham thạch, đầm lầy) cạnh tileset chính
 };
@@ -102,6 +103,11 @@ function makeFields(o) {
       m: (fbm(moistNoise, mx + 37.1, my - 11.7, 4) + 1) / 2,
     };
   };
+}
+
+/** Noise fields of the zone map: the same noise as the base map at the (lower) `zoneNoiseScale`, so features are bigger and fewer cells are boundary cells. */
+function zoneFields(o) {
+  return makeFields({ ...o, noiseScale: o.zoneNoiseScale });
 }
 
 function generateCorners(o) {
@@ -328,6 +334,8 @@ function buildMap(o, corners, idByName) {
           : `${L.name}_m${String(m).padStart(2, '0')}`;
         layers[L.name][k] = idByName[name];
       }
+      // a full grass tile is opaque over its whole diamond: the dirt under it is invisible, so it is not emitted (same rule as the zone map)
+      if (layers.grass[k] >= 0 && maskFor(MAT.GRASS) === 15) layers.dirt[k] = -1;
       const center = Math.max(cs.N, cs.E, cs.S, cs.W);
       stats[MAT_NAMES[center]]++;
     }
@@ -485,7 +493,7 @@ function main() {
 
   const useZones = !!o.zones && !!GROUND && !!(GROUND.lava && GROUND.swamp && GROUND.stone);
   if (o.zones && !useZones) console.warn('⚠ --zones cần --ground có đủ ảnh stone / swamp / lava: dùng bản đồ 3 chất liệu như cũ');
-  const zoneCorners = useZones ? Z.generateZoneCorners(o, makeFields(o)) : null;
+  const zoneCorners = useZones ? Z.generateZoneCorners(o, zoneFields(o)) : null;
   const corners = zoneCorners ? { W1: zoneCorners.W1, H1: zoneCorners.H1, data: zoneCorners.level } : generateCorners(o);
   const tileDefs = buildTileList(o).concat(useZones ? buildExtTileList(o) : []);
   const tiles = tileDefs.map((t) => ({ ...t, image: renderTile(o, t) }));
@@ -558,4 +566,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { generateCorners, makeFields, buildZoneMap, walkRows, renderTile, buildTileList, buildExtTileList, packAtlas, buildMap, parseArgs, setGround: (g) => { GROUND = g; } };
+module.exports = { generateCorners, makeFields, zoneFields, buildZoneMap, walkRows, renderTile, buildTileList, buildExtTileList, packAtlas, buildMap, parseArgs, setGround: (g) => { GROUND = g; } };
