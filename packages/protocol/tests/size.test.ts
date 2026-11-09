@@ -139,6 +139,8 @@ describe('bandwidth budgets (docs/08 §8)', () => {
     ).toBe(20);
     expect(encode({ type: 'telegraph_end', id: 1, cancelled: false }).length).toBe(5);
     expect([encode({ type: 'telegraph_end', id: 1, cancelled: false })[1]]).toEqual([16]); // stable wire id (docs/24: 15 start, 16 end)
+    expect(encode({ type: 'boss_phase', mobEntityId: 1_000_003, phase: 1, transformMs: 1800 }).length).toBe(9);
+    expect([encode({ type: 'boss_phase', mobEntityId: 1, phase: 1, transformMs: 1800 })[1]]).toEqual([17]); // stable wire id (D91)
     const enter = encode({
       type: 'aoi_enter',
       entities: [{ index: 1, entityId: 9, kind: 1, defId: 3, qi: 5, qj: 6, anim: 0, dir: 0, hpPct: 100, maxHp: 1200 }],

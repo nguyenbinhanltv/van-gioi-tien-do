@@ -14,6 +14,10 @@ export interface BagPanelHooks {
   move(from: number, to: number): boolean;
   /** claim pending loot; false when it could not be sent */
   claim(): boolean;
+  /** use the item in `slot` (a pill); false when it could not be sent */
+  use(slot: number): boolean;
+  /** use the first stack of item `key` (the quick-use key); false when there is none */
+  quickUse(key: string): boolean;
   clientToUi(clientX: number, clientY: number): { x: number; y: number };
   /** item / stone icon by item key (`heal_pill`, `stone_low`, ...), or null when there is no art (the coloured tile stays) */
   icon?(key: string): SpriteFrame | null;
@@ -90,6 +94,9 @@ export class BagPanel {
   private lastWaiting = -1;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly pointerDown: (e: PointerEvent) => void;
+  private readonly contextMenu: (e: MouseEvent) => void;
+  /** double-tap / double-click on a usable item uses it (touch has no right-click) */
+  private readonly gesture = new core.UseGesture();
   private readonly size = core.bagPanelSize(SLOTS_DRAWN);
 
   constructor(
@@ -165,15 +172,24 @@ export class BagPanel {
     this.keyDown = (e) => {
       if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
       if (e.code === 'KeyB') this.toggle();
+      else if (e.code === core.BAG_USE.quickUseCode) this.hooks.quickUse(core.BAG_USE.quickUseItem);
     };
     window.addEventListener('keydown', this.keyDown);
     // a click on the panel must not also start click-to-move (client-core listens on the same canvas)
     this.pointerDown = (e) => this.onPointer(e);
     game.canvas?.addEventListener('pointerdown', this.pointerDown, { capture: true });
+    // a right-click on the panel uses the item (and must not open the browser menu)
+    this.contextMenu = (e) => {
+      if (!this.visible || !this.insidePanel(e.clientX, e.clientY)) return;
+      e.preventDefault();
+    };
+    game.canvas?.addEventListener('contextmenu', this.contextMenu, { capture: true });
     // automation hook (headless capture): read / drive the panel without touching canvas pixels
     (globalThis as unknown as Record<string, unknown>).__vgtdBag = {
       state: () => this.debugState(),
       toggle: () => this.toggle(),
+      use: (slot: number) => this.hooks.use(slot),
+      quickUse: () => this.hooks.quickUse(core.BAG_USE.quickUseItem),
       clickSlot: (i: number) => {
         const r = core.slotRect(i);
         return this.click(r.x + r.w / 2, r.y + r.h / 2);
@@ -316,16 +332,39 @@ export class BagPanel {
     return c.type;
   }
 
+  /** Panel-local point (design units, origin top-left, y down) of a client point. */
+  private toLocal(clientX: number, clientY: number): { lx: number; ly: number } {
+    const ui = this.hooks.clientToUi(clientX, clientY);
+    const rp = this.root.position;
+    return { lx: (ui.x - rp.x) / this.scale + this.size.w / 2, ly: this.size.h / 2 - (ui.y - rp.y) / this.scale };
+  }
+  private insidePanel(clientX: number, clientY: number): boolean {
+    const { lx, ly } = this.toLocal(clientX, clientY);
+    return core.insidePanel(lx, ly, SLOTS_DRAWN);
+  }
+
   private onPointer(e: PointerEvent): void {
     if (!this.visible) return;
-    const ui = this.hooks.clientToUi(e.clientX, e.clientY);
-    const rp = this.root.position;
-    const lx = (ui.x - rp.x) / this.scale + this.size.w / 2;
-    const ly = this.size.h / 2 - (ui.y - rp.y) / this.scale;
+    const { lx, ly } = this.toLocal(e.clientX, e.clientY);
     if (!core.insidePanel(lx, ly, SLOTS_DRAWN)) return;
     e.stopImmediatePropagation();
     e.preventDefault();
-    if (e.button === 0) this.click(lx, ly);
+    const slot = core.slotAtPoint(lx, ly, SLOTS_DRAWN);
+    if (e.button === 2) {
+      if (slot !== null) this.hooks.use(slot); // right-click uses the item
+      return;
+    }
+    if (e.button !== 0) return;
+    // a second tap on the same usable item within BAG_USE.doubleTapMs uses it (the first tap selected it)
+    const bag = this.bag();
+    if (slot !== null && bag?.canUse(slot) && this.gesture.tap(slot, performance.now())) {
+      this.hooks.use(slot);
+      this.selection.selected = null;
+      this.lastSelected = -2;
+      return;
+    }
+    if (slot === null || !bag?.canUse(slot)) this.gesture.reset();
+    this.click(lx, ly);
   }
 
   /** Panel-local point (design units, y down) to CSS px on the page, or null without a canvas. */
@@ -353,15 +392,18 @@ export class BagPanel {
       pending: bag?.pendingTotal ?? 0,
       waiting: bag?.waitingCount ?? 0,
       lastResult: bag?.lastResult ?? null,
-      slots: this.slots
-        .map((s, i) => (s.code.string ? `${i}:${s.code.string}${s.qty.string ? `x${s.qty.string}` : ''}` : ''))
-        .filter((x) => x),
+      // read from the model, not from the drawn labels: an item with an icon has no code text (D90 smoke checks use this)
+      slots: Array.from({ length: bag?.slotCount ?? 0 }, (_, i) => {
+        const it = bag?.itemAt(i);
+        return it ? `${i}:${it.key ?? it.defId}${it.kind === 'stack' && it.qty > 1 ? `x${it.qty}` : ''}` : '';
+      }).filter((x) => x),
     };
   }
 
   destroy(): void {
     window.removeEventListener('keydown', this.keyDown);
     game.canvas?.removeEventListener('pointerdown', this.pointerDown, { capture: true });
+    game.canvas?.removeEventListener('contextmenu', this.contextMenu, { capture: true });
     this.root.destroy();
   }
 }

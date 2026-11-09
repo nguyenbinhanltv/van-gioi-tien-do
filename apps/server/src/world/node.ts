@@ -63,13 +63,14 @@ import type { ChatService } from '../chat/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
+  type MobPhaseChange,
   type MobTelegraphEvent,
   type AimedInput,
   type CombatOptions,
   type CombatResult,
 } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
-import { DropSink, InventorySync, type InventoryService } from './inventory/index.js';
+import { DropSink, InventorySync, itemUseFor, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -732,7 +733,19 @@ export class WorldNode {
         if (!this.invSync) {
           c.stats.badMessages++;
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
-        } else this.send(c, this.invSync.handle(c.accountId, msg, this.world.timeMs));
+        } else {
+          // using an item (D90) acts on the sender's character: pills heal through the combat core / feed the next breakthrough
+          const use = itemUseFor(
+            {
+              combat: this.combat,
+              progression: this.progression,
+              getWorld: () => this.world,
+              setWorld: (w) => (this.world = w),
+            },
+            c.id,
+          );
+          this.send(c, this.invSync.handle(c.accountId, msg, this.world.timeMs, use));
+        }
         break;
       case 'ping':
         this.send(c, { type: 'pong', clientTimeMs: msg.clientTimeMs, serverTimeMs: this.world.timeMs >>> 0 });
@@ -783,6 +796,7 @@ export class WorldNode {
       const mobAtk = this.mobAttacks.step(this.world);
       this.world = mobAtk.world;
       if (mobAtk.telegraphs.length > 0) this.sendTelegraphs(mobAtk.telegraphs);
+      if (mobAtk.phases.length > 0) this.sendBossPhases(mobAtk.phases);
     }
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.metrics.ticks++;
@@ -1099,6 +1113,31 @@ export class WorldNode {
         this.send(c, msg);
       }
       if (to.length > 0) this.telegraphAudience.set(t.id, to);
+    }
+  }
+
+  /**
+   * Boss phase changes (D91): `boss_phase` goes to the clients whose AOI holds the boss (the ones that see it), once per change. A held
+   * (dropped) or dead connection is skipped.
+   */
+  private sendBossPhases(list: readonly MobPhaseChange[]): void {
+    for (const p of list) {
+      const boss = this.world.entities.find((e) => e.id === p.mobId);
+      if (!boss) continue;
+      const msg: Message = {
+        type: 'boss_phase',
+        mobEntityId: p.mobId,
+        phase: Math.min(255, Math.max(1, p.phase)),
+        transformMs: Math.min(0xffff, p.transformMs),
+      };
+      for (const c of this.clients.values()) {
+        if (c.dead || c.suspendedAtMs !== null) continue;
+        const me = this.byId.get(c.id);
+        if (!me) continue;
+        const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
+        const { u, w } = toUW(centre.i, centre.j);
+        if (inAoiAt(boss.i, boss.j, u, w, false)) this.send(c, msg);
+      }
     }
   }
 

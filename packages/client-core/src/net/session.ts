@@ -21,6 +21,7 @@ import {
   type Message,
   type SelfState,
   type SkillResultMsg,
+  type BossPhaseMsg,
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
@@ -68,6 +69,8 @@ export type NetStatus = 'idle' | 'connecting' | 'online' | 'reconnecting' | 'clo
  */
 export interface NetEvents {
   onSkillResult?(msg: SkillResultMsg): void;
+  /** a boss in view entered a new phase (D91): `phase` is the new phase index (>= 1); the boss is invulnerable for `transformMs` */
+  onBossPhase?(msg: BossPhaseMsg): void;
   onAoiEnter?(entities: readonly EnterEntity[]): void;
   /** Runs BEFORE the entities are dropped from `remote`, so `entityOfIndex(index)` still resolves each of them. */
   onAoiLeave?(indices: readonly number[]): void;
@@ -249,6 +252,20 @@ export class NetClient {
     if (!cmd) return false;
     ws.send(encode(cmd));
     return true;
+  }
+  /** Use the item in bag slot `slot` (a pill; the server validates, applies the effect and consumes one unit). False when not usable or the socket is not open. */
+  sendBagUse(slot: number): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    const cmd = this.bag.useCmd(slot, () => makeRequestId(this.o.deps.random ?? Math.random));
+    if (!cmd) return false;
+    ws.send(encode(cmd));
+    return true;
+  }
+  /** Quick-use: use the first stack of item `key` in the bag (the key bound to a pill). False when there is none or the socket is not open. */
+  sendBagQuickUse(key: string): boolean {
+    const slot = this.bag.slotOfKey(key);
+    return slot === null ? false : this.sendBagUse(slot);
   }
   /** Ask the server to move pending loot into the bag. False when nothing is pending or the socket is not open. */
   sendBagClaim(): boolean {
@@ -467,6 +484,9 @@ export class NetClient {
         break;
       case 'telegraph_end':
         this.telegraph.end(msg);
+        break;
+      case 'boss_phase':
+        this.emit(() => this.events.onBossPhase?.(msg));
         break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
