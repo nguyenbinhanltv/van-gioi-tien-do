@@ -6,7 +6,10 @@
 //   npm run play                  online play-test (local + LAN URLs)
 //   npm run play -- --offline     client only, no game server
 //   npm run play -- --rebuild     force a web client build        --dev   build the debug variant      --open   open the browser
+//   npm run play -- --memory      keep nothing between runs     --reset-data   wipe the saved characters first
 //   npm run play -- --help        every option
+//
+// The game server stores accounts, characters, bags and stones in ./.vgtd-data by default (D92), so a restart keeps them.
 //
 // Windows first (Git Bash and PowerShell), works on Linux / macOS. Pure Node: no dependencies, no shell.
 import { spawn, spawnSync } from 'node:child_process';
@@ -22,6 +25,10 @@ import {
   cocosEditorPath,
   controlLines,
   corsOrigins,
+  hasSavedData,
+  resetCheck,
+  resetData,
+  storePlan,
   installState,
   lanAddresses,
   makeBuildLineFilter,
@@ -84,7 +91,8 @@ function start(name, args, env, { quiet = false, service = false, keep = () => t
   const child = spawn(process.execPath, args, {
     cwd: root,
     env: { ...process.env, ...env },
-    stdio: ['ignore', 'pipe', 'pipe'],
+    // the game server gets a stdin pipe: a clean stop is the line `quit` (no signals on Windows, no extra listening port)
+    stdio: [name === 'server' ? 'pipe' : 'ignore', 'pipe', 'pipe'],
     windowsHide: true,
     detached: !IS_WIN, // POSIX: its own process group, so the whole tree can be signalled
   });
@@ -182,6 +190,17 @@ async function shutdown(code = 0) {
   if (shuttingDown) return;
   shuttingDown = true;
   console.log('\n  Đang dừng… / Stopping…');
+  // ask the game server to save and exit first (it flushes the data directory), then kill whatever is still running
+  const srv = children.find((c) => c.name === 'server');
+  if (srv && srv.child.exitCode === null && srv.child.stdin && !srv.child.stdin.destroyed) {
+    try {
+      srv.child.stdin.write('quit\n');
+    } catch {
+      /* pipe already closed: the kill below handles it */
+    }
+    const clean = await Promise.race([srv.exited.then(() => true), sleep(3500).then(() => false)]);
+    if (clean) say('Máy chủ đã lưu dữ liệu và thoát.', 'The game server saved its data and exited.');
+  }
   for (const { child } of children) killTree(child);
   await Promise.race([Promise.all(children.map((c) => c.exited)), sleep(6000)]);
   const freed = await waitUntil(async () => (await Promise.all(usedPorts.map(isPortFree))).every(Boolean), 6000, 200);
@@ -371,6 +390,21 @@ if (decision.rebuild) {
 }
 
 // ------------------------------------------------------------------------------------------------ start servers
+const plan = storePlan({ root, env: process.env, opts });
+if (plan.error) fail(plan.error, plan.error, 2);
+if (!opts.offline && plan.store === 'file' && opts.resetData) {
+  const check = resetCheck({ root, dir: plan.dir, custom: plan.custom, yes: opts.yes });
+  if (!check.ok) fail(`Không xóa dữ liệu: ${check.reason}`, `Not resetting the saved data: ${check.reason}`, 2);
+  const removed = resetData(plan.dir);
+  if (removed.length === 0) say(`Không có dữ liệu để xóa trong ${plan.dir}.`, `Nothing to reset in ${plan.dir}.`);
+  else
+    say(
+      `Đã xóa dữ liệu đã lưu (${removed.length} tệp) trong ${plan.dir}.`,
+      `Reset the saved data (${removed.length} file(s)) in ${plan.dir}.`,
+    );
+}
+const continuing = plan.store === 'file' && hasSavedData(plan.dir);
+
 const lan = opts.lan ? lanAddresses() : [];
 const urls = buildUrls({ clientPort: opts.clientPort, serverPort: opts.serverPort, lan });
 
@@ -388,6 +422,9 @@ if (!opts.offline) {
       MOBS: '1',
       COMBAT: '1',
       INVENTORY: '1',
+      STORE: plan.store,
+      ...(plan.store === 'file' ? { DATA_DIR: plan.dir } : {}),
+      QUIT_ON_STDIN: '1',
     },
     { service: true },
   );
@@ -435,6 +472,18 @@ if (!opts.offline) {
   } else if (opts.lan) {
     say('Không tìm thấy địa chỉ LAN (chưa nối Wi-Fi?).', 'No LAN address found (not on Wi-Fi?).');
   }
+}
+if (!opts.offline) {
+  if (plan.store === 'file')
+    say(
+      `Dữ liệu lưu ở ${plan.dir} (${continuing ? 'tiếp tục dữ liệu cũ' : 'mới'}). Xóa bằng --reset-data, tắt bằng --memory.`,
+      `Saved data: ${plan.dir} (${continuing ? 'continuing an earlier game' : 'new'}). Wipe it with --reset-data, turn it off with --memory.`,
+    );
+  else
+    say(
+      'Không lưu dữ liệu (--memory): khởi động lại là mất.',
+      'Nothing is saved (--memory): a restart loses everything.',
+    );
 }
 say('Chế độ offline (không cần game server, quái giả lập) / offline mode (no game server, mock monsters):', null);
 console.log(`    Offline: ${urls.offline}`);
