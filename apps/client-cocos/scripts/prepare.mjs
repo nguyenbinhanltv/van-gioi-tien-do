@@ -7,7 +7,7 @@
 import { build } from 'esbuild';
 import ts from 'typescript';
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { prepareChibiBundles } from './chibi-bundles.mjs';
@@ -111,23 +111,21 @@ prepareChibiBundles({ root, repo });
 // the tilemap. `--allow-missing`: without the LFS sources the client falls back to its placeholder props and text bag tiles.
 {
   const gdir = join(procgen, 'out/gemini');
-  for (const f of [
-    'gemini.json',
-    'atl_prop_2x_0.png',
-    'atl_prop_1x_0.png',
-    'atl_gicon_2x_0.png',
-    'atl_gicon_1x_0.png',
-    'atl_skill_2x_0.png',
-    'atl_skill_1x_0.png',
-    'atl_ui_2x_0.png',
-    'atl_ui_1x_0.png',
-  ])
-    rmSync(join(worldDir, f), { force: true }); // never leave stale art behind
+  // never leave stale art behind: the sidecar, every atlas page (a page count can change) and the key-art textures
+  rmSync(join(worldDir, 'gemini.json'), { force: true });
+  for (const f of readdirSync(worldDir)) {
+    if (/^(atl_(prop|gicon|skill|ui|status|realm|ptcl)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png)$/.test(f))
+      rmSync(join(worldDir, f), { force: true });
+  }
   if (existsSync(join(gdir, 'gemini.json'))) {
     copyFileSync(join(gdir, 'gemini.json'), join(worldDir, 'gemini.json'));
     const sidecar = JSON.parse(readFileSync(join(gdir, 'gemini.json'), 'utf8'));
     for (const pages of Object.values(sidecar.atlases))
       for (const p of pages) copyFileSync(join(gdir, 'atlas', p.file), join(worldDir, p.file));
+    // login backdrop + emblem: single textures (not atlased), loaded on demand by the class picker
+    const ka = sidecar.keyArt ?? {};
+    for (const f of [ka.backdrop?.file, ka.emblem?.f2?.file, ka.emblem?.f1?.file].filter(Boolean))
+      copyFileSync(join(gdir, 'atlas', f), join(worldDir, f));
   }
 }
 console.log('prepared vendor bundle + tilemap + DragonBones test rig + chibi bundles + gemini props');

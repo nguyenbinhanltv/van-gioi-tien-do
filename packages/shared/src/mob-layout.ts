@@ -24,3 +24,26 @@ export function mobZoneMargin(mapTiles: number): number {
 export function mobAreaHalfSize(mapTiles: number): number {
   return Math.max(1, (mapTiles - 2 * mobZoneMargin(mapTiles)) / 2);
 }
+
+/** The four mob zones of docs/10 section 4 (the ids of `MobZoneId` in mobs.ts, repeated here to keep this file import-free). */
+export type MobLayoutZone = 'bia_rung' | 'dam_lay_doc' | 'co_thu_trung_tam' | 'doc_hoa_dam';
+
+/**
+ * The default mob zone a tile of a `mapTiles` square map belongs to, or null (zone margin and the dead cross between the
+ * quadrants). Same rectangles as the server's `defaultMobZones` (apps/server/src/world/mobs/manager.ts), so client dressing
+ * (swamp reeds in the Dam lay doc, ancient trees around the Co thu trung tam, lava props in the Doc Hoa Dam) lands where
+ * the zone's mobs live. A real map supplies its own rectangles.
+ */
+export function mobZoneAt(i: number, j: number, mapTiles: number): MobLayoutZone | null {
+  const h = mapTiles / 2;
+  const m = mobZoneMargin(mapTiles);
+  const west = i >= m && i < h - m,
+    east = i >= h + m && i < mapTiles - m;
+  const north = j >= m && j < h - m,
+    south = j >= h + m && j < mapTiles - m;
+  if (west && north) return 'bia_rung';
+  if (east && north) return 'dam_lay_doc';
+  if (west && south) return 'co_thu_trung_tam';
+  if (east && south) return 'doc_hoa_dam';
+  return null;
+}
