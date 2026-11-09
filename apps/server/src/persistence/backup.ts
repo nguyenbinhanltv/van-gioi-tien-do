@@ -1,8 +1,8 @@
 /**
  * Backup and restore of the file store (D99, P5).
  *
- * A backup is a directory `backup-<id>/` holding the four store documents (`accounts.json`, `progression.json`, `inventories.json`,
- * `ledger.json`) and a `manifest.json` (format, version, creation time, size + sha256 of every document, and COUNTS only).
+ * A backup is a directory `backup-<id>/` holding every store document (`STORE_DOC_NAMES`: accounts, progression, inventories, sect, friends,
+ * ledger) and a `manifest.json` (format, version, creation time, size + sha256 of every document, and COUNTS only).
  *
  *  - Consistent: a live backup is made from `FileStores.snapshot()`, which serialises all four documents in ONE synchronous turn, so
  *    the files describe the same moment (never a ledger newer than the bags). `readLiveDocs` is the offline / cold copy of the files on
@@ -38,11 +38,11 @@ import { Bag } from '../world/inventory/bag.js';
 import { INVENTORY_CONFIG } from '../world/inventory/service.js';
 import type { InventorySnapshot } from '../world/inventory/store.js';
 import { Ledger } from '../world/inventory/ledger.js';
-import { openFileStores, type StoreDocs } from './file-stores.js';
+import { STORE_DOC_NAMES, openFileStores, type StoreDocs } from './file-stores.js';
 
 export const BACKUP_FORMAT = 'vgtd-backup';
 export const BACKUP_VERSION = 1;
-export const DOC_NAMES = ['accounts.json', 'progression.json', 'inventories.json', 'ledger.json'] as const;
+export const DOC_NAMES = STORE_DOC_NAMES;
 export type DocName = (typeof DOC_NAMES)[number];
 export type Docs = StoreDocs;
 
@@ -52,6 +52,10 @@ export interface BackupCounts {
   inventories: number;
   ledgerAccounts: number;
   ledgerEntries: number;
+  /** sect members / friendships / pending requests (D98, D96): counts only, no names */
+  sectMembers: number;
+  friendships: number;
+  friendRequests: number;
 }
 export interface BackupManifest {
   format: typeof BACKUP_FORMAT;
@@ -81,6 +85,8 @@ const EMPTY_DOCS: Docs = {
   'accounts.json': JSON.stringify({ v: 1, accounts: [] }),
   'progression.json': JSON.stringify({ v: 1, records: [] }),
   'inventories.json': JSON.stringify({ v: 1, owners: {} }),
+  'sect.json': JSON.stringify({ v: 1, members: [], manuals: [] }),
+  'friends.json': JSON.stringify({ v: 1, friends: [], requests: [] }),
   'ledger.json': JSON.stringify({ ...new Ledger().snapshot(), v: 1 }),
 };
 
@@ -122,7 +128,16 @@ export interface DocsReport {
 export function validateDocs(docs: Docs): DocsReport {
   const problems: string[] = [];
   const warnings: string[] = [];
-  const counts: BackupCounts = { accounts: 0, characters: 0, inventories: 0, ledgerAccounts: 0, ledgerEntries: 0 };
+  const counts: BackupCounts = {
+    accounts: 0,
+    characters: 0,
+    inventories: 0,
+    ledgerAccounts: 0,
+    ledgerEntries: 0,
+    sectMembers: 0,
+    friendships: 0,
+    friendRequests: 0,
+  };
   const scratch = mkdtempSync(join(tmpdir(), 'vgtd-validate-'));
   try {
     const parsed: Record<string, Record<string, unknown>> = {};
@@ -153,6 +168,12 @@ export function validateDocs(docs: Docs): DocsReport {
     counts.inventories = Object.keys(owners).length;
     counts.ledgerAccounts = ledger.accounts?.length ?? 0;
     counts.ledgerEntries = ledger.entries?.length ?? 0;
+    const members = (parsed['sect.json']!.members as string[]) ?? [];
+    const friendPairs = (parsed['friends.json']!.friends as [string, string][]) ?? [];
+    const requestPairs = (parsed['friends.json']!.requests as [string, string][]) ?? [];
+    counts.sectMembers = members.length;
+    counts.friendships = friendPairs.length;
+    counts.friendRequests = requestPairs.length;
     let n = 0;
     for (const [owner, snap] of Object.entries(owners)) {
       n++;
@@ -168,6 +189,11 @@ export function validateDocs(docs: Docs): DocsReport {
     const orphanBags = Object.keys(owners).filter((o) => !ids.has(o)).length;
     if (orphanChars > 0) warnings.push(`${orphanChars} character record(s) without an account`);
     if (orphanBags > 0) warnings.push(`${orphanBags} inventor${orphanBags === 1 ? 'y' : 'ies'} without an account`);
+    const orphanMembers = members.filter((m) => !ids.has(m)).length;
+    const orphanFriends = [...friendPairs, ...requestPairs].filter(([a, b]) => !ids.has(a) || !ids.has(b)).length;
+    if (orphanMembers > 0) warnings.push(`${orphanMembers} sect member(s) without an account`);
+    if (orphanFriends > 0)
+      warnings.push(`${orphanFriends} friend entr${orphanFriends === 1 ? 'y' : 'ies'} naming a missing account`);
     return { problems, warnings, counts };
   } finally {
     rmSync(scratch, { recursive: true, force: true });
@@ -319,7 +345,16 @@ function readManifest(dir: string): BackupManifest {
 
 /** Check a backup directory without changing anything: manifest, sizes, sha256, then the documents through the server's loaders. */
 export function verifyBackup(dir: string): VerifyReport {
-  const empty: BackupCounts = { accounts: 0, characters: 0, inventories: 0, ledgerAccounts: 0, ledgerEntries: 0 };
+  const empty: BackupCounts = {
+    accounts: 0,
+    characters: 0,
+    inventories: 0,
+    ledgerAccounts: 0,
+    ledgerEntries: 0,
+    sectMembers: 0,
+    friendships: 0,
+    friendRequests: 0,
+  };
   let m: BackupManifest;
   try {
     m = readManifest(dir);

@@ -236,8 +236,21 @@ export function openFileLedger(path: string, opts: DocFileOptions = {}): { ledge
   return { ledger, file };
 }
 
-/** The four store documents as text, by file name. */
-export type StoreDocs = Record<'accounts.json' | 'progression.json' | 'inventories.json' | 'ledger.json', string>;
+/**
+ * Every document of the data directory, by file name. THE one list: backup, restore, verify and the live snapshot all use it, so a document
+ * added to `openFileStores` cannot be forgotten by them (the sect and friends documents were, until D99 was reviewed).
+ */
+export const STORE_DOC_NAMES = [
+  'accounts.json',
+  'progression.json',
+  'inventories.json',
+  'sect.json',
+  'friends.json',
+  'ledger.json',
+] as const;
+export type StoreDocName = (typeof STORE_DOC_NAMES)[number];
+/** The store documents as text, by file name. */
+export type StoreDocs = Record<StoreDocName, string>;
 
 export interface FileStores {
   accounts: FileAccountStore;
@@ -249,7 +262,7 @@ export interface FileStores {
   /** write every document now (shutdown, tests) */
   flush(): void;
   /**
-   * Every document as text, serialised in ONE synchronous turn: nothing can change between them, so the four always describe the same
+   * Every document as text, serialised in ONE synchronous turn: nothing can change between them, so they always describe the same
    * moment (a drop never shows in the ledger but not in the bag). `prepare` runs first (the server passes the save of online bags).
    * This is what a live backup is made of (D99); it does not touch the files on disk.
    */
@@ -287,6 +300,8 @@ export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStor
         'accounts.json': accounts.file.serializeNow(),
         'progression.json': progression.file.serializeNow(),
         'inventories.json': inventories.file.serializeNow(),
+        'sect.json': sect.file.serializeNow(),
+        'friends.json': friends.file.serializeNow(),
         'ledger.json': ledgerFile.serializeNow(),
       };
     },

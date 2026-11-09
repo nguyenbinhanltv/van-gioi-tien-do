@@ -21,6 +21,7 @@ import {
   AuthService,
   BackupError,
   DOC_NAMES,
+  STORE_DOC_NAMES,
   InventoryService,
   backupIds,
   createBackup,
@@ -97,6 +98,10 @@ async function playFirstSession(w: World): Promise<void> {
       key,
     );
   }
+  // a sect join with a bought manual (D98) and a friendship plus a pending request (D96): the documents the review found missing from the first D99
+  // draft. Written through the stores the services sit on, so the test needs no sockets.
+  w.stores.sect.save({ members: [w.ids.alice_a!], manuals: [[w.ids.alice_a!, 'kiem_manual_1']] });
+  w.stores.friends.save({ friends: [[w.ids.alice_a!, w.ids.bob_b!]], requests: [] });
   w.inv.flushAll();
   w.stores.flush();
 }
@@ -111,6 +116,8 @@ function stateOf(w: World): unknown {
     bags: ['alice_a', 'bob_b'].map((n) => JSON.stringify(w.stores.inventories.load(w.ids[n]!) ?? null)),
     wallets: ['alice_a', 'bob_b'].map((n) => String(w.inv.wallet(w.ids[n]!, HA))),
     ledger: JSON.stringify(w.stores.ledger.snapshot()),
+    sect: JSON.stringify(w.stores.sect.load() ?? null),
+    friends: JSON.stringify(w.stores.friends.load() ?? null),
   };
 }
 
@@ -136,6 +143,14 @@ describe('the restore drill (P5 gate: no data lost in a restore trial)', () => {
     await w1.stores.progression
       .save({ ...newRecord(w1.ids.alice_a!, ROOT, 'kiem'), exp: 999, version: 9 }, 1)
       .catch(() => undefined);
+    w1.stores.sect.save({
+      members: [w1.ids.alice_a!, w1.ids.bob_b!],
+      manuals: [
+        [w1.ids.alice_a!, 'kiem_manual_1'],
+        [w1.ids.bob_b!, 'phap_manual_2'],
+      ],
+    });
+    w1.stores.friends.save({ friends: [], requests: [[w1.ids.alice_a!, w1.ids.carol_c!]] });
     w1.inv.flushAll();
     w1.stores.accounts.file.flush();
     w1.stores.flush(); // the later state reaches the disk, then...
@@ -146,13 +161,20 @@ describe('the restore drill (P5 gate: no data lost in a restore trial)', () => {
     // RESTORE into the same data directory (the server is down; the files are fresh, so the live-write guard is lowered)
     const r = restoreBackup(info.dir, dir, { liveWindowMs: 0 });
     expect(r.preRestoreDir).not.toBeNull();
-    expect(readdirSync(r.preRestoreDir!).sort()).toContain('accounts.json');
+    expect(readdirSync(r.preRestoreDir!).sort()).toEqual(
+      expect.arrayContaining(['accounts.json', 'sect.json', 'friends.json']),
+    );
 
     // the restarted server sees exactly the snapshot
     const w2 = open(dir);
     w2.ids = { ...w1.ids };
     delete w2.ids.carol_c;
     expect(stateOf(w2)).toEqual(expected);
+    // the sect and the friends came back exactly as they were at the snapshot, and the later changes are gone (but kept in the safety copy)
+    expect(w2.stores.sect.load()).toEqual({ members: [w1.ids.alice_a], manuals: [[w1.ids.alice_a, 'kiem_manual_1']] });
+    expect(w2.stores.friends.load()).toEqual({ friends: [[w1.ids.alice_a, w1.ids.bob_b]], requests: [] });
+    expect(JSON.parse(read(join(r.preRestoreDir!, 'sect.json'))).members).toHaveLength(2);
+    expect(JSON.parse(read(join(r.preRestoreDir!, 'friends.json'))).requests).toHaveLength(1);
     expect(w2.inv.wallet(w2.ids.alice_a!, HA)).toBe(walletAlice);
     expect(w2.stores.accounts.byUsername('carol_c')).toBeUndefined();
     expect(w2.stores.ledger.reconcile()).toEqual([]);
@@ -189,7 +211,15 @@ describe('the restore drill (P5 gate: no data lost in a restore trial)', () => {
     );
     const docs = w.stores.snapshot(() => w.inv.flushAll());
     const info = createBackup(join(dir, 'backups'), docs, { now: at(2) });
-    expect(info.manifest.counts).toMatchObject({ accounts: 2, characters: 2, inventories: 2 });
+    expect(info.manifest.counts).toMatchObject({
+      accounts: 2,
+      characters: 2,
+      inventories: 2,
+      sectMembers: 1,
+      friendships: 1,
+      friendRequests: 0,
+    });
+    expect(Object.keys(info.manifest.files).sort()).toEqual([...DOC_NAMES].sort()); // every store document is in the backup
     // open the backup as a server would: wallet and bag both contain the 6 stones' ledger entry and the 3 extra pills
     const b = tmp();
     for (const n of DOC_NAMES) writeFileSync(join(b, n), read(join(info.dir, n)));
@@ -201,6 +231,43 @@ describe('the restore drill (P5 gate: no data lost in a restore trial)', () => {
         .count(w.inv.bagOf(w.ids.alice_a!).slots.flatMap((s) => (s && s.kind === 'stack' ? [s.defId] : []))[0]!, 1),
     ).toBeGreaterThan(0);
     expect(w2.stores.ledger.reconcile()).toEqual([]);
+  });
+});
+
+describe('the document list cannot drift from the file store', () => {
+  it('every document openFileStores writes is in STORE_DOC_NAMES (and so in every backup), and nothing else', async () => {
+    const dir = tmp();
+    const w = open(dir);
+    await playFirstSession(w); // touches every store
+    const onDisk = readdirSync(dir)
+      .filter((n) => n.endsWith('.json'))
+      .sort();
+    expect(onDisk).toEqual([...STORE_DOC_NAMES].sort());
+    expect([...DOC_NAMES]).toEqual([...STORE_DOC_NAMES]);
+  });
+
+  it('verify flags sect members and friend entries that name a missing account (counts only) and a restore into a new directory brings both documents back', async () => {
+    const dir = tmp();
+    const w = open(dir);
+    await playFirstSession(w);
+    w.stores.sect.save({ members: [w.ids.alice_a!, 'ghost-account'], manuals: [] });
+    w.stores.friends.save({ friends: [[w.ids.alice_a!, 'ghost-account']], requests: [] });
+    const info = createBackup(
+      join(dir, 'backups'),
+      w.stores.snapshot(() => w.inv.flushAll()),
+      { now: at(7) },
+    );
+    const v = verifyBackup(info.dir);
+    expect(v.ok).toBe(true);
+    expect(v.warnings.join(' ')).toMatch(/1 sect member\(s\) without an account/);
+    expect(v.warnings.join(' ')).toMatch(/1 friend entry naming a missing account/);
+    expect(v.warnings.join(' ')).not.toContain('ghost-account'); // never a name or id
+    const fresh = join(tmp(), 'new-data');
+    restoreBackup(info.dir, fresh);
+    expect(readdirSync(fresh).sort()).toEqual([...STORE_DOC_NAMES].sort());
+    const w2 = open(fresh);
+    expect(w2.stores.sect.load()?.members).toHaveLength(2);
+    expect(w2.stores.friends.load()?.friends).toHaveLength(1);
   });
 });
 

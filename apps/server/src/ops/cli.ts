@@ -29,7 +29,7 @@ export interface CliIo {
 }
 
 const countsLine = (c: BackupCounts): string =>
-  `accounts ${c.accounts}, characters ${c.characters}, inventories ${c.inventories}, ledger accounts ${c.ledgerAccounts}, ledger entries ${c.ledgerEntries}`;
+  `accounts ${c.accounts}, characters ${c.characters}, inventories ${c.inventories}, ledger accounts ${c.ledgerAccounts}, ledger entries ${c.ledgerEntries}, sect members ${c.sectMembers}, friendships ${c.friendships}, friend requests ${c.friendRequests}`;
 
 const COMMANDS = ['backup', 'verify', 'restore', 'list'];
 const VALUE_OPTIONS = ['data-dir', 'backup-dir', 'keep', 'from'];
