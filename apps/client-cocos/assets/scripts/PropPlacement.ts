@@ -71,8 +71,18 @@ export interface PlacementInput {
   sectOrigin?: { i: number; j: number };
 }
 
+/** A sect building `placeProps` could not draw (the server still blocks its tiles): why, so a test / the client can say it loudly. */
+export interface SkippedSect {
+  name: string;
+  di: number;
+  dj: number;
+  reason: 'no-def' | 'not-land' | 'occupied' | 'spawn-clear';
+}
+
 export interface PlacementResult {
   props: PlacedProp[];
+  /** sect buildings that were not placed (empty on the default map: a test pins that) */
+  sectSkipped: SkippedSect[];
   /** Tiles blocked by props (to be merged into the walkability grid). */
   blocked: Array<[number, number]>;
   courtyard: PlacedProp[];
@@ -189,18 +199,29 @@ export function placeProps(input: PlacementInput): PlacementResult {
     courtyard.push({ name: c.name, i: at[0], j: at[1] });
   }
   // 1b. sect buildings (D118): fixed tiles shared with the server grid, never nudged
+  const sectSkipped: SkippedSect[] = [];
   if (input.sect) {
     const o = input.sectOrigin ?? spawn;
     for (const b of input.sect) {
-      if (!defs[b.name]) continue;
+      if (!defs[b.name]) {
+        sectSkipped.push({ name: b.name, di: b.di, dj: b.dj, reason: 'no-def' });
+        continue;
+      }
       const bi = o.i + b.di,
         bj = o.j + b.dj;
       const tiles = [[bi, bj] as [number, number], ...tilesOf(b.name, bi, bj)];
       // land under the whole footprint and around the anchor (a coast tile only shows a rim of land), free, inside the map
-      const ok =
-        tiles.every(([ti, tj]) => inMap(ti, tj) && isLand(terrain(ti, tj)) && !occupied.has(key(ti, tj))) &&
-        !clear(bi, bj);
-      if (!ok) continue;
+      const why = !tiles.every(([ti, tj]) => inMap(ti, tj) && isLand(terrain(ti, tj)))
+        ? 'not-land'
+        : tiles.some(([ti, tj]) => occupied.has(key(ti, tj)))
+          ? 'occupied'
+          : clear(bi, bj)
+            ? 'spawn-clear'
+            : null;
+      if (why) {
+        sectSkipped.push({ name: b.name, di: b.di, dj: b.dj, reason: why });
+        continue;
+      }
       take(b.name, bi, bj);
       courtyard.push({ name: b.name, i: bi, j: bj });
     }
@@ -285,5 +306,26 @@ export function placeProps(input: PlacementInput): PlacementResult {
       if (name && tryPlace(name, i, j)) placed++;
     }
   }
-  return { props, blocked, courtyard };
+  return { props, blocked, courtyard, sectSkipped };
+}
+
+/**
+ * Blocks the sect building tiles (`sectBlockedTiles` of @vgtd/shared: the SAME tiles the server blocks) in a client walkability mask,
+ * independent of the art: a client without the Gemini props (or a building `placeProps` skipped) must still predict the wall the server
+ * enforces, or the player rubber-bands at an invisible obstacle. Returns how many tiles were newly blocked.
+ */
+export function blockSectTiles(
+  blocked: Uint8Array,
+  width: number,
+  height: number,
+  tiles: ReadonlyArray<readonly [number, number]>,
+): number {
+  let n = 0;
+  for (const [i, j] of tiles) {
+    if (i < 0 || j < 0 || i >= width || j >= height) continue;
+    const k = j * width + i;
+    if (blocked[k] === 0) n++;
+    blocked[k] = 1;
+  }
+  return n;
 }

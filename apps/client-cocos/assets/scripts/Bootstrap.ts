@@ -21,7 +21,7 @@ import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
 import { installDrawDebug } from './DrawDebug';
 import { MobArt, createMobDemoBackend } from './MobArt';
-import { placeProps } from './PropPlacement';
+import { blockSectTiles, placeProps } from './PropPlacement';
 import { NpcArt, type NpcStandee } from './NpcArt';
 import { placeSectNpcs } from './NpcPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
@@ -175,6 +175,8 @@ export class Bootstrap extends Component {
 
     // blocked tiles (props) on top of terrain walkability
     const blocked = new Uint8Array(map.width * map.height);
+    // the sect building tiles the SERVER blocks, with or without the art (placeholder path, a building that did not fit): never predict a free walk there
+    blockSectTiles(blocked, map.width, map.height, shared.sectBlockedTiles(map.width));
     const walkable = (i: number, j: number) => this.world.isTerrainWalkable(i, j) && blocked[j * map.width + i] === 0;
 
     // `?at=i,j` (offline QA): start near that tile instead of the map centre, e.g. to look at a mob zone's dressing
@@ -205,6 +207,11 @@ export class Bootstrap extends Component {
         sectOrigin: shared.sectOrigin(map.width),
       });
       for (const [i, j] of placed.blocked) blocked[j * map.width + i] = 1;
+      if (placed.sectSkipped.length > 0)
+        console.warn(
+          '[vgtd] sect buildings not drawn (their tiles stay blocked, as on the server):',
+          placed.sectSkipped,
+        );
       for (const p of placed.courtyard) this.propArt.add(this.ysort, p);
       for (const p of placed.props) this.propArt.add(this.ysort, p);
       // Son Mon NPC standees around the plaza: they block their tile like props and adapt to the land (INTERIM art, keyed npc_<name>)

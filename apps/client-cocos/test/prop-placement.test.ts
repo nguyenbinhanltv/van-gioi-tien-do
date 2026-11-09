@@ -3,6 +3,7 @@ import { SECT_BUILDINGS, mobZoneAt, sectBlockedTiles, sectOrigin } from '@vgtd/s
 import manifest from '../../../tools/procgen/src/gemini/manifest.json';
 import {
   COURTYARD,
+  blockSectTiles,
   SPAWN_CLEAR_RADIUS,
   SWAMP_REACH,
   ZONE_MIN_DIST,
@@ -321,6 +322,41 @@ describe('Son Mon sect buildings (D118)', () => {
     const b = placeProps({ ...base(), sect: [], sectOrigin: undefined });
     expect(b.courtyard).toEqual(a.courtyard);
     expect(b.props).toEqual(a.props);
+  });
+
+  it('nothing is skipped on the default map (a skipped building would be an invisible wall: the test says so loudly)', () => {
+    expect(placeProps(base()).sectSkipped).toEqual([]);
+  });
+
+  it('a skipped building is reported with its reason (no def, not land, occupied)', () => {
+    const o = sectOrigin(N);
+    const noHall = { ...defs };
+    delete (noHall as Record<string, unknown>).sect_main_hall;
+    expect(placeProps(base({ defs: noHall })).sectSkipped).toContainEqual({
+      name: 'sect_main_hall',
+      di: -17,
+      dj: -17,
+      reason: 'no-def',
+    });
+    const water = (i: number, j: number): Terrain => (i === o.i - 3 && j === o.j - 14 ? 'water' : 'dirt');
+    expect(placeProps(base({ terrain: water })).sectSkipped.map((x) => [x.name, x.reason])).toEqual([
+      ['sect_scripture_pavilion', 'not-land'],
+    ]);
+  });
+
+  it('without any prop art the blocked set still holds every sectBlockedTiles tile (the server blocks them regardless)', () => {
+    const blocked = new Uint8Array(N * N); // what Bootstrap builds before it knows whether the art exists
+    const tiles = sectBlockedTiles(N);
+    expect(blockSectTiles(blocked, N, N, tiles)).toBe(tiles.length);
+    for (const [i, j] of tiles) expect(blocked[j * N + i], `${i},${j}`).toBe(1);
+    expect(blocked.reduce((n, v) => n + v, 0)).toBe(tiles.length); // and nothing else
+    expect(blockSectTiles(blocked, N, N, tiles)).toBe(0); // idempotent
+    expect(
+      blockSectTiles(new Uint8Array(4), 2, 2, [
+        [5, 5],
+        [-1, 0],
+      ]),
+    ).toBe(0); // outside the map is ignored
   });
 
   it('the scatter keeps away from the buildings (a prop never lands on a blocked sect tile)', () => {
