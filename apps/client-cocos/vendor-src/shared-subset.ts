@@ -7,6 +7,7 @@ export * from '../../../packages/shared/src/constants.js';
 export * from '../../../packages/shared/src/iso.js';
 export * from '../../../packages/shared/src/formulas/stats.js';
 export * from '../../../packages/shared/src/formulas/breakthrough.js';
+export * from '../../../packages/shared/src/formulas/karma.js'; // Nghiệp Lực band / Đạo Tâm (D103)
 export * from '../../../packages/shared/src/formulas/tribulation.js';
 export * from '../../../packages/shared/src/formulas/combat.js';
 export * from '../../../packages/shared/src/formulas/cultivation.js';

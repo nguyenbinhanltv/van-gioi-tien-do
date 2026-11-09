@@ -32,6 +32,7 @@ import {
   type PartyStateMsg,
   type PartyVitalsMsg,
   type CharStateMsg,
+  type DaoTamMsg,
   type EnterEntity,
   type MeditateResultMsg,
   type InvResultMsg,
@@ -125,6 +126,8 @@ export interface ReconnectOptions {
  */
 export interface ProgressionEvents {
   onCharState?(msg: CharStateMsg): void;
+  /** the Đạo Tâm that counts (D103); sent on join and whenever it changes */
+  onDaoTam?(msg: DaoTamMsg): void;
   onMeditateResult?(msg: MeditateResultMsg): void;
   onBreakthroughResult?(msg: BreakthroughResultMsg): void;
 }
@@ -601,6 +604,9 @@ export class NetClient {
         break;
       case 'char_state':
         this.emit(() => this.progressionEvents.onCharState?.(msg));
+        break;
+      case 'dao_tam':
+        this.emit(() => this.progressionEvents.onDaoTam?.(msg));
         break;
       case 'meditate_result':
         this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
