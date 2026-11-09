@@ -5,6 +5,7 @@ export * from './binary.js';
 export * from './json.js';
 export * from './progression.js';
 export * from './inventory.js';
+export * from './trade.js';
 export * from './sect.js';
 export * from './friends.js';
 export * from './market.js';

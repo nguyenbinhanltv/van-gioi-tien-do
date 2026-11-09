@@ -2,6 +2,7 @@ import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
+import { TradeService } from './trade/service.js';
 import { SectService } from './sect/service.js';
 import type { SectStore } from './sect/store.js';
 import { Ledger } from './world/inventory/ledger.js';
@@ -23,6 +24,8 @@ export interface ServerOptions {
   chat?: ChatOptions | false;
   /** `false` to run without parties (default: enabled, in-memory, session-only: D93) */
   party?: false;
+  /** direct trade (D102): on whenever the world has an inventory, or `false` to run without it */
+  trade?: false;
   /** NPC sect options (D98): the persistence store (default in memory), or `false` to run without the sect */
   sect?: { store?: SectStore; ledger?: Ledger } | false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
@@ -31,7 +34,8 @@ export interface ServerOptions {
    * Vạn Bảo Lâu options (D112). The market needs an inventory (items and the ledger): it is created whenever `world.inventory` exists, unless
    * `false`. `store` = where the book is kept (default in memory), `report` / `now` / `durable` as in `MarketServiceOptions`.
    */
-  market?: ({ store?: MarketStore } & Pick<MarketServiceOptions, 'now' | 'report' | 'durable'>) | false;
+  market?:
+    ({ store?: MarketStore } & Pick<MarketServiceOptions, 'now' | 'report' | 'durable' | 'onDurableError'>) | false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -53,6 +57,12 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
       : (opts.world?.progression ?? new ProgressionService({ seed: opts.world?.seed, ...opts.progression }));
   const chat = opts.chat === false ? undefined : (opts.world?.chat ?? new ChatService(opts.chat));
   const party = opts.party === false ? undefined : (opts.world?.party ?? new PartyService());
+  // a trade moves bag items and stones, so it only exists where the world has an inventory
+  const trade =
+    opts.trade === false
+      ? undefined
+      : (opts.world?.trade ??
+        (opts.world?.inventory ? new TradeService({ inventory: opts.world.inventory }) : undefined));
   // Cống hiến lives in the same ledger as the stones, so one durable `ledger.json` (D92) covers both. `sect.ledger` is the ledger of the
   // file stores (given by main.ts whenever STORE=file, with or without an inventory); when an inventory is also given it MUST be the same
   // object, or stones and Cống hiến would be booked in two ledgers and only one of them would be durable.
@@ -92,6 +102,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
           ...(opts.market?.now ? { now: opts.market.now } : {}),
           ...(opts.market?.report ? { report: opts.market.report } : {}),
           ...(opts.market?.durable ? { durable: opts.market.durable } : {}),
+          ...(opts.market?.onDurableError ? { onDurableError: opts.market.onDurableError } : {}),
           directory: {
             idOf: (nameLower) => auth.store.byUsername(nameLower)?.id,
             nameOf: (id) => auth.store.byId(id)?.username,
@@ -102,6 +113,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
     ...(party ? { party } : {}),
+    ...(trade ? { trade } : {}),
     ...(sect ? { sect } : {}),
     ...(friends ? { friends } : {}),
     ...(market ? { market } : {}),

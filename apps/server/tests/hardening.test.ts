@@ -103,6 +103,7 @@ describe('ConnectionGuard', () => {
       'market_list',
       'market_buy',
       'market_cancel',
+      'trade_cmd',
       'meditate_start',
       'meditate_stop',
       'breakthrough_start',

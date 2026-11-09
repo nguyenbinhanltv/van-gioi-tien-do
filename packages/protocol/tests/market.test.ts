@@ -76,7 +76,7 @@ const samples: ColdMessage[] = [
   { type: 'market_notice', kind: MarketNoticeKind.Expired, listingId: 6, defId: 1, quality: 0, qty: 1, amount: 0 },
 ];
 
-describe('market messages (cold family ids 50-56)', () => {
+describe('market messages (cold family ids 51-57)', () => {
   it.each(samples.map((m, i) => [`${m.type} #${i}`, m] as const))(
     '%s round-trips and re-encodes canonically',
     (_n, m) => {
@@ -87,15 +87,15 @@ describe('market messages (cold family ids 50-56)', () => {
     },
   );
 
-  it('uses the docs/24 ids 50-54 (+55 cancel, 56 notice) on the cold envelope, protocol version unchanged', () => {
+  it('uses ids 51-57 on the cold envelope (50 belongs to the FTUE tutorial), protocol version unchanged', () => {
     const ids: Record<string, number> = {
-      market_search: 50,
-      market_results: 51,
-      market_list: 52,
-      market_buy: 53,
-      market_result: 54,
-      market_cancel: 55,
-      market_notice: 56,
+      market_search: 51,
+      market_results: 52,
+      market_list: 53,
+      market_buy: 54,
+      market_result: 55,
+      market_cancel: 56,
+      market_notice: 57,
     };
     for (const m of samples) {
       const b = encode(m);
@@ -109,12 +109,12 @@ describe('market messages (cold family ids 50-56)', () => {
     const v = PROTOCOL_VERSION.toString(16).padStart(2, '0');
     expect(
       Buffer.from(encode({ type: 'market_buy', clientMsgId: 0x0102, listingId: 0x0a0b0c0d })).toString('hex'),
-    ).toBe(`${v}800035` + '0102' + '0a0b0c0d');
+    ).toBe(`${v}800036` + '0102' + '0a0b0c0d');
     expect(
       Buffer.from(
         encode({ type: 'market_list', clientMsgId: 1, slot: 3, qty: 0x0010, unitPrice: 0x000003e8, durationH: 24 }),
       ).toString('hex'),
-    ).toBe(`${v}800034` + '0001' + '03' + '0010' + '000003e8' + '18');
+    ).toBe(`${v}800035` + '0001' + '03' + '0010' + '000003e8' + '18');
   });
 
   it('validates every field: ranges, enums, names, page size', () => {
@@ -182,7 +182,7 @@ describe('market messages (cold family ids 50-56)', () => {
   it('fuzz: random bytes after a market header never crash the decoder with anything but a ProtocolError', () => {
     const rnd = lcg(12345);
     for (let k = 0; k < 400; k++) {
-      const id = 50 + (k % 7);
+      const id = 51 + (k % 7);
       const len = Math.floor(rnd() * 40);
       const bytes = new Uint8Array(4 + len);
       bytes[0] = PROTOCOL_VERSION;

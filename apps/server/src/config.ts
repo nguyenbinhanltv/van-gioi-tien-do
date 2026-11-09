@@ -72,6 +72,8 @@ export const SECURITY_CONFIG = {
     friend: { burst: 30, perS: 10 },
     /** Vạn Bảo Lâu (D112): the market has its own per-account limiter that answers with a reason (market/config.ts); same looser outer cap */
     market: { burst: 30, perS: 10 },
+    /** direct trade (D102): the trade service has its own per-account limiter that answers with a reason; this outer cap is looser so that answer comes first */
+    trade: { burst: 30, perS: 10 },
   },
   /** malformed / unexpected frames tolerated in a rolling window before the kick (honest bugs age out) */
   MALFORMED_MAX: 5,

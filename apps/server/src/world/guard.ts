@@ -29,6 +29,8 @@ export function budgetClassOf(type: string): BudgetClass | null {
     case 'market_buy':
     case 'market_cancel':
       return 'market';
+    case 'trade_cmd':
+      return 'trade';
     case 'meditate_start':
     case 'meditate_stop':
     case 'breakthrough_start':

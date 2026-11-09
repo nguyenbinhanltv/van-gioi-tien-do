@@ -23,12 +23,13 @@ export type AccountKind =
   | 'SYSTEM_FAUCET_DROP_MOB'
   | 'SYSTEM_FAUCET_DROP_ELITE'
   | 'SYSTEM_FAUCET_DROP_BOSS'
+  | 'SYSTEM_SINK_TRADE_TAX'
   | 'SYSTEM_FAUCET_SECT_KILL'
   | 'SYSTEM_SINK_SECT_LIBRARY'
   /** Vạn Bảo Lâu (D112): the 1 % listing fee and the 5 % sale tax are destroyed, never paid to another player (docs/26 §5) */
   | 'SYSTEM_SINK_LISTING_FEE'
   | 'SYSTEM_SINK_MARKET_TAX';
-export type LedgerReason = 'DROP' | 'SECT_REWARD' | 'SECT_PURCHASE' | 'MARKET_LISTING_FEE' | 'MARKET_SALE';
+export type LedgerReason = 'DROP' | 'TRADE' | 'SECT_REWARD' | 'SECT_PURCHASE' | 'MARKET_LISTING_FEE' | 'MARKET_SALE';
 
 export interface AccountRef {
   kind: AccountKind;

@@ -15,6 +15,7 @@ export * from './progression/index.js';
 export * from './chat/index.js';
 export * from './party/index.js';
 export * from './persistence/index.js';
+export * from './trade/index.js';
 export * from './ops/cli.js';
 export * from './sect/index.js';
 export * from './world/breakthrough/index.js';

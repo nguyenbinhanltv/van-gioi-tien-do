@@ -1,6 +1,5 @@
 /**
- * Vạn Bảo Lâu, the auction house ("cold family", D112; docs/10 §7.1 P4 "Vạn Bảo Lâu cơ bản"; docs/24 reserved cold ids 50-54 for it, 55-56
- * were free). Same `[ver][0x80][msgId u16][body]` envelope and strict fixed big-endian bodies as friends.ts / party.ts.
+ * Vạn Bảo Lâu, the auction house ("cold family", D112; docs/10 §7.1 P4 "Vạn Bảo Lâu cơ bản"; docs/24 reserved cold ids 50-54 for it, but 49-50 are the FTUE tutorial, so the market uses 51-57). Same `[ver][0x80][msgId u16][body]` envelope and strict fixed big-endian bodies as friends.ts / party.ts.
  *
  *   market_search  C->S  browse (view 0) or "my listings" (view 1): filters, sort, page
  *   market_results S->C  one page of listings + the total, answer to every market_search

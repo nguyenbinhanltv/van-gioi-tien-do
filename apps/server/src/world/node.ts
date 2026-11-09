@@ -69,6 +69,7 @@ import type { SecurityEvent } from './security-log.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
+import type { TradeService } from '../trade/service.js';
 import type { SectService } from '../sect/service.js';
 import type { FriendService } from '../friends/service.js';
 import type { MarketService } from '../market/service.js';
@@ -232,6 +233,8 @@ export interface WorldNodeOptions {
   chat?: ChatService;
   /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
   party?: PartyService;
+  /** direct trade module (D102): needs `inventory`; absent = trade commands are rejected as unexpected */
+  trade?: TradeService;
   /** NPC sect module (D98): join / leave at the sect NPC, Cống hiến from kills, the library; absent = sect commands are rejected as unexpected */
   sect?: SectService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
@@ -363,6 +366,7 @@ export class WorldNode {
   private readonly shadows: ShadowRegistry | null;
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
+  readonly trade: TradeService | undefined;
   readonly sect: SectService | undefined;
   readonly friends: FriendService | undefined;
   readonly market: MarketService | undefined;
@@ -412,6 +416,14 @@ export class WorldNode {
       },
       posOf: (id) => this.byId.get(id),
       partyMembers: (id) => this.party?.membersOf(id) ?? [],
+    });
+    this.trade = opts.trade;
+    this.trade?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
     });
     this.sect = opts.sect;
     this.sect?.attach({
@@ -620,6 +632,7 @@ export class WorldNode {
     });
     this.progression?.join(id, accountId, this.world.timeMs);
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.trade?.join({ entityId: id, accountId, name: displayName });
     this.sect?.join({ entityId: id, accountId, path: classPath });
     this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     this.market?.join({ entityId: id, accountId });
@@ -763,6 +776,7 @@ export class WorldNode {
     void this.progression?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
+    this.trade?.leave(id);
     this.sect?.leave(id);
     this.friends?.leave(id);
     this.market?.leave(id);
@@ -990,6 +1004,11 @@ export class WorldNode {
           this.badFrame(c, 'unexpected');
         } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
         break;
+      case 'trade_cmd':
+        if (!this.trade) {
+          this.badFrame(c, 'unexpected');
+        } else this.send(c, this.trade.handle(id, msg, this.world.timeMs));
+        break;
       case 'sect_cmd':
         if (!this.sect) {
           this.badFrame(c, 'unexpected');
@@ -1118,6 +1137,7 @@ export class WorldNode {
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     if (this.majorDue.size) this.sendMajorDue();
     this.party?.tick(this.world.timeMs, this.world.tick);
+    this.trade?.tick(this.world.timeMs);
     this.sect?.tick();
     this.friends?.tick();
     if (this.market && this.world.tick % 20 === 0) this.market.tick(); // expiry, returns and the weekly shadow report: about once a second

@@ -86,11 +86,15 @@ export interface MarketServiceOptions {
   /** called with every weekly SHADOW report (the server logs it; telemetry can subscribe). Must not throw. */
   report?: (r: ShadowReport) => void;
   /**
-   * Called right after a command changed the market book (the caller has already saved it to the store) and before the reply is sent: the
-   * place where a transaction journal makes the book, the ledger and the bags durable as ONE unit. May throw on a disk error: the in-memory
-   * change stays (the debounced writes retry), the command still answers Ok.
+   * Called right after a command changed the market book, AFTER the book is in the store and the bags of the owners involved were saved to
+   * theirs, and before the reply is sent: the write-ahead journal (`stores.durableMarket.commit`) makes the book, the ledger and the bags
+   * durable as ONE unit (a crash between three separate file writes would be an item dupe or a lost payment). It may throw on a disk error:
+   * the change stands in memory, the stores keep the documents dirty and their debounced writes retry them, the command still answers Ok,
+   * and the failure is COUNTED per operation (`metrics.durableErrorsByOp`) and reported through `onDurableError`.
    */
   durable?: (label: string) => void;
+  /** called for every failed `durable` commit (the server logs it); must not throw */
+  onDurableError?: (label: string, error: unknown) => void;
 }
 
 interface Bucket {
@@ -112,6 +116,10 @@ export interface MarketMetrics {
   /** a command whose second step failed after the first one and had to be reversed (should stay 0) */
   reversed: number;
   durableErrors: number;
+  /** failed durable commits by operation (`list`, `sale`, `cancel`, `expire`, `shadow`): a non-zero value means the disk may lag the memory */
+  durableErrorsByOp: Record<string, number>;
+  /** durable commits that went through */
+  durableCommits: number;
 }
 
 const walletOf = (owner: string): AccountRef => ({ kind: 'PLAYER_WALLET', ownerId: owner, currency: CURRENCY });
@@ -133,6 +141,8 @@ export class MarketService {
     refused: {},
     reversed: 0,
     durableErrors: 0,
+    durableErrorsByOp: {},
+    durableCommits: 0,
   };
   private host: MarketHost | null = null;
   private readonly store: MarketStore;
@@ -142,6 +152,7 @@ export class MarketService {
   private readonly now: () => number;
   private readonly report: ((r: ShadowReport) => void) | undefined;
   private readonly durable: ((label: string) => void) | undefined;
+  private readonly onDurableError: ((label: string, error: unknown) => void) | undefined;
   private nextId = 1;
   private readonly listings = new Map<number, Listing>();
   private trades: TradeRecord[] = [];
@@ -160,6 +171,7 @@ export class MarketService {
     this.now = opts.now ?? (() => Date.now());
     this.report = opts.report;
     this.durable = opts.durable;
+    this.onDurableError = opts.onDurableError;
     this.restore(this.store.load());
   }
 
@@ -189,13 +201,27 @@ export class MarketService {
       reports: this.reports.map((r) => ({ ...r })),
     };
   }
-  private persist(label: string): void {
+  /**
+   * Save the book and make it durable. `owners` are the accounts whose BAG changed in this command: an online player's bag lives in memory
+   * and only reaches `inventories.json` when it is saved, so it is saved first, otherwise the journal would commit the old bag next to the new
+   * book and ledger (an item in no place, or in two).
+   */
+  private persist(label: string, owners: readonly string[] = []): void {
+    for (const o of owners) this.inv.flush(o);
     this.store.save(this.snapshot());
     if (!this.durable) return;
     try {
       this.durable(label);
-    } catch {
-      this.metrics.durableErrors++; // the data stays dirty in the stores; the debounced writes retry it
+      this.metrics.durableCommits++;
+    } catch (e) {
+      const op = label.split(':')[1] ?? 'other';
+      this.metrics.durableErrors++;
+      this.metrics.durableErrorsByOp[op] = (this.metrics.durableErrorsByOp[op] ?? 0) + 1;
+      try {
+        this.onDurableError?.(label, e);
+      } catch {
+        /* a log sink must never stop the market */
+      }
     }
   }
 
@@ -403,7 +429,7 @@ export class MarketService {
     });
     this.metrics.listed++;
     this.metrics.feeBurned += Number(fee);
-    this.persist(`market:list:${id}`);
+    this.persist(`market:list:${id}`, [me.accountId]);
     return {
       type: 'market_result',
       clientMsgId: cmd.clientMsgId,
@@ -475,7 +501,7 @@ export class MarketService {
     this.metrics.sold++;
     this.metrics.taxBurned += Number(tax);
     this.metrics.volume += Number(proceeds);
-    this.persist(`market:sale:${l.id}`);
+    this.persist(`market:sale:${l.id}`, [me.accountId]);
     this.inv.refresh(l.seller); // the proceeds are a ledger posting, not a bag change: push the new wallet to the seller's HUD
     this.notify(l.seller, {
       type: 'market_notice',
@@ -515,7 +541,7 @@ export class MarketService {
     if (where === 'none') return refuse(op, MarketReason.NoSpace); // the listing stays: nothing was lost, nothing changed
     this.listings.delete(l.id);
     this.metrics.cancelled++;
-    this.persist(`market:cancel:${l.id}`);
+    this.persist(`market:cancel:${l.id}`, [me.accountId]);
     return {
       type: 'market_result',
       clientMsgId: cmd.clientMsgId,
@@ -541,6 +567,7 @@ export class MarketService {
   /** Expired and `returning` listings go back to their seller (bag, else pending loot); a lot with nowhere to go stays and is retried. */
   private sweep(now: number): void {
     let changed = false;
+    const touched = new Set<string>();
     for (const l of [...this.listings.values()]) {
       if (l.state === 'active' && l.expiresAt > now) continue;
       const where = this.inv.deposit(
@@ -558,6 +585,7 @@ export class MarketService {
       this.listings.delete(l.id);
       this.metrics.expired++;
       changed = true;
+      touched.add(l.seller);
       this.notify(l.seller, {
         type: 'market_notice',
         kind: MarketNoticeKind.Expired,
@@ -568,7 +596,7 @@ export class MarketService {
         amount: 0,
       });
     }
-    if (changed) this.persist('market:expire');
+    if (changed) this.persist('market:expire', [...touched]);
   }
 
   private basketWeek(week: number): BasketWeek {

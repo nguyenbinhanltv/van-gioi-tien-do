@@ -171,6 +171,22 @@ export class Bag {
     return ok({ slots: touched });
   }
 
+  /**
+   * Put an EXISTING instance into the first free slot with a NEW id (the old owner's id dies with the old bag): quality, durability and
+   * affixes travel with it, the version is bumped. Used when an item changes hands (D102); `bound` items are refused.
+   */
+  addInstance(from: ItemInstance): BagResult<{ slot: number }> {
+    const def = itemDefById(from.defId);
+    if (!def || def.kind !== 'instance') return fail('UNKNOWN_ITEM');
+    if (from.bound) return fail('UNKNOWN_ITEM');
+    const slot = this.slots.findIndex((s) => s === null);
+    if (slot < 0) return fail('NO_SPACE');
+    const inst: ItemInstance = { ...from, id: this.newId(), affixes: [...from.affixes], version: from.version + 1 };
+    this.instances.set(inst.id, inst);
+    this.slots[slot] = { kind: 'instance', id: inst.id };
+    return ok({ slot });
+  }
+
   /** Remove `qty` of a stackable (all-or-nothing). Takes from the LAST slots first so early slots stay stable. */
   removeStack(defId: number, quality: number, qty: number): BagResult {
     const def = itemDefById(defId);

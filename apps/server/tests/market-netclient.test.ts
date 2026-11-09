@@ -215,10 +215,14 @@ describe('Vạn Bảo Lâu end to end (real server, real NetClient)', () => {
         auth: { scrypt: FAST, registerPerIpPerDay: 0, ipFailLimit: 1_000_000, store: stores.accounts },
         world: {
           ...SERVER_WORLD,
-          inventory: new InventoryService({ store: stores.inventories, ledger: stores.ledger }),
+          inventory: new InventoryService({
+            store: stores.inventories,
+            ledger: stores.ledger,
+            durable: stores.durable,
+          }),
         },
         progression: { store: stores.progression },
-        market: { store: stores.market },
+        market: { store: stores.market, durable: (label) => stores.durableMarket.commit(label) },
       });
       srv = s;
       return { s, stores };

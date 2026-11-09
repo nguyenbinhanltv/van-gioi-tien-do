@@ -63,7 +63,9 @@ const srv = await startServer({
     // structured security events (kicks, flood drops, malformed frames, anti-cheat violations; D101): one JSON line each, no PII; SECURITY_LOG=0 silences
     securityLog: process.env.SECURITY_LOG === '0' ? undefined : jsonLineSink((line) => console.log(line)),
     inventory: flag(process.env.INVENTORY)
-      ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
+      ? new InventoryService(
+          stores ? { store: stores.inventories, ledger: stores.ledger, durable: stores.durable } : {},
+        )
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
@@ -71,7 +73,17 @@ const srv = await startServer({
   ...(stores ? { friends: { store: stores.friends } } : {}),
   // Vạn Bảo Lâu (D112): the book is the market.json document; the weekly SHADOW CPI report goes to the log (telemetry can subscribe later)
   market: {
-    ...(stores ? { store: stores.market } : {}),
+    ...(stores
+      ? {
+          store: stores.market,
+          // the book, the ledger and the bags become durable as ONE unit through the write-ahead journal (D102 / D112)
+          durable: (label: string) => stores.durableMarket.commit(label),
+          onDurableError: (label: string, e: unknown) =>
+            console.error(
+              `[vgtd/market] journal commit failed (${label}): ${e instanceof Error ? e.message : String(e)}; the change stands in memory and the stores retry it`,
+            ),
+        }
+      : {}),
     report: (r) =>
       console.log(
         `[vgtd/market] shadow CPI week ${r.week}: cpi ${r.cpi === null ? 'n/a' : r.cpi.toFixed(3)}, applied tax ${r.appliedBps / 100}%, shadow tax ${r.shadowBps / 100}%, ${r.trades} sales, ${r.volume} hạ phẩm (measured, NOT applied)`,
