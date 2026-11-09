@@ -22,6 +22,7 @@
     "combat:smoke": "node scripts/combat-smoke.mjs",
     "combat:online": "node scripts/combat-online-smoke.mjs",
     "telegraph:online": "node scripts/telegraph-online-smoke.mjs",
+    "friends:online": "node scripts/friends-online-smoke.mjs",
     "touch:aim": "node scripts/touch-aim-smoke.mjs",
     "bag:smoke": "node scripts/bag-smoke.mjs",
     "progression:online": "node scripts/progression-online-smoke.mjs",
