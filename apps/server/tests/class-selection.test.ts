@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { WebSocket } from 'ws';
 import { DEFAULT_CLASS, PATHS, classWireId, type PathId } from '@vgtd/shared';
-import { ErrorCode, decode } from '@vgtd/protocol';
+import { ErrorCode, PROTOCOL_VERSION, decode } from '@vgtd/protocol';
 import { TileGrid } from '@vgtd/sim';
 import { NetClient, type NetDeps } from '@vgtd/client-core/src/net/index.js'; // engine-free netcode only
 import {
@@ -48,7 +48,15 @@ async function hello(
   ws.binaryType = 'arraybuffer';
   return new Promise((resolve) => {
     ws.on('open', () =>
-      ws.send(JSON.stringify({ type: 'hello', protocolMin: 4, protocolMax: 4, token: tok, ...extra })),
+      ws.send(
+        JSON.stringify({
+          type: 'hello',
+          protocolMin: PROTOCOL_VERSION,
+          protocolMax: PROTOCOL_VERSION,
+          token: tok,
+          ...extra,
+        }),
+      ),
     );
     ws.on('message', (d, isBinary) => {
       if (!isBinary) return resolve({ ack: JSON.parse(d.toString()) as Record<string, unknown>, ws });

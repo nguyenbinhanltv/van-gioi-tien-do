@@ -29,6 +29,7 @@ import {
   type CombatEvent,
   type MobAttackPort,
   type MobAttackView,
+  type MobTelegraphEvent,
 } from '../src/index.js';
 
 const MOB = MOB_ID_BASE;
@@ -52,6 +53,7 @@ interface Rig {
   port: FakeView;
   events: CombatEvent[];
   phases: Array<{ mobId: number; phase: number }>;
+  telegraphs: MobTelegraphEvent[];
   /** inputs for the next tick */
   pending: SimInput[];
   tick(n?: number): void;
@@ -113,6 +115,7 @@ function rig(
     port,
     events: [],
     phases: [],
+    telegraphs: [],
     pending: [],
     tick(n = 1) {
       for (let k = 0; k < n; k++) {
@@ -124,6 +127,7 @@ function rig(
         r.world = out.world;
         r.events.push(...post.events, ...out.events);
         r.phases.push(...out.phases);
+        r.telegraphs.push(...out.telegraphs);
       }
     },
     hp: () => r.world.entities.find((e) => e.id === PLAYER)!.hp,
@@ -508,5 +512,48 @@ describe('WorldNode: a real boss fight (D91)', () => {
     expect(node.mobAttacks!.isInvulnerable(bossId)).toBe(true);
     for (let k = 0; k < Math.ceil(MOB_TRANSFORM_MS / NETWORK.TICK_MS) + 2; k++) node.tick();
     expect(node.mobAttacks!.isInvulnerable(bossId)).toBe(false);
+  });
+});
+
+describe('telegraph events stay consistent with phase changes and effect-only attacks (D89 + D91)', () => {
+  /** every telegraph start has exactly one end (resolved or cancelled) once the fight is quiet */
+  const pairs = (r: Rig) => {
+    const starts = r.telegraphs.filter((t): t is Extract<MobTelegraphEvent, { kind: 'start' }> => t.kind === 'start');
+    const ends = r.telegraphs.filter((t): t is Extract<MobTelegraphEvent, { kind: 'end' }> => t.kind === 'end');
+    return { starts, ends };
+  };
+
+  it('a boss that crosses an HP threshold during a telegraph cancels it on the wire (end cancelled) and never leaves a decal behind', () => {
+    const r = rig({ key: 'boss_ho_vuong', mob: { i: 22.5, j: 20.5 }, level: 57, hpMax: 10_000 });
+    r.tick(ms(300)); // its first skill (1000 ms telegraph) has started
+    const open = pairs(r).starts;
+    expect(open.length).toBeGreaterThan(0);
+    expect(pairs(r).ends).toHaveLength(0);
+    r.world = { ...r.world, entities: r.world.entities.map((e) => (e.id === MOB ? { ...e, hp: 4900 } : e)) };
+    r.tick(1); // phase change: the windup is dropped
+    const cancelled = pairs(r).ends.filter((t) => t.cancelled);
+    expect(cancelled.map((t) => t.id)).toEqual(open.map((t) => t.id));
+    r.tick(ms(6000)); // transform, then phase 2 attacks: every one starts and ends
+    const { starts, ends } = pairs(r);
+    for (const st of starts.slice(0, -1))
+      expect(
+        ends.filter((e) => e.id === st.id),
+        `telegraph ${st.id}`,
+      ).toHaveLength(1);
+    expect(starts.length).toBeGreaterThan(open.length); // phase 2 attacks produced telegraphs too
+  });
+
+  it('an effect-only attack (Tru goi, coeff 0) still sends a start and a non-cancelled end', () => {
+    const r = rig({
+      key: 'elite_lang_vuong',
+      mob: { i: 26.5, j: 20.5 },
+      extraMobs: [{ id: MOB + 1, key: 'mob_hoi_lang', i: 28.5, j: 20.5 }],
+    });
+    r.tick(ms(1300));
+    const { starts, ends } = pairs(r);
+    const howl = starts.find((t) => t.attack.effect?.type === 'call_help');
+    expect(howl).toBeDefined();
+    expect(howl!.durationMs).toBe(1000);
+    expect(ends.filter((e) => e.id === howl!.id)).toEqual([{ kind: 'end', id: howl!.id, cancelled: false }]);
   });
 });

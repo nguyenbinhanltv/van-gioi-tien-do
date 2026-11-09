@@ -9,7 +9,8 @@
  *
  * Because the shape is fixed when the telegraph starts and tested again when it ends, moving out of it dodges the hit. A mob that dies
  * or despawns during its telegraph cancels the attack. Damage reaches the client through the own-vitals block of the snapshot (no wire
- * change); the telegraph itself has no wire representation yet (OPEN-ITEMS).
+ * change); the telegraph itself goes out as `telegraph_start` / `telegraph_end` (protocol v5, D89): `step` reports them as
+ * `telegraphs` and `WorldNode` sends them to the clients whose AOI holds the anchor.
  *
  * Determinism (skill `vgtd-sim-determinism`): no clocks, no ambient randomness. The only random input is the damage jitter, drawn from
  * a PRNG forked from the node seed ('mobatk'), one float per victim, victims in ascending id order, attacks resolved in
@@ -69,7 +70,25 @@ interface PhaseState {
   transformUntilMs: number;
 }
 
+/** A telegraph that started or ended this tick (D89); the node turns it into wire messages. Not part of the simulation state. */
+export type MobTelegraphEvent =
+  | {
+      kind: 'start';
+      /** per-system counter (u16, wraps) */
+      id: number;
+      mobId: number;
+      attack: MobAttack;
+      facing: number;
+      /** circle: the locked anchor; cone / line: the mob's position when the telegraph started */
+      i: number;
+      j: number;
+      durationMs: number;
+    }
+  | { kind: 'end'; id: number; cancelled: boolean };
+
 interface Windup {
+  /** telegraph id on the wire */
+  id: number;
   mobId: number;
   /** the player the attack was aimed at when it started (pool damage is sized against that player) */
   targetId: number;
@@ -97,6 +116,7 @@ interface MobCooldowns {
 export class MobAttackSystem {
   private rng: RngState;
   private windups: Windup[] = [];
+  private nextTelegraphId = 0;
   private readonly cooldowns = new Map<number, MobCooldowns>();
   private readonly phases = new Map<number, PhaseState>();
   private phaseChanges: MobPhaseChange[] = [];
@@ -129,7 +149,7 @@ export class MobAttackSystem {
   }
 
   /** Advance a mob to its next phase(s) when its HP crossed the thresholds: transform window, in-flight attacks cancelled. */
-  private advancePhase(e: EntityState, def: MobDef, now: number): void {
+  private advancePhase(e: EntityState, def: MobDef, now: number, telegraphs: MobTelegraphEvent[]): void {
     const list = mobPhasesOf(def);
     if (list.length < 2) return;
     const hpMax = this.combat.mobHpMax(e.id);
@@ -145,12 +165,24 @@ export class MobAttackSystem {
     if (next === st.phase) return;
     st.phase = next;
     st.transformUntilMs = now + list[next]!.transformMs;
-    this.windups = this.windups.filter((w) => w.mobId !== e.id);
+    // in-flight attacks of this mob are dropped: the client must stop drawing their decals (D89)
+    const kept: Windup[] = [];
+    for (const w of this.windups) {
+      if (w.mobId === e.id) telegraphs.push({ kind: 'end', id: w.id, cancelled: true });
+      else kept.push(w);
+    }
+    this.windups = kept;
     this.phaseChanges.push({ mobId: e.id, phase: next, transformMs: list[next]!.transformMs });
   }
 
-  step(world: SimWorld): { world: SimWorld; events: CombatEvent[]; phases: MobPhaseChange[] } {
+  step(world: SimWorld): {
+    world: SimWorld;
+    events: CombatEvent[];
+    telegraphs: MobTelegraphEvent[];
+    phases: MobPhaseChange[];
+  } {
     const events: CombatEvent[] = [];
+    const telegraphs: MobTelegraphEvent[] = [];
     const now = world.timeMs;
     this.nowMs = now;
     const byId = new Map<number, EntityState>();
@@ -161,7 +193,7 @@ export class MobAttackSystem {
       if (e.id < MOB_ID_BASE || e.hp <= 0) continue;
       const v = this.mobs.attackView(e.id);
       if (!v) continue;
-      this.advancePhase(e, v.def, now);
+      this.advancePhase(e, v.def, now, telegraphs);
       if (this.isInvulnerable(e.id)) continue; // transforming: no attacks
       if (v.state !== 'chase' || v.target === 0) continue;
       if (this.windups.some((w) => w.mobId === e.id)) continue; // one attack at a time
@@ -178,12 +210,27 @@ export class MobAttackSystem {
       const state = cd ?? { readyAt: new Map<string, number>(), gapUntilMs: 0 };
       state.readyAt.set(attack.id, now + Math.round(attack.cooldownMs * phase.cooldownMult));
       this.cooldowns.set(e.id, state);
+      const id = this.nextTelegraphId;
+      this.nextTelegraphId = (id + 1) & 0xffff;
+      const facing = encodeDirection(t.i - e.i, t.j - e.j);
+      const circle = attack.anchor === 'target';
+      telegraphs.push({
+        kind: 'start',
+        id,
+        mobId: e.id,
+        attack,
+        facing,
+        i: circle ? t.i : e.i,
+        j: circle ? t.j : e.j,
+        durationMs: attack.telegraphMs,
+      });
       this.windups.push({
+        id,
         mobId: e.id,
         targetId: t.id,
         attack,
         resolveAtMs: now + attack.telegraphMs,
-        facing: encodeDirection(t.i - e.i, t.j - e.j),
+        facing,
         ai: attack.anchor === 'target' ? t.i : e.i,
         aj: attack.anchor === 'target' ? t.j : e.j,
         ci: e.i,
@@ -201,7 +248,10 @@ export class MobAttackSystem {
       const keep: Windup[] = [];
       for (const x of this.windups) {
         const mob = byId.get(x.mobId);
-        if (!mob || mob.hp <= 0) continue; // the mob died / despawned: the attack is cancelled
+        if (!mob || mob.hp <= 0) {
+          telegraphs.push({ kind: 'end', id: x.id, cancelled: true }); // the mob died / despawned: the attack is cancelled
+          continue;
+        }
         if (x.resolveAtMs <= now) due.push(x);
         else keep.push(x);
       }
@@ -209,6 +259,7 @@ export class MobAttackSystem {
       due.sort((a, b) => a.resolveAtMs - b.resolveAtMs || a.mobId - b.mobId);
       for (const x of due) {
         w = this.resolve(w, x, events);
+        telegraphs.push({ kind: 'end', id: x.id, cancelled: false });
         const cd = this.cooldowns.get(x.mobId);
         if (cd) cd.gapUntilMs = now + MOB_ATTACK_GAP_MS;
       }
@@ -222,7 +273,7 @@ export class MobAttackSystem {
     }
     const phases = this.phaseChanges;
     this.phaseChanges = [];
-    return { world: w, events, phases };
+    return { world: w, events, telegraphs, phases };
   }
 
   /** The first skill that is ready and in reach, else the basic attack when in reach (null = nothing to do yet). */
