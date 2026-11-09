@@ -17,10 +17,11 @@
  * during the cast time. A target (or ground anchor) beyond `targeting.range_tiles`, or without line of sight when the skill needs it, is
  * ignored: a single-target skill then hits nobody and an area skill is anchored on the caster.
  *
- * Supported effects: `damage`, `heal`, `shield`. Everything else (dot, status, dash, buff ...) is reported in `unsupported` and has no
- * effect yet (needs the status / buff system).
+ * Effects: `damage`, `heal` and `shield` resolve here to numbers. The effects that change state afterwards (dot, hot, status, debuff, mark,
+ * detonate, buff, dash, knock-back, pull, taunt, restore_mp, revive: D116) are handed back in `effects` together with the shape's `victims`,
+ * for `EffectSystem` / `CombatSystem` to apply; a type nobody handles is reported in `unsupported`.
  */
-import { damageBreakdown, effectActive, skillDefinitions } from '@vgtd/shared';
+import { COMBAT_RULES, damageBreakdown, effectActive, skillDefinitions } from '@vgtd/shared';
 import type { AnyElement, SkillDef, SkillDefinitions, SkillEffect } from '@vgtd/shared';
 import { encodeDirection, hypot } from '@vgtd/sim';
 import { inShape, type Point } from './geometry.js';
@@ -52,6 +53,10 @@ export interface ResolveInput {
   /** Is there a clear line between two points for this caster? Omitted = no LOS check (pure tests). */
   losClear?: (from: Point, to: Point) => boolean;
   defs?: SkillDefinitions;
+  /** Does the caster have an ally of its group near (the `group` context of effects, D116)? Default: no. */
+  grouped?: boolean;
+  /** Buff modifiers of the caster: outgoing damage multiplier, added crit chance and added armour penetration (D116). */
+  mods?: { dmgMult: number; critBonus: number; penBonus: number };
 }
 
 export interface HitOutcome {
@@ -66,9 +71,35 @@ export interface CastOutcome {
   heal: number;
   shield: number;
   shieldDurationMs: number;
-  /** Effect types that were not simulated. */
+  /** Heal beyond max HP becomes a shield of this share of the overheal, lasting `overhealShieldMs` (0 = none). */
+  overhealRatio: number;
+  overhealShieldMs: number;
+  /** The shield bursts into this damage (coefficient of the caster's ATK, radius) when it ends or breaks. */
+  shieldExplode: { coeff: number; radius: number } | null;
+  /** The mobs the skill's shape reaches (nearest to the anchor first): the targets of every state effect. */
+  victims: ResolveTarget[];
+  /** Active effects for `EffectSystem` (data order). */
+  effects: SkillEffect[];
+  /** Effect types nobody handles. */
   unsupported: string[];
 }
+
+/** Effect types applied after the cast by the combat core (D116). */
+export const STATE_EFFECTS: ReadonlySet<SkillEffect['type']> = new Set([
+  'status',
+  'dot',
+  'hot',
+  'buff',
+  'debuff',
+  'mark',
+  'detonate',
+  'dash',
+  'knockback',
+  'pull',
+  'taunt',
+  'restore_mp',
+  'revive',
+]);
 
 function statValue(e: SkillEffect, p: CombatProfile, victimHpMax: number): number {
   switch (e.scale?.stat) {
@@ -148,16 +179,32 @@ function victimsOf(i: ResolveInput): ResolveTarget[] {
 
 export function resolveCast(i: ResolveInput): CastOutcome {
   const { skill, profile, rand } = i;
-  const out: CastOutcome = { hits: [], heal: 0, shield: 0, shieldDurationMs: 0, unsupported: [] };
+  const out: CastOutcome = {
+    hits: [],
+    heal: 0,
+    shield: 0,
+    shieldDurationMs: 0,
+    overhealRatio: 0,
+    overhealShieldMs: 0,
+    shieldExplode: null,
+    victims: [],
+    effects: [],
+    unsupported: [],
+  };
+  const grouped = i.grouped ?? false;
+  const mods = i.mods ?? { dmgMult: 1, critBonus: 0, penBonus: 0 };
+  const critChance = Math.min(COMBAT_RULES.CRIT_CHANCE_CAP, profile.critChance + mods.critBonus);
+  const victims = victimsOf(i);
+  out.victims = victims;
   const attackerElement = skillElement(skill, profile);
   const byTarget = new Map<number, HitOutcome>();
   for (const e of skill.effects) {
-    if (!effectActive(e, false)) continue;
+    if (!effectActive(e, grouped)) continue;
     if (e.type === 'damage' && e.scale) {
-      for (const v of victimsOf(i)) {
+      for (const v of victims) {
         const hits = Math.max(1, e.hits ?? 1);
         for (let h = 0; h < hits; h++) {
-          const crit = rand() < profile.critChance;
+          const crit = rand() < critChance;
           const jitter = rand();
           const b = damageBreakdown({
             atk: statValue(e, profile, v.hpMax),
@@ -165,13 +212,13 @@ export function resolveCast(i: ResolveInput): CastOutcome {
             cSkill: e.scale.coeff,
             attackerElement,
             defenderElement: v.element ?? undefined,
-            pen: (e.pen ?? 0) + profile.pen,
+            pen: (e.pen ?? 0) + profile.pen + mods.penBonus,
             crit,
             attackerRealm: profile.realm,
             defenderRealm: v.realm,
             rand: jitter,
           });
-          const dmg = Math.max(1, Math.round(b.damage));
+          const dmg = Math.max(1, Math.round(b.damage * mods.dmgMult));
           const cur = byTarget.get(v.id);
           if (cur) {
             cur.damage += dmg;
@@ -181,10 +228,15 @@ export function resolveCast(i: ResolveInput): CastOutcome {
       }
     } else if (e.type === 'heal' && e.scale) {
       out.heal += Math.round(statValue(e, profile, 0) * e.scale.coeff * Math.max(1, e.hits ?? 1));
+      out.overhealRatio = Math.max(out.overhealRatio, e.overheal_to_shield ?? 0);
+      out.overhealShieldMs = Math.max(out.overhealShieldMs, e.shield_duration_ms ?? 6000);
     } else if (e.type === 'shield' && e.scale) {
       out.shield += Math.round(statValue(e, profile, 0) * e.scale.coeff);
       out.shieldDurationMs = Math.max(out.shieldDurationMs, e.shield_duration_ms ?? e.duration_ms ?? 0);
-    } else if (e.type !== 'passive_stat') {
+      if (e.explode) out.shieldExplode = { coeff: e.explode.coeff, radius: e.explode.radius };
+    } else if (STATE_EFFECTS.has(e.type)) {
+      out.effects.push(e);
+    } else if (e.type !== 'passive_stat' && e.type !== 'heal' && e.type !== 'shield' && e.type !== 'damage') {
       out.unsupported.push(e.type);
     }
   }
