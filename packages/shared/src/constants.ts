@@ -257,3 +257,20 @@ export const REALM_NAMES: readonly string[] = [
 export const SUB_STAGE_NAMES: readonly string[] = ['sơ kỳ', 'trung kỳ', 'hậu kỳ', 'Viên Mãn'];
 /** D46/D58: each premium semi-chibi drawing occupies one tick of this export clock. */
 export const SPRITE_SMOOTH_FPS = 24;
+
+/**
+ * Party (D92, docs/10 §7.1 P4 "Tổ đội (4)"). Size 4 comes from docs/10 / docs/07 §6; the rest are PLACEHOLDERS "cần game designer duyệt".
+ * Session-only: a party is never persisted.
+ */
+export const PARTY = {
+  /** max members, leader included (docs/10 §7.1, docs/07 §6) */
+  MAX_SIZE: 4,
+  /** an invite expires after this long (placeholder) */
+  INVITE_TTL_MS: 30_000,
+  /** pending invites one player can hold at once (placeholder) */
+  MAX_PENDING_INVITES: 4,
+  /** member HP / MP broadcast period in ticks (every 4th tick = 5 Hz at 20 Hz; docs/22 §AOI "đồng đội luôn 20 Hz" is for positions) */
+  VITALS_EVERY_TICKS: 4,
+  /** a member shares a kill's credit when within this many tiles of the killer (placeholder; same as the near band x 2) */
+  SHARE_RANGE_TILES: 20,
+} as const;

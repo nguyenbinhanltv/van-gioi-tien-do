@@ -39,6 +39,7 @@ export const CHAT_REASON_TEXT: Readonly<Record<number, string>> = {
   [ChatReason.NoSuchPlayer]: 'Không tìm thấy người chơi này (hoặc họ đang ngoại tuyến).',
   [ChatReason.NotReady]: 'Chưa vào game, chưa chat được.',
   [ChatReason.SelfWhisper]: 'Không thể nhắn riêng cho chính mình.',
+  [ChatReason.NotInParty]: 'Bạn chưa vào tổ đội nào.',
 };
 
 export const CHAT_HELP = [

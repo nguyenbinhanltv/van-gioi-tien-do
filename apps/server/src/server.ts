@@ -1,6 +1,7 @@
 import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
+import { PartyService } from './party/service.js';
 import { ProgressionService, type ProgressionOptions } from './progression/service.js';
 import { WorldNode, type WorldNodeOptions } from './world/node.js';
 
@@ -13,6 +14,8 @@ export interface ServerOptions {
   progression?: ProgressionOptions | false;
   /** chat options, or `false` to run without chat (default: enabled, in-memory) */
   chat?: ChatOptions | false;
+  /** `false` to run without parties (default: enabled, in-memory, session-only: D92) */
+  party?: false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -33,10 +36,12 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
       ? undefined
       : (opts.world?.progression ?? new ProgressionService({ seed: opts.world?.seed, ...opts.progression }));
   const chat = opts.chat === false ? undefined : (opts.world?.chat ?? new ChatService(opts.chat));
+  const party = opts.party === false ? undefined : (opts.world?.party ?? new PartyService());
   const world = new WorldNode({
     ...opts.world,
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
+    ...(party ? { party } : {}),
   });
   const gateway = createGateway(auth, world, opts.gateway);
   await new Promise<void>((resolve, reject) => {

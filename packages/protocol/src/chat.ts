@@ -17,7 +17,7 @@ export enum ChatChannel {
   World = 1,
   Zone = 2,
   Whisper = 3,
-  /** reserved for the party feature (docs/10 §7.1); the server refuses it until parties exist */
+  /** the party channel (D92): delivered to the members of the sender's party, refused with NotInParty otherwise */
   Party = 4,
 }
 
@@ -30,7 +30,7 @@ export enum ChatReason {
   /** nothing left to send after sanitising */
   Empty = 3,
   Muted = 4,
-  /** unknown channel, or a channel that is not open yet (Party) */
+  /** unknown channel (or a channel that is not open) */
   BadChannel = 5,
   /** whisper target offline or unknown: the answer never says which */
   NoSuchPlayer = 6,
@@ -38,6 +38,8 @@ export enum ChatReason {
   NotReady = 7,
   /** whispering yourself */
   SelfWhisper = 8,
+  /** a Party line from a player who is in no party (D92) */
+  NotInParty = 9,
 }
 
 export const CHAT_LIMITS = {
