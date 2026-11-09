@@ -1,5 +1,17 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## GEMINI-MOB-PHASES — skin pha boss do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. 3 ảnh 2752×1536 nền magenta, dấu ✦ Gemini ở góc dưới-phải, quay mặt sang TRÁI (cùng hướng với concept gốc): `boss_ho_vuong_p2` (pha 2 của Độc Nha Hổ Vương), `boss_co_mang_p2`, `boss_co_mang_p3` (pha 2 và 3 của Độc Hỏa Cổ Mãng). Sao nguyên byte vào `assets-src/concepts/mobs_phase/` (Git LFS).
+
+**Dùng tạm trong game (INTERIM):** `gen:gemini` xoá ✦, tách nền, cắt sát, đặt pivot ở chân, scale theo DIỆN TÍCH của standee pha đầu (tư thế bò / cuộn ngang rộng không bị nhỏ đi so với tư thế đứng) và đóng chung trang atlas với prop và quái. `MobStandee.setPhase(phase, transformMs)` (qua `OnlineSession.onBossPhase`, thông điệp `boss_phase`) nháy trắng / đỏ trong cửa sổ biến hình của server rồi đổi skin giữa cửa sổ; chết rồi hồi sinh thì về skin pha đầu.
+
+| Tệp nguồn (nguyên byte) | SHA-256 (12 ký tự đầu) |
+| ----------------------- | ---------------------- |
+| `assets-src/concepts/mobs_phase/boss_co_mang_p2.png` | `b9989b7a9b32` |
+| `assets-src/concepts/mobs_phase/boss_co_mang_p3.png` | `23459eea5ae0` |
+| `assets-src/concepts/mobs_phase/boss_ho_vuong_p2.png` | `859776e5375a` |
+
 ## GEMINI-MOBS — concept 14 quái do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. 14 ảnh 1792x2400 (tên tệp = `MOB_DEFS[].key`), nền magenta, dấu ✦ Gemini ở góc dưới-phải, phần lớn quay mặt sang TRÁI, chi tiết hơn phong cách semi-chibi. Sao nguyên byte vào `assets-src/concepts/mobs/` (Git LFS) **làm ảnh tham chiếu concept cho việc sản xuất sprite hoạt hình sau này** (Codex); quyền sử dụng như mục GEMINI-PROPS-ICONS.

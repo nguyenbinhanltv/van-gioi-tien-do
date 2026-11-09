@@ -363,5 +363,20 @@
       "id": 14,
       "box": 512
     }
+  },
+  "mobsPhase": {
+    "_doc": "Boss skins taken at an HP threshold (mobs_phase/, faces LEFT like the base art). phase = the NEW phase index as sent by the server's boss_phase message (1 = first transform, 0 = the base sprite in `mobs`); mob = the MOB_DEFS key. Scaled to the AREA of the base sprite so a wide crouched pose does not look smaller. INTERIM like the base standees.",
+    "boss_ho_vuong_p2": {
+      "mob": "boss_ho_vuong",
+      "phase": 1
+    },
+    "boss_co_mang_p2": {
+      "mob": "boss_co_mang",
+      "phase": 1
+    },
+    "boss_co_mang_p3": {
+      "mob": "boss_co_mang",
+      "phase": 2
+    }
   }
 }

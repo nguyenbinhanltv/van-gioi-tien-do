@@ -539,3 +539,10 @@ Còn mở / lưu ý:
 
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ. Đã đo bản @2x (2026-11-09): prop @2x + quái @2x cần 3,74 / 4,19 MP, xếp thành **2 trang** 2048² (thêm ~16 MB GPU và Y-sort bị ngắt batch giữa prop và quái), nên chưa làm; làm khi có sprite hoạt hình thật (atlas riêng cho quái, nén ASTC).
 - Quái nhận biết bằng `EnemyView.defId` (id dây của `MOB_DEFS`, do `aoi_enter` mang); tên `Mob <id>` chỉ còn là đường lùi cho backend chưa gán `defId`.
+
+## Skin pha boss (INTERIM, 2026-11-09): còn mở
+
+- Skin pha đổi khi client nhận `boss_phase`; client vào tầm nhìn SAU lúc boss đã đổi pha (AOI) chưa nhận lại thông điệp nên vẫn thấy skin pha đầu cho tới lần đổi pha kế: cần `phase` trong `aoi_enter` / snapshot (giao thức) để dựng đúng skin ngay.
+- Thanh máu trên đầu boss giữ độ cao của skin pha đầu (skin pha sau thấp hơn); chưa dùng sprite hoạt hình: chỉ nháy + đổi ảnh tĩnh trong cửa sổ biến hình (`TRANSFORM_SWAP_AT` = giữa cửa sổ).
+- Trang atlas prop @1x (tier thấp) lớn lên 2048×2048 (thêm ~8 MB GPU) vì ba skin pha rộng; nếu tier thấp cần nhẹ hơn, tách skin pha ra atlas nạp lười.
+

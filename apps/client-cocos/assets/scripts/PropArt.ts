@@ -32,6 +32,8 @@ interface Sidecar {
   skills?: Record<string, { path: string; index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** INTERIM mob standees (MobArt.ts), packed into the SAME pages as the props so the Y-sort batches them together */
   mobs?: Record<string, MobSprite>;
+  /** boss skins taken at HP thresholds (phase = the NEW phase index of the boss_phase message), same atlas page */
+  mobPhases?: Record<string, MobSprite & { phase: number }>;
 }
 export interface MobSprite {
   id: number;
@@ -69,6 +71,8 @@ export class PropArt {
   private readonly iconFrames = new Map<string, SpriteFrame>();
   private readonly skillFrames = new Map<string, SpriteFrame>();
   private readonly mobById = new Map<number, { entry: MobSprite; frame: SpriteFrame }>();
+  /** mob wire id -> phase -> skin (phase 0 = the base standee) */
+  private readonly mobSkinsById = new Map<number, Map<number, { entry: MobSprite; frame: SpriteFrame }>>();
 
   private constructor(
     private readonly meta: Sidecar,
@@ -106,7 +110,15 @@ export class PropArt {
       // mob standees: same page (same Texture2D) as the props
       for (const m of Object.values(meta.mobs ?? {})) {
         const f = low ? m.f1 : m.f2;
-        art.mobById.set(m.id, { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
+        const skin = { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) };
+        art.mobById.set(m.id, skin);
+        art.mobSkinsById.set(m.id, new Map([[0, skin]]));
+      }
+      for (const m of Object.values(meta.mobPhases ?? {})) {
+        const f = low ? m.f1 : m.f2;
+        art.mobSkinsById
+          .get(m.id)
+          ?.set(m.phase, { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
       }
       // skill icons (hotbar): the @2x page (1024 px, 4 MB) is drawn at <= 64 design px; `tier low` takes the @1x page
       for (const [id, sk] of Object.entries(meta.skills ?? {})) {
@@ -132,6 +144,11 @@ export class PropArt {
   /** INTERIM mob standee sprite by mob wire id (MOB_DEFS id), or undefined. */
   mob(id: number): { entry: MobSprite; frame: SpriteFrame } | undefined {
     return this.mobById.get(id);
+  }
+
+  /** Every skin of a mob by phase (0 = base standee, then the boss phase skins), or undefined for an unknown mob. */
+  mobSkins(id: number): ReadonlyMap<number, { entry: MobSprite; frame: SpriteFrame }> | undefined {
+    return this.mobSkinsById.get(id);
   }
 
   /** Skill icon by skill id (e.g. `kiem_khi_tram`), or null when missing. Square; draw it at 64 design px. */
