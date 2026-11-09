@@ -567,3 +567,12 @@ Còn mở / lưu ý:
 7. **Dung lượng key art**: `login_bg` 1024×576 PNG ≈ 1,4 MB và emblem 512 px ≈ 0,6 MB (tải theo yêu cầu, chỉ khi hộp chọn Đạo Lộ hiện); chưa có preset nén WebP/ASTC cho hai ảnh này. Cần nén nếu gói tải đầu sát trần 25 MB.
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
+
+## D103 — Nghiệp Lực / Đạo Tâm: còn mở (worker39, 2026-11-09)
+
+1. **Đạo Tâm khởi đầu = 60 là PLACEHOLDER** (docs/01 §8.3 chỉ có trần theo dải): cần game designer chốt giá trị khởi đầu; các trần 100 / 100 / 80 / 60 cũng là "Đề xuất" của docs/01 §8.3 (câu hỏi G14).
+2. **Chưa có nguồn đổi K trong game**: cần PvP + cờ Gây hấn / Truy nã + vùng PK (docs/14 §3.3), nhiệm vụ nhân quả "Ân / Oán" (docs/12 §3.4, +100 K mỗi tuần), rơi đồ theo nghiệp (docs/14 §3.4). `applyKarma` đã có bảng sự kiện, trần ngày và lưu bền; còn thiếu: phát hiện giết người lặp lần 3 trong 1 giờ, "giết cùng nạn nhân", cờ, ngày máy chủ (`day`) do ai cấp.
+3. **Chưa có nguồn đổi Đạo Tâm**: docs/01 §8.3 ghi "số cụ thể: chưa thiết kế" (nhiệm vụ đạo tâm, giữ lời thề, giết vô tội, chết trong Tâm Cảnh). `adjustDaoTam` chờ số liệu.
+4. **Độ bền × 1,5 Ma đạo chưa có nơi dùng**: máy chủ chưa trừ độ bền khi chết (docs/07 §7). Khi có, nhân với `durabilityLossMultiplier(K)`.
+5. **Nối #252**: Tâm Ma đang dùng `MAJOR_EVENT.DEFAULT_DAO_TAM`; đổi sang `progression.tamMaInputs(entityId)` (D103), thêm bóng phụ Nghiệp Ảnh (`nghiepAnh`) nếu muốn làm đủ docs/01 §5.3.
+6. **Nhãn phe chỉ là chữ trong HUD**: màu tên, danh hiệu và mở nhiệm vụ nhân quả (docs/14 §3.2) chưa làm; theo docs/10 không có nội dung phe độc quyền.

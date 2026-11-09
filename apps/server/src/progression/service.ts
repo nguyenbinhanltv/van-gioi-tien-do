@@ -22,13 +22,19 @@ import {
   type MeditateResultMsg,
 } from '@vgtd/protocol';
 import {
+  DAO_TAM,
   DEFAULT_CLASS,
   ROOT_TYPES,
+  applyKarmaEvent,
   breakthroughPillChance,
+  clampDaoTam,
+  effectiveDaoTam,
+  nghiepAnhCount,
   parseClass,
   rngFloat,
   rngFork,
   rngSeed,
+  type KarmaEventId,
   type PathId,
   type RngState,
 } from '@vgtd/shared';
@@ -103,6 +109,8 @@ interface Session {
   answers: Map<string, ColdServerMessage>;
   /** quality of the breakthrough pill waiting for the next attempt (D90); session-only, not persisted */
   pill: number | null;
+  /** Đạo Tâm last sent to the client (-1 = nothing sent yet); `dao_tam` goes out when the value that counts changes (D103) */
+  lastSentDao: number;
 }
 
 export interface ProgressionMetrics {
@@ -201,6 +209,7 @@ export class ProgressionService {
       tokenMs: nowMs,
       answers: new Map(),
       pill: null,
+      lastSentDao: -1,
     });
     this.metrics.joins++;
     // load only after any in-flight write of the same character (re-login right after a leave) has finished
@@ -285,6 +294,61 @@ export class ProgressionService {
   }
   recordOf(entityId: number): ProgressRecord | null {
     return this.sessions.get(entityId)?.rec ?? null;
+  }
+
+  // ------------------------------------------------------------------ Nghiệp Lực / Đạo Tâm (D103)
+  /** Nghiệp Lực K of a joined player (0 until the profile is loaded). */
+  karmaOf(entityId: number): number {
+    return this.sessions.get(entityId)?.rec?.karma ?? 0;
+  }
+  /** The Đạo Tâm that counts for a joined player: the stored value under the ceiling of its Nghiệp band (the start value until loaded). */
+  daoTamOf(entityId: number): number {
+    const r = this.sessions.get(entityId)?.rec;
+    return r ? effectiveDaoTam(r.daoTam ?? DAO_TAM.START, r.karma) : DAO_TAM.START;
+  }
+  /**
+   * What the Tâm Ma needs (docs/01 §5.3): `tamMaStrength(inputs.daoTam, inputs.karma)`, plus the number of Nghiệp Ảnh shadows. This is the
+   * adapter the major-breakthrough module calls instead of its provisional constant.
+   */
+  tamMaInputs(entityId: number): { karma: number; daoTam: number; nghiepAnh: number } {
+    const karma = this.karmaOf(entityId);
+    return { karma, daoTam: this.daoTamOf(entityId), nghiepAnh: nghiepAnhCount(karma) };
+  }
+  /**
+   * Apply a documented K event (docs/14 §3.3) to a joined player. `day` is the server day number (the daily gain budget resets when it
+   * changes). Returns the new K and the change, or null when the profile is not loaded. Persisted like every progression change.
+   */
+  applyKarma(entityId: number, event: KarmaEventId, day: number): { karma: number; delta: number } | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const r = s.rec;
+    const used = r.karmaGain && r.karmaGain.day === day ? r.karmaGain.gained : 0;
+    const out = applyKarmaEvent(r.karma, event, used);
+    if (out.delta === 0 && out.gained === 0) return { karma: r.karma, delta: 0 };
+    s.rec = {
+      ...r,
+      karma: out.karma,
+      karmaGain:
+        out.gained > 0 || (r.karmaGain && r.karmaGain.day === day) ? { day, gained: used + out.gained } : r.karmaGain,
+    };
+    this.changed(s);
+    return { karma: out.karma, delta: out.delta };
+  }
+  /** Change the stored Đạo Tâm by `delta` (clamped 0..100). Returns the value that counts afterwards, or null when not loaded. */
+  adjustDaoTam(entityId: number, delta: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const next = clampDaoTam((s.rec.daoTam ?? DAO_TAM.START) + delta);
+    if (next !== (s.rec.daoTam ?? DAO_TAM.START)) {
+      s.rec = { ...s.rec, daoTam: next };
+      this.changed(s);
+    }
+    return this.daoTamOf(entityId);
+  }
+  private changed(s: Session): void {
+    s.dirty = true;
+    void this.save(s);
+    this.queueState(s);
   }
   /**
    * A breakthrough pill (D90) of `quality` is drunk: its bonus applies to the NEXT breakthrough attempt of this character. One at a
@@ -517,6 +581,11 @@ export class ProgressionService {
     s.lastSentMs = nowMs ?? s.lastSentMs;
     s.lastSentExp = s.rec.exp;
     this.outbox.push({ entityId: s.entityId, msg: this.stateMsg(s, s.rec) });
+    const dao = effectiveDaoTam(s.rec.daoTam ?? DAO_TAM.START, s.rec.karma);
+    if (dao !== s.lastSentDao) {
+      s.lastSentDao = dao;
+      this.outbox.push({ entityId: s.entityId, msg: { type: 'dao_tam', daoTam: dao } });
+    }
   }
 
   /**

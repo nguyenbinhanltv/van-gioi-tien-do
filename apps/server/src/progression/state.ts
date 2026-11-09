@@ -55,6 +55,13 @@ export interface ProgressRecord {
    * hello. Absent on records written before D82: they are given a class by the next login (`resolveClass`).
    */
   readonly classId?: PathId;
+  /**
+   * Đạo Tâm 0..100 (D103): changed only by the events the docs give a number for. Absent on records written before D103 = `DAO_TAM.START`.
+   * The value that counts is `effectiveDaoTam(daoTam, karma)` (under the ceiling of the Nghiệp band), never this raw number.
+   */
+  readonly daoTam?: number;
+  /** K gained through the daily-capped sources in the current server day (D103, docs/14 §3.3 "+100 mỗi ngày"); absent = nothing yet */
+  readonly karmaGain?: { readonly day: number; readonly gained: number };
 }
 
 type Position = Pick<ProgressRecord, 'realm' | 'subRealm'>;

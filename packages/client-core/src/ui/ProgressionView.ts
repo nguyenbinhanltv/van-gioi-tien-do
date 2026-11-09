@@ -11,9 +11,10 @@ import {
   ProgressionReason,
   type BreakthroughResultMsg,
   type CharStateMsg,
+  type DaoTamMsg,
   type MeditateResultMsg,
 } from '@vgtd/protocol';
-import { stageLabel, stageToRealm } from '@vgtd/shared';
+import { DAO_TAM, FACTION_LABEL, factionOf, stageLabel, stageToRealm, type Faction } from '@vgtd/shared';
 
 /** Vietnamese texts of every refusal reason (user-facing). */
 export const PROGRESSION_REASON_TEXT: Readonly<Record<number, string>> = {
@@ -47,6 +48,11 @@ export interface ProgressionSnapshot {
   /** consecutive failed major attempts (pity counter) */
   readonly nFail: number;
   readonly karma: number;
+  /** band of the Nghiệp Lực (D103): a display label only */
+  readonly faction: Faction;
+  readonly factionLabel: string;
+  /** Đạo Tâm that counts, as the server last told us (the start value until the first `dao_tam`) */
+  readonly daoTam: number;
   readonly rootType: number;
   readonly elements: number;
   readonly mutation: number;
@@ -83,6 +89,7 @@ export function requestIdFrom(rng: () => number): string {
 
 export class ProgressionView {
   state: ProgressionSnapshot | null = null;
+  private daoTam: number = DAO_TAM.START;
   private toast: Toast | null = null;
   private meditatePending: { id: string; at: number } | null = null;
   private breakthroughPending: { id: string; at: number } | null = null;
@@ -110,10 +117,27 @@ export class ProgressionView {
       maxStage: (m.flags & CHAR_FLAG.MAX_STAGE) !== 0,
       nFail: m.nFail,
       karma: m.karma,
+      faction: factionOf(m.karma),
+      factionLabel: FACTION_LABEL[factionOf(m.karma)],
+      daoTam: this.daoTam,
       rootType: m.rootType,
       elements: m.elements,
       mutation: m.mutation,
     };
+  }
+
+  /** The server's Đạo Tâm (D103). It can arrive before the first char_state: it is kept and shown with it. */
+  applyDaoTam(m: DaoTamMsg): void {
+    this.daoTam = m.daoTam;
+    if (this.state) this.state = { ...this.state, daoTam: m.daoTam };
+  }
+
+  /** One line for the HUD: "Tán tu (0) · Đạo Tâm 60". Empty until the profile is loaded. */
+  standingText(): string {
+    const s = this.state;
+    if (!s) return '';
+    const k = s.karma > 0 ? `+${s.karma}` : String(s.karma);
+    return `${s.factionLabel} (${k}) · Đạo Tâm ${s.daoTam}`;
   }
 
   applyMeditateResult(m: MeditateResultMsg): void {
