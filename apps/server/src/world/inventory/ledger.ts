@@ -12,22 +12,33 @@
  *
  * Scope: in-game stone currencies only. There is deliberately no real-money, shop, price or entitlement logic here.
  */
+import type { SECT } from '@vgtd/shared';
 import type { Currency } from './items.js';
+
+/** The stone currencies of docs/26 plus Cống hiến (D98): the ledger rules are the same for all of them. */
+export type LedgerCurrency = Currency | typeof SECT.CURRENCY;
 
 export type AccountKind =
   | 'PLAYER_WALLET'
   | 'SYSTEM_FAUCET_DROP_MOB'
   | 'SYSTEM_FAUCET_DROP_ELITE'
   | 'SYSTEM_FAUCET_DROP_BOSS'
+  | 'SYSTEM_SINK_TRADE_TAX'
+  | 'SYSTEM_FAUCET_SECT_KILL'
+  | 'SYSTEM_SINK_SECT_LIBRARY'
+  /** Vạn Bảo Lâu (D112): the 1 % listing fee and the 5 % sale tax are destroyed, never paid to another player (docs/26 §5) */
+  | 'SYSTEM_SINK_LISTING_FEE'
+  | 'SYSTEM_SINK_MARKET_TAX'
   /** furnace fees of alchemy (D108, docs/13 §6.1): paid by the player, destroyed */
   | 'SYSTEM_SINK_CRAFT_FEE';
-export type LedgerReason = 'DROP' | 'CRAFT';
+export type LedgerReason =
+  'DROP' | 'TRADE' | 'SECT_REWARD' | 'SECT_PURCHASE' | 'MARKET_LISTING_FEE' | 'MARKET_SALE' | 'CRAFT';
 
 export interface AccountRef {
   kind: AccountKind;
   /** owner of a PLAYER_WALLET (account id); null for system accounts */
   ownerId: string | null;
-  currency: Currency;
+  currency: LedgerCurrency;
 }
 export interface LedgerEntryInput {
   account: AccountRef;
@@ -126,7 +137,7 @@ export class Ledger {
       return { txId: seen.txId, replayed: true };
     }
     if (tx.entries.length === 0) throw new LedgerError('EMPTY', 'transaction without entries');
-    const sums = new Map<Currency, bigint>();
+    const sums = new Map<LedgerCurrency, bigint>();
     const next = new Map<string, bigint>();
     for (const e of tx.entries) {
       if (e.delta === 0n) throw new LedgerError('BAD_AMOUNT', 'zero-amount entry');

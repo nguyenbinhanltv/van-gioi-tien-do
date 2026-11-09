@@ -39,5 +39,6 @@ export function statusMaskGlyphs(mask: number): string {
   if (mask & StatusBit.Root) parts.push('TROI');
   if (mask & StatusBit.Slow) parts.push('CHAM');
   if (mask & StatusBit.Poison) parts.push('DOC');
+  if (mask & StatusBit.Stun) parts.push('CHOANG');
   return parts.join(' ');
 }

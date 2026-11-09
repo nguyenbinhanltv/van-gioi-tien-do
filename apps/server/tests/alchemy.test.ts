@@ -377,6 +377,41 @@ describe('replay and atomicity', () => {
     expect(inv.bagOf(o).check()).toEqual([]);
   });
 
+  it('a craft is made durable as one unit with the ledger fee (journal commit), once per applied key; a failing commit does not undo the craft', () => {
+    const labels: string[] = [];
+    let fail = false;
+    const inv = new InventoryService({
+      durable: {
+        commit: (label: string) => {
+          labels.push(label);
+          if (fail) throw new Error('disk');
+        },
+      },
+    });
+    const o = 'owner';
+    inv.onJoin(o);
+    inv.grantDrops(
+      o,
+      [
+        { item: 'craft_material', qty: 20, quality: 0 },
+        { item: 'stone_ha', qty: 100, quality: 0 },
+      ] as DropRoll[],
+      'field',
+      'k1',
+    );
+    const ex = { key: 'c1', materialDefId: MAT, consume: 5, fee: 10n, produce: null };
+    labels.length = 0;
+    expect(inv.craftExchange(o, ex)).toEqual({ ok: true, replayed: false });
+    expect(labels).toEqual(['craft:owner|c1']);
+    expect(inv.craftExchange(o, ex)).toEqual({ ok: true, replayed: true }); // a replay changes and commits nothing
+    expect(labels).toHaveLength(1);
+    fail = true;
+    expect(inv.craftExchange(o, { ...ex, key: 'c2' })).toEqual({ ok: true, replayed: false });
+    expect(inv.durableErrors).toBe(1);
+    expect(inv.bagOf(o).count(MAT)).toBe(10);
+    expect(inv.wallet(o, 'LT_HA')).toBe(80n);
+  });
+
   it('a product that does not fit rolls the whole exchange back (no fee, no materials lost)', () => {
     const inv = new InventoryService({ bagSlots: 2 });
     const o = 'owner';

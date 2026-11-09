@@ -90,6 +90,7 @@ async function player(s: RunningServer, name: string): Promise<Player> {
         raw,
         (m) => net.sendChat(m),
         (m) => net.sendParty(m),
+        undefined, // sect
         (m) => net.sendFriend(m),
       ),
     close: () => {

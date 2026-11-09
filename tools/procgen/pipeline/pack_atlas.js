@@ -31,12 +31,13 @@ function parseArgs(argv) {
 const nextPow2 = (n) => 2 ** Math.ceil(Math.log2(Math.max(1, n)));
 
 /** Xếp kệ (shelf) theo chiều cao giảm dần; trả về danh sách trang với vị trí từng ảnh. */
-function shelfPack(items, max, pad) {
-  const sorted = [...items].sort((a, b) => b.h - a.h || b.w - a.w);
+function shelfPack(items, max, pad, opts = {}) {
+  const order = opts.order || ((a, b) => b.h - a.h || b.w - a.w);
+  const sorted = [...items].sort(order);
   // Chiều rộng kệ: lũy thừa 2 gần căn bậc hai tổng diện tích -> trang gần vuông, không quá max
   const area = items.reduce((s, it) => s + (it.w + pad * 2) * (it.h + pad * 2), 0);
   const widest = Math.max(...items.map((it) => it.w + pad * 2));
-  const shelfW = Math.min(max, Math.max(nextPow2(widest), nextPow2(Math.ceil(Math.sqrt(area)))));
+  const shelfW = opts.width ? Math.min(max, Math.max(nextPow2(widest), opts.width)) : Math.min(max, Math.max(nextPow2(widest), nextPow2(Math.ceil(Math.sqrt(area)))));
   const pages = [];
   let page = null;
   const newPage = () => { page = { placed: [], shelfY: 0, shelfH: 0, x: 0, usedW: 0, usedH: 0 }; pages.push(page); };
@@ -57,6 +58,36 @@ function shelfPack(items, max, pad) {
     page.usedH = Math.max(page.usedH, page.shelfY + page.shelfH);
   }
   return pages;
+}
+
+/** Total texture area of a packing result, pages rounded to powers of two like the writer does. */
+const packArea = (pages) => pages.reduce((n, p) => n + nextPow2(p.usedW) * nextPow2(p.usedH), 0);
+
+/**
+ * The best of a few shelf packings (different item orders and shelf widths): fewest pages first, then the smallest texture area.
+ * A single page matters (D246: a second texture breaks the L3 batch); plain height-sorted shelves waste ~25% on mixed sizes.
+ */
+function bestPack(items, max, pad) {
+  const orders = [
+    (a, b) => b.h - a.h || b.w - a.w,
+    (a, b) => b.w - a.w || b.h - a.h,
+    (a, b) => b.w * b.h - a.w * a.h || b.h - a.h,
+    (a, b) => Math.max(b.w, b.h) - Math.max(a.w, a.h) || b.h - a.h,
+  ];
+  let best = null;
+  for (const order of orders)
+    for (const width of [0, 1024, 2048, 4096]) {
+      if (width > max) continue;
+      let pages;
+      try {
+        pages = shelfPack(items, max, pad, { order, width });
+      } catch (e) {
+        if (e.exitCode === 20) throw e;
+        continue;
+      }
+      if (!best || pages.length < best.length || (pages.length === best.length && packArea(pages) < packArea(best))) best = pages;
+    }
+  return best;
 }
 
 function blitExtrude(dst, src, x0, y0, pad) {
@@ -87,7 +118,7 @@ function main() {
   const extrude = o.extrude ?? o.padding;
   const gutter = o.extrude === undefined ? o.padding : o.padding + extrude;
   if (!Number.isInteger(extrude) || extrude < 0) throw new Error('Invalid extrusion');
-  const pages = shelfPack(items, o.max, gutter);
+  const pages = bestPack(items, o.max, gutter);
   fs.mkdirSync(o.out, { recursive: true });
   const frames = {};
   const meta = [];
@@ -111,4 +142,4 @@ function main() {
 if (require.main === module) {
   try { main(); } catch (e) { console.error('✖', e.message); process.exit(e.exitCode || 1); }
 }
-module.exports = { shelfPack };
+module.exports = { shelfPack, bestPack };
