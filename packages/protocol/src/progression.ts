@@ -107,6 +107,8 @@ export enum ColdMsgId {
   InvState = 66,
   InvCmd = 67,
   InvResult = 68,
+  /** Đạo Tâm (D103) */
+  DaoTam = 59,
 }
 
 export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
@@ -119,6 +121,7 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.InvState]: 'inv_state',
   [ColdMsgId.InvCmd]: 'inv_cmd',
   [ColdMsgId.InvResult]: 'inv_result',
+  [ColdMsgId.DaoTam]: 'dao_tam',
   [ColdMsgId.ChatSend]: 'chat_send',
   [ColdMsgId.ChatMsg]: 'chat_msg',
   [ColdMsgId.ChatHistory]: 'chat_history',
@@ -158,6 +161,7 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   inv_state: ColdMsgId.InvState,
   inv_cmd: ColdMsgId.InvCmd,
   inv_result: ColdMsgId.InvResult,
+  dao_tam: ColdMsgId.DaoTam,
   chat_send: ColdMsgId.ChatSend,
   chat_msg: ColdMsgId.ChatMsg,
   chat_history: ColdMsgId.ChatHistory,
@@ -229,6 +233,7 @@ export const PROGRESSION_LIMITS = {
   MAX_N_FAIL: 255,
   KARMA_MIN: -1000,
   KARMA_MAX: 1000,
+  DAO_TAM_MAX: 100,
   /** chance is sent in 1/10000 */
   CHANCE_SCALE: 10000,
 } as const;
@@ -285,6 +290,15 @@ export interface MeditateResultMsg {
   meditating: boolean;
   reason: number;
 }
+/**
+ * Server -> client: the character's Đạo Tâm (D103), the value that counts (already under the ceiling of the Nghiệp band). Nghiệp Lực itself is
+ * in `char_state.karma`; the faction label is derived from it on the client (`factionOf`). Sent on join and whenever the value changes.
+ */
+export interface DaoTamMsg {
+  type: 'dao_tam';
+  /** 0..100 */
+  daoTam: number;
+}
 export type ColdClientMessage =
   | BreakthroughStartMsg
   | MeditateStartMsg
@@ -298,6 +312,7 @@ export type ColdClientMessage =
   | MarketClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
+  | DaoTamMsg
   | BreakthroughResultMsg
   | MeditateResultMsg
   | InvServerMessage
@@ -344,6 +359,8 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         tuVi: fin(o.tuVi, 0, 'tuVi'),
         tuViReq: fin(o.tuViReq, 0, 'tuViReq'),
       };
+    case 'dao_tam':
+      return { type: 'dao_tam', daoTam: int(o.daoTam, 0, PROGRESSION_LIMITS.DAO_TAM_MAX, 'daoTam') };
     case 'breakthrough_start':
       return { type: 'breakthrough_start', requestId: reqId(o.requestId) };
     case 'meditate_start':
@@ -415,6 +432,9 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
       w.u16(m.karma + 1000); // 0..2000, unsigned on the wire
       w.f64(m.tuVi);
       w.f64(m.tuViReq);
+      break;
+    case 'dao_tam':
+      w.u8(m.daoTam);
       break;
     case 'breakthrough_start':
     case 'meditate_start':
@@ -502,6 +522,8 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
         tuVi: r.f64(),
         tuViReq: r.f64(),
       };
+    case 'dao_tam':
+      return { type, daoTam: r.u8() };
     case 'breakthrough_start':
     case 'meditate_start':
     case 'meditate_stop':
