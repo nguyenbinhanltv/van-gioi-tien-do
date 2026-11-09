@@ -10,6 +10,9 @@ import {
   decode,
   encode,
   type BreakthroughResultMsg,
+  type ChatHistoryMsg,
+  type ChatMsgMsg,
+  type ChatResultMsg,
   type CharStateMsg,
   type EnterEntity,
   type MeditateResultMsg,
@@ -18,6 +21,7 @@ import {
   type Message,
   type SelfState,
   type SkillResultMsg,
+  type BossPhaseMsg,
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
@@ -25,6 +29,7 @@ import type { CollisionGrid } from '@vgtd/sim';
 import { IDLE_INTENT, Predictor, type MoveIntent } from './predictor.js';
 import { RemoteWorld, type RemoteView } from './remote.js';
 import { BagModel, makeRequestId } from './bag.js';
+import { TelegraphTracker, type TelegraphView } from './telegraphs.js';
 
 /** The slice of the WebSocket API we use (browser WebSocket and `ws` both satisfy it). */
 export interface SocketLike {
@@ -64,6 +69,8 @@ export type NetStatus = 'idle' | 'connecting' | 'online' | 'reconnecting' | 'clo
  */
 export interface NetEvents {
   onSkillResult?(msg: SkillResultMsg): void;
+  /** a boss in view entered a new phase (D91): `phase` is the new phase index (>= 1); the boss is invulnerable for `transformMs` */
+  onBossPhase?(msg: BossPhaseMsg): void;
   onAoiEnter?(entities: readonly EnterEntity[]): void;
   /** Runs BEFORE the entities are dropped from `remote`, so `entityOfIndex(index)` still resolves each of them. */
   onAoiLeave?(indices: readonly number[]): void;
@@ -107,6 +114,19 @@ export interface InventoryEvents {
   onInventory?(msg: InvStateMsg): void;
   /** The server answered an inventory command (`net.bag.lastResult` is set). */
   onInvResult?(msg: InvResultMsg): void;
+}
+
+/**
+ * Chat callbacks (D87), a SEPARATE object from `NetEvents` for the same reason as `InventoryEvents` / `ProgressionEvents`: the scene
+ * replaces `events` wholesale. A throwing hook never breaks the session.
+ */
+export interface ChatEvents {
+  /** One delivered line (any channel, own whispers echoed back). */
+  onChatMsg?(msg: ChatMsgMsg): void;
+  /** The World channel's recent lines, once after joining. */
+  onChatHistory?(msg: ChatHistoryMsg): void;
+  /** The answer to a `sendChat` (0 = delivered, otherwise why not). */
+  onChatResult?(msg: ChatResultMsg): void;
 }
 
 export interface NetOptions {
@@ -179,6 +199,7 @@ export class NetClient {
   /** the server answered a resume `hello` with an Unauthorized error frame: the token is unknown / the hold is over */
   private resumeRejected = false;
   private lastRxMs = 0;
+  private readonly telegraph = new TelegraphTracker();
   /** wall time of the previous `update()`: a gap means the client's OWN loop stalled, not the link */
   private lastUpdateMs = 0;
   private reconnecting = false;
@@ -220,6 +241,8 @@ export class NetClient {
   readonly bag: BagModel;
   /** Callbacks for the bag (own object, see `InventoryEvents`). */
   inventoryEvents: InventoryEvents = {};
+  /** Callbacks for chat (own object, see `ChatEvents`). */
+  chatEvents: ChatEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -254,18 +277,18 @@ export class NetClient {
     this.status = 'connecting';
     this.userClosed = false;
     try {
-      const ack = await this.login();
-      this.adopt(ack, false);
+      await this.login((ack) => this.adopt(ack, false));
     } catch (e) {
       this.status = 'closed';
       this.bag.reset();
+      this.telegraph.clear();
       this.lastError = (e as Error).message;
       throw e;
     }
   }
 
   /** register-or-login over HTTP, then a fresh `hello` with the access token */
-  private async login(): Promise<HelloAck> {
+  private async login(onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     const cred = { username: this.o.username, password: this.o.password };
     const reg = await this.post('/auth/register', cred);
     if (reg.status !== 201 && reg.status !== 409)
@@ -274,10 +297,13 @@ export class NetClient {
     if (login.status !== 200)
       throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
     // `classId` only matters for a character that does not exist yet; the server's stored class wins afterwards (D82)
-    return this.openSocket({
-      token: String(login.json.token),
-      ...(this.classRequest !== undefined ? { classId: this.classRequest } : {}),
-    });
+    return this.openSocket(
+      {
+        token: String(login.json.token),
+        ...(this.classRequest !== undefined ? { classId: this.classRequest } : {}),
+      },
+      onAck,
+    );
   }
 
   /** Take over a (re)connected session: reset everything that belonged to the old connection and go online. */
@@ -291,6 +317,7 @@ export class NetClient {
     this.predictor = new Predictor(this.o.makeGrid(ack.mapTiles), this.o.agi);
     this.remote.clear();
     this.bag.reset();
+    this.telegraph.clear();
     this.lastSnapshotSeq = 0;
     this.acc = 0;
     this.pings.clear();
@@ -305,7 +332,12 @@ export class NetClient {
   }
 
   /** Open a socket and say `hello` (`{ token }` for a login, `{ resume: { entityId, token } }` for a resume); resolves on `hello_ack`. */
-  private openSocket(hello: Record<string, unknown>): Promise<HelloAck> {
+  /**
+   * `onAck` runs SYNCHRONOUSLY inside the socket's message handler, before the next frame is delivered: the server sends `aoi_enter` and the
+   * first snapshot right behind `hello_ack`, and `ws` can deliver them in the same turn, before any promise continuation runs. Adopting
+   * the session only after `await` would wipe those frames (`adopt` resets the remote world) and the server never re-announces them.
+   */
+  private openSocket(hello: Record<string, unknown>, onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     return new Promise((resolve, reject) => {
       const url = `${this.o.baseUrl.replace(/^http/, 'ws')}/ws`;
       const ws = new this.o.deps.WebSocket(url);
@@ -324,14 +356,16 @@ export class NetClient {
             const mapTiles = m.mapTiles ?? 0;
             if (mapTiles <= 0) return reject(new Error('server did not announce mapTiles'));
             acked = true;
-            resolve({
+            const ack: HelloAck = {
               classId: typeof m.classId === 'number' ? m.classId : 0,
               entityId: m.entityId ?? 0,
               mapTiles,
               resumed: m.resumed === true,
               resumeToken: typeof m.resumeToken === 'string' ? m.resumeToken : null,
               resumeHoldMs: m.resumeHoldMs ?? 0,
-            });
+            };
+            onAck(ack);
+            resolve(ack);
           }
           return;
         }
@@ -355,12 +389,14 @@ export class NetClient {
       if (!this.userClosed && !this.fatal && this.rc) {
         this.lastError = `connection lost (${ev.code} ${ev.reason})`;
         this.bag.reset(); // belonged to the lost connection; the server re-sends state to the next one
+        this.telegraph.clear();
         this.emit(() => this.events.onConnectionLost?.());
         void this.reconnectLoop();
         return;
       }
       this.status = 'closed';
       this.bag.reset();
+      this.telegraph.clear();
       if (!this.lastError) this.lastError = `closed ${ev.code} ${ev.reason}`;
     }
   }
@@ -384,10 +420,9 @@ export class NetClient {
         const canResume = this.resumeToken !== null && this.o.deps.now() - t0 < this.resumeHoldMs;
         this.resumeRejected = false;
         try {
-          const ack = canResume
-            ? await this.openSocket({ resume: { entityId: this.entityId, token: this.resumeToken } })
-            : await this.login();
-          this.adopt(ack, true);
+          const onAck = (ack: HelloAck): void => this.adopt(ack, true);
+          if (canResume) await this.openSocket({ resume: { entityId: this.entityId, token: this.resumeToken } }, onAck);
+          else await this.login(onAck);
           return;
         } catch (e) {
           this.lastError = `reconnect: ${(e as Error).message}`;
@@ -399,6 +434,7 @@ export class NetClient {
       if (!this.userClosed) this.lastError = `${this.lastError || 'connection lost'} (gave up reconnecting)`;
       this.status = 'closed';
       this.bag.reset();
+      this.telegraph.clear();
     } finally {
       this.reconnecting = false;
     }
@@ -429,6 +465,15 @@ export class NetClient {
         this.emit(() => this.events.onAoiLeave?.(msg.indices)); // before removal: indices still resolve
         this.remote.onLeave(msg);
         break;
+      case 'telegraph_start':
+        this.telegraph.start(msg, now);
+        break;
+      case 'telegraph_end':
+        this.telegraph.end(msg);
+        break;
+      case 'boss_phase':
+        this.emit(() => this.events.onBossPhase?.(msg));
+        break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
         break;
@@ -448,6 +493,15 @@ export class NetClient {
       case 'inv_result':
         this.bag.applyResult(msg);
         this.emit(() => this.inventoryEvents.onInvResult?.(msg));
+        break;
+      case 'chat_msg':
+        this.emit(() => this.chatEvents.onChatMsg?.(msg));
+        break;
+      case 'chat_history':
+        this.emit(() => this.chatEvents.onChatHistory?.(msg));
+        break;
+      case 'chat_result':
+        this.emit(() => this.chatEvents.onChatResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -541,6 +595,30 @@ export class NetClient {
     return true;
   }
 
+  /**
+   * Send one chat line (D87). `channel` is a `ChatChannel`; `target` is the whisper recipient's name ('' for the other channels);
+   * `clientMsgId` (uint16) comes back in the `chat_result`. Returns false when the socket is not open or the line cannot be encoded
+   * (over 256 bytes, bad channel...): the caller shows its own refusal instead of waiting for an answer that will never come.
+   */
+  sendChat(m: { channel: number; text: string; target?: string; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({
+          type: 'chat_send',
+          channel: m.channel,
+          clientMsgId: m.clientMsgId & 0xffff,
+          target: m.target ?? '',
+          text: m.text,
+        }),
+      );
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
   /** Ask the server to start or stop meditation (D76). Returns false when the socket is not open. `requestId`: 32 lowercase hex characters. */
   sendMeditate(start: boolean, requestId: string): boolean {
     const ws = this.ws;
@@ -562,6 +640,11 @@ export class NetClient {
     return this.predictor?.display() ?? null;
   }
 
+  /** Mob attack danger areas to draw this frame (D89); empty offline / when no mob is winding up near the player. */
+  telegraphs(): TelegraphView[] {
+    return this.telegraph.active(this.o.deps.now());
+  }
+
   /** Other entities interpolated at the current time. */
   remotes(): RemoteView[] {
     return this.remote.sample(this.o.deps.now()).filter((r) => r.entityId !== this.entityId);
@@ -571,6 +654,7 @@ export class NetClient {
     this.userClosed = true;
     this.status = 'closed';
     this.bag.reset();
+    this.telegraph.clear();
     this.ws?.close(1000, 'bye'); // a normal close: the server removes the character at once instead of holding it for a resume
   }
 }

@@ -9,7 +9,9 @@ import type { ColdClientMessage, ColdServerMessage } from './progression.js';
 /** v2 (D74): `EnterEntity.defId` (monster / NPC definition id, u16). */
 /** v3 (D78): `SkillCastMsg.aim` (ground / direction aim point) and `SelfState.vitals` (own HP / MP / shield). */
 /** v4 (D79): inventory messages inv_state / inv_cmd / inv_result (cold ids 66-68); one bump shared with the reconnect work. */
-export const PROTOCOL_VERSION = 4;
+/** v5 (D89): mob attack telegraphs telegraph_start / telegraph_end (hot ids 15-16; 10-14 stay reserved for the docs/24 hello family). */
+/** Additive since v5, no bump (D91): hot message boss_phase (id 17); decoders of the same build know it, clients and server ship together (D27). */
+export const PROTOCOL_VERSION = 5;
 
 export enum MsgType {
   Input = 1,
@@ -21,6 +23,9 @@ export enum MsgType {
   Error = 7,
   Ping = 8,
   Pong = 9,
+  TelegraphStart = 15,
+  TelegraphEnd = 16,
+  BossPhase = 17,
 }
 
 export const MSG_TYPE_NAMES: Readonly<Record<number, Message['type']>> = {
@@ -33,6 +38,9 @@ export const MSG_TYPE_NAMES: Readonly<Record<number, Message['type']>> = {
   [MsgType.Error]: 'error',
   [MsgType.Ping]: 'ping',
   [MsgType.Pong]: 'pong',
+  [MsgType.TelegraphStart]: 'telegraph_start',
+  [MsgType.TelegraphEnd]: 'telegraph_end',
+  [MsgType.BossPhase]: 'boss_phase',
 };
 
 // ---------------------------------------------------------------- limits (single source for codec + validation)
@@ -192,6 +200,56 @@ export interface SkillResultMsg {
   hits: SkillHit[];
 }
 
+/** Ground shape of a mob attack telegraph (D89). */
+export enum TelegraphShape {
+  Circle = 0,
+  Cone = 1,
+  Line = 2,
+}
+/**
+ * A mob started a telegraphed attack (D89): draw the danger area on the ground until `durationMs` is over or `telegraph_end` arrives.
+ * Sent only to clients whose AOI contains the anchor. Positions / sizes use the snapshot quantum (1/32 tile); the shape is locked at
+ * the start (the server tests it again when the telegraph ends), so the client never has to track the mob.
+ */
+export interface TelegraphStartMsg {
+  type: 'telegraph_start';
+  /** per-node counter (u16, wraps): pairs with `telegraph_end` */
+  id: number;
+  /** world entity id of the attacking mob (u32) */
+  mobEntityId: number;
+  /** `TelegraphShape` */
+  shape: number;
+  /** circle: centre; cone / line: origin (the mob's position when the telegraph started), 1/32 tile */
+  qi: number;
+  qj: number;
+  /** direction code 0-254 of cone / line (same table as `SelfState.facing`); 0 for a circle */
+  facing: number;
+  /** circle / cone radius, line length, 1/32 tile */
+  size: number;
+  /** cone: full angle in degrees (1-360); line: width in 1/32 tile; circle: 0 */
+  extra: number;
+  /** time until the damage lands (ms, u16) */
+  durationMs: number;
+}
+/** The telegraph `id` is over: the attack landed (`cancelled` false) or was cancelled (the mob died / despawned). */
+export interface TelegraphEndMsg {
+  type: 'telegraph_end';
+  id: number;
+  cancelled: boolean;
+}
+
+/**
+ * A boss entered a new phase (D91): `phase` is the index of the NEW phase (1 = the first transform; 0 is never sent). The boss is invulnerable
+ * and attack-less for `transformMs` (docs/03 §6 transform window): the client can flash / swap its skin for that long.
+ */
+export interface BossPhaseMsg {
+  type: 'boss_phase';
+  mobEntityId: number;
+  phase: number;
+  /** transform window (ms, u16) */
+  transformMs: number;
+}
+
 export enum ErrorCode {
   BadVersion = 1,
   BadMessage = 2,
@@ -216,5 +274,14 @@ export interface PongMsg {
 
 export type ClientMessage = InputMsg | SkillCastMsg | PingMsg | ColdClientMessage;
 export type ServerMessage =
-  SnapshotMsg | AoiEnterMsg | AoiLeaveMsg | SkillResultMsg | ErrorMsg | PongMsg | ColdServerMessage;
+  | SnapshotMsg
+  | AoiEnterMsg
+  | AoiLeaveMsg
+  | SkillResultMsg
+  | ErrorMsg
+  | PongMsg
+  | TelegraphStartMsg
+  | TelegraphEndMsg
+  | BossPhaseMsg
+  | ColdServerMessage;
 export type Message = ClientMessage | ServerMessage;

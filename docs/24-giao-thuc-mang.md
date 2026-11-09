@@ -99,6 +99,9 @@ Ký hiệu: **C→S** / **S→C**; "Họ": N = nóng (thủ công), L = lạnh (
 | 6            | `skill_result`           | S→C       | N   | S            | **Có**          | `seq, reason (CastReason), skillId, readyAtMs, casterIndex, hits[]`                                                                                                                                                                                       |
 | 7            | `error`                  | S→C       | N   | S            | **Có**          | `code u16, len u8, utf-8` (mã lỗi §8)                                                                                                                                                                                                                     |
 | 8/9          | `ping`/`pong`            | C→S/S→C   | N   | D            | **Có**          | `clientTimeMs u32 [, serverTimeMs u32]`                                                                                                                                                                                                                   |
+| 15           | `telegraph_start`        | S→C       | N   | S            | **Có**          | `id u16, mobEntityId u32, shape u8, qi u16, qj u16, facing u8, size u16, extra u16, durationMs u16` (20 B) _[Cập nhật D89: giao thức v5; hình báo đòn của quái, chỉ tới client có AOI chứa điểm neo]_                                                     |
+| 16           | `telegraph_end`          | S→C       | N   | S            | **Có**          | `id u16, cancelled u8` (5 B) _[Cập nhật D89]_                                                                                                                                                                                                             |
+| 17           | `boss_phase`             | S→C       | N   | S            | **Có**          | `mobEntityId u32, phase u8, transformMs u16` (9 B) _[Cập nhật D91: thêm vào v5, không bump; boss vào pha mới, `phase` là chỉ số pha MỚI (≥ 1), boss bất tử và không tấn công trong `transformMs`]_                                                        |
 | 10           | `hello`                  | C→S       | N   | S            | Đề xuất         | `protocolMin u8, protocolMax u8, dataVersion u32, clientBuild u16, platform u8, tokenLen u16, token` (token JWT ≤ 1 KB)                                                                                                                                   |
 | 11           | `hello_ack`              | S→C       | N   | S            | Đề xuất         | `sessionId 16 B, serverTimeMs u32, tickHz u8, limits{maxEntities, maxFrame}, characters[…]`                                                                                                                                                               |
 | 12           | `resume`                 | C→S       | N   | S            | Đề xuất         | `sessionId 16 B, lastSnapshotSeq u16`                                                                                                                                                                                                                     |
@@ -161,6 +164,8 @@ Ghi chú: mọi thông điệp C→S là **ý định**; không có thông đi�
 > **[Cập nhật D79]** Các id 66-68 (túi đồ, `packages/protocol/src/inventory.ts`) cùng phong bì họ Lạnh; id 69 để dành. `inv_state`: `slotCount u8`, ví 3 × `f64` (Linh thạch hạ/trung/thượng), từng ô (`0` trống · `1` xếp chồng `defId u16, quality u8, qty u16` · `2` instance `defId u16, quality u8, durability u16 (×100), bound u8`), `pendingCount u8` + mục `defId u16, quality u8, qty u16`; gửi khi vào game và sau mỗi thay đổi, tối đa một lần mỗi tick. `inv_cmd`: `op` 1 = chuyển / hoán đổi / gộp ô, 2 = nhận hàng chờ (from = to = 0); phát lại cùng `requestId` trả đúng kết quả cũ. `inv_result.reason` (`InvReason`): 0 ok, 1 ô sai, 2 ô trống, 3 quá nhanh, 4 chưa sẵn sàng, 5 không chuyển được; `count` = số mục hàng chờ đã chuyển. `PROTOCOL_VERSION` lên **4** (một lần tăng chung với việc nối lại, D79). Không có trường giá, cửa hàng hay tiền thật.
 
 > **[Cập nhật D82]** `hello` (JSON) có thêm `classId` tùy chọn (chuỗi `PathId` hoặc id dây 1..6; sai giá trị: `BadMessage`), dùng chỉ khi nhân vật chưa tồn tại; `hello_ack` có `classId` (id dây của lớp server giữ). `EnterEntity.defId` của người chơi (kind 0) mang id lớp 1..6 (0 = không rõ), của quái vẫn là id định nghĩa quái: không đổi bố cục `aoi_enter`, không tăng `PROTOCOL_VERSION`. Hiện thực: `apps/server/src/gateway.ts`, `packages/shared/src/classes.ts`.
+
+> **[Cập nhật D87]** Chat dùng phong bì họ Lạnh, thân nhị phân cố định: id 40 `chat_send`, 41 `chat_msg`, 42 `chat_history`, và **43 `chat_result {clientMsgId u16, reason u8}`** (thêm để mọi `chat_send` có đúng một phản hồi; `ChatReason`: 0 đã gửi, 1 quá nhanh, 2 quá dài, 3 trống, 4 bị cấm chat, 5 kênh không có / chưa mở, 6 không có người nhận, 7 chưa vào game, 8 tự thì thầm). Kênh 1 Thế giới, 2 Vùng, 3 Thì thầm, 4 Đội (để dành). Giới hạn theo byte UTF-8: nội dung ≤ 256, tên ≤ 24, lịch sử ≤ 50 dòng. Hiện thực: `packages/protocol/src/chat.ts`.
 
 ### 5.1 Quy tắc ứng dụng
 
@@ -228,17 +233,18 @@ Ngân sách ([00 §3](00-ho-so-tong-hop.md), 08 §8): **~8 KB/s** đánh quái �
 
 Ngân sách theo thông điệp (đề xuất, dùng để kiểm thử "không vượt"):
 
-| Thông điệp                   | Kích thước mục tiêu                  | Tần suất                  | Chiều  |
-| ---------------------------- | ------------------------------------ | ------------------------- | ------ |
-| `input` (1 / 3 input)        | 10 B / 20 B                          | 20–30 Hz                  | Lên    |
-| `snapshot`                   | 13 B + ~5 B × thực thể (≤ 120 / 200) | 20 Hz (vùng gần), 10/5 Hz | Xuống  |
-| `aoi_enter`                  | 2 B + 20 B × thực thể mới            | Theo sự kiện, ≤ 5/s       | Xuống  |
-| `skill_result`               | 14 B + 7 B × số đòn trúng            | Theo sự kiện              | Xuống  |
-| `damage_batch`               | ≤ 3 B + 7 B × mục tiêu               | ≤ 10 Hz                   | Xuống  |
-| `chat_msg`                   | ≤ 320 B (nén tùy chọn)               | Theo kênh                 | Xuống  |
-| `inv_snapshot`               | ≤ 8 KB (túi 100 ô); gửi khi vào game | Hiếm                      | Xuống  |
-| `inv_delta`, `market_result` | ≤ 128 B                              | Theo thao tác             | Xuống  |
-| Khung tối đa                 | 16 KB                                | —                         | Cả hai |
+| Thông điệp                   | Kích thước mục tiêu                  | Tần suất                               | Chiều  |
+| ---------------------------- | ------------------------------------ | -------------------------------------- | ------ |
+| `input` (1 / 3 input)        | 10 B / 20 B                          | 20–30 Hz                               | Lên    |
+| `snapshot`                   | 13 B + ~5 B × thực thể (≤ 120 / 200) | 20 Hz (vùng gần), 10/5 Hz              | Xuống  |
+| `aoi_enter`                  | 2 B + 20 B × thực thể mới            | Theo sự kiện, ≤ 5/s                    | Xuống  |
+| `skill_result`               | 14 B + 7 B × số đòn trúng            | Theo sự kiện                           | Xuống  |
+| `telegraph_start` / `_end`   | 20 B / 5 B                           | Theo đòn của quái (~49 B/s ở giữa bầy) | Xuống  |
+| `damage_batch`               | ≤ 3 B + 7 B × mục tiêu               | ≤ 10 Hz                                | Xuống  |
+| `chat_msg`                   | ≤ 320 B (nén tùy chọn)               | Theo kênh                              | Xuống  |
+| `inv_snapshot`               | ≤ 8 KB (túi 100 ô); gửi khi vào game | Hiếm                                   | Xuống  |
+| `inv_delta`, `market_result` | ≤ 128 B                              | Theo thao tác                          | Xuống  |
+| Khung tối đa                 | 16 KB                                | —                                      | Cả hai |
 
 Chiều lên: input 30 Hz × 10 B = 300 B/s (+ header WS 6–8 B/khung với mặt nạ) < 1 KB/s như yêu cầu.
 

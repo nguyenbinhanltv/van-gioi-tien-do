@@ -1,4 +1,7 @@
 import type {
+  TelegraphEndMsg,
+  BossPhaseMsg,
+  TelegraphStartMsg,
   ColdMessage,
   AoiEnterMsg,
   AoiLeaveMsg,
@@ -71,6 +74,9 @@ export function randMessage(r: Rng, type?: HotType): Message {
     'error',
     'ping',
     'pong',
+    'telegraph_start',
+    'telegraph_end',
+    'boss_phase',
   ];
   const t = type ?? types[r.int(0, types.length - 1)]!;
   switch (t) {
@@ -157,6 +163,34 @@ export function randMessage(r: Rng, type?: HotType): Message {
     }
     case 'ping': {
       const m: PingMsg = { type: 'ping', clientTimeMs: r.int(0, 2 ** 32 - 1) };
+      return m;
+    }
+    case 'telegraph_start': {
+      const m: TelegraphStartMsg = {
+        type: 'telegraph_start',
+        id: r.int(0, 65535),
+        mobEntityId: r.int(0, 2 ** 32 - 1),
+        shape: r.int(0, 2),
+        qi: r.int(0, 65535),
+        qj: r.int(0, 65535),
+        facing: r.int(0, 254),
+        size: r.int(0, 65535),
+        extra: r.int(0, 65535),
+        durationMs: r.int(0, 65535),
+      };
+      return m;
+    }
+    case 'boss_phase': {
+      const m: BossPhaseMsg = {
+        type: 'boss_phase',
+        mobEntityId: r.int(0, 2 ** 32 - 1),
+        phase: r.int(1, 255),
+        transformMs: r.int(0, 65535),
+      };
+      return m;
+    }
+    case 'telegraph_end': {
+      const m: TelegraphEndMsg = { type: 'telegraph_end', id: r.int(0, 65535), cancelled: r.bool() };
       return m;
     }
     case 'pong': {

@@ -5,7 +5,7 @@
  *  POST /auth/login     {username,password}  -> 200 {token, accountId, sessionId, expiresAtS}
  *  OPTIONS *            -> 204 CORS preflight (only for origins in GatewayOptions.corsOrigins)
  *  GET  /health         -> 200 {ok, players, tick}
- *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":4,"protocolMax":4,"token":"...","classId"?}
+ *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":5,"protocolMax":5,"token":"...","classId"?}
  *                       `classId` (D82, optional): class path id or wire id; used only when the character does not exist yet (the stored
  *                       class wins afterwards); an invalid value is refused with BadMessage
  *                       reply (text JSON): {"type":"hello_ack","entityId","serverTimeMs","tickHz","protocol","mapTiles","classId",...}
@@ -246,7 +246,7 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           clearTimeout(helloTimer);
           try {
             transport = makeTransport();
-            entityId = world.addPlayer(transport, accountId, classPath);
+            entityId = world.addPlayer(transport, accountId, classPath, auth.usernameOf(accountId));
             world.stampSession(entityId, { sessionId: authed!.sessionId, version: authed!.version });
           } catch (e) {
             if (e instanceof WorldFullError) return closeWith(ErrorCode.ServerFull, 'server full');

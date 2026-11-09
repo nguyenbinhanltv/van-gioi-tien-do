@@ -31,6 +31,9 @@ const TYPES: HotType[] = [
   'error',
   'ping',
   'pong',
+  'telegraph_start',
+  'telegraph_end',
+  'boss_phase',
 ];
 
 describe('binary round trip', () => {
@@ -220,9 +223,9 @@ describe('JSON debug codec', () => {
     expect(() => decodeJson('{')).toThrowError(ProtocolError);
     expect(() => decodeJson('[]')).toThrowError(ProtocolError);
     expect(() => decodeJson(JSON.stringify({ v: 99, type: 'ping', clientTimeMs: 1 }))).toThrowError(/version/);
-    expect(() => decodeJson(JSON.stringify({ v: 4, type: 'ping', clientTimeMs: -1 }))).toThrowError(ProtocolError);
-    expect(() => decodeJson(JSON.stringify({ v: 4, type: 'nope' }))).toThrowError(/unknown message type/);
-    expect(decodeJson(JSON.stringify({ v: 4, type: 'ping', clientTimeMs: 4, evil: '__proto__' }))).toEqual({
+    expect(() => decodeJson(JSON.stringify({ v: 5, type: 'ping', clientTimeMs: -1 }))).toThrowError(ProtocolError);
+    expect(() => decodeJson(JSON.stringify({ v: 5, type: 'nope' }))).toThrowError(/unknown message type/);
+    expect(decodeJson(JSON.stringify({ v: 5, type: 'ping', clientTimeMs: 4, evil: '__proto__' }))).toEqual({
       type: 'ping',
       clientTimeMs: 4,
     });
