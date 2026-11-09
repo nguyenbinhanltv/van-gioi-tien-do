@@ -3,7 +3,7 @@
  * the state equals the snapshot exactly), atomic publishing, rotation, verification, the refusal cases and the operator CLI.
  * No test prints or asserts on document content beyond equality: the documents hold password hashes.
  */
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   existsSync,
   mkdtempSync,
@@ -38,6 +38,9 @@ import {
   type FileStores,
 } from '../src/index.js';
 import { TEST_ONLY_GOOD } from './fixtures.js';
+
+// the drills register accounts (scrypt) and write many small files: allow for a loaded machine (the default is 5 s)
+vi.setConfig({ testTimeout: 30_000 });
 
 const HA = STONE_CURRENCY['stone_ha']!;
 const FAST = { N: 1024, r: 8, p: 1 };
