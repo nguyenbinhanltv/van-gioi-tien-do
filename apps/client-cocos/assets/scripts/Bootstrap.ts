@@ -530,6 +530,7 @@ export class Bootstrap extends Component {
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
     }
     this.rig.follow(this.playerScreen(), dt);
+    this.ysort.cull(this.cameraRect()); // park what is far outside the view: fewer draw calls (docs/33)
     this.ysort.sort();
     this.npcs?.update(dt);
     this.world.update(dt, this.cameraRect());

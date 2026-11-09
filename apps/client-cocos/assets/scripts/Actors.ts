@@ -3,6 +3,7 @@ import { character, shared } from './vendor/vgtd.mjs';
 import { footprintSortable, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
+import { CHIBI_REACH } from './CullMath';
 import { ChibiBody } from './ChibiBody';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 
@@ -171,7 +172,7 @@ export class RemotePlayer {
     this.body = this.chibi.root;
     this.shadow = spriteNode(`RemoteShadow${entityId}`, art.shadow, 48, 24, 0.5, 0.5);
     shadowLayer.addChild(this.shadow);
-    ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j));
+    ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j), CHIBI_REACH);
     this.bar = shadowLayer.parent ? new OverheadBar(worldUiLayer(shadowLayer.parent), art.pixel, 96) : null;
     this.place();
   }

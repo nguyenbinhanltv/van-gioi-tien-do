@@ -2,6 +2,7 @@ import { Color, Label, Node, Sprite, SpriteFrame, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
+import { sharedAtlas } from './UiLabel';
 
 type Bag = InstanceType<typeof core.BagModel>;
 
@@ -47,6 +48,7 @@ function label(parent: Node, name: string, size: number, color: Color): Label {
   l.verticalAlign = Label.VerticalAlign.CENTER;
   l.overflow = Label.Overflow.NONE;
   l.color = color;
+  sharedAtlas(l);
   return l;
 }
 

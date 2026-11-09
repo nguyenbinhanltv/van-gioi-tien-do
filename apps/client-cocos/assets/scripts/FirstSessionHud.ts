@@ -2,6 +2,7 @@ import { Color, Label, Node, Sprite, UITransform } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
+import { sharedAtlas } from './UiLabel';
 
 type Net = InstanceType<typeof core.NetClient>;
 type Tracker = InstanceType<typeof core.FirstSessionTracker>;
@@ -42,6 +43,7 @@ function label(parent: Node, name: string, size: number, color: Color): Label {
   l.verticalAlign = Label.VerticalAlign.CENTER;
   l.overflow = Label.Overflow.NONE;
   l.color = color;
+  sharedAtlas(l);
   return l;
 }
 

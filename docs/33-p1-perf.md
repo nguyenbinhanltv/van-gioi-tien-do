@@ -38,6 +38,18 @@ Giới hạn của phép đo, nên đọc cùng kết quả:
 
 Nếu FPS dưới 30 hoặc RAM vượt ngưỡng trên máy thật, chạy thêm `?npcart=placeholder` (tách chi phí NPC chibi) và `&tier=low` rồi báo lại cả ba số.
 
+## Draw call khi có quái và HUD chiến đấu (2026-11-09)
+
+Số 55 / 80 của báo cáo thoát P1 là **không có quái và không có HUD chiến đấu**. Đo thật (`director.root.device.numDrawCalls`) với `?npcs=20&combat=1&mobdemo=1` (14 quái cùng lúc, 20 NPC chibi, HUD chiến đấu, zoom 1,5×): **106** (vượt 80). Công cụ `?drawdbg=1` (`window.__vgtdDrawDbg()`: danh sách các lần ngắt batch theo texture và đường node; `window.__vgtdDrawExp(tên)`: thử một ý tưởng trên cảnh đang chạy) cho thấy nguồn:
+
+| Nguồn | Trước | Sau | Cách |
+| ----- | ----: | --: | ---- |
+| HUD chiến đấu (mỗi `Label` một texture riêng; mỗi ô thanh kỹ năng đổi texture 4 lần) | 34 | ~8 | `Label.cacheMode` dùng atlas chung (`UiLabel.sharedAtlas`: BITMAP cho chữ tĩnh, CHAR cho chữ đổi liên tục như số sát thương, hồi chiêu, máu); thanh kỹ năng dựng thành 4 lớp dùng chung (nền, icon, vòng hồi chiêu, chữ) |
+| Vật thể L3 ngoài màn hình (armature NPC, quái, prop) vẫn vẽ và cắt batch của vật thể bên cạnh | ~19 | 0 | `YSortLayer.cull`: cất node ngoài khung nhìn (cộng tầm với của sprite, có trễ chống nhấp nháy) vào node không hoạt động |
+| `enableBatch` của armature | 0 | không đổi | các armature bị prop / quái chen giữa nên không liền kề; không dùng |
+
+Kết quả: **64–65** (tối đa trong 20–40 giây đo) với cùng cảnh; cảnh cơ sở (20 NPC, không quái, không combat) 49 (trước 53–55); mở túi đồ 37 (không đổi). Cổng đo: `npm run perf:p1 -w client-cocos -- --mobs --draw-limit 65` (chỉ siết được ngưỡng, không nới ngưỡng dùng chung). Mục tiêu 65 chưa có chỗ trống: thêm quái / NPC trên màn hình thì phải gom tiếp (HP bar trên đầu, armature).
+
 ## Cách đo trên Web (headless)
 
 ```bash

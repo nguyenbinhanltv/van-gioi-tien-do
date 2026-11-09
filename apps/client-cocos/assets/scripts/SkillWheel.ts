@@ -5,6 +5,7 @@ import type { ArtFrames } from './PlaceholderArt';
 import type { TilePos } from './Actors';
 import type { CombatUi } from './Combat';
 import { worldUiLayer } from './OverheadBar';
+import { sharedAtlas } from './UiLabel';
 
 interface Btn {
   root: Node;
@@ -80,6 +81,7 @@ export class SkillWheel {
     l.verticalAlign = Label.VerticalAlign.CENTER;
     l.overflow = Label.Overflow.NONE;
     l.color = color;
+    sharedAtlas(l);
     return l;
   }
 
