@@ -33,6 +33,8 @@ interface Sidecar {
   skills?: Record<string, { path: string; index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** INTERIM mob standees (MobArt.ts), packed into the SAME pages as the props so the Y-sort batches them together */
   mobs?: Record<string, MobSprite>;
+  /** INTERIM Son Mon NPC standees by key (npc_<name>), same atlas page; front-facing, not flipped */
+  npcs?: Record<string, NpcSprite & { f2: AtlasFrame; f1: AtlasFrame }>;
   /** boss skins taken at HP thresholds (phase = the NEW phase index of the boss_phase message), same atlas page */
   mobPhases?: Record<string, MobSprite & { phase: number }>;
   /** status icons by status id (tools/procgen manifest.json "status.ids"), PART 2 */
@@ -52,6 +54,12 @@ interface Sidecar {
     { w: number; h: number; inset: [number, number, number, number]; f2: AtlasFrame; f1: AtlasFrame }
   >;
 }
+export interface NpcSprite {
+  w: number;
+  h: number;
+  pivot: { x: number; y: number };
+}
+
 /** Login screen art as plain image URLs for the DOM class picker (see `PropArt.keyArt`). */
 export interface KeyArtUrls {
   backdrop: string;
@@ -135,6 +143,7 @@ export class PropArt {
   private mobPhaseLoader: (() => Promise<void>) | null = null;
   private mobPhasePromise: Promise<void> | null = null;
   private readonly mobById = new Map<number, { entry: MobSprite; frame: SpriteFrame }>();
+  private readonly npcByKey = new Map<string, { entry: NpcSprite; frame: SpriteFrame }>();
   /** mob wire id -> phase -> skin (phase 0 = the base standee) */
   private readonly mobSkinsById = new Map<number, Map<number, { entry: MobSprite; frame: SpriteFrame }>>();
   private readonly uiFrames = new Map<string, SpriteFrame>();
@@ -180,6 +189,10 @@ export class PropArt {
         const skin = { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) };
         art.mobById.set(m.id, skin);
         art.mobSkinsById.set(m.id, new Map([[0, skin]]));
+      }
+      for (const [key, n] of Object.entries(meta.npcs ?? {})) {
+        const f = low ? n.f1 : n.f2;
+        art.npcByKey.set(key, { entry: n, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
       }
       // boss phase skins: their own @1x page (both tiers), loaded on first need (`mobSkins`), not in the initial download
       art.mobPhaseLoader = async () => {
@@ -244,6 +257,11 @@ export class PropArt {
   /** INTERIM mob standee sprite by mob wire id (MOB_DEFS id), or undefined. */
   mob(id: number): { entry: MobSprite; frame: SpriteFrame } | undefined {
     return this.mobById.get(id);
+  }
+
+  /** INTERIM NPC standee sprite by key (npc_chuong_mon, ...), or undefined. */
+  npc(key: string): { entry: NpcSprite; frame: SpriteFrame } | undefined {
+    return this.npcByKey.get(key);
   }
 
   /** Every skin of a mob by phase (0 = base standee, then the boss phase skins), or undefined for an unknown mob. */

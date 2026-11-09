@@ -263,6 +263,18 @@ describe('keyMagenta never eats neutral / pale bodies that touch the background'
   });
 });
 
+describe('processMob with a height target (NPC standees)', () => {
+  it('scales a front-facing character to a standing height, keeping the aspect', () => {
+    const img = new Image(400, 500);
+    for (let y = 0; y < 500; y++) for (let x = 0; x < 400; x++) img.setPixel(x, y, 250, 40, 248, 255);
+    for (let y = 60; y < 360; y++) for (let x = 150; x < 270; x++) img.setPixel(x, y, 60, 90, 160, 255); // 120 x 300
+    const r = G.processMob(img, 0, { height: 100 });
+    expect(r.x1.height).toBe(100);
+    expect(Math.abs(r.x1.width - 40)).toBeLessThanOrEqual(1);
+    expect(r.pivot.y).toBeCloseTo(0.95);
+  });
+});
+
 describe('processMob with an area target (boss phase skins)', () => {
   it('scales a wide pose to the area of the sprite it replaces instead of the longest side', () => {
     const img = new Image(400, 300);

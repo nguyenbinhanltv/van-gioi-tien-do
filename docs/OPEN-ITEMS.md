@@ -562,6 +562,11 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## NPC Sơn Môn dạng standee (INTERIM, 2026-11-09): còn mở
+
+- 6 NPC (`npc_chuong_mon`, `npc_truong_lao_dan`, `npc_ve_binh`, `npc_su_huynh`, `npc_tho_ren`, `npc_thuong_nhan`) chỉ là ảnh concept tĩnh đứng quanh quảng trường gần spawn; chưa có hội thoại, nhiệm vụ, cửa hàng hay hoạt hình. Khoá `npc_<tên>` theo kiểu docs/12; hệ thống NPC tông môn (D98) ánh xạ NPC id của nó vào các khoá này (`NPC_STANDEE_KEYS` trong `NpcPlacement.ts`), vị trí ưu tiên trong `SECT_NPC_LAYOUT` (chỉ phía client, chưa lấy từ server).
+- Mỗi NPC chiếm một ô đi bộ (chặn như prop); NPC không lật theo người chơi vì ảnh nhìn thẳng.
+
 ## 22. Đột phá đại cảnh: Tâm Ma + Lôi Kiếp (D97, worker37): còn mở
 
 - **Số liệu tạm, cần game designer duyệt**: độ khó Tâm Ma (Đạo Tâm mặc định 60), 90 s, vòng đánh 2,5 s / r2 / 0,8 s, Khí Huyết ≥ 80 % để vào, mây tụ 3 s, cảnh báo tia 1,2 s, nghỉ Thiên Mệnh 2 s, khóa 30 phút / 24 giờ, mất tu vi 25 % / 50 %. Công thức tỉ lệ và sát thương sét **không đổi** (07 §2-§3).
