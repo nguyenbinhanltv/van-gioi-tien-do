@@ -355,6 +355,8 @@ export interface RestoreOptions {
   now?: () => Date;
   /** how recent a write counts as "the server is running" (ms, default 3000) */
   liveWindowMs?: number;
+  /** test hook, called after each step ('staged', 'moved', 'installed'); throwing simulates a failure at that point */
+  onStep?: (step: 'staged' | 'moved' | 'installed') => void;
 }
 export interface RestoreReport {
   id: string;
@@ -390,10 +392,12 @@ export function restoreBackup(backupDir: string, dataDir: string, opts: RestoreO
   rmSync(stage, { recursive: true, force: true });
   mkdirSync(stage, { mode: 0o700 });
   const moved: Array<[string, string]> = [];
+  const installed: string[] = [];
   let madeSafety = false;
   try {
     for (const name of DOC_NAMES) writeSynced(join(stage, name), docs[name]);
     fsyncDir(stage);
+    opts.onStep?.('staged');
     // safety copy of what is there now: main file, .bak and any stray temp file
     for (const name of DOC_NAMES)
       for (const suffix of ['', '.bak', '.tmp']) {
@@ -407,8 +411,13 @@ export function restoreBackup(backupDir: string, dataDir: string, opts: RestoreO
         renameSync(from, to);
         moved.push([from, to]);
       }
-    for (const name of DOC_NAMES) renameSync(join(stage, name), join(dataDir, name));
+    opts.onStep?.('moved');
+    for (const name of DOC_NAMES) {
+      renameSync(join(stage, name), join(dataDir, name));
+      installed.push(name);
+    }
     fsyncDir(dataDir);
+    opts.onStep?.('installed');
     rmSync(stage, { recursive: true, force: true });
     // the installed files must be exactly the verified ones
     const m = readManifest(backupDir);
@@ -417,8 +426,9 @@ export function restoreBackup(backupDir: string, dataDir: string, opts: RestoreO
         throw new BackupError(`${name}: the installed file differs from the backup`);
     return { id, preRestoreDir: madeSafety ? safety : null, counts: report.counts };
   } catch (e) {
-    // put the old files back so the data directory is what it was before
-    for (const name of DOC_NAMES) rmSync(join(dataDir, name), { force: true });
+    // put the old files back so the data directory is what it was before: remove ONLY what this restore installed (a file that was
+    // never moved to the safety copy is still the original and must stay), then move the saved files back
+    for (const name of installed) rmSync(join(dataDir, name), { force: true });
     for (const [from, to] of moved.reverse()) if (existsSync(to)) renameSync(to, from);
     rmSync(stage, { recursive: true, force: true });
     if (madeSafety) rmSync(safety, { recursive: true, force: true });

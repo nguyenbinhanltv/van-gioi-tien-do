@@ -391,6 +391,37 @@ describe('restoring', () => {
     expect(() => restoreBackup(info.dir, dir)).not.toThrow();
   });
 
+  it.each(['staged', 'moved', 'installed'] as const)(
+    'a failure after the %s step leaves the data directory byte-identical (nothing deleted for good)',
+    async (step) => {
+      const dir = tmp();
+      const w = open(dir);
+      await playFirstSession(w);
+      const info = createBackup(
+        join(dir, 'backups'),
+        w.stores.snapshot(() => w.inv.flushAll()),
+        { now: at(1) },
+      );
+      // later state, so the restore would change every file
+      await w.auth.register('carol_c', TEST_ONLY_GOOD, '127.0.0.1');
+      w.stores.flush();
+      const names = (): string[] =>
+        readdirSync(dir)
+          .filter((n) => n !== 'backups')
+          .sort();
+      const before = names().map((n) => [n, read(join(dir, n))]);
+      expect(() =>
+        restoreBackup(info.dir, dir, {
+          force: true,
+          onStep: (s) => {
+            if (s === step) throw new Error('disk full');
+          },
+        }),
+      ).toThrow(/disk full/);
+      expect(names().map((n) => [n, read(join(dir, n))])).toEqual(before);
+    },
+  );
+
   it('restores into an empty / new directory (disaster recovery) and leaves no staging directory behind', async () => {
     const dir = tmp();
     const w = open(dir);
