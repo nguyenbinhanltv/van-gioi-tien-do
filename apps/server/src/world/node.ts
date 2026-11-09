@@ -64,6 +64,8 @@ import {
 } from '@vgtd/sim';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
+import { ConnectionGuard, budgetClassOf } from './guard.js';
+import type { SecurityEvent } from './security-log.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
@@ -187,6 +189,8 @@ interface Client {
   /** lag credit so far (ms): non-decreasing, handed to `step` as `StepOptions.lagMs` */
   lagCreditMs: number;
   dead: boolean;
+  /** token buckets, strike windows and log throttles of this connection (D101) */
+  guard: ConnectionGuard;
   stats: ClientStats;
 }
 
@@ -202,6 +206,12 @@ export interface WorldMetrics {
   kicksBadMessages: number;
   kicksRate: number;
   kicksBackpressure: number;
+  /** kicks for sustained over-budget flooding (D101) */
+  kicksFlood: number;
+  /** frames dropped for exceeding a per-class budget (D101) */
+  budgetDrops: number;
+  /** security log events emitted (D101) */
+  securityEvents: number;
   /** `inv_state` sends that threw (state or encode); the world tick carried on */
   inventorySendErrors: number;
 }
@@ -233,6 +243,8 @@ export interface WorldNodeOptions {
   resumeHoldMs?: number;
   /** clock (ms) for the per-client packet-rate window; default real time. Tests and benchmarks that tick faster than real time drive it themselves. */
   packetClock?: () => number;
+  /** structured security events (D101): kicks, over-budget drops, malformed frames, anti-cheat violations. No account, name, address or token is ever in an event. */
+  securityLog?: (e: SecurityEvent) => void;
   /**
    * Real-time clock (ms, monotonic) used ONLY to measure how far the tick loop runs behind real time (`lagCreditMs`); default real time.
    * Tests and benchmarks that tick faster than, or independently of, real time inject their own.
@@ -300,6 +312,9 @@ export class WorldNode {
     kicksBadMessages: 0,
     kicksRate: 0,
     kicksBackpressure: 0,
+    kicksFlood: 0,
+    budgetDrops: 0,
+    securityEvents: 0,
     inventorySendErrors: 0,
   };
   /** duration (ms) of each tick: sim step + AOI + encode + socket writes */
@@ -315,6 +330,7 @@ export class WorldNode {
   /** sim ms a dropped player's entity is held (0 = no resume) */
   readonly resumeHoldMs: number;
   private readonly packetClock: () => number;
+  private readonly securityLog: ((e: SecurityEvent) => void) | undefined;
   private readonly wallClock: () => number;
   /**
    * wall time that corresponds to sim time 0, fixed at the FIRST tick (time before ticking started is not overload): drift = (wall) - (wall0)
@@ -443,6 +459,7 @@ export class WorldNode {
     this.idQuarantineMs = opts.playerIdQuarantineMs ?? WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS;
     this.resumeHoldMs = opts.resumeHoldMs ?? WORLD_CONFIG.RESUME_HOLD_MS;
     this.packetClock = opts.packetClock ?? clock;
+    this.securityLog = opts.securityLog;
     this.wallClock = opts.wallClock ?? clock;
     this.inventory = opts.inventory ?? null;
     this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
@@ -587,6 +604,7 @@ export class WorldNode {
       driftAtJoinMs: this.driftNow(), // the drift at the real join time: a client never earns credit for overload that predates it
       lagCreditMs: 0,
       dead: false,
+      guard: new ConnectionGuard(),
       stats: emptyStats(),
     });
     this.progression?.join(id, accountId, this.world.timeMs);
@@ -894,11 +912,19 @@ export class WorldNode {
     try {
       msg = decode(data);
     } catch (e) {
-      c.stats.badMessages++;
-      this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: e instanceof ProtocolError ? e.code : 'bad' });
-      if (c.stats.badMessages >= 5) {
-        this.metrics.kicksBadMessages++;
-        this.kick(c, ErrorCode.BadMessage, 'too many malformed packets');
+      this.badFrame(c, e instanceof ProtocolError ? e.code : 'bad');
+      return;
+    }
+    const cls = budgetClassOf(msg.type);
+    if (cls && !c.guard.take(cls, now)) {
+      this.metrics.budgetDrops++;
+      if (c.guard.due(`drop:${cls}`, now)) {
+        this.emitSecurity('budget_drop', c, cls, { dropped: c.guard.dropped[cls] ?? 0 });
+        this.send(c, { type: 'error', code: ErrorCode.RateLimited, text: 'message rate limit' });
+      }
+      if (c.guard.strikeFlood(now)) {
+        this.metrics.kicksFlood++;
+        this.kick(c, ErrorCode.RateLimited, 'message flood');
       }
       return;
     }
@@ -938,38 +964,32 @@ export class WorldNode {
       case 'meditate_stop':
       case 'breakthrough_start':
         if (!this.progression) {
-          c.stats.badMessages++;
-          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+          this.badFrame(c, 'unexpected');
         } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
         break;
       case 'chat_send':
         if (!this.chat) {
-          c.stats.badMessages++;
-          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+          this.badFrame(c, 'unexpected');
         } else this.send(c, this.chat.handle(id, msg, this.world.timeMs));
         break;
       case 'party_cmd':
         if (!this.party) {
-          c.stats.badMessages++;
-          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+          this.badFrame(c, 'unexpected');
         } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
         break;
       case 'sect_cmd':
         if (!this.sect) {
-          c.stats.badMessages++;
-          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+          this.badFrame(c, 'unexpected');
         } else this.send(c, this.sect.handle(id, msg, this.world.timeMs));
         break;
       case 'friend_cmd':
         if (!this.friends) {
-          c.stats.badMessages++;
-          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+          this.badFrame(c, 'unexpected');
         } else this.send(c, this.friends.handle(id, msg, this.world.timeMs));
         break;
       case 'inv_cmd':
         if (!this.invSync) {
-          c.stats.badMessages++;
-          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+          this.badFrame(c, 'unexpected');
         } else {
           // using an item (D90) acts on the sender's character: pills heal through the combat core / feed the next breakthrough
           const use = itemUseFor(
@@ -988,8 +1008,34 @@ export class WorldNode {
         this.send(c, { type: 'pong', clientTimeMs: msg.clientTimeMs, serverTimeMs: this.world.timeMs >>> 0 });
         break;
       default:
-        c.stats.badMessages++;
-        this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        this.badFrame(c, 'unexpected');
+    }
+  }
+
+  /** A malformed, unexpected or out-of-direction frame: answer once, count it, kick when the strikes of the rolling window are used up. */
+  private badFrame(c: Client, why: string): void {
+    c.stats.badMessages++;
+    const now = this.packetClock();
+    if (c.guard.due('bad', now)) this.emitSecurity('bad_frame', c, why, { total: c.stats.badMessages });
+    this.send(c, {
+      type: 'error',
+      code: ErrorCode.BadMessage,
+      text: why === 'unexpected' ? 'unexpected message' : why,
+    });
+    if (c.guard.strikeMalformed(now)) {
+      this.metrics.kicksBadMessages++;
+      this.kick(c, ErrorCode.BadMessage, 'too many malformed packets');
+    }
+  }
+
+  /** One structured security event (D101): numeric entity id and fixed strings only, never account / name / address / token / payload. */
+  private emitSecurity(ev: SecurityEvent['ev'], c: Client, reason: string, detail?: SecurityEvent['detail']): void {
+    this.metrics.securityEvents++;
+    if (!this.securityLog) return;
+    try {
+      this.securityLog({ ev, tick: this.world.tick, entity: c.id, reason, ...(detail ? { detail } : {}) });
+    } catch {
+      /* a failing log sink must never take the world down */
     }
   }
 
@@ -1195,9 +1241,13 @@ export class WorldNode {
           if (c) this.send(c, { type: 'error', code: ErrorCode.RateLimited, text: 'cast rate limit' });
           break;
         }
-        case 'violation':
+        case 'violation': {
           this.metrics.violations[ev.kind] = (this.metrics.violations[ev.kind] ?? 0) + 1;
+          const vc = this.clients.get(ev.entityId);
+          if (vc && vc.guard.due(`violation:${ev.kind}`, this.packetClock()))
+            this.emitSecurity('violation', vc, ev.kind, { score: Math.round(ev.score) });
           break;
+        }
         case 'warn':
           this.metrics.warns++;
           break;
@@ -1628,6 +1678,7 @@ export class WorldNode {
   private kick(c: Client, code: ErrorCode, text: string): void {
     if (c.dead) return;
     c.dead = true;
+    this.emitSecurity('kick', c, text, { code });
     c.transport.close(code, text);
     this.removePlayer(c.id);
   }
