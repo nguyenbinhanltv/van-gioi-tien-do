@@ -2,6 +2,7 @@ import { Color, Label, Node, Sprite, SpriteFrame, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
+import { sharedAtlas } from './UiLabel';
 import type { UiSlice } from './PropArt';
 
 type Bag = InstanceType<typeof core.BagModel>;
@@ -54,6 +55,7 @@ function label(parent: Node, name: string, size: number, color: Color): Label {
   l.verticalAlign = Label.VerticalAlign.CENTER;
   l.overflow = Label.Overflow.NONE;
   l.color = color;
+  sharedAtlas(l);
   return l;
 }
 
@@ -129,7 +131,7 @@ export class BagPanel {
       const icon = quad(this.root, `walletIcon${k}`, art, 22, 22, new Color(255, 255, 255, 255));
       icon.spriteFrame = frame;
       icon.node.setPosition(cx - 24, this.size.h / 2 - 38, 0);
-      const count = label(this.root, `walletCount${k}`, 13, new Color(200, 210, 230, 255));
+      const count = sharedAtlas(label(this.root, `walletCount${k}`, 13, new Color(200, 210, 230, 255)), 'dynamic');
       count.node.setPosition(cx + 18, this.size.h / 2 - 38, 0);
       this.walletIcons.push({ icon, count });
     });
@@ -152,7 +154,7 @@ export class BagPanel {
       quality.node.setPosition(0, (r.h - 8) / 2 - 2, 0);
       quality.node.active = false;
       const code = label(holder, 'code', 14, new Color(255, 255, 255, 255));
-      const qty = label(holder, 'qty', 11, new Color(255, 255, 255, 255));
+      const qty = sharedAtlas(label(holder, 'qty', 11, new Color(255, 255, 255, 255)), 'dynamic'); // stack sizes change with every pickup
       qty.node.setPosition(10, -14, 0);
       this.slots.push({ outline, bg, item, icon, quality, code, qty });
     }
@@ -161,9 +163,9 @@ export class BagPanel {
     this.claimBtn.setPosition(cb.x + cb.w / 2 - this.size.w / 2, this.size.h / 2 - (cb.y + cb.h / 2), 0);
     if (!hooks.slice?.(this.claimBtn, 'frame', 'button_normal', cb.w, cb.h, 0.7))
       quad(this.claimBtn, 'bg', art, cb.w, cb.h, new Color(70, 120, 80, 255));
-    this.claimText = label(this.claimBtn, 'text', 13, new Color(255, 255, 255, 255));
+    this.claimText = sharedAtlas(label(this.claimBtn, 'text', 13, new Color(255, 255, 255, 255)), 'dynamic'); // 'Claim loot (N)'
     this.claimBtn.active = false;
-    this.toast = label(this.root, 'toast', 12, new Color(255, 170, 120, 255));
+    this.toast = sharedAtlas(label(this.root, 'toast', 12, new Color(255, 170, 120, 255)), 'dynamic');
     this.toast.node.setPosition(60, -this.size.h / 2 + 20, 0);
     this.hint = label(this.root, 'hint', 14, new Color(190, 190, 190, 255));
     this.hint.node.setPosition(0, 0, 0);
