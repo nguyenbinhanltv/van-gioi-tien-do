@@ -4,15 +4,15 @@ Nguồn gốc: mục "chưa kiểm tra được" và "việc còn mở" của h�
 
 ## Mục lục theo mảng
 
-| Mảng                                  | Mục                                                                                                         |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Tổng quan, quy trình, tài liệu        | §1, §2, §3, §4, §6, §7, §8, Design A (01, 10, 11), Design C (20–29)                                         |
-| Công thức và dữ liệu (`@vgtd/shared`) | §5, §16, "P2-1", D83 (số quái)                                                                              |
-| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55, Asset Gemini, Asset Gemini PART 2                                    |
-| Hệ kỹ năng và combat                  | §14, "D74 — quái", D83, D88 (hồi HP / MP), D89 (telegraph quái)                                             |
-| Server, mạng, hiệu năng               | "P2-2", "P2-3", D73, "P2 exit", D80, D85, D88 (hồi HP / MP phía server), D92 (lưu trữ bằng tệp), §20 (chat) |
-| Client, render, HUD                   | D71 (hai mục), §15, §18, §19, D79, D84, D89 (telegraph), Mob hiển thị tạm thời (standee), §20 (chat)        |
-| Tu luyện, túi đồ, kinh tế (server)    | §17, D77, D79, D90 (dùng vật phẩm)                                                                          |
+| Mảng                                  | Mục                                                                                                                                |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Tổng quan, quy trình, tài liệu        | §1, §2, §3, §4, §6, §7, §8, Design A (01, 10, 11), Design C (20–29)                                                                |
+| Công thức và dữ liệu (`@vgtd/shared`) | §5, §16, "P2-1", D83 (số quái)                                                                                                     |
+| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55, Asset Gemini, Asset Gemini PART 2                                                           |
+| Hệ kỹ năng và combat                  | §14, "D74 — quái", D83, D88 (hồi HP / MP), D89 (telegraph quái)                                                                    |
+| Server, mạng, hiệu năng               | "P2-2", "P2-3", D73, "P2 exit", D80, D85, D88 (hồi HP / MP phía server), D92 (lưu trữ bằng tệp), §20 (chat), "P5 load test" (D100) |
+| Client, render, HUD                   | D71 (hai mục), §15, §18, §19, D79, D84, D89 (telegraph), Mob hiển thị tạm thời (standee), §20 (chat)                               |
+| Tu luyện, túi đồ, kinh tế (server)    | §17, D77, D79, D90 (dùng vật phẩm)                                                                                                 |
 
 ## 1. Việc cần làm
 
@@ -643,6 +643,16 @@ Còn mở / lưu ý:
 - `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
+
+## P5 load test (2026-11-09; D100, [docs/35](35-p5-load-test.md))
+
+Công cụ `npm run soak -w @vgtd/server` (bot chơi thật qua `NetClient`, kho tệp D92, soak ngắn / dài, khói CI 20 bot × 60 giây). Số đo đầu tiên (server và bot chung một máy dev): 200 và 100 bot, 0 bot rớt, xuống 3,4-4,1 KB/s (ngưỡng 8), lên 0,3 KB/s, tối đa 120 thực thể, heap trôi 3-4,4 %. Còn mở:
+
+- **Tick p99 ~98-102 ms (ngưỡng 40) ở cả 100 và 200 bot**, trung vị lành (9,5 / 16,5 ms): đuôi giật cục 100-350 ms, không tỉ lệ với số bot, kho tệp không phải nguyên nhân chính (kho bộ nhớ vẫn 79,5 ms). Nghi tranh chấp CPU giữa server và bot trên cùng máy; **chưa chứng minh**. Cần đo lại trên máy riêng / server tách khỏi bot trước khi kết luận hay tối ưu (chưa chỉnh gì).
+- **Ngoại lệ của khói CI (`GATE_EXEMPT_VIOLATIONS` trong `soak-report.ts`)**: cổng `--ci` chỉ chặn các loại vi phạm mà bot trung thực không thể gây ra; `cooldown` vẫn được báo cáo nhưng không chặn, vì runner chung stall nhiều hơn máy dev. Ngoại lệ này **bỏ đi** khi mục dưới đây được giải quyết.
+- **Bot trung thực dính vi phạm `cooldown`** (81-526 mỗi lần chạy, không ai bị đá): giả thuyết đồng hồ mô phỏng chậm hơn đồng hồ thực khi tick giật; chưa chứng minh; kiểm lại sau khi tick ổn.
+- **Chưa chạy** soak 30 phút / 4-8 giờ / 24 giờ (cổng beta "100 CCU 24 giờ không sự cố"): cần máy riêng, chạy tay (`--hours 24`).
+- Bot chưa gồm bạn bè (D96), đột phá lớn (D97), chợ, nhiều vùng bản đồ.
 
 ## Vạn Bảo Lâu (2026-11-09; D112, [docs/38](38-van-bao-lau.md))
 
