@@ -30,10 +30,23 @@ describe('MarketModel (D112)', () => {
     m.setFilter({ defId: 2, minQuality: 3, sort: MarketSort.Newest });
     const a = m.searchCmd();
     const b = m.searchCmd();
-    expect(a).toMatchObject({ type: 'market_search', view: MarketView.Browse, defId: 2, minQuality: 3, sort: MarketSort.Newest, page: 0 });
+    expect(a).toMatchObject({
+      type: 'market_search',
+      view: MarketView.Browse,
+      defId: 2,
+      minQuality: 3,
+      sort: MarketSort.Newest,
+      page: 0,
+    });
     expect(b.clientMsgId).not.toBe(a.clientMsgId);
     expect(a.clientMsgId).toBeLessThanOrEqual(0xffff);
-    expect(m.listCmd(4, 5, 100, 24)).toMatchObject({ type: 'market_list', slot: 4, qty: 5, unitPrice: 100, durationH: 24 });
+    expect(m.listCmd(4, 5, 100, 24)).toMatchObject({
+      type: 'market_list',
+      slot: 4,
+      qty: 5,
+      unitPrice: 100,
+      durationH: 24,
+    });
     expect(m.buyCmd(7)).toMatchObject({ type: 'market_buy', listingId: 7 });
     expect(m.cancelCmd(8)).toMatchObject({ type: 'market_cancel', listingId: 8 });
     expect(m.waitingCount).toBe(3);
@@ -59,13 +72,34 @@ describe('MarketModel (D112)', () => {
     expect(m.ready).toBe(false);
     const old = m.searchCmd();
     const cur = m.searchCmd();
-    m.applyResults({ type: 'market_results', clientMsgId: cur.clientMsgId, view: 0, page: 0, total: 1, listings: [listing(2)] });
-    m.applyResults({ type: 'market_results', clientMsgId: old.clientMsgId, view: 0, page: 0, total: 5, listings: [listing(1)] });
+    m.applyResults({
+      type: 'market_results',
+      clientMsgId: cur.clientMsgId,
+      view: 0,
+      page: 0,
+      total: 1,
+      listings: [listing(2)],
+    });
+    m.applyResults({
+      type: 'market_results',
+      clientMsgId: old.clientMsgId,
+      view: 0,
+      page: 0,
+      total: 5,
+      listings: [listing(1)],
+    });
     expect(m.listings().map((l) => l.listingId)).toEqual([2]);
     expect(m.total).toBe(1);
     expect(m.ready).toBe(true);
     expect(m.pages).toBe(1);
-    m.applyResults({ type: 'market_results', clientMsgId: m.searchCmd().clientMsgId, view: 0, page: 0, total: 17, listings: [] });
+    m.applyResults({
+      type: 'market_results',
+      clientMsgId: m.searchCmd().clientMsgId,
+      view: 0,
+      page: 0,
+      total: 17,
+      listings: [],
+    });
     expect(m.pages).toBe(Math.ceil(17 / MARKET_BOARD.PAGE_SIZE));
   });
 
@@ -90,20 +124,39 @@ describe('MarketModel (D112)', () => {
 
   it('turns every answer into a line: success with the charged numbers, refusals in Vietnamese, unknown ids ignored', () => {
     const m = new MarketModel(() => 0);
-    m.applyResults({ type: 'market_results', clientMsgId: m.searchCmd().clientMsgId, view: 0, page: 0, total: 1, listings: [listing(9)] });
+    m.applyResults({
+      type: 'market_results',
+      clientMsgId: m.searchCmd().clientMsgId,
+      view: 0,
+      page: 0,
+      total: 1,
+      listings: [listing(9)],
+    });
     const list = m.listCmd(0, 10, 100, 24);
-    const base: MarketResultMsg = { type: 'market_result', clientMsgId: list.clientMsgId, op: MarketOp.List, reason: 0, listingId: 3, amount: 10, tax: 0 };
+    const base: MarketResultMsg = {
+      type: 'market_result',
+      clientMsgId: list.clientMsgId,
+      op: MarketOp.List,
+      reason: 0,
+      listingId: 3,
+      amount: 10,
+      tax: 0,
+    };
     expect(m.applyResult(base)).toContain('Phí niêm yết 10');
     const buy = m.buyCmd(9);
-    const bought = m.applyResult(result(base, { clientMsgId: buy.clientMsgId, op: MarketOp.Buy, listingId: 9, amount: 1000, tax: 50 }));
+    const bought = m.applyResult(
+      result(base, { clientMsgId: buy.clientMsgId, op: MarketOp.Buy, listingId: 9, amount: 1000, tax: 50 }),
+    );
     expect(bought).toContain('Đan hồi máu x10');
     expect(bought).toContain('1000');
     const cancel = m.cancelCmd(9);
-    expect(m.applyResult(result(base, { clientMsgId: cancel.clientMsgId, op: MarketOp.Cancel, amount: 0 }))).toContain('Đã gỡ');
-    const refused = m.buyCmd(9);
-    expect(m.applyResult(result(base, { clientMsgId: refused.clientMsgId, op: MarketOp.Buy, reason: MarketReason.NoFunds }))).toBe(
-      MARKET_REASON_TEXT[MarketReason.NoFunds],
+    expect(m.applyResult(result(base, { clientMsgId: cancel.clientMsgId, op: MarketOp.Cancel, amount: 0 }))).toContain(
+      'Đã gỡ',
     );
+    const refused = m.buyCmd(9);
+    expect(
+      m.applyResult(result(base, { clientMsgId: refused.clientMsgId, op: MarketOp.Buy, reason: MarketReason.NoFunds })),
+    ).toBe(MARKET_REASON_TEXT[MarketReason.NoFunds]);
     expect(m.applyResult(result(base, { clientMsgId: 4242 }))).toBeNull(); // an answer to nothing this model asked
     expect(m.waitingCount).toBe(0);
     for (const reason of Object.values(MarketReason).filter((v): v is number => typeof v === 'number'))
@@ -112,17 +165,42 @@ describe('MarketModel (D112)', () => {
 
   it('notices read as sold (with what the seller received) or expired', () => {
     const m = new MarketModel(() => 0);
-    const sold = m.applyNotice({ type: 'market_notice', kind: MarketNoticeKind.Sold, listingId: 1, defId: 2, quality: 0, qty: 3, amount: 285 });
+    const sold = m.applyNotice({
+      type: 'market_notice',
+      kind: MarketNoticeKind.Sold,
+      listingId: 1,
+      defId: 2,
+      quality: 0,
+      qty: 3,
+      amount: 285,
+    });
     expect(sold).toContain('Đan đột phá x3');
     expect(sold).toContain('285');
-    expect(m.applyNotice({ type: 'market_notice', kind: MarketNoticeKind.Expired, listingId: 2, defId: 1, quality: 0, qty: 1, amount: 0 })).toContain('hết hạn');
+    expect(
+      m.applyNotice({
+        type: 'market_notice',
+        kind: MarketNoticeKind.Expired,
+        listingId: 2,
+        defId: 1,
+        quality: 0,
+        qty: 1,
+        amount: 0,
+      }),
+    ).toContain('hết hạn');
     expect(itemLabel(99)).toBe('Vật phẩm #99'); // an id from a newer server does not break the panel
   });
 
   it('reset forgets pending commands and the page; the plain-text summary names the listings', () => {
     const m = new MarketModel(() => 0);
     expect(m.summaryLines()).toEqual(['Vạn Bảo Lâu chưa tải xong.']);
-    m.applyResults({ type: 'market_results', clientMsgId: m.searchCmd().clientMsgId, view: 0, page: 0, total: 1, listings: [listing(5, { mine: true })] });
+    m.applyResults({
+      type: 'market_results',
+      clientMsgId: m.searchCmd().clientMsgId,
+      view: 0,
+      page: 0,
+      total: 1,
+      listings: [listing(5, { mine: true })],
+    });
     m.buyCmd(5);
     expect(m.summaryLines().join('\n')).toContain('#5 Đan hồi máu');
     expect(m.summaryLines().join('\n')).toContain('(bạn)');

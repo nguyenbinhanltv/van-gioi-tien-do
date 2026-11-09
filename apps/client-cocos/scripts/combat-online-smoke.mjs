@@ -200,7 +200,7 @@ try {
   await sleep(500);
   s = await st();
   check(
-    s.statusTiles.length === 2 && s.statusTiles[0] === 'TROI' && s.statusTiles[1] === 'CHAM',
+    s.statusTiles.length === 2 && s.statusTiles[0] === 'TRÓI' && s.statusTiles[1] === 'CHẬM',
     `the status row shows root and slow (${JSON.stringify(s.statusTiles)})`,
   );
   await page.screenshot({ path: join(out, 'combat-online-status.png') });

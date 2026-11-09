@@ -82,7 +82,7 @@ export class FriendsPanel {
       closeIcon.style.marginRight = '0';
       close.append(closeIcon);
     } else close.textContent = '×';
-    close.title = 'Đóng (O)';
+    close.title = core.t('friends.panel.close_hint');
     Object.assign(close.style, BTN_STYLE);
     close.addEventListener('click', () => this.toggle(false));
     head.append(this.title, close);
@@ -90,14 +90,14 @@ export class FriendsPanel {
     const add = document.createElement('div');
     Object.assign(add.style, { display: 'flex', marginTop: '8px' });
     this.input = document.createElement('input');
-    this.input.placeholder = 'Tên người chơi…';
+    this.input.placeholder = core.t('friends.panel.name_placeholder');
     this.input.maxLength = 24;
     this.input.autocomplete = 'off';
     Object.assign(this.input.style, { flex: '1 1 auto', minWidth: '0', font: '12px sans-serif', padding: '3px 5px' });
     const send = document.createElement('button');
-    send.textContent = 'Kết bạn';
+    send.textContent = core.t('friends.panel.add_button');
     const addIcon = domIcon('hud', 'friend_add', 16);
-    if (addIcon) send.prepend(addIcon); // an <img> adds no text: the label stays 'Kết bạn'
+    if (addIcon) send.prepend(addIcon); // an <img> adds no text: the label stays the add button text
     Object.assign(send.style, BTN_STYLE);
     const submit = (): void => {
       const name = this.input.value.trim().split(/\s+/)[0] ?? '';
@@ -211,39 +211,46 @@ export class FriendsPanel {
     if (!this.open || this.drawn === this.model.version) return;
     this.drawn = this.model.version;
     this.title.textContent = this.model.ready
-      ? `Bạn bè (${this.model.count}, ${this.model.onlineCount} online)`
-      : 'Bạn bè (đang tải…)';
+      ? core.t('friends.panel.title', { count: this.model.count, online: this.model.onlineCount })
+      : core.t('friends.panel.title_loading');
     const frag = document.createDocumentFragment();
     for (const f of this.model.friends()) {
       const buttons: HTMLButtonElement[] = [];
-      if (f.canWhisper) buttons.push(this.button('Nhắn', this.model.whisperPrefill(f.name), true, 'chat'));
-      if (f.canInvite) buttons.push(this.button('Mời', this.model.inviteCommand(f.name), false, 'party_invite'));
-      buttons.push(this.button('Xóa', `/friend remove ${f.name}`, false, 'friend_remove'));
+      if (f.canWhisper)
+        buttons.push(this.button(core.t('friends.panel.whisper'), this.model.whisperPrefill(f.name), true, 'chat'));
+      if (f.canInvite)
+        buttons.push(
+          this.button(core.t('friends.panel.invite'), this.model.inviteCommand(f.name), false, 'party_invite'),
+        );
+      buttons.push(this.button(core.t('friends.panel.remove'), `/friend remove ${f.name}`, false, 'friend_remove'));
       frag.appendChild(
         this.row(f.name, f.online ? (CLASS_COLOR[f.classId] ?? '#f0f0f5') : '#8a8fa0', f.online ? '●' : '○', buttons),
       );
     }
     if (this.model.ready && this.model.count === 0) {
       const none = document.createElement('div');
-      none.textContent = 'Chưa có bạn bè. Nhập tên bên dưới để gửi lời mời.';
+      none.textContent = core.t('friends.panel.empty');
       none.style.color = '#b6bccb';
       frag.appendChild(none);
     }
     const inc = this.model.incoming();
     if (inc.length) {
-      frag.appendChild(this.heading('Lời mời nhận được'));
+      frag.appendChild(this.heading(core.t('friends.panel.incoming')));
       for (const n of inc)
         frag.appendChild(
           this.row(n, '#f0f0f5', '✉', [
-            this.button('Nhận', `/friend accept ${n}`),
-            this.button('Từ chối', `/friend decline ${n}`),
+            this.button(core.t('friends.panel.accept'), `/friend accept ${n}`),
+            this.button(core.t('friends.panel.decline'), `/friend decline ${n}`),
           ]),
         );
     }
     const out = this.model.outgoing();
     if (out.length) {
-      frag.appendChild(this.heading('Lời mời đã gửi'));
-      for (const n of out) frag.appendChild(this.row(n, '#b6bccb', '…', [this.button('Hủy', `/friend remove ${n}`)]));
+      frag.appendChild(this.heading(core.t('friends.panel.outgoing')));
+      for (const n of out)
+        frag.appendChild(
+          this.row(n, '#b6bccb', '…', [this.button(core.t('friends.panel.cancel'), `/friend remove ${n}`)]),
+        );
     }
     this.body.replaceChildren(frag);
   }

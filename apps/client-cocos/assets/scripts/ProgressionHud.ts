@@ -153,8 +153,8 @@ export class ProgressionHud {
     this.barFill.node.setPosition(-PANEL_W + 12 + 2, -38, 0);
     this.barText = sharedAtlas(label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER), 'dynamic'); // tu vi grows every tick
     this.barText.node.setPosition(-PANEL_W / 2, -38, 0);
-    this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, 'Đả tọa [M]');
-    this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, 'Đột phá [N]');
+    this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, core.t('progression.hud.meditate'));
+    this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, core.t('progression.hud.breakthrough'));
     this.standing = sharedAtlas(label(this.root, 'Standing', 12, Label.HorizontalAlign.CENTER), 'dynamic');
     this.standing.node.setPosition(-PANEL_W / 2, -94, 0);
     this.standing.color = COL.info;
@@ -201,7 +201,7 @@ export class ProgressionHud {
   update(): void {
     const v = this.view;
     const s = v.state;
-    this.title.string = s ? s.label : 'Tu luyện…';
+    this.title.string = s ? s.label : core.t('progression.hud.title_loading');
     // realm badge: the server's realm is 1-based, the art index 0-based (REALM_NAMES order)
     // level-up flourish (PART 2 particle demo): only when a stage is gained while we are watching, never on the first state
     if (s) {
@@ -219,15 +219,15 @@ export class ProgressionHud {
     this.barText.string = !s
       ? ''
       : s.maxStage
-        ? 'cảnh giới cao nhất'
+        ? core.t('progression.hud.max_stage')
         : `${Math.floor(s.tuVi)} / ${Math.floor(s.tuViReq)}`;
     this.setButton(
       this.meditate,
-      s?.meditating ? 'Dừng [M]' : 'Đả tọa [M]',
+      s?.meditating ? core.t('progression.hud.meditate_stop') : core.t('progression.hud.meditate'),
       v.canMeditate(),
       s?.meditating ? COL.btnMeditating : COL.btnOn,
     );
-    this.setButton(this.breakthrough, 'Đột phá [N]', v.canBreakthrough(), COL.btnBreak);
+    this.setButton(this.breakthrough, core.t('progression.hud.breakthrough'), v.canBreakthrough(), COL.btnBreak);
     this.standing.string = v.standingText();
     const t = v.currentToast();
     this.toast.string = t?.text ?? '';

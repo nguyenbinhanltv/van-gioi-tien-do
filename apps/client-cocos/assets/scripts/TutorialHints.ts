@@ -70,7 +70,7 @@ export class TutorialHints {
     hint.style.color = '#9fd4ff';
     const skip = document.createElement('button');
     skip.id = 'vgtd-tutorial-skip';
-    skip.textContent = 'Bỏ qua';
+    skip.textContent = core.t('tutorial.hud.skip');
     Object.assign(skip.style, {
       position: 'absolute',
       right: '8px',
@@ -175,12 +175,18 @@ export class TutorialHints {
       this.visible = show;
       this.root.style.display = show ? 'block' : 'none';
       if (closing && (v.isTip || v.current === null)) {
-        this.head.textContent = 'Hành trình đầu tiên: hoàn thành!';
-        this.title.textContent = 'Bạn đã đi từ điểm xuất phát tới lần đột phá đầu tiên.';
-        this.hint.textContent = v.current ? `Gợi ý thêm: ${v.current.title.toLowerCase()}.` : '';
+        this.head.textContent = core.t('tutorial.hud.done_head');
+        this.title.textContent = core.t('tutorial.hud.done_title');
+        this.hint.textContent = v.current
+          ? core.t('tutorial.hud.more_tip', { title: v.current.title.toLowerCase() })
+          : '';
       } else if (v.current) {
-        this.head.textContent = v.isTip ? 'Gợi ý thêm' : `Hành trình đầu tiên ${v.completed}/${v.total}`;
-        this.title.textContent = v.progress ? `${v.current.title} (${v.progress})` : v.current.title; // text only
+        this.head.textContent = v.isTip
+          ? core.t('tutorial.hud.tip_head')
+          : core.t('tutorial.hud.head', { done: v.completed, total: v.total });
+        this.title.textContent = v.progress
+          ? core.t('tutorial.hud.with_progress', { title: v.current.title, progress: v.progress })
+          : v.current.title; // text only
         this.hint.textContent = v.hint;
       }
     }

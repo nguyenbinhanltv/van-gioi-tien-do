@@ -13,7 +13,7 @@ import {
 } from '@vgtd/protocol';
 import {
   NetClient,
-  PROGRESSION_REASON_TEXT,
+  PROGRESSION_REASON_KEY,
   ProgressionView,
   reasonText,
   requestIdFrom,
@@ -170,21 +170,28 @@ describe('ProgressionView (mirror of the server state)', () => {
     v.applyBreakthroughResult(
       result({ outcome: BreakthroughOutcome.Rejected, reason: ProgressionReason.TribulationRequired, chance: 0 }),
     );
-    expect(v.currentToast()!.text).toBe(PROGRESSION_REASON_TEXT[ProgressionReason.TribulationRequired]);
+    expect(v.currentToast()!.text).toBe(reasonText(ProgressionReason.TribulationRequired));
   });
 
   it('a rejected meditation shows its reason; accepted ones show nothing', () => {
     const { v } = view();
-    v.applyMeditateResult({ type: 'meditate_result', requestId: REQ(1), meditating: false, reason: ProgressionReason.Moving });
-    expect(v.currentToast()).toMatchObject({ tone: 'info', text: PROGRESSION_REASON_TEXT[ProgressionReason.Moving] });
+    v.applyMeditateResult({
+      type: 'meditate_result',
+      requestId: REQ(1),
+      meditating: false,
+      reason: ProgressionReason.Moving,
+    });
+    expect(v.currentToast()).toMatchObject({ tone: 'info', text: reasonText(ProgressionReason.Moving) });
     const quiet = view().v;
     quiet.applyMeditateResult({ type: 'meditate_result', requestId: REQ(1), meditating: true, reason: 0 });
     expect(quiet.currentToast()).toBeNull();
   });
 
   it('every wire reason has a Vietnamese text and unknown codes get a fallback', () => {
-    for (const k of Object.keys(ProgressionReason).filter((x) => /^\d+$/.test(x)).map(Number)) {
-      expect(k in PROGRESSION_REASON_TEXT, `reason ${k}`).toBe(true);
+    for (const k of Object.keys(ProgressionReason)
+      .filter((x) => /^\d+$/.test(x))
+      .map(Number)) {
+      expect(k in PROGRESSION_REASON_KEY, `reason ${k}`).toBe(true);
       if (k !== ProgressionReason.Ok) expect(reasonText(k).length).toBeGreaterThan(5);
     }
     expect(reasonText(200)).toBe('Bị từ chối (mã 200).');
@@ -192,7 +199,7 @@ describe('ProgressionView (mirror of the server state)', () => {
 
   it('requestIdFrom builds 32 lowercase hex characters from any rng and is deterministic', () => {
     let s = 7;
-    const rng = () => ((s = (s * 48271) % 2147483647) / 2147483647);
+    const rng = () => (s = (s * 48271) % 2147483647) / 2147483647;
     const a = requestIdFrom(rng);
     expect(a).toMatch(/^[0-9a-f]{32}$/);
     s = 7;
@@ -219,7 +226,14 @@ class FakeSocket implements SocketLike {
     if (typeof d === 'string')
       queueMicrotask(() =>
         this.onmessage?.({
-          data: JSON.stringify({ type: 'hello_ack', entityId: 1, serverTimeMs: 0, tickHz: 20, protocol: 4, mapTiles: 64 }),
+          data: JSON.stringify({
+            type: 'hello_ack',
+            entityId: 1,
+            serverTimeMs: 0,
+            tickHz: 20,
+            protocol: 4,
+            mapTiles: 64,
+          }),
         }),
       );
   }

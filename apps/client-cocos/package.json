@@ -32,6 +32,7 @@
     "progression:online": "node scripts/progression-online-smoke.mjs",
     "class:online": "node scripts/class-online-smoke.mjs",
     "chat:online": "node scripts/chat-online-smoke.mjs",
+    "glyphs": "node scripts/glyph-smoke.mjs",
     "party:online": "node scripts/party-online-smoke.mjs",
     "tutorial:online": "node scripts/tutorial-online-smoke.mjs",
     "sect:screens": "node scripts/sect-screens.mjs"

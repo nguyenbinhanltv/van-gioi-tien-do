@@ -143,7 +143,7 @@ describe('item styling and texts', () => {
     expect(QUALITY_RGB).toHaveLength(6);
   });
   it('wallet text and durability percent', () => {
-    expect(walletText(b)).toBe('Ha 7   Trung 2   Thuong 1');
+    expect(walletText(b)).toBe('Hạ 7   Trung 2   Thượng 1');
     expect(durabilityPercent(b.itemAt(1)!)).toBe(80);
     expect(durabilityPercent(b.itemAt(0)!)).toBeNull();
   });
@@ -167,4 +167,3 @@ describe('UseGesture (double-tap / double-click uses an item, D90)', () => {
     expect(g.tap(5, 5100)).toBe(false);
   });
 });
-

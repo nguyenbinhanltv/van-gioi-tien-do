@@ -24,30 +24,34 @@ import {
   type CraftResultMsg,
   type CraftStateMsg,
 } from '@vgtd/protocol';
+import { reasonTexts, t } from '../i18n/strings.js';
 
 /** re-exported so engine scripts (which only see client-core) can name the ops */
 export { CraftOp } from '@vgtd/protocol';
 
-/** Vietnamese text of every refusal / cancel reason (user-facing). */
-export const CRAFT_REASON_TEXT: Readonly<Record<number, string>> = {
-  [CraftReason.Ok]: '',
-  [CraftReason.NotReady]: 'Hồ sơ nhân vật đang tải…',
-  [CraftReason.TooFar]: 'Hãy đến gần đan lô của Sơn Môn.',
-  [CraftReason.RealmTooLow]: 'Chưa đủ cảnh giới: chế tác mở từ Trúc Cơ và công thức cần cảnh giới tương ứng.',
-  [CraftReason.UnknownRecipe]: 'Công thức này không tồn tại.',
-  [CraftReason.NotEnoughMaterials]: 'Không đủ nguyên liệu.',
-  [CraftReason.NotEnoughStones]: 'Không đủ Linh thạch trả phí lò.',
-  [CraftReason.BagFull]: 'Túi đồ đầy, không còn chỗ cho thành phẩm.',
-  [CraftReason.Busy]: 'Đang luyện: hãy chờ hoặc dừng lượt hiện tại.',
-  [CraftReason.BadCount]: `Số lần luyện phải từ 1 đến ${ALCHEMY.QUEUE_MAX}.`,
-  [CraftReason.RateLimited]: 'Thao tác quá nhanh, hãy thử lại sau giây lát.',
-  [CraftReason.Moved]: 'Bạn đã di chuyển: dừng luyện, không mất gì.',
-  [CraftReason.InCombat]: 'Vào giao chiến: dừng luyện, không mất gì.',
-  [CraftReason.ByPlayer]: 'Đã dừng luyện, không mất gì.',
-  [CraftReason.Dead]: 'Nhân vật đã tử vong.',
-  [CraftReason.Interrupted]: 'Rời xa đan lô: dừng luyện, không mất gì.',
-  [CraftReason.Replayed]: 'Lệnh này đã được gửi rồi.',
-};
+/** Text of every refusal / cancel reason (user-facing, from the string table; `{max}` = longest queue). */
+export const CRAFT_REASON_TEXT: Readonly<Record<number, string>> = reasonTexts(
+  {
+    [CraftReason.Ok]: null,
+    [CraftReason.NotReady]: 'craft.reason.not_ready',
+    [CraftReason.TooFar]: 'craft.reason.too_far',
+    [CraftReason.RealmTooLow]: 'craft.reason.realm_too_low',
+    [CraftReason.UnknownRecipe]: 'craft.reason.unknown_recipe',
+    [CraftReason.NotEnoughMaterials]: 'craft.reason.no_materials',
+    [CraftReason.NotEnoughStones]: 'craft.reason.no_stones',
+    [CraftReason.BagFull]: 'craft.reason.bag_full',
+    [CraftReason.Busy]: 'craft.reason.busy',
+    [CraftReason.BadCount]: 'craft.reason.bad_count',
+    [CraftReason.RateLimited]: 'craft.reason.rate_limited',
+    [CraftReason.Moved]: 'craft.reason.moved',
+    [CraftReason.InCombat]: 'craft.reason.in_combat',
+    [CraftReason.ByPlayer]: 'craft.reason.by_player',
+    [CraftReason.Dead]: 'craft.reason.dead',
+    [CraftReason.Interrupted]: 'craft.reason.interrupted',
+    [CraftReason.Replayed]: 'craft.reason.replayed',
+  },
+  () => ({ max: ALCHEMY.QUEUE_MAX }),
+);
 
 export interface RecipeView {
   readonly wireId: number;
@@ -125,22 +129,22 @@ export class CraftModel {
 
   applyResult(m: CraftResultMsg): void {
     if (m.index === CRAFT_ANSWER_INDEX && this.pending?.id === m.requestId) this.pending = null;
-    const name = recipeByWireId(m.recipeId)?.name ?? 'đan';
+    const name = recipeByWireId(m.recipeId)?.name ?? t('craft.pill');
     switch (m.outcome) {
       case CraftOutcome.Rejected:
-        this.say(CRAFT_REASON_TEXT[m.reason] || 'Không luyện được.', 'bad');
+        this.say(CRAFT_REASON_TEXT[m.reason] || t('craft.toast.rejected'), 'bad');
         break;
       case CraftOutcome.Accepted:
-        this.say(`Bắt đầu luyện ${name}…`, 'info');
+        this.say(t('craft.toast.started', { name }), 'info');
         break;
       case CraftOutcome.Success:
-        this.say(`Luyện ${name} thành công: phẩm ${QUALITY_TIERS[m.quality]?.name ?? '?'}.`, 'good');
+        this.say(t('craft.toast.success', { name, quality: QUALITY_TIERS[m.quality]?.name ?? '?' }), 'good');
         break;
       case CraftOutcome.Failed:
-        this.say(`Luyện ${name} thất bại: mất ${m.lost} nguyên liệu.`, 'bad');
+        this.say(t('craft.toast.failed', { name, lost: m.lost }), 'bad');
         break;
       case CraftOutcome.Cancelled:
-        this.say(CRAFT_REASON_TEXT[m.reason] || 'Đã dừng luyện.', 'info');
+        this.say(CRAFT_REASON_TEXT[m.reason] || t('craft.toast.stopped'), 'info');
         break;
     }
   }
@@ -211,18 +215,28 @@ export class CraftModel {
 
   /** One line for the panel footer. */
   statusLine(pos: { i: number; j: number } | null): string {
-    if (!this.seen) return 'Đang tải…';
-    if (!this.nearFurnace(pos)) return `Hãy đến gần đan lô của Sơn Môn (trong ${ALCHEMY.FURNACE_RANGE_TILES} ô).`;
+    if (!this.seen) return t('craft.status.loading');
+    if (!this.nearFurnace(pos)) return t('craft.status.too_far', { range: ALCHEMY.FURNACE_RANGE_TILES });
     const realm = this.o.realm();
-    if (realm !== null && realm < ALCHEMY.MIN_REALM) return 'Chế tác mở từ cảnh giới Trúc Cơ.';
+    if (realm !== null && realm < ALCHEMY.MIN_REALM) return t('craft.status.realm');
     const j = this.job();
-    if (j) return `Đang luyện ${j.name}: ${j.done}/${j.total}, còn ${(j.remainingMs / 1000).toFixed(1)} s (di chuyển sẽ dừng, không mất gì).`;
-    return 'Chọn công thức rồi bấm Luyện.';
+    if (j)
+      return t('craft.status.running', {
+        name: j.name,
+        done: j.done,
+        total: j.total,
+        left: (j.remainingMs / 1000).toFixed(1),
+      });
+    return t('craft.status.pick');
   }
 
   // ---------------------------------------------------------------- model -> server
   /** Ask for `count` crafts; one command in flight (a lost answer times out after 5 s). `send` returns false when the socket is closed. */
-  start(wireId: number, count: number, send: (m: { op: number; requestId: string; recipeId: number; count: number }) => boolean): boolean {
+  start(
+    wireId: number,
+    count: number,
+    send: (m: { op: number; requestId: string; recipeId: number; count: number }) => boolean,
+  ): boolean {
     const now = this.o.now();
     if (this.pending && now - this.pending.at < 5000) return false;
     if (this.jobView.recipeId !== 0) return false;

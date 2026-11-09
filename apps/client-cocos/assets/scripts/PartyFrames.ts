@@ -95,7 +95,10 @@ export class PartyFrames {
       b.addEventListener('click', () => this.answer(command));
       return b;
     };
-    buttons.append(mkButton('Đồng ý', '/accept'), mkButton('Từ chối', '/decline'));
+    buttons.append(
+      mkButton(core.t('party.invite.accept'), '/accept'),
+      mkButton(core.t('party.invite.decline'), '/decline'),
+    );
     card.append(cardText, buttons);
     root.append(rows, card);
     parent.appendChild(root);
@@ -188,7 +191,7 @@ export class PartyFrames {
 
     this.card.style.display = inv ? 'block' : 'none';
     if (inv) {
-      this.cardText.textContent = `${inv.fromName} mời bạn vào tổ đội`; // text only
+      this.cardText.textContent = core.t('party.invite.banner', { from: inv.fromName }); // text only
       const ic = domIcon('hud', 'party_invite', 18);
       if (ic) this.cardText.prepend(ic);
     }

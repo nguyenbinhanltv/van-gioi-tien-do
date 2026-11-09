@@ -2,7 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { TradeClosed, TradeOp, TradePhase, TradeReason, type TradeSideView, type TradeStateMsg } from '@vgtd/protocol';
 import { ChatLog, TRADE_REASON_TEXT, TradeModel, parseChatInput } from '../src/index.js';
 
-const side = (o: Partial<TradeSideView> = {}): TradeSideView => ({ items: [], stones: [0, 0, 0], locked: false, confirmed: false, ...o });
+const side = (o: Partial<TradeSideView> = {}): TradeSideView => ({
+  items: [],
+  stones: [0, 0, 0],
+  locked: false,
+  confirmed: false,
+  ...o,
+});
 const state = (o: Partial<TradeStateMsg> = {}): TradeStateMsg => ({
   type: 'trade_state',
   phase: TradePhase.Open,
@@ -13,7 +19,16 @@ const state = (o: Partial<TradeStateMsg> = {}): TradeStateMsg => ({
   tax: [0, 0, 0],
   ...o,
 });
-const trade = (op: number, o: Record<string, unknown> = {}) => ({ kind: 'trade', op, name: '', slot: 0, qty: 0, currency: 0, amount: 0, ...o });
+const trade = (op: number, o: Record<string, unknown> = {}) => ({
+  kind: 'trade',
+  op,
+  name: '',
+  slot: 0,
+  qty: 0,
+  currency: 0,
+  amount: 0,
+  ...o,
+});
 
 describe('trade commands in the chat input', () => {
   it('/trade alone shows the window; /trade name invites; accept / decline take an optional name', () => {
@@ -53,7 +68,9 @@ describe('trade commands in the chat input', () => {
     const got: unknown[] = [];
     const never = () => false;
     expect(l.submit('/trade bob', never, never, undefined, undefined, (m) => (got.push(m), true))).toBe(true);
-    expect(got).toEqual([{ op: TradeOp.Invite, name: 'bob', slot: 0, qty: 0, currency: 0, amount: 0, clientMsgId: expect.any(Number) }]);
+    expect(got).toEqual([
+      { op: TradeOp.Invite, name: 'bob', slot: 0, qty: 0, currency: 0, amount: 0, clientMsgId: expect.any(Number) },
+    ]);
     expect(l.submit('/trade lock', never, never, undefined, undefined, () => false)).toBe(false);
     expect(l.entries.at(-1)).toMatchObject({ tone: 'error', text: 'Chưa kết nối máy chủ.' });
     expect(l.submit('/trade lock', never)).toBe(false); // no trade sender wired
@@ -72,7 +89,9 @@ describe('TradeModel', () => {
   it('is closed until a window opens; the view shows both sides, names items and gives lock / confirm hints', () => {
     const { m } = model();
     expect(m.view()).toMatchObject({ open: false, canLock: false, canConfirm: false });
-    expect(m.applyState(state({ mine: side({ items: [{ defId: 1, quality: 0, qty: 5 }], stones: [100, 0, 0] }) }))).toMatch(/Đã mở giao dịch với bob/);
+    expect(
+      m.applyState(state({ mine: side({ items: [{ defId: 1, quality: 0, qty: 5 }], stones: [100, 0, 0] }) })),
+    ).toMatch(/Đã mở giao dịch với bob/);
     let v = m.view();
     expect(v).toMatchObject({ open: true, partner: 'bob', canLock: true, canConfirm: false });
     expect(v.mine.items).toEqual([{ defId: 1, quality: 0, qty: 5, name: 'Đan hồi máu' }]);
@@ -88,10 +107,14 @@ describe('TradeModel', () => {
     const { m } = model();
     expect(m.applyState(state())).toMatch(/Đã mở/);
     expect(m.applyState(state({ theirs: side({ stones: [5, 0, 0] }) }))).toBeNull();
-    expect(m.applyState(state({ phase: TradePhase.Done, tax: [7, 0, 1] }))).toMatch(/hoàn tất.*7 linh thạch hạ phẩm, 1 linh thạch thượng phẩm/);
+    expect(m.applyState(state({ phase: TradePhase.Done, tax: [7, 0, 1] }))).toMatch(
+      /hoàn tất.*7 linh thạch hạ phẩm, 1 linh thạch thượng phẩm/,
+    );
     expect(m.view().open).toBe(false);
     m.applyState(state());
-    expect(m.applyState(state({ phase: TradePhase.Closed, closed: TradeClosed.PartnerLeft }))).toMatch(/đã rời game.*không có gì bị mất/);
+    expect(m.applyState(state({ phase: TradePhase.Closed, closed: TradeClosed.PartnerLeft }))).toMatch(
+      /đã rời game.*không có gì bị mất/,
+    );
     m.applyState(state());
     expect(m.applyState(state({ phase: TradePhase.Closed, closed: TradeClosed.Expired }))).toMatch(/hết hạn/);
     m.applyState(state());

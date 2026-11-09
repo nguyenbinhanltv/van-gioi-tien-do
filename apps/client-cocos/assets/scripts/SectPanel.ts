@@ -77,7 +77,7 @@ export class SectPanel {
       closeIcon.style.marginRight = '0';
       close.append(closeIcon);
     } else close.textContent = '×';
-    close.title = 'Đóng (K)';
+    close.title = core.t('sect.panel.close_hint');
     Object.assign(close.style, BTN_STYLE);
     close.addEventListener('click', () => this.toggle(false));
     head.append(this.title, close);
@@ -169,39 +169,30 @@ export class SectPanel {
     if (sectIcon) this.title.prepend(sectIcon);
     const frag = document.createDocumentFragment();
     if (!v.ready) {
-      frag.appendChild(this.line('Đang tải…', '#b6bccb'));
+      frag.appendChild(this.line(core.t('sect.panel.loading'), '#b6bccb'));
       this.body.replaceChildren(frag);
       return;
     }
     frag.appendChild(
       this.line(
-        near
-          ? 'Bạn đang ở gần NPC tông môn.'
-          : `Hãy đến gần NPC tông môn (trong ${shared.SECT.NPC_RANGE_TILES} ô) để gia nhập, rời hoặc học bí tịch.`,
+        near ? core.t('sect.panel.near') : core.t('sect.panel.far', { range: shared.SECT.NPC_RANGE_TILES }),
         near ? '#8fe0a0' : '#f0dc96',
       ),
     );
     if (!v.member) {
-      frag.appendChild(
-        this.line(
-          'Đệ tử tiếp dẫn: "Sơn Môn Đại Phái là Chính đạo, mở cửa cho người tu hành. Gia nhập để nhận Cống hiến từ việc diệt yêu thú và đổi lấy bí tịch ở Tàng Kinh Các."',
-          '#d6d9e6',
-        ),
-      );
+      frag.appendChild(this.line(core.t('sect.panel.recruit'), '#d6d9e6'));
       const row = document.createElement('div');
       row.style.margin = '6px 0';
-      row.appendChild(this.button('Gia nhập', '/sect join', near));
+      row.appendChild(this.button(core.t('sect.panel.join'), '/sect join', near));
       (row.firstElementChild as HTMLElement).style.marginLeft = '0';
       frag.appendChild(row);
     } else {
-      const ch = this.line(`Cống hiến: ${v.contribution}`, '#e8c872');
+      const ch = this.line(core.t('sect.panel.contribution', { n: v.contribution }), '#e8c872');
       const token = domIcon('item', 'cong_hien_token', 18);
       if (token) ch.prepend(token);
       frag.appendChild(ch);
-      frag.appendChild(
-        this.line('Trưởng lão Tàng Kinh Các: "Bí tịch cơ bản của Đạo Lộ ngươi, đổi bằng Cống hiến."', '#d6d9e6'),
-      );
-      if (v.library.length === 0) frag.appendChild(this.line('(Chưa có bí tịch cho Đạo Lộ này.)', '#b6bccb'));
+      frag.appendChild(this.line(core.t('sect.panel.elder'), '#d6d9e6'));
+      if (v.library.length === 0) frag.appendChild(this.line(core.t('sect.panel.no_manuals'), '#b6bccb'));
       for (const m of v.library) {
         const row = document.createElement('div');
         row.dataset.manual = m.name;
@@ -219,7 +210,12 @@ export class SectPanel {
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
         });
-        label.textContent = `${m.index + 1}. ${m.name} (cấp ${m.levelMin}) · ${m.price} CH`;
+        label.textContent = core.t('sect.panel.manual', {
+          n: m.index + 1,
+          name: m.name,
+          level: m.levelMin,
+          price: m.price,
+        });
         label.style.color = m.owned ? '#8a8fa0' : '#f0f0f5';
         // the manual's icon: tier by level, form by position in the library (PART 3 group O art)
         const manualIcon = domIcon('item', manualIconKey(m.levelMin, m.index), 28);
@@ -227,16 +223,16 @@ export class SectPanel {
         row.appendChild(label);
         if (m.owned) {
           const owned = document.createElement('span');
-          owned.textContent = 'Đã học';
+          owned.textContent = core.t('sect.panel.learned');
           owned.style.color = '#8fe0a0';
           owned.style.marginLeft = '6px';
           row.appendChild(owned);
-        } else row.appendChild(this.button('Học', `/sect buy ${m.index + 1}`, near && m.canBuy));
+        } else row.appendChild(this.button(core.t('sect.panel.learn'), `/sect buy ${m.index + 1}`, near && m.canBuy));
         frag.appendChild(row);
       }
       const leave = document.createElement('div');
       leave.style.marginTop = '8px';
-      leave.appendChild(this.button('Rời tông môn', '/sect leave', near));
+      leave.appendChild(this.button(core.t('sect.panel.leave'), '/sect leave', near));
       frag.appendChild(leave);
     }
     this.body.replaceChildren(frag);

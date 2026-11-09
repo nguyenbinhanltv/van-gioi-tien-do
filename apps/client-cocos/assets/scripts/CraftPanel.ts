@@ -67,11 +67,11 @@ export class CraftPanel {
     const head = document.createElement('div');
     Object.assign(head.style, { display: 'flex', justifyContent: 'space-between', marginBottom: '6px' });
     const title = document.createElement('div');
-    title.textContent = 'Luyện đan · Đan lô Sơn Môn';
+    title.textContent = core.t('craft.panel.title');
     title.style.fontWeight = 'bold';
     const close = document.createElement('button');
     close.textContent = '×';
-    close.title = 'Đóng (P)';
+    close.title = core.t('craft.panel.close_hint');
     Object.assign(close.style, BTN);
     close.addEventListener('click', () => this.toggle(false));
     head.append(title, close);
@@ -134,12 +134,17 @@ export class CraftPanel {
       row.dataset.recipe = String(r.wireId);
       Object.assign(row.style, { padding: '4px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' });
       const top = document.createElement('div');
-      top.textContent = `${r.name} · bậc ${r.tier} · độ khó ${r.difficulty}`;
+      top.textContent = core.t('craft.panel.recipe', { name: r.name, tier: r.tier, difficulty: r.difficulty });
       top.style.fontWeight = 'bold';
       const info = document.createElement('div');
-      info.textContent =
-        `Nguyên liệu ${r.have}/${r.materials} · phí lò ${r.fee} LT hạ · thành công ${Math.round(r.chance * 100)}% · ` +
-        `phẩm tối đa ${r.capName} · thạo luyện ${r.mastery}/100`;
+      info.textContent = core.t('craft.panel.info', {
+        have: r.have,
+        need: r.materials,
+        fee: r.fee,
+        chance: Math.round(r.chance * 100),
+        cap: r.capName,
+        mastery: r.mastery,
+      });
       info.style.color = r.have >= r.materials ? '#cfd4e2' : '#ff9f95';
       const act = document.createElement('div');
       Object.assign(act.style, { display: 'flex', alignItems: 'center', gap: '6px', marginTop: '3px' });
@@ -155,7 +160,7 @@ export class CraftPanel {
         this.counts.set(r.wireId, Math.min(10, Math.max(1, Math.floor(Number(n.value) || 1)))),
       );
       const go = document.createElement('button');
-      go.textContent = 'Luyện';
+      go.textContent = core.t('craft.panel.go');
       Object.assign(go.style, BTN);
       go.disabled = !r.canStart;
       go.style.opacity = r.canStart ? '1' : '0.5';
@@ -170,7 +175,7 @@ export class CraftPanel {
     }
     if (job) {
       const stop = document.createElement('button');
-      stop.textContent = `Dừng (${job.name} ${job.done}/${job.total})`;
+      stop.textContent = core.t('craft.panel.stop', { name: job.name, done: job.done, total: job.total });
       Object.assign(stop.style, BTN);
       stop.style.marginTop = '6px';
       stop.addEventListener('click', () => this.model.cancel(this.hooks.send));

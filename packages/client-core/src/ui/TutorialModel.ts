@@ -3,7 +3,7 @@
  * server decides every step; the client never reports progress except "skip") and turns it into one non-blocking hint card: the
  * current step, a short contextual hint that depends on the input mode (docs/16 §2: the same lesson with PC or touch wording), a
  * progress count, and the optional tips once the required steps are done. Engine-free and DOM-free; the Cocos `TutorialHints`
- * only draws `view()`. Vietnamese texts are the first editorial pass (OPEN-ITEMS 22).
+ * only draws `view()`. The texts are in the string table (first editorial pass, OPEN-ITEMS 22).
  */
 import {
   TUTORIAL,
@@ -15,6 +15,7 @@ import {
   type TutorialStepId,
 } from '@vgtd/shared';
 import type { TutorialStateMsg } from '@vgtd/protocol';
+import { t, type StringKey } from '../i18n/strings.js';
 
 export type TutorialInputMode = 'pointer' | 'touch';
 
@@ -25,78 +26,53 @@ export interface TutorialStepText {
   hint: Record<TutorialInputMode, string>;
 }
 
-export const TUTORIAL_TEXT: Readonly<Record<TutorialStepId, TutorialStepText>> = {
-  move: {
-    title: 'Di chuyển',
-    hint: {
-      pointer: 'Bấm chuột trái xuống đất hoặc dùng WASD để đi.',
-      touch: 'Chạm giữ bên trái màn hình rồi kéo để đi.',
-    },
-  },
-  field: {
-    title: 'Ra khu săn yêu thú',
-    hint: {
-      pointer: 'Đi ra xa điểm xuất phát, tới vùng có yêu thú.',
-      touch: 'Kéo cần điều khiển đi ra xa điểm xuất phát, tới vùng có yêu thú.',
-    },
-  },
-  skill: {
-    title: 'Dùng kỹ năng',
-    hint: {
-      pointer: 'Đứng gần yêu thú rồi bấm phím 1-8 để dùng kỹ năng.',
-      touch: 'Đứng gần yêu thú rồi chạm nút kỹ năng ở góc phải.',
-    },
-  },
-  kills: {
-    title: `Hạ ${TUTORIAL.killTarget} yêu thú`,
-    hint: {
-      pointer: 'Tab chọn mục tiêu, phím 1-8 dùng kỹ năng.',
-      touch: 'Chạm nhanh để nhắm mục tiêu gần nhất, giữ và kéo để nhắm hướng.',
-    },
-  },
-  loot: {
-    title: 'Nhặt chiến lợi phẩm',
-    hint: {
-      pointer: 'Yêu thú rơi đồ vào túi: nhấn B để xem.',
-      touch: 'Yêu thú rơi đồ vào túi: mở túi để xem.',
-    },
-  },
+/** String keys of every step's title and per-mode hint (the texts are in the string table). */
+const TUTORIAL_KEYS: Readonly<Record<TutorialStepId, { title: StringKey; pointer: StringKey; touch: StringKey }>> = {
+  move: { title: 'tutorial.move.title', pointer: 'tutorial.move.pointer', touch: 'tutorial.move.touch' },
+  field: { title: 'tutorial.field.title', pointer: 'tutorial.field.pointer', touch: 'tutorial.field.touch' },
+  skill: { title: 'tutorial.skill.title', pointer: 'tutorial.skill.pointer', touch: 'tutorial.skill.touch' },
+  kills: { title: 'tutorial.kills.title', pointer: 'tutorial.kills.pointer', touch: 'tutorial.kills.touch' },
+  loot: { title: 'tutorial.loot.title', pointer: 'tutorial.loot.pointer', touch: 'tutorial.loot.touch' },
   meditate: {
-    title: 'Đả tọa tăng tu vi',
-    hint: {
-      pointer: 'Đứng yên, nhấn M để đả tọa.',
-      touch: 'Đứng yên, chạm nút Đả tọa trên bảng tu luyện.',
-    },
+    title: 'tutorial.meditate.title',
+    pointer: 'tutorial.meditate.pointer',
+    touch: 'tutorial.meditate.touch',
   },
   breakthrough: {
-    title: 'Đột phá tiểu cảnh',
-    hint: {
-      pointer: 'Khi thanh tu vi đầy, nhấn N để đột phá.',
-      touch: 'Khi thanh tu vi đầy, chạm nút Đột phá trên bảng tu luyện.',
-    },
+    title: 'tutorial.breakthrough.title',
+    pointer: 'tutorial.breakthrough.pointer',
+    touch: 'tutorial.breakthrough.touch',
   },
-  item: {
-    title: 'Dùng một món đồ',
-    hint: {
-      pointer: 'Mở túi (B), chuột phải vào đan dược để dùng.',
-      touch: 'Mở túi, chạm đan dược rồi chạm Dùng.',
-    },
-  },
-  chat: {
-    title: 'Trò chuyện',
-    hint: {
-      pointer: 'Nhấn Enter để chat với mọi người, /help xem lệnh.',
-      touch: 'Chạm dải chat bên trái để gõ, /help xem lệnh.',
-    },
-  },
-  party: {
-    title: 'Lập tổ đội',
-    hint: {
-      pointer: 'Gõ /invite tên để mời bạn cùng đi.',
-      touch: 'Chạm dải chat rồi gõ /invite tên để mời bạn cùng đi.',
-    },
-  },
+  item: { title: 'tutorial.item.title', pointer: 'tutorial.item.pointer', touch: 'tutorial.item.touch' },
+  chat: { title: 'tutorial.chat.title', pointer: 'tutorial.chat.pointer', touch: 'tutorial.chat.touch' },
+  party: { title: 'tutorial.party.title', pointer: 'tutorial.party.pointer', touch: 'tutorial.party.touch' },
 };
+
+/**
+ * Title and hints of every step, read through the string table (each property is a getter: it follows the installed language).
+ * `{n}` of the kills title = `TUTORIAL.killTarget`.
+ */
+export const TUTORIAL_TEXT: Readonly<Record<TutorialStepId, TutorialStepText>> = Object.fromEntries(
+  (Object.keys(TUTORIAL_KEYS) as TutorialStepId[]).map((id) => {
+    const k = TUTORIAL_KEYS[id];
+    return [
+      id,
+      {
+        get title() {
+          return t(k.title, { n: TUTORIAL.killTarget });
+        },
+        hint: {
+          get pointer() {
+            return t(k.pointer);
+          },
+          get touch() {
+            return t(k.touch);
+          },
+        },
+      },
+    ];
+  }),
+) as Record<TutorialStepId, TutorialStepText>;
 
 export interface TutorialStepView {
   id: TutorialStepId;
@@ -158,19 +134,18 @@ export class TutorialModel {
   }
 
   view(mode: TutorialInputMode): TutorialView {
-    const steps = TUTORIAL_STEPS.map(
-      (id, k): TutorialStepView => ({
-        id,
-        title: TUTORIAL_TEXT[id].title,
-        done: this.isDone(id),
-        required: k < TUTORIAL_REQUIRED_COUNT,
-      }),
-    );
+    const steps = TUTORIAL_STEPS.map((id, k): TutorialStepView => ({
+      id,
+      title: TUTORIAL_TEXT[id].title,
+      done: this.isDone(id),
+      required: k < TUTORIAL_REQUIRED_COUNT,
+    }));
     const completed = steps.filter((s) => s.required && s.done).length;
     // the first unfinished REQUIRED step; once those are done, the first unfinished tip
     const current = steps.find((s) => s.required && !s.done) ?? steps.find((s) => !s.done) ?? null;
     const isTip = !!current && !current.required;
-    const progress = current?.id === 'kills' ? `${Math.min(this.killCount, TUTORIAL.killTarget)}/${TUTORIAL.killTarget}` : '';
+    const progress =
+      current?.id === 'kills' ? `${Math.min(this.killCount, TUTORIAL.killTarget)}/${TUTORIAL.killTarget}` : '';
     return {
       visible: this.got && !this.skipped && current !== null,
       skipped: this.skipped,

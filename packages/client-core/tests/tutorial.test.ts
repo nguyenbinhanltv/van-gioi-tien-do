@@ -60,7 +60,12 @@ describe('TutorialModel', () => {
     let v = m.view('pointer');
     expect(v).toMatchObject({ visible: true, complete: true, isTip: true, completed: TUTORIAL_REQUIRED_COUNT });
     expect(v.current!.id).toBe('item');
-    m.applyState({ type: 'tutorial_state', done: mask(...REQUIRED, 'item', 'chat'), kills: 3, flags: TUTORIAL_FLAG_COMPLETE });
+    m.applyState({
+      type: 'tutorial_state',
+      done: mask(...REQUIRED, 'item', 'chat'),
+      kills: 3,
+      flags: TUTORIAL_FLAG_COMPLETE,
+    });
     expect(m.view('pointer').current!.id).toBe('party');
     m.applyState({ type: 'tutorial_state', done: mask(...TUTORIAL_STEPS), kills: 3, flags: TUTORIAL_FLAG_COMPLETE });
     v = m.view('pointer');

@@ -20,4 +20,6 @@ export * from './ui/FriendsModel.js';
 export * from './ui/CraftModel.js';
 export * from './ui/MarketModel.js';
 export * from './ui/FirstSessionTracker.js';
+export * from './i18n/strings.js';
+export * from './i18n/glyphs.js';
 export * from './net/index.js';

@@ -719,7 +719,8 @@ export class NetClient {
       }
       case 'error':
         this.lastError = `server: ${msg.text} (${ErrorCode[msg.code] ?? msg.code})`;
-        if (FATAL_CODES.has(msg.code)) this.fatal = true; // kicked / wrong protocol: do not reconnect
+        if (FATAL_CODES.has(msg.code))
+          this.fatal = true; // kicked / wrong protocol: do not reconnect
         else if (msg.code === ErrorCode.Unauthorized && this.status === 'reconnecting') this.resumeRejected = true;
         break;
       default:
@@ -761,7 +762,8 @@ export class NetClient {
     // If this loop itself was starved (busy tab / CPU-starved host) frames sat unread in the socket queue: silence we cannot
     // attribute to the link. Forgive the gap instead of tearing down a healthy connection.
     const rcStale = this.rc?.staleMs ?? 0;
-    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0) this.lastRxMs = now;
+    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0)
+      this.lastRxMs = now;
     this.lastUpdateMs = now;
     // half-open connection: the server sends a snapshot every tick, so silence means the link is dead
     const rc = this.rc;
@@ -854,7 +856,15 @@ export class NetClient {
    * `slot` / `qty` = a bag slot and a quantity for set-item (qty 0 takes the line out); `currency` / `amount` for set-stones. `clientMsgId` (uint16)
    * comes back in the `trade_result`. False when the socket is not open or the command cannot be encoded.
    */
-  sendTrade(m: { op: number; clientMsgId: number; name?: string; slot?: number; qty?: number; currency?: number; amount?: number }): boolean {
+  sendTrade(m: {
+    op: number;
+    clientMsgId: number;
+    name?: string;
+    slot?: number;
+    qty?: number;
+    currency?: number;
+    amount?: number;
+  }): boolean {
     const ws = this.ws;
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
@@ -953,7 +963,12 @@ export class NetClient {
     const el = Math.max(0, this.o.deps.now() - s.at);
     const left = (ms: number): number => Math.max(0, Math.round(ms - el));
     const slowMs = left(s.status.slowMs);
-    return { rootMs: left(s.status.rootMs), slowMs, slowPct: slowMs > 0 ? s.status.slowPct : 0, poisonMs: left(s.status.poisonMs) };
+    return {
+      rootMs: left(s.status.rootMs),
+      slowMs,
+      slowPct: slowMs > 0 ? s.status.slowPct : 0,
+      poisonMs: left(s.status.poisonMs),
+    };
   }
 
   /** Another player's `StatusBit` flags (0 = none known), from `status_update`. */

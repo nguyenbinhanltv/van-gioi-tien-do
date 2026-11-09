@@ -15,22 +15,23 @@ import {
   type MeditateResultMsg,
 } from '@vgtd/protocol';
 import { DAO_TAM, FACTION_LABEL, factionOf, stageLabel, stageToRealm, type Faction } from '@vgtd/shared';
+import { t, type StringKey } from '../i18n/strings.js';
 
-/** Vietnamese texts of every refusal reason (user-facing). */
-export const PROGRESSION_REASON_TEXT: Readonly<Record<number, string>> = {
-  [ProgressionReason.Ok]: '',
-  [ProgressionReason.NotReady]: 'Hồ sơ nhân vật đang tải…',
-  [ProgressionReason.Moving]: 'Đang di chuyển: hãy đứng yên để đả tọa.',
-  [ProgressionReason.InCombat]: 'Đang giao chiến: chưa thể đả tọa.',
-  [ProgressionReason.Dead]: 'Nhân vật đã tử vong.',
-  [ProgressionReason.RateLimited]: 'Thao tác quá nhanh, hãy thử lại sau giây lát.',
-  [ProgressionReason.NotEnoughTuVi]: 'Tu vi chưa đủ để đột phá.',
-  [ProgressionReason.AtMaxStage]: 'Đã đạt cảnh giới cao nhất.',
-  [ProgressionReason.Cooldown]: 'Vừa đột phá xong, hãy chờ giây lát.',
-  [ProgressionReason.TribulationRequired]: 'Đột phá đại cảnh cần Tâm Ma và Lôi Kiếp, chưa mở ở bản này.',
-  [ProgressionReason.EventActive]: 'Tâm Ma / Lôi Kiếp đang diễn ra.',
-  [ProgressionReason.NotPrepared]: 'Cần gần đầy Khí Huyết để bước vào đại cảnh.',
-  [ProgressionReason.Locked]: 'Đột phá đại cảnh đang bị khóa (sau thất bại).',
+/** String key of every refusal reason (user-facing text: `reasonText`). */
+export const PROGRESSION_REASON_KEY: Readonly<Record<number, StringKey | null>> = {
+  [ProgressionReason.Ok]: null,
+  [ProgressionReason.NotReady]: 'progression.reason.not_ready',
+  [ProgressionReason.Moving]: 'progression.reason.moving',
+  [ProgressionReason.InCombat]: 'progression.reason.in_combat',
+  [ProgressionReason.Dead]: 'progression.reason.dead',
+  [ProgressionReason.RateLimited]: 'progression.reason.rate_limited',
+  [ProgressionReason.NotEnoughTuVi]: 'progression.reason.not_enough_tu_vi',
+  [ProgressionReason.AtMaxStage]: 'progression.reason.at_max_stage',
+  [ProgressionReason.Cooldown]: 'progression.reason.cooldown',
+  [ProgressionReason.TribulationRequired]: 'progression.reason.tribulation_required',
+  [ProgressionReason.EventActive]: 'progression.reason.event_active',
+  [ProgressionReason.NotPrepared]: 'progression.reason.not_prepared',
+  [ProgressionReason.Locked]: 'progression.reason.locked',
 };
 
 export interface ProgressionSnapshot {
@@ -140,7 +141,7 @@ export class ProgressionView {
     const s = this.state;
     if (!s) return '';
     const k = s.karma > 0 ? `+${s.karma}` : String(s.karma);
-    return `${s.factionLabel} (${k}) · Đạo Tâm ${s.daoTam}`;
+    return t('progression.standing', { faction: s.factionLabel, karma: k, dao: s.daoTam });
   }
 
   applyMeditateResult(m: MeditateResultMsg): void {
@@ -151,12 +152,13 @@ export class ProgressionView {
   applyBreakthroughResult(m: BreakthroughResultMsg): void {
     if (this.breakthroughPending?.id === m.requestId) this.breakthroughPending = null;
     if (m.outcome === BreakthroughOutcome.Rejected) return this.say(reasonText(m.reason), 'bad');
-    const kind = m.kind === BreakthroughKind.Major ? 'đại cảnh' : 'tiểu cảnh';
+    const kind = t(m.kind === BreakthroughKind.Major ? 'progression.kind.major' : 'progression.kind.minor');
     const pct = `${(m.chance / 100).toFixed(m.chance % 100 === 0 ? 0 : 1)}%`;
     if (m.outcome === BreakthroughOutcome.Success)
-      this.say(`Đột phá ${kind} thành công: ${stageLabel(m.toStage)} (tỉ lệ ${pct}).`, 'good');
-    else if (m.kind === BreakthroughKind.Major) this.say(`Đột phá ${kind} thất bại (tỉ lệ ${pct}).`, 'bad');
-    else this.say(`Đột phá ${kind} thất bại (tỉ lệ ${pct}). Tu vi được giữ nguyên, hãy thử lại.`, 'bad');
+      this.say(t('progression.toast.success', { kind, stage: stageLabel(m.toStage), chance: pct }), 'good');
+    else if (m.kind === BreakthroughKind.Major)
+      this.say(t('progression.toast.failure_major', { kind, chance: pct }), 'bad');
+    else this.say(t('progression.toast.failure', { kind, chance: pct }), 'bad');
   }
 
   // ---------------------------------------------------------------- queries
@@ -187,12 +189,12 @@ export class ProgressionView {
   /** One-line status for a HUD label. */
   statusLine(): string {
     const s = this.state;
-    if (!s) return 'Tu luyện: đang tải…';
+    if (!s) return t('progression.status.loading');
     const bar = `${Math.floor(s.tuVi)}/${Math.floor(s.tuViReq)}`;
-    if (s.maxStage) return `${s.label} · cảnh giới cao nhất`;
-    if (s.meditating) return `${s.label} · đang đả tọa ${bar}`;
-    if (s.ready) return `${s.label} · tu vi đầy, có thể đột phá`;
-    return `${s.label} · ${bar}`;
+    if (s.maxStage) return t('progression.status.max', { label: s.label });
+    if (s.meditating) return t('progression.status.meditating', { label: s.label, bar });
+    if (s.ready) return t('progression.status.ready', { label: s.label });
+    return t('progression.status.normal', { label: s.label, bar });
   }
 
   // ---------------------------------------------------------------- player -> server
@@ -202,7 +204,7 @@ export class ProgressionView {
     const id = this.o.newRequestId();
     const ok = send({ type: this.state!.meditating ? 'meditate_stop' : 'meditate_start', requestId: id });
     if (!ok) {
-      this.say('Chưa kết nối máy chủ.', 'info');
+      this.say(t('net.err.offline'), 'info');
       return false;
     }
     this.meditatePending = { id, at: this.o.now() };
@@ -213,7 +215,7 @@ export class ProgressionView {
     if (!this.canBreakthrough()) return false;
     const id = this.o.newRequestId();
     if (!send({ type: 'breakthrough_start', requestId: id })) {
-      this.say('Chưa kết nối máy chủ.', 'info');
+      this.say(t('net.err.offline'), 'info');
       return false;
     }
     this.breakthroughPending = { id, at: this.o.now() };
@@ -225,6 +227,9 @@ export class ProgressionView {
   }
 }
 
+/** The player-facing text of a refusal reason: '' for Ok, the generic "refused (code n)" line for an unknown code. */
 export function reasonText(reason: number): string {
-  return PROGRESSION_REASON_TEXT[reason] ?? `Bị từ chối (mã ${reason}).`;
+  const key = PROGRESSION_REASON_KEY[reason];
+  if (key === null) return '';
+  return key === undefined ? t('progression.reason.unknown', { code: reason }) : t(key);
 }

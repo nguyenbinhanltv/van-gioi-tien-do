@@ -662,6 +662,14 @@ Còn mở / lưu ý:
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
 
+## i18n tiếng Việt (D104): còn mở
+
+- **Tên trong dữ liệu `@vgtd/shared` chưa qua bảng chuỗi**: `REALM_NAMES` / `SUB_STAGE_NAMES` / `stageLabel` (hiện ở HUD tu luyện), tên quái (`MOB_DEFS`), tên vật phẩm và kỹ năng. Đây là dữ liệu dùng chung với server (bảng số liệu docs/07, docs/10, docs/11), không phải chuỗi trong mã client; cần khóa `realm.<n>.name`, `mob.<key>.name`, `item.<key>.name`, `skill.<id>.name` (docs/19 §2.2) và client dịch theo khóa khi có ngôn ngữ thứ hai.
+- **Chưa có ngôn ngữ thứ hai và chưa có `plural` ICU** (tiếng Việt không cần). Khi thêm `en`: bảng `en` cùng khóa, `setStrings`, kiểm tham số `{...}` khớp giữa các bảng (hiện test chỉ kiểm bảng nguồn), thêm phông CJK nếu có `zh` (docs/19 §3).
+- **Ngoại lệ có chủ đích**: lớp phủ chẩn đoán (`PerfHud`, `DrawDebug`, ghi chú `hud.note` ở `Bootstrap` / `OnlineSession`), trình xem animation `viewer/`, thông báo lỗi ném ra và log (`console`, `throw`) là tiếng Anh cho lập trình viên, không phải chữ của người chơi. `packages/character` có chú thích kỹ thuật tiếng Việt trong dữ liệu animation / socket (chỉ công cụ đọc), ngoài phạm vi.
+- **Định dạng số / ngày theo vùng** (docs/19 §2.3): `formatNumber` (Intl, `vi-VN`) đã có nhưng HUD vẫn in số thô (`String(n)`, `toFixed`); cần dùng khi có số lớn (ví dụ "1.200" Linh thạch) và lịch sự kiện theo múi giờ.
+- **Glyph**: phủ ký tự được kiểm bằng canvas của trình duyệt với phông `Arial` + dự phòng hệ thống (headless Chrome trên Windows); chưa kiểm trên máy Android / iOS thật (phông hệ thống khác). Atlas nhãn dùng chung ở chế độ `dynamic` giữ bộ glyph trong vài batch (xem `npm run glyphs`), cổng draw call 65 của `perf:p1 --mobs` giữ nguyên.
+
 ## P5 load test (2026-11-09; D100, [docs/35](35-p5-load-test.md))
 
 Công cụ `npm run soak -w @vgtd/server` (bot chơi thật qua `NetClient`, kho tệp D92, soak ngắn / dài, khói CI 20 bot × 60 giây). Số đo đầu tiên (server và bot chung một máy dev): 200 và 100 bot, 0 bot rớt, xuống 3,4-4,1 KB/s (ngưỡng 8), lên 0,3 KB/s, tối đa 120 thực thể, heap trôi 3-4,4 %. Còn mở:

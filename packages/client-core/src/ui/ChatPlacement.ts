@@ -15,7 +15,8 @@ export interface TouchChatPlacement {
   scale: number;
 }
 
-const intersects = (a: Rect, b: Rect): boolean => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+const intersects = (a: Rect, b: Rect): boolean =>
+  a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 
 export function touchChatPlacement(
   vw: number,

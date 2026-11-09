@@ -37,10 +37,12 @@ function model(o: { realm?: number | null; have?: number; stones?: number } = {}
   });
   return { m, advance: (ms: number) => (t += ms) };
 }
-const sendTo = (sent: unknown[], ok = true) => (x: unknown) => {
-  sent.push(x);
-  return ok;
-};
+const sendTo =
+  (sent: unknown[], ok = true) =>
+  (x: unknown) => {
+    sent.push(x);
+    return ok;
+  };
 
 describe('CraftModel', () => {
   it('has no state before the first craft_state and says it is loading', () => {

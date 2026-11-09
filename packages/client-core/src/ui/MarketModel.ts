@@ -28,44 +28,57 @@ import {
   type MarketResultsMsg,
   type MarketSearchMsg,
 } from '@vgtd/protocol';
+import { reasonTexts, t, type StringKey } from '../i18n/strings.js';
 
 /** re-exported so engine scripts (which only see client-core) can name the enums */
 export { MarketNoticeKind, MarketOp, MarketReason, MarketSort, MarketView } from '@vgtd/protocol';
 
-/** Vietnamese text of every market refusal (user-facing). */
-export const MARKET_REASON_TEXT: Readonly<Record<number, string>> = {
-  [MarketReason.Ok]: '',
-  [MarketReason.RateLimited]: 'Bạn thao tác quá nhanh, hãy chờ giây lát.',
-  [MarketReason.NotReady]: 'Chưa vào game, chưa dùng được Vạn Bảo Lâu.',
-  [MarketReason.BadRequest]: 'Giá, số lượng hoặc thời hạn không hợp lệ.',
-  [MarketReason.NoSuchListing]: 'Món hàng này không còn (đã bán, đã hủy, hết hạn, hoặc không phải của bạn).',
-  [MarketReason.NoItem]: 'Ô túi này không có món đồ có thể bán (trống, không đủ số lượng, hoặc đã khóa).',
-  [MarketReason.TooManyListings]: `Bạn đang đăng bán tối đa ${MARKET_BOARD.MAX_LISTINGS_PER_ACCOUNT} món.`,
-  [MarketReason.NoFunds]: 'Không đủ Linh thạch hạ phẩm.',
-  [MarketReason.NoSpace]: 'Túi đồ của bạn không còn chỗ.',
-  [MarketReason.SelfBuy]: 'Không thể mua hàng do chính bạn đăng.',
-};
+/** Text of every market refusal (user-facing, from the string table; `{max}` = most listings per account). */
+export const MARKET_REASON_TEXT: Readonly<Record<number, string>> = reasonTexts(
+  {
+    [MarketReason.Ok]: null,
+    [MarketReason.RateLimited]: 'market.reason.rate_limited',
+    [MarketReason.NotReady]: 'market.reason.not_ready',
+    [MarketReason.BadRequest]: 'market.reason.bad_request',
+    [MarketReason.NoSuchListing]: 'market.reason.no_such_listing',
+    [MarketReason.NoItem]: 'market.reason.no_item',
+    [MarketReason.TooManyListings]: 'market.reason.too_many_listings',
+    [MarketReason.NoFunds]: 'market.reason.no_funds',
+    [MarketReason.NoSpace]: 'market.reason.no_space',
+    [MarketReason.SelfBuy]: 'market.reason.self_buy',
+  },
+  () => ({ max: MARKET_BOARD.MAX_LISTINGS_PER_ACCOUNT }),
+);
 
-/** Placeholder item names (docs/07 §6); an id this client does not know (a newer server) shows as `Vật phẩm #id`. */
-const ITEM_LABEL: Readonly<Record<string, string>> = {
-  heal_pill: 'Đan hồi máu',
-  breakthrough_pill: 'Đan đột phá',
-  blueprint_white_green: 'Bản vẽ (Trắng-Lục)',
-  blueprint_blue_purple: 'Bản vẽ (Lam-Tím)',
-  blueprint_gold_red: 'Bản vẽ (Vàng-Đỏ)',
-  craft_material: 'Nguyên liệu',
+/** String key of the placeholder item names (docs/07 s6); an id this client does not know (a newer server) shows as "Vat pham #id". */
+const ITEM_LABEL_KEY: Readonly<Record<string, StringKey>> = {
+  heal_pill: 'market.item.heal_pill',
+  breakthrough_pill: 'market.item.breakthrough_pill',
+  blueprint_white_green: 'market.item.blueprint_white_green',
+  blueprint_blue_purple: 'market.item.blueprint_blue_purple',
+  blueprint_gold_red: 'market.item.blueprint_gold_red',
+  craft_material: 'market.item.craft_material',
 };
-export const QUALITY_LABEL = ['Trắng', 'Lục', 'Lam', 'Tím', 'Vàng', 'Đỏ'] as const;
-export const SORT_LABEL: Readonly<Record<number, string>> = {
-  [MarketSort.PriceAsc]: 'Giá thấp trước',
-  [MarketSort.PriceDesc]: 'Giá cao trước',
-  [MarketSort.Newest]: 'Mới đăng',
-  [MarketSort.EndingSoon]: 'Sắp hết hạn',
-};
+/** Quality names (Trang .. Do) by index: `QUALITY_LABEL[q]`. */
+export const QUALITY_LABEL: Readonly<Record<number, string>> = reasonTexts({
+  0: 'market.quality.white',
+  1: 'market.quality.green',
+  2: 'market.quality.blue',
+  3: 'market.quality.purple',
+  4: 'market.quality.gold',
+  5: 'market.quality.red',
+});
+export const SORT_LABEL: Readonly<Record<number, string>> = reasonTexts({
+  [MarketSort.PriceAsc]: 'market.sort.price_asc',
+  [MarketSort.PriceDesc]: 'market.sort.price_desc',
+  [MarketSort.Newest]: 'market.sort.newest',
+  [MarketSort.EndingSoon]: 'market.sort.ending_soon',
+});
 
 export function itemLabel(defId: number): string {
   const key = itemDefById(defId)?.key;
-  return (key && ITEM_LABEL[key]) || `Vật phẩm #${defId}`;
+  const k = key && ITEM_LABEL_KEY[key];
+  return k ? t(k) : t('market.item.unknown', { id: defId });
 }
 
 export interface MarketFilter {
@@ -93,7 +106,13 @@ type Waiting = { op: number; listing?: MarketListing; label?: string };
 export class MarketModel {
   /** bumps on every change, so a view can redraw only when needed */
   version = 0;
-  readonly filter: MarketFilter = { view: MarketView.Browse, defId: 0, minQuality: 0, sort: MarketSort.PriceAsc, page: 0 };
+  readonly filter: MarketFilter = {
+    view: MarketView.Browse,
+    defId: 0,
+    minQuality: 0,
+    sort: MarketSort.PriceAsc,
+    page: 0,
+  };
   private rows: MarketListing[] = [];
   private _total = 0;
   private seen = false;
@@ -156,10 +175,10 @@ export class MarketModel {
   }
   /** The local part of the checks (the server re-validates everything): a Vietnamese problem line, or null when the form is sendable. */
   listProblem(unitPrice: number, qty: number, available: number, durationH: number): string | null {
-    if (!Number.isInteger(unitPrice) || unitPrice < MARKET_BOARD.MIN_UNIT_PRICE) return 'Hãy nhập giá (số nguyên, tối thiểu 1).';
-    if (!Number.isInteger(qty) || qty < 1 || qty > available) return 'Số lượng không hợp lệ.';
-    if (unitPrice * qty > MARKET_BOARD.MAX_TOTAL_PRICE) return 'Tổng giá quá lớn.';
-    if (!MARKET_BOARD.DURATIONS_H.includes(durationH)) return 'Thời hạn không hợp lệ.';
+    if (!Number.isInteger(unitPrice) || unitPrice < MARKET_BOARD.MIN_UNIT_PRICE) return t('market.problem.price');
+    if (!Number.isInteger(qty) || qty < 1 || qty > available) return t('market.problem.qty');
+    if (unitPrice * qty > MARKET_BOARD.MAX_TOTAL_PRICE) return t('market.problem.total');
+    if (!MARKET_BOARD.DURATIONS_H.includes(durationH)) return t('market.problem.duration');
     return null;
   }
   listCmd(slot: number, qty: number, unitPrice: number, durationH: number): MarketListMsg {
@@ -199,11 +218,13 @@ export class MarketModel {
     this.waiting.delete(m.clientMsgId);
     this.version++;
     let line: string;
-    if (m.reason !== MarketReason.Ok) line = MARKET_REASON_TEXT[m.reason] ?? `Thao tác bị từ chối (mã ${m.reason}).`;
-    else if (m.op === MarketOp.List) line = `Đã đăng bán. Phí niêm yết ${m.amount} hạ phẩm (không hoàn lại).`;
+    if (m.reason !== MarketReason.Ok)
+      line = MARKET_REASON_TEXT[m.reason] ?? t('market.result.refused', { code: m.reason });
+    else if (m.op === MarketOp.List) line = t('market.result.listed', { fee: m.amount });
     else if (m.op === MarketOp.Buy)
-      line = `Đã mua ${w?.label ?? 'món hàng'} với giá ${m.amount} hạ phẩm (người bán chịu thuế ${m.tax}).`;
-    else if (m.op === MarketOp.Cancel) line = `Đã gỡ ${w?.label ?? 'món hàng'} về túi (phí niêm yết không hoàn lại).`;
+      line = t('market.result.bought', { what: w?.label ?? t('market.result.a_listing'), price: m.amount, tax: m.tax });
+    else if (m.op === MarketOp.Cancel)
+      line = t('market.result.cancelled', { what: w?.label ?? t('market.result.a_listing') });
     else line = '';
     if (!w && m.op !== MarketOp.Search) return null;
     this.lastLine = line;
@@ -216,8 +237,8 @@ export class MarketModel {
     this.version++;
     this.lastLine =
       m.kind === MarketNoticeKind.Sold
-        ? `Vạn Bảo Lâu: ${what} đã bán, bạn nhận ${m.amount} hạ phẩm (sau thuế).`
-        : `Vạn Bảo Lâu: ${what} đã hết hạn và được trả về túi (hoặc kho nhặt đồ).`;
+        ? t('market.notice.sold', { what, amount: m.amount })
+        : t('market.notice.expired', { what });
     return this.lastLine;
   }
 
@@ -233,15 +254,31 @@ export class MarketModel {
 
   /** The page as plain lines (for `/market` in the chat log). */
   summaryLines(): string[] {
-    if (!this.seen) return ['Vạn Bảo Lâu chưa tải xong.'];
+    if (!this.seen) return [t('market.summary.loading')];
     const f = this.filter;
-    const head = f.view === MarketView.Mine ? 'Hàng của bạn' : 'Vạn Bảo Lâu';
-    const lines = [`${head} (${this._total} món, trang ${f.page + 1}/${this.pages}, ${SORT_LABEL[f.sort] ?? ''}):`];
+    const head = t(f.view === MarketView.Mine ? 'market.summary.mine' : 'market.summary.browse');
+    const lines = [
+      t('market.summary.head', {
+        head,
+        total: this._total,
+        page: f.page + 1,
+        pages: this.pages,
+        sort: SORT_LABEL[f.sort] ?? '',
+      }),
+    ];
     for (const l of this.rows)
       lines.push(
-        `  #${l.listingId} ${itemLabel(l.defId)} ${QUALITY_LABEL[l.quality] ?? ''} x${l.qty} · ${l.unitPrice} hạ/cái · ${l.seller}${l.mine ? ' (bạn)' : ''} · còn ${l.minutesLeft} phút`,
+        t('market.summary.row', {
+          id: l.listingId,
+          item: itemLabel(l.defId),
+          quality: QUALITY_LABEL[l.quality] ?? '',
+          qty: l.qty,
+          price: l.unitPrice,
+          seller: l.mine ? t('market.summary.seller_me', { name: l.seller }) : l.seller,
+          mins: l.minutesLeft,
+        }),
       );
-    if (this.rows.length === 0) lines.push('  (không có món nào)');
+    if (this.rows.length === 0) lines.push(t('market.summary.empty'));
     return lines;
   }
 }

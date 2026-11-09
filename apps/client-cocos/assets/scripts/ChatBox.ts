@@ -178,7 +178,7 @@ export class ChatBox {
     input.autocomplete = 'off';
     input.spellcheck = false;
     input.maxLength = 256;
-    input.placeholder = 'Enter để chat · /help';
+    input.placeholder = core.t('chat.input.placeholder');
     Object.assign(input.style, {
       flex: '0 0 auto',
       pointerEvents: 'auto',
@@ -261,7 +261,7 @@ export class ChatBox {
     this.onResize = () => this.layout();
     window.addEventListener('resize', this.onResize);
     this.layout();
-    this.log.system('Chat: Enter để gõ, /help để xem lệnh.');
+    this.log.system(core.t('chat.input.hint'));
 
     // automation hook (scripts/chat-online-smoke.mjs): read / drive the box without touching the DOM
     (globalThis as unknown as Record<string, unknown>).__vgtdChat = {
