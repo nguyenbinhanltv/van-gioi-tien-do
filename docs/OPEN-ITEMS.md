@@ -556,3 +556,10 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## D99 — sao lưu / khôi phục: còn mở (worker39, 2026-11-09)
+
+1. **Bản sao nằm cùng ổ đĩa mặc định** (`DATA_DIR/backups`): chưa có đẩy ra máy khác, mã hóa hay lịch chép ngoài; bản sao chứa băm mật khẩu như dữ liệu gốc. Người vận hành phải chép tay (docs/27 §9.1).
+2. **Phát hiện "server đang chạy" chỉ bằng mtime** (3 s): không có tệp khóa / pid; `restore --force` bỏ qua. Cần khóa thư mục dữ liệu khi có nhiều tiến trình.
+3. **Sao lưu ngoại tuyến khi server chạy** đọc tệp trên đĩa, trễ tới `flushMs` + chu kỳ lưu túi (5 s) so với bộ nhớ; chỉ sao lưu trực tiếp của server (`BACKUP_EVERY_MIN`, stdin `backup`) là đúng thời điểm.
+4. **Không có**: sao lưu tăng dần / nén, khôi phục một tài khoản, kiểm định kỳ tự động của bản sao cũ (chỉ `verify` thủ công), cảnh báo khi sao lưu lỗi ngoài dòng log (docs/27 §3 alert).
+5. **Kho PostgreSQL** (docs/08) cần sao lưu riêng (`pg_dump` + WAL / PITR) và thử khôi phục tương tự; giao diện lệnh ở đây chỉ phủ kho tệp D92.

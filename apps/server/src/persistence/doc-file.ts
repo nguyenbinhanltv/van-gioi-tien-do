@@ -30,6 +30,11 @@ export class DocFile {
     this.flushMs = opts.flushMs ?? 250;
   }
 
+  /** The document as it would be written right now (backups serialise every store in ONE synchronous turn, D99). */
+  serializeNow(): string {
+    return this.serialize();
+  }
+
   markDirty(): void {
     this.dirty = true;
     if (this.timer || this.flushMs < 0) return;

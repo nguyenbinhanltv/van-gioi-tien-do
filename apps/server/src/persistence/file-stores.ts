@@ -170,6 +170,9 @@ export function openFileLedger(path: string, opts: DocFileOptions = {}): { ledge
   return { ledger, file };
 }
 
+/** The four store documents as text, by file name. */
+export type StoreDocs = Record<'accounts.json' | 'progression.json' | 'inventories.json' | 'ledger.json', string>;
+
 export interface FileStores {
   accounts: FileAccountStore;
   progression: FileProgressionStore;
@@ -177,6 +180,12 @@ export interface FileStores {
   ledger: Ledger;
   /** write every document now (shutdown, tests) */
   flush(): void;
+  /**
+   * Every document as text, serialised in ONE synchronous turn: nothing can change between them, so the four always describe the same
+   * moment (a drop never shows in the ledger but not in the bag). `prepare` runs first (the server passes the save of online bags).
+   * This is what a live backup is made of (D99); it does not touch the files on disk.
+   */
+  snapshot(prepare?: () => void): StoreDocs;
   readonly dir: string;
 }
 
@@ -197,6 +206,15 @@ export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStor
       progression.file.flush();
       inventories.file.flush();
       ledgerFile.flush();
+    },
+    snapshot: (prepare) => {
+      prepare?.();
+      return {
+        'accounts.json': accounts.file.serializeNow(),
+        'progression.json': progression.file.serializeNow(),
+        'inventories.json': inventories.file.serializeNow(),
+        'ledger.json': ledgerFile.serializeNow(),
+      };
     },
   };
 }
