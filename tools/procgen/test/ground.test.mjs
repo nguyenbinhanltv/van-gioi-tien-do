@@ -235,8 +235,15 @@ describe('tile edge hairlines and water palette', () => {
       { tileW: 128, tileH: 64, waterFrames: 4, variants: 1, padding: 2 },
       { kind: 'water', frame: 0 },
     );
-    // pixel just outside the exact diamond (|dx|/64 + |dy|/32 = 1.03) is already opaque
-    expect(tile.getPixel(64 + 66, 32)[3]).toBe(255);
+    // The tips cannot leave the exact diamond inside a 128-wide tile, so probe the slanted edge near the top vertex (centres at +0.5):
+    //   exact diamond  |px-64|/64 + |py-32|/32 <= 1        grown (EXPAND 2.4, half that vertically)  /66.4 + /33.2
+    //   (68, 1): 4.5/64 + 30.5/32 = 1.02 -> outside the exact diamond, 4.5/66.4 + 30.5/33.2 = 0.99 -> inside the grown one
+    //   (68, 0): 4.5/66.4 + 31.5/33.2 = 1.02 -> outside even the grown diamond
+    const exact = (x, y) => Math.abs(x + 0.5 - 64) / 64 + Math.abs(y + 0.5 - 32) / 32;
+    expect(exact(68, 1)).toBeGreaterThan(1);
+    expect(tile.getPixel(68, 1)[3]).toBe(255);
+    expect(exact(68, 0)).toBeGreaterThan(1);
+    expect(tile.getPixel(68, 0)[3]).toBe(0);
   });
   it('liquidColor grades water onto the art-bible ramp (deep blue .. jade) and leaves lava alone', () => {
     const patch = new Image(16, 16);
