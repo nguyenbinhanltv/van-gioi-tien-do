@@ -12,6 +12,7 @@
  */
 import {
   BOSS_REPEAT_STONE_FACTOR,
+  CRAFT_FEE_RATE,
   BREAKTHROUGH,
   DROP_TABLE,
   DURABILITY_LOSS,
@@ -24,6 +25,9 @@ import {
   ROOT_TYPES,
   STONE_VALUE,
   breakthroughSuccess,
+  craftPromoteChance,
+  craftSuccessChance,
+  craftValue,
   directTradeTax,
   expectedStoneValue,
   listingFee,
@@ -70,11 +74,6 @@ export type SinkChannel = (typeof SINK_CHANNELS)[number];
 export type Activity = 'field' | 'elite' | 'boss' | 'quests' | 'craft';
 export const ACTIVITIES: readonly Activity[] = ['field', 'elite', 'boss', 'quests', 'craft'];
 
-/** docs/13 s5.1: kappa of the pill quality, V(r, q) = kappa x 1610 x 1.5^(r-1) */
-export const KAPPA: readonly number[] = [0.15, 0.25, 0.4, 0.7, 1.2, 2.0];
-/** docs/13 s4.3 quality ladder a_k and the Score step */
-const LADDER_A = [0.5, 0.4, 0.3, 0.18, 0.08];
-const CRAFT_FEE = 0.03; // docs/13 s6 (Đề xuất)
 const TRIBULATION_DEATH_PP = DURABILITY_LOSS.death_tribulation * 100;
 const PVE_DEATH_PP = DURABILITY_LOSS.death_pve * 100;
 const COMBAT_PP_PER_HOUR = DURABILITY_LOSS_PER_30MIN_COMBAT * 100 * 2;
@@ -172,7 +171,8 @@ const zeros = <K extends string>(keys: readonly K[]): Record<K, number> =>
 /** hạ phẩm value of the realm's weekly boss chest: 1610 at realm 1 (07 s6, 13 s5.1) */
 export const V_REF_1 = expectedStoneValue('boss');
 export const vRef = (realm: number): number => V_REF_1 * stoneRealmMultiplier(realm);
-export const pillValue = (realm: number, q: number): number => KAPPA[q]! * vRef(realm);
+/** V(r, q) of docs/13 s5.1 (shared) */
+export const pillValue = (realm: number, q: number): number => craftValue(realm, q);
 
 export function gini(sortedAsc: readonly number[]): number {
   const n = sortedAsc.length;
@@ -530,10 +530,10 @@ export function runSim(params: SimParams): SimResult {
         const ceil = P.recipeCeil;
         const matNeed = Math.ceil(pillValue(tr, ceil) / P.matUnitValue);
         const D = ceil + 1;
-        const pOk = Math.min(0.98, Math.max(0.4, 0.95 - 0.07 * (D - 1) + 0.02 * P.craftScore));
+        const pOk = craftSuccessChance(D, P.craftScore);
         const crafts = rng.poisson(P.craftsPerHour * craftH);
         for (let i = 0; i < crafts; i++) {
-          const fee = CRAFT_FEE * pillValue(tr, ceil);
+          const fee = CRAFT_FEE_RATE * pillValue(tr, ceil);
           if (p.mats < matNeed || p.wallet < fee) break;
           spend(p, 'craft_fee', fee);
           activity.craft.cost += fee;
@@ -542,7 +542,7 @@ export function runSim(params: SimParams): SimResult {
             item('mats', -matNeed);
             activity.craft.cost += matNeed * P.matUnitValue * matMult * 0.6;
             let q = 0;
-            while (q < 5 && rng.next() < Math.min(0.9, LADDER_A[q]! + 0.04 * P.craftScore)) q++;
+            while (q < 5 && rng.next() < craftPromoteChance(q, P.craftScore)) q++;
             q = Math.min(q, ceil);
             p.pills[tr]![q]!++;
             item('breakthrough_pill', 1);
