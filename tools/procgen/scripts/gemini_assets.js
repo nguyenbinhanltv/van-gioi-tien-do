@@ -364,13 +364,20 @@ function main() {
 
   // INTERIM mob standees share the PROP atlas pages (one texture for props + mobs: the Y-sort interleaves them, separate
   // pages would break the batch at every switch). Mobs are @1x pixels in both pages (drawn 1:1).
-  for (const key of [...Object.keys(manifest.mobs), ...Object.keys(manifest.mobsPhase).filter((n) => !n.startsWith('_'))])
+  for (const key of Object.keys(manifest.mobs))
     for (const d of ['props_2x', 'props_1x']) fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, d, `${key}.png`));
+  // boss-phase skins: their OWN @1x page for both tiers (loaded lazily by the client). In the prop pages they overflowed the
+  // 2048 page (a second texture breaks the L3 batch) and added ~2 MB to the initial package.
+  fs.rmSync(path.join(OUT, 'mobphase_1x'), { recursive: true, force: true });
+  fs.mkdirSync(path.join(OUT, 'mobphase_1x'), { recursive: true });
+  for (const key of Object.keys(manifest.mobsPhase).filter((n) => !n.startsWith('_')))
+    fs.copyFileSync(path.join(OUT, 'mobs_1x', `${key}.png`), path.join(OUT, 'mobphase_1x', `${key}.png`));
   for (const [dir, atlasName, kind] of [
     ['props_2x', 'atl_prop_2x', 'props'],
     ['props_1x', 'atl_prop_1x', 'props'],
     ['icons_2x', 'atl_gicon_2x', 'icons'],
     ['icons_1x', 'atl_gicon_1x', 'icons'],
+    ['mobphase_1x', 'atl_mobphase_1x', 'mobPhases'],
     ['ui_2x', 'atl_ui_2x', 'ui'],
     ['ui_1x', 'atl_ui_1x', 'ui'],
     ['skills_2x', 'atl_skill_2x', 'skills'],
@@ -386,7 +393,7 @@ function main() {
     const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';
     sidecar.atlases[atlasName] = a.pages.map((p) => ({ file: p.file, width: p.width, height: p.height }));
     for (const [n, f] of Object.entries(a.frames)) {
-      const target = sidecar[kind][n] || sidecar.mobs[n] || sidecar.mobPhases[n];
+      const target = sidecar[kind][n] || sidecar.mobs[n];
       target[scale] = { file: a.pages[f.page].file, x: f.x, y: f.y, w: f.w, h: f.h };
     }
   }

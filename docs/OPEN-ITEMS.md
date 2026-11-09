@@ -544,7 +544,7 @@ Còn mở / lưu ý:
 
 - Skin pha đổi khi client nhận `boss_phase`; client vào tầm nhìn SAU lúc boss đã đổi pha (AOI) chưa nhận lại thông điệp nên vẫn thấy skin pha đầu cho tới lần đổi pha kế: cần `phase` trong `aoi_enter` / snapshot (giao thức) để dựng đúng skin ngay.
 - Thanh máu trên đầu boss giữ độ cao của skin pha đầu (skin pha sau thấp hơn); chưa dùng sprite hoạt hình: chỉ nháy + đổi ảnh tĩnh trong cửa sổ biến hình (`TRANSFORM_SWAP_AT` = giữa cửa sổ).
-- Trang atlas prop @1x (tier thấp) lớn lên 2048×2048 (thêm ~8 MB GPU) vì ba skin pha rộng; nếu tier thấp cần nhẹ hơn, tách skin pha ra atlas nạp lười.
+- Skin pha boss nằm trong trang atlas riêng `atl_mobphase_1x` (@1x cho mọi tier, ~0,9 MB PNG, tải lười khi có boss có pha trong tầm nhìn; cổng ngân sách tính riêng qua `LAZY_ATLAS_PREFIXES`, không vào gói tải đầu). Trang prop vẫn một trang (`atl_prop_2x` 2048², `atl_prop_1x` 2048×1024). Còn mở: nếu boss đổi pha trước khi trang tải xong thì dùng tạm màu pha (hiếm: trang tải ngay khi boss vào tầm nhìn).
 
 ## 21. Tổ đội (D93, worker35): còn mở
 

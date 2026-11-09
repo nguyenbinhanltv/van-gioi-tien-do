@@ -132,6 +132,8 @@ export class PropArt {
   private readonly particleFrames = new Map<string, SpriteFrame>();
   /** loads the particle page on first use (not at start: particles are VFX, kept out of the initial download) */
   private particleLoader: (() => Promise<void>) | null = null;
+  private mobPhaseLoader: (() => Promise<void>) | null = null;
+  private mobPhasePromise: Promise<void> | null = null;
   private readonly mobById = new Map<number, { entry: MobSprite; frame: SpriteFrame }>();
   /** mob wire id -> phase -> skin (phase 0 = the base standee) */
   private readonly mobSkinsById = new Map<number, Map<number, { entry: MobSprite; frame: SpriteFrame }>>();
@@ -179,12 +181,17 @@ export class PropArt {
         art.mobById.set(m.id, skin);
         art.mobSkinsById.set(m.id, new Map([[0, skin]]));
       }
-      for (const m of Object.values(meta.mobPhases ?? {})) {
-        const f = low ? m.f1 : m.f2;
-        art.mobSkinsById
-          .get(m.id)
-          ?.set(m.phase, { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
-      }
+      // boss phase skins: their own @1x page (both tiers), loaded on first need (`mobSkins`), not in the initial download
+      art.mobPhaseLoader = async () => {
+        for (const m of Object.values(meta.mobPhases ?? {})) {
+          const skins = art.mobSkinsById.get(m.id);
+          if (skins)
+            skins.set(m.phase, {
+              entry: m,
+              frame: makeFrame(await texture(pageOf(m.f1)), m.f1.x, m.f1.y, m.f1.w, m.f1.h),
+            });
+        }
+      };
       // 9-slice UI frames: insets are in the frame's own pixels (x2 on the @2x page)
       art.uiK = low ? 1 : 0.5;
       for (const [key, u] of Object.entries(meta.ui ?? {})) {
@@ -241,6 +248,11 @@ export class PropArt {
 
   /** Every skin of a mob by phase (0 = base standee, then the boss phase skins), or undefined for an unknown mob. */
   mobSkins(id: number): ReadonlyMap<number, { entry: MobSprite; frame: SpriteFrame }> | undefined {
+    // the phase page loads once, on the first request for a mob that has phase skins; the map fills in when it resolves
+    if (Object.values(this.meta.mobPhases ?? {}).some((m) => m.id === id))
+      this.mobPhasePromise ??= (this.mobPhaseLoader?.() ?? Promise.resolve()).catch((e) => {
+        console.warn('[vgtd] boss phase skins unavailable:', e);
+      });
     return this.mobSkinsById.get(id);
   }
 

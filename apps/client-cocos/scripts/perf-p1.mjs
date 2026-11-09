@@ -150,7 +150,7 @@ try {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}${mobs ? '&combat=1&mobdemo=1' : ''}`;
+  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}${mobs ? '&combat=1&mobdemo=1' : ''}${flag('drawdbg') ? '&drawdbg=1' : ''}`;
   console.log('opening', url);
   await page.goto(url);
   await page.waitForFunction('window.__vgtdPerf && window.__vgtdPerf.fps > 0 && window.__vgtdPerf.nodes > 100', {
@@ -174,6 +174,11 @@ try {
     await sleep(500);
   }
   if (route) retained = { startMB: retainedStart, endMB: await heapAfterGc() };
+  if (flag('drawdbg')) {
+    const rep = await page.evaluate('window.__vgtdDrawDbg && window.__vgtdDrawDbg()');
+    console.log('drawdbg', JSON.stringify(rep));
+    for (const r of (rep && rep.runs) || []) console.log(`  ${r.count}x ${r.key}  ${r.first} .. ${r.last}`);
+  }
   meta = await page.evaluate(() => ({ ua: navigator.userAgent, dpr: devicePixelRatio }));
   await sleep(200);
 } finally {
