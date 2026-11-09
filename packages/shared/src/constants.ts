@@ -259,6 +259,43 @@ export const SUB_STAGE_NAMES: readonly string[] = ['sơ kỳ', 'trung kỳ', 'h�
 export const SPRITE_SMOOTH_FPS = 24;
 
 /**
+ * NPC sect "Sơn Môn Đại Phái" (D98, docs/01 §9.2, docs/10 §7.1 P4 "Tông môn NPC: gia nhập, Cống hiến, kho bí tịch"). The beta has exactly
+ * one sect, run by NPCs (no player-made sects). Cống hiến is an in-game currency in the ledger (docs/26 `CONG_HIEN`, never transferable
+ * between players). The docs name the currency, the library and the rank-up table (docs/11 §5) but give NO rates for earning it from
+ * kills and NO price for the basic manuals: those numbers are PROVISIONAL "cần game designer duyệt khi cân bằng".
+ */
+export const SECT = {
+  ID: 'son_mon',
+  NAME: 'Sơn Môn Đại Phái',
+  /** the ledger currency code of Cống hiến (docs/26 §2.1) */
+  CURRENCY: 'CONG_HIEN',
+  /**
+   * PLACEHOLDER NPC ids for the six Sơn Môn NPC standees (art by worker 42): they bind to these keys. Only the first two have a function in
+   * D98 (join / leave, library); the others are decoration until their systems exist.
+   */
+  NPCS: [
+    'son_mon_tiep_dan',
+    'son_mon_tang_kinh',
+    'son_mon_chuong_mon',
+    'son_mon_dan_phong',
+    'son_mon_luyen_khi',
+    'son_mon_nhiem_vu',
+  ],
+  /** NPC where a character joins / leaves the sect */
+  JOIN_NPC: 'son_mon_tiep_dan',
+  /** NPC (Tàng Kinh Các) where the library is used */
+  LIBRARY_NPC: 'son_mon_tang_kinh',
+  /** how close (tiles) a character must stand to the sect NPC to join, leave or buy (placeholder; wide enough for the whole 24-tile dev spawn square) */
+  NPC_RANGE_TILES: 20,
+  /** Cống hiến earned per kill by drop source, only while a member (placeholder; docs only give the quest `contribution` as fixed data) */
+  KILL_REWARD: { field: 1, elite: 5, boss: 25 },
+  /** library price of a manual = `MANUAL_PRICE_PER_LEVEL` x its `unlock.level_min` (placeholder; docs/11 §5 prices only the rank-up) */
+  MANUAL_PRICE_PER_LEVEL: 3,
+  /** most manuals one class library can list on the wire */
+  MAX_MANUALS: 8,
+} as const;
+
+/**
  * Party (D93, docs/10 §7.1 P4 "Tổ đội (4)"). Size 4 comes from docs/10 / docs/07 §6; the rest are PLACEHOLDERS "cần game designer duyệt".
  * Session-only: a party is never persisted.
  */

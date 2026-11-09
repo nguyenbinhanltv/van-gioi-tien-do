@@ -5,14 +5,17 @@
  * answer without a round trip; everything else (rate limit, mute, filter, whisper target) is decided and answered by the server.
  *
  * Party (D93): `/p text` party channel; `/invite name`, `/accept [name]`, `/decline [name]`, `/leave`, `/kick name` are party commands.
+ * Sect (D98): `/sect` shows it (the panel), `/sect join`, `/sect leave`, `/sect buy N` (N = the manual's number in the library).
  * Commands: plain text = World channel; `/z text` Zone (everyone who can see you); `/w name text` whisper; `/r text` reply to the last
  * player who whispered you; `//text` sends a World line that starts with a slash; `/help`.
  */
+import { SECT } from '@vgtd/shared';
 import {
   CHAT_LIMITS,
   ChatChannel,
   ChatReason,
   PartyOp,
+  SectOp,
   type ChatHistoryMsg,
   type ChatLine,
   type ChatMsgMsg,
@@ -47,6 +50,7 @@ export const CHAT_REASON_TEXT: Readonly<Record<number, string>> = {
 export const CHAT_HELP = [
   'Chat: gõ nội dung để nói ở kênh Thế giới.',
   '/z nội dung: kênh Vùng (người ở gần bạn) · /w tên nội dung: nhắn riêng · /r nội dung: trả lời người vừa nhắn · //nội dung: gửi tin bắt đầu bằng dấu /',
+  'Tông môn: /sect (xem) · /sect join · /sect leave · /sect buy số (phím K mở bảng Sơn Môn Đại Phái)',
   'Tổ đội: /invite tên · /accept [tên] · /decline [tên] · /leave · /kick tên (đội trưởng) · /p nội dung: chat tổ đội',
 ].join('\n');
 
@@ -55,7 +59,9 @@ export type ParsedChatInput =
   | { kind: 'help' }
   | { kind: 'error'; message: string }
   | { kind: 'send'; channel: number; target: string; text: string }
-  | { kind: 'party'; op: number; name: string };
+  | { kind: 'party'; op: number; name: string }
+  | { kind: 'sect'; op: number; manual: number }
+  | { kind: 'sects' };
 
 const utf8Bytes = (s: string): number => new TextEncoder().encode(s).length;
 
@@ -108,6 +114,32 @@ export function parseChatInput(raw: string, ctx: { lastWhisperFrom?: string | nu
       if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
       return { kind: 'party', op: cmd === 'accept' || cmd === 'ac' || cmd === 'dongy' ? PartyOp.Accept : PartyOp.Decline, name };
     }
+    case 'sect':
+    case 'tongmon':
+    case 'tm': {
+      const m2 = /^(\S*)\s*(\S*)/.exec(rest)!;
+      const sub = m2[1]!.toLowerCase();
+      switch (sub) {
+        case '':
+        case 'list':
+        case 'info':
+          return { kind: 'sects' };
+        case 'join':
+        case 'gianhap':
+          return { kind: 'sect', op: SectOp.Join, manual: 0 };
+        case 'leave':
+        case 'roi':
+          return { kind: 'sect', op: SectOp.Leave, manual: 0 };
+        case 'buy':
+        case 'mua': {
+          const n = /^\d{1,2}$/.test(m2[2]!) ? Number(m2[2]) : 0;
+          if (n < 1 || n > SECT.MAX_MANUALS) return { kind: 'error', message: 'Dùng: /sect buy số (số thứ tự bí tịch, từ 1)' };
+          return { kind: 'sect', op: SectOp.Buy, manual: n - 1 };
+        }
+        default:
+          return { kind: 'error', message: 'Dùng: /sect · /sect join · /sect leave · /sect buy số' };
+      }
+    }
     case 'leave':
     case 'roi':
       return { kind: 'party', op: PartyOp.Leave, name: '' };
@@ -147,10 +179,13 @@ export interface ChatLogOptions {
   myName: () => string;
   /** lines kept (oldest dropped) */
   max?: number;
+  /** `/sect` was typed: show the sect panel (or its text lines) */
+  onSect?: () => void;
 }
 
 export type SendChat = (m: { channel: number; text: string; target: string; clientMsgId: number }) => boolean;
 export type SendParty = (m: { op: number; name: string; clientMsgId: number }) => boolean;
+export type SendSect = (m: { op: number; manual: number; clientMsgId: number }) => boolean;
 
 export class ChatLog {
   readonly entries: ChatEntry[] = [];
@@ -212,7 +247,7 @@ export class ChatLog {
    * What the player typed. Local mistakes and `/help` are answered here; a good line goes to `send` (false = socket closed -> told so).
    * Returns true when something was sent.
    */
-  submit(raw: string, send: SendChat, sendParty?: SendParty): boolean {
+  submit(raw: string, send: SendChat, sendParty?: SendParty, sendSect?: SendSect): boolean {
     const p = parseChatInput(raw, { lastWhisperFrom: this.lastWhisperFrom });
     switch (p.kind) {
       case 'empty':
@@ -223,6 +258,18 @@ export class ChatLog {
       case 'error':
         this.system(p.message, 'error');
         return false;
+      case 'sects':
+        this.o.onSect?.();
+        return false;
+      case 'sect': {
+        if (!sendSect) {
+          this.system('Tông môn chưa dùng được.', 'error');
+          return false;
+        }
+        const ok = sendSect({ op: p.op, manual: p.manual, clientMsgId: this.nextClientMsgId() });
+        if (!ok) this.system('Chưa kết nối máy chủ.', 'error');
+        return ok;
+      }
       case 'party': {
         if (!sendParty) {
           this.system('Tổ đội chưa dùng được.', 'error');

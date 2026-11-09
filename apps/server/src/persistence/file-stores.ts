@@ -10,6 +10,7 @@
  */
 import { join } from 'node:path';
 import type { Account, AccountStore } from '../auth/accounts.js';
+import type { SectSnapshot, SectStore } from '../sect/store.js';
 import type { ProgressRecord } from '../progression/state.js';
 import type { ProgressionStore } from '../progression/store.js';
 import { Ledger, type LedgerSnapshot } from '../world/inventory/ledger.js';
@@ -161,6 +162,37 @@ export class FileInventoryStore implements InventoryStore {
   }
 }
 
+/** Sect membership and bought manuals (D98): account ids and skill ids, see `SectSnapshot`. The Cống hiến balance is in the ledger. */
+export class FileSectStore implements SectStore {
+  private snap: SectSnapshot | undefined;
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    this.snap = load(path, 'sect', (d) => {
+      if (!Array.isArray(d.members) || !d.members.every(isStr)) throw new Error('sect: malformed members');
+      if (!Array.isArray(d.manuals)) throw new Error('sect: missing manuals');
+      const manuals = d.manuals.map((p: unknown): [string, string] => {
+        if (!Array.isArray(p) || p.length !== 2 || !isStr(p[0]) || !isStr(p[1]))
+          throw new Error('sect: malformed manuals entry');
+        return [p[0], p[1]];
+      });
+      return { members: d.members as string[], manuals };
+    });
+    this.file = new DocFile(
+      path,
+      () => JSON.stringify({ v: VERSION, members: this.snap?.members ?? [], manuals: this.snap?.manuals ?? [] }),
+      opts,
+    );
+  }
+  load(): SectSnapshot | undefined {
+    return this.snap === undefined ? undefined : structuredClone(this.snap);
+  }
+  save(s: SectSnapshot): void {
+    if (this.snap !== undefined && JSON.stringify(this.snap) === JSON.stringify(s)) return;
+    this.snap = structuredClone(s);
+    this.file.markDirty();
+  }
+}
+
 /** The ledger lives in its own document (docs/23 §4.4: separate from the inventory snapshots). */
 export function openFileLedger(path: string, opts: DocFileOptions = {}): { ledger: Ledger; file: DocFile } {
   const snap = load(path, 'ledger', (d) => d as unknown as LedgerSnapshot);
@@ -174,28 +206,32 @@ export interface FileStores {
   accounts: FileAccountStore;
   progression: FileProgressionStore;
   inventories: FileInventoryStore;
+  sect: FileSectStore;
   ledger: Ledger;
   /** write every document now (shutdown, tests) */
   flush(): void;
   readonly dir: string;
 }
 
-/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `ledger.json`. */
+/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `ledger.json`. */
 export function openFileStores(dir: string, opts: DocFileOptions = {}): FileStores {
   const accounts = new FileAccountStore(join(dir, 'accounts.json'), opts);
   const progression = new FileProgressionStore(join(dir, 'progression.json'), opts);
   const inventories = new FileInventoryStore(join(dir, 'inventories.json'), opts);
+  const sect = new FileSectStore(join(dir, 'sect.json'), opts);
   const { ledger, file: ledgerFile } = openFileLedger(join(dir, 'ledger.json'), opts);
   return {
     accounts,
     progression,
     inventories,
+    sect,
     ledger,
     dir,
     flush: () => {
       accounts.file.flush();
       progression.file.flush();
       inventories.file.flush();
+      sect.file.flush();
       ledgerFile.flush();
     },
   };

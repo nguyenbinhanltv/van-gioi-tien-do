@@ -62,6 +62,7 @@ import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
+import type { SectService } from '../sect/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -72,7 +73,7 @@ import {
   type CombatResult,
 } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
-import { DropSink, InventorySync, itemUseFor, type InventoryService } from './inventory/index.js';
+import { DropSink, InventorySync, dropKillKey, itemUseFor, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -213,6 +214,8 @@ export interface WorldNodeOptions {
   chat?: ChatService;
   /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
   party?: PartyService;
+  /** NPC sect module (D98): join / leave at the sect NPC, Cống hiến from kills, the library; absent = sect commands are rejected as unexpected */
+  sect?: SectService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -323,6 +326,7 @@ export class WorldNode {
   readonly progression: ProgressionService | undefined;
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
+  readonly sect: SectService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -361,6 +365,16 @@ export class WorldNode {
       },
       posOf: (id) => this.byId.get(id),
       partyMembers: (id) => this.party?.membersOf(id) ?? [],
+    });
+    this.sect = opts.sect;
+    this.sect?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
+      // the sect NPC stands in the middle of the spawn area unless the sect service was told otherwise
+      defaultNpc: { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
     });
     this.party = opts.party;
     this.party?.attach({
@@ -427,12 +441,21 @@ export class WorldNode {
           isInvulnerable: (id) => this.mobAttacks?.isInvulnerable(id) ?? false,
           ...opts.combat,
           mobs: mobPort,
-          onDrops: sink
-            ? (e) => {
-                sink.handle(e);
-                opts.combat?.onDrops?.(e);
-              }
-            : opts.combat.onDrops,
+          onDrops:
+            sink || opts.sect
+              ? (e) => {
+                  sink?.handle(e);
+                  // a sect member's kill pays Cống hiến (D98); the kill key makes a repeated event a replay
+                  const owner = this.clients.get(e.killerId)?.accountId;
+                  if (owner !== undefined && opts.sect)
+                    opts.sect.onKill(
+                      owner,
+                      mobPort?.combatStats(e.mobId)?.dropSource ?? 'field',
+                      dropKillKey(e.mobId, this.world.tick),
+                    );
+                  opts.combat?.onDrops?.(e);
+                }
+              : opts.combat.onDrops,
         })
       : null;
     this.mobAttacks =
@@ -514,6 +537,7 @@ export class WorldNode {
     });
     this.progression?.join(id, accountId, this.world.timeMs);
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.sect?.join({ entityId: id, accountId, path: classPath });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -553,6 +577,7 @@ export class WorldNode {
     void this.progression?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
+    this.sect?.leave(id);
     this.chatHistoryDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -765,6 +790,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
         break;
+      case 'sect_cmd':
+        if (!this.sect) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.sect.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           c.stats.badMessages++;
@@ -841,6 +872,7 @@ export class WorldNode {
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     this.party?.tick(this.world.timeMs, this.world.tick);
+    this.sect?.tick();
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);

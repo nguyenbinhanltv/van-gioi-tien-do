@@ -13,6 +13,7 @@ import {
   AuthService,
   DocFile,
   FileAccountStore,
+  FileSectStore,
   FileProgressionStore,
   Ledger,
   newRecord,
@@ -166,6 +167,25 @@ describe('file stores round trip', () => {
     expect(() => inv2.grantDrops('acc', [{ item: 'stone_ha', qty: 5 }], 'field', 'k1')).not.toThrow();
     expect(inv2.wallet('acc', HA)).toBe(walletBefore + 5n);
     expect(s2.ledger.reconcile()).toEqual([]);
+  });
+
+  it('sect: members and bought manuals round trip, an unchanged save costs no write, malformed data is refused', () => {
+    const d = tmp();
+    const p = join(d, 'sect.json');
+    const a = new FileSectStore(p, { flushMs: -1 });
+    expect(a.load()).toBeUndefined(); // first start
+    const snap = { members: ['acc-a', 'acc-b'], manuals: [['acc-a', 'kiem_tu.kim_quang_quet']] as [string, string][] };
+    a.save(snap);
+    a.file.flush();
+    const writes = a.file.writes;
+    a.save(structuredClone(snap));
+    a.file.flush();
+    expect(a.file.writes).toBe(writes);
+    expect(new FileSectStore(p, { flushMs: -1 }).load()).toEqual(snap);
+    writeFileAtomic(p, JSON.stringify({ v: 1, members: [1], manuals: [] }));
+    expect(() => new FileSectStore(p)).toThrow(/malformed members/);
+    writeFileAtomic(p, JSON.stringify({ v: 1, members: [], manuals: [['only-one']] }));
+    expect(() => new FileSectStore(p)).toThrow(/malformed manuals/);
   });
 
   it('re-saving an unchanged bag (the periodic save of online players) costs no disk write', () => {
