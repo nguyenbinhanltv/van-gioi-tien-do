@@ -5,7 +5,7 @@ real `@vgtd/shared` formulas and tables and reports stone supply per player per 
 for dominant loops and runaway faucets. **It reports; it never changes a gameplay number** (changes go through `vgtd-formula-change`).
 
 ```bash
-npm run sim -w @vgtd/econ-sim -- --out ../../docs/35-mo-phong-kinh-te.md   # full report (~40 s), then: npx prettier --write docs/35-mo-phong-kinh-te.md
+npm run sim -w @vgtd/econ-sim -- --out ../../docs/37-mo-phong-kinh-te.md   # full report (~40 s), then: npx prettier --write docs/37-mo-phong-kinh-te.md
 npm run sim -w @vgtd/econ-sim -- --quick                                   # 400 players, 42 days, to stdout
 npm test -w @vgtd/econ-sim
 ```
