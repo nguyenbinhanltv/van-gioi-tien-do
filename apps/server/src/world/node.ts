@@ -1037,6 +1037,11 @@ export class WorldNode {
       if (enters.length > 0) {
         this.send(c, { type: 'aoi_enter', entities: enters });
         c.stats.aoiEnter += enters.length;
+        // an entity that comes into view with an active status: tell this client now (status_update otherwise only goes out on a change)
+        for (const en of enters) {
+          const mask = this.statusMasks.get(en.entityId);
+          if (mask) this.send(c, { type: 'status_update', entityId: en.entityId, mask });
+        }
       }
       const n = c.visible.size;
       c.stats.visibleSum += n;

@@ -487,6 +487,11 @@ export class NetClient {
         break;
       case 'aoi_leave':
         this.emit(() => this.events.onAoiLeave?.(msg.indices)); // before removal: indices still resolve
+        for (const i of msg.indices) {
+          // an entity that left the view has no known status: its mask-0 `status_update` may never reach us (D94)
+          const id = this.entityOfIndex(i);
+          if (id !== undefined) this.otherStatus.delete(id);
+        }
         this.remote.onLeave(msg);
         break;
       case 'telegraph_start':

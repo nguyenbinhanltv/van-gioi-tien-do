@@ -149,4 +149,21 @@ describe('status_update for other players (D94)', () => {
     expect(victim.updates()).toHaveLength(0);
     expect(far.updates()).toHaveLength(0);
   });
+
+  it('a player who comes into view while another is rooted gets the current mask right after aoi_enter', () => {
+    const node = makeNode();
+    const victim = new Client();
+    const victimId = node.addPlayer(victim, 'victim');
+    run(node, 6);
+    node.combat!.status.rootPlayer(victimId, node.world.timeMs, 5000);
+    run(node, 4);
+    const late = new Client();
+    node.addPlayer(late, 'late');
+    run(node, 12);
+    expect(late.updates()).toEqual([{ type: 'status_update', entityId: victimId, mask: 1 }]);
+    const enterAt = late.msgs.findIndex((m) => m.type === 'aoi_enter');
+    const updAt = late.msgs.findIndex((m) => m.type === 'status_update');
+    expect(enterAt).toBeGreaterThanOrEqual(0);
+    expect(updAt).toBeGreaterThan(enterAt); // after the enter, so the client already knows the entity
+  });
 });
