@@ -34,6 +34,7 @@ import { OnlineSession, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
+import { PartyFrames } from './PartyFrames';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -95,6 +96,7 @@ export class Bootstrap extends Component {
   private progressionHud: ProgressionHud | null = null;
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
+  private partyFrames: PartyFrames | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -295,6 +297,8 @@ export class Bootstrap extends Component {
     if (this.online) {
       this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
       this.chatBox = new ChatBox(this.online.net, this.online.username);
+      const chat = this.chatBox;
+      this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -525,6 +529,7 @@ export class Bootstrap extends Component {
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
     this.chatBox?.update();
+    this.partyFrames?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -571,6 +576,7 @@ export class Bootstrap extends Component {
     this.combat?.destroy();
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
+    this.partyFrames?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

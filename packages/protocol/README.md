@@ -32,3 +32,7 @@ additive, so they do not bump `PROTOCOL_VERSION` (2 since D74 for an unrelated f
 ## Chat messages (D87)
 
 `chat_send` (40), `chat_msg` (41), `chat_history` (42) and `chat_result` (43) in `src/chat.ts`: same cold envelope and strict canonical decode as the progression / inventory messages. Text is valid UTF-8 capped in bytes (content 256, names 24, history 50 lines); every `chat_send` is answered by exactly one `chat_result`. `PROTOCOL_VERSION` is unchanged (additive ids).
+
+## Party messages (D93)
+
+`party_cmd` (44), `party_result` (45), `party_invite` (46), `party_state` (47) and `party_vitals` (48) in `src/party.ts`: same cold envelope and strict canonical decode as chat. At most `PARTY.MAX_SIZE` members per roster, names capped at 24 bytes, the leader of a non-empty roster must be one of its members; every `party_cmd` is answered by exactly one `party_result`. The party chat channel is `ChatChannel.Party` (4) of the chat messages. `PROTOCOL_VERSION` is unchanged (additive ids; 49 and 69+ are left to other workers).

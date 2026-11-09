@@ -539,3 +539,12 @@ Còn mở / lưu ý:
 
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ. Đã đo bản @2x (2026-11-09): prop @2x + quái @2x cần 3,74 / 4,19 MP, xếp thành **2 trang** 2048² (thêm ~16 MB GPU và Y-sort bị ngắt batch giữa prop và quái), nên chưa làm; làm khi có sprite hoạt hình thật (atlas riêng cho quái, nén ASTC).
 - Quái nhận biết bằng `EnemyView.defId` (id dây của `MOB_DEFS`, do `aoi_enter` mang); tên `Mob <id>` chỉ còn là đường lùi cho backend chưa gán `defId`.
+
+## 21. Tổ đội (D93, worker35): còn mở
+
+- **Chia chiến lợi phẩm là PLACEHOLDER**: mỗi người trong 20 ô tự roll với hệ số 1/√n (docs/07 §6). Cần game designer duyệt: bán kính chia, có tính người đã chết / ngoại tuyến không, nhặt chung hay riêng (Need / Greed), chia **kinh nghiệm** (MVP chưa có XP khi hạ quái), boss bí cảnh "1 lần mỗi tuần mỗi người" khi đi đội.
+- **Hạn mức là đề xuất**: 1 lệnh / s bùng nổ 5 theo tài khoản; lời mời sống 30 s, tối đa 4 lời mời treo mỗi người; giải tán khi còn 1 người; nhường đội trưởng cho người vào lâu nhất. Chưa có "đồng ý tự nhận lời mời của bạn bè", chưa có cấm nhận lời mời / chặn người chơi (OPEN-ITEMS 20).
+- **Chỉ trong phiên**: đội tan khi ngắt kết nối hoặc server khởi động lại; resume trong cửa sổ giữ chỗ vẫn tính là **chưa** ngắt kết nối (đội giữ nguyên), nhưng chưa có test cho trường hợp này. Chưa lưu bền (cần bàn với nhóm lưu trữ).
+- **Chưa có**: chuyển quyền đội trưởng chủ động (`/leader tên`), đội hình / đánh dấu mục tiêu, tìm đội công khai, đội liên bản đồ (hiện chỉ một bản đồ), nhóm chat Đội lưu lịch sử, thông báo ngoại tuyến cho người mời khi bị từ chối (từ chối im lặng với người mời).
+- **Hiển thị**: khung đồng đội là DOM overlay dưới khung người chơi, chưa có icon lớp / icon hiệu ứng (buff / debuff), chưa kéo-thả, chưa có "đồng đội ngoài tầm nhìn" trên minimap; HP / MP gửi 5 Hz khi đổi (không tính vào ngân sách snapshot).
+- **Kỹ năng ngữ cảnh nhóm** (docs/11 §2, `context: group`): server combat chưa biết "còn đồng đội sống" nên mọi kỹ năng ⚑C vẫn chạy nhánh solo; cần `PartyService.membersOf` làm nguồn khi hiện thực.
