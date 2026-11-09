@@ -15,6 +15,13 @@ import {
   type ChatServerMessage,
 } from './chat.js';
 import {
+  decodeTradeBody,
+  encodeTradeBody,
+  validateTradeMessage,
+  type TradeClientMessage,
+  type TradeServerMessage,
+} from './trade.js';
+import {
   decodeSectBody,
   encodeSectBody,
   validateSectMessage,
@@ -59,6 +66,11 @@ export enum ColdMsgId {
   PartyInvite = 46,
   PartyState = 47,
   PartyVitals = 48,
+  /** direct trade (D102, trade.ts); 69-70 are the major-breakthrough messages of D97, so the docs/24 trade block starts at 71 here */
+  TradeCmd = 71,
+  TradeResult = 72,
+  TradeState = 73,
+  TradeInvite = 74,
   /** NPC sect (D98, sect.ts): the docs/24 block 100-119 is reserved for `sect_*` */
   SectCmd = 100,
   SectResult = 101,
@@ -101,6 +113,10 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyInvite]: 'party_invite',
   [ColdMsgId.PartyState]: 'party_state',
   [ColdMsgId.PartyVitals]: 'party_vitals',
+  [ColdMsgId.TradeCmd]: 'trade_cmd',
+  [ColdMsgId.TradeResult]: 'trade_result',
+  [ColdMsgId.TradeState]: 'trade_state',
+  [ColdMsgId.TradeInvite]: 'trade_invite',
   [ColdMsgId.SectCmd]: 'sect_cmd',
   [ColdMsgId.SectResult]: 'sect_result',
   [ColdMsgId.SectState]: 'sect_state',
@@ -129,6 +145,10 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_invite: ColdMsgId.PartyInvite,
   party_state: ColdMsgId.PartyState,
   party_vitals: ColdMsgId.PartyVitals,
+  trade_cmd: ColdMsgId.TradeCmd,
+  trade_result: ColdMsgId.TradeResult,
+  trade_state: ColdMsgId.TradeState,
+  trade_invite: ColdMsgId.TradeInvite,
   sect_cmd: ColdMsgId.SectCmd,
   sect_result: ColdMsgId.SectResult,
   sect_state: ColdMsgId.SectState,
@@ -243,6 +263,7 @@ export type ColdClientMessage =
   | InvClientMessage
   | ChatClientMessage
   | PartyClientMessage
+  | TradeClientMessage
   | SectClientMessage
   | FriendClientMessage;
 export type ColdServerMessage =
@@ -252,6 +273,7 @@ export type ColdServerMessage =
   | InvServerMessage
   | ChatServerMessage
   | PartyServerMessage
+  | TradeServerMessage
   | SectServerMessage
   | MajorServerMessage
   | FriendServerMessage;
@@ -322,6 +344,7 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validateInventoryMessage(o) ??
         validateChatMessage(o) ??
         validatePartyMessage(o) ??
+        validateTradeMessage(o) ??
         validateSectMessage(o) ??
         validateMajorMessage(o) ??
         validateFriendMessage(o)
@@ -399,6 +422,12 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'party_vitals':
       encodePartyBody(w, m);
       break;
+    case 'trade_cmd':
+    case 'trade_result':
+    case 'trade_state':
+    case 'trade_invite':
+      encodeTradeBody(w, m);
+      break;
     case 'sect_cmd':
     case 'sect_result':
     case 'sect_state':
@@ -469,6 +498,11 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'party_state':
     case 'party_vitals':
       return decodePartyBody(r, type);
+    case 'trade_cmd':
+    case 'trade_result':
+    case 'trade_state':
+    case 'trade_invite':
+      return decodeTradeBody(r, type);
     case 'sect_cmd':
     case 'sect_result':
     case 'sect_state':

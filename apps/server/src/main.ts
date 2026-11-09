@@ -1,4 +1,5 @@
 /** Local dev entry: `PORT=8080 node <bundle>` (hosting is local-only for now, D27). */
+import { jsonLineSink } from './world/security-log.js';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createBackup, openFileStores } from './persistence/index.js';
@@ -59,8 +60,12 @@ const srv = await startServer({
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
+    // structured security events (kicks, flood drops, malformed frames, anti-cheat violations; D101): one JSON line each, no PII; SECURITY_LOG=0 silences
+    securityLog: process.env.SECURITY_LOG === '0' ? undefined : jsonLineSink((line) => console.log(line)),
     inventory: flag(process.env.INVENTORY)
-      ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
+      ? new InventoryService(
+          stores ? { store: stores.inventories, ledger: stores.ledger, durable: stores.durable } : {},
+        )
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
