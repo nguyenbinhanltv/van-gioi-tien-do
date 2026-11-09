@@ -69,6 +69,17 @@ export class MajorEventView {
     this.strike = null;
   }
 
+  /**
+   * `NetClient` `events.onReconnect` handler that forgets the event (the final `major_event` may have been lost with the old
+   * connection; a resumed server re-sends the live state on the next tick). Runs `prev` first so an existing handler still works.
+   */
+  chainReconnect(prev?: (info: { resumed: boolean }) => void): (info: { resumed: boolean }) => void {
+    return (info) => {
+      prev?.(info);
+      this.reset();
+    };
+  }
+
   current(): MajorSnapshot | null {
     const m = this.ev;
     if (!m) return null;

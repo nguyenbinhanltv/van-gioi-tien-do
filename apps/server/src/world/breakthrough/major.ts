@@ -131,6 +131,32 @@ export class MajorBreakthroughs implements MajorEventPort {
   isActive(entityId: number): boolean {
     return this.events.has(entityId);
   }
+  /** The `major_event` describing where a running event stands now (null when none runs): re-sent to a player who resumes a held session. */
+  snapshotMsg(entityId: number, nowMs: number): MajorServerMessage | null {
+    const a = this.events.get(entityId);
+    if (!a) return null;
+    let remaining = 0;
+    let wave = 0;
+    if (a.phase === MajorPhase.TamMa) remaining = a.spawned ? a.shadowDeadlineMs - nowMs : MAJOR_EVENT.TAM_MA_LIMIT_MS;
+    else if (a.phase === MajorPhase.Destiny) remaining = MAJOR_EVENT.DESTINY_PAUSE_MS - (nowMs - a.phaseStartMs);
+    else {
+      remaining = a.lightStartMs - nowMs; // > 0 while the clouds gather, else 0
+      wave = a.waveAnnounced;
+    }
+    return {
+      type: 'major_event',
+      phase: a.phase,
+      wave,
+      waves: a.spec.tribulation?.waves ?? 0,
+      remainingMs: Math.max(0, Math.round(remaining)),
+      strengthPct: Math.round(a.strength * 100),
+      result: MajorResult.Running,
+      tier: 0,
+      expLostPct: 0,
+      lockMin: 0,
+      tamMaId: a.phase === MajorPhase.TamMa ? a.shadowId : 0,
+    };
+  }
   /** Shadow entity of a player's running Tâm Ma (0 = none). */
   shadowOf(entityId: number): number {
     return this.events.get(entityId)?.shadowId ?? 0;

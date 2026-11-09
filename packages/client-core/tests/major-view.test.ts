@@ -84,4 +84,21 @@ describe('MajorEventView (D97)', () => {
     v.reset();
     expect(v.active).toBe(false);
   });
+
+  it('a reconnect forgets a running event (its final message may have been lost) and still runs the previous handler', () => {
+    const v = new MajorEventView(() => 0);
+    v.apply(ev({}));
+    v.applyStrike({ type: 'tribulation_strike', wave: 1, waves: 3, strike: 0, qi: 0, qj: 0, damage: 5 });
+    expect(v.active).toBe(true);
+    const seen: boolean[] = [];
+    const onReconnect = v.chainReconnect((info) => seen.push(info.resumed));
+    onReconnect({ resumed: true });
+    expect(seen).toEqual([true]);
+    expect(v.active).toBe(false);
+    expect(v.title()).toBe('');
+    expect(v.current()).toBeNull();
+    v.apply(ev({}));
+    v.chainReconnect()({ resumed: false }); // no previous handler
+    expect(v.active).toBe(false);
+  });
 });

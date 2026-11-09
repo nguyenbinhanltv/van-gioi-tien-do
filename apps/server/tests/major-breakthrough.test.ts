@@ -98,6 +98,7 @@ async function rig(
     spawn: { i0: 30, j0: 30, side: 1 },
     combat: {},
     progression: service,
+    resumeHoldMs: 300_000,
   });
   const c = new Client();
   const id = node.addPlayer(c, 'acc');
@@ -497,4 +498,69 @@ describe('only the owner can hurt the Tâm Ma shadow (D97)', () => {
     r.run(8000);
     expect(ent(otherId).hp).toBe(r.node.combat!.maxHpOf(otherId));
   }, 30_000);
+});
+
+describe('a held player gets the event state back when it resumes (D97)', () => {
+  /** drop the connection, let `ms` of sim time pass, come back on a new transport; the node re-sends the state on the next tick */
+  const dropAndResume = (r: Rig, ms: number): Client => {
+    const token = r.node.resumeTokenOf(r.id)!;
+    expect(r.node.suspendPlayer(r.id, r.c)).toBe(true);
+    const seen = r.c.msgs.length;
+    r.run(ms);
+    expect(r.c.msgs.length).toBe(seen); // nothing reached the dead connection
+    const back = new Client();
+    expect(r.node.resumePlayer(r.id, token, back)).not.toBeNull();
+    expect(back.of('major_event')).toHaveLength(0); // not before the client has handled the hello_ack
+    r.run(100);
+    return back;
+  };
+
+  it('mid Tâm Ma: the live phase, the time left and the shadow id', async () => {
+    const r = await rig();
+    r.start();
+    r.run(200);
+    const sid = r.shadowId();
+    expect(sid).toBeGreaterThan(0);
+    const back = dropAndResume(r, 20_000);
+    const ev = back.of('major_event');
+    expect(ev).toHaveLength(1);
+    expect(ev[0]).toMatchObject({ phase: MajorPhase.TamMa, result: MajorResult.Running, tamMaId: sid });
+    expect(ev[0]!.remainingMs).toBeGreaterThan(0);
+    expect(ev[0]!.remainingMs).toBeLessThan(MAJOR_EVENT.TAM_MA_LIMIT_MS - 19_000);
+  });
+
+  it('the phase changed during the hold: the client gets the CURRENT phase', async () => {
+    const r = await rig({ realm: 3, seed: seedFor(true, breakthroughSuccess({ realm: 3, karma: 0, nFail: 0 })) });
+    r.start();
+    r.run(100);
+    r.killShadow();
+    r.run(100);
+    const token = r.node.resumeTokenOf(r.id)!;
+    expect(r.node.suspendPlayer(r.id, r.c)).toBe(true);
+    r.run(MAJOR_EVENT.DESTINY_PAUSE_MS + 400); // Thiên Mệnh rolls, the clouds start gathering
+    const back = new Client();
+    expect(r.node.resumePlayer(r.id, token, back)).not.toBeNull();
+    r.run(100);
+    const ev = back.of('major_event');
+    expect(ev).toHaveLength(1);
+    expect(ev[0]).toMatchObject({ phase: MajorPhase.Tribulation, result: MajorResult.Running, tamMaId: 0 });
+  });
+
+  it('the event ended during the hold: its final major_event and breakthrough_result are delivered at the resume', async () => {
+    const r = await rig();
+    r.start();
+    r.run(200);
+    const back = dropAndResume(r, MAJOR_EVENT.TAM_MA_LIMIT_MS + 2000); // the time runs out while held
+    expect(r.node.major!.isActive(r.id)).toBe(false);
+    expect(back.of('major_event').map((m) => m.result)).toContain(MajorResult.TamMaLost);
+    expect(back.of('breakthrough_result')).toHaveLength(1);
+  });
+
+  it('nothing is queued when no event runs', async () => {
+    const r = await rig();
+    r.run(100);
+    const back = dropAndResume(r, 1000);
+    expect(back.of('major_event')).toHaveLength(0);
+    expect(back.of('breakthrough_result')).toHaveLength(0);
+  });
 });

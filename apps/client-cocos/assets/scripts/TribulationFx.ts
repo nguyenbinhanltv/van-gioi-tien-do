@@ -74,6 +74,9 @@ export class TribulationFx {
     const gn = newNode('Lightning', worldUiLayer(worldRoot));
     gn.addComponent(UITransform);
     this.g = gn.addComponent(Graphics);
+    // a reconnect drops whatever the old connection never finished (a lost final `major_event` would leave the tint up forever);
+    // a resumed server re-sends the live event next tick. `attachCombat` spreads `net.events`, so this survives it.
+    net.events = { ...net.events, onReconnect: this.view.chainReconnect(net.events.onReconnect?.bind(net.events)) };
     net.majorEvents = {
       onMajorEvent: (m) => this.view.apply(m),
       onTribulationStrike: (m) => {

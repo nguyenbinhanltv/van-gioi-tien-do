@@ -21,6 +21,7 @@ import {
   toUW,
   type PathId,
   type RngState,
+  MajorResult,
 } from '@vgtd/shared';
 import {
   ErrorCode,
@@ -333,6 +334,10 @@ export class WorldNode {
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
    */
   private readonly chatHistoryDue = new Map<number, ChatLine[]>();
+  /** Major-event messages a player missed while held (D97): their final answer, kept until they resume. */
+  private readonly heldMajor = new Map<number, Message[]>();
+  /** Major-event state to re-send to resumed players on the next tick (after the client has reset its overlay on `hello_ack`). */
+  private readonly majorDue = new Map<number, Message[]>();
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
   /** Mobs in chase hurt their target (D86); null without mobs + combat or with `combat.mobAttacks: false`. */
@@ -586,6 +591,8 @@ export class WorldNode {
     this.chat?.leave(id);
     this.party?.leave(id);
     this.chatHistoryDue.delete(id);
+    this.heldMajor.delete(id);
+    this.majorDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
@@ -686,6 +693,11 @@ export class WorldNode {
     c.snapSeq = 0;
     c.lastAckMs = now;
     c.lastResyncMs = -Infinity;
+    // a Tâm Ma / Kiếp that ran (or ended) while the player was held: tell the client where it stands, next tick (D97)
+    const snap = this.major?.snapshotMsg(id, now);
+    const missed = this.heldMajor.get(id);
+    this.heldMajor.delete(id);
+    if (snap || missed?.length) this.majorDue.set(id, snap ? [snap] : missed!);
     this.world = {
       ...this.world,
       entities: this.world.entities.map((e) =>
@@ -879,6 +891,7 @@ export class WorldNode {
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
+    if (this.majorDue.size) this.sendMajorDue();
     this.party?.tick(this.world.timeMs, this.world.tick);
     for (const e of this.world.entities) {
       if (!e.connected) {
@@ -957,11 +970,29 @@ export class WorldNode {
     this.chatHistoryDue.clear();
   }
 
+  private sendMajorDue(): void {
+    for (const [id, msgs] of this.majorDue) {
+      const c = this.clients.get(id);
+      if (c && !c.dead) for (const m of msgs) this.send(c, m);
+    }
+    this.majorDue.clear();
+  }
+
   /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
   private deliver(out: Outbound[]): void {
     for (const o of out) {
       const c = this.clients.get(o.entityId);
-      if (c && !c.dead) this.send(c, o.msg);
+      if (!c || c.dead) continue;
+      if (c.suspendedAtMs !== null) {
+        // held player: the final answer of an event is kept for the resume (the rest is rebuilt from the live event)
+        const m = o.msg;
+        if ((m.type === 'major_event' && m.result !== MajorResult.Running) || m.type === 'breakthrough_result') {
+          const q = this.heldMajor.get(o.entityId) ?? [];
+          q.push(m);
+          this.heldMajor.set(o.entityId, q);
+        }
+      }
+      this.send(c, o.msg);
     }
   }
 
