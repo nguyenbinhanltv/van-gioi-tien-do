@@ -5,6 +5,7 @@ import {
   COURTYARD,
   SPAWN_CLEAR_RADIUS,
   SWAMP_REACH,
+  ZONE_MIN_DIST,
   mulberry32,
   placeProps,
   type PlacementInput,
@@ -249,6 +250,17 @@ describe('zone dressing (PART 2 props)', () => {
         plain.props.some((p) => p.name === n),
         n,
       ).toBe(false);
+  });
+
+  it('leaves the start view alone: dressing is not scattered near the spawn and never reshuffles what is there', () => {
+    for (const seed of [1, 2, 3]) {
+      const terrain = makeTerrain(seed + 3);
+      const near = (p: { i: number; j: number }) =>
+        Math.max(Math.abs(p.i - spawn.i), Math.abs(p.j - spawn.j)) < ZONE_MIN_DIST - 2;
+      const plain = placeProps(input({ seed, terrain })).props.filter(near);
+      const zoned = placeProps(input({ seed, terrain, zoneAt })).props.filter(near);
+      expect(zoned).toEqual(plain);
+    }
   });
 
   it('keeps the big ancient tree (4 x 4) on land with its spacing', () => {
