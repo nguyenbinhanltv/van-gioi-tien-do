@@ -133,7 +133,7 @@ try {
     failures++;
   });
   await page.goto(
-    `http://127.0.0.1:${webPort}/?online=1&npcs=0&server=127.0.0.1:${gwPort}&name=prog${Date.now() % 100000}`,
+    `http://127.0.0.1:${webPort}/?online=1&npcs=0&class=kiem-tu&server=127.0.0.1:${gwPort}&name=prog${Date.now() % 100000}`,
   );
   const state = () => page.evaluate('window.__vgtdProgression ? window.__vgtdProgression.state() : null');
   const until = async (what, pred, timeoutMs = 20000) => {

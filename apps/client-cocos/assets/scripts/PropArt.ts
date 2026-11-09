@@ -32,6 +32,11 @@ interface Sidecar {
   skills?: Record<string, { path: string; index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** INTERIM mob standees (MobArt.ts), packed into the SAME pages as the props so the Y-sort batches them together */
   mobs?: Record<string, MobSprite>;
+  /** 9-slice UI frames (panel_jade, button_normal, button_disabled, slot_frame): size and slice insets in @1x design px */
+  ui?: Record<
+    string,
+    { w: number; h: number; inset: [number, number, number, number]; f2: AtlasFrame; f1: AtlasFrame }
+  >;
 }
 export interface MobSprite {
   id: number;
@@ -69,6 +74,9 @@ export class PropArt {
   private readonly iconFrames = new Map<string, SpriteFrame>();
   private readonly skillFrames = new Map<string, SpriteFrame>();
   private readonly mobById = new Map<number, { entry: MobSprite; frame: SpriteFrame }>();
+  private readonly uiFrames = new Map<string, SpriteFrame>();
+  /** node scale that maps the UI atlas page's pixels to design px: 0.5 on the @2x page, 1 on the @1x page */
+  private uiK = 0.5;
 
   private constructor(
     private readonly meta: Sidecar,
@@ -108,6 +116,18 @@ export class PropArt {
         const f = low ? m.f1 : m.f2;
         art.mobById.set(m.id, { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
       }
+      // 9-slice UI frames: insets are in the frame's own pixels (x2 on the @2x page)
+      art.uiK = low ? 1 : 0.5;
+      for (const [key, u] of Object.entries(meta.ui ?? {})) {
+        const f = low ? u.f1 : u.f2;
+        const sf = makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h);
+        const k = low ? 1 : 2;
+        sf.insetLeft = u.inset[0] * k;
+        sf.insetTop = u.inset[1] * k;
+        sf.insetRight = u.inset[2] * k;
+        sf.insetBottom = u.inset[3] * k;
+        art.uiFrames.set(key, sf);
+      }
       // skill icons (hotbar): the @2x page (1024 px, 4 MB) is drawn at <= 64 design px; `tier low` takes the @1x page
       for (const [id, sk] of Object.entries(meta.skills ?? {})) {
         const f = low ? sk.f1 : sk.f2;
@@ -132,6 +152,26 @@ export class PropArt {
   /** INTERIM mob standee sprite by mob wire id (MOB_DEFS id), or undefined. */
   mob(id: number): { entry: MobSprite; frame: SpriteFrame } | undefined {
     return this.mobById.get(id);
+  }
+
+  /** node scale mapping the UI atlas page to design px (0.5 on the @2x page) */
+  get uiScale(): number {
+    return this.uiK;
+  }
+
+  /** A 9-slice frame by key (`panel_jade`, `button_normal`, `button_disabled`, `slot_frame`), or null when the art is missing. */
+  uiFrame(key: string): SpriteFrame | null {
+    return this.uiFrames.get(key) ?? null;
+  }
+
+  /**
+   * Adds a 9-slice frame node under `parent` covering `w` x `h` design px, centred on the parent's origin. `scale` shrinks the border
+   * ornaments (0.5 = half size). Cocos draws slice borders at native pixels, so the node runs at `uiK * scale` with a content size
+   * enlarged by the inverse. Returns null when the frame is not available (callers keep their flat quad).
+   */
+  slice(parent: Node, name: string, key: string, w: number, h: number, scale = 1): UiSlice | null {
+    const frame = this.uiFrame(key);
+    return frame ? new UiSlice(parent, name, frame, this, w, h, scale) : null;
   }
 
   /** Skill icon by skill id (e.g. `kiem_khi_tram`), or null when missing. Square; draw it at 64 design px. */
@@ -191,5 +231,42 @@ export class PropArt {
     const key = footprintSortable(allocSortId(), 0, i0, j0, fw, fh);
     ysort.add(n, () => key);
     return n;
+  }
+}
+
+/** A 9-slice UI frame instance (see `PropArt.slice`). */
+export class UiSlice {
+  readonly node: Node;
+  private readonly sprite: Sprite;
+  private readonly s: number;
+
+  constructor(
+    parent: Node,
+    name: string,
+    frame: SpriteFrame,
+    private readonly art: PropArt,
+    w: number,
+    h: number,
+    scale: number,
+  ) {
+    this.s = art.uiScale * scale;
+    this.node = newNode(name, parent);
+    this.node.setScale(this.s, this.s, 1);
+    const ui = this.node.addComponent(UITransform);
+    ui.setContentSize(w / this.s, h / this.s);
+    this.sprite = this.node.addComponent(Sprite);
+    this.sprite.type = Sprite.Type.SLICED;
+    this.sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+    this.sprite.spriteFrame = frame;
+  }
+
+  /** Swap to another frame of the family (e.g. button_normal <-> button_disabled) without changing the size. */
+  setKey(key: string): void {
+    const f = this.art.uiFrame(key);
+    if (f) this.sprite.spriteFrame = f;
+  }
+
+  setSize(w: number, h: number): void {
+    this.node.getComponent(UITransform)!.setContentSize(w / this.s, h / this.s);
   }
 }

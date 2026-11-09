@@ -221,17 +221,35 @@ describe('whisper', () => {
     expect(r.got.get(1)).toEqual(r.got.get(2)); // the echo is the same line: "alice -> bob"
     expect(r.got.get(3)).toBeUndefined(); // nobody else sees it
   });
-  it('unknown and offline targets are the same answer (no way to probe who exists), and cost no token', () => {
+  it('unknown and offline targets are the same answer (no way to probe who exists)', () => {
     const r = rig();
     r.chat.leave(3);
     expect(r.say(1, 'x', ChatChannel.Whisper, 'carol')).toBe(ChatReason.NoSuchPlayer); // was online, left
     expect(r.say(1, 'x', ChatChannel.Whisper, 'nobody_here')).toBe(ChatReason.NoSuchPlayer);
-    for (let k = 0; k < 3; k++)
-      expect(r.say(1, `ok${k}`, ChatChannel.Whisper, 'bob', 0)).toBe(k < 3 ? ChatReason.Ok : ChatReason.RateLimited);
   });
   it('whispering yourself is refused', () => {
     const r = rig();
     expect(r.say(1, 'me', ChatChannel.Whisper, 'ALICE')).toBe(ChatReason.SelfWhisper);
+  });
+  it('name probing is rate limited: NoSuchPlayer / SelfWhisper answers cost a token, so rapid probes end in RateLimited', () => {
+    const r = rig();
+    const burst = CHAT_CONFIG.RATE.whisper.burst;
+    const answers = Array.from({ length: burst + 5 }, (_, k) => r.say(1, 'x', ChatChannel.Whisper, `ghost${k}`, 0));
+    expect(answers.slice(0, burst).every((a) => a === ChatReason.NoSuchPlayer)).toBe(true);
+    expect(answers.slice(burst).every((a) => a === ChatReason.RateLimited)).toBe(true);
+    // once the bucket is empty even a real online name gets no free answer: no distinguishable reply either way
+    expect(r.say(1, 'x', ChatChannel.Whisper, 'bob', 0)).toBe(ChatReason.RateLimited);
+    expect(r.say(1, 'x', ChatChannel.Whisper, 'alice', 0)).toBe(ChatReason.RateLimited); // SelfWhisper is not free either
+    expect(r.got.get(2)).toBeUndefined(); // nothing was delivered
+    // the probes did not burn the World channel's own bucket
+    expect(r.say(1, 'still can talk', ChatChannel.World, '', 0)).toBe(ChatReason.Ok);
+    // and a probe is paid for like any line: one token per refill interval buys exactly one more answer
+    expect(r.say(1, 'x', ChatChannel.Whisper, 'ghost', CHAT_CONFIG.RATE.whisper.refillMs)).toBe(
+      ChatReason.NoSuchPlayer,
+    );
+    expect(r.say(1, 'x', ChatChannel.Whisper, 'ghost2', CHAT_CONFIG.RATE.whisper.refillMs)).toBe(
+      ChatReason.RateLimited,
+    );
   });
   it('rate limited per account: 3 in a burst, then 1 per 2 s', () => {
     const r = rig();
@@ -290,7 +308,7 @@ describe('zone', () => {
 });
 
 describe('channels that do not exist', () => {
-  it.each([[0], [4], [5], [255]])('channel %i is BadChannel (Party opens with the party feature)', (channel) => {
+  it.each([[0], [5], [255]])('channel %i is BadChannel', (channel) => {
     const r = rig();
     expect(r.say(1, 'x', channel)).toBe(ChatReason.BadChannel);
     expect(r.got.size).toBe(0);

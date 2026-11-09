@@ -166,6 +166,8 @@ export class CombatUi {
   private readonly enemyNodes = new Map<number, Node>();
   /** INTERIM mob standees (MobArt.ts); set by Bootstrap. Enemies it does not know keep the placeholder sprite. */
   mobArt: MobArt | null = null;
+  /** the L2 shadow layer (standee shadows) */
+  private readonly shadowLayer: Node | null;
   private readonly standees = new Map<number, MobStandee>();
   private readonly enemyBars = new Map<number, OverheadBar>();
   private readonly selfBar: OverheadBar;
@@ -202,6 +204,7 @@ export class CombatUi {
     this.ysort = ysort;
 
     const l1 = worldRoot.getChildByName('L1_Decal') ?? worldRoot;
+    this.shadowLayer = worldRoot.getChildByName('L2_Shadow');
     this.ring = newNode('TargetRing', l1);
     this.ring.addComponent(UITransform).setContentSize(shared.TILE_WIDTH, shared.TILE_HEIGHT);
     const rs = this.ring.addComponent(Sprite);
@@ -656,10 +659,11 @@ export class CombatUi {
     for (const e of this.backend.enemies) {
       seen.add(e.id);
       let n = this.enemyNodes.get(e.id);
-      const standee = !n ? this.mobArt?.create(e.id, e.name) : null;
+      const standee = !n ? this.mobArt?.create(e.id, e.name, e.defId) : null;
       if (!n && standee) {
         n = standee.node;
         this.standees.set(e.id, standee);
+        if (this.shadowLayer) standee.attachShadow(this.art.shadow, this.shadowLayer);
         const id = e.id;
         const key = 3000 + (id % 100000);
         this.ysort.add(n, () => {
@@ -687,7 +691,7 @@ export class CombatUi {
       n.setPosition(tileToWorld(e.pos.i, e.pos.j));
       const st = this.standees.get(e.id);
       if (st) {
-        st.update(dt, e);
+        st.update(dt, e, this.playerPos());
         n.active = st.visible;
       } else n.active = e.alive;
     }
@@ -695,6 +699,7 @@ export class CombatUi {
       if (seen.has(id)) return;
       this.ysort.remove(n); // unregisters only: destroy the node here
       n.destroy();
+      this.standees.get(id)?.shadowNode?.destroy();
       this.standees.delete(id);
       this.enemyNodes.delete(id);
     });

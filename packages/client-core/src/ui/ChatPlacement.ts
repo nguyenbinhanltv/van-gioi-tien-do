@@ -35,3 +35,39 @@ export function touchChatPlacement(
   if (joystick && intersects(strip, joystick)) strip = { ...strip, y: Math.max(res.safe.y, joystick.y - strip.h) };
   return { strip, joystick, scale: res.scale };
 }
+
+/** Logic-px height of one party-frame row (the frames show the OTHER members: at most PARTY.MAX_SIZE - 1 rows). */
+export const PARTY_ROW_HEIGHT = 36;
+
+export interface PartyFramesPlacement {
+  /** top-left of the stack, CSS px */
+  x: number;
+  y: number;
+  /** width of one row, CSS px */
+  w: number;
+  /** height of one row, CSS px */
+  rowH: number;
+  scale: number;
+}
+
+/**
+ * Where the party frames (D93) stack: directly under the shared `player-frame` of the current profile (top-left, clear of the touch
+ * joystick at the bottom-left and of the chat strip in the left-middle). `touch` picks the touch profile.
+ */
+export function partyFramesPlacement(
+  vw: number,
+  vh: number,
+  touch: boolean,
+  insets: Insets = { top: 0, right: 0, bottom: 0, left: 0 },
+): PartyFramesPlacement {
+  const opts: Required<AnchorLayoutOptions> = {
+    refLandscape: [1280, 720],
+    refPortrait: [720, 1280],
+    userScale: 1,
+    touchMargin: 16,
+  };
+  const res = AnchorLayout.compute(vw, vh, insets, touch ? 'touch' : 'pointer', DEFAULT_PROFILES, opts);
+  const pf = res.rects.get('player-frame') ?? { x: res.safe.x, y: res.safe.y, w: 0, h: 0 };
+  const gap = Math.round(8 * res.scale);
+  return { x: pf.x, y: pf.y + pf.h + gap, w: pf.w, rowH: Math.round(PARTY_ROW_HEIGHT * res.scale), scale: res.scale };
+}
