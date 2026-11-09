@@ -37,6 +37,7 @@ import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
 import { FriendsPanel } from './FriendsPanel';
+import { CraftPanel } from './CraftPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -100,6 +101,7 @@ export class Bootstrap extends Component {
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private craftPanel: CraftPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -323,6 +325,20 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // alchemy panel (D108): P; the numbers come from the same shared formulas the server uses, the server decides everything
+      const net = this.online.net;
+      const craft = new core.CraftModel({
+        now: () => performance.now(),
+        newRequestId: () => core.requestIdFrom(Math.random),
+        bagCount: (id) => net.bag.count(id),
+        stones: () => Number(net.bag.wallet.LT_HA ?? 0),
+        realm: () => this.progressionHud?.view.state?.realm ?? null,
+      });
+      net.craftEvents = {
+        onCraftState: (m) => craft.applyState(m),
+        onCraftResult: (m) => craft.applyResult(m),
+      };
+      this.craftPanel = new CraftPanel(craft, { position: () => net.selfPosition(), send: (m) => net.sendCraft(m) });
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -576,6 +592,7 @@ export class Bootstrap extends Component {
     this.chatBox?.update();
     this.partyFrames?.update();
     this.friendsPanel?.update();
+    this.craftPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -625,6 +642,7 @@ export class Bootstrap extends Component {
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
     this.friendsPanel?.destroy();
+    this.craftPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

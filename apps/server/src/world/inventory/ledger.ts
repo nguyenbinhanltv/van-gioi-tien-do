@@ -15,8 +15,13 @@
 import type { Currency } from './items.js';
 
 export type AccountKind =
-  'PLAYER_WALLET' | 'SYSTEM_FAUCET_DROP_MOB' | 'SYSTEM_FAUCET_DROP_ELITE' | 'SYSTEM_FAUCET_DROP_BOSS';
-export type LedgerReason = 'DROP';
+  | 'PLAYER_WALLET'
+  | 'SYSTEM_FAUCET_DROP_MOB'
+  | 'SYSTEM_FAUCET_DROP_ELITE'
+  | 'SYSTEM_FAUCET_DROP_BOSS'
+  /** furnace fees of alchemy (D108, docs/13 §6.1): paid by the player, destroyed */
+  | 'SYSTEM_SINK_CRAFT_FEE';
+export type LedgerReason = 'DROP' | 'CRAFT';
 
 export interface AccountRef {
   kind: AccountKind;

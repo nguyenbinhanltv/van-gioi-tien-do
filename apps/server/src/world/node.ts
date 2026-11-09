@@ -62,6 +62,7 @@ import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
+import { CraftService, type CraftLogEntry } from '../craft/service.js';
 import type { FriendService } from '../friends/service.js';
 import {
   CombatSystem,
@@ -216,6 +217,11 @@ export interface WorldNodeOptions {
   party?: PartyService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
   friends?: FriendService;
+  /**
+   * Minimal alchemy (D108): needs `inventory` and `progression`. `true` = the furnace NPC in the middle of the spawn area; absent / false = no crafting
+   * (craft messages are rejected as unexpected).
+   */
+  craft?: boolean | { furnaceAt?: { i: number; j: number }; seed?: number; onLog?: (e: CraftLogEntry) => void };
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -327,6 +333,8 @@ export class WorldNode {
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
   readonly friends: FriendService | undefined;
+  /** alchemy (D108); null when the node runs without it */
+  readonly craft: CraftService | null = null;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -410,6 +418,18 @@ export class WorldNode {
     this.inventory = opts.inventory ?? null;
     this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
     this.inventory?.subscribe((owner) => this.invSync?.markDirty(owner));
+    if (opts.craft && this.inventory && this.progression) {
+      const co = opts.craft === true ? {} : opts.craft;
+      this.craft = new CraftService({
+        inventory: this.inventory,
+        progression: this.progression,
+        furnaceAt: co.furnaceAt ?? { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
+        seed: co.seed ?? seed,
+        onLog: co.onLog,
+        isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
+        tickOf: () => this.world.tick,
+      });
+    }
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
@@ -496,6 +516,7 @@ export class WorldNode {
       mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
     this.inventory?.onJoin(accountId);
+    this.craft?.join(id, accountId, this.world.timeMs);
     this.invSync?.markDirty(accountId); // the joining client gets its first inv_state this tick
     this.clients.set(id, {
       id,
@@ -563,6 +584,7 @@ export class WorldNode {
     this.inventory?.onLeave(c.accountId);
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
     void this.progression?.leave(id);
+    this.craft?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
     this.friends?.leave(id);
@@ -730,7 +752,10 @@ export class WorldNode {
       case 'input': {
         c.lastAckMs = this.world.timeMs;
         for (const p of msg.inputs) {
-          if (p.mag > 0) this.progression?.onInput(id, p.mag, this.world.timeMs);
+          if (p.mag > 0) {
+            this.progression?.onInput(id, p.mag, this.world.timeMs);
+            if (this.craft) this.deliver(this.craft.onMove(id, this.world.timeMs));
+          }
           // the packet re-sends the previous inputs; apply each seq once (uint16 wrap-aware)
           if (c.lastRecvSeq !== null && !seqNewer(p.seq, c.lastRecvSeq)) continue;
           c.lastRecvSeq = p.seq;
@@ -748,6 +773,7 @@ export class WorldNode {
       }
       case 'skill_cast':
         this.progression?.onCombat(id, this.world.timeMs);
+        if (this.craft) this.deliver(this.craft.onCombat(id, this.world.timeMs));
         c.inbox.push({
           kind: 'cast',
           entityId: c.id,
@@ -765,6 +791,15 @@ export class WorldNode {
           c.stats.badMessages++;
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
+        break;
+      case 'craft_cmd':
+        if (!this.craft) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else {
+          const e = this.byId.get(id);
+          this.deliver(this.craft.handle(id, msg, this.world.timeMs, e ? { i: e.i, j: e.j } : null));
+        }
         break;
       case 'chat_send':
         if (!this.chat) {
@@ -858,6 +893,13 @@ export class WorldNode {
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
+    if (this.craft)
+      this.deliver(
+        this.craft.tick(this.world.timeMs, (id) => {
+          const e = this.byId.get(id);
+          return e ? { i: e.i, j: e.j } : null;
+        }),
+      );
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     this.party?.tick(this.world.timeMs, this.world.tick);
     this.friends?.tick();

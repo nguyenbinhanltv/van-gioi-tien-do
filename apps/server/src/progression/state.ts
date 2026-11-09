@@ -55,6 +55,8 @@ export interface ProgressRecord {
    * hello. Absent on records written before D82: they are given a class by the next login (`resolveClass`).
    */
   readonly classId?: PathId;
+  /** alchemy mastery points 0..100 per recipe key (D108, docs/13 §4.1); absent = none yet. Persisted with the record (D92). */
+  readonly craftMastery?: Readonly<Record<string, number>>;
 }
 
 type Position = Pick<ProgressRecord, 'realm' | 'subRealm'>;

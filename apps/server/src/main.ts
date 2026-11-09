@@ -59,6 +59,8 @@ const srv = await startServer({
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
+    // alchemy at the furnace NPC (D108): needs INVENTORY (bags, stones) and the progression module (realm, mastery)
+    craft: flag(process.env.INVENTORY) ? true : undefined,
     inventory: flag(process.env.INVENTORY)
       ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
       : undefined,

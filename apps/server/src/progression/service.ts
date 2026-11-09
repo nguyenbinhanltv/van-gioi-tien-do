@@ -286,6 +286,27 @@ export class ProgressionService {
   recordOf(entityId: number): ProgressRecord | null {
     return this.sessions.get(entityId)?.rec ?? null;
   }
+  /** Alchemy mastery points (0..100) of a recipe key (D108); 0 for a character without any or before its profile loads. */
+  masteryOf(entityId: number, recipeKey: string): number {
+    return this.sessions.get(entityId)?.rec?.craftMastery?.[recipeKey] ?? 0;
+  }
+  /** All the character's mastery entries (recipe key -> points). */
+  masteryAll(entityId: number): Readonly<Record<string, number>> {
+    return this.sessions.get(entityId)?.rec?.craftMastery ?? {};
+  }
+  /** Add mastery points to a recipe (capped at `max`), saved like every progression change. Returns the new total, or null when not loaded. */
+  addMastery(entityId: number, recipeKey: string, points: number, max: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const cur = s.rec.craftMastery?.[recipeKey] ?? 0;
+    const next = Math.min(max, Math.max(0, cur + Math.trunc(points)));
+    if (next !== cur) {
+      s.rec = { ...s.rec, craftMastery: { ...s.rec.craftMastery, [recipeKey]: next } };
+      s.dirty = true;
+      void this.save(s);
+    }
+    return next;
+  }
   /**
    * A breakthrough pill (D90) of `quality` is drunk: its bonus applies to the NEXT breakthrough attempt of this character. One at a
    * time; session-only (not persisted). 'ok' = accepted (the caller consumes the item), otherwise nothing changed.
