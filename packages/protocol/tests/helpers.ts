@@ -1,5 +1,6 @@
 import type {
   TelegraphEndMsg,
+  BossPhaseMsg,
   TelegraphStartMsg,
   ColdMessage,
   AoiEnterMsg,
@@ -75,6 +76,7 @@ export function randMessage(r: Rng, type?: HotType): Message {
     'pong',
     'telegraph_start',
     'telegraph_end',
+    'boss_phase',
   ];
   const t = type ?? types[r.int(0, types.length - 1)]!;
   switch (t) {
@@ -175,6 +177,15 @@ export function randMessage(r: Rng, type?: HotType): Message {
         size: r.int(0, 65535),
         extra: r.int(0, 65535),
         durationMs: r.int(0, 65535),
+      };
+      return m;
+    }
+    case 'boss_phase': {
+      const m: BossPhaseMsg = {
+        type: 'boss_phase',
+        mobEntityId: r.int(0, 2 ** 32 - 1),
+        phase: r.int(1, 255),
+        transformMs: r.int(0, 65535),
       };
       return m;
     }

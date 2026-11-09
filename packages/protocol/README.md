@@ -28,3 +28,7 @@ The `self` block carries the owner's `lastSeq` plus the movement state needed to
 big-endian layouts until the Protobuf pipeline exists (request ids are 16 bytes, shown as 32 lowercase hex characters;
 `char_state` carries `tuVi`/`tuViReq` as float64). Decoding is strict and canonical like the hot family; adding a msgId is
 additive, so they do not bump `PROTOCOL_VERSION` (2 since D74 for an unrelated field). `ProgressionReason`, `BreakthroughOutcome`, `BreakthroughKind` and `CHAR_FLAG` are the wire enums.
+
+## Chat messages (D87)
+
+`chat_send` (40), `chat_msg` (41), `chat_history` (42) and `chat_result` (43) in `src/chat.ts`: same cold envelope and strict canonical decode as the progression / inventory messages. Text is valid UTF-8 capped in bytes (content 256, names 24, history 50 lines); every `chat_send` is answered by exactly one `chat_result`. `PROTOCOL_VERSION` is unchanged (additive ids).

@@ -523,6 +523,13 @@ export class CombatUi {
     }
   }
 
+  /** A boss entered phase `phase` (wire `boss_phase`, D91): a big floating line above it and a toast; the standee flash / skin swap is the mob art layer's job. */
+  announceBossPhase(entityId: number, phase: number): void {
+    this.spawnText(entityId, `Bien hinh! Pha ${phase + 1}`, new Color(255, 120, 60, 255), 34);
+    this.toast.string = `Boss bien hinh (pha ${phase + 1}) / Boss transforms (phase ${phase + 1})`;
+    this.toastLeft = 2.5;
+  }
+
   private spawnText(entityId: number, str: string, color: Color, size: number): void {
     const pos = entityId === cb.PLAYER_ID ? this.playerPos() : (this.backend.enemy(entityId)?.pos ?? null);
     if (!pos) return;

@@ -20,6 +20,7 @@ import {
   type SnapshotEntity,
   type SnapshotMsg,
   type TelegraphEndMsg,
+  type BossPhaseMsg,
   type TelegraphStartMsg,
 } from './types.js';
 
@@ -231,6 +232,15 @@ export function validateMessage(x: unknown): Message {
     case 'telegraph_end': {
       if (typeof o.cancelled !== 'boolean') throw new ProtocolError('malformed', 'cancelled must be a boolean');
       const m: TelegraphEndMsg = { type: 'telegraph_end', id: int(o.id, 0, U16, 'id'), cancelled: o.cancelled };
+      return m;
+    }
+    case 'boss_phase': {
+      const m: BossPhaseMsg = {
+        type: 'boss_phase',
+        mobEntityId: int(o.mobEntityId, 0, U32, 'mobEntityId'),
+        phase: int(o.phase, 1, 255, 'phase'),
+        transformMs: int(o.transformMs, 0, U16, 'transformMs'),
+      };
       return m;
     }
     default: {

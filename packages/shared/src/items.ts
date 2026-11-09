@@ -34,6 +34,10 @@ export const ITEM_DEFS: readonly ItemDef[] = [
   { id: 6, key: 'craft_material', kind: 'stackable', stackLimit: 999, tradable: true },
 ];
 
+/** Items the player can use from the bag (`inv_cmd` op Use, D90). */
+export const USABLE_ITEM_KEYS: readonly string[] = ['heal_pill', 'breakthrough_pill'];
+export const isUsableItem = (key: string | undefined): boolean => key !== undefined && USABLE_ITEM_KEYS.includes(key);
+
 export function itemDefByKey(key: DropItem): ItemDef | undefined {
   return ITEM_DEFS.find((d) => d.key === key);
 }

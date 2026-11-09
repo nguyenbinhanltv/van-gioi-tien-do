@@ -18,6 +18,7 @@ import {
   rngFloat,
   rngFork,
   rngSeed,
+  ITEM_USE,
   NETWORK,
   REGEN,
   skillDefinitions,
@@ -39,6 +40,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { DEFAULT_PATH, makeProfile } from './profile.js';
+import { StatusSystem } from './status.js';
 import { resolveCast, type ResolveTarget } from './resolve.js';
 import {
   type AimedInput,
@@ -57,6 +59,8 @@ interface PlayerCombat {
   shieldUntilMs: number;
   /** sim time of the last damage dealt or taken (regeneration is slower in combat, D88) */
   lastCombatMs: number;
+  /** sim time at which the shared pill cooldown ends (D90) */
+  pillReadyAtMs: number;
   /** fractional HP / MP not yet applied (vitals are integers; the remainder carries over) */
   hpFrac: number;
   mpFrac: number;
@@ -92,6 +96,8 @@ export class CombatSystem {
   private pending: Pending[] = [];
   private dropRng: RngState;
   private readonly respawnDelayMs: number;
+  /** root / slow / poison / pools put on players by elite and boss skills (D91) */
+  readonly status = new StatusSystem();
 
   constructor(
     private readonly ctx: SimContext,
@@ -118,6 +124,7 @@ export class CombatSystem {
       shield: 0,
       shieldUntilMs: 0,
       lastCombatMs: -REGEN.outOfCombatDelayMs, // a new player starts out of combat
+      pillReadyAtMs: 0,
       hpFrac: 0,
       mpFrac: 0,
     });
@@ -146,6 +153,7 @@ export class CombatSystem {
   }
 
   removePlayer(id: number): void {
+    this.status.clear(id);
     this.players.delete(id);
     this.pending = this.pending.filter((p) => p.casterId !== id);
   }
@@ -200,7 +208,7 @@ export class CombatSystem {
         continue;
       }
       if (inp.kind === 'move') {
-        if (p.alive) keep.push(inp);
+        if (p.alive) keep.push(this.status.adjustMove(inp, world.timeMs));
         continue;
       }
       // a client seq is unique: a second cast with the same (entity, seq) in one tick is malformed, the first one wins
@@ -266,8 +274,23 @@ export class CombatSystem {
     for (const p of due) w = this.resolve(w, p, results, events);
     w = this.respawnDue(w, events);
     w = this.regenerate(w);
+    w = this.applyStatus(w, events);
     this.inflight.clear(); // every entry belongs to this tick's inputs: anything left (no sim event) is stale
     return { world: w, results, events };
+  }
+
+  /** Poison and pool ticks that are due (D91): plain damage on living players, through `damagePlayer`. */
+  private applyStatus(world: SimWorld, events: CombatEvent[]): SimWorld {
+    const living: Array<{ id: number; i: number; j: number }> = [];
+    for (const e of world.entities)
+      if (e.hp > 0 && this.players.get(e.id)?.alive) living.push({ id: e.id, i: e.i, j: e.j });
+    let w = world;
+    for (const hit of this.status.tick(world.timeMs, living)) {
+      const r = this.damagePlayer(w, hit.targetId, hit.amount, hit.sourceId);
+      w = r.world;
+      for (const ev of r.events) events.push(ev);
+    }
+    return w;
   }
 
   /** Damage a player from outside the cast pipeline (mob attacks, PvP, environment). Shields absorb first. */
@@ -300,6 +323,42 @@ export class CombatSystem {
       w = patch(w, new Map([[id, { vi: 0, vj: 0, pending: [] }]]));
     }
     return { world: w, events };
+  }
+
+  // ------------------------------------------------------------------ item use (D90)
+  /**
+   * Drink a heal pill: `ITEM_USE.healPill.healPct` of max HP, shared cooldown `cooldownMs`. Refused (nothing changes, the caller keeps
+   * the item) when the player is unknown, dead, at full HP or still cooling down. Healing is not combat (regeneration is unaffected).
+   */
+  usePill(
+    world: SimWorld,
+    id: number,
+  ): {
+    world: SimWorld;
+    result: 'ok' | 'unknown' | 'dead' | 'full' | 'cooldown';
+    healed: number;
+    events: CombatEvent[];
+  } {
+    const p = this.players.get(id);
+    const e = world.entities.find((x) => x.id === id);
+    const none = (result: 'unknown' | 'dead' | 'full' | 'cooldown') => ({ world, result, healed: 0, events: [] });
+    if (!p || !e) return none('unknown');
+    if (!p.alive || e.hp <= 0) return none('dead');
+    if (world.timeMs < p.pillReadyAtMs) return none('cooldown');
+    if (e.hp >= p.hpMax) return none('full');
+    const healed = Math.min(p.hpMax - e.hp, Math.max(1, Math.round(p.hpMax * ITEM_USE.healPill.healPct)));
+    p.pillReadyAtMs = world.timeMs + ITEM_USE.healPill.cooldownMs;
+    return {
+      world: patch(world, new Map([[id, { hp: e.hp + healed }]])),
+      result: 'ok',
+      healed,
+      events: [{ type: 'heal', targetId: id, amount: healed }],
+    };
+  }
+
+  /** Milliseconds until the shared pill cooldown ends (0 = ready), for tests and diagnostics. */
+  pillCooldownMs(id: number, nowMs: number): number {
+    return Math.max(0, (this.players.get(id)?.pillReadyAtMs ?? 0) - nowMs);
   }
 
   // ------------------------------------------------------------------ regeneration (D88)
@@ -350,7 +409,7 @@ export class CombatSystem {
     if (!mobs) return [];
     const out: ResolveTarget[] = [];
     for (const e of world.entities) {
-      if (e.hp <= 0) continue;
+      if (e.hp <= 0 || this.opts.isInvulnerable?.(e.id)) continue;
       const s = mobs.combatStats(e.id);
       if (s)
         out.push({ id: e.id, i: e.i, j: e.j, hpMax: s.hpMax, defense: s.defense, realm: s.realm, element: s.element });
@@ -480,6 +539,7 @@ export class CombatSystem {
       const e = w.entities.find((x) => x.id === id);
       if (!e) continue;
       p.alive = true;
+      this.status.clear(id);
       p.shield = 0;
       p.shieldUntilMs = 0;
       const at = this.opts.respawnPoint?.(id) ?? { i: e.i, j: e.j };
@@ -515,9 +575,20 @@ export class CombatSystem {
     return JSON.stringify({
       players: [...this.players.entries()]
         .sort((a, b) => a[0] - b[0])
-        .map(([id, p]) => [id, p.alive, p.respawnAtMs, p.shield, p.shieldUntilMs, p.lastCombatMs, p.hpFrac, p.mpFrac]),
+        .map(([id, p]) => [
+          id,
+          p.alive,
+          p.respawnAtMs,
+          p.shield,
+          p.shieldUntilMs,
+          p.lastCombatMs,
+          p.hpFrac,
+          p.mpFrac,
+          p.pillReadyAtMs,
+        ]),
       pending: this.pending.map((p) => [p.resolveAtMs, p.casterId, p.seq, p.wireId, p.targetId]),
       drop: this.dropRng,
+      status: this.status.digest(),
     });
   }
 }
