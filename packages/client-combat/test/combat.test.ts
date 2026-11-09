@@ -207,3 +207,19 @@ describe('MockCombat', () => {
     if (costly >= 0) expect(c.cast(costly, 100000)[0]).toMatchObject({ type: 'blocked', reason: 'mp' });
   });
 });
+
+describe('MockCombat enemy defId', () => {
+  it('carries the optional mob wire id of a spec to the enemy view (art only)', () => {
+    const c = new MockCombat({
+      path: 'kiem',
+      rand: rng(1),
+      playerPos: { i: 10, j: 10 },
+      enemies: [
+        { name: 'Mob 4', defId: 4, pos: { i: 12, j: 10 } },
+        { name: 'dummy', pos: { i: 14, j: 10 } },
+      ],
+    });
+    expect(c.enemies[0]?.defId).toBe(4);
+    expect(c.enemies[1]?.defId).toBeUndefined();
+  });
+});

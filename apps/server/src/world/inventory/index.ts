@@ -5,3 +5,4 @@ export * from './store.js';
 export * from './service.js';
 export * from './drops.js';
 export * from './sync.js';
+export * from './use.js';
