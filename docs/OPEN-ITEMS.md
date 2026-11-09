@@ -536,3 +536,6 @@ Còn mở / lưu ý:
 - Chưa lưu: khóa idempotency của sổ cái (xem D92), nhật ký roll (`roll_log`), token nối lại; vị trí / máu hiện tại của nhân vật không được lưu (vào lại ở điểm xuất hiện, như trước). Kỹ năng / hotbar / hồi chiêu không thuộc dữ liệu bền.
 - `npm run play` dừng tiến trình con bằng `taskkill /F` trên Windows nên không có tắt máy sạch: dữ liệu có thể mất tới ~5 s thay đổi túi đồ gần nhất (bản ghi tài khoản / nhân vật ghi sau <= 250 ms).
 - Adapter PostgreSQL chưa viết (giao diện `AccountStore` / `InventoryStore` cần chuyển sang bất đồng bộ; xem D92).
+
+- Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ. Đã đo bản @2x (2026-11-09): prop @2x + quái @2x cần 3,74 / 4,19 MP, xếp thành **2 trang** 2048² (thêm ~16 MB GPU và Y-sort bị ngắt batch giữa prop và quái), nên chưa làm; làm khi có sprite hoạt hình thật (atlas riêng cho quái, nén ASTC).
+- Quái nhận biết bằng `EnemyView.defId` (id dây của `MOB_DEFS`, do `aoi_enter` mang); tên `Mob <id>` chỉ còn là đường lùi cho backend chưa gán `defId`.
