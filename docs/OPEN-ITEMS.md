@@ -664,3 +664,9 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 - **Rổ CPI** (`MARKET_BASKET`: đan đột phá, nguyên liệu, bản vẽ trắng-lục) và mọi giá trị mặc định (10 niêm yết / tài khoản, 12 / 24 / 48 giờ, giới hạn tốc độ) là đề xuất **cần game designer duyệt**.
 - **Chưa có smoke trình duyệt cho panel** (cần dựng lại Cocos); `MarketModel` và luồng server-client đã có test; panel mới chỉ qua typecheck của script.
 - `docs/24` cũ nói `requestId` UUID cho mọi lệnh có tác dụng phụ; chợ dùng `clientMsgId` u16 vì lệnh dựa trên trạng thái nên tự idempotent (mua hai lần: lần hai "không còn").
+
+## D117 — trọng số chỉ số của lớp (worker39, 2026-11-10)
+
+1. `packages/client-combat` (mô phỏng ngoại tuyến cho HUD) và HP tham chiếu của Lôi Kiếp (`breakthrough-event.ts`) chưa dùng `classStatsAt`: cần quyết định có nên tính theo lớp hay không (Lôi Kiếp hiện theo cảnh giới, không theo lớp).
+2. `agi` đã có trọng số nhưng máy chủ chưa dùng `agi` (tốc độ di chuyển cố định theo D95): chờ quyết định thiết kế.
+3. Cần game designer duyệt khi cân bằng: tank (the) và hỗ trợ (dan_phu) vẫn chậm hơn ~2× trong TTK đơn độc trước D116 (xem D116 để biết khi hiệu ứng được cài).

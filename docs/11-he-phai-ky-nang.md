@@ -538,6 +538,8 @@ Phần schema và dữ liệu mẫu dài trước đây trong mục này **đã 
 - Mọi kỹ năng chủ động **không vô dụng khi solo** và có hiệu ứng khi chơi nhóm; buff / hot đồng đội **gồm người thi triển**; kỹ năng nhắm đồng đội là `ally_or_self`; thẻ `context_aware` phải khớp với việc có effect `solo` / `group`.
 - **E** (3.4) nằm trong biên theo `tier` (basic ≤ 3,5; core ≤ 6; ultimate 4 – 16; ultimate thuần phòng thủ có thẻ `sustain` được miễn); `cooldown × (1 − cdr_cap) ≥ cast + channel`; `damage.hits = channel_ticks` với kỹ năng channel.
 
+> **[Cập nhật D117]** `stat_weights` của lớp nay được máy chủ áp lên HP / MP / ATK / DEF / AGI của người chơi (`classStatsAt` trong `@vgtd/shared`); xem DECISIONS D117.
+
 ## Câu hỏi cần chốt
 
 Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (S1–S14). Nội dung gốc của mục này nằm trong lịch sử git.
