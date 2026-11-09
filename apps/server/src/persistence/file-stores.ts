@@ -186,6 +186,8 @@ export interface FileStores {
   commitAtomic(label: string, docs: readonly DocFile[]): void;
   /** The hook `InventoryService` calls after an exchange: commits the inventories and the ledger together. */
   readonly durable: { commit(label: string): void };
+  /** True while a multi-document commit's journal is still waiting to be finished after an error (it is finished before the next write). */
+  readonly journalPending: () => boolean;
   /** The journal recovered at open (the label of the interrupted commit it finished), or null. */
   readonly recovered: string | null;
 }
@@ -195,6 +197,8 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
   // FIRST finish a commit a crash interrupted: every document below is then loaded in its committed state
   const recovered = recoverJournal(dir);
   const journal = new TxJournal(dir, opts);
+  // every ordinary document write first finishes a pending journal (see `DocFileOptions.beforeWrite`)
+  opts = { ...opts, beforeWrite: () => journal.settle() };
   const accounts = new FileAccountStore(join(dir, 'accounts.json'), opts);
   const progression = new FileProgressionStore(join(dir, 'progression.json'), opts);
   const inventories = new FileInventoryStore(join(dir, 'inventories.json'), opts);
@@ -208,6 +212,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
     dir,
     recovered,
     commitAtomic,
+    journalPending: () => journal.pending,
     durable: { commit: (label) => commitAtomic(label, [inventories.file, ledgerFile]) },
     flush: () => {
       accounts.file.flush();

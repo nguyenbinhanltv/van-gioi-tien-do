@@ -12,6 +12,12 @@ import { writeFileAtomic } from './atomic.js';
 export interface DocFileOptions {
   flushMs?: number;
   onError?: (e: unknown) => void;
+  /**
+   * Runs before every write of this document; if it throws the write does not happen and the document stays dirty. The file store uses it to
+   * finish a pending multi-document journal FIRST, so a newer version of a document can never be written while an older journal that covers
+   * it is still waiting to be rolled forward (a later restart would otherwise re-apply the stale journal over the newer data).
+   */
+  beforeWrite?: () => void;
 }
 
 export class DocFile {
@@ -35,14 +41,18 @@ export class DocFile {
     return this.serialize();
   }
 
-  /** The journal wrote this document itself: it is clean now and a pending debounced write is pointless. */
-  markWritten(): void {
+  /**
+   * The journal wrote `text` as this document's content. The document is clean only if that IS its current content: if it changed since
+   * (a later write is waiting), it stays dirty so that write still happens.
+   */
+  markWritten(text: string): void {
+    this.writes++;
+    if (this.serialize() !== text) return;
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;
     }
     this.dirty = false;
-    this.writes++;
   }
 
   markDirty(): void {
@@ -63,6 +73,7 @@ export class DocFile {
     }
     if (!this.dirty) return;
     try {
+      this.opts.beforeWrite?.();
       writeFileAtomic(this.path, this.serialize());
       this.dirty = false;
       this.writes++;

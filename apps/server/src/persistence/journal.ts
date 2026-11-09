@@ -46,6 +46,8 @@ const SAFE_NAME = /^[a-z][a-z0-9_-]*\.json$/;
 export class TxJournal {
   /** commits finished since start (test hook) */
   commits = 0;
+  /** a commit whose journal is on disk but whose document writes / journal delete did not all finish (an error, not a crash) */
+  private inFlight: { rec: JournalRecord; docs: readonly DocFile[] } | null = null;
   constructor(
     readonly dir: string,
     private readonly opts: JournalOptions = {},
@@ -56,19 +58,44 @@ export class TxJournal {
    * the journal after a crash. Throws on a disk error (the documents stay dirty and the normal debounced flush retries them).
    */
   commit(label: string, docs: readonly DocFile[]): void {
+    this.settle(); // a previous commit that failed half way is finished first: journals never pile up or get applied out of order
     this.opts.crash?.('before-journal');
     const rec: JournalRecord = { v: 1, tx: label, docs: docs.map((d) => ({ file: basename(d.path), data: d.text() })) };
     for (const d of rec.docs) if (!SAFE_NAME.test(d.file)) throw new Error(`journal: unsafe document name "${d.file}"`);
     writeFileAtomic(join(this.dir, JOURNAL_FILE), JSON.stringify(rec));
+    // from here the commit is decided. If anything below throws (a disk error) the journal STAYS on disk and `inFlight` remembers it:
+    // `settle()` finishes it before any other write of these documents, so a stale journal can never be rolled forward over newer data.
+    this.inFlight = { rec, docs };
     this.opts.crash?.('journal-written');
-    docs.forEach((d, i) => {
-      writeFileAtomic(d.path, rec.docs[i]!.data);
-      d.markWritten();
+    this.apply();
+    this.opts.crash?.('done');
+  }
+
+  /** Write every document of the in-flight commit, then delete its journal. Idempotent (full contents). */
+  private apply(): void {
+    const f = this.inFlight;
+    if (!f) return;
+    f.docs.forEach((d, i) => {
+      writeFileAtomic(d.path, f.rec.docs[i]!.data);
+      d.markWritten(f.rec.docs[i]!.data);
       this.opts.crash?.(`applied-${i + 1}`);
     });
     rmSync(join(this.dir, JOURNAL_FILE), { force: true });
+    this.inFlight = null;
     this.commits++;
-    this.opts.crash?.('done');
+  }
+
+  /**
+   * Finish a commit whose journal is still pending after an error. Called before every commit and before every ordinary write of a document
+   * (`DocFileOptions.beforeWrite`); throws when it cannot (the caller's write then does not happen and stays dirty).
+   */
+  settle(): void {
+    if (this.inFlight) this.apply();
+  }
+
+  /** Is a commit's journal still waiting to be finished? (ops / tests) */
+  get pending(): boolean {
+    return this.inFlight !== null;
   }
 }
 

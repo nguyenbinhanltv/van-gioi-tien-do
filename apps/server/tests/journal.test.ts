@@ -128,6 +128,77 @@ describe('TxJournal: a commit over two documents', () => {
     expect((read(dir, 'a.json') as { n: number }).n + (read(dir, 'b.json') as { n: number }).n).toBe(130);
   });
 
+  it('a commit that FAILS (an error, not a crash) leaves its journal pending, and the next ordinary write finishes it FIRST: a stale journal can never be rolled forward over newer data', () => {
+    const dir = tmp();
+    const a = { n: 100 };
+    const b = { n: 0 };
+    let failOnce = true;
+    const journal = new TxJournal(dir, {
+      crash: (stage) => {
+        if (stage === 'applied-1' && failOnce) {
+          failOnce = false;
+          throw new Error('disk error');
+        }
+      },
+    });
+    // every ordinary write settles a pending journal first, exactly as openFileStores wires it
+    const opts = { flushMs: -1, beforeWrite: () => journal.settle() };
+    const da = new DocFile(join(dir, 'a.json'), () => JSON.stringify({ v: 1, n: a.n }), opts);
+    const db = new DocFile(join(dir, 'b.json'), () => JSON.stringify({ v: 1, n: b.n }), opts);
+    da.markDirty();
+    db.markDirty();
+    da.flush();
+    db.flush();
+    a.n = 70;
+    b.n = 30;
+    expect(() => journal.commit('move', [da, db])).toThrow(/disk error/); // a.json written, b.json not, journal still there
+    expect(journal.pending).toBe(true);
+    expect(existsSync(join(dir, JOURNAL_FILE))).toBe(true);
+    // LATER changes: b is changed again in memory and flushed the ordinary way. The pending journal is applied before, never after.
+    b.n = 25;
+    a.n = 75;
+    da.markDirty();
+    db.markDirty();
+    da.flush();
+    db.flush();
+    expect(journal.pending).toBe(false);
+    expect(existsSync(join(dir, JOURNAL_FILE))).toBe(false);
+    // a restart now finds nothing to recover and the NEWER data (not the journal's older 70 / 30)
+    expect(recoverJournal(dir)).toBeNull();
+    expect([read(dir, 'a.json'), read(dir, 'b.json')]).toEqual([
+      { v: 1, n: 75 },
+      { v: 1, n: 25 },
+    ]);
+  });
+
+  it('if the pending journal cannot be finished, the ordinary write does NOT happen (the document stays dirty) and the next commit is refused until it can', () => {
+    const dir = tmp();
+    const a = { n: 1 };
+    let broken = true;
+    const journal = new TxJournal(dir, {
+      crash: (stage) => {
+        if (stage.startsWith('applied-') && broken) throw new Error('disk error');
+      },
+    });
+    const da = new DocFile(join(dir, 'a.json'), () => JSON.stringify({ v: 1, n: a.n }), {
+      flushMs: -1,
+      beforeWrite: () => journal.settle(),
+    });
+    a.n = 2;
+    expect(() => journal.commit('x', [da])).toThrow(/disk error/);
+    a.n = 3; // newer data
+    da.markDirty();
+    da.flush(); // settle fails again: nothing is written, the document stays dirty
+    expect(da.errors).toBe(1);
+    expect(existsSync(join(dir, 'a.json'))).toBe(true); // the journal's apply wrote it before throwing at applied-1
+    expect(read(dir, 'a.json')).toEqual({ v: 1, n: 2 }); // NOT 3: the newer write was held back
+    expect(() => journal.commit('y', [da])).toThrow(/disk error/); // and a new commit cannot jump the queue
+    broken = false;
+    da.flush(); // the disk works again: settle first, then the newer data
+    expect(read(dir, 'a.json')).toEqual({ v: 1, n: 3 });
+    expect(journal.pending).toBe(false);
+  });
+
   it('a crash DURING recovery is harmless: the journal is still there and the next start finishes it', () => {
     const dir = tmp();
     const a = { n: 100 };
@@ -347,6 +418,52 @@ describe('a trade killed at every point of its commit: items and stones are cons
       expect(existsSync(join(dir, JOURNAL_FILE))).toBe(false);
     },
   );
+
+  it('a durable commit that FAILS in the middle of a trade (an error) does not let a later write be undone by the stale journal after a restart', () => {
+    const dir = tmp();
+    let failOnce = true;
+    const stores = openFileStores(dir, {
+      flushMs: -1,
+      crash: (stage) => {
+        if (stage === 'applied-1' && failOnce) {
+          failOnce = false;
+          throw new Error('disk error'); // swallowed by the exchange (durableErrors), the process lives on
+        }
+      },
+    });
+    const inv = new InventoryService({ store: stores.inventories, ledger: stores.ledger, durable: stores.durable });
+    for (const o of ['acc-a', 'acc-b']) inv.onJoin(o);
+    inv.grantDrops(
+      'acc-a',
+      [
+        { item: 'heal_pill', qty: 10, quality: 1 },
+        { item: 'stone_ha', qty: 100 },
+      ],
+      'field',
+      'g1',
+    );
+    inv.flushAll();
+    stores.flush();
+    const r = inv.exchange(
+      'k1',
+      { owner: 'acc-a', items: [{ kind: 'stack', defId: PILL, quality: 1, qty: 4 }], stones: [100n, 0n, 0n] },
+      { owner: 'acc-b', items: [], stones: [0n, 0n, 0n] },
+    );
+    expect(r).toMatchObject({ ok: true });
+    expect(inv.durableErrors).toBe(1);
+    expect(stores.journalPending()).toBe(true);
+    // the game goes on: bob uses 2 of the 4 pills he got, then the normal flush runs
+    inv.bagOf('acc-b').removeStack(PILL, 1, 2);
+    inv.flushAll();
+    stores.flush(); // settles the pending journal FIRST, then writes the newer bags
+    expect(stores.journalPending()).toBe(false);
+    // restart: nothing to recover, and bob has 2 pills, not the 4 of the stale journal
+    const { stores: s2, inv: inv2 } = reopen(dir);
+    expect(s2.recovered).toBeNull();
+    expect([inv2.bagOf('acc-a').count(PILL), inv2.bagOf('acc-b').count(PILL)]).toEqual([6, 2]);
+    expect([inv2.wallet('acc-a', 'LT_HA'), inv2.wallet('acc-b', 'LT_HA')]).toEqual([0n, 97n]);
+    expect(inv2.ledger.reconcile()).toEqual([]);
+  });
 
   it('after a recovered trade the same accounts can trade again and nothing was applied twice', () => {
     const dir = tmp();
