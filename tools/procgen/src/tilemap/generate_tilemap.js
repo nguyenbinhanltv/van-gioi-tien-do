@@ -364,14 +364,22 @@ function buildZoneMap(o, zc, idByName) {
       const stack = Z.STACKS[zoneId];
       if (maskFor(1) !== 15) layers.liquid[k] = idByName[stack.liquid === 'lava' ? 'lava_0' : 'water_0'];
       let land = false;
-      for (const L of stack.layers) {
+      let topFull = -1; // index in `stack.layers` of the highest FULL (opaque, mask 15) tile of this cell
+      stack.layers.forEach((L, n) => {
         const m = maskFor(L.min);
-        if (m === 0 || (L.fullOnly && m !== 15)) continue;
+        if (m === 0 || (L.fullOnly && m !== 15)) return;
         const name = m === 15
           ? `${L.name}_full_${pickVariant(i, j, o.seed + LAYER_SEEDS[L.name], o.variants)}`
           : `${L.name}_m${String(m).padStart(2, '0')}`;
         layers[L.name][k] = idByName[name];
         land = true;
+        if (m === 15) topFull = n;
+      });
+      // a full tile is opaque over its whole diamond: everything under it in this cell is invisible, so it is not emitted (fewer
+      // sprites per chunk -> fewer nodes and draw calls on the client)
+      if (topFull >= 0) {
+        layers.liquid[k] = -1;
+        for (let n = 0; n < topFull; n++) layers[stack.layers[n].name][k] = -1;
       }
       row += land ? '.' : '#';
       stats[zoneId][levelNames[Math.max(cs.N, cs.E, cs.S, cs.W)]]++;

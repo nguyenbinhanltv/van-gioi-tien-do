@@ -204,6 +204,29 @@ describe('generate_tilemap --zones (end to end on a small map with synthetic gro
     expect(lavaOnly).toBeGreaterThan(0);
   });
 
+  it('a full (opaque) tile hides everything under it, so the layers below it are not emitted (fewer sprites on the client)', () => {
+    const out = path.join(dir, 'f');
+    run(out, ['--ground', ground, '--zones', '1']);
+    const map = read(out, 'map.json');
+    const ts = read(out, 'tileset.json');
+    const full = new Set(ts.tiles.filter((t) => /_full_\d+$/.test(t.name)).map((t) => t.id));
+    const idx = Object.fromEntries(map.layers.map((l, n) => [l.name, n]));
+    let checked = 0;
+    for (let k = 0; k < N * N; k++) {
+      // from the top layer down: once a full tile is met, no lower layer of the cell may hold a tile
+      let seenFull = false;
+      for (let n = Z.LAYER_ORDER.length - 1; n >= 0; n--) {
+        const id = map.layers[idx[Z.LAYER_ORDER[n]]].data[k];
+        if (seenFull) expect(id).toBe(-1);
+        else if (id >= 0 && full.has(id)) {
+          seenFull = true;
+          checked++;
+        }
+      }
+    }
+    expect(checked).toBeGreaterThan(100);
+  });
+
   it('the spawn plaza at the map centre is walkable', () => {
     const out = path.join(dir, 'c');
     run(out, ['--ground', ground, '--zones', '1']);
