@@ -614,6 +614,15 @@ Còn mở / lưu ý:
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
 
+## D103 — Nghiệp Lực / Đạo Tâm: còn mở (worker39, 2026-11-09)
+
+1. **Đạo Tâm khởi đầu = 60 là PLACEHOLDER** (docs/01 §8.3 chỉ có trần theo dải): cần game designer chốt giá trị khởi đầu; các trần 100 / 100 / 80 / 60 cũng là "Đề xuất" của docs/01 §8.3 (câu hỏi G14).
+2. **Chưa có nguồn đổi K trong game**: cần PvP + cờ Gây hấn / Truy nã + vùng PK (docs/14 §3.3), nhiệm vụ nhân quả "Ân / Oán" (docs/12 §3.4, +100 K mỗi tuần), rơi đồ theo nghiệp (docs/14 §3.4). `applyKarma` đã có bảng sự kiện, trần ngày và lưu bền; còn thiếu: phát hiện giết người lặp lần 3 trong 1 giờ, "giết cùng nạn nhân", cờ, ngày máy chủ (`day`) do ai cấp.
+3. **Chưa có nguồn đổi Đạo Tâm**: docs/01 §8.3 ghi "số cụ thể: chưa thiết kế" (nhiệm vụ đạo tâm, giữ lời thề, giết vô tội, chết trong Tâm Cảnh). `adjustDaoTam` chờ số liệu.
+4. **Độ bền × 1,5 Ma đạo chưa có nơi dùng**: máy chủ chưa trừ độ bền khi chết (docs/07 §7). Khi có, nhân với `durabilityLossMultiplier(K)`.
+5. **Nối #252**: Tâm Ma đang dùng `MAJOR_EVENT.DEFAULT_DAO_TAM`; đổi sang `progression.tamMaInputs(entityId)` (D103), thêm bóng phụ Nghiệp Ảnh (`nghiepAnh`) nếu muốn làm đủ docs/01 §5.3.
+6. **Nhãn phe chỉ là chữ trong HUD**: màu tên, danh hiệu và mở nhiệm vụ nhân quả (docs/14 §3.2) chưa làm; theo docs/10 không có nội dung phe độc quyền.
+
 ## D102 — giao dịch trực tiếp: còn mở
 
 - Sao lưu (D99) và nhật ký ghi trước (D102): `readLiveDocs` từ chối sao lưu nguội khi còn `journal.json` (một commit nhiều tài liệu bị cắt ngang: hãy khởi động server một lần để nó hoàn tất rồi mới sao lưu; khi đang chạy thì tệp biến mất sau vài ms và việc đọc lại tự thử lại), và `restoreBackup` chuyển `journal.json` vào `pre-restore-<id>/` cùng các tài liệu cũ để một nhật ký cũ không bị áp lại lên dữ liệu vừa khôi phục. `--reset-data` cũng xóa `journal.json`. Sao lưu sống (`FileStores.snapshot`) lấy trạng thái trong bộ nhớ nên không bị ảnh hưởng.
@@ -664,3 +673,12 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 - **Rổ CPI** (`MARKET_BASKET`: đan đột phá, nguyên liệu, bản vẽ trắng-lục) và mọi giá trị mặc định (10 niêm yết / tài khoản, 12 / 24 / 48 giờ, giới hạn tốc độ) là đề xuất **cần game designer duyệt**.
 - **Chưa có smoke trình duyệt cho panel** (cần dựng lại Cocos); `MarketModel` và luồng server-client đã có test; panel mới chỉ qua typecheck của script.
 - `docs/24` cũ nói `requestId` UUID cho mọi lệnh có tác dụng phụ; chợ dùng `clientMsgId` u16 vì lệnh dựa trên trạng thái nên tự idempotent (mua hai lần: lần hai "không còn").
+
+## Kiểm toán nội dung quái (D114): còn mở
+
+- **Client chưa biết biến thể**: server đã sinh hai hệ cho mỗi quái thường (docs/10 §4: "tint / palette shader, không vẽ lại" theo 02 §1) nhưng `EnterEntity` chỉ mang `defId`, nên client chưa tô màu theo hệ và người chơi chưa nhìn thấy sự khác nhau giữa hai bầy. Cần một trường biến thể trên dây (cộng thêm) hoặc ghi vào bit cao của `defId`, và bảng tint 5 hệ ở client; việc này đụng giao thức nên chưa làm trong D114.
+- **Mộc nhân của tutorial** (docs/10 §3.1 và ghi chú: "tutorial dùng mộc nhân, bất động, không phản công, trong Quảng trường luyện võ"; câu hỏi M3): chưa có def. Thêm cần quyết định thiết kế: một `MobTier` mới (hoặc cờ) cho mục tiêu tập bắn không AI / không đòn / không rớt đồ, một vùng Sơn Môn để đặt (hiện `MobZoneId` chỉ có 4 vùng Rừng Độc và quảng trường quanh tâm là vùng an toàn không sinh quái), và có tính vào bước `kills` của tutorial (D105) hay không. Tới lúc đó quái thật đầu tiên là ở dải thường (≥ 0,12 R quanh tâm).
+- **Hệ phụ của boss / tinh anh**: bảng docs/10 §4 ghi "Hỏa / Mộc" cho Độc Hỏa Cổ Mãng nhưng cột gọi là "Hệ chính / biến thể" và doc không nói boss có biến thể hay là hệ kép; hiện chỉ dùng hệ chính. Cần game designer chốt (hệ kép nghĩa là gì với ma trận 07 §4).
+- **Số lượng và dải level**: số con mỗi vùng (12 thường theo bầy 3, tinh anh 2, boss 1), bán kính bầy, tỷ lệ 50/50 giữa hai biến thể, xen theo bầy là **placeholder** (D74 / D83 / D114). Level của mỗi con rút đều trong `[levelMin, levelMax]` của def; doc chưa quy định phân bố (ví dụ lệch theo khoảng cách tới tâm).
+- **Kỹ năng quái**: 7 trong 8 quái thường có đúng 1 kỹ năng, Độc Thố chỉ có đòn thường (đúng doc); tổng ~28 kỹ năng của docs/10 §5 gồm cả đòn thường; "Tru gọi" của Hôi Lang Vương vẫn là kéo 2 Hôi Lang có sẵn (D91, chưa sinh thực thể mới); 8 × 8 và quái pha lê (docs/03 §6: Giao Long, Thao Thiết...) ngoài beta.
+- **Roster đầy đủ (docs/02 §1)**: 25 thường × 4 biến thể, 20 tinh anh, 12 boss là mục tiêu dài hạn; beta dừng ở 14 loại.

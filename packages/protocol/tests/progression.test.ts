@@ -47,6 +47,7 @@ const samples: ColdMessage[] = [
   { type: 'meditate_start', requestId: REQ },
   { type: 'meditate_stop', requestId: REQ },
   { type: 'meditate_result', requestId: REQ, meditating: true, reason: ProgressionReason.Ok },
+  { type: 'dao_tam', daoTam: 73 },
 ];
 
 describe('progression (cold family) codec', () => {
@@ -65,6 +66,7 @@ describe('progression (cold family) codec', () => {
       meditate_start: 63,
       meditate_stop: 64,
       meditate_result: 65,
+      dao_tam: 59,
     };
     for (const m of samples) {
       const b = encode(m);
@@ -106,6 +108,13 @@ describe('progression (cold family) codec', () => {
     bad({ ...charState, tuVi: -1 });
     bad({ ...charState, tuVi: Infinity });
     bad({ ...charState, flags: 8 });
+    bad({ type: 'dao_tam', daoTam: 101 });
+    bad({ type: 'dao_tam', daoTam: -1 });
+    bad({ type: 'dao_tam', daoTam: 1.5 });
+    const dt = Uint8Array.from(encode({ type: 'dao_tam', daoTam: 5 }));
+    dt[4] = 200; // decoder side: out of range
+    expect(() => decode(dt)).toThrow(ProtocolError);
+    expect(encode({ type: 'dao_tam', daoTam: 5 }).length).toBe(5); // header 4 + one byte
     bad({ type: 'meditate_start', requestId: 'XYZ' });
     bad({ type: 'meditate_start', requestId: REQ.toUpperCase() });
     bad({ ...samples[2]!, outcome: 0 });
