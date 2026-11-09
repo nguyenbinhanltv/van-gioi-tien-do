@@ -156,6 +156,8 @@ export class CombatUi {
   private readonly hpFill: Sprite;
   private readonly mpFill: Sprite;
   private readonly shieldFill: Sprite;
+  /** every constantly changing label (hp / mp, cooldown numbers, toast) lives here, drawn after all bar / slot art: one text batch */
+  private readonly dynText: Node;
   private readonly hpText: Label;
   private readonly mpText: Label;
   private readonly castBar: Sprite;
@@ -212,9 +214,28 @@ export class CombatUi {
     this.ring.active = false;
     // --- HUD
     this.hudRoot = newNode('CombatHud', hudParent);
+    this.dynText = newNode('HudDynText', this.hudRoot);
     const bars = SLOT + 8 + BAR_H;
-    const hp = this.makeBar('Hp', -BAR_W / 2 - 5, bars, new Color(200, 50, 50, 255));
-    const mp = this.makeBar('Mp', BAR_W / 2 + 5, bars, new Color(60, 110, 220, 255));
+    const hp = this.makeBar(
+      'Hp',
+      -BAR_W / 2 - 5,
+      bars,
+      new Color(200, 50, 50, 255),
+      BAR_W,
+      BAR_H,
+      this.hudRoot,
+      this.dynText,
+    );
+    const mp = this.makeBar(
+      'Mp',
+      BAR_W / 2 + 5,
+      bars,
+      new Color(60, 110, 220, 255),
+      BAR_W,
+      BAR_H,
+      this.hudRoot,
+      this.dynText,
+    );
     this.hpFill = hp.fill;
     this.mpFill = mp.fill;
     this.hpText = hp.label;
@@ -222,11 +243,20 @@ export class CombatUi {
     this.shieldFill = quad(hp.back, 'Shield', art.pixel, 0, 4, new Color(240, 240, 255, 255));
     this.shieldFill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.shieldFill.node.setPosition(-BAR_W / 2, BAR_H / 2 - 2, 0);
-    const cast = this.makeBar('Cast', 0, bars + BAR_H + 6, new Color(240, 200, 80, 255), HUD_W, 6);
+    const cast = this.makeBar(
+      'Cast',
+      0,
+      bars + BAR_H + 6,
+      new Color(240, 200, 80, 255),
+      HUD_W,
+      6,
+      this.hudRoot,
+      this.dynText,
+    );
     this.castBar = cast.fill;
     cast.back.active = false;
     this.castBackNode = cast.back;
-    this.toast = sharedAtlas(text(this.hudRoot, 'Toast', 16, new Color(255, 220, 160, 255)), 'dynamic');
+    this.toast = sharedAtlas(text(this.dynText, 'Toast', 16, new Color(255, 220, 160, 255)), 'dynamic');
     this.toast.node.setPosition(0, bars + BAR_H + 34, 0);
 
     const bar = this.backend.hotbar;
@@ -248,6 +278,7 @@ export class CombatUi {
       const iconRoot = holder(layerIcon);
       const ringRoot = holder(layerRing);
       const textRoot = holder(layerText);
+      const cdRoot = holder(this.dynText); // the countdown changes every frame: dynamic label layer
       const base = ELEMENT_COLOR[s.skill.element] ?? ELEMENT_COLOR.none!;
       const bgColor = s.castable ? base : new Color(base.r * 0.45, base.g * 0.45, base.b * 0.45, 255);
       const bg = quad(root, 'Bg', art.pixel, SLOT, SLOT, bgColor);
@@ -277,8 +308,8 @@ export class CombatUi {
       this.radial(cd);
       const gcd = quad(ringRoot, 'Gcd', art.pixel, SLOT, SLOT, new Color(255, 255, 255, 75));
       this.radial(gcd);
-      const cdText = sharedAtlas(text(textRoot, 'CdText', 18, new Color(255, 255, 255, 255)), 'dynamic'); // counts down
-      this.slots.push({ root, holders: [root, iconRoot, ringRoot, textRoot], bg, cd, gcd, cdText, x });
+      const cdText = sharedAtlas(text(cdRoot, 'CdText', 18, new Color(255, 255, 255, 255)), 'dynamic'); // counts down
+      this.slots.push({ root, holders: [root, iconRoot, ringRoot, textRoot, cdRoot], bg, cd, gcd, cdText, x });
     });
 
     // target frame (top centre)
@@ -289,6 +320,7 @@ export class CombatUi {
     this.targetName = text(this.targetRoot, 'TargetName', 16, new Color(255, 235, 235, 255));
     this.targetName.node.setPosition(0, 20, 0);
     this.targetRoot.active = false;
+    this.dynText.setSiblingIndex(this.hudRoot.children.length - 1); // after every bar / slot quad: the dynamic labels form the last batch
 
     // floating text pool (world space, above the Y-sorted entities)
     const l6 = worldUiLayer(worldRoot);
@@ -313,7 +345,7 @@ export class CombatUi {
     const title = text(this.deathRoot, 'Title', 40, new Color(255, 225, 225, 255));
     title.string = 'Ban da roi / You have fallen';
     title.node.setPosition(0, 40, 0);
-    this.deathCount = text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255));
+    this.deathCount = sharedAtlas(text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255)), 'dynamic'); // counts down
     this.deathCount.node.setPosition(0, -10, 0);
     this.deathRoot.active = false;
 
@@ -748,13 +780,22 @@ export class CombatUi {
     w = BAR_W,
     h = BAR_H,
     parent: Node = this.hudRoot,
+    textLayer?: Node,
   ): { back: Node; fill: Sprite; label: Label } {
     const back = quad(parent, `${name}Back`, this.art.pixel, w, h, new Color(0, 0, 0, 170));
     back.node.setPosition(x, y, 0);
     const fill = quad(back.node, `${name}Fill`, this.art.pixel, w, h - 2, color);
     fill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     fill.node.setPosition(-w / 2, 0, 0);
-    const label = text(back.node, `${name}Text`, 11, new Color(255, 255, 255, 255));
+    // every bar carries numbers that change with each hit / regen tick: per-character cache, never whole strings (they are not reclaimed)
+    // (a bar whose parent is the HUD root puts its text in `textLayer` at the same spot, so all bar quads batch before all text)
+    let holder = back.node;
+    if (textLayer) {
+      holder = newNode(`${name}TextHolder`, textLayer);
+      holder.setPosition(x, y, 0);
+    }
+    const label = sharedAtlas(text(holder, `${name}Text`, 11, new Color(255, 255, 255, 255)), 'dynamic');
+    label.string = ''; // a Label starts as the engine default text: bars whose text is never set (the cast bar) must draw nothing
     return { back: back.node, fill, label };
   }
 

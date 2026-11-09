@@ -44,7 +44,7 @@ Số 55 / 80 của báo cáo thoát P1 là **không có quái và không có HUD
 
 | Nguồn | Trước | Sau | Cách |
 | ----- | ----: | --: | ---- |
-| HUD chiến đấu (mỗi `Label` một texture riêng; mỗi ô thanh kỹ năng đổi texture 4 lần) | 34 | ~8 | `Label.cacheMode` dùng atlas chung (`UiLabel.sharedAtlas`: BITMAP cho chữ tĩnh, CHAR cho chữ đổi liên tục như số sát thương, hồi chiêu, máu); thanh kỹ năng dựng thành 4 lớp dùng chung (nền, icon, vòng hồi chiêu, chữ) |
+| HUD chiến đấu (mỗi `Label` một texture riêng; mỗi ô thanh kỹ năng đổi texture 4 lần) | 34 | ~8 | `Label.cacheMode` dùng atlas chung (`UiLabel.sharedAtlas`: BITMAP chỉ cho chữ lấy từ một tập cố định nhỏ vì BITMAP không thu hồi chuỗi cũ; **mọi chữ có số hoặc tên đổi khi chơi** (máu / MP, sát thương, hồi chiêu, bộ đếm, khoảng cách, số lượng, thông báo) phải là CHAR, nếu không atlas chung đầy dần và lợi ích batch mất); thanh kỹ năng dựng thành các lớp dùng chung (nền, icon, vòng hồi chiêu, chữ tĩnh) và mọi chữ đổi liên tục (máu / MP, hồi chiêu, thông báo) gom vào một lớp cuối |
 | Vật thể L3 ngoài màn hình (armature NPC, quái, prop) vẫn vẽ và cắt batch của vật thể bên cạnh | ~19 | 0 | `YSortLayer.cull`: cất node ngoài khung nhìn (cộng tầm với của sprite, có trễ chống nhấp nháy) vào node không hoạt động |
 | `enableBatch` của armature | 0 | không đổi | các armature bị prop / quái chen giữa nên không liền kề; không dùng |
 
