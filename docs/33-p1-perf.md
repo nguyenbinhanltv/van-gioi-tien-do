@@ -50,6 +50,19 @@ Số 55 / 80 của báo cáo thoát P1 là **không có quái và không có HUD
 
 Kết quả: **60–64** (tối đa trong 30 giây đo, zoom 1,5× mặc định; zoom 1,0× nhìn rộng hơn nên ~66) với cùng cảnh, sau khi gộp thêm code mới (party, status tile, khung UI 9-slice, map vùng); tầm với cắt của chibi 120 px, prop = max(cao, rộng/2) + 30; cảnh cơ sở (20 NPC, không quái, không combat) 49 (trước 53–55); mở túi đồ 37 (không đổi). Cổng đo: `npm run perf:p1 -w client-cocos -- --mobs --draw-limit 65` (chỉ siết được ngưỡng, không nới ngưỡng dùng chung). Mục tiêu 65 chưa có chỗ trống: thêm quái / NPC trên màn hình thì phải gom tiếp (HP bar trên đầu, armature).
 
+### Bộ đệm đỉnh của Batcher2D (`BATCHER2D_MEM_INCREMENT`, 2026-11-10)
+
+Nguyên nhân thật của phần lớn draw call "thừa" (đo bằng `__vgtdBatchTrace` + `__vgtdGroundProbe`, xem PR): mọi sprite của một chunk nền dùng cùng texture và material, nhưng engine gộp batch chỉ khi **hash dữ liệu bằng nhau**, và hash đó gồm id của **bộ đệm đỉnh** (`bid`). Mỗi bộ đệm đỉnh 2D mặc định chỉ 144 KB = 4096 đỉnh = 1024 sprite, nên một chunk nền (~1250-5000 ô) và mọi lớp đông sprite bị cắt thành nhiều batch ở ranh giới bộ đệm, dù không có gì khác biệt.
+
+Cách sửa: macro `BATCHER2D_MEM_INCREMENT` = **2048** (KB) trong `apps/client-cocos/settings/v2/packages/engine.json` (`macroConfig`; builder đưa vào `settings.json` của bản dựng: `"macros":{"BATCHER2D_MEM_INCREMENT":2048}`). Mỗi bộ đệm = 2048 KB / 36 B = **58254 đỉnh** (14563 sprite).
+
+- **Giới hạn trên 2303 KB**: chỉ số đỉnh trong bộ đệm là `Uint16` (tối đa 65535 đỉnh; đỉnh 36 byte). 4096 KB cho 116508 đỉnh và vượt giới hạn, nên KHÔNG tăng quá ~2300.
+- **Bộ nhớ**: mỗi bộ đệm = 2048 KB đỉnh + 455 KB chỉ số (`IB_SCALE` 4 × 2 B) ≈ 2,5 MB trên CPU và cùng cỡ đó trên GPU. Cảnh 14 quái + 20 NPC cần khoảng 80 nghìn đỉnh: 2 bộ đệm (~5 MB CPU + ~5 MB GPU), so với ~20 bộ đệm × 176 KB (~3,5 MB) ở mặc định; chênh vài MB là do làm tròn lên bộ đệm cuối. Đường RAM của cổng đo (heap JS + texture) không đổi trong sai số (160-173 MB cả hai bên); ArrayBuffer nằm ngoài heap JS nên số này không thấy phần chênh ~1-3 MB.
+
+**Còn mở: chưa kiểm tra bộ nhớ trên máy mobile thật.** Phần chênh bộ nhớ ở trên (~1-3 MB CPU + GPU) là số TÍNH, không phải số đo: ArrayBuffer nằm ngoài heap JS nên cổng đo không thấy. Cần đo trên thiết bị thật (Android tầm thấp và iOS Safari: bộ nhớ GPU của hai bộ đệm 2048 KB, nguy cơ bị hệ điều hành đóng tab) trước khi coi là đã chốt; xem mục "Cách đo trên máy mobile thật" bên dưới và `docs/OPEN-ITEMS.md`.
+
+Đo sạch (hai bản dựng release trên **stage mới** cho mỗi bên, cùng commit, chỉ khác dòng macro; `--mobs`, tối đa draw call 30 giây): zoom 1,5: **64 -> 38**; zoom 1,0: **70 -> 44**; zoom 2,0: **59 -> 35**. Kịch bản tung chiêu liên tục (nhánh PR #274, `--casting`): **70-76 -> 40-47** (zoom 1,5) trước khi gom tiếp bất cứ thứ gì khác. Lưu ý đo: bản dựng release chạy trên bản sao `build/stage-release` có Library riêng; muốn so sánh hai giá trị macro phải dùng `VGTD_STAGE_DIR` mới cho từng bên, nếu không bản dựng cũ có thể giữ cấu hình cũ.
+
 ## Cách đo trên Web (headless)
 
 ```bash
