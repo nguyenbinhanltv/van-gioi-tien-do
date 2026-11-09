@@ -510,6 +510,13 @@ Còn mở / lưu ý:
 - Chưa gộp nhiều telegraph cùng lúc (bầy quái): mỗi đòn một khung 20 B. Nếu đo thực tế thấy tốn, gộp theo tick.
 - Đã có smoke test trình duyệt thật `npm run telegraph:online -w client-cocos` (decal hiện khi `telegraph_start` tới, biến mất khi đòn kết thúc); nó đếm điểm ảnh đỏ nên chỉ là kiểm tra thô, chưa đánh giá thẩm mỹ / độ rõ của decal trên mọi nền bản đồ.
 
+## D90 — dùng vật phẩm: còn mở (worker39, 2026-11-09)
+
+1. **Số liệu tạm, cần game designer duyệt**: đan hồi máu không phụ thuộc phẩm; áp công thức đan của đột phá đại cảnh cho đột phá tiểu cảnh (trần 95 % của công thức nên đan chỉ thêm tối đa +5 % so với 90 %); một đan đột phá chờ mỗi lúc; hồi chiêu 8 s chung cho mọi đan hồi máu.
+2. **Đan đột phá chỉ sống trong phiên**: không nằm trong hồ sơ nhân vật (cần đổi lược đồ `ProgressRecord` và cờ trong `char_state`); client chưa có chỉ báo "đang có đan chờ" (chỉ thấy tỉ lệ trong `breakthrough_result`); rớt mạng làm mất đan đã dùng.
+3. **Chưa làm**: đan hồi MP, đan chủ / đan phụ theo ngưỡng (`pillBonus` với `main` / `support` và tối đa 3 viên), đan hồi máu thường bị khóa trong Lôi Kiếp (docs/01 §5), dùng vật phẩm instance (trang bị / bản vẽ), tách / vứt, ô nhanh nhiều phím (chỉ phím H cho đan hồi máu), hồi chiêu hiển thị trên client (chỉ biết khi bị từ chối `OnCooldown`).
+4. **Giao thức**: `Use` và các lý do 6-10 chỉ thêm giá trị vào enum, `PROTOCOL_VERSION` không đổi; khi có bản server và client khác nhau cùng chạy cần bật lại kiểm tra phiên bản (docs/24).
+
 ## D92 — lưu trữ bằng tệp: còn mở
 
 - Không phải cơ sở dữ liệu: một tệp JSON mỗi kho, nạp hết vào bộ nhớ lúc khởi động, ghi lại toàn bộ tệp (gộp theo 250 ms). Đủ cho play-test và vài nghìn nhân vật; `ledger.json` tăng vô hạn vì bút toán chỉ thêm (cần JSONL hoặc DB thật trước khi mở cho nhiều người).

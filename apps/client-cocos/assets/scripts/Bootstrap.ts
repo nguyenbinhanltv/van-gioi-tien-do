@@ -366,6 +366,8 @@ export class Bootstrap extends Component {
         bag: () => (demo ? demo.bag : (online?.net.bag ?? null)),
         move: (from, to) => (demo ? demo.move(from, to) : (online?.net.sendBagMove(from, to) ?? false)),
         claim: () => (demo ? demo.claim() : (online?.net.sendBagClaim() ?? false)),
+        use: (slot) => (demo ? demo.use(slot) : (online?.net.sendBagUse(slot) ?? false)),
+        quickUse: (key) => (demo ? false : (online?.net.sendBagQuickUse(key) ?? false)),
         clientToUi: (x, y) => this.rig.clientToUi(x, y),
         icon: (key) => this.propArt?.icon(key) ?? null,
       },
@@ -586,6 +588,7 @@ function makeDemoBag(): {
   bag: InstanceType<typeof core.BagModel>;
   move: (a: number, b: number) => boolean;
   claim: () => boolean;
+  use: (slot: number) => boolean;
 } {
   const bag = new core.BagModel();
   const slots: Array<unknown> = Array.from({ length: 40 }, () => null);
@@ -606,6 +609,15 @@ function makeDemoBag(): {
       const tmp = slots[a];
       slots[a] = slots[b] ?? null;
       slots[b] = tmp ?? null;
+      push();
+      return true;
+    },
+    use: (slot) => {
+      // a local stand-in for the server: only to see the panel react in a headless capture
+      const s = slots[slot] as { kind: string; qty: number } | null | undefined;
+      if (!s || s.kind !== 'stack' || !bag.canUse(slot)) return false;
+      s.qty -= 1;
+      if (s.qty <= 0) slots[slot] = null;
       push();
       return true;
     },
