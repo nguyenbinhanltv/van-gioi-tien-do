@@ -27,6 +27,8 @@ export const INV_LIMITS = {
 export enum InvOp {
   Move = 1,
   ClaimPending = 2,
+  /** consume one item of the stack in slot `from` (heal pill, breakthrough pill); `to` is 0 (D90) */
+  Use = 3,
 }
 
 /** Why an inventory command was refused (0 = done). Values are wire-stable. */
@@ -39,6 +41,16 @@ export enum InvReason {
   NotReady = 4,
   /** nothing to claim, or nothing fitted (claim) */
   NothingMoved = 5,
+  /** Use: the item in that slot cannot be used (D90) */
+  NotUsable = 6,
+  /** Use: the item's shared cooldown is still running (heal pills: 8 s) */
+  OnCooldown = 7,
+  /** Use: the character is dead */
+  Dead = 8,
+  /** Use: HP is already full, nothing consumed */
+  NothingToHeal = 9,
+  /** Use: a breakthrough pill is already waiting for the next breakthrough attempt */
+  PillActive = 10,
 }
 
 export type InvSlot =
@@ -62,9 +74,9 @@ export interface InvCmdMsg {
   type: 'inv_cmd';
   requestId: string;
   op: number;
-  /** Move: source slot; ClaimPending: 0 */
+  /** Move / Use: source slot; ClaimPending: 0 */
   from: number;
-  /** Move: target slot; ClaimPending: 0 */
+  /** Move: target slot; ClaimPending / Use: 0 */
   to: number;
 }
 export interface InvResultMsg {
@@ -151,18 +163,19 @@ export function validateInventoryMessage(o: Rec): InvMessage | null {
       };
     }
     case 'inv_cmd': {
-      const op = int(o.op, InvOp.Move, InvOp.ClaimPending, 'op');
+      const op = int(o.op, InvOp.Move, InvOp.Use, 'op');
       const from = int(o.from, 0, L.MAX_SLOTS - 1, 'from');
       const to = int(o.to, 0, L.MAX_SLOTS - 1, 'to');
       if (op === InvOp.ClaimPending && (from !== 0 || to !== 0))
         throw new ProtocolError('malformed', 'claim_pending carries no slots');
+      if (op === InvOp.Use && to !== 0) throw new ProtocolError('malformed', 'use carries only the source slot');
       return { type: 'inv_cmd', requestId: reqId(o.requestId), op, from, to };
     }
     case 'inv_result':
       return {
         type: 'inv_result',
         requestId: reqId(o.requestId),
-        op: int(o.op, InvOp.Move, InvOp.ClaimPending, 'op'),
+        op: int(o.op, InvOp.Move, InvOp.Use, 'op'),
         reason: int(o.reason, 0, 255, 'reason'),
         count: int(o.count, 0, 255, 'count'),
       };

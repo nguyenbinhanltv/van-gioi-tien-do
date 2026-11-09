@@ -177,6 +177,7 @@ const TYPE_IDS: Readonly<Record<Exclude<Message['type'], ColdMessage['type']>, M
   pong: MsgType.Pong,
   telegraph_start: MsgType.TelegraphStart,
   telegraph_end: MsgType.TelegraphEnd,
+  boss_phase: MsgType.BossPhase,
 };
 
 const SELF_FLAG_FLYING = 1;
@@ -259,6 +260,11 @@ export function encode(msg: Message, opts: CodecOptions = {}): Uint8Array {
     case 'telegraph_end':
       w.u16(m.id);
       w.u8(m.cancelled ? 1 : 0);
+      break;
+    case 'boss_phase':
+      w.u32(m.mobEntityId);
+      w.u8(m.phase);
+      w.u16(m.transformMs);
       break;
   }
   return w.result();
@@ -547,6 +553,9 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
       msg = { type, id, cancelled: c === 1 };
       break;
     }
+    case 'boss_phase':
+      msg = { type, mobEntityId: r.u32(), phase: r.u8(), transformMs: r.u16() };
+      break;
     default:
       throw new ProtocolError('type', `message ${type} is not a hot-family message`);
   }

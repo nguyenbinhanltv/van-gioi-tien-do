@@ -190,6 +190,18 @@ export class Bag {
     return ok(undefined);
   }
 
+  /** Consume ONE unit of the stack in exactly `slot` (the slot the player picked, D90). */
+  takeOne(slot: number): BagResult<{ defId: number; quality: number }> {
+    if (!this.validSlot(slot)) return fail('BAD_SLOT');
+    const s = this.slots[slot];
+    if (!s) return fail('EMPTY_SLOT');
+    if (s.kind !== 'stack') return fail('NOT_STACKABLE');
+    s.qty -= 1;
+    const out = { defId: s.defId, quality: s.quality };
+    if (s.qty <= 0) this.slots[slot] = null;
+    return ok(out);
+  }
+
   removeInstance(slot: number): BagResult<ItemInstance> {
     if (!this.validSlot(slot)) return fail('BAD_SLOT');
     const s = this.slots[slot];
