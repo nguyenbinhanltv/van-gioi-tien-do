@@ -232,6 +232,12 @@ export interface WorldNodeOptions {
   inventory?: InventoryService;
 }
 
+/** The phases `WorldNode.profile` times, in tick order. */
+export const TICK_PHASES = ['pre', 'sim', 'post', 'mobs', 'events', 'aoi', 'snap'] as const;
+export type TickPhase = (typeof TICK_PHASES)[number];
+/** A tick longer than this is "slow": its biggest phase is counted in `profile.slowBy` (the 20 Hz period). */
+const SLOW_TICK_MS = 50;
+
 const BAND_PERIOD = [1, 2, 4] as const;
 const clock = (): number => Number(process.hrtime.bigint()) / 1e6;
 
@@ -296,6 +302,20 @@ export class WorldNode {
   readonly tickIntervalMs: number[] = [];
   /** cumulative ms per tick phase (sim step / AOI / snapshot encode+send) and the slowest single sample of each */
   readonly phases = { stepMs: 0, aoiMs: 0, snapMs: 0, aoiTicks: 0, maxStepMs: 0, maxAoiMs: 0, maxSnapMs: 0 };
+  /**
+   * Per-phase duration samples (ms, capped like `tickMs`) and, for every tick over the budget, which phase was the biggest (profiling, D106).
+   * Phases: `pre` (hold scan, inbox drain, combat pre-step), `sim` (`step`), `post` (combat post-step), `mobs` (mob AI + attacks),
+   * `events` (event handling, progression / chat / party ticks, anti-cheat kicks), `aoi`, `snap` (inventory flush + snapshot encode + send).
+   */
+  readonly profile: {
+    samples: Record<TickPhase, number[]>;
+    slowTicks: number;
+    slowBy: Record<TickPhase, number>;
+  } = {
+    samples: { pre: [], sim: [], post: [], mobs: [], events: [], aoi: [], snap: [] },
+    slowTicks: 0,
+    slowBy: { pre: 0, sim: 0, post: 0, mobs: 0, events: 0, aoi: 0, snap: 0 },
+  };
   private nextId = 1;
   /** released player ids, oldest first, with the sim time from which each may be reused */
   private readonly freeIds: { id: number; reusableAtMs: number }[] = [];
@@ -742,6 +762,7 @@ export class WorldNode {
           skillId: msg.skillId,
           targetId: msg.targetId,
           rttMs: 0,
+          recvAtMs: this.wallClock(),
           aim: msg.aim ? { i: dequantizePos(msg.aim.qi), j: dequantizePos(msg.aim.qj) } : null,
         });
         break;
@@ -805,8 +826,14 @@ export class WorldNode {
     }
 
     const inputs: AimedInput[] = [];
+    const wallNow = this.wallClock();
     for (const c of this.clients.values()) {
-      for (const i of c.inbox) inputs.push(i);
+      for (const i of c.inbox) {
+        // how long a cast waited for this tick (D106): the sim judges it as of its arrival
+        if (i.kind === 'cast' && i.recvAtMs !== undefined)
+          inputs.push({ ...i, ageMs: Math.max(0, wallNow - i.recvAtMs) });
+        else inputs.push(i);
+      }
       c.inbox.length = 0;
     }
     let simInputs: SimInput[] = inputs;
@@ -815,6 +842,7 @@ export class WorldNode {
       simInputs = pre.inputs;
       for (const res of pre.results) this.sendCombatResult(res);
     }
+    const tPre = clock();
     if (Number.isNaN(this.wall0)) this.wall0 = this.wallClock() - this.world.timeMs; // the wall clock starts counting at the first tick
     this.tickDriftMs = this.driftNow();
     const r = step(this.world, simInputs, this.ctx, NETWORK.TICK_MS, { lagMs: (id) => this.lagCreditOf(id) });
@@ -825,6 +853,7 @@ export class WorldNode {
       this.world = post.world;
       for (const res of post.results) this.sendCombatResult(res);
     }
+    const tPost = clock();
     // mob AI after combat, so a mob killed this tick is already despawned (and its respawn timer running)
     if (this.mobs) this.world = this.mobs.step(this.world);
     // mob attacks resolve after the AI moved the mobs: telegraphs start / land on the new positions
@@ -834,6 +863,7 @@ export class WorldNode {
       if (mobAtk.telegraphs.length > 0) this.sendTelegraphs(mobAtk.telegraphs);
       if (mobAtk.phases.length > 0) this.sendBossPhases(mobAtk.phases);
     }
+    const tMob = clock();
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.sendStatusUpdates(); // other players' root / slow / poison, on change (D94)
     this.metrics.ticks++;
@@ -864,9 +894,24 @@ export class WorldNode {
     ph.maxAoiMs = Math.max(ph.maxAoiMs, t3 - t2);
     ph.maxSnapMs = Math.max(ph.maxSnapMs, t4 - t3);
 
-    const dt = clock() - t0;
+    const tEnd = clock();
+    const dt = tEnd - t0;
     pushCapped(this.tickMs, dt, WORLD_CONFIG.TICK_SAMPLES);
+    this.recordProfile(dt, [tPre - t0, t1 - tPre, tPost - t1, tMob - tPost, t2 - tMob, t3 - t2, t4 - t3]);
     return dt;
+  }
+
+  private recordProfile(dt: number, ms: readonly number[]): void {
+    const p = this.profile;
+    let biggest = 0;
+    for (let k = 0; k < TICK_PHASES.length; k++) {
+      pushCapped(p.samples[TICK_PHASES[k]!], ms[k]!, WORLD_CONFIG.TICK_SAMPLES);
+      if (ms[k]! > ms[biggest]!) biggest = k;
+    }
+    if (dt > SLOW_TICK_MS) {
+      p.slowTicks++;
+      p.slowBy[TICK_PHASES[biggest]!]++;
+    }
   }
 
   /** One `inv_state` per changed inventory per tick (D79), to the owner's live connection(s); offline owners just drop out. */

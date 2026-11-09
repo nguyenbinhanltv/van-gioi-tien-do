@@ -21,7 +21,25 @@ import {
 } from 'node:fs';
 import { dirname } from 'node:path';
 
+/**
+ * Synchronous file-write cost since start (profiling, D106): every `writeFileAtomic` blocks the event loop for its open + write + fsync +
+ * renames, so a store flush on the tick path is a stall of exactly this long. Read it, never reset it from game code.
+ */
+export const fileWriteStats = { count: 0, totalMs: 0, maxMs: 0 };
+
 export function writeFileAtomic(file: string, data: string): void {
+  const t0 = performance.now();
+  try {
+    writeFileAtomicUntimed(file, data);
+  } finally {
+    const ms = performance.now() - t0;
+    fileWriteStats.count++;
+    fileWriteStats.totalMs += ms;
+    if (ms > fileWriteStats.maxMs) fileWriteStats.maxMs = ms;
+  }
+}
+
+function writeFileAtomicUntimed(file: string, data: string): void {
   const dir = dirname(file);
   mkdirSync(dir, { recursive: true });
   const tmp = `${file}.tmp`;
