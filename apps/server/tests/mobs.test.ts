@@ -229,7 +229,7 @@ describe('combatStats (seam for the combat step)', () => {
       expect(cs).toEqual({
         defense: st.def,
         realm: mobRealm(info.level),
-        element: info.def.elements[0],
+        element: info.def.elements[info.variant] ?? info.def.elements[0],
         dropSource: info.def.tier === 'normal' ? 'field' : info.def.tier,
         hpMax: info.maxHp,
         tier: info.def.tier,

@@ -45,6 +45,8 @@ export interface MobAttackView {
   target: number;
   level: number;
   def: MobDef;
+  /** the mob's own element (its variant, D114); absent = the def's main element */
+  element?: MobDef['elements'][number] | null;
 }
 export interface MobAttackPort {
   /** undefined for dead / unknown mobs */
@@ -240,7 +242,7 @@ export class MobAttackSystem {
         cj: e.j,
         atk: Math.round(stats.atk * phase.atkMult),
         attackerRealm: mobRealm(v.level),
-        element: v.def.elements[0] ?? null,
+        element: v.element !== undefined ? v.element : (v.def.elements[0] ?? null),
       });
     }
 
