@@ -216,3 +216,36 @@ describe('processUi (9-slice frames)', () => {
     expect(r.x1.getPixel(50, 20).slice(0, 4)).toEqual([150, 40, 40, 255]);
   });
 });
+
+describe('tile edge hairlines and water palette', () => {
+  it('bleedColors spreads the edge colour into the transparent texels (alpha stays 0), so bilinear filtering cannot darken the edge', () => {
+    const img = new Image(8, 1);
+    for (let x = 0; x < 8; x++) img.setPixel(x, 0, 0, 0, 0, 0);
+    img.setPixel(3, 0, 200, 120, 40, 255);
+    const out = Gen.bleedColors(img, 2);
+    expect(out.getPixel(3, 0)).toEqual([200, 120, 40, 255]);
+    for (const x of [1, 2, 4, 5]) {
+      const [r, g, b, a] = out.getPixel(x, 0);
+      expect([r, g, b, a]).toEqual([200, 120, 40, 0]);
+    }
+    expect(out.getPixel(7, 0)).toEqual([0, 0, 0, 0]); // out of reach stays empty
+  });
+  it('the diamond is grown enough that a neighbour covers the texels filtered at its edge', () => {
+    const tile = Gen.renderTile(
+      { tileW: 128, tileH: 64, waterFrames: 4, variants: 1, padding: 2 },
+      { kind: 'water', frame: 0 },
+    );
+    // pixel just outside the exact diamond (|dx|/64 + |dy|/32 = 1.03) is already opaque
+    expect(tile.getPixel(64 + 66, 32)[3]).toBe(255);
+  });
+  it('liquidColor grades water onto the art-bible ramp (deep blue .. jade) and leaves lava alone', () => {
+    const patch = new Image(16, 16);
+    for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) patch.setPixel(x, y, 150 + x * 3, 210 + y, 230, 255);
+    const patches = { water: [patch], lava: [patch] };
+    const lava = Tex.liquidColor(patches, 'lava', 0.3, 0.6, 0, 4);
+    const water = Tex.liquidColor(patches, 'water', 0.3, 0.6, 0, 4);
+    expect(water[0]).toBeLessThan(lava[0]); // less pale: red channel drops towards #294451 / #5E8798
+    for (const c of water) expect(c).toBeGreaterThanOrEqual(0);
+    expect(water[2]).toBeGreaterThan(water[0]); // still blue-dominant
+  });
+});

@@ -200,13 +200,15 @@ function cornerField(mask, u, v) {
 }
 
 /**
- * Vẽ một tile. kind: 'water' | 'overlay'. Hình thoi được nới 0,8 px để hai ô kề nhau chồng
- * lên nhau một chút, tránh khe sáng khi ghép.
+ * Vẽ một tile. kind: 'water' | 'overlay'. Hình thoi được nới EXPAND px để hai ô kề nhau chồng
+ * lên nhau, tránh khe khi ghép. Mọi mẫu màu đều tuần hoàn theo (u, v) nên phần nới ra khớp với ô bên cạnh.
+ * Nới 0,8 px là chưa đủ: khi lọc song tuyến ở zoom 1,5x, pixel mép kim cương trộn với texel trong suốt
+ * và để lộ nền tối thành đường chấm chấm dọc cạnh ô ("lưới" quá rõ); 2,4 px che hết.
  */
 function renderTile(o, spec) {
   const { tileW: TW, tileH: TH } = o;
   const img = new Image(TW, TH);
-  const EXPAND = 0.8;
+  const EXPAND = 2.4;
   for (let y = 0; y < TH; y++) {
     for (let x = 0; x < TW; x++) {
       const px = x + 0.5, py = y + 0.5;
@@ -258,13 +260,51 @@ function buildTileList(o) {
 
 const nextPow2 = (n) => 2 ** Math.ceil(Math.log2(n));
 
+/**
+ * Copy of `tile` whose fully transparent pixels carry the colour of the nearest opaque pixel (alpha stays 0). Bilinear filtering
+ * averages RGB without weighting by alpha, so texels that are (0,0,0,0) next to the diamond edge darken every edge pixel: a dark
+ * dotted line along each tile edge at non-integer zoom. `passes` = how far the colour is spread (>= padding + filter radius).
+ */
+function bleedColors(tile, passes) {
+  const W = tile.width, H = tile.height;
+  const out = new Image(W, H);
+  const known = new Uint8Array(W * H);
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const p = tile.getPixel(x, y);
+      out.setPixel(x, y, p[0], p[1], p[2], p[3]);
+      if (p[3] > 0) known[y * W + x] = 1;
+    }
+  for (let n = 0; n < passes; n++) {
+    const add = [];
+    for (let y = 0; y < H; y++)
+      for (let x = 0; x < W; x++) {
+        if (known[y * W + x]) continue;
+        let r = 0, g = 0, b = 0, c = 0;
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H || !known[ny * W + nx]) continue;
+          const p = out.getPixel(nx, ny);
+          r += p[0]; g += p[1]; b += p[2]; c++;
+        }
+        if (c) add.push([x, y, r / c, g / c, b / c]);
+      }
+    for (const [x, y, r, g, b] of add) {
+      out.setPixel(x, y, r, g, b, 0);
+      known[y * W + x] = 1;
+    }
+  }
+  return out;
+}
+
 /** Ghi tile vào ô atlas, kéo dài (extrude) pixel biên ra vùng padding để chống rò màu khi lọc texture. */
 function blitExtruded(sheet, tile, x0, y0, pad) {
+  const src = bleedColors(tile, pad + 2);
   for (let y = -pad; y < tile.height + pad; y++) {
     for (let x = -pad; x < tile.width + pad; x++) {
       const sx = clamp(x, 0, tile.width - 1), sy = clamp(y, 0, tile.height - 1);
-      const [r, g, b, a] = tile.getPixel(sx, sy);
-      if (a === 0) continue;
+      const [r, g, b, a] = src.getPixel(sx, sy);
+      if (a === 0 && r === 0 && g === 0 && b === 0) continue;
       sheet.setPixel(x0 + x, y0 + y, r, g, b, a);
     }
   }
@@ -466,4 +506,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { generateCorners, renderTile, buildTileList, buildExtTileList, packAtlas, buildMap, parseArgs, setGround: (g) => { GROUND = g; } };
+module.exports = { generateCorners, renderTile, bleedColors, buildTileList, buildExtTileList, packAtlas, buildMap, parseArgs, setGround: (g) => { GROUND = g; } };

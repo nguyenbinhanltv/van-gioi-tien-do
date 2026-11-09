@@ -561,6 +561,7 @@ Còn mở / lưu ý:
 - Mỗi ô lặp lại cùng một patch (chu kỳ = một ô, biến thể chỉ khác phần trong ô), nên thấy lưới hình thoi nhạt trên mặt nước / cỏ rộng; muốn bớt cần patch lớn hơn một ô (thêm lớp biến thể theo vị trí ô) hoặc nhiều biến thể hơn.
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
+- **Đường kẻ ô và nước nhạt (đã xử lý)**: đường chấm tối dọc cạnh ô kim cương do texel trong suốt `(0,0,0,0)` quanh ô bị lọc song tuyến trộn vào pixel mép (rõ ở zoom 1,5x); `generate_tilemap.js` nay nới kim cương 2,4 px và rải màu pixel mép sang texel trong suốt (`bleedColors`, alpha giữ 0). Nước được ánh xạ lại lên dải màu art bible (xanh sâu `#294451` → xanh núi `#5E8798` → ngọc `#78B79A`, giữ 30% màu gốc) trong `ground_textures.js` (`WATER_KEEP`). Còn mở: nước vẫn là một texture lặp theo ô nên thấy nhịp lặp; chưa có bờ nước riêng cho đá / đầm / dung nham.
 
 ## Asset Gemini PART 2 (props vùng, icon trạng thái, huy hiệu cảnh giới, hạt, key art, 2026-11-09): còn mở
 
