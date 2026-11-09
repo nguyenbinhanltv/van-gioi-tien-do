@@ -62,7 +62,7 @@ export interface PlacementInput {
   /** Zone dressing props on top of `count` (default ZONE_COUNT); only used with `zoneAt`. */
   zoneCount?: number;
   /**
-   * The Sơn Môn sect buildings (D115): offsets from `sectOrigin` (default: the spawn), placed at EXACTLY those tiles with no nudging (the
+   * The Sơn Môn sect buildings (D118): offsets from `sectOrigin` (default: the spawn), placed at EXACTLY those tiles with no nudging (the
    * server blocks the very same tiles, so a building that moved would leave an invisible wall) and only when every tile of its footprint is
    * land inside the map; a building that does not fit is skipped. Like the courtyard they block tiles and keep scatter away.
    */
@@ -188,7 +188,7 @@ export function placeProps(input: PlacementInput): PlacementResult {
     take(c.name, at[0], at[1]);
     courtyard.push({ name: c.name, i: at[0], j: at[1] });
   }
-  // 1b. sect buildings (D115): fixed tiles shared with the server grid, never nudged
+  // 1b. sect buildings (D118): fixed tiles shared with the server grid, never nudged
   if (input.sect) {
     const o = input.sectOrigin ?? spawn;
     for (const b of input.sect) {

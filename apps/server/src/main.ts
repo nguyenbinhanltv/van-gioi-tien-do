@@ -52,7 +52,7 @@ if (process.env.MAP_FILE) {
     `[vgtd/server] terrain from ${process.env.MAP_FILE}: ${t.width}x${t.height}, ${t.rows.join('').split('#').length - 1} blocked tiles`,
   );
 }
-// the Son Mon sect buildings (D115) block their tiles on the server grid, exactly the tiles the client draws and blocks them on (shared
+// the Son Mon sect buildings (D118) block their tiles on the server grid, exactly the tiles the client draws and blocks them on (shared
 // SECT_BUILDINGS); SECT_BUILDINGS=0 leaves the map as the terrain file / open map says (A/B measurements, old clients)
 let grid: TileGrid | undefined;
 if (process.env.SECT_BUILDINGS !== '0') {

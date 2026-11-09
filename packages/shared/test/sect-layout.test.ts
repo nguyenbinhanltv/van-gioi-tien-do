@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import manifest from '../../../tools/procgen/src/gemini/manifest.json';
 import { SECT_BUILDINGS, fieldBandStart, sectBlockedTiles, sectOrigin } from '../src/index.js';
 
-describe('Son Mon sect layout (D115)', () => {
+describe('Son Mon sect layout (D118)', () => {
   it('every building is a sect prop of the art manifest, with the very same footprint (the server blocks what the client draws)', () => {
     const props = manifest.props as Record<string, { block: number[][]; biomes: string[]; weight: number }>;
     for (const b of SECT_BUILDINGS) {

@@ -196,7 +196,7 @@ export class Bootstrap extends Component {
         defs: this.propArt.defs(),
         count: 110,
         radius: 40,
-        // the Son Mon sect buildings (D115): the same list and origin the server blocks its grid with (shared SECT_BUILDINGS)
+        // the Son Mon sect buildings (D118): the same list and origin the server blocks its grid with (shared SECT_BUILDINGS)
         sect: shared.SECT_BUILDINGS,
         sectOrigin: shared.sectOrigin(map.width),
       });

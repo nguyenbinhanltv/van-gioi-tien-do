@@ -633,7 +633,7 @@ Còn mở / lưu ý:
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
 
-## Art Gemini phần 3: công trình tông môn, icon vật phẩm, icon HUD (D115): còn mở
+## Art Gemini phần 3: công trình tông môn, icon vật phẩm, icon HUD (D118): còn mở
 
 - **Công trình tông môn đang ở @1x**: giữ trang atlas prop @2x ở 2048 (trần ngân sách) và một texture (cổng draw call 65) nên 9 công trình vẽ 1:1 từ pixel @1x ở cả hai tầng; ở zoom 1,5-2,0 chúng mềm hơn các prop khác. Cần quyết định: nâng trang prop lên 4096 cho PC (ngân sách chỉ cho 4096 ở atlas bản đồ PC), hoặc tách trang công trình lazy và chấp nhận thêm draw call, hoặc cắt bớt prop vùng khỏi trang @2x. Bố cục (15 công trình, vị trí cạnh NPC) và kích thước là placeholder.
 - **Mộc nhân chỉ là prop** (chặn ô, không đánh được): chưa có def, xem "Kiểm toán nội dung quái (D114)". Cổng phụ phía đông chưa dẫn tới đâu (Hậu sơn chưa có); bảng Cống hiến chưa tương tác (panel tông môn mở bằng K ở mọi nơi trong tầm NPC).

@@ -1,5 +1,5 @@
 /**
- * Layout of the Sơn Môn Đại Phái buildings (D115): where the nine owner-provided sect props stand around the map centre, and which tiles
+ * Layout of the Sơn Môn Đại Phái buildings (D118): where the nine owner-provided sect props stand around the map centre, and which tiles
  * they block. ONE source for the server (blocks the tiles on its walkability grid, so prediction and the real simulation agree) and the
  * client (draws the buildings and merges the same tiles into its own walkability). All positions are tile offsets from the ORIGIN, the
  * centre tile of the map (`sectOrigin`), the same point the players spawn around.

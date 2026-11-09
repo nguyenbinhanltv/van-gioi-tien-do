@@ -1,4 +1,4 @@
-// Screenshots + checks of the PART 3 Gemini art (D115): the Son Mon sect buildings around the spawn and the HUD / item icons in the DOM panels.
+// Screenshots + checks of the PART 3 Gemini art (D118): the Son Mon sect buildings around the spawn and the HUD / item icons in the DOM panels.
 //
 //   npm run sect:screens -w client-cocos -- [--skip-build] [--out <dir>]
 //

@@ -106,7 +106,7 @@ describe('mobs on a generated zone map', () => {
   });
 });
 
-describe('Son Mon sect buildings on the server grid (D115)', () => {
+describe('Son Mon sect buildings on the server grid (D118)', () => {
   const N = 256;
   const o = { ...Gen.parseArgs([]), width: N, height: N };
   const zoneRows: string[] = Gen.buildZoneMap(

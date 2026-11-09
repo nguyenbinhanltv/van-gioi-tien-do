@@ -45,7 +45,7 @@ export function openRows(size: number): string[] {
 }
 
 /**
- * The same rows with the Sơn Môn sect buildings (D115, `SECT_BUILDINGS` of @vgtd/shared) blocked: the client draws those buildings and
+ * The same rows with the Sơn Môn sect buildings (D118, `SECT_BUILDINGS` of @vgtd/shared) blocked: the client draws those buildings and
  * blocks their tiles in its own walkability, so the server must block the very same tiles or prediction and the real simulation
  * disagree at every wall. Rows are returned as new strings; a map that is not square is returned unchanged.
  */

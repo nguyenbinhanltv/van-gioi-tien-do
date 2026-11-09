@@ -272,7 +272,7 @@ describe('zone dressing (PART 2 props)', () => {
   });
 });
 
-describe('Son Mon sect buildings (D115)', () => {
+describe('Son Mon sect buildings (D118)', () => {
   const N = 256;
   const open = (): Terrain => 'dirt';
   const base = (over: Partial<PlacementInput> = {}): PlacementInput => ({
