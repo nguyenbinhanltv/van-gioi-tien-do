@@ -52,7 +52,7 @@ describe('shouldCull (margin + hysteresis)', () => {
 });
 
 describe('per-node reach', () => {
-  it('a chibi (reach 200) is parked long before a boss (reach 600) at the same spot', () => {
+  it('a chibi (reach 120) is parked long before a boss (reach 600) at the same spot', () => {
     const far = { x: view.x - 500, y: 700 };
     expect(CHIBI_REACH).toBeLessThan(CULL_MARGIN);
     expect(shouldCull(far, view, true, CHIBI_REACH)).toBe(true); // parked chibi stays parked

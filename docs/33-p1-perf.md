@@ -48,7 +48,7 @@ Số 55 / 80 của báo cáo thoát P1 là **không có quái và không có HUD
 | Vật thể L3 ngoài màn hình (armature NPC, quái, prop) vẫn vẽ và cắt batch của vật thể bên cạnh | ~19 | 0 | `YSortLayer.cull`: cất node ngoài khung nhìn (cộng tầm với của sprite, có trễ chống nhấp nháy) vào node không hoạt động |
 | `enableBatch` của armature | 0 | không đổi | các armature bị prop / quái chen giữa nên không liền kề; không dùng |
 
-Kết quả: **64–65** (tối đa trong 20–40 giây đo) với cùng cảnh; cảnh cơ sở (20 NPC, không quái, không combat) 49 (trước 53–55); mở túi đồ 37 (không đổi). Cổng đo: `npm run perf:p1 -w client-cocos -- --mobs --draw-limit 65` (chỉ siết được ngưỡng, không nới ngưỡng dùng chung). Mục tiêu 65 chưa có chỗ trống: thêm quái / NPC trên màn hình thì phải gom tiếp (HP bar trên đầu, armature).
+Kết quả: **60–64** (tối đa trong 30 giây đo, zoom 1,5× mặc định; zoom 1,0× nhìn rộng hơn nên ~66) với cùng cảnh, sau khi gộp thêm code mới (party, status tile, khung UI 9-slice, map vùng); tầm với cắt của chibi 120 px, prop = max(cao, rộng/2) + 30; cảnh cơ sở (20 NPC, không quái, không combat) 49 (trước 53–55); mở túi đồ 37 (không đổi). Cổng đo: `npm run perf:p1 -w client-cocos -- --mobs --draw-limit 65` (chỉ siết được ngưỡng, không nới ngưỡng dùng chung). Mục tiêu 65 chưa có chỗ trống: thêm quái / NPC trên màn hình thì phải gom tiếp (HP bar trên đầu, armature).
 
 ## Cách đo trên Web (headless)
 

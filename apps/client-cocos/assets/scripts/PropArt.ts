@@ -229,7 +229,7 @@ export class PropArt {
       }
     }
     const key = footprintSortable(allocSortId(), 0, i0, j0, fw, fh);
-    ysort.add(n, () => key, Math.max(w, h) + 40);
+    ysort.add(n, () => key, Math.max(h, w / 2) + 30);
     return n;
   }
 }
