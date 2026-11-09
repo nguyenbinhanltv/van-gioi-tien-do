@@ -1,4 +1,4 @@
-import { BlendFactor, Node, Sprite, UITransform, UIOpacity, game } from 'cc';
+import { Node, Sprite, UITransform, UIOpacity, game, gfx } from 'cc';
 import { newNode } from './IsoAdapter';
 import { getParticleFrame, preloadParticles } from './PropArt';
 import { particleSpec } from './ArtRegistry';
@@ -49,8 +49,8 @@ export class LevelUpFx {
       sp.sizeMode = Sprite.SizeMode.CUSTOM;
       sp.spriteFrame = frame;
       if (particleSpec(spriteName)?.blend === 'additive') {
-        sp.srcBlendFactor = BlendFactor.SRC_ALPHA;
-        sp.dstBlendFactor = BlendFactor.ONE;
+        sp.srcBlendFactor = gfx.BlendFactor.SRC_ALPHA;
+        sp.dstBlendFactor = gfx.BlendFactor.ONE;
       }
       const opacity = node.addComponent(UIOpacity);
       opacity.opacity = 0;
