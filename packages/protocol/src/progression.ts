@@ -35,6 +35,7 @@ import {
   type PartyClientMessage,
   type PartyServerMessage,
 } from './party.js';
+import { decodeMajorBody, encodeMajorBody, validateMajorMessage, type MajorServerMessage } from './major.js';
 import {
   decodeInventoryBody,
   encodeInventoryBody,
@@ -62,6 +63,9 @@ export enum ColdMsgId {
   SectCmd = 100,
   SectResult = 101,
   SectState = 102,
+  /** major breakthrough events (D97, major.ts) */
+  MajorEvent = 69,
+  TribulationStrike = 70,
   /** friends (D96, friends.ts); 92-94 sit between the docs/24 craft (90-91) and sect (100+) ranges */
   FriendCmd = 92,
   FriendResult = 93,
@@ -100,6 +104,8 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.SectCmd]: 'sect_cmd',
   [ColdMsgId.SectResult]: 'sect_result',
   [ColdMsgId.SectState]: 'sect_state',
+  [ColdMsgId.MajorEvent]: 'major_event',
+  [ColdMsgId.TribulationStrike]: 'tribulation_strike',
   [ColdMsgId.FriendCmd]: 'friend_cmd',
   [ColdMsgId.FriendResult]: 'friend_result',
   [ColdMsgId.FriendState]: 'friend_state',
@@ -126,6 +132,8 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   sect_cmd: ColdMsgId.SectCmd,
   sect_result: ColdMsgId.SectResult,
   sect_state: ColdMsgId.SectState,
+  major_event: ColdMsgId.MajorEvent,
+  tribulation_strike: ColdMsgId.TribulationStrike,
   friend_cmd: ColdMsgId.FriendCmd,
   friend_result: ColdMsgId.FriendResult,
   friend_state: ColdMsgId.FriendState,
@@ -145,6 +153,12 @@ export enum ProgressionReason {
   Cooldown = 8,
   /** a major threshold needs Tâm Ma and Lôi Kiếp (docs/01 §5), which do not exist yet: major attempts are refused */
   TribulationRequired = 9,
+  /** a major event (Tâm Ma / Lôi Kiếp) of this character is already running (D97) */
+  EventActive = 10,
+  /** the character must be nearly at full HP to start a major breakthrough (D97) */
+  NotPrepared = 11,
+  /** the major breakthrough is locked after a lost Tâm Ma or a Nặng death in a Kiếp (D97) */
+  Locked = 12,
 }
 export enum BreakthroughOutcome {
   Success = 1,
@@ -239,6 +253,7 @@ export type ColdServerMessage =
   | ChatServerMessage
   | PartyServerMessage
   | SectServerMessage
+  | MajorServerMessage
   | FriendServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
@@ -308,6 +323,7 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validateChatMessage(o) ??
         validatePartyMessage(o) ??
         validateSectMessage(o) ??
+        validateMajorMessage(o) ??
         validateFriendMessage(o)
       );
   }
@@ -388,6 +404,10 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'sect_state':
       encodeSectBody(w, m);
       break;
+    case 'major_event':
+    case 'tribulation_strike':
+      encodeMajorBody(w, m);
+      break;
     case 'friend_cmd':
     case 'friend_result':
     case 'friend_state':
@@ -453,6 +473,9 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'sect_result':
     case 'sect_state':
       return decodeSectBody(r, type);
+    case 'major_event':
+    case 'tribulation_strike':
+      return decodeMajorBody(r, type);
     case 'friend_cmd':
     case 'friend_result':
     case 'friend_state':

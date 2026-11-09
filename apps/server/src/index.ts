@@ -14,4 +14,5 @@ export * from './chat/index.js';
 export * from './party/index.js';
 export * from './persistence/index.js';
 export * from './sect/index.js';
+export * from './world/breakthrough/index.js';
 export * from './friends/index.js';

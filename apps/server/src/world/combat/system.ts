@@ -404,12 +404,13 @@ export class CombatSystem {
   }
 
   // ------------------------------------------------------------------ internals
-  private enemiesNear(world: SimWorld): ResolveTarget[] {
+  private enemiesNear(world: SimWorld, casterId: number): ResolveTarget[] {
     const mobs = this.opts.mobs;
     if (!mobs) return [];
     const out: ResolveTarget[] = [];
     for (const e of world.entities) {
       if (e.hp <= 0 || this.opts.isInvulnerable?.(e.id)) continue;
+      if (this.opts.canTarget && !this.opts.canTarget(casterId, e.id)) continue;
       const s = mobs.combatStats(e.id);
       if (s)
         out.push({ id: e.id, i: e.i, j: e.j, hpMax: s.hpMax, defense: s.defense, realm: s.realm, element: s.element });
@@ -448,7 +449,7 @@ export class CombatSystem {
       skill: c.skill,
       targetId: c.targetId,
       aim: c.aim,
-      enemies: this.enemiesNear(world),
+      enemies: this.enemiesNear(world, c.casterId),
       rand,
       losClear: (a, b) => lineOfSight(this.ctx.grid, a.i, a.j, b.i, b.j, caster.layer, caster.flying),
       defs: this.defs,

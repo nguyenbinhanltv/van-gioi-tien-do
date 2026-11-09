@@ -139,6 +139,22 @@ describe('file stores round trip', () => {
     expect(await b.save({ ...v1, exp: 99 }, 0)).toBe(false);
   });
 
+  it('progression: the major-breakthrough lock (time left, D97) is written to the file and read back', async () => {
+    const d = tmp();
+    const p = join(d, 'progression.json');
+    const a = new FileProgressionStore(p, { flushMs: -1 });
+    const rec = {
+      ...newRecord('char2', { type: 'don', elements: ['moc'], mutation: null }, 'kiem'),
+      nFail: 2,
+      majorLockMs: 86_400_000,
+    };
+    expect(await a.save(rec, 0)).toBe(true);
+    a.file.flush();
+    const b = new FileProgressionStore(p, { flushMs: -1 });
+    expect(await b.load('char2')).toEqual(rec);
+    expect((await b.load('char2'))!.majorLockMs).toBe(86_400_000);
+  });
+
   it('inventories + ledger: bags, pending loot and bigint balances come back exactly, and the ledger keeps working', () => {
     const d = tmp();
     const s1 = openFileStores(d, { flushMs: -1 });

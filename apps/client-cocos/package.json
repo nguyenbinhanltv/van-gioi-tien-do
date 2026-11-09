@@ -25,6 +25,7 @@
     "sect:online": "node scripts/sect-online-smoke.mjs",
     "friends:online": "node scripts/friends-online-smoke.mjs",
     "touch:aim": "node scripts/touch-aim-smoke.mjs",
+    "major:vfx": "node scripts/major-vfx-smoke.mjs",
     "bag:smoke": "node scripts/bag-smoke.mjs",
     "progression:online": "node scripts/progression-online-smoke.mjs",
     "class:online": "node scripts/class-online-smoke.mjs",
