@@ -35,7 +35,7 @@
 | Số nhiều                               | Dùng cơ chế ICU `plural` dù tiếng Việt không cần, để thêm ngôn ngữ sau không đổi khóa                      |
 | Mô tả cho dịch giả                     | Mỗi khóa mới có `context` ngắn (nơi hiển thị, độ dài tối đa)                                               |
 
-Cấu trúc tệp đề xuất: `locales/vi-VN.json` (nguồn), `locales/en.json` (khung, sau MVP). CI (dự kiến): báo lỗi nếu khóa trong mã không có trong `vi-VN.json`, báo cảnh báo nếu khóa thiếu ở ngôn ngữ khác, và kiểm tra tham số `{...}` khớp giữa các ngôn ngữ. Thư viện cụ thể chưa chốt (xem câu hỏi Q2).
+Cấu trúc tệp đề xuất: `locales/vi-VN.json` (nguồn), `locales/en.json` (khung, sau MVP). _[Cập nhật D104: đã làm cho tiếng Việt. Bảng nguồn là `packages/client-core/src/i18n/vi-VN.ts` (TypeScript, một object phẳng cùng quy ước khóa), hàm `t(key, params)` và `setStrings` / `pseudoLocalize` ở `strings.ts`; kiểm "khóa trong mã có trong bảng" và "không còn chuỗi cứng" là `tests/i18n-guard.test.ts`; `plural` ICU hoãn tới khi có ngôn ngữ thứ hai.]_ CI (dự kiến): báo lỗi nếu khóa trong mã không có trong `vi-VN.json`, báo cảnh báo nếu khóa thiếu ở ngôn ngữ khác, và kiểm tra tham số `{...}` khớp giữa các ngôn ngữ. Thư viện cụ thể chưa chốt (xem câu hỏi Q2).
 
 ### 2.3 Định dạng theo vùng
 

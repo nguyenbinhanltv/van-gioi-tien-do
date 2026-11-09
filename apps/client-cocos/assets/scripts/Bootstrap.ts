@@ -20,6 +20,7 @@ import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
 import { installDrawDebug } from './DrawDebug';
+import { installGlyphSheet } from './GlyphSheet';
 import { MobArt, createMobDemoBackend } from './MobArt';
 import { placeProps } from './PropPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
@@ -149,6 +150,8 @@ export class Bootstrap extends Component {
     const worldRoot = newNode('World', this.node);
     // `?tier=low|medium|high` picks the chunk-streaming window (D63); default medium
     const params = new URLSearchParams(location.search);
+    // `?lang=pseudo`: pseudo-localized text (longer, accented, bracketed) to spot clipped or concatenated strings (docs/19 §2.4)
+    if (params.get('lang') === 'pseudo') core.setStrings(core.pseudoLocalize(core.sourceStrings()), 'pseudo');
     const tierParam = params.get('tier');
     const tier: cw.StreamTier = tierParam === 'low' || tierParam === 'high' ? tierParam : 'medium';
     this.world = new WorldView(data, tilesetJson.animations, tilesetTex, worldRoot, tier);
@@ -318,6 +321,7 @@ export class Bootstrap extends Component {
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
     if (params.get('drawdbg') !== null) installDrawDebug(this.node); // window.__vgtdDrawDbg(): batch-break report
+    if (params.get('glyphs') !== null) installGlyphSheet(this.uiRoot!); // every supported glyph through the shared label atlas (D104)
     this.maybeAutotest();
   }
 

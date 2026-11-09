@@ -111,7 +111,11 @@ export class OnlineSession {
       onAoiEnter: (entities) => {
         for (const e of entities) {
           if (e.kind === KIND_MONSTER)
-            this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, defId: e.defId, hpMax: e.maxHp });
+            this.mobMeta.set(e.entityId, {
+              name: core.t('combat.mob.fallback_name', { id: e.defId }),
+              defId: e.defId,
+              hpMax: e.maxHp,
+            });
         }
       },
       onBossPhase: (msg) => this.onBossPhase?.(msg.mobEntityId, msg.phase, msg.transformMs),

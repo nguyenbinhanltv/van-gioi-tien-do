@@ -4,26 +4,34 @@
  * authoritative; this keeps no rules of its own beyond showing the answers in Vietnamese.
  */
 import { PARTY } from '@vgtd/shared';
+import { t, type StringKey } from '../i18n/strings.js';
 import { PartyReason, type PartyInviteMsg, type PartyResultMsg, type PartyStateMsg, type PartyVitalsMsg } from '@vgtd/protocol';
 
 /** re-exported so engine scripts (which only see client-core) can name the ops */
 export { PartyOp } from '@vgtd/protocol';
 
-/** Vietnamese text of every party refusal (user-facing). */
-export const PARTY_REASON_TEXT: Readonly<Record<number, string>> = {
-  [PartyReason.Ok]: '',
-  [PartyReason.RateLimited]: 'Bạn thao tác quá nhanh, hãy chờ giây lát.',
-  [PartyReason.NoSuchPlayer]: 'Không tìm thấy người chơi này (hoặc họ đang ngoại tuyến).',
-  [PartyReason.Self]: 'Không thể tự chọn chính mình.',
-  [PartyReason.PartyFull]: 'Tổ đội đã đủ người.',
-  [PartyReason.TargetInParty]: 'Người này đã ở trong một tổ đội.',
-  [PartyReason.NotLeader]: 'Chỉ đội trưởng mới làm được việc này.',
-  [PartyReason.NotInParty]: 'Không có trong tổ đội (hoặc người đó không thuộc tổ đội của bạn).',
-  [PartyReason.NoInvite]: 'Không có lời mời nào còn hiệu lực.',
-  [PartyReason.AlreadyInParty]: 'Bạn đang ở trong một tổ đội, hãy rời đội trước.',
-  [PartyReason.TooManyInvites]: 'Người này đang có quá nhiều lời mời (hoặc bạn đã mời rồi).',
-  [PartyReason.NotReady]: 'Chưa vào game, chưa thao tác được.',
+/** String key of every party refusal (user-facing text: `partyReasonText`). */
+export const PARTY_REASON_KEY: Readonly<Record<number, StringKey | null>> = {
+  [PartyReason.Ok]: null,
+  [PartyReason.RateLimited]: 'party.reason.rate_limited',
+  [PartyReason.NoSuchPlayer]: 'party.reason.no_such_player',
+  [PartyReason.Self]: 'party.reason.self',
+  [PartyReason.PartyFull]: 'party.reason.full',
+  [PartyReason.TargetInParty]: 'party.reason.target_in_party',
+  [PartyReason.NotLeader]: 'party.reason.not_leader',
+  [PartyReason.NotInParty]: 'party.reason.not_in_party',
+  [PartyReason.NoInvite]: 'party.reason.no_invite',
+  [PartyReason.AlreadyInParty]: 'party.reason.already_in_party',
+  [PartyReason.TooManyInvites]: 'party.reason.too_many_invites',
+  [PartyReason.NotReady]: 'party.reason.not_ready',
 };
+
+/** The player-facing text of a party refusal: '' for Ok, the generic "refused (code n)" line for an unknown code. */
+export function partyReasonText(reason: number): string {
+  const key = PARTY_REASON_KEY[reason];
+  if (key === null) return '';
+  return key === undefined ? t('party.reason.unknown', { code: reason }) : t(key);
+}
 
 export interface PartyMemberView {
   entityId: number;
@@ -109,20 +117,20 @@ export class PartyModel {
     for (const id of [...this.vitals.keys()]) if (!keep.has(id)) this.vitals.delete(id);
     if (this.roster.length) this.invites = []; // joined a party: pending invites are moot (the server dropped them too)
     this.version++;
-    if (!this.roster.length) return wasIn ? 'Bạn đã rời tổ đội.' : null;
+    if (!this.roster.length) return wasIn ? t('party.event.you_left') : null;
     if (!wasIn) {
       const lead = this.roster.find((x) => x.entityId === m.leaderId)?.name ?? '';
-      return `Bạn đã vào tổ đội của ${lead} (${this.roster.length}/${PARTY.MAX_SIZE}).`;
+      return t('party.event.you_joined', { leader: lead, size: this.roster.length, max: PARTY.MAX_SIZE });
     }
     const names = (list: typeof before) => new Set(list.map((x) => x.entityId));
     const was = names(before);
     const now = names(this.roster);
     const joined = this.roster.filter((x) => !was.has(x.entityId)).map((x) => x.name);
     const left = before.filter((x) => !now.has(x.entityId)).map((x) => x.name);
-    const parts: string[] = [];
-    if (joined.length) parts.push(`${joined.join(', ')} vào tổ đội`);
-    if (left.length) parts.push(`${left.join(', ')} rời tổ đội`);
-    return parts.length ? `${parts.join('; ')}.` : null;
+    if (joined.length && left.length) return t('party.event.joined_and_left', { joined: joined.join(', '), left: left.join(', ') });
+    if (joined.length) return t('party.event.joined', { names: joined.join(', ') });
+    if (left.length) return t('party.event.left', { names: left.join(', ') });
+    return null;
   }
 
   applyVitals(m: PartyVitalsMsg): void {
@@ -135,12 +143,12 @@ export class PartyModel {
     this.invites = this.invites.filter((i) => i.fromName !== m.fromName);
     this.invites.push({ fromName: m.fromName, expiresAtMs: this.o.now() + m.ttlMs });
     this.version++;
-    return `${m.fromName} mời bạn vào tổ đội. Gõ /accept để nhận hoặc /decline để từ chối.`;
+    return t('party.invite.line', { from: m.fromName });
   }
 
   /** The answer to one of our commands: a refusal text, or null when it worked. */
   applyResult(m: PartyResultMsg): string | null {
-    return m.reason === PartyReason.Ok ? null : (PARTY_REASON_TEXT[m.reason] ?? `Lệnh tổ đội bị từ chối (mã ${m.reason}).`);
+    return m.reason === PartyReason.Ok ? null : partyReasonText(m.reason);
   }
 
   /** We answered an invite from `fromName` ('' = the newest): forget it locally (the server's result confirms). */

@@ -1,5 +1,5 @@
 import { Color, Node, Sprite, SpriteFrame, UITransform } from 'cc';
-import { combat as cb } from './vendor/vgtd.mjs';
+import { combat as cb, core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { MobSprite, PropArt } from './PropArt';
 import { mobDefIdOfName, newMotion, stepMotion, type MotionState } from './MobMotion';
@@ -120,7 +120,7 @@ export function createMobDemoBackend(
         j: spawn.j + Math.sin(a + r * 0.3) * (ring + r * 0.8),
       };
     }
-    specs.push({ name: `Mob ${id}`, defId: id, pos });
+    specs.push({ name: core.t('combat.mob.fallback_name', { id }), defId: id, pos });
   }
   return new cb.MockCombat({
     path: pathOfClass(classId) as never,

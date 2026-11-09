@@ -6,6 +6,7 @@
  * In-game stone currencies only: no price / shop / real-money notions.
  */
 import { CURRENCIES, isUsableItem, itemDefById, type Currency, type DropItem } from '@vgtd/shared';
+import { t } from '../i18n/strings.js';
 import { InvOp, InvReason, type InvCmdMsg, type InvPending, type InvResultMsg, type InvSlot, type InvStateMsg } from '@vgtd/protocol';
 
 export type WalletView = Readonly<Record<Currency, number>>;
@@ -162,32 +163,32 @@ export class BagModel {
   }
 }
 
-/** Short text for a refused command (UI toast). */
+/** Short player-facing text for a refused command (UI toast). */
 export function invReasonText(reason: number): string {
   switch (reason) {
     case InvReason.Ok:
-      return 'ok';
+      return t('bag.reason.ok');
     case InvReason.BadSlot:
-      return 'bad slot';
+      return t('bag.reason.bad_slot');
     case InvReason.EmptySlot:
-      return 'nothing in that slot';
+      return t('bag.reason.empty_slot');
     case InvReason.RateLimited:
-      return 'too fast';
+      return t('bag.reason.rate_limited');
     case InvReason.NotReady:
-      return 'bag not ready';
+      return t('bag.reason.not_ready');
     case InvReason.NothingMoved:
-      return 'nothing fits';
+      return t('bag.reason.nothing_moved');
     case InvReason.NotUsable:
-      return 'cannot be used';
+      return t('bag.reason.not_usable');
     case InvReason.OnCooldown:
-      return 'still cooling down';
+      return t('bag.reason.on_cooldown');
     case InvReason.Dead:
-      return 'you are dead';
+      return t('bag.reason.dead');
     case InvReason.NothingToHeal:
-      return 'HP is full';
+      return t('bag.reason.nothing_to_heal');
     case InvReason.PillActive:
-      return 'a pill is already waiting';
+      return t('bag.reason.pill_active');
     default:
-      return `refused (${reason})`;
+      return t('bag.reason.unknown', { code: reason });
   }
 }

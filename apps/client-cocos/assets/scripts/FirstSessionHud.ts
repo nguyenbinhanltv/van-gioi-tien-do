@@ -160,8 +160,8 @@ export class FirstSessionHud {
       this.root.active = this.doneForS < SHOW_DONE_S;
     }
     this.title.string = v.done
-      ? 'Hành trình đầu tiên: hoàn thành!'
-      : `Hành trình đầu tiên  ${v.completed}/${v.steps.length}`;
+      ? core.t('firstsession.hud.title_done')
+      : core.t('firstsession.hud.title', { done: v.completed, total: v.steps.length });
     let hint = '';
     for (let k = 0; k < v.steps.length; k++) {
       const s = v.steps[k]!;

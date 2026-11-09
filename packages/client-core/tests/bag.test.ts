@@ -78,7 +78,7 @@ describe('BagModel', () => {
     let k = 0.1;
     const id = makeRequestId(() => (k = (k * 7.7) % 1));
     expect(id).toMatch(/^[0-9a-f]{32}$/);
-    expect(invReasonText(InvReason.EmptySlot)).toBe('nothing in that slot');
+    expect(invReasonText(InvReason.EmptySlot)).toBe('Ô này trống.');
     expect(invReasonText(200)).toContain('200');
   });
 });

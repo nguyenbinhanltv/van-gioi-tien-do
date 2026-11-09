@@ -7,6 +7,7 @@
  * Tím, Vàng, Đỏ). In-game stone currencies only.
  */
 import type { BagItemView, BagModel } from '../net/bag.js';
+import { t } from '../i18n/strings.js';
 
 export const BAG_GRID = { cols: 8, cell: 44, gap: 4, pad: 10, headerH: 58, footerH: 44 } as const;
 
@@ -180,10 +181,10 @@ export function itemStyle(item: BagItemView): ItemStyle {
   return { code: s.code, color: s.color, quality: QUALITY_RGB[Math.min(5, Math.max(0, item.quality))]! };
 }
 
-/** Wallet line, hạ / trung / thượng phẩm (ASCII: the placeholder font has no diacritics). */
+/** Wallet line, hạ / trung / thượng phẩm. */
 export function walletText(bag: BagModel): string {
   const w = bag.wallet;
-  return `Ha ${w.LT_HA}   Trung ${w.LT_TRUNG}   Thuong ${w.LT_THUONG}`;
+  return t('bag.wallet', { low: w.LT_HA, mid: w.LT_TRUNG, high: w.LT_THUONG });
 }
 /** Durability as a percent 0..100 (null for stacks). */
 export function durabilityPercent(item: BagItemView): number | null {

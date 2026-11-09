@@ -567,3 +567,11 @@ Còn mở / lưu ý:
 7. **Dung lượng key art**: `login_bg` 1024×576 PNG ≈ 1,4 MB và emblem 512 px ≈ 0,6 MB (tải theo yêu cầu, chỉ khi hộp chọn Đạo Lộ hiện); chưa có preset nén WebP/ASTC cho hai ảnh này. Cần nén nếu gói tải đầu sát trần 25 MB.
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
+
+## i18n tiếng Việt (D104): còn mở
+
+- **Tên trong dữ liệu `@vgtd/shared` chưa qua bảng chuỗi**: `REALM_NAMES` / `SUB_STAGE_NAMES` / `stageLabel` (hiện ở HUD tu luyện), tên quái (`MOB_DEFS`), tên vật phẩm và kỹ năng. Đây là dữ liệu dùng chung với server (bảng số liệu docs/07, docs/10, docs/11), không phải chuỗi trong mã client; cần khóa `realm.<n>.name`, `mob.<key>.name`, `item.<key>.name`, `skill.<id>.name` (docs/19 §2.2) và client dịch theo khóa khi có ngôn ngữ thứ hai.
+- **Chưa có ngôn ngữ thứ hai và chưa có `plural` ICU** (tiếng Việt không cần). Khi thêm `en`: bảng `en` cùng khóa, `setStrings`, kiểm tham số `{...}` khớp giữa các bảng (hiện test chỉ kiểm bảng nguồn), thêm phông CJK nếu có `zh` (docs/19 §3).
+- **Ngoại lệ có chủ đích**: lớp phủ chẩn đoán (`PerfHud`, `DrawDebug`, ghi chú `hud.note` ở `Bootstrap` / `OnlineSession`), trình xem animation `viewer/`, thông báo lỗi ném ra và log (`console`, `throw`) là tiếng Anh cho lập trình viên, không phải chữ của người chơi. `packages/character` có chú thích kỹ thuật tiếng Việt trong dữ liệu animation / socket (chỉ công cụ đọc), ngoài phạm vi.
+- **Định dạng số / ngày theo vùng** (docs/19 §2.3): `formatNumber` (Intl, `vi-VN`) đã có nhưng HUD vẫn in số thô (`String(n)`, `toFixed`); cần dùng khi có số lớn (ví dụ "1.200" Linh thạch) và lịch sự kiện theo múi giờ.
+- **Glyph**: phủ ký tự được kiểm bằng canvas của trình duyệt với phông `Arial` + dự phòng hệ thống (headless Chrome trên Windows); chưa kiểm trên máy Android / iOS thật (phông hệ thống khác). Atlas nhãn dùng chung ở chế độ `dynamic` giữ bộ glyph trong vài batch (xem `npm run glyphs`), cổng draw call 65 của `perf:p1 --mobs` giữ nguyên.

@@ -1,5 +1,5 @@
 import { Color, Label, Node, Sprite, SpriteFrame, UITransform, Vec2, game } from 'cc';
-import { combat as cb, shared } from './vendor/vgtd.mjs';
+import { combat as cb, core, shared } from './vendor/vgtd.mjs';
 import { cellCenterToWorld, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
@@ -45,7 +45,11 @@ export function createMockBackend(
   [3, 4.5, 6, 8, 12].forEach((r, n) => {
     const a = n * 1.9 + 0.4;
     const p = walkableNear(walkable, spawn.i + Math.cos(a) * r, spawn.j + Math.sin(a) * r);
-    specs.push({ name: n === 1 ? 'Hung nhan (hits back)' : `Moc nhan ${n + 1}`, pos: p, fightsBack: n === 1 });
+    specs.push({
+      name: n === 1 ? core.t('combat.mock.dummy_fighter') : core.t('combat.mock.dummy', { n: n + 1 }),
+      pos: p,
+      fightsBack: n === 1,
+    });
   });
   return new cb.MockCombat({ path: pathOfClass(classId), enemies: specs, rand, playerPos: spawn });
 }
@@ -65,16 +69,17 @@ const ELEMENT_COLOR: Record<string, Color> = {
   none: new Color(120, 120, 120, 255),
 };
 
-const BLOCK_TEXT: Record<string, string> = {
-  empty: 'empty slot',
-  passive: 'passive skill',
-  cooldown: 'on cooldown',
-  gcd: 'global cooldown',
-  busy: 'casting',
-  mp: 'not enough MP',
-  no_target: 'no target',
-  range: 'out of range',
-  dead: 'you are down',
+/** String key of the toast shown when a cast is blocked (`ev.reason` of the combat backend). */
+const BLOCK_KEY: Record<string, core.StringKey> = {
+  empty: 'combat.block.empty',
+  passive: 'combat.block.passive',
+  cooldown: 'combat.block.cooldown',
+  gcd: 'combat.block.gcd',
+  busy: 'combat.block.busy',
+  mp: 'combat.block.mp',
+  no_target: 'combat.block.no_target',
+  range: 'combat.block.range',
+  dead: 'combat.block.dead',
 };
 
 const SLOT = 56;
@@ -362,7 +367,7 @@ export class CombatUi {
     this.deathRoot = newNode('DeathOverlay', hudParent);
     quad(this.deathRoot, 'Dim', art.pixel, 4000, 4000, new Color(60, 0, 0, 120));
     const title = text(this.deathRoot, 'Title', 40, new Color(255, 225, 225, 255));
-    title.string = 'Ban da roi / You have fallen';
+    title.string = core.t('combat.death.title');
     title.node.setPosition(0, 40, 0);
     this.deathCount = sharedAtlas(text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255)), 'dynamic'); // counts down
     this.deathCount.node.setPosition(0, -10, 0);
@@ -589,7 +594,7 @@ export class CombatUi {
         break;
       case 'blocked':
         this.flash.set(ev.slot, 0.25);
-        this.toast.string = BLOCK_TEXT[ev.reason] ?? ev.reason;
+        this.toast.string = BLOCK_KEY[ev.reason] ? core.t(BLOCK_KEY[ev.reason]!) : ev.reason;
         this.toastLeft = 1.2;
         break;
       case 'death':
@@ -601,7 +606,7 @@ export class CombatUi {
       case 'respawn':
         if (ev.id === cb.PLAYER_ID) {
           this.diedAtMs = null;
-          this.toast.string = 'Hoi sinh / Respawned';
+          this.toast.string = core.t('combat.toast.respawned');
           this.toastLeft = 2.5;
         }
         break;
@@ -612,8 +617,8 @@ export class CombatUi {
 
   /** A boss entered phase `phase` (wire `boss_phase`, D91): a big floating line above it and a toast; the standee flash / skin swap is the mob art layer's job. */
   announceBossPhase(entityId: number, phase: number): void {
-    this.spawnText(entityId, `Bien hinh! Pha ${phase + 1}`, new Color(255, 120, 60, 255), 34);
-    this.toast.string = `Boss bien hinh (pha ${phase + 1}) / Boss transforms (phase ${phase + 1})`;
+    this.spawnText(entityId, core.t('combat.boss.phase_float', { phase: phase + 1 }), new Color(255, 120, 60, 255), 34);
+    this.toast.string = core.t('combat.toast.boss_phase', { phase: phase + 1 });
     this.toastLeft = 2.5;
   }
 
@@ -798,8 +803,7 @@ export class CombatUi {
     if (this.diedAtMs === null) this.diedAtMs = this.clock; // joined dead / backend without the event
     const left = cb.respawnLeftMs(this.diedAtMs, this.clock, this.backend.respawnDelayMs);
     const secs = Math.ceil(left / 1000);
-    this.deathCount.string =
-      left > 0 ? `Hoi sinh sau ${secs} giay / Respawn in ${secs} s` : 'Dang hoi sinh... / Respawning...';
+    this.deathCount.string = left > 0 ? core.t('combat.death.respawn_in', { secs }) : core.t('combat.death.respawning');
   }
 
   private setBar(fill: Sprite, full: number, fraction: number): void {
