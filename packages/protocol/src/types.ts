@@ -26,6 +26,7 @@ export enum MsgType {
   TelegraphStart = 15,
   TelegraphEnd = 16,
   BossPhase = 17,
+  StatusUpdate = 18,
 }
 
 export const MSG_TYPE_NAMES: Readonly<Record<number, Message['type']>> = {
@@ -41,6 +42,7 @@ export const MSG_TYPE_NAMES: Readonly<Record<number, Message['type']>> = {
   [MsgType.TelegraphStart]: 'telegraph_start',
   [MsgType.TelegraphEnd]: 'telegraph_end',
   [MsgType.BossPhase]: 'boss_phase',
+  [MsgType.StatusUpdate]: 'status_update',
 };
 
 // ---------------------------------------------------------------- limits (single source for codec + validation)
@@ -112,6 +114,21 @@ export interface SelfVitals {
   shield: number;
 }
 
+/** Status bits (`status_update.mask`, the bit order of the own status block): root, slow, poison. */
+export const StatusBit = { Root: 1, Slow: 2, Poison: 4 } as const;
+
+/**
+ * Own movement / damage statuses (D94): remaining time of each effect, 0 = not active. Sent only when an effect was applied, refreshed or
+ * expired since the last block the client got (like `vitals`); the client counts the times down itself. `slowPct` is the speed factor in
+ * percent (50 = half speed), meaningful only while `slowMs` > 0. Prediction uses root / slow so movement matches the server.
+ */
+export interface SelfStatus {
+  rootMs: number;
+  slowMs: number;
+  slowPct: number;
+  poisonMs: number;
+}
+
 export interface SelfState {
   /** last input seq the server processed for this player */
   lastSeq: number;
@@ -128,6 +145,8 @@ export interface SelfState {
   invulnMs: number;
   /** present only when changed (see `SelfVitals`) */
   vitals: SelfVitals | null;
+  /** present only when a status was applied / refreshed / expired (see `SelfStatus`) */
+  status: SelfStatus | null;
 }
 
 /** One entity in a snapshot. `qi`/`qj` are absolute positions in 1/32 tile; the codec picks delta or absolute. */
@@ -250,6 +269,13 @@ export interface BossPhaseMsg {
   transformMs: number;
 }
 
+/** Another player's statuses changed (D94): `mask` = `StatusBit` flags, for the target frame / overhead glyphs. Sent to the clients that see the entity. */
+export interface StatusUpdateMsg {
+  type: 'status_update';
+  entityId: number;
+  mask: number;
+}
+
 export enum ErrorCode {
   BadVersion = 1,
   BadMessage = 2,
@@ -283,5 +309,6 @@ export type ServerMessage =
   | TelegraphStartMsg
   | TelegraphEndMsg
   | BossPhaseMsg
+  | StatusUpdateMsg
   | ColdServerMessage;
 export type Message = ClientMessage | ServerMessage;

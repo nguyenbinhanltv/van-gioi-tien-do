@@ -28,6 +28,7 @@ Mỗi package có `package.json` riêng (tên `@vgtd/<name>`), `tsconfig.json` k
 npm ci                 # một lần (script chỉ cảnh báo nếu thiếu / cũ, không tự chạy)
 npm run play           # online: game server (quái, combat, túi đồ) + client, in URL Local và LAN
 npm run play -- --offline   # chỉ client, không cần game server (quái giả lập: ?combat=1)
+npm run play -- --reset-data   # xóa nhân vật / túi đồ đã lưu (mặc định play lưu ở ./.vgtd-data, D92); --memory = không lưu
 ```
 
 `npm run play` kiểm tra Node ≥ 18, thư viện đã cài và Cocos Creator 3.8.8 (`COCOS_CREATOR_PATH` hoặc đường dẫn mặc định trên Windows), **chỉ build client khi cần** (chưa có bản build, mã nguồn mới hơn bản build, hoặc đổi loại build; `--rebuild` ép build), khởi động game server (`apps/server`, `MOBS`/`COMBAT`/`INVENTORY` bật) và server tĩnh của client (cổng 8456), đợi `/health` rồi in:

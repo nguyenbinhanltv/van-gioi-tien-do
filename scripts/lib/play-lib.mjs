@@ -1,8 +1,8 @@
 // Pure helpers of `npm run play` (scripts/play.mjs): argument parsing, "does the web client need a rebuild", preflight checks, URLs and
 // the controls cheat sheet. No process spawning here, so everything is unit-tested (apps/client-cocos/test/play-lib.test.ts).
-import { readdirSync, statSync } from 'node:fs';
-import { networkInterfaces } from 'node:os';
-import { join, relative, sep } from 'node:path';
+import { existsSync, readdirSync, rmSync, rmdirSync, statSync } from 'node:fs';
+import { homedir, networkInterfaces } from 'node:os';
+import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 
 export const DEFAULTS = Object.freeze({ clientPort: 8456, serverPort: 8080, minNodeMajor: 18, buildTimeoutMin: 10 });
 
@@ -20,6 +20,11 @@ export const USAGE = `npm run play -- [options]
                        asked for explicitly is an error
   --build-timeout <m>  give up on a web client build after <m> minutes (default ${DEFAULTS.buildTimeoutMin}); a normal build takes 1-2 minutes
   --smoke              start, wait until healthy, print the URLs, then stop again (used to check the setup / CI)
+  --memory             keep nothing between runs (STORE=memory). Default: STORE=file, accounts / characters / bags in
+                       ./.vgtd-data (or $DATA_DIR) survive a restart
+  --reset-data         delete the saved play-test data (only accounts.json, progression.json, inventories.json, ledger.json and
+                       their .bak) before starting; with a custom $DATA_DIR it also needs --yes
+  --yes                confirm --reset-data on a custom $DATA_DIR
   --help               this text
 `;
 
@@ -43,6 +48,9 @@ export function parseArgs(argv) {
     open: false,
     lan: true,
     smoke: false,
+    memory: false,
+    resetData: false,
+    yes: false,
     help: false,
     clientPort: DEFAULTS.clientPort,
     serverPort: DEFAULTS.serverPort,
@@ -78,6 +86,15 @@ export function parseArgs(argv) {
       case '--smoke':
         opts.smoke = true;
         break;
+      case '--memory':
+        opts.memory = true;
+        break;
+      case '--reset-data':
+        opts.resetData = true;
+        break;
+      case '--yes':
+        opts.yes = true;
+        break;
       case '--help':
       case '-h':
         opts.help = true;
@@ -110,8 +127,83 @@ export function parseArgs(argv) {
     }
   }
   if (!opts.offline && opts.clientPort === opts.serverPort) errors.push('--port and --server-port must differ');
+  if (opts.memory && opts.resetData) errors.push('--reset-data has nothing to reset with --memory');
+  if (opts.yes && !opts.resetData) errors.push('--yes only confirms --reset-data');
   return { opts, errors };
 }
+
+// ------------------------------------------------------------------------------------------------ persistent play-test data (D92)
+/** The only files `--reset-data` ever deletes (file store documents + their `.bak` / `.tmp`), never anything else in the directory. */
+export const DATA_FILES = Object.freeze(['accounts.json', 'progression.json', 'inventories.json', 'ledger.json']);
+
+/**
+ * Which store the play-test server uses and where its data lives. `STORE=file` unless `--memory` (or `STORE=memory` in the
+ * environment); `DATA_DIR` from the environment, else `<repo>/.vgtd-data` (gitignored).
+ * @param {{ root: string, env: Record<string, string | undefined>, opts: { memory: boolean } }} i
+ * @returns {{ store: 'file' | 'memory', dir: string, custom: boolean, error?: string }}
+ */
+export function storePlan({ root, env, opts }) {
+  const def = join(root, '.vgtd-data');
+  const fromEnv = env.DATA_DIR && env.DATA_DIR.trim() !== '' ? resolve(root, env.DATA_DIR) : null;
+  const dir = fromEnv ?? def;
+  const custom = fromEnv !== null && fromEnv !== def;
+  const want = opts.memory ? 'memory' : (env.STORE ?? 'file');
+  if (want !== 'file' && want !== 'memory')
+    return { store: 'memory', dir, custom, error: `STORE must be "file" or "memory" (got "${want}")` };
+  return { store: want, dir, custom };
+}
+
+/**
+ * Is it safe to wipe this data directory? Only the known document names are ever removed (see `DATA_FILES`), so even a wrong path
+ * cannot lose anything else; on top of that a custom directory needs `--yes`, and the repo root, its parents, the filesystem root
+ * and the home directory are refused outright.
+ * @param {{ root: string, dir: string, custom: boolean, yes: boolean, home?: string }} i
+ * @returns {{ ok: true } | { ok: false, reason: string }}
+ */
+export function resetCheck({ root, dir, custom, yes, home = homedir() }) {
+  const d = resolve(dir);
+  if (!isAbsolute(d)) return { ok: false, reason: `"${dir}" is not an absolute path` };
+  if (dirname(d) === d) return { ok: false, reason: 'that is a filesystem root' };
+  const r = resolve(root);
+  const inside = (parent, child) => {
+    const rel = relative(parent, child);
+    return rel === '' || (!rel.startsWith('..') && !isAbsolute(rel));
+  };
+  if (inside(d, r)) return { ok: false, reason: 'that directory contains the repository' };
+  if (resolve(home) === d || inside(d, resolve(home)))
+    return { ok: false, reason: 'that is (or contains) your home directory' };
+  if (custom && !yes)
+    return { ok: false, reason: `${d} is a custom DATA_DIR: add --yes to confirm wiping its saved game data` };
+  return { ok: true };
+}
+
+/**
+ * Delete the saved play-test documents in `dir`. Returns the files removed. Removes the directory only if it is left empty.
+ * @param {string} dir
+ * @returns {string[]}
+ */
+export function resetData(dir) {
+  const removed = [];
+  for (const base of DATA_FILES) {
+    for (const suffix of ['', '.bak', '.tmp']) {
+      const f = join(dir, base + suffix);
+      if (existsSync(f)) {
+        rmSync(f, { force: true });
+        removed.push(f);
+      }
+    }
+  }
+  try {
+    rmdirSync(dir); // only succeeds when empty
+  } catch {
+    /* not empty or already gone: leave it */
+  }
+  return removed;
+}
+
+/** Does a saved game already exist in `dir`? (for the banner: "continuing" vs "new") */
+export const hasSavedData = (dir) =>
+  existsSync(join(dir, 'accounts.json')) || existsSync(join(dir, 'accounts.json.bak'));
 
 // ------------------------------------------------------------------------------------------------ rebuild decision
 /** Which build variant `play` serves: release unless `--dev`. Recorded next to the build so a variant switch rebuilds. */

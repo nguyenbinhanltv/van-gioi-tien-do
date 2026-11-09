@@ -1,5 +1,33 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## GEMINI-GROUND-UI — texture nền 6 chất liệu và khung UI 9-slice do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. Sao nguyên byte vào `assets-src/gemini/ground/` (6 ảnh 2048×2048, nhìn từ trên xuống, KHÔNG nền magenta, dấu ✦ Gemini ở góc dưới-phải của từng ảnh) và `assets-src/gemini/ui/` (4 ảnh 2752×1536 nền magenta, dấu ✦ ở góc dưới-phải).
+
+**Xử lý (tái lập được, `npm run gen:gemini -w @vgtd/procgen`):** *Nền:* vá dấu ✦ bằng mảng texture cách nửa chu kỳ (kiểm tra độ tương phản vùng dấu trước và sau); các ảnh KHÔNG thật sự liền mạch (độ lệch ở mép gập lại gấp 1,4–8,7 lần độ lệch bình thường giữa hai pixel kề), nên mỗi ảnh được cắt 4 mảnh 1024 px, làm tuần hoàn bằng pha trộn lệch nửa chu kỳ hai lượt (X rồi Y) và thu về patch 256 px; chỉ số mép gập sau xử lý ≤ 1,6 (1 = vô hình, kiểm tra bắt buộc trong công cụ). Bộ sinh tile (`tools/procgen/src/tilemap/generate_tilemap.js --ground`) lấy mẫu patch qua hình thoi 2:1 của từng ô (chu kỳ = một ô nên mép khớp tuyệt đối; biến thể chỉ khác nhau ở phần trong ô), nước chuyển động bằng cách trượt chéo đúng một chu kỳ trong 4 khung. Giữ nguyên định dạng tileset (128×64 @2x, 4 khung nước, 4 ô thuần + 14 mặt nạ Wang góc mỗi lớp phủ) nên client không đổi; thêm `tileset_ext` (bờ đá cạnh nước, vỏ đá trên nham thạch viền sáng đỏ, bờ đầm lầy, nham thạch 4 khung) cho các bản đồ sau. *UI:* tách magenta, vá ✦, cắt sát, đặt kích thước thiết kế và khoảng cắt 9-slice trong `manifest.json`, đóng `atl_ui_2x` / `atl_ui_1x`.
+
+| Chất liệu | Độ tương phản dấu ✦ trước -> sau vá | Mép gập (4 mảnh): trước -> sau |
+| --------- | ------------------------------------ | ------------------------------ |
+| grass | 77.5 -> 6.6 | 2.11->0.79 ; 2.13->0.9 ; 2.17->0.78 ; 3.72->1.11 |
+| dirt | 82.8 -> 15.4 | 11.84->0.8 ; 11.5->1.34 ; 11.65->1.08 ; 10.73->1.12 |
+| stone | 72.8 -> 6.8 | 8.41->0.84 ; 8.23->1.28 ; 9.11->1.14 ; 7.83->0.98 |
+| water | 43.2 -> 6.7 | 9.23->1.39 ; 8.23->0.87 ; 7.22->0.77 ; 8.38->1.13 |
+| swamp | 96.6 -> 1.3 | 6.87->1.19 ; 7.5->0.77 ; 8.15->0.88 ; 7.63->1.51 |
+| lava | 103.1 -> 2.7 | 5.59->0.92 ; 6.7->1.03 ; 6.44->1 ; 5.62->1.32 |
+
+| Tệp nguồn (nguyên byte) | Loại | SHA-256 (12 ký tự đầu) |
+| ----------------------- | ---- | ---------------------- |
+| `assets-src/gemini/ground/dirt.png` | ground texture | `8285ca8f5521` |
+| `assets-src/gemini/ground/grass.png` | ground texture | `2da13736d516` |
+| `assets-src/gemini/ground/lava.png` | ground texture | `a80903d954fb` |
+| `assets-src/gemini/ground/stone.png` | ground texture | `d10dbb823bf2` |
+| `assets-src/gemini/ground/swamp.png` | ground texture | `4aea1f2e1cab` |
+| `assets-src/gemini/ground/water.png` | ground texture | `7646748009d5` |
+| `assets-src/gemini/ui/button_disabled.png` | UI frame 9-slice | `a7ec1d557c44` |
+| `assets-src/gemini/ui/button_normal.png` | UI frame 9-slice | `ca9f2b047500` |
+| `assets-src/gemini/ui/panel_jade.png` | UI frame 9-slice | `5ff2ca3744c7` |
+| `assets-src/gemini/ui/slot_frame.png` | UI frame 9-slice | `35afa70ccb0a` |
+
 ## GEMINI-MOBS — concept 14 quái do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. 14 ảnh 1792x2400 (tên tệp = `MOB_DEFS[].key`), nền magenta, dấu ✦ Gemini ở góc dưới-phải, phần lớn quay mặt sang TRÁI, chi tiết hơn phong cách semi-chibi. Sao nguyên byte vào `assets-src/concepts/mobs/` (Git LFS) **làm ảnh tham chiếu concept cho việc sản xuất sprite hoạt hình sau này** (Codex); quyền sử dụng như mục GEMINI-PROPS-ICONS.

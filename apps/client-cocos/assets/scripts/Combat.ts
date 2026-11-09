@@ -8,6 +8,7 @@ import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 import { getSkillIcon } from './PropArt';
 import { sharedAtlas } from './UiLabel';
+import { getStatusIcon } from './StatusIcons';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -171,6 +172,8 @@ export class CombatUi {
   private readonly enemyNodes = new Map<number, Node>();
   /** INTERIM mob standees (MobArt.ts); set by Bootstrap. Enemies it does not know keep the placeholder sprite. */
   mobArt: MobArt | null = null;
+  /** the L2 shadow layer (standee shadows) */
+  private readonly shadowLayer: Node | null;
   private readonly standees = new Map<number, MobStandee>();
   private readonly enemyBars = new Map<number, OverheadBar>();
   private readonly selfBar: OverheadBar;
@@ -180,6 +183,8 @@ export class CombatUi {
   private diedAtMs: number | null = null;
   /** Touch input: the skill wheel replaces the bottom hotbar (hidden, not tappable). */
   private touchMode = false;
+  /** status row (D94): one tile per active status, left of the HP bar */
+  private readonly statusTiles: Array<{ root: Node; bg: Sprite; icon: Sprite; label: Label; time: Label }> = [];
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
@@ -205,6 +210,7 @@ export class CombatUi {
     this.ysort = ysort;
 
     const l1 = worldRoot.getChildByName('L1_Decal') ?? worldRoot;
+    this.shadowLayer = worldRoot.getChildByName('L2_Shadow');
     this.ring = newNode('TargetRing', l1);
     this.ring.addComponent(UITransform).setContentSize(shared.TILE_WIDTH, shared.TILE_HEIGHT);
     const rs = this.ring.addComponent(Sprite);
@@ -243,6 +249,20 @@ export class CombatUi {
     this.shieldFill = quad(hp.back, 'Shield', art.pixel, 0, 4, new Color(240, 240, 255, 255));
     this.shieldFill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.shieldFill.node.setPosition(-BAR_W / 2, BAR_H / 2 - 2, 0);
+    // status row: up to 4 tiles growing leftwards from the HP bar
+    const TILE = 34;
+    for (let n = 0; n < 4; n++) {
+      const root = newNode(`Status${n}`, this.hudRoot);
+      root.setPosition(-BAR_W / 2 - 5 - BAR_W / 2 - 22 - n * (TILE + 4), bars, 0);
+      const bg = quad(root, 'Bg', art.pixel, TILE, TILE, new Color(60, 60, 60, 220));
+      const icon = quad(root, 'Icon', art.pixel, TILE - 6, TILE - 6, new Color(255, 255, 255, 255));
+      icon.node.active = false;
+      const label = text(root, 'Label', 11, new Color(255, 255, 255, 255));
+      const time = sharedAtlas(text(root, 'Time', 12, new Color(255, 240, 160, 255)), 'dynamic'); // remaining seconds
+      time.node.setPosition(0, -TILE / 2 - 8, 0);
+      root.active = false;
+      this.statusTiles.push({ root, bg: bg, icon, label, time });
+    }
     const cast = this.makeBar(
       'Cast',
       0,
@@ -386,6 +406,7 @@ export class CombatUi {
         gcd: this.backend.hotbar.gcdFraction(this.clock),
         floaters: this.floaters.filter((f) => f.node.active).length,
         touchMode: this.touchMode,
+        statusTiles: this.statusTiles.filter((t) => t.root.active).map((t) => t.label.string || 'icon'),
         hotbarShown: this.slots.every((s) => s.root.active),
         deathOverlay: this.deathRoot.active,
         deathText: this.deathCount.string,
@@ -448,6 +469,27 @@ export class CombatUi {
   /** Now (HUD clock, ms): the same clock the hotbar cooldowns use. */
   get nowMs(): number {
     return this.clock;
+  }
+
+  /** The own status row (D94): `items` from client-core `statusRowItems`; an icon when `getStatusIcon` has one, else the text glyph. */
+  setStatuses(items: ReadonlyArray<{ id: string; label: string; secs: number | null; note: string }>): void {
+    const colour: Record<string, Color> = {
+      root: new Color(150, 100, 50, 230),
+      slow: new Color(70, 120, 190, 230),
+      poison: new Color(80, 160, 70, 230),
+      shield: new Color(170, 170, 210, 230),
+    };
+    this.statusTiles.forEach((t, k) => {
+      const it = items[k];
+      t.root.active = !!it;
+      if (!it) return;
+      t.bg.color = colour[it.id] ?? new Color(60, 60, 60, 220);
+      const frame = getStatusIcon(it.id);
+      t.icon.node.active = !!frame;
+      if (frame && t.icon.spriteFrame !== frame) t.icon.spriteFrame = frame;
+      t.label.string = frame ? '' : it.label;
+      t.time.string = it.secs !== null ? `${it.secs}s${it.note ? ' ' + it.note : ''}` : it.note;
+    });
   }
 
   /** Touch input: show the skill wheel instead of the bottom hotbar. */
@@ -666,10 +708,11 @@ export class CombatUi {
     for (const e of this.backend.enemies) {
       seen.add(e.id);
       let n = this.enemyNodes.get(e.id);
-      const standee = !n ? this.mobArt?.create(e.id, e.name) : null;
+      const standee = !n ? this.mobArt?.create(e.id, e.name, e.defId) : null;
       if (!n && standee) {
         n = standee.node;
         this.standees.set(e.id, standee);
+        if (this.shadowLayer) standee.attachShadow(this.art.shadow, this.shadowLayer);
         const id = e.id;
         const key = 3000 + (id % 100000);
         this.ysort.add(
@@ -701,7 +744,7 @@ export class CombatUi {
       n.setPosition(tileToWorld(e.pos.i, e.pos.j));
       const st = this.standees.get(e.id);
       if (st) {
-        st.update(dt, e);
+        st.update(dt, e, this.playerPos());
         n.active = st.visible;
       } else n.active = e.alive;
     }
@@ -709,6 +752,7 @@ export class CombatUi {
       if (seen.has(id)) return;
       this.ysort.remove(n); // unregisters only: destroy the node here
       n.destroy();
+      this.standees.get(id)?.shadowNode?.destroy();
       this.standees.delete(id);
       this.enemyNodes.delete(id);
     });
