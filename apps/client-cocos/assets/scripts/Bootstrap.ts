@@ -138,7 +138,9 @@ export class Bootstrap extends Component {
       load('world/iso-tileset', ImageAsset),
     ]);
     const map = mapAsset.json as unknown as { width: number; height: number; seed?: number };
-    const tilesetJson = tilesetAsset.json as unknown as { animations?: { water?: { frames: number[]; fps: number } } };
+    const tilesetJson = tilesetAsset.json as unknown as {
+      animations?: Record<string, { frames: number[]; fps: number }>;
+    };
     const data = cw.parseProcgenMap(tilesetJson, mapAsset.json);
     const tilesetTex = makeTexture(tilesetImage);
     const art: ArtFrames = buildPlaceholderArt();

@@ -1,8 +1,10 @@
 /** Local dev entry: `PORT=8080 node <bundle>` (hosting is local-only for now, D27). */
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { openFileStores } from './persistence/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
+import { parseTerrain, terrainGrid } from './world/terrain.js';
 
 const port = Number(process.env.PORT ?? 8080);
 // the Cocos web client is served from http://localhost:8456 (npm run serve -w client-cocos); override with CORS_ORIGINS=a,b
@@ -35,12 +37,25 @@ const stores =
         onError: (e) => console.error('[vgtd/server] persistence write failed:', e),
       })
     : null;
+// MAP_FILE=<terrain.json> (D95): the walkability grid the tile generator wrote, so water / lava block the server like they block the client
+// (mobs spawn and walk on land, prediction sees the same obstacles). Default: an open map. A file that does not match MAP_TILES is refused.
+let grid;
+if (process.env.MAP_FILE) {
+  const t = parseTerrain(JSON.parse(readFileSync(process.env.MAP_FILE, 'utf8')));
+  if (mapTiles !== undefined && (t.width !== mapTiles || t.height !== mapTiles))
+    throw new Error(`MAP_FILE is ${t.width}x${t.height} but MAP_TILES is ${mapTiles}`);
+  grid = terrainGrid(t);
+  console.log(
+    `[vgtd/server] terrain from ${process.env.MAP_FILE}: ${t.width}x${t.height}, ${t.rows.join('').split('#').length - 1} blocked tiles`,
+  );
+}
 const srv = await startServer({
   port,
   host: process.env.HOST ?? '127.0.0.1',
   gateway: { corsOrigins },
   world: {
     mapTiles,
+    grid,
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
