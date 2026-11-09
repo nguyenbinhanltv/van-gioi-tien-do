@@ -194,14 +194,18 @@ export function step(
     e = { ...e, pending, stunMs: Math.max(0, e.stunMs - dtMs) };
 
     // ---------------------------------------------------------------- skills
+    let castFloor = 0;
     for (const c of sortBySeq(casts.get(e.id) ?? [])) {
+      // the cast is judged and stamped as of its arrival (D106); the packet-rate bucket stays on the tick clock
+      const age = Number.isFinite(c.ageMs) ? Math.min(ANTICHEAT.CAST_MAX_AGE_MS, Math.max(0, c.ageMs!)) : 0;
+      const castNow = Math.max(acNow - age, castFloor); // casts of one tick stay in order
       const tok = takeCastToken(e.ac, acNow);
       e = { ...e, ac: tok.ac };
       if (!tok.ok) {
         events.push({ type: 'cast_dropped', entityId: e.id, seq: c.seq });
         continue;
       }
-      const r = validateCast(e, c, ctx, byId, acNow);
+      const r = validateCast(e, c, ctx, byId, castNow);
       if (r.reason !== CastReason.Ok) {
         events.push({
           type: 'cast_rejected',
@@ -221,10 +225,11 @@ export function step(
       }
       const def = ctx.skills.find((s) => s.id === c.skillId)!;
       const cooldowns = e.cooldowns.slice();
-      cooldowns[def.id] = acNow + def.cooldownMs; // cooldowns run on the guards' clock (wall time since join), reported in sim time below
+      cooldowns[def.id] = castNow + def.cooldownMs; // cooldowns run on the guards' clock (wall time since join), reported in sim time below
       const [roll, nextRng] = rngFloat(rng);
       rng = nextRng;
-      e = { ...e, mp: e.mp - mpCostOf(def, e.mpMax), cooldowns, gcdReadyAt: acNow + def.gcdMs };
+      e = { ...e, mp: e.mp - mpCostOf(def, e.mpMax), cooldowns, gcdReadyAt: castNow + def.gcdMs };
+      castFloor = castNow;
       events.push({
         type: 'cast_ok',
         entityId: e.id,
