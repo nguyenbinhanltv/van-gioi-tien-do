@@ -32,18 +32,23 @@ const TONE_COLOR: Record<string, string> = {
   world: '#f0f0f5',
   zone: '#9fe7a3',
   whisper: '#f2a6ff',
+  party: '#7fd4ff',
   system: '#f0dc96',
   error: '#ff8f85',
 };
 
 export class ChatBox {
   readonly log: InstanceType<typeof core.ChatLog>;
+  /** the party state shown by `PartyFrames` (D93); fed by the same net hooks as the chat */
+  readonly party: InstanceType<typeof core.PartyModel>;
   private readonly root: HTMLDivElement;
   private readonly list: HTMLDivElement;
   private readonly input: HTMLInputElement;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly onResize: () => void;
   private drawn = -1;
+  /** party commands waiting for their answer (by clientMsgId), to know what a `party_result` was about */
+  private readonly asked = new Map<number, { op: number; name: string }>();
   private compact = false;
 
   constructor(
@@ -52,11 +57,28 @@ export class ChatBox {
     parent: HTMLElement = document.body,
   ) {
     this.log = new core.ChatLog({ myName: () => username });
+    this.party = new core.PartyModel({ myId: () => net.entityId, now: () => performance.now() });
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
     net.chatEvents = {
       onChatMsg: (m) => this.log.applyMsg(m),
       onChatHistory: (m) => this.log.applyHistory(m),
       onChatResult: (m) => this.log.applyResult(m),
+    };
+    // party (D93): roster / invites / answers show up as chat lines, vitals only feed the frames
+    net.partyEvents = {
+      onPartyState: (m) => {
+        const line = this.party.applyState(m);
+        if (line) this.log.system(line, 'party');
+      },
+      onPartyVitals: (m) => this.party.applyVitals(m),
+      onPartyInvite: (m) => this.log.system(this.party.applyInvite(m), 'party'),
+      onPartyResult: (m) => {
+        const asked = this.asked.get(m.clientMsgId);
+        this.asked.delete(m.clientMsgId);
+        const refusal = this.party.applyResult(m);
+        if (refusal) this.log.system(refusal, 'error');
+        else if (asked && asked.op === core.PartyOp.Decline) this.party.forgetInvite(asked.name);
+      },
     };
 
     const root = document.createElement('div');
@@ -159,7 +181,7 @@ export class ChatBox {
     // automation hook (scripts/chat-online-smoke.mjs): read / drive the box without touching the DOM
     (globalThis as unknown as Record<string, unknown>).__vgtdChat = {
       lines: () => this.log.entries.map((e) => ({ tone: e.tone, text: e.text })),
-      say: (raw: string) => this.log.submit(raw, (m) => this.net.sendChat(m)),
+      say: (raw: string) => this.command(raw),
       focused: () => document.activeElement === this.input,
       compact: () => this.compact,
       /** box rect and the shared joystick zone, for the touch smoke check */
@@ -186,6 +208,22 @@ export class ChatBox {
     this.list.replaceChildren(frag);
   }
 
+  /** Run one line as if typed: chat, `/` commands, party commands. Also used by the party frames' Accept / Decline buttons. */
+  command(raw: string): boolean {
+    return this.log.submit(
+      raw,
+      (m) => this.net.sendChat(m),
+      (m) => {
+        const ok = this.net.sendParty(m);
+        if (ok) {
+          this.asked.set(m.clientMsgId, { op: m.op, name: m.name });
+          if (this.asked.size > 16) this.asked.delete(this.asked.keys().next().value as number);
+        }
+        return ok;
+      },
+    );
+  }
+
   focus(prefill = ''): void {
     this.input.focus();
     if (prefill) this.input.value = prefill;
@@ -194,7 +232,7 @@ export class ChatBox {
   private submit(): void {
     const raw = this.input.value;
     this.input.value = '';
-    this.log.submit(raw, (m) => this.net.sendChat(m));
+    this.command(raw);
     this.input.blur(); // back to playing; Enter again to continue the conversation
   }
 

@@ -308,7 +308,7 @@ describe('zone', () => {
 });
 
 describe('channels that do not exist', () => {
-  it.each([[0], [4], [5], [255]])('channel %i is BadChannel (Party opens with the party feature)', (channel) => {
+  it.each([[0], [5], [255]])('channel %i is BadChannel', (channel) => {
     const r = rig();
     expect(r.say(1, 'x', channel)).toBe(ChatReason.BadChannel);
     expect(r.got.size).toBe(0);

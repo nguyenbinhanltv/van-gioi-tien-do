@@ -11,5 +11,6 @@ export * from './ui/ProgressionView.js';
 export * from './ui/BagPanelLogic.js';
 export * from './ui/ChatLog.js';
 export * from './ui/ChatPlacement.js';
+export * from './ui/PartyModel.js';
 export * from './ui/FirstSessionTracker.js';
 export * from './net/index.js';
