@@ -1,5 +1,5 @@
 {
-  "_doc": "Owner-provided Gemini exports (assets-src/gemini). target = content size in px @2x (w or h); @1x is half. block = tile offsets from the anchor tile (the tile containing the prop's foot point) that the prop blocks; [] = walk-through decoration. biomes: sect (grass / dirt near the Son Mon), swamp (shoreline), lava, courtyard (fixed buildings). weight = relative scatter frequency. spacing = free tiles kept around the prop when scattered (default 1; tall trees 2). clear = rects (fractions of the keyed content box) erased as source-art artifacts.",
+  "_doc": "Owner-provided Gemini exports (assets-src/gemini). target = content size in px @2x (w or h); @1x is half. block = tile offsets from the anchor tile (the tile containing the prop's foot point) that the prop blocks; [] = walk-through decoration. biomes: sect (grass / dirt near the Son Mon), swamp (shoreline), lava, courtyard (fixed buildings). weight = relative scatter frequency. spacing = free tiles kept around the prop when scattered (default 1; tall trees 2). clear = rects (fractions of the keyed content box) erased as source-art artifacts. src = source file under assets-src/gemini when it differs from the key (props2/... replacements keep the old key, so scatter and saved maps do not change). zones = mob zones (docs/10 section 4, @vgtd/shared mobZoneAt) in which the prop is scattered as zone dressing (biomes: [] = zone only).",
   "props": {
     "bush_round_01": {
       "target": {
@@ -115,7 +115,8 @@
       "biomes": [
         "sect"
       ],
-      "weight": 1
+      "weight": 1,
+      "src": "props2/rock_large_spirit_v2"
     },
     "rock_lava_cooled": {
       "target": {
@@ -275,7 +276,8 @@
       "biomes": [
         "sect"
       ],
-      "weight": 4
+      "weight": 4,
+      "src": "props2/tree_pine_02_v2"
     },
     "well_stone": {
       "target": {
@@ -291,6 +293,334 @@
         "courtyard"
       ],
       "weight": 0
+    },
+    "swamp_reeds": {
+      "target": {
+        "w": 200
+      },
+      "block": [],
+      "biomes": [
+        "swamp"
+      ],
+      "zones": [
+        "dam_lay_doc"
+      ],
+      "weight": 4,
+      "src": "props2/swamp_reeds"
+    },
+    "swamp_lilypads": {
+      "target": {
+        "w": 300
+      },
+      "block": [],
+      "biomes": [
+        "swamp"
+      ],
+      "zones": [
+        "dam_lay_doc"
+      ],
+      "weight": 3,
+      "src": "props2/swamp_lilypads"
+    },
+    "swamp_rotten_log": {
+      "target": {
+        "w": 300
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "biomes": [],
+      "zones": [
+        "dam_lay_doc"
+      ],
+      "weight": 2,
+      "src": "props2/swamp_rotten_log"
+    },
+    "swamp_poison_mushrooms": {
+      "target": {
+        "w": 230
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [],
+      "zones": [
+        "dam_lay_doc"
+      ],
+      "weight": 3,
+      "src": "props2/swamp_poison_mushrooms"
+    },
+    "ancient_tree_giant": {
+      "target": {
+        "w": 520
+      },
+      "spacing": 2,
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "biomes": [],
+      "zones": [
+        "co_thu_trung_tam"
+      ],
+      "weight": 1,
+      "src": "props2/ancient_tree_giant"
+    },
+    "ancient_roots_arch": {
+      "target": {
+        "w": 330
+      },
+      "spacing": 1,
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [],
+      "zones": [
+        "co_thu_trung_tam"
+      ],
+      "weight": 1,
+      "src": "props2/ancient_roots_arch"
+    },
+    "ancient_shrine_stone": {
+      "target": {
+        "w": 340
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [],
+      "zones": [
+        "co_thu_trung_tam"
+      ],
+      "weight": 1,
+      "src": "props2/ancient_shrine_stone"
+    },
+    "lava_obsidian_spires": {
+      "target": {
+        "w": 280
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [
+        "lava"
+      ],
+      "zones": [
+        "doc_hoa_dam"
+      ],
+      "weight": 2,
+      "src": "props2/lava_obsidian_spires",
+      "key": {
+        "famFrac": 0.3
+      }
+    },
+    "lava_fire_vent": {
+      "target": {
+        "w": 330
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [
+        "lava"
+      ],
+      "zones": [
+        "doc_hoa_dam"
+      ],
+      "weight": 2,
+      "src": "props2/lava_fire_vent",
+      "key": {
+        "famFrac": 0.3
+      }
+    },
+    "lava_charred_tree": {
+      "target": {
+        "h": 342
+      },
+      "spacing": 2,
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [
+        "lava"
+      ],
+      "zones": [
+        "doc_hoa_dam"
+      ],
+      "weight": 2,
+      "src": "props2/lava_charred_tree",
+      "key": {
+        "famFrac": 0.3
+      }
+    },
+    "lava_sulfur_rocks": {
+      "target": {
+        "w": 320
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [
+        "lava"
+      ],
+      "zones": [
+        "doc_hoa_dam"
+      ],
+      "weight": 2,
+      "src": "props2/lava_sulfur_rocks",
+      "key": {
+        "famFrac": 0.3
+      }
     }
   },
   "icons": [
@@ -362,6 +692,64 @@
     "boss_co_mang": {
       "id": 14,
       "box": 512
+    }
+  },
+  "status": {
+    "_doc": "status/status_icons.png: 4 columns x 3 rows of round icons, row-major. ids follow the shared StatusId / mob effect vocabulary (root, slow, stun, poison) and the buff names; getStatusIcon(id) in PropArt.ts. size2 = px @2x (@1x is half).",
+    "file": "status/status_icons",
+    "cols": 4,
+    "rows": 3,
+    "size2": 64,
+    "ids": [
+      "root",
+      "slow",
+      "poison",
+      "burn",
+      "stun",
+      "shield",
+      "meditate",
+      "regen",
+      "atk_up",
+      "def_up",
+      "invulnerable",
+      "breakthrough_buff"
+    ]
+  },
+  "realms": {
+    "_doc": "realms/realm_badges.png: 3 x 3 badges, row-major = realm 1..9 (Luyen Khi .. Do Kiep, REALM_NAMES order); getRealmBadge(realmIndex), realmIndex 0 = Luyen Khi. Shapes differ, so they are fitted into the square keeping the aspect. eraseCorner = the Gemini mark overlaps the last badge glow.",
+    "file": "realms/realm_badges",
+    "cols": 3,
+    "rows": 3,
+    "size2": 128,
+    "eraseCorner": 0.075,
+    "pad": 0.03
+  },
+  "particles": {
+    "_doc": "particles/*.png: glow on BLACK, luminance -> alpha (additive or alpha blending). name = file name; registry in ParticleArt.ts.",
+    "size2": 192,
+    "names": [
+      "p_flame",
+      "p_glow",
+      "p_ice",
+      "p_leaf",
+      "p_lightning",
+      "p_ring",
+      "p_rune",
+      "p_slash",
+      "p_smoke",
+      "p_spark"
+    ]
+  },
+  "keyArt": {
+    "_doc": "key_art: login backdrop (opaque, w x h design px) and emblem (keyed, trimmed, longest side px @2x; @1x half). Loaded as single textures, not atlased.",
+    "backdrop": {
+      "file": "key_art/login_bg",
+      "w": 1024,
+      "h": 576
+    },
+    "emblem": {
+      "file": "key_art/logo_emblem",
+      "size2": 512
     }
   }
 }

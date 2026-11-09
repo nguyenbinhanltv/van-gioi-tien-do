@@ -115,6 +115,14 @@ Xem thêm `.claude/skills/cocos-creator/SKILL.md` (quy ước), D25 trong `docs/
 - `YSortLayer.add(node, depth)` là chỗ đăng ký mọi vật thể L3 (quái, NPC, người chơi khác).
 - `CameraRig.follow()` / `clientToWorld()` là giao diện camera cho client-core.
 
+## Art Gemini phần 2 (props vùng, icon trạng thái, huy hiệu cảnh giới, hạt, key art)
+
+Nguồn `assets-src/gemini/{props2,status,realms,particles,key_art}` được `npm run gen:gemini -w @vgtd/procgen` (chạy trong `prepare:assets`) tách nền, xoá dấu Gemini và đóng atlas vào `assets/resources/world/` (git-ignored). Điểm nối trong `assets/scripts/`:
+
+- `PropArt.ts`: `getStatusIcon(id)` (root, slow, poison, burn, stun, shield, meditate, regen, atk_up, def_up, invulnerable, breakthrough_buff; vuông, vẽ 32 px), `getRealmBadge(realmIndex)` (0 = Luyện Khí … 8 = Độ Kiếp; hiện cạnh tên cảnh giới ở `ProgressionHud`), `getParticleFrame(name)` + `preloadParticles()` (hạt tải theo yêu cầu, không nằm trong gói tải đầu), `PropArt.keyArt()` (URL nền + emblem cho hộp chọn Đạo Lộ `ClassPicker.ts`).
+- `ArtRegistry.ts`: id trạng thái, số huy hiệu, danh sách hạt với blend gợi ý (không phụ thuộc `cc`, có test đối chiếu `manifest.json`). `LevelUpFx.ts` là hiệu ứng mẫu dùng `p_spark` + `p_ring` + sparks khi stage tăng.
+- Prop vùng (`swamp_*`, `ancient_*`, `lava_*`) rải theo vùng mob bằng `shared.mobZoneAt` (cùng hình chữ nhật với `defaultMobZones` của server). `?at=i,j` (chỉ offline) đặt điểm xuất phát gần ô đó để xem từng vùng, ví dụ `?npcs=0&at=176,70`.
+
 ## Tải chibi theo bundle (D71)
 
 `npm run prepare:assets` (chạy trong `build:web`) sinh `assets/chibi/` (git-ignored) từ bản xuất `assets/resources/dragonbones/<lớp>-chibi-v1` (không đổi): mỗi (lớp, hướng) là một Asset Bundle `chibi-<lớp>-<hướng>` với hai tier (`full`, `1x` Lanczos3) và hai nhóm clip (`loco` = idle/walk/run, `rest`), cùng `resources/world/chibi-index.json`. Preset nén texture (ASTC 4x4 cho `1x`, ASTC 6x6 cho `full`, WebP dự phòng) nằm ở `settings/v2/packages/builder.json`, gắn vào từng PNG qua `.meta` do `scripts/chibi-bundles.mjs` ghi. `ChibiAssets.ts` nạp bundle, giới hạn tải đồng thời và giữ việc nền (NPC, hướng khác) đến khi người chơi đã hiện hình. `?restier=1x|full` ép tier (mặc định: `full` cho người chơi cục bộ trên desktop, `1x` cho mọi thứ còn lại). Ổ C: đầy thì đặt `library/`, `temp/`, `build/`, `assets/chibi/` thành junction sang ổ khác (đều git-ignored).

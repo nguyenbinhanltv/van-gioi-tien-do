@@ -7,6 +7,8 @@
  * Output (default out/gemini, git-ignored, regenerated; skipped when the stamp of sources + tool is unchanged;
  * the INTERIM mob standees are packed into the same atlas pages as the props):
  *   props_2x/ props_1x/ icons_2x/ icons_1x/   processed single PNGs (magenta keyed, sparkle removed, trimmed)
+ *   status_* realms_* particles_*             PART 2: status icons (4x3 grid), realm badges (3x3), particle textures (luminance -> alpha)
+ *   keyart/                                   PART 2: login backdrop + emblem (single textures, not atlased)
  *   atlas/atl_prop_2x_0.png ... + .json       packed with pipeline/pack_atlas.js (padding + extrude), fed to the budget gate
  *   gemini.json                               sidecar: per prop pivot / blocked tiles / biomes / frames; per icon frames
  *
@@ -32,8 +34,12 @@ const CONCEPTS = path.resolve(opt('concepts', path.join(root, '../../assets-src/
 const OUT = path.resolve(opt('out', path.join(root, 'out/gemini')));
 
 const isPng = (buf) => buf.length > 8 && buf.readUInt32BE(0) === 0x89504e47;
+// a prop's source file is props/<key> unless the manifest names another one (props2 replacements: `src`)
+const propSrc = (n) => manifest.props[n].src || `props/${n}`;
 const files = [
-  ...Object.keys(manifest.props).map((n) => ['props', n]),
+  ...Object.keys(manifest.props).map((n) => propSrc(n).split('/')),
+  ...[manifest.status.file, manifest.realms.file, manifest.keyArt.backdrop.file, manifest.keyArt.emblem.file].map((f) => f.split('/')),
+  ...manifest.particles.names.map((n) => ['particles', n]),
   ...manifest.icons.map((n) => ['items', n]),
   ...GRID_PATHS.map((n) => ['skills', n]),
   ...Object.keys(manifest.mobs).map((n) => ['mobs', n]),
@@ -87,29 +93,31 @@ function main() {
     return 0;
   }
   fs.rmSync(OUT, { recursive: true, force: true });
-  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x', 'skills_2x', 'skills_1x', 'mobs_1x']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
+  for (const d of ['props_2x', 'props_1x', 'icons_2x', 'icons_1x', 'skills_2x', 'skills_1x', 'mobs_1x', 'status_2x', 'status_1x', 'realms_2x', 'realms_1x', 'particles_2x', 'particles_1x', 'keyart']) fs.mkdirSync(path.join(OUT, d), { recursive: true });
 
   const problems = [];
-  const sidecar = { format: 'vgtd-gemini', version: 1, props: {}, icons: {}, skills: {}, mobs: {}, atlases: {} };
-  const verify = (key, srcBuf, sparkle) => {
+  const sidecar = { format: 'vgtd-gemini', version: 2, props: {}, icons: {}, skills: {}, mobs: {}, status: {}, realms: {}, particles: {}, keyArt: {}, atlases: {} };
+  const verify = (key, srcBuf, sparkle, isBg) => {
     if (sparkle.components < 1) problems.push(`${key}: no Gemini sparkle found in the corner (unexpected source layout)`);
     else {
       // re-run on a fresh copy of the source with the mark removed: nothing may be found a second time
       const img = decodePNG(srcBuf);
-      G.removeSparkle(img);
-      if (G.removeSparkle(img).components !== 0) problems.push(`${key}: sparkle still present after removal`);
+      const test = isBg || G.bgTest(G.estimateBackground(img));
+      G.removeSparkle(img, test);
+      if (G.removeSparkle(img, test).components !== 0) problems.push(`${key}: sparkle still present after removal`);
     }
   };
 
   for (const [name, def] of Object.entries(manifest.props)) {
-    const buf = bufs.get(`props/${name}`);
-    const r = G.processProp(decodePNG(buf), def.target, { clear: def.clear });
-    verify(`props/${name}`, buf, r.sparkle);
+    const buf = bufs.get(propSrc(name));
+    const r = G.processProp(decodePNG(buf), def.target, { clear: def.clear, key: def.key });
+    verify(propSrc(name), buf, r.sparkle);
     if (def.pivotX !== undefined) r.pivot.x = def.pivotX;
     r.x2.save(path.join(OUT, 'props_2x', `${name}.png`));
     r.x1.save(path.join(OUT, 'props_1x', `${name}.png`));
     sidecar.props[name] = {
       w2: r.x2.width, h2: r.x2.height, pivot: r.pivot, block: def.block, biomes: def.biomes, weight: def.weight, spacing: def.spacing || 1,
+      ...(def.zones ? { zones: def.zones } : {}),
     };
     console.log(`  props/${name}: ${r.x2.width}x${r.x2.height} @2x, pivot ${r.pivot.x},${r.pivot.y}, sparkle ${r.sparkle.pixels}px`);
   }
@@ -135,6 +143,58 @@ function main() {
     });
     console.log(`  skills/${cls}: 8 icons, sparkle ${r.sparkle.pixels}px`);
   }
+  // PART 2: status icons (4x3), realm badges (3x3)
+  {
+    const s = manifest.status;
+    const buf = bufs.get(s.file);
+    const r = G.sliceGrid(decodePNG(buf), s.size2, s.cols, s.rows);
+    verify(s.file, buf, r.sparkle);
+    if (s.ids.length !== s.cols * s.rows) problems.push(`status: ${s.ids.length} ids for a ${s.cols}x${s.rows} grid`);
+    s.ids.forEach((id, k) => {
+      r.x2[k].save(path.join(OUT, 'status_2x', `${id}.png`));
+      r.x1[k].save(path.join(OUT, 'status_1x', `${id}.png`));
+      sidecar.status[id] = { index: k };
+    });
+    console.log(`  ${s.file}: ${s.ids.length} status icons, sparkle ${r.sparkle.pixels}px`);
+    const q = manifest.realms;
+    const qb = bufs.get(q.file);
+    const qr = G.sliceGrid(decodePNG(qb), q.size2, q.cols, q.rows, { fit: 'contain', pad: q.pad, eraseCorner: q.eraseCorner });
+    verify(q.file, qb, qr.sparkle);
+    qr.x2.forEach((im, k) => {
+      const key = `realm_${k}`;
+      im.save(path.join(OUT, 'realms_2x', `${key}.png`));
+      qr.x1[k].save(path.join(OUT, 'realms_1x', `${key}.png`));
+      sidecar.realms[key] = { index: k };
+    });
+    console.log(`  ${q.file}: ${qr.x2.length} realm badges, sparkle ${qr.sparkle.pixels}px`);
+  }
+  // PART 2: particle textures (black background, luminance -> alpha)
+  for (const name of manifest.particles.names) {
+    const buf = bufs.get(`particles/${name}`);
+    const r = G.processParticle(decodePNG(buf), manifest.particles.size2);
+    verify(`particles/${name}`, buf, r.sparkle, G.isDark);
+    r.x2.save(path.join(OUT, 'particles_2x', `${name}.png`));
+    r.x1.save(path.join(OUT, 'particles_1x', `${name}.png`));
+    sidecar.particles[name] = {};
+    console.log(`  particles/${name}: ${r.x2.width}px @2x, gain ${r.gain.toFixed(2)}, sparkle ${r.sparkle.pixels}px`);
+  }
+  // PART 2: login backdrop + emblem: single textures next to the atlases (not packed)
+  {
+    const b = manifest.keyArt.backdrop;
+    const bb = bufs.get(b.file);
+    const br = G.processBackdrop(decodePNG(bb), b.w, b.h);
+    if (br.sparkle.components < 1) problems.push(`${b.file}: no Gemini mark found in the corner`);
+    br.image.save(path.join(OUT, 'keyart', 'login_bg.png'));
+    sidecar.keyArt.backdrop = { file: 'keyart_login_bg.png', w: b.w, h: b.h };
+    const e = manifest.keyArt.emblem;
+    const eb = bufs.get(e.file);
+    const er = G.processEmblem(decodePNG(eb), e.size2);
+    verify(e.file, eb, er.sparkle);
+    er.x2.save(path.join(OUT, 'keyart', 'emblem_2x.png'));
+    er.x1.save(path.join(OUT, 'keyart', 'emblem_1x.png'));
+    sidecar.keyArt.emblem = { f2: { file: 'keyart_emblem_2x.png', w: er.x2.width, h: er.x2.height }, f1: { file: 'keyart_emblem_1x.png', w: er.x1.width, h: er.x1.height } };
+    console.log(`  key art: backdrop ${b.w}x${b.h}, emblem ${er.x2.width}x${er.x2.height} @2x`);
+  }
   // INTERIM mob standees (concept art, faces left): one @1x tier
   for (const [key, def] of Object.entries(manifest.mobs)) {
     const buf = bufs.get(`mobs/${key}`);
@@ -157,6 +217,9 @@ function main() {
     ['props_2x', 'atl_prop_2x', 'props'], ['props_1x', 'atl_prop_1x', 'props'],
     ['icons_2x', 'atl_gicon_2x', 'icons'], ['icons_1x', 'atl_gicon_1x', 'icons'],
     ['skills_2x', 'atl_skill_2x', 'skills'], ['skills_1x', 'atl_skill_1x', 'skills'],
+    ['status_2x', 'atl_status_2x', 'status'], ['status_1x', 'atl_status_1x', 'status'],
+    ['realms_2x', 'atl_realm_2x', 'realms'], ['realms_1x', 'atl_realm_1x', 'realms'],
+    ['particles_2x', 'atl_ptcl_2x', 'particles'], ['particles_1x', 'atl_ptcl_1x', 'particles'],
   ]) {
     const a = pack(dir, atlasName);
     const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';
@@ -166,6 +229,9 @@ function main() {
       target[scale] = { file: a.pages[f.page].file, x: f.x, y: f.y, w: f.w, h: f.h };
     }
   }
+  // single textures (not atlased) ride along in atlas/ so every consumer copies one directory
+  for (const [from, to] of [['login_bg.png', 'keyart_login_bg.png'], ['emblem_2x.png', 'keyart_emblem_2x.png'], ['emblem_1x.png', 'keyart_emblem_1x.png']])
+    fs.copyFileSync(path.join(OUT, 'keyart', from), path.join(OUT, 'atlas', to));
   fs.writeFileSync(path.join(OUT, 'gemini.json'), JSON.stringify(sidecar, null, 2));
   fs.writeFileSync(stampFile, stamp);
   console.log(`✔ gemini assets -> ${OUT}`);

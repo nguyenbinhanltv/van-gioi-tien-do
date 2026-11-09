@@ -1,5 +1,59 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## GEMINI-PART2 — props vùng, icon trạng thái, huy hiệu cảnh giới, hạt, key art, concept NPC và pha boss do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack part 2. Ảnh là owner-provided Gemini exports (nằm ngoài repo ở thư mục nhập của chủ dự án), sao nguyên byte vào `assets-src/gemini/{props2,status,realms,particles,key_art}/` và `assets-src/concepts/{npcs,mobs_phase}/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba. Chủ dự án không lưu prompt gốc từng ảnh (như GEMINI-PROPS-ICONS): chỉ còn pack prompt phần 2 của orchestrator làm đặc tả. Mọi ảnh có dấu ✦ Gemini ở góc dưới-phải; nền magenta (props, status, realms, key_art/logo_emblem, npcs, mobs_phase), nền ĐEN (particles), key_art/login_bg là tranh đặc.
+
+**Quyền sử dụng:** như GEMINI-PROPS-ICONS: output do chủ dự án tạo cho dự án này, điều khoản Google Gemini áp dụng cho tài khoản của chủ dự án; chưa có kiểm tra pháp lý riêng cho phát hành thương mại (xem `docs/OPEN-ITEMS.md`, mục "Asset Gemini").
+
+**Dùng trong game (tái lập được bằng `npm run gen:gemini -w @vgtd/procgen`, mã ở `tools/procgen/src/gemini/`):**
+
+- `props2/` (13 ảnh): 11 prop vùng (đầm lầy: `swamp_*`; Cổ thụ: `ancient_*`; Độc Hỏa Đàm: `lava_*`) vào atlas prop (`atl_prop_2x` / `atl_prop_1x`, một trang) và rải theo vùng mob (`mobZoneAt`); `tree_pine_02_v2` và `rock_large_spirit_v2` THAY `props/tree_pine_02` / `props/rock_large_spirit` (cùng khóa, nguồn mới; ảnh cũ giữ lại ở `assets-src/gemini/props/` làm nguồn gốc, không còn vào atlas).
+- `status/status_icons.png`: lưới 4×3 → atlas `atl_status_*` (32 px @1x / 64 px @2x), id trong `manifest.json` `status.ids`, `getStatusIcon(id)`.
+- `realms/realm_badges.png`: lưới 3×3 theo `REALM_NAMES` → atlas `atl_realm_*` (64 / 128 px, giữ tỉ lệ), `getRealmBadge(realmIndex)`, hiển thị cạnh tên cảnh giới ở HUD tu luyện. Dấu ✦ chồng lên quầng sáng của huy hiệu cuối nên xoá thêm bằng hộp góc (`eraseCorner`).
+- `particles/` (10 ảnh nền đen): xoá ✦, độ sáng → alpha (màu giữ nguyên, hợp additive và alpha), atlas `atl_ptcl_*` (96 / 192 px), registry `ArtRegistry.ts`.
+- `key_art/login_bg.png`: xoá ✦ bằng vá khuếch tán (tranh đặc, không có nền magenta), thu về 1024×576; `key_art/logo_emblem.png`: tách nền (kể cả lỗ giữa đĩa ngọc), 512 / 256 px. Dùng làm nền và biểu tượng của màn chọn Đạo Lộ (đăng nhập online lần đầu).
+- `concepts/npcs/` (6) và `concepts/mobs_phase/` (3): **chỉ là ảnh tham chiếu concept**, chưa dựng sprite chạy; việc dựng NPC đứng và skin pha boss (worker 42) làm sau.
+
+| Tệp nguồn (nguyên byte) | Loại | SHA-256 (12 ký tự đầu) |
+| ----------------------- | ---- | ---------------------- |
+| `assets-src/gemini/props2/ancient_roots_arch.png` | prop (PART 2) | `c5b819f8761d` |
+| `assets-src/gemini/props2/ancient_shrine_stone.png` | prop (PART 2) | `34b9f9f5f211` |
+| `assets-src/gemini/props2/ancient_tree_giant.png` | prop (PART 2) | `7fb0f3b8823c` |
+| `assets-src/gemini/props2/lava_charred_tree.png` | prop (PART 2) | `9bf738bd4b91` |
+| `assets-src/gemini/props2/lava_fire_vent.png` | prop (PART 2) | `12bdbed1fafa` |
+| `assets-src/gemini/props2/lava_obsidian_spires.png` | prop (PART 2) | `4488e62ab6bf` |
+| `assets-src/gemini/props2/lava_sulfur_rocks.png` | prop (PART 2) | `a399264cc47c` |
+| `assets-src/gemini/props2/rock_large_spirit_v2.png` | prop (PART 2) | `b73f9aae3402` |
+| `assets-src/gemini/props2/swamp_lilypads.png` | prop (PART 2) | `0cba8fb59a54` |
+| `assets-src/gemini/props2/swamp_poison_mushrooms.png` | prop (PART 2) | `3c21f927307c` |
+| `assets-src/gemini/props2/swamp_reeds.png` | prop (PART 2) | `ee36a7fe97a5` |
+| `assets-src/gemini/props2/swamp_rotten_log.png` | prop (PART 2) | `d1ed4694a70d` |
+| `assets-src/gemini/props2/tree_pine_02_v2.png` | prop (PART 2) | `acf003fdd8cf` |
+| `assets-src/gemini/status/status_icons.png` | icon trạng thái | `62f89820a1c4` |
+| `assets-src/gemini/realms/realm_badges.png` | huy hiệu cảnh giới | `120cbec1ebe0` |
+| `assets-src/gemini/particles/p_flame.png` | hạt (nền đen) | `a77987134a96` |
+| `assets-src/gemini/particles/p_glow.png` | hạt (nền đen) | `8fdb0c5d858c` |
+| `assets-src/gemini/particles/p_ice.png` | hạt (nền đen) | `5e02a4f5ec38` |
+| `assets-src/gemini/particles/p_leaf.png` | hạt (nền đen) | `b5daabc3c496` |
+| `assets-src/gemini/particles/p_lightning.png` | hạt (nền đen) | `367d52d0e1b0` |
+| `assets-src/gemini/particles/p_ring.png` | hạt (nền đen) | `157b76baaa08` |
+| `assets-src/gemini/particles/p_rune.png` | hạt (nền đen) | `c11b3940bba9` |
+| `assets-src/gemini/particles/p_slash.png` | hạt (nền đen) | `d84a8a3c9813` |
+| `assets-src/gemini/particles/p_smoke.png` | hạt (nền đen) | `a1297bd4b103` |
+| `assets-src/gemini/particles/p_spark.png` | hạt (nền đen) | `ce7d0e3dfe98` |
+| `assets-src/gemini/key_art/login_bg.png` | key art | `61418f9ef2d1` |
+| `assets-src/gemini/key_art/logo_emblem.png` | key art | `d1d93b2b078b` |
+| `assets-src/concepts/npcs/npc_chuong_mon.png` | concept NPC | `16320af4be2a` |
+| `assets-src/concepts/npcs/npc_su_huynh.png` | concept NPC | `080bea3ea938` |
+| `assets-src/concepts/npcs/npc_tho_ren.png` | concept NPC | `580ab72da915` |
+| `assets-src/concepts/npcs/npc_thuong_nhan.png` | concept NPC | `28dc6460f539` |
+| `assets-src/concepts/npcs/npc_truong_lao_dan.png` | concept NPC | `4748bda98bef` |
+| `assets-src/concepts/npcs/npc_ve_binh.png` | concept NPC | `1d8306c35621` |
+| `assets-src/concepts/mobs_phase/boss_co_mang_p2.png` | concept pha boss | `b9989b7a9b32` |
+| `assets-src/concepts/mobs_phase/boss_co_mang_p3.png` | concept pha boss | `23459eea5ae0` |
+| `assets-src/concepts/mobs_phase/boss_ho_vuong_p2.png` | concept pha boss | `859776e5375a` |
+
 ## GEMINI-MOBS — concept 14 quái do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. 14 ảnh 1792x2400 (tên tệp = `MOB_DEFS[].key`), nền magenta, dấu ✦ Gemini ở góc dưới-phải, phần lớn quay mặt sang TRÁI, chi tiết hơn phong cách semi-chibi. Sao nguyên byte vào `assets-src/concepts/mobs/` (Git LFS) **làm ảnh tham chiếu concept cho việc sản xuất sprite hoạt hình sau này** (Codex); quyền sử dụng như mục GEMINI-PROPS-ICONS.

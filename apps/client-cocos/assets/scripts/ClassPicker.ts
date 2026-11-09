@@ -4,6 +4,7 @@
  * only decides what we ask for. The choice is remembered per server + account so the picker does not appear again.
  */
 import { shared } from './vendor/vgtd.mjs';
+import type { KeyArtUrls } from './PropArt';
 
 /** Display data of the six classes, in wire order (`shared.PATHS`): name and element (docs/11 §4). */
 const CLASS_INFO: Readonly<Record<string, { name: string; hint: string }>> = {
@@ -38,7 +39,10 @@ export function rememberClass(account: string, path: string): void {
 }
 
 /** Show the picker and resolve with the chosen class (buttons, or keys 1-6). Resolves at once with `fallback` when there is no DOM. */
-export function pickClass(fallback: shared.PathId = shared.DEFAULT_CLASS): Promise<shared.PathId> {
+export function pickClass(
+  fallback: shared.PathId = shared.DEFAULT_CLASS,
+  art: KeyArtUrls | null = null,
+): Promise<shared.PathId> {
   if (typeof document === 'undefined') return Promise.resolve(fallback);
   return new Promise((resolve) => {
     const box = document.createElement('div');
@@ -51,11 +55,27 @@ export function pickClass(fallback: shared.PathId = shared.DEFAULT_CLASS): Promi
       alignItems: 'center',
       justifyContent: 'center',
       gap: '10px',
-      background: 'rgba(8,10,18,0.82)',
+      // Gemini login backdrop (PART 2) under a dark veil so the buttons stay readable; plain dark panel without the art
+      background: art
+        ? `linear-gradient(rgba(8,10,18,0.55), rgba(8,10,18,0.78)), url("${art.backdrop}") center / cover no-repeat`
+        : 'rgba(8,10,18,0.82)',
       color: '#f0f0f5',
       font: '16px sans-serif',
       zIndex: '1000',
     } as Partial<CSSStyleDeclaration>);
+    if (art) {
+      const emblem = document.createElement('img');
+      emblem.id = 'vgtd-class-emblem';
+      emblem.src = art.emblem;
+      emblem.alt = '';
+      Object.assign(emblem.style, {
+        width: '160px',
+        height: '160px',
+        objectFit: 'contain',
+        pointerEvents: 'none',
+      } as Partial<CSSStyleDeclaration>);
+      box.appendChild(emblem);
+    }
     const title = document.createElement('div');
     title.textContent = 'Chọn Đạo Lộ (không đổi được sau khi tạo nhân vật)';
     title.style.fontSize = '20px';

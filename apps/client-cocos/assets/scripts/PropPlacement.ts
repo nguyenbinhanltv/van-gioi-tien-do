@@ -10,6 +10,10 @@
  *   swamp     land within SWAMP_REACH tiles of water: dead swamp trees
  *   lava      land within SWAMP_REACH tiles of `lava` terrain (none in the slice map today): cooled lava rocks
  *   courtyard fixed Son Mon courtyard (gate, pavilion, well, lanterns, incense burner, fence), laid out relative to spawn
+ *
+ * Zones (PART 2 dressing): the slice map has no swamp / lava / old-forest terrain, so props that belong to a mob zone (swamp reeds in
+ * the Dam lay doc, ancient trees around the Co thu trung tam, lava props in the Doc Hoa Dam) are scattered by the tile's zone
+ * (`PlacementInput.zoneAt`, the same quadrants the server spawns that zone's mobs in) on whatever land is there.
  */
 
 export type Terrain = 'water' | 'dirt' | 'grass' | 'lava';
@@ -19,6 +23,8 @@ export interface PropDef {
   /** Tile offsets from the anchor tile that the prop blocks; [] = walk-through decoration. */
   block: ReadonlyArray<TileOffset>;
   biomes: ReadonlyArray<string>;
+  /** Mob zones (`MobLayoutZone`) whose dressing this prop is; scattered there with probability `ZONE_SHARE` per tile. */
+  zones?: ReadonlyArray<string>;
   /** Relative scatter frequency (0 = never scattered, courtyard only). */
   weight: number;
   /** Free tiles kept around the anchor when scattered (default 1; tall trees 2 so crowns do not pile up). */
@@ -40,6 +46,8 @@ export interface PlacementInput {
   /** Terrain of a tile, null outside the map. */
   terrain(i: number, j: number): Terrain | null;
   defs: Readonly<Record<string, PropDef>>;
+  /** Mob zone of a tile (null outside every zone); omit to scatter by biome only (the original behaviour). */
+  zoneAt?(i: number, j: number): string | null;
   /** Scatter attempts target (props placed <= count). */
   count: number;
   /** Scatter within +-radius tiles of the spawn. */
@@ -59,6 +67,8 @@ export const SPAWN_CLEAR_RADIUS = 6;
 export const SWAMP_REACH = 2;
 /** Share of shore tiles that grow a swamp tree. */
 export const SWAMP_SHARE = 0.35;
+/** Share of scatter tiles inside a mob zone that take that zone's dressing (when it has any). */
+export const ZONE_SHARE = 0.6;
 
 /** mulberry32: deterministic PRNG shared with Bootstrap's prop scatter. */
 export function mulberry32(seed: number): () => number {
@@ -169,6 +179,7 @@ export function placeProps(input: PlacementInput): PlacementResult {
   const rand = mulberry32(input.seed);
   const scatter = Object.entries(defs).filter(([, d]) => d.weight > 0);
   const byBiome = (b: string) => scatter.filter(([, d]) => d.biomes.includes(b));
+  const byZone = (z: string) => scatter.filter(([, d]) => d.zones?.includes(z));
   const pick = (list: Array<[string, PropDef]>): string | null => {
     const total = list.reduce((s, [, d]) => s + d.weight, 0);
     if (total <= 0) return null;
@@ -191,7 +202,11 @@ export function placeProps(input: PlacementInput): PlacementResult {
     if (!inMap(i, j) || !isLand(terrain(i, j)) || reserve.has(key(i, j))) continue;
     // shore tiles take a swamp tree only some of the time (a pond is not a swamp); lava edges always take lava rocks
     const biome = near(i, j, 'lava') ? 'lava' : near(i, j, 'water') && rand() < SWAMP_SHARE ? 'swamp' : 'sect';
-    const list = byBiome(biome);
+    // zone dressing: only draws from the PRNG when the tile is in a zone that has dressing, so maps without zones are unchanged
+    const zone = input.zoneAt ? input.zoneAt(i, j) : null;
+    const zoneList = zone ? byZone(zone) : [];
+    const useZone = zoneList.length > 0 && rand() < ZONE_SHARE;
+    const list = useZone ? zoneList : byBiome(biome);
     const name = pick(list.length ? list : byBiome('sect'));
     if (!name || !fits(name, i, j)) continue;
     // `spacing` free tiles around the anchor AND every blocked tile (so 2x2 rocks keep a gap too), both ways: this prop's own
