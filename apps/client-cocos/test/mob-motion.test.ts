@@ -1,10 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { MOB_DEFS } from '@vgtd/shared';
+import { MOB_DEFS, MOB_TRANSFORM_MS, mobDefByKey, mobPhasesOf } from '@vgtd/shared';
 import manifest from '../../../tools/procgen/src/gemini/manifest.json';
 import {
   BOB_PX,
   DEATH_FADE_S,
   FACE_DEADZONE,
+  TRANSFORM_PULSE_HZ,
+  TRANSFORM_SWAP_AT,
+  beginTransform,
+  flashMotion,
   HIT_FLASH_S,
   IDLE_FACE_AFTER_S,
   mobDefIdOfName,
@@ -138,6 +142,92 @@ describe('mob atlas manifest', () => {
       expect(m.id, d.key).toBe(d.id);
       const box = d.tier === 'normal' ? 128 : d.tier === 'elite' ? 192 : d.footprint === 4 ? 512 : 256;
       expect(m.box, d.key).toBe(box);
+    }
+  });
+});
+
+describe('boss phase transform', () => {
+  const step = (s: ReturnType<typeof newMotion>, dt = 1 / 60, alive_ = true) =>
+    stepMotion(s, dt, { pos: { i: 5, j: 5 }, hp: 100, alive: alive_ });
+
+  it('swaps the skin exactly once, half way through the server window, and pulses until the window ends', () => {
+    const s = newMotion(11);
+    step(s);
+    beginTransform(s, MOB_TRANSFORM_MS);
+    let swaps = 0,
+      swapAtMs = -1,
+      on = 0,
+      off = 0,
+      t = 0;
+    for (let k = 0; k < 140; k++) {
+      const o = step(s);
+      t += 1000 / 60;
+      if (o.swapNow) {
+        swaps++;
+        swapAtMs = t;
+      }
+      if (t < MOB_TRANSFORM_MS - 50) o.flashing ? on++ : off++;
+    }
+    expect(swaps).toBe(1);
+    expect(Math.abs(swapAtMs - MOB_TRANSFORM_MS * TRANSFORM_SWAP_AT)).toBeLessThan(40);
+    expect(on).toBeGreaterThan(20); // it pulses (flash on and off), not a constant tint
+    expect(off).toBeGreaterThan(20);
+    expect(Math.abs(on - off)).toBeLessThan(0.3 * (on + off));
+    expect(TRANSFORM_PULSE_HZ).toBeGreaterThan(0);
+    expect(step(s).flashing).toBe(false); // the window is over
+    expect(s.transform).toBeNull();
+  });
+
+  it('a zero-length window swaps on the next frame without a pulse', () => {
+    const s = newMotion(12);
+    beginTransform(s, 0);
+    const o = step(s);
+    expect(o.swapNow).toBe(true);
+    expect(o.flashing).toBe(false);
+    expect(step(s).swapNow).toBe(false);
+  });
+
+  it('a boss that dies mid-transform comes back as its first phase: respawned is reported once and the transform is dropped', () => {
+    const s = newMotion(13);
+    beginTransform(s, MOB_TRANSFORM_MS);
+    step(s);
+    step(s, 0.5, false); // dead
+    const back = step(s);
+    expect(back.respawned).toBe(true);
+    expect(back.swapNow).toBe(false);
+    expect(s.transform).toBeNull();
+    expect(step(s).respawned).toBe(false);
+  });
+
+  it('flashMotion lasts the longest requested time and never shortens a running flash', () => {
+    const s = newMotion(14);
+    flashMotion(s, 0.5);
+    flashMotion(s, 0.1);
+    expect(s.flash).toBe(0.5);
+    expect(step(s, 0.3).flashing).toBe(true);
+    expect(step(s, 0.3).flashing).toBe(false);
+  });
+});
+
+describe('boss phase skins (manifest vs @vgtd/shared)', () => {
+  const phases = manifest.mobsPhase as unknown as Record<string, { mob: string; phase: number }>;
+  const entries = Object.entries(phases).filter(([k]) => !k.startsWith('_'));
+
+  it('every skin names a real mob with that phase, and every boss phase after the first has exactly one skin', () => {
+    for (const [key, e] of entries) {
+      const def = mobDefByKey(e.mob);
+      expect(def, `${key}: mob ${e.mob}`).toBeDefined();
+      expect(def!.tier).toBe('boss');
+      expect(e.phase, key).toBeGreaterThanOrEqual(1);
+      expect(e.phase, key).toBeLessThan(mobPhasesOf(def!).length);
+    }
+    for (const d of MOB_DEFS.filter((m) => m.tier === 'boss')) {
+      const need = Array.from({ length: mobPhasesOf(d).length - 1 }, (_, k) => k + 1);
+      const have = entries
+        .filter(([, e]) => e.mob === d.key)
+        .map(([, e]) => e.phase)
+        .sort();
+      expect(have, d.key).toEqual(need);
     }
   });
 });

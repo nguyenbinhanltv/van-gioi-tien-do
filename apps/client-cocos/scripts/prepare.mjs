@@ -7,7 +7,7 @@
 import { build } from 'esbuild';
 import ts from 'typescript';
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { prepareChibiBundles } from './chibi-bundles.mjs';
@@ -80,12 +80,24 @@ const out = join(procgen, 'out/tilemap');
 // always regenerate (0.6 s) so the copied tilemap can never be stale vs tools/procgen
 {
   // Slice map = Son Mon (docs/04 section 5, docs/10 section 12): 256 x 256 tiles = 8 x 8 chunks, so the ChunkStreamer really
-  // streams (keep window 7x7). `VGTD_MAP_TILES` overrides (e.g. 32 = the old single-chunk map). A tiny preview scale keeps
-  // the generator from writing a multi-MB map_preview.png nobody opens here.
+  // streams (keep window 7x7). `VGTD_MAP_TILES` overrides (e.g. 32 = the old single-chunk map). `--previewScale 0` skips
+  // map_preview.png: nobody opens it here and drawing it costs ~1 minute on a 256 map.
   const tiles = String(Number(process.env.VGTD_MAP_TILES) || 256);
   const r = spawnSync(
     'npm',
-    ['run', 'gen:tilemap', '--', '--width', tiles, '--height', tiles, '--previewScale', '0.05'],
+    [
+      'run',
+      'gen:tilemap',
+      '--',
+      '--width',
+      tiles,
+      '--height',
+      tiles,
+      '--previewScale',
+      '0',
+      // VGTD_ZONES=0 builds the old 3-material map (A/B measurements); default: the four zones (D95, `gen:tilemap` has `--zones 1`)
+      ...(process.env.VGTD_ZONES === '0' ? ['--zones', '0'] : []),
+    ],
     { cwd: procgen, stdio: 'inherit', shell: true },
   );
   if (r.status !== 0) throw new Error('gen:tilemap failed');
@@ -111,23 +123,21 @@ prepareChibiBundles({ root, repo });
 // the tilemap. `--allow-missing`: without the LFS sources the client falls back to its placeholder props and text bag tiles.
 {
   const gdir = join(procgen, 'out/gemini');
-  for (const f of [
-    'gemini.json',
-    'atl_prop_2x_0.png',
-    'atl_prop_1x_0.png',
-    'atl_gicon_2x_0.png',
-    'atl_gicon_1x_0.png',
-    'atl_skill_2x_0.png',
-    'atl_skill_1x_0.png',
-    'atl_ui_2x_0.png',
-    'atl_ui_1x_0.png',
-  ])
-    rmSync(join(worldDir, f), { force: true }); // never leave stale art behind
+  // never leave stale art behind: the sidecar, every atlas page (a page count can change) and the key-art textures
+  rmSync(join(worldDir, 'gemini.json'), { force: true });
+  for (const f of readdirSync(worldDir)) {
+    if (/^(atl_(prop|gicon|skill|ui|status|realm|ptcl)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png)$/.test(f))
+      rmSync(join(worldDir, f), { force: true });
+  }
   if (existsSync(join(gdir, 'gemini.json'))) {
     copyFileSync(join(gdir, 'gemini.json'), join(worldDir, 'gemini.json'));
     const sidecar = JSON.parse(readFileSync(join(gdir, 'gemini.json'), 'utf8'));
     for (const pages of Object.values(sidecar.atlases))
       for (const p of pages) copyFileSync(join(gdir, 'atlas', p.file), join(worldDir, p.file));
+    // login backdrop + emblem: single textures (not atlased), loaded on demand by the class picker
+    const ka = sidecar.keyArt ?? {};
+    for (const f of [ka.backdrop?.file, ka.emblem?.f2?.file, ka.emblem?.f1?.file].filter(Boolean))
+      copyFileSync(join(gdir, 'atlas', f), join(worldDir, f));
   }
 }
 console.log('prepared vendor bundle + tilemap + DragonBones test rig + chibi bundles + gemini props');

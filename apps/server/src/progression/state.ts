@@ -55,6 +55,11 @@ export interface ProgressRecord {
    * hello. Absent on records written before D82: they are given a class by the next login (`resolveClass`).
    */
   readonly classId?: PathId;
+  /**
+   * Remaining lock of the MAJOR breakthrough (ms) as of the last write (D97): after a lost Tâm Ma (30 min) or a Nặng death in a Lôi Kiếp (24 h).
+   * The service turns it into an absolute time on load and refreshes it on every write, so it survives a restart. Absent / 0 = not locked.
+   */
+  readonly majorLockMs?: number;
 }
 
 type Position = Pick<ProgressRecord, 'realm' | 'subRealm'>;

@@ -38,7 +38,10 @@ import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
+import { SectPanel } from './SectPanel';
+import { FriendsPanel } from './FriendsPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
+import { TribulationFx } from './TribulationFx';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -102,8 +105,12 @@ export class Bootstrap extends Component {
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
+  private sectPanel: SectPanel | null = null;
+  private friendsPanel: FriendsPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
+  /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
+  private tribulationFx: TribulationFx | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -145,7 +152,9 @@ export class Bootstrap extends Component {
       load('world/iso-tileset', ImageAsset),
     ]);
     const map = mapAsset.json as unknown as { width: number; height: number; seed?: number };
-    const tilesetJson = tilesetAsset.json as unknown as { animations?: { water?: { frames: number[]; fps: number } } };
+    const tilesetJson = tilesetAsset.json as unknown as {
+      animations?: Record<string, { frames: number[]; fps: number }>;
+    };
     const data = cw.parseProcgenMap(tilesetJson, mapAsset.json);
     const tilesetTex = makeTexture(tilesetImage);
     const art: ArtFrames = buildPlaceholderArt();
@@ -164,7 +173,12 @@ export class Bootstrap extends Component {
     const blocked = new Uint8Array(map.width * map.height);
     const walkable = (i: number, j: number) => this.world.isTerrainWalkable(i, j) && blocked[j * map.width + i] === 0;
 
-    const spawn = this.findSpawn(Math.floor(map.width / 2), Math.floor(map.height / 2));
+    // `?at=i,j` (offline QA): start near that tile instead of the map centre, e.g. to look at a mob zone's dressing
+    const at = /^(\d+),(\d+)$/.exec(params.get('at') ?? '');
+    const spawn = this.findSpawn(
+      at ? Math.min(map.width - 1, Number(at[1])) : Math.floor(map.width / 2),
+      at ? Math.min(map.height - 1, Number(at[2])) : Math.floor(map.height / 2),
+    );
     // Owner-provided Gemini props (one atlas, Y-sorted with the actors); falls back to the placeholder tree / rock when the
     // assets were not generated (`npm run prepare:assets` needs the LFS sources in assets-src/gemini)
     this.propArt = await PropArt.load(tier === 'low');
@@ -177,6 +191,8 @@ export class Bootstrap extends Component {
         seed: map.seed ?? 1,
         spawn,
         terrain: (i, j) => this.world.terrainAt(i, j),
+        // zone dressing (swamp / old forest / lava props) in the quadrants the server spawns each zone's mobs in
+        zoneAt: (i, j) => shared.mobZoneAt(i, j, map.width),
         defs: this.propArt.defs(),
         count: 110,
         radius: 40,
@@ -322,9 +338,23 @@ export class Bootstrap extends Component {
         (x, y) => this.rig.clientToUi(x, y),
         (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       );
+      this.tribulationFx = new TribulationFx(hudRoot, this.worldRootNode!, art, this.online.net);
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
+      // sect panel (D98): K or /sect; its buttons run the same lines the player could type, the server decides
+      const net = this.online.net;
+      this.sectPanel = new SectPanel(chat.sect, {
+        run: (cmd) => chat.command(cmd),
+        position: () => net.selfPosition(),
+      });
+      chat.onSectToggle = () => this.sectPanel?.toggle();
+      // friends panel (D96): O or /friends; its buttons run the same lines the player could type
+      this.friendsPanel = new FriendsPanel(chat.friends, {
+        run: (cmd) => chat.command(cmd),
+        prefill: (text) => chat.focus(text),
+      });
+      chat.onFriendsToggle = () => this.friendsPanel?.toggle();
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -345,6 +375,9 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToWorld(x, y),
     );
     this.combat.mobArt = this.mobArt;
+    // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
+    (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
+      this.combat?.setEnemyPhase(entityId, phase, ms);
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
@@ -357,7 +390,10 @@ export class Bootstrap extends Component {
     const q =
       new URLSearchParams(location.search).get('class') ?? new URLSearchParams(location.hash.slice(1)).get('class');
     const fromUrl = q ? (shared.parseClass(pathOfChibiId(q) ?? q) ?? null) : null;
-    const asked = fromUrl ?? rememberedClass(online.accountKey) ?? (await pickClass());
+    const asked =
+      fromUrl ??
+      rememberedClass(online.accountKey) ??
+      (await pickClass(undefined, (await this.propArt?.keyArt()) ?? null));
     online.net.classRequest = shared.classWireId(asked);
     online.connect();
   }
@@ -375,7 +411,10 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
-      online.onBossPhase = (entityId, phase) => this.combat?.announceBossPhase(entityId, phase);
+      online.onBossPhase = (entityId, phase, transformMs) => {
+        this.combat?.announceBossPhase(entityId, phase);
+        this.combat?.setEnemyPhase(entityId, phase, transformMs); // skin swap on the boss standee
+      };
       // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
       this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
@@ -566,8 +605,11 @@ export class Bootstrap extends Component {
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
     this.updateStatusRow();
+    this.tribulationFx?.update(dt);
     this.chatBox?.update();
     this.partyFrames?.update();
+    this.sectPanel?.update();
+    this.friendsPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -592,6 +634,7 @@ export class Bootstrap extends Component {
       this.progressionHud?.layout(w, this.canvasUi.contentSize.height);
       this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
       this.firstSession?.layout(w, this.canvasUi.contentSize.height);
+      this.tribulationFx?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
       this.hud.note = this.online
@@ -617,8 +660,11 @@ export class Bootstrap extends Component {
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
+    this.sectPanel?.destroy();
+    this.friendsPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
+    this.tribulationFx?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

@@ -275,3 +275,18 @@ describe('processMob with a height target (NPC standees)', () => {
   });
 });
 
+describe('processMob with an area target (boss phase skins)', () => {
+  it('scales a wide pose to the area of the sprite it replaces instead of the longest side', () => {
+    const img = new Image(400, 300);
+    for (let y = 0; y < 300; y++) for (let x = 0; x < 400; x++) img.setPixel(x, y, 250, 40, 248, 255);
+    for (let y = 100; y < 200; y++) for (let x = 40; x < 340; x++) img.setPixel(x, y, 60, 120, 60, 255); // 300 x 100, faces left
+    const byBox = G.processMob(img, 128);
+    expect(Math.max(byBox.x1.width, byBox.x1.height)).toBe(128); // longest side = the canvas
+    const area = 90 * 120; // a tall 90 x 120 base sprite
+    const byArea = G.processMob(img, 0, { area });
+    const got = byArea.x1.width * byArea.x1.height;
+    expect(Math.abs(got - area) / area).toBeLessThan(0.05);
+    expect(byArea.x1.width).toBeGreaterThan(byArea.x1.height); // still the wide pose
+  });
+});
+
