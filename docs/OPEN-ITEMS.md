@@ -687,3 +687,10 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 - **Số lượng và dải level**: số con mỗi vùng (12 thường theo bầy 3, tinh anh 2, boss 1), bán kính bầy, tỷ lệ 50/50 giữa hai biến thể, xen theo bầy là **placeholder** (D74 / D83 / D114). Level của mỗi con rút đều trong `[levelMin, levelMax]` của def; doc chưa quy định phân bố (ví dụ lệch theo khoảng cách tới tâm).
 - **Kỹ năng quái**: 7 trong 8 quái thường có đúng 1 kỹ năng, Độc Thố chỉ có đòn thường (đúng doc); tổng ~28 kỹ năng của docs/10 §5 gồm cả đòn thường; "Tru gọi" của Hôi Lang Vương vẫn là kéo 2 Hôi Lang có sẵn (D91, chưa sinh thực thể mới); 8 × 8 và quái pha lê (docs/03 §6: Giao Long, Thao Thiết...) ngoài beta.
 - **Roster đầy đủ (docs/02 §1)**: 25 thường × 4 biến thể, 20 tinh anh, 12 boss là mục tiêu dài hạn; beta dừng ở 14 loại.
+
+## D116 — hiệu ứng kỹ năng: còn mở (worker39, 2026-11-09)
+
+1. **Số tạm** (`SKILL_EFFECTS`, mô phỏng thiết kế): trần giảm sát thương 0,75, sàn DEF 0,2, trần `def_shred` 0,5, chia dấu nổ 0,6, boss chậm ×0,5, tầm thú 9 ô, lướt dừng cách 1 ô, bước va chạm 0,25 ô, ngữ cảnh nhóm 12 ô, trần khiên từ hồi thừa; tinh anh nhận khống chế đủ. Cần game designer duyệt khi cân bằng.
+2. **Chưa áp**: `move_speed_pct` (đồng bộ dự đoán), `timing.invuln_ms` của lướt, `silence`, `tribulation_reduction`, `ClassDef.trait`, nhấc quái khi knock-up, buff cho người ngoài tổ đội.
+3. **Client**: trạng thái quái chỉ có chữ `CHOANG` / `TROI` / `CHAM` (chưa icon, chưa hoạt ảnh choáng); quái bị đẩy / kéo dịch chuyển tức thời (chưa nội suy riêng).
+4. **Cân bằng**: sau D116 thứ hạng lớp thay đổi (xem báo cáo D115 chạy lại): cần xem lại hệ số trên cơ sở mới trước khi chỉnh bất kỳ số nào; `stat_weights` của lớp vẫn bị bỏ qua (D117).

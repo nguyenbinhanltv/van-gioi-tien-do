@@ -199,6 +199,7 @@ export class MobAttackSystem {
       if (!v) continue;
       this.advancePhase(e, v.def, now, telegraphs);
       if (this.isInvulnerable(e.id)) continue; // transforming: no attacks
+      if (this.combat.effects.isStunned(e.id, now)) continue; // stunned / knocked up (D116): no new attack
       if (v.state !== 'chase' || v.target === 0) continue;
       if (this.windups.some((w) => w.mobId === e.id)) continue; // one attack at a time
       const t = byId.get(v.target);
@@ -256,6 +257,11 @@ export class MobAttackSystem {
           telegraphs.push({ kind: 'end', id: x.id, cancelled: true }); // the mob died / despawned: the attack is cancelled
           continue;
         }
+        // stunned (or interrupted by a hard CC / knock-back on a boss, D116): the attack in progress is cancelled
+        if (this.combat.interrupted.has(x.mobId) || this.combat.effects.isStunned(x.mobId, now)) {
+          telegraphs.push({ kind: 'end', id: x.id, cancelled: true });
+          continue;
+        }
         if (x.resolveAtMs <= now) due.push(x);
         else keep.push(x);
       }
@@ -275,6 +281,7 @@ export class MobAttackSystem {
     if (this.phases.size > 0) {
       for (const id of [...this.phases.keys()]) if (!byId.has(id)) this.phases.delete(id);
     }
+    this.combat.interrupted.clear();
     const phases = this.phaseChanges;
     this.phaseChanges = [];
     return { world: w, events, telegraphs, phases };
@@ -302,13 +309,14 @@ export class MobAttackSystem {
       if (!inShape(x.attack.shape, origin, x.facing, anchor, { i: e.i, j: e.j })) continue;
       const prof = this.combat.profileOf(e.id);
       if (!prof) continue;
+      const def = this.combat.defenseOf(e.id, world.timeMs); // DEF with the `def_pct` of passives and buffs (D116)
       if (x.attack.coeff > 0) {
         const [jitter, next] = rngFloat(this.rng);
         this.rng = next;
         const b = damageBreakdown({
           atk: x.atk,
           cSkill: x.attack.coeff,
-          def: prof.stats.def,
+          def,
           attackerElement: x.element ?? undefined,
           defenderElement: prof.element,
           crit: false,
@@ -320,7 +328,7 @@ export class MobAttackSystem {
         w = hit.world;
         for (const ev of hit.events) events.push(ev);
       }
-      if (eff && this.combat.isAlive(e.id)) this.applyHitEffect(eff, e.id, prof.stats.def, prof.element, prof.realm, x);
+      if (eff && this.combat.isAlive(e.id)) this.applyHitEffect(eff, e.id, def, prof.element, prof.realm, x);
     }
     if (eff?.type === 'pool') this.addPool(eff, x);
     else if (eff?.type === 'call_help') this.callHelp(world, eff, x);
