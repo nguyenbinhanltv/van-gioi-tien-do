@@ -94,6 +94,21 @@
 | `assets-src/gemini/ui/panel_jade.png`      | UI frame 9-slice | `5ff2ca3744c7`         |
 | `assets-src/gemini/ui/slot_frame.png`      | UI frame 9-slice | `35afa70ccb0a`         |
 
+## GEMINI-NPCS — 6 NPC Sơn Môn do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. 6 ảnh 1792×2400 nền magenta, dấu ✦ Gemini ở góc dưới-phải, nhân vật nhìn thẳng (không quay trái như quái): `npc_chuong_mon` (chưởng môn), `npc_truong_lao_dan` (trưởng lão đan), `npc_ve_binh` (vệ binh), `npc_su_huynh` (sư huynh), `npc_tho_ren` (thợ rèn), `npc_thuong_nhan` (thương nhân). Sao nguyên byte vào `assets-src/concepts/npcs/` (Git LFS) làm tham chiếu cho sprite hoạt hình sau này.
+
+**Dùng tạm trong game (INTERIM):** `gen:gemini` xoá ✦, tách nền, cắt sát, đặt pivot ở chân, scale theo chiều CAO đứng (100–128 px thiết kế; nhân vật người chơi ~90 px) và đóng chung trang atlas với prop và quái. Client dựng mỗi NPC thành standee tĩnh (nhún nhẹ, bóng dưới chân, không lật) quanh quảng trường gần điểm spawn, chặn ô nó đứng; khoá chuẩn `npc_<tên>` cho hệ thống tông môn (D98) ánh xạ NPC id của nó vào.
+
+| Tệp nguồn (nguyên byte)                           | SHA-256 (12 ký tự đầu) |
+| ------------------------------------------------- | ---------------------- |
+| `assets-src/concepts/npcs/npc_chuong_mon.png`     | `16320af4be2a`         |
+| `assets-src/concepts/npcs/npc_su_huynh.png`       | `080bea3ea938`         |
+| `assets-src/concepts/npcs/npc_tho_ren.png`        | `580ab72da915`         |
+| `assets-src/concepts/npcs/npc_thuong_nhan.png`    | `28dc6460f539`         |
+| `assets-src/concepts/npcs/npc_truong_lao_dan.png` | `4748bda98bef`         |
+| `assets-src/concepts/npcs/npc_ve_binh.png`        | `1d8306c35621`         |
+
 ## GEMINI-MOBS — concept 14 quái do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. 14 ảnh 1792x2400 (tên tệp = `MOB_DEFS[].key`), nền magenta, dấu ✦ Gemini ở góc dưới-phải, phần lớn quay mặt sang TRÁI, chi tiết hơn phong cách semi-chibi. Sao nguyên byte vào `assets-src/concepts/mobs/` (Git LFS) **làm ảnh tham chiếu concept cho việc sản xuất sprite hoạt hình sau này** (Codex); quyền sử dụng như mục GEMINI-PROPS-ICONS.
