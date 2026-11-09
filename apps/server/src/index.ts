@@ -11,3 +11,4 @@ export * from './server.js';
 export * from './progression/index.js';
 export * from './chat/index.js';
 export * from './party/index.js';
+export * from './persistence/index.js';
