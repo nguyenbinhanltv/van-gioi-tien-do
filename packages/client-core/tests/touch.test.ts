@@ -58,3 +58,36 @@ test('touch controller: joystick, skill wheel, aim, cancel, page swipe', () => {
   assert.equal(tc.visualState()!.page, 1);
   assert.equal(tc.visualState()!.buttons[1].slot, 6);
 });
+
+test('touch aim: the live aim tile follows the finger and dragging back to the button drops the cast', () => {
+  const t = new TouchController(player, () => ({ x: 0, y: 0 }));
+  t.setLayout(layout);
+  t.aimZoom = 1;
+  const s0 = t.skillCenters()[0];
+  t.pointerDown(ev(7, s0.x, s0.y));
+  assert.equal(t.visualState()!.aim, null, 'a press is not an aim yet');
+  t.pointerMove(ev(7, s0.x - 96, s0.y));
+  const v = t.visualState()!.aim!;
+  assert.equal(v.backAtOrigin, false);
+  assert.equal(v.overCancel, false);
+  assert.ok(v.tile.i < 10, 'aim tile is where a release would cast');
+  // the cast the release produces carries exactly that tile
+  t.pointerUp(ev(7, s0.x - 96, s0.y));
+  let f = emptyFrame(); t.update(f);
+  assert.deepEqual(f.casts[0].aimTile, v.tile);
+
+  // drag out, then back onto the button: indicator says "dropped", release casts nothing and cancels nothing
+  t.pointerDown(ev(8, s0.x, s0.y));
+  t.pointerMove(ev(8, s0.x - 96, s0.y));
+  t.pointerMove(ev(8, s0.x + 3, s0.y - 2));
+  assert.equal(t.visualState()!.aim!.backAtOrigin, true);
+  t.pointerUp(ev(8, s0.x + 3, s0.y - 2));
+  f = emptyFrame(); t.update(f);
+  assert.equal(f.casts.length, 0);
+  assert.equal(f.cancelCast, false);
+
+  // a plain tap still auto-targets
+  t.pointerDown(ev(9, s0.x, s0.y)); t.pointerUp(ev(9, s0.x, s0.y));
+  f = emptyFrame(); t.update(f);
+  assert.deepEqual(f.casts, [{ slot: 1 }]);
+});

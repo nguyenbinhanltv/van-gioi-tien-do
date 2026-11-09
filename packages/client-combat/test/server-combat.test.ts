@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { HIT_FLAG_CRIT, HIT_FLAG_KILL } from '@vgtd/shared';
 import { compileSkills } from '@vgtd/sim';
-import { PLAYER_ID, ServerCombat, wireSkillIds } from '../src/index.js';
+import { PLAYER_ID, ServerCombat, clampAimToRange, wireSkillIds } from '../src/index.js';
 import type { CombatEvent, SkillCastWire } from '../src/index.js';
 
 const make = () => {
@@ -16,6 +16,35 @@ const make = () => {
   c.upsertEnemy({ id: 1_000_001, name: 'mob', pos: { i: 22, j: 20 }, hpPct: 100, hpMax: 3000 });
   return { c, sent };
 };
+
+describe('touch aim override', () => {
+  it('a cast with an explicit aim sends that aim (pulled back to the skill range) instead of the pointer aim', () => {
+    const { c, sent } = make();
+    c.setPlayerPos({ i: 20, j: 20 });
+    c.setAim({ i: 25, j: 20 }); // pointer says east
+    const slot = c.hotbar.slots.findIndex((s) => s.skill.id === 'kiem_khi_tram');
+    c.target.select(1_000_001);
+    c.cast(slot, 1000, { i: 20, j: 22 }); // the touch drag says south, 2 tiles
+    expect(sent[0]!.aim).toEqual({ i: 20, j: 22 });
+    // far drags are pulled back to the range, an explicit null means "no aim" even with a pointer aim set
+    const range = c.hotbar.slots[slot]!.skill.targeting.range_tiles ?? 0;
+    const other = c.hotbar.slots.findIndex((s) => s.skill.id === 'lien_hoan_kiem');
+    c.cast(other, 9000, { i: 20, j: 2000 });
+    const a = sent[1]!.aim!;
+    expect(a.i).toBeCloseTo(20, 6);
+    expect(a.j).toBeGreaterThan(20);
+    expect(a.j).toBeLessThan(2000);
+    expect(range).toBeGreaterThanOrEqual(0);
+    c.cast(slot, 20000, null);
+    expect(sent[2]!.aim).toBeNull();
+  });
+  it('clampAimToRange: range clamp, map edge, non-finite', () => {
+    expect(clampAimToRange({ i: 5, j: 5 }, { i: 5, j: 25 }, 10)).toEqual({ i: 5, j: 15 });
+    expect(clampAimToRange({ i: 1, j: 1 }, { i: -4, j: 1 }, 0)).toEqual({ i: 0, j: 1 });
+    expect(clampAimToRange({ i: 1, j: 1 }, { i: Number.NaN, j: 1 }, 5)).toBeNull();
+    expect(clampAimToRange({ i: 1, j: 1 }, null, 5)).toBeNull();
+  });
+});
 
 describe('wire skill ids', () => {
   it('match @vgtd/sim compileSkills for every active skill (the id the server expects in skill_cast)', () => {

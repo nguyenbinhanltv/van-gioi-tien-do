@@ -52,3 +52,25 @@ describe('withKillObserver (D84): counts the player own kills from the server sk
     expect(ev[0]).toMatchObject({ type: 'cast_start' });
   });
 });
+
+describe('withKillObserver keeps the touch aim', () => {
+  it('forwards the explicit aim (and an explicit null) of cast() to the wrapped backend instead of dropping it', () => {
+    const sent: Array<{ aim: { i: number; j: number } | null }> = [];
+    const c = new ServerCombat({
+      path: 'kiem',
+      send: (m) => {
+        sent.push(m);
+      },
+    });
+    c.setSelfVitals({ hp: 1200, hpMax: 1200, mp: 400, mpMax: 400 });
+    c.setPlayerPos({ i: 20, j: 20 });
+    c.setAim({ i: 30, j: 30 }); // a stale pointer aim that a wheel cast must never use
+    const wrapped = withKillObserver(c, () => undefined);
+    const slot = slotOf(c);
+    wrapped.cast(slot, 1000, { i: 20, j: 22 });
+    expect(sent[0]!.aim).toEqual({ i: 20, j: 22 });
+    const other = c.hotbar.slots.findIndex((s) => s.skill.id === 'lien_hoan_kiem');
+    wrapped.cast(other, 9000, null);
+    expect(sent[1]!.aim).toBeNull(); // a tap: no aim, not the stale pointer aim
+  });
+});
