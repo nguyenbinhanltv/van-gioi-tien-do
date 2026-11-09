@@ -149,6 +149,10 @@ export class InventoryService {
     const st = this.owners.get(owner);
     if (st) this.save(owner, st);
   }
+  /** Save every loaded (online) owner: a clean shutdown calls this so a durable store has the latest bags. */
+  flushAll(): void {
+    for (const [owner, st] of this.owners) this.save(owner, st);
+  }
 
   // ------------------------------------------------------------------ queries
   /** Number of owners currently held in memory (online players). */
