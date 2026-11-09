@@ -421,6 +421,7 @@ export class WorldNode {
           respawnPoint: () => this.spawnPoint(),
           isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
           partyOf: (id) => this.creditGroupOf(id),
+          isInvulnerable: (id) => this.mobAttacks?.isInvulnerable(id) ?? false,
           ...opts.combat,
           mobs: mobPort,
           onDrops: sink

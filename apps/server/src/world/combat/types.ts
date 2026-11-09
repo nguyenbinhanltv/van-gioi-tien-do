@@ -102,4 +102,6 @@ export interface CombatOptions {
    * ascending. Each one gets a separate drop roll with `partySize` = the group size (docs/07 §6, personal loot x 1/sqrt(n)). Default: just the killer.
    */
   partyOf?: (killerId: number) => readonly number[];
+  /** A mob that cannot be hurt right now (a boss in its phase transform, D91): it is not a valid target and takes no player damage. */
+  isInvulnerable?: (id: number) => boolean;
 }
