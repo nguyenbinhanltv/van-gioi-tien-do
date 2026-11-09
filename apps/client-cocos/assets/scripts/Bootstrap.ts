@@ -162,7 +162,12 @@ export class Bootstrap extends Component {
     const blocked = new Uint8Array(map.width * map.height);
     const walkable = (i: number, j: number) => this.world.isTerrainWalkable(i, j) && blocked[j * map.width + i] === 0;
 
-    const spawn = this.findSpawn(Math.floor(map.width / 2), Math.floor(map.height / 2));
+    // `?at=i,j` (offline QA): start near that tile instead of the map centre, e.g. to look at a mob zone's dressing
+    const at = /^(\d+),(\d+)$/.exec(params.get('at') ?? '');
+    const spawn = this.findSpawn(
+      at ? Math.min(map.width - 1, Number(at[1])) : Math.floor(map.width / 2),
+      at ? Math.min(map.height - 1, Number(at[2])) : Math.floor(map.height / 2),
+    );
     // Owner-provided Gemini props (one atlas, Y-sorted with the actors); falls back to the placeholder tree / rock when the
     // assets were not generated (`npm run prepare:assets` needs the LFS sources in assets-src/gemini)
     this.propArt = await PropArt.load(tier === 'low');
@@ -175,6 +180,8 @@ export class Bootstrap extends Component {
         seed: map.seed ?? 1,
         spawn,
         terrain: (i, j) => this.world.terrainAt(i, j),
+        // zone dressing (swamp / old forest / lava props) in the quadrants the server spawns each zone's mobs in
+        zoneAt: (i, j) => shared.mobZoneAt(i, j, map.width),
         defs: this.propArt.defs(),
         count: 110,
         radius: 40,
@@ -347,7 +354,10 @@ export class Bootstrap extends Component {
     const q =
       new URLSearchParams(location.search).get('class') ?? new URLSearchParams(location.hash.slice(1)).get('class');
     const fromUrl = q ? (shared.parseClass(pathOfChibiId(q) ?? q) ?? null) : null;
-    const asked = fromUrl ?? rememberedClass(online.accountKey) ?? (await pickClass());
+    const asked =
+      fromUrl ??
+      rememberedClass(online.accountKey) ??
+      (await pickClass(undefined, (await this.propArt?.keyArt()) ?? null));
     online.net.classRequest = shared.classWireId(asked);
     online.connect();
   }

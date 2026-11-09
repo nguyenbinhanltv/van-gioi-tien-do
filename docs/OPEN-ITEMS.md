@@ -8,7 +8,7 @@ Nguồn gốc: mục "chưa kiểm tra được" và "việc còn mở" của h�
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | Tổng quan, quy trình, tài liệu        | §1, §2, §3, §4, §6, §7, §8, Design A (01, 10, 11), Design C (20–29)                                         |
 | Công thức và dữ liệu (`@vgtd/shared`) | §5, §16, "P2-1", D83 (số quái)                                                                              |
-| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55, Asset Gemini                                                         |
+| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55, Asset Gemini, Asset Gemini PART 2                                    |
 | Hệ kỹ năng và combat                  | §14, "D74 — quái", D83, D88 (hồi HP / MP), D89 (telegraph quái)                                             |
 | Server, mạng, hiệu năng               | "P2-2", "P2-3", D73, "P2 exit", D80, D85, D88 (hồi HP / MP phía server), D92 (lưu trữ bằng tệp), §20 (chat) |
 | Client, render, HUD                   | D71 (hai mục), §15, §18, §19, D79, D84, D89 (telegraph), Mob hiển thị tạm thời (standee), §20 (chat)        |
@@ -555,6 +555,18 @@ Còn mở / lưu ý:
 - Mỗi ô lặp lại cùng một patch (chu kỳ = một ô, biến thể chỉ khác phần trong ô), nên thấy lưới hình thoi nhạt trên mặt nước / cỏ rộng; muốn bớt cần patch lớn hơn một ô (thêm lớp biến thể theo vị trí ô) hoặc nhiều biến thể hơn.
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
+
+## Asset Gemini PART 2 (props vùng, icon trạng thái, huy hiệu cảnh giới, hạt, key art, 2026-11-09): còn mở
+
+1. **Địa hình vùng chưa có trên bản đồ lát cắt**: bản đồ chỉ có nước / đất / cỏ, không có đầm lầy, rừng cổ thụ hay dung nham. Prop vùng (swamp\_\*, ancient\_\*, lava\_\*) được rải trên đất / cỏ trong bốn góc phần tư mà server dùng cho vùng mob (`mobZoneAt` trong `@vgtd/shared`, trùng `defaultMobZones`), nên là "trang trí theo vùng", không phải địa hình thật. Trang trí vùng là một lượt rải riêng (PRNG riêng, +60 prop trên lượt rải gốc) và chỉ cách điểm xuất phát từ 16 ô (`ZONE_MIN_DIST`): khung nhìn lúc vào game giữ nguyên bố cục cũ, vì prop vùng gần điểm xuất phát làm cổng draw call 65 của `perf:p1 --mobs` vượt (68–70 so với 62). Khi có tọa độ vùng Sơn Môn thật (D83 mục 2) và ground từng vùng (PR Gemini ground), đổi `mobZoneAt` sang hình chữ nhật của bản đồ thật.
+2. **Số đo prop vùng là ước lượng**: kích thước `target` (ancient_tree_giant 520 px @2x cho nền 4×4 ô, lava_charred_tree cao 342 px) bị ép để trang atlas prop @2x vẫn là MỘT trang 2048×2048 (đang dùng ~74 % diện tích; thêm prop lớn nữa sẽ tràn sang trang 2 và phá batch Y-sort: cần nâng trần trang hoặc tách atlas theo vùng). Ô chặn (khối 2×2 cho fire_vent / obsidian / sulfur, 4×4 cho cây cổ thụ, 2×2 cho cổng rễ và đền đá) chưa qua level designer; `swamp_lilypads` là prop phẳng bằng chuẩn "lá sen trên nước" nhưng chưa có nước trong vùng đầm, nên đang đặt ven bờ.
+3. **Hàng trạng thái của HUD (D94) đã dùng icon**: `Combat.setStatuses` gọi `getStatusIcon(id)` của `PropArt.ts` (ids root, slow, poison, shield; bản stub `StatusIcons.ts` đã xóa). Còn mở: `burn`, `regen`, `atk_up`, `def_up`, `invulnerable`, `breakthrough_buff` đã có icon nhưng chưa có hiệu ứng tương ứng ở server / client-core (`statusRowItems` mới có root / slow / poison / shield).
+4. **Huy hiệu cảnh giới chỉ ở HUD tu luyện** (cạnh tên cảnh giới, 30 px); chưa có ở khung nhân vật / bảng xếp hạng / chat. Huy hiệu thứ 9 (Độ Kiếp) có quầng sáng bị cắt nhẹ ở góc dưới-phải do dấu ✦ chồng lên nó (xoá bằng hộp góc 7,5 %).
+5. **Hạt chỉ là kho texture + registry** (`ArtRegistry.ts`, `getParticleFrame`): chưa hệ VFX nào dùng; chế độ blend (additive / alpha) chỉ là gợi ý trong `ParticleSpec`, node dùng chúng phải đặt blend riêng. Chưa kiểm hiển thị trên máy thật với `tier low` (trang @1x, 96 px).
+6. **Màn "đăng nhập" chỉ là hộp chọn Đạo Lộ**: client chưa có màn đăng nhập thật (tài khoản tự sinh), nên nền `login_bg` và emblem hiện ở hộp chọn Đạo Lộ của lần đăng nhập online đầu tiên; thêm màn đăng nhập / tạo nhân vật thật (D82 mục "Nhiều nhân vật") thì chuyển sang đó. URL ảnh cho DOM lấy từ `ImageAsset` (nguồn `HTMLImageElement.src`, dự phòng `nativeUrl`); chưa kiểm trong mọi cấu hình build (đóng bundle từ xa / CDN).
+7. **Dung lượng key art**: `login_bg` 1024×576 PNG ≈ 1,4 MB và emblem 512 px ≈ 0,6 MB (tải theo yêu cầu, chỉ khi hộp chọn Đạo Lộ hiện); chưa có preset nén WebP/ASTC cho hai ảnh này. Cần nén nếu gói tải đầu sát trần 25 MB.
+8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
+9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
 
 ## D98 — tông môn NPC: còn mở
 
