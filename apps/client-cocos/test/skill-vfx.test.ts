@@ -77,7 +77,8 @@ describe('preset table', () => {
     const own = resolveVfx('thuong', 'loi', { id: 'x_own', element: 'root_main', ...base });
     expect(own.element).toBe('loi');
     expect(own.primary).toEqual(ELEMENT_COLORS.loi!.primary);
-    const ice = resolveVfx('dan_phu', 'moc', { id: 'x_ice', element: 'thuy', ...base });
+    // (a path without stills: the generic presets, whose main texture follows the element; classes with stills draw their own art)
+    const ice = resolveVfx('generic_path', 'moc', { id: 'x_ice', element: 'thuy', ...base });
     expect(ice.element).toBe('thuy');
     expect(ice.cast.some((d) => d.tex === 'p_ice')).toBe(true);
     expect(ice.primary).toEqual(ELEMENT_COLORS.thuy!.primary);
@@ -187,5 +188,54 @@ describe('VfxPlayer', () => {
   });
   it('every registered particle can be indexed', () => {
     expect(PARTICLE_NAMES.length).toBeLessThanOrEqual(255);
+  });
+});
+
+describe('PART 3 VFX stills', () => {
+  it('every class resolves its trail / burst / ring to its own stills, untinted, and the aura stays generic', () => {
+    for (const c of skillDefinitions.classes) {
+      const own = (list: Array<{ tex: string }>) => list.some((d) => d.tex.startsWith(`vfx_${c.path}_`));
+      const probe = (id: string, shape: string, effects: string[], extra: Partial<SkillLike> = {}) =>
+        resolveVfx(c.path, c.element, {
+          id: `${id}_${c.path}`,
+          element: 'root_main',
+          shape: { type: shape, radius: 2 },
+          targeting: { mode: 'enemy', range_tiles: 6 },
+          effects: effects.map((type) => ({ type })),
+          ...extra,
+        });
+      const trail = probe('t', 'line', ['damage']);
+      expect(trail.archetype).toBe('trail');
+      expect(trail.cast.find((d) => d.tex === `vfx_${c.path}_proj`)).toMatchObject({
+        travel: true,
+        face: true,
+        tint: 'white',
+      });
+      expect(own(probe('b', 'cone', ['damage']).cast)).toBe(true);
+      expect(own(probe('r', 'circle', ['damage']).cast)).toBe(true);
+      expect(own(probe('a', 'single', ['heal']).cast)).toBe(false);
+      expect(own(trail.hit)).toBe(true); // the small impact burst on the target is the class' burst still
+    }
+  });
+  it('a travelling projectile takes the trail travel time (the hit burst lands with it) and ends at the target', () => {
+    const pl = new VfxPlayer(makePool());
+    const v = resolveVfx('phap', 'hoa', {
+      id: 'x_proj',
+      element: 'hoa',
+      shape: { type: 'line' },
+      targeting: { mode: 'enemy', range_tiles: 6 },
+      effects: [{ type: 'damage' }],
+    });
+    pl.cast(v, place({ x: 0, y: 0, tx: 420, ty: -60, dx: 0.99, dy: -0.14 }));
+    const p = pl.pool;
+    let slot = -1;
+    for (let i = 0; i < p.capacity; i++)
+      if (p.used[i] && p.vx[i]! > 100 && p.life[i]! > 0.1 && p.life[i]! <= 0.32) slot = i;
+    expect(slot).toBeGreaterThanOrEqual(0);
+    const life = p.life[slot]!;
+    expect(life).toBeCloseTo(trailTravelS(Math.hypot(420, 60)), 5);
+    expect(p.vx[slot]! * life).toBeCloseTo(420, 3);
+    expect(p.vy[slot]! * life).toBeCloseTo(-60, 3);
+    expect(p.rot[slot]!).toBeCloseTo((Math.atan2(-0.14, 0.99) * 180) / Math.PI, 3);
   });
 });

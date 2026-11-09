@@ -42,8 +42,11 @@ const isPng = (buf) => buf.length > 8 && buf.readUInt32BE(0) === 0x89504e47;
 const propSrc = (n) => manifest.props[n].src || `props/${n}`;
 const files = [
   ...Object.keys(manifest.props).map((n) => propSrc(n).split('/')),
-  ...[manifest.status.file, manifest.realms.file, manifest.keyArt.backdrop.file, manifest.keyArt.emblem.file].map((f) => f.split('/')),
+  ...[manifest.status.file, manifest.realms.file, manifest.keyArt.backdrop.file, manifest.keyArt.emblem.file].map((f) =>
+    f.split('/'),
+  ),
   ...manifest.particles.names.map((n) => ['particles', n]),
+  ...manifest.vfx.classes.map((c) => ['vfx', c]),
   ...manifest.icons.map((n) => ['items', n]),
   ...manifest.itemGrids.map((g) => g.file.split('/')),
   manifest.hud.file.split('/'),
@@ -248,7 +251,8 @@ function main() {
       key: g.key,
     });
     verify(g.file, buf, r.sparkle);
-    if (g.ids.length !== g.cols * g.rows) problems.push(`${g.file}: ${g.ids.length} ids for a ${g.cols}x${g.rows} grid`);
+    if (g.ids.length !== g.cols * g.rows)
+      problems.push(`${g.file}: ${g.ids.length} ids for a ${g.cols}x${g.rows} grid`);
     g.ids.forEach((id, k) => {
       if (sidecar.icons[id]) problems.push(`${g.file}: icon id ${id} is used twice`);
       r.x2[k].save(path.join(OUT, 'icons_2x', `${id}.png`));
@@ -299,7 +303,11 @@ function main() {
     console.log(`  ${s.file}: ${s.ids.length} status icons, sparkle ${r.sparkle.pixels}px`);
     const q = manifest.realms;
     const qb = bufs.get(q.file);
-    const qr = G.sliceGrid(decodePNG(qb), q.size2, q.cols, q.rows, { fit: 'contain', pad: q.pad, eraseCorner: q.eraseCorner });
+    const qr = G.sliceGrid(decodePNG(qb), q.size2, q.cols, q.rows, {
+      fit: 'contain',
+      pad: q.pad,
+      eraseCorner: q.eraseCorner,
+    });
     verify(q.file, qb, qr.sparkle);
     qr.x2.forEach((im, k) => {
       const key = `realm_${k}`;
@@ -319,6 +327,26 @@ function main() {
     sidecar.particles[name] = {};
     console.log(`  particles/${name}: ${r.x2.width}px @2x, gain ${r.gain.toFixed(2)}, sparkle ${r.sparkle.pixels}px`);
   }
+  // PART 3 group Q: skill VFX sheets (3 panels on black) -> vfx_<class>_<panel>, packed with the particle textures
+  const vfxPanels = manifest.vfx.panels;
+  for (const cls of manifest.vfx.classes) {
+    const buf = bufs.get(`vfx/${cls}`);
+    const r = G.processVfxSheet(
+      decodePNG(buf),
+      vfxPanels.map((p) => p.size2),
+      vfxPanels.map((p) => !!p.rotate),
+    );
+    verify(`vfx/${cls}`, buf, r.sparkle, G.isDark);
+    r.panels.forEach((p, k) => {
+      const name = `vfx_${cls}_${vfxPanels[k].id}`;
+      p.x2.save(path.join(OUT, 'particles_2x', `${name}.png`));
+      p.x1.save(path.join(OUT, 'particles_1x', `${name}.png`));
+      sidecar.particles[name] = {};
+    });
+    console.log(
+      `  vfx/${cls}: ${r.panels.map((p, k) => `${vfxPanels[k].id} ${p.x2.width}x${p.x2.height}`).join(', ')} @2x, sparkle ${r.sparkle.pixels}px`,
+    );
+  }
   // PART 2: login backdrop + emblem: single textures next to the atlases (not packed)
   {
     const b = manifest.keyArt.backdrop;
@@ -333,7 +361,10 @@ function main() {
     verify(e.file, eb, er.sparkle);
     er.x2.save(path.join(OUT, 'keyart', 'emblem_2x.png'));
     er.x1.save(path.join(OUT, 'keyart', 'emblem_1x.png'));
-    sidecar.keyArt.emblem = { f2: { file: 'keyart_emblem_2x.png', w: er.x2.width, h: er.x2.height }, f1: { file: 'keyart_emblem_1x.png', w: er.x1.width, h: er.x1.height } };
+    sidecar.keyArt.emblem = {
+      f2: { file: 'keyart_emblem_2x.png', w: er.x2.width, h: er.x2.height },
+      f1: { file: 'keyart_emblem_1x.png', w: er.x1.width, h: er.x1.height },
+    };
     console.log(`  key art: backdrop ${b.w}x${b.h}, emblem ${er.x2.width}x${er.x2.height} @2x`);
   }
   // INTERIM mob standees (concept art, faces left): one @1x tier
@@ -358,7 +389,9 @@ function main() {
     verify(`mobs_phase/${key}`, buf, r.sparkle);
     r.x1.save(path.join(OUT, 'mobs_1x', `${key}.png`));
     sidecar.mobPhases[key] = { id: base.id, phase: def.phase, w: r.x1.width, h: r.x1.height, pivot: r.pivot };
-    console.log(`  mobs_phase/${key}: ${r.x1.width}x${r.x1.height} px (mob ${def.mob} id ${base.id}, phase ${def.phase}), sparkle ${r.sparkle.pixels}px`);
+    console.log(
+      `  mobs_phase/${key}: ${r.x1.width}x${r.x1.height} px (mob ${def.mob} id ${base.id}, phase ${def.phase}), sparkle ${r.sparkle.pixels}px`,
+    );
   }
   // 9-slice UI frames: keyed + trimmed, one atlas, slice insets in the sidecar
   for (const [name, def] of Object.entries(manifest.ui)) {
@@ -459,7 +492,11 @@ function main() {
     }
   }
   // single textures (not atlased) ride along in atlas/ so every consumer copies one directory
-  for (const [from, to] of [['login_bg.png', 'keyart_login_bg.png'], ['emblem_2x.png', 'keyart_emblem_2x.png'], ['emblem_1x.png', 'keyart_emblem_1x.png']])
+  for (const [from, to] of [
+    ['login_bg.png', 'keyart_login_bg.png'],
+    ['emblem_2x.png', 'keyart_emblem_2x.png'],
+    ['emblem_1x.png', 'keyart_emblem_1x.png'],
+  ])
     fs.copyFileSync(path.join(OUT, 'keyart', from), path.join(OUT, 'atlas', to));
   fs.writeFileSync(path.join(OUT, 'gemini.json'), JSON.stringify(sidecar, null, 2));
   fs.writeFileSync(stampFile, stamp);

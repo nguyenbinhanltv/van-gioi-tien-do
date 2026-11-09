@@ -39,6 +39,26 @@ export interface ParticleSpec {
   readonly use: string;
 }
 
+/** Skill VFX stills of the owner's PART 3 group Q (vfx/<class>.png, 3 panels each): see tools/procgen manifest.json `vfx`. */
+export const VFX_CLASSES: readonly string[] = ['kiem', 'phap', 'the', 'dan_phu', 'thuong', 'dao'];
+export const VFX_PANELS: readonly string[] = ['proj', 'burst', 'ring'];
+/** Particle texture name of a class' VFX still: `vfxTex('phap', 'proj')` -> `vfx_phap_proj`. */
+export const vfxTex = (path: string, panel: string): string => `vfx_${path}_${panel}`;
+const VFX_USE: Record<string, string> = {
+  proj: 'projectile (points +x, tail on the left): full-colour art, draw untinted',
+  burst: 'impact burst: full-colour art, draw untinted',
+  ring: 'ground ring / zone mark (top-down circle, squash for the iso ellipse): full-colour art, draw untinted',
+};
+const VFX_SIZE: Record<string, number> = { proj: 128, burst: 160, ring: 256 };
+const VFX_PARTICLES: ParticleSpec[] = VFX_CLASSES.flatMap((c) =>
+  VFX_PANELS.map((p): ParticleSpec => ({
+    name: vfxTex(c, p),
+    blend: 'alpha',
+    size: VFX_SIZE[p]!,
+    use: `${c} ${VFX_USE[p]}`,
+  })),
+);
+
 export const PARTICLES: readonly ParticleSpec[] = [
   { name: 'p_flame', blend: 'additive', size: 64, use: 'fire / burn / Hoa skills' },
   { name: 'p_glow', blend: 'additive', size: 96, use: 'soft orb: aura, heal, level-up / breakthrough flare' },
@@ -50,6 +70,7 @@ export const PARTICLES: readonly ParticleSpec[] = [
   { name: 'p_slash', blend: 'additive', size: 96, use: 'sword / blade slash arc' },
   { name: 'p_smoke', blend: 'alpha', size: 80, use: 'smoke puff: death, dash dust' },
   { name: 'p_spark', blend: 'additive', size: 48, use: 'four-point spark: hit flash, sparkle' },
+  ...VFX_PARTICLES,
 ];
 
 export const PARTICLE_NAMES: readonly string[] = PARTICLES.map((p) => p.name);

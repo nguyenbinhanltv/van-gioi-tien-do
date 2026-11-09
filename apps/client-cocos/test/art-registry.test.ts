@@ -8,6 +8,8 @@ import {
   PARTICLES,
   PARTICLE_NAMES,
   REALM_BADGE_COUNT,
+  VFX_CLASSES,
+  VFX_PANELS,
   STATUS_ICON_IDS,
   channelOfInput,
   itemIconKey,
@@ -27,7 +29,10 @@ describe('Gemini art registries (PART 2)', () => {
   });
 
   it('particle registry lists every exported particle once, each with a blend and a size', () => {
-    expect([...PARTICLE_NAMES].sort()).toEqual([...manifest.particles.names].sort());
+    const vfx = manifest.vfx.classes.flatMap((c) => manifest.vfx.panels.map((p) => `vfx_${c}_${p.id}`));
+    expect([...PARTICLE_NAMES].sort()).toEqual([...manifest.particles.names, ...vfx].sort());
+    expect([...VFX_CLASSES]).toEqual(manifest.vfx.classes);
+    expect([...VFX_PANELS]).toEqual(manifest.vfx.panels.map((p) => p.id));
     expect(new Set(PARTICLE_NAMES).size).toBe(PARTICLE_NAMES.length);
     for (const p of PARTICLES) {
       expect(['additive', 'alpha']).toContain(p.blend);

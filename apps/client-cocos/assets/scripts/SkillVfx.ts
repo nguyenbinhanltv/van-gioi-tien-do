@@ -151,6 +151,8 @@ class PoolView {
   private readonly sprites: Sprite[] = [];
   private readonly uis: UITransform[] = [];
   private readonly texOf: number[] = [];
+  /** height / width of the frame in each slot (the PART 3 stills are not square) */
+  private readonly aspect: number[] = [];
   private readonly shown: boolean[] = [];
   private readonly color = new Color(255, 255, 255, 255);
   /** true while a sync may still have nodes to hide */
@@ -171,6 +173,7 @@ class PoolView {
       this.nodes.push(n);
       this.sprites.push(sp);
       this.texOf.push(-1);
+      this.aspect.push(1);
       this.shown.push(false);
     }
   }
@@ -202,6 +205,7 @@ class PoolView {
         }
         sp.spriteFrame = frame;
         this.texOf[i] = tex;
+        this.aspect[i] = frame.rect.height / Math.max(1, frame.rect.width);
       }
       any = true;
       if (!this.shown[i]) {
@@ -209,7 +213,7 @@ class PoolView {
         this.shown[i] = true;
       }
       const s = pool.size(i);
-      this.uis[i]!.setContentSize(s, s * pool.sq[i]!);
+      this.uis[i]!.setContentSize(s, s * this.aspect[i]! * pool.sq[i]!);
       node.setPosition(pool.x[i]!, pool.y[i]!, 0);
       node.angle = pool.rot[i]!;
       this.color.set(pool.r[i]!, pool.g[i]!, pool.b[i]!, pool.opacity(i));

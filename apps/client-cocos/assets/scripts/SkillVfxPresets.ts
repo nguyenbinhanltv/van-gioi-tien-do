@@ -13,7 +13,7 @@
  * The colour comes from the skill's element (kim, moc, thuy, hoa, tho, loi, phong); skills with `root_main` / `none` use the class'
  * own element. The main texture follows the element too when it differs from the class' (a Thuy skill of a Moc class throws ice).
  */
-import { PARTICLE_NAMES } from './ArtRegistry';
+import { PARTICLE_NAMES, VFX_CLASSES, vfxTex } from './ArtRegistry';
 
 export type VfxArchetype = 'trail' | 'burst' | 'ring' | 'aura';
 export type Rgb = readonly [number, number, number];
@@ -44,6 +44,8 @@ export interface EmitterDef {
   jitter?: number;
   /** ground-plane squash (0.5 = iso ellipse); default 1 */
   squash?: number;
+  /** fly from the cast point to the target over the trail travel time (a single projectile sprite) */
+  travel?: boolean;
   /** rotate the sprite to face the cast direction (slashes, bolts) */
   face?: boolean;
   spin?: number;
@@ -188,100 +190,53 @@ export function buildPreset(main: string, accent: string): Preset {
   };
 }
 
-/** Class-specific replacements of whole archetype lists (a class can shape its own look without touching the generic ones). */
-export const CLASS_OVERRIDES: Record<string, Partial<Preset>> = {
-  // Thể tu (earth tank): heavy impacts, dust and rune marks instead of sparks
-  the: {
-    ring: [
+/**
+ * The owner's Gemini skill VFX stills (PART 3 group Q), one set per class: projectile, impact burst, ground ring. Full-colour art
+ * (tint 'white' = drawn as is). They replace the generic trail / burst / ring of the class; the `aura` archetype (buffs, heals) keeps
+ * the generic motes tinted by the skill element. To use other art: change the names here (or add classes to `VFX_CLASSES`).
+ */
+export function stillsPreset(path: string): Partial<Preset> {
+  const proj = vfxTex(path, 'proj');
+  const burst = vfxTex(path, 'burst');
+  const ring = vfxTex(path, 'ring');
+  return {
+    trail: [
+      { tex: proj, count: 1, life: 0.3, size: [120, 100], travel: true, face: true, tint: 'white', alpha: 0.95 },
       {
-        tex: 'p_rune',
-        count: 1,
-        life: 0.7,
-        size: [0.2, 1],
-        fit: 'diameter',
-        squash: 0.5,
-        tint: 'secondary',
-        alpha: 0.8,
-      },
-      {
-        tex: 'p_ring',
-        count: 1,
-        life: 0.5,
-        size: [0.15, 1],
-        fit: 'diameter',
-        squash: 0.5,
-        tint: 'primary',
-        alpha: 0.95,
-      },
-      {
-        tex: 'p_smoke',
-        count: 7,
-        life: 0.7,
-        size: [34, 70],
-        speed: 80,
-        drag: 1.6,
-        rise: 25,
-        jitter: 24,
-        tint: 'primary',
-        alpha: 0.7,
-      },
-    ],
-  },
-  // Pháp tu (fire fan): flames rise from the ring
-  phap: {
-    ring: [
-      {
-        tex: 'p_ring',
-        count: 1,
-        life: 0.55,
-        size: [0.15, 1],
-        fit: 'diameter',
-        squash: 0.5,
-        tint: 'primary',
-        alpha: 0.95,
-      },
-      {
-        tex: 'p_flame',
-        count: 9,
-        life: 0.6,
-        size: [34, 58],
+        tex: 'p_spark',
+        count: 8,
+        life: 0.4,
+        size: [24, 8],
+        along: true,
+        stagger: 0.02,
+        jitter: 10,
         speed: 30,
-        rise: 110,
-        jitter: 40,
-        stagger: 0.03,
-        tint: 'primary',
-        alpha: 0.9,
-      },
-    ],
-  },
-  // Lôi / Thương tu: a crackle of bolts around the ring
-  thuong: {
-    ring: [
-      {
-        tex: 'p_ring',
-        count: 1,
-        life: 0.5,
-        size: [0.15, 1],
-        fit: 'diameter',
-        squash: 0.5,
-        tint: 'primary',
-        alpha: 0.95,
-      },
-      {
-        tex: 'p_lightning',
-        count: 5,
-        life: 0.28,
-        size: [70, 90],
-        spread: Math.PI * 2,
-        jitter: 40,
-        stagger: 0.06,
-        face: false,
         tint: 'secondary',
         alpha: 1,
       },
     ],
-  },
-};
+    burst: [
+      { tex: burst, count: 1, life: 0.34, size: [110, 190], tint: 'white', alpha: 0.95 },
+      { tex: 'p_spark', count: 6, life: 0.45, size: [24, 8], speed: 120, drag: 2.2, tint: 'secondary', alpha: 1 },
+    ],
+    ring: [
+      { tex: ring, count: 1, life: 0.75, size: [0.25, 1], fit: 'diameter', squash: 0.5, tint: 'white', alpha: 0.92 },
+      {
+        tex: 'p_glow',
+        count: 1,
+        life: 0.4,
+        size: [0.1, 0.7],
+        fit: 'diameter',
+        squash: 0.5,
+        tint: 'secondary',
+        alpha: 0.3,
+      },
+    ],
+  };
+}
+
+/** Class-specific replacements of whole archetype lists, applied after the stills (hand-tuned looks of one class). */
+export const CLASS_OVERRIDES: Record<string, Partial<Preset>> = {};
 
 /** Per-skill replacements (skill id -> archetype lists); empty on purpose, the hook for hand-tuned effects and the part-3 stills. */
 export const SKILL_OVERRIDES: Record<string, Partial<Preset>> = {};
@@ -343,7 +298,12 @@ export function resolveVfx(path: string, classElement: string, skill: SkillLike)
   // the main texture follows the skill's element only when it differs from the class' own
   const main = element !== classElement && ELEMENT_TEX[element] ? ELEMENT_TEX[element]! : flav.main;
   const base = buildPreset(main, flav.accent);
-  const preset: Preset = { ...base, ...(CLASS_OVERRIDES[path] ?? {}), ...(SKILL_OVERRIDES[skill.id] ?? {}) };
+  const preset: Preset = {
+    ...base,
+    ...(VFX_CLASSES.includes(path) ? stillsPreset(path) : {}),
+    ...(CLASS_OVERRIDES[path] ?? {}),
+    ...(SKILL_OVERRIDES[skill.id] ?? {}),
+  };
   const archetype = archetypeOf(skill);
   const out: ResolvedVfx = {
     archetype,
@@ -370,6 +330,7 @@ export function unknownTextures(): string[] {
     const p = buildPreset(t, t);
     for (const l of Object.values(p)) check(l);
   }
+  for (const c of VFX_CLASSES) for (const l of Object.values(stillsPreset(c))) check(l ?? []);
   for (const o of [...Object.values(CLASS_OVERRIDES), ...Object.values(SKILL_OVERRIDES)])
     for (const l of Object.values(o)) check(l ?? []);
   return [...bad].sort();

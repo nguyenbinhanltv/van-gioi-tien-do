@@ -55,19 +55,30 @@ export class VfxPlayer {
       const t = def.along ? (def.count > 1 ? n / (def.count - 1) : 0.5) : 0;
       const px = (def.along ? place.x + (place.tx - place.x) * t : place.x) + rng.signed() * jit;
       const py = (def.along ? place.y + (place.ty - place.y) * t : place.y) + rng.signed() * jit * sq * 0.5;
-      const a = def.spread === undefined ? rng.signed() * Math.PI : base + rng.signed() * def.spread;
-      const v = (def.speed ?? 0) * (0.6 + 0.4 * rng.next());
+      let vx: number, vy: number;
+      let life = def.life;
+      if (def.travel) {
+        // one projectile: from the cast point to the target in the trail travel time (the hit burst is delayed by the same time)
+        life = trailTravelS(Math.hypot(place.tx - px, place.ty - py));
+        vx = (place.tx - px) / life;
+        vy = (place.ty - py) / life;
+      } else {
+        const a = def.spread === undefined ? rng.signed() * Math.PI : base + rng.signed() * def.spread;
+        const v = (def.speed ?? 0) * (0.6 + 0.4 * rng.next());
+        vx = Math.cos(a) * v;
+        vy = Math.sin(a) * v * (sq < 1 ? 0.6 : 1);
+      }
       const rot = def.face ? base * DEG : def.spin ? rng.signed() * 180 : 0;
       pool.spawn(
         tex,
         px,
         py,
-        Math.cos(a) * v,
-        Math.sin(a) * v * (sq < 1 ? 0.6 : 1),
+        vx,
+        vy,
         def.rise ?? 0,
         def.drag ?? 0,
         delay0 + n * (def.stagger ?? 0),
-        def.life,
+        life,
         s0,
         s1,
         sq,
