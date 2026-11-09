@@ -404,7 +404,7 @@ Sinh theo quy tắc từ các số trên; **cần chủ dự án / game designer
 ## 10. Chạy lại
 
 ```bash
-npm run balance -w @vgtd/server                       # bản đầy đủ, ghi docs/35-bao-cao-can-bang-dao-lo.md
+npm run balance -w @vgtd/server                       # bản đầy đủ, ghi docs/36-bao-cao-can-bang-dao-lo.md
 npm run balance -w @vgtd/server -- --quick --out -    # bản nhanh, in ra màn hình
 ```
 

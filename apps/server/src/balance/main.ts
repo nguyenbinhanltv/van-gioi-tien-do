@@ -19,7 +19,7 @@ const report = formatBalanceReport({
 });
 if (out === '-') process.stdout.write(report);
 else {
-  const file = resolve(out ?? process.env.BALANCE_OUT ?? 'docs/35-bao-cao-can-bang-dao-lo.md');
+  const file = resolve(out ?? process.env.BALANCE_OUT ?? 'docs/36-bao-cao-can-bang-dao-lo.md');
   mkdirSync(dirname(file), { recursive: true });
   writeFileSync(file, report);
   console.log(

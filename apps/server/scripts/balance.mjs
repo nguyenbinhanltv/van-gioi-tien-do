@@ -1,5 +1,5 @@
 // Class-balance report (D115): bundles src/balance/main.ts with esbuild (workspace packages export .ts sources) and runs it.
-//   npm run balance -w @vgtd/server -- [--quick] [--out <file>|-]      (default out: docs/35-bao-cao-can-bang-dao-lo.md at the repo root)
+//   npm run balance -w @vgtd/server -- [--quick] [--out <file>|-]      (default out: docs/36-bao-cao-can-bang-dao-lo.md at the repo root)
 import { build } from 'esbuild';
 import { spawnSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
@@ -22,7 +22,7 @@ await build({
   logLevel: 'warning',
 });
 const args = process.argv.slice(2);
-if (!args.includes('--out')) args.push('--out', join(repo, 'docs/35-bao-cao-can-bang-dao-lo.md'));
+if (!args.includes('--out')) args.push('--out', join(repo, 'docs/36-bao-cao-can-bang-dao-lo.md'));
 const r = spawnSync(process.execPath, [join(outdir, 'balance.mjs'), ...args], { stdio: 'inherit' });
 if (r.status === 0) {
   // the generated document is committed: keep it prettier-clean so `format:check` passes and a re-run changes only numbers

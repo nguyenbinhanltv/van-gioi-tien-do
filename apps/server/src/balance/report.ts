@@ -337,7 +337,7 @@ export function formatBalanceReport(d: BalanceData): string {
   o.push('## 10. Chạy lại');
   o.push('');
   o.push('```bash');
-  o.push('npm run balance -w @vgtd/server                       # bản đầy đủ, ghi docs/35-bao-cao-can-bang-dao-lo.md');
+  o.push('npm run balance -w @vgtd/server                       # bản đầy đủ, ghi docs/36-bao-cao-can-bang-dao-lo.md');
   o.push('npm run balance -w @vgtd/server -- --quick --out -    # bản nhanh, in ra màn hình');
   o.push('```');
   o.push('');
