@@ -37,6 +37,7 @@ import {
   type BackupManifest,
   type Docs,
   type FileStores,
+  TutorialService,
 } from '../src/index.js';
 import { TEST_ONLY_GOOD } from './fixtures.js';
 
@@ -62,6 +63,8 @@ interface World {
   stores: FileStores;
   inv: InventoryService;
   auth: AuthService;
+  /** the tutorial tracker over the tutorial document (D105): without it `tutorial.json` would never be written and the drift test could not see it */
+  tutorial: TutorialService;
   ids: Record<string, string>;
 }
 
@@ -70,7 +73,8 @@ function open(dir: string): World {
   const stores = openFileStores(dir, { flushMs: -1 });
   const inv = new InventoryService({ store: stores.inventories, ledger: stores.ledger });
   const auth = new AuthService({ store: stores.accounts, scrypt: FAST, registerPerIpPerDay: 0 });
-  return { stores, inv, auth, ids: {} };
+  const tutorial = new TutorialService({ mapTiles: 256, store: stores.tutorial });
+  return { stores, inv, auth, tutorial, ids: {} };
 }
 async function playFirstSession(w: World): Promise<void> {
   for (const name of ['alice_a', 'bob_b']) {
@@ -98,6 +102,13 @@ async function playFirstSession(w: World): Promise<void> {
       key,
     );
   }
+  // tutorial progress (D105): alice finished two steps and one kill, bob skipped; through the real service on the real store
+  w.tutorial.join(1, w.ids.alice_a!);
+  w.tutorial.note(1, 'chat');
+  w.tutorial.note(1, 'meditate');
+  w.tutorial.note(1, 'kill');
+  w.tutorial.join(2, w.ids.bob_b!);
+  w.tutorial.skip(2);
   // a sect join with a bought manual (D98) and a friendship plus a pending request (D96): the documents the review found missing from the first D99
   // draft. Written through the stores the services sit on, so the test needs no sockets.
   w.stores.sect.save({ members: [w.ids.alice_a!], manuals: [[w.ids.alice_a!, 'kiem_manual_1']] });
@@ -131,6 +142,7 @@ function stateOf(w: World): unknown {
       .filter(Boolean)
       .map((a) => ({ ...a! })),
     records: ['alice_a', 'bob_b'].map((n) => JSON.stringify(w.stores.progression['rows'].get(w.ids[n]!) ?? null)),
+    tutorial: ['alice_a', 'bob_b'].map((n) => JSON.stringify(w.stores.tutorial.load(w.ids[n]!) ?? null)),
     bags: ['alice_a', 'bob_b'].map((n) => JSON.stringify(w.stores.inventories.load(w.ids[n]!) ?? null)),
     wallets: ['alice_a', 'bob_b'].map((n) => String(w.inv.wallet(w.ids[n]!, HA))),
     ledger: JSON.stringify(w.stores.ledger.snapshot()),
