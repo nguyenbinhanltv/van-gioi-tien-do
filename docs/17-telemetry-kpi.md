@@ -2,6 +2,8 @@
 
 > **Trạng thái: bản thiết kế đề xuất – chờ duyệt.** Hồ sơ gốc ghi "đo lường (telemetry, dashboard KPI)" là mảng chưa có tài liệu ([OPEN-ITEMS.md](OPEN-ITEMS.md) §3). Đã có sẵn: mục tiêu tiêu hao / sinh ra 0,9–1,0, thuế CPI, vòng điều chỉnh hằng tuần ([07-cong-thuc-data-schema.md](07-cong-thuc-data-schema.md) §6–7); điểm nghi vấn gian lận ([08-server-architecture.md](08-server-architecture.md) §6); ngân sách hiệu năng và băng thông ([00-ho-so-tong-hop.md](00-ho-so-tong-hop.md) §3). Ngưỡng KPI sản phẩm (giữ chân, chuyển đổi…) là _Đề xuất – chờ duyệt_ vì chưa có dữ liệu thật. Phần quyền riêng tư (§7) phải được luật sư kiểm tra: xem [19-ngon-ngu-phap-ly.md](19-ngon-ngu-phap-ly.md) §4.
 
+> **[Cập nhật D109]** Tài liệu này đã được chủ dự án duyệt (2026-11-09). Bản hiện thực MVP (server, hosting cục bộ): pipeline sự kiện trong `apps/server/src/telemetry`, lược đồ đóng `TELEMETRY_EVENTS` trong `@vgtd/shared`, log JSON-lines + bảng tổng hợp lưu cục bộ, và trang `/dashboard` với CCU, DAU, phễu FTUE, giữ chân D1 / D7 / D30 và kinh tế từ sổ cái. Khác với đề xuất bên dưới: không có NATS / PostgreSQL / Grafana (adapter thay sau), thuộc tính của sự kiện nằm trong `attrs`, `ftue.step` thay cho các sự kiện `ftue.first_*`, chưa có sự kiện client (`perf`, `net`, `client`) và chưa có đồng ý phân tích (§7). Chi tiết và danh sách còn thiếu: [DECISIONS.md](DECISIONS.md) D109 và [OPEN-ITEMS.md](OPEN-ITEMS.md) "Telemetry (D109)".
+
 ## 1. Nguyên tắc
 
 1. **Server là nguồn sự thật cho mọi số liệu kinh tế và chiến đấu.** Số liệu client (hiệu năng, UI) chỉ phục vụ trải nghiệm; **không bao giờ** dùng sự kiện client để tính tiền tệ, rơi đồ hay xử phạt. Kinh tế đọc từ **sổ cái kép PostgreSQL** (08 §7), không đọc từ log client.

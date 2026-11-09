@@ -1,6 +1,7 @@
 /** Local dev entry: `PORT=8080 node <bundle>` (hosting is local-only for now, D27). */
 import { join } from 'node:path';
 import { openFileStores } from './persistence/index.js';
+import { TelemetryService, openTelemetryFiles } from './telemetry/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
 
@@ -35,11 +36,21 @@ const stores =
         onError: (e) => console.error('[vgtd/server] persistence write failed:', e),
       })
     : null;
+// telemetry (D109): local-only pseudonymous event log + rollups + KPI dashboard at /dashboard; files under DATA_DIR/telemetry with STORE=file
+const telemetryFiles = stores
+  ? openTelemetryFiles(stores.dir, { onError: (e) => console.error('[vgtd/server] telemetry write failed:', e) })
+  : null;
+const telemetry = new TelemetryService(
+  telemetryFiles ? { key: telemetryFiles.key, log: telemetryFiles.log, rollups: telemetryFiles.rollups } : {},
+);
 const srv = await startServer({
+  telemetry: false, // the instance above is passed through `world` so main.ts can flush and read it
+  dashboardToken: process.env.DASHBOARD_TOKEN || undefined,
   port,
   host: process.env.HOST ?? '127.0.0.1',
   gateway: { corsOrigins },
   world: {
+    telemetry,
     mapTiles,
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
@@ -54,8 +65,12 @@ const srv = await startServer({
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
     ...(stores ? { store: stores.progression } : {}),
   },
-  // tutorial progress is stored with the other documents when STORE=file (D105)
-  tutorial: { mapTiles, ...(stores ? { store: stores.tutorial } : {}) },
+  // tutorial progress is stored with the other documents when STORE=file (D105); its steps feed the telemetry funnel (D109)
+  tutorial: {
+    mapTiles,
+    onEvent: (account, report) => telemetry.ftue(account, report),
+    ...(stores ? { store: stores.tutorial } : {}),
+  },
 });
 if (stores) {
   console.log(`[vgtd/server] STORE=file: data in ${stores.dir}`);
@@ -70,16 +85,18 @@ const shutdown = async (reason: string): Promise<void> => {
   closing = true;
   console.log(`[vgtd/server] ${reason}: ${stores ? 'saving and ' : ''}stopping`);
   await srv.stop().catch(() => undefined);
-  // local-only first-session funnel (D105): printed here, never sent anywhere
-  const f = srv.world.tutorial?.funnel();
-  if (f && f.accounts > 0)
+  // local-only first-session funnel (D105 / D109): printed here, never sent anywhere
+  const f = telemetry.summary().ftue;
+  if (f.started > 0)
     console.log(
-      `[vgtd/server] FTUE: ${f.completed}/${f.accounts} completed (${Math.round(f.completionRate * 100)}%), ${f.skipped} skipped, ${f.sessions} sessions; steps ${JSON.stringify(f.byStep)}`,
+      `[vgtd/server] FTUE: ${f.completed}/${f.started} completed (${Math.round((f.completionRate ?? 0) * 100)}%), ${f.skipped} skipped; steps ${JSON.stringify(Object.fromEntries(f.steps.map((x) => [x.step, x.players])))}`,
     );
+  telemetry.flush();
   if (stores) {
     await new Promise((r) => setTimeout(r, 100));
     srv.world.inventory?.flushAll();
     stores.flush();
+    telemetryFiles?.flush();
   }
   process.exit(0);
 };

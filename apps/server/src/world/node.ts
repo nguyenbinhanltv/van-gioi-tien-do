@@ -24,6 +24,7 @@ import {
 } from '@vgtd/shared';
 import {
   BreakthroughOutcome,
+  PROGRESSION_LIMITS,
   ChatReason,
   ErrorCode,
   InvOp,
@@ -67,6 +68,7 @@ import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
 import type { TutorialService } from '../tutorial/service.js';
+import type { TelemetryService } from '../telemetry/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -220,6 +222,8 @@ export interface WorldNodeOptions {
   party?: PartyService;
   /** tutorial / FTUE tracker (D105): server-decided first-session steps, persisted per account; absent = tutorial messages are rejected as unexpected */
   tutorial?: TutorialService;
+  /** telemetry pipeline (D109): session / progression / combat / drop events; absent = nothing is recorded */
+  telemetry?: TelemetryService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -331,6 +335,7 @@ export class WorldNode {
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
   readonly tutorial: TutorialService | undefined;
+  readonly telemetry: TelemetryService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -372,6 +377,7 @@ export class WorldNode {
     });
     this.party = opts.party;
     this.tutorial = opts.tutorial;
+    this.telemetry = opts.telemetry;
     this.party?.attach({
       deliver: (id, m) => {
         const c = this.clients.get(id);
@@ -439,6 +445,7 @@ export class WorldNode {
           onDrops: (e) => {
             // tutorial (D105): a kill credited to this player; a drop (something for the bag) is the `loot` step
             this.tutorial?.note(e.killerId, 'kill');
+            this.recordKill(e.killerId, e.mobId, e.rolls.length, mobPort);
             if (e.rolls.length > 0) this.tutorial?.note(e.killerId, 'loot');
             sink?.handle(e);
             opts.combat?.onDrops?.(e);
@@ -523,6 +530,7 @@ export class WorldNode {
       stats: emptyStats(),
     });
     this.progression?.join(id, accountId, this.world.timeMs);
+    this.telemetry?.sessionStart(accountId, classWireId(classPath));
     if (this.tutorial) {
       this.tutorial.join(id, accountId);
       // the session's starting point (for the `move` step) is where the entity spawned, not wherever it is when first observed
@@ -560,10 +568,11 @@ export class WorldNode {
    * id which has since been recycled to someone else is ignored instead of removing the new owner. Internal callers (kick)
    * omit it.
    */
-  removePlayer(id: number, from?: ClientTransport): void {
+  removePlayer(id: number, from?: ClientTransport, reason: 'quit' | 'kick' = 'quit'): void {
     const c = this.clients.get(id);
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
+    this.telemetry?.sessionEnd(c.accountId, reason);
     this.inventory?.onLeave(c.accountId);
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
     void this.progression?.leave(id);
@@ -774,12 +783,20 @@ export class WorldNode {
           // tutorial (D105): an accepted meditation, a breakthrough the server rolled (success or failure, not a refusal)
           for (const o of out) {
             if (o.entityId !== id) continue;
-            if (o.msg.type === 'meditate_result' && o.msg.meditating) this.tutorial?.note(id, 'meditate');
-            else if (
+            if (o.msg.type === 'meditate_result' && o.msg.meditating) {
+              this.tutorial?.note(id, 'meditate');
+              this.telemetry?.emitAccount(c.accountId, 'cultivate.start');
+            } else if (
               o.msg.type === 'breakthrough_result' &&
               (o.msg.outcome === BreakthroughOutcome.Success || o.msg.outcome === BreakthroughOutcome.Failure)
-            )
+            ) {
               this.tutorial?.note(id, 'breakthrough');
+              this.telemetry?.emitAccount(c.accountId, 'breakthrough.attempt', {
+                to_stage: o.msg.toStage,
+                success: o.msg.outcome === BreakthroughOutcome.Success,
+                p_success: o.msg.chance / PROGRESSION_LIMITS.CHANCE_SCALE,
+              });
+            }
           }
         }
         break;
@@ -889,6 +906,7 @@ export class WorldNode {
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     this.party?.tick(this.world.timeMs, this.world.tick);
     if (this.tutorial) this.tickTutorial();
+    this.telemetry?.tick(this.clients.size);
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -955,6 +973,24 @@ export class WorldNode {
       if (Math.hypot(e.i - k.i, e.j - k.j) <= PARTY.SHARE_RANGE_TILES) out.push(m);
     }
     return out;
+  }
+
+  /** Telemetry (D109): a kill credited to `killerId` and what its drop roll produced. */
+  private recordKill(
+    killerId: number,
+    mobId: number,
+    items: number,
+    mobs: { combatStats(id: number): { dropSource: string } | undefined } | undefined,
+  ): void {
+    const t = this.telemetry;
+    const account = this.clients.get(killerId)?.accountId;
+    if (!t || account === undefined) return;
+    t.emitAccount(account, 'combat.kill', { target_type: 'mob' });
+    const src = mobs?.combatStats(mobId)?.dropSource;
+    t.emitAccount(account, 'loot.drop', {
+      source: src === 'elite' || src === 'boss' ? src : 'field',
+      item_count: items,
+    });
   }
 
   /** Tutorial (D105): watch positions a few times a second (steps `move` / `field`) and send every changed state. */
@@ -1460,7 +1496,7 @@ export class WorldNode {
     if (c.dead) return;
     c.dead = true;
     c.transport.close(code, text);
-    this.removePlayer(c.id);
+    this.removePlayer(c.id, undefined, 'kick');
   }
 
   // ------------------------------------------------------------------ scheduling
