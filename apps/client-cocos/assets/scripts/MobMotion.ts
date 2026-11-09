@@ -22,6 +22,10 @@ export const DEATH_SINK_PX = 6;
 export const IDLE_FACE_AFTER_S = 0.25;
 /** Dead zone (tiles of screen x, i - j) before an idle mob flips towards the player: no flicker when level with it. */
 export const FACE_DEADZONE = 0.2;
+/** Boss phase change: the skin swaps this far into the transform window (the window length comes from the server: MOB_TRANSFORM_MS). */
+export const TRANSFORM_SWAP_AT = 0.5;
+/** Pulses per second of the white / red flash during a transform. */
+export const TRANSFORM_PULSE_HZ = 8;
 
 export interface MotionState {
   t: number;
@@ -31,6 +35,8 @@ export interface MotionState {
   /** seconds since the last movement */
   idleFor: number;
   flash: number;
+  /** a boss phase change in progress (seconds elapsed / window length in seconds / skin already swapped) */
+  transform: { t: number; secs: number; swapped: boolean } | null;
   deadFor: number;
   /** -1 = art as drawn (faces LEFT), +1 = mirrored (faces right) */
   flipX: 1 | -1;
@@ -44,6 +50,10 @@ export interface MotionOut {
   flashing: boolean;
   alpha: number;
   visible: boolean;
+  /** true on the one frame the new skin must be applied (mid-transform) */
+  swapNow: boolean;
+  /** true on the frame a dead mob comes back: show the base skin again */
+  respawned: boolean;
 }
 
 export const newMotion = (id: number): MotionState => ({
@@ -53,9 +63,20 @@ export const newMotion = (id: number): MotionState => ({
   lastScreenX: null,
   idleFor: 0,
   flash: 0,
+  transform: null,
   deadFor: -1,
   flipX: 1,
 });
+
+/** Start a boss phase change lasting `ms` (server MOB_TRANSFORM_MS); `ms <= 0` swaps on the next frame without a pulse. */
+export function beginTransform(s: MotionState, ms: number): void {
+  s.transform = { t: 0, secs: Math.max(0, ms) / 1000, swapped: false };
+}
+
+/** One-shot flash (the hit flash mechanism) for `seconds`. */
+export function flashMotion(s: MotionState, seconds: number): void {
+  s.flash = Math.max(s.flash, seconds);
+}
 
 /**
  * One frame: `pos` in tiles, `hp` absolute (a drop = a hit), `alive`. `face` = the position to turn towards when idle (the player).
@@ -79,12 +100,17 @@ export function stepMotion(
       flashing: false,
       alpha: Math.round(255 * (1 - k)),
       visible: k < 1,
+      swapNow: false,
+      respawned: false,
     };
   }
+  let respawned = false;
   if (s.deadFor >= 0) {
-    // respawned: the same entity is back
+    // respawned: the same entity is back (a boss goes back to its first phase)
     s.deadFor = -1;
     s.lastHp = null;
+    s.transform = null;
+    respawned = true;
   }
   // the art faces left; moving right on screen (screen x = (i - j) * 32) mirrors it
   const sx = e.pos.i - e.pos.j;
@@ -101,11 +127,25 @@ export function stepMotion(
   if (s.lastHp !== null && e.hp < s.lastHp) s.flash = HIT_FLASH_S;
   s.lastHp = e.hp;
   s.flash = Math.max(0, s.flash - dt);
+  let swapNow = false;
+  let pulsing = false;
+  const tr = s.transform;
+  if (tr) {
+    tr.t += dt;
+    pulsing = tr.secs > 0 && Math.floor(tr.t * TRANSFORM_PULSE_HZ) % 2 === 0;
+    if (!tr.swapped && tr.t >= tr.secs * TRANSFORM_SWAP_AT) {
+      tr.swapped = true;
+      swapNow = true;
+    }
+    if (tr.t >= tr.secs) s.transform = null;
+  }
   return {
     scaleX: s.flipX,
     bobY: Math.sin(s.t * BOB_RATE + s.phase) * BOB_PX,
-    flashing: s.flash > 0,
+    flashing: s.flash > 0 || pulsing,
     alpha: 255,
     visible: true,
+    swapNow,
+    respawned,
   };
 }

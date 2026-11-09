@@ -15,6 +15,13 @@ import {
   type ChatServerMessage,
 } from './chat.js';
 import {
+  decodeFriendBody,
+  encodeFriendBody,
+  validateFriendMessage,
+  type FriendClientMessage,
+  type FriendServerMessage,
+} from './friends.js';
+import {
   decodePartyBody,
   encodePartyBody,
   validatePartyMessage,
@@ -48,6 +55,10 @@ export enum ColdMsgId {
   /** major breakthrough events (D97, major.ts) */
   MajorEvent = 69,
   TribulationStrike = 70,
+  /** friends (D96, friends.ts); 92-94 sit between the docs/24 craft (90-91) and sect (100+) ranges */
+  FriendCmd = 92,
+  FriendResult = 93,
+  FriendState = 94,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -81,6 +92,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyVitals]: 'party_vitals',
   [ColdMsgId.MajorEvent]: 'major_event',
   [ColdMsgId.TribulationStrike]: 'tribulation_strike',
+  [ColdMsgId.FriendCmd]: 'friend_cmd',
+  [ColdMsgId.FriendResult]: 'friend_result',
+  [ColdMsgId.FriendState]: 'friend_state',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -103,6 +117,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_vitals: ColdMsgId.PartyVitals,
   major_event: ColdMsgId.MajorEvent,
   tribulation_strike: ColdMsgId.TribulationStrike,
+  friend_cmd: ColdMsgId.FriendCmd,
+  friend_result: ColdMsgId.FriendResult,
+  friend_state: ColdMsgId.FriendState,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -203,7 +220,13 @@ export interface MeditateResultMsg {
   reason: number;
 }
 export type ColdClientMessage =
-  BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg | InvClientMessage | ChatClientMessage | PartyClientMessage;
+  | BreakthroughStartMsg
+  | MeditateStartMsg
+  | MeditateStopMsg
+  | InvClientMessage
+  | ChatClientMessage
+  | PartyClientMessage
+  | FriendClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
   | BreakthroughResultMsg
@@ -211,7 +234,8 @@ export type ColdServerMessage =
   | InvServerMessage
   | ChatServerMessage
   | PartyServerMessage
-  | MajorServerMessage;
+  | MajorServerMessage
+  | FriendServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -276,7 +300,11 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
       };
     default:
       return (
-        validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o) ?? validateMajorMessage(o)
+        validateInventoryMessage(o) ??
+        validateChatMessage(o) ??
+        validatePartyMessage(o) ??
+        validateMajorMessage(o) ??
+        validateFriendMessage(o)
       );
   }
 }
@@ -355,6 +383,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'tribulation_strike':
       encodeMajorBody(w, m);
       break;
+    case 'friend_cmd':
+    case 'friend_result':
+    case 'friend_state':
+      encodeFriendBody(w, m);
+      break;
   }
 }
 
@@ -414,5 +447,9 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'major_event':
     case 'tribulation_strike':
       return decodeMajorBody(r, type);
+    case 'friend_cmd':
+    case 'friend_result':
+    case 'friend_state':
+      return decodeFriendBody(r, type);
   }
 }

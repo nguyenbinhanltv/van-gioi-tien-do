@@ -1,9 +1,11 @@
 import { describe, it, expect } from 'vitest';
+import { mobZoneAt } from '@vgtd/shared';
 import manifest from '../../../tools/procgen/src/gemini/manifest.json';
 import {
   COURTYARD,
   SPAWN_CLEAR_RADIUS,
   SWAMP_REACH,
+  ZONE_MIN_DIST,
   mulberry32,
   placeProps,
   type PlacementInput,
@@ -17,6 +19,7 @@ const defs = Object.fromEntries(
     {
       block: p.block,
       biomes: p.biomes,
+      zones: 'zones' in p ? (p.zones as string[]) : undefined,
       weight: p.weight,
       spacing: 'spacing' in p ? (p.spacing as number) : 1,
     } as PropDef,
@@ -204,5 +207,67 @@ describe('placeProps', () => {
           ).toBeGreaterThanOrEqual(2);
       expect(all.length).toBeGreaterThan(r.props.length);
     }
+  });
+});
+
+describe('zone dressing (PART 2 props)', () => {
+  const zoneAt = (i: number, j: number) => mobZoneAt(i, j, W);
+  const zoneOnly = Object.entries(defs).filter(([, d]) => d.zones && d.biomes.length === 0);
+
+  it('manifest: zone props name real zones and are scatterable', () => {
+    const zones = new Set(['bia_rung', 'dam_lay_doc', 'co_thu_trung_tam', 'doc_hoa_dam']);
+    for (const [n, d] of Object.entries(defs))
+      for (const z of d.zones ?? []) expect(zones.has(z), n + ' ' + z).toBe(true);
+    for (const z of ['dam_lay_doc', 'co_thu_trung_tam', 'doc_hoa_dam'])
+      expect(
+        Object.values(defs).some((d) => d.zones?.includes(z) && d.weight > 0),
+        z,
+      ).toBe(true);
+  });
+
+  it('places each zone dressing only inside its zone and gives every dressed zone some', () => {
+    const seen = new Map<string, number>();
+    for (const seed of [1, 2, 3]) {
+      const r = placeProps(input({ seed, zoneAt, terrain: makeTerrain(seed + 3) }));
+      for (const p of r.props) {
+        const d = defs[p.name]!;
+        if (!d.zones) continue;
+        const z = zoneAt(p.i, p.j);
+        const inZone = z !== null && d.zones.includes(z);
+        // zone-only props must be inside their zone; props that are also biome props (reeds on a shore) may sit elsewhere
+        if (d.biomes.length === 0) expect(inZone, p.name + ' at ' + p.i + ',' + p.j + ' zone ' + z).toBe(true);
+        if (inZone) seen.set(z!, (seen.get(z!) ?? 0) + 1);
+      }
+    }
+    for (const z of ['dam_lay_doc', 'co_thu_trung_tam', 'doc_hoa_dam']) expect(seen.get(z) ?? 0, z).toBeGreaterThan(0);
+  });
+
+  it('is deterministic with a zone function, and without one no zone-only prop is scattered', () => {
+    expect(placeProps(input({ zoneAt }))).toEqual(placeProps(input({ zoneAt })));
+    const plain = placeProps(input());
+    for (const [n] of zoneOnly)
+      expect(
+        plain.props.some((p) => p.name === n),
+        n,
+      ).toBe(false);
+  });
+
+  it('leaves the start view alone: dressing is not scattered near the spawn and never reshuffles what is there', () => {
+    for (const seed of [1, 2, 3]) {
+      const terrain = makeTerrain(seed + 3);
+      const near = (p: { i: number; j: number }) =>
+        Math.max(Math.abs(p.i - spawn.i), Math.abs(p.j - spawn.j)) < ZONE_MIN_DIST - 2;
+      const plain = placeProps(input({ seed, terrain })).props.filter(near);
+      const zoned = placeProps(input({ seed, terrain, zoneAt })).props.filter(near);
+      expect(zoned).toEqual(plain);
+    }
+  });
+
+  it('keeps the big ancient tree (4 x 4) on land with its spacing', () => {
+    const r = placeProps(input({ zoneAt, radius: 60, count: 300, terrain: makeTerrain(9) }));
+    const trees = r.props.filter((p) => p.name === 'ancient_tree_giant');
+    for (const a of trees)
+      for (const b of trees)
+        if (a !== b) expect(Math.max(Math.abs(a.i - b.i), Math.abs(a.j - b.j))).toBeGreaterThanOrEqual(5);
   });
 });

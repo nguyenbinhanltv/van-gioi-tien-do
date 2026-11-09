@@ -3,7 +3,7 @@
 // Env: COMBAT / MOBS / INVENTORY (default 1 here: server combat, monsters, drops into the bag), PORT, HOST, MAP_TILES (default 256 = the Cocos client's Son Mon map), SPAWN_SIDE (default 24 here so local tabs see each other), REGISTER_PER_IP_PER_DAY, CORS_ORIGINS.
 import { build } from 'esbuild';
 import { spawn } from 'node:child_process';
-import { mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -22,6 +22,17 @@ await build({
   logLevel: 'warning',
 });
 process.env.MAP_TILES ??= '256';
+// the terrain the tile generator wrote (D95: lava / water block): used when it exists and is the size of MAP_TILES; MAP_FILE=off keeps the open map
+if (process.env.MAP_FILE === 'off') delete process.env.MAP_FILE;
+else if (!process.env.MAP_FILE) {
+  const f = join(root, '../../tools/procgen/out/tilemap/terrain.json');
+  if (existsSync(f)) {
+    // only when it is the same size as the map (a stale file of another VGTD_MAP_TILES is ignored, not fatal)
+    const t = JSON.parse(readFileSync(f, 'utf8'));
+    if (t.width === Number(process.env.MAP_TILES) && t.height === t.width) process.env.MAP_FILE = f;
+    else console.warn(`[dev] ignoring ${f}: ${t.width}x${t.height} is not MAP_TILES=${process.env.MAP_TILES}`);
+  }
+}
 process.env.SPAWN_SIDE ??= '24';
 // local play: monsters and server-authoritative combat on (COMBAT=0 / MOBS=0 turn them off)
 process.env.MOBS ??= '1';

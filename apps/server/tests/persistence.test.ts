@@ -13,6 +13,7 @@ import {
   AuthService,
   DocFile,
   FileAccountStore,
+  FileFriendStore,
   FileProgressionStore,
   Ledger,
   newRecord,
@@ -182,6 +183,28 @@ describe('file stores round trip', () => {
     expect(() => inv2.grantDrops('acc', [{ item: 'stone_ha', qty: 5 }], 'field', 'k1')).not.toThrow();
     expect(inv2.wallet('acc', HA)).toBe(walletBefore + 5n);
     expect(s2.ledger.reconcile()).toEqual([]);
+  });
+
+  it('friends: pairs and requests round trip, an unchanged save costs no write, malformed data is refused', () => {
+    const d = tmp();
+    const p = join(d, 'friends.json');
+    const a = new FileFriendStore(p, { flushMs: -1 });
+    expect(a.load()).toBeUndefined(); // first start
+    const snap = {
+      friends: [['acc-a', 'acc-b']] as [string, string][],
+      requests: [['acc-c', 'acc-a']] as [string, string][],
+    };
+    a.save(snap);
+    a.file.flush();
+    const writes = a.file.writes;
+    a.save(structuredClone(snap)); // same content
+    a.file.flush();
+    expect(a.file.writes).toBe(writes);
+    expect(new FileFriendStore(p, { flushMs: -1 }).load()).toEqual(snap);
+    writeFileAtomic(p, JSON.stringify({ v: 1, friends: [['only-one']], requests: [] }));
+    expect(() => new FileFriendStore(p)).toThrow(/malformed/);
+    writeFileAtomic(p, JSON.stringify({ v: 1, friends: 'x', requests: [] }));
+    expect(() => new FileFriendStore(p)).toThrow(/missing friends/);
   });
 
   it('re-saving an unchanged bag (the periodic save of online players) costs no disk write', () => {
