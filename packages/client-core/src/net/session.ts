@@ -18,6 +18,7 @@ import {
   type Message,
   type SelfState,
   type SkillResultMsg,
+  type BossPhaseMsg,
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
@@ -65,6 +66,8 @@ export type NetStatus = 'idle' | 'connecting' | 'online' | 'reconnecting' | 'clo
  */
 export interface NetEvents {
   onSkillResult?(msg: SkillResultMsg): void;
+  /** a boss in view entered a new phase (D91): `phase` is the new phase index (>= 1); the boss is invulnerable for `transformMs` */
+  onBossPhase?(msg: BossPhaseMsg): void;
   onAoiEnter?(entities: readonly EnterEntity[]): void;
   /** Runs BEFORE the entities are dropped from `remote`, so `entityOfIndex(index)` still resolves each of them. */
   onAoiLeave?(indices: readonly number[]): void;
@@ -449,6 +452,9 @@ export class NetClient {
         break;
       case 'telegraph_end':
         this.telegraph.end(msg);
+        break;
+      case 'boss_phase':
+        this.emit(() => this.events.onBossPhase?.(msg));
         break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));

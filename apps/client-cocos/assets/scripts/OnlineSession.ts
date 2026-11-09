@@ -73,6 +73,8 @@ export class OnlineSession {
   private failed = '';
   /** server-authoritative combat backend (`?online=1&combat=1`); null = no combat HUD */
   private serverCombat: InstanceType<typeof cb.ServerCombat> | null = null;
+  /** A boss in view entered a new phase (D91, `boss_phase`): the HUD / standee layer reacts (announcement, flash, skin swap). */
+  onBossPhase: ((entityId: number, phase: number, transformMs: number) => void) | null = null;
   /** name / max HP of monsters in view (from `aoi_enter`; later snapshots only carry hpPct) */
   private readonly mobMeta = new Map<number, { name: string; hpMax: number }>();
 
@@ -111,6 +113,7 @@ export class OnlineSession {
           if (e.kind === KIND_MONSTER) this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, hpMax: e.maxHp });
         }
       },
+      onBossPhase: (msg) => this.onBossPhase?.(msg.mobEntityId, msg.phase, msg.transformMs),
       onAoiLeave: (indices) => {
         for (const i of indices) {
           const id = this.net.entityOfIndex(i); // the hook runs before removal: the index still resolves
