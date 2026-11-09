@@ -41,6 +41,11 @@ export interface AccountStore {
   create(a: Account): boolean;
   byUsername(username: string): Account | undefined;
   byId(id: string): Account | undefined;
+  /**
+   * Optional: the service mutates the `Account` it got (lockout, password rehash); a durable store persists it here.
+   * The in-memory store holds the very same object, so it needs nothing.
+   */
+  save?(a: Account): void;
 }
 
 export class InMemoryAccountStore implements AccountStore {
@@ -210,15 +215,18 @@ export class AuthService {
         account.lockedUntilMs = this.now() + minutes * 60_000;
         account.lockLevel++;
         account.failures = 0;
+        this.store.save?.(account); // a restart must not clear a lockout
       }
       throw new AuthError(401, 'bad_credentials', 'invalid username or password');
     }
     this.release(this.ipFails, ip, W, stamp);
+    const wasLocked = account.lockLevel > 0;
     account.failures = 0;
     account.lockLevel = 0;
     if (needsRehash(account.passwordHash, this.scryptParams)) {
       account.passwordHash = await this.job(() => hashPassword(password, this.scryptParams));
-    }
+      this.store.save?.(account);
+    } else if (wasLocked) this.store.save?.(account);
     const sessionId = randomUUID();
     const { token, claims } = this.tokens.issue(account.id, sessionId, account.tokenVersion);
     return { accountId: account.id, sessionId, token, expiresAtS: claims.exp };
@@ -231,6 +239,11 @@ export class AuthService {
     if (!account || account.tokenVersion !== claims.ver || this.revoked.has(claims.sid))
       throw new AuthError(401, 'session_revoked', 'session revoked');
     return { accountId: claims.sub, sessionId: claims.sid, version: claims.ver };
+  }
+
+  /** Username (lowercase, unique) of an account, for display names (chat); undefined for an unknown id. */
+  usernameOf(accountId: string): string | undefined {
+    return this.store.byId(accountId)?.username;
   }
 
   /**

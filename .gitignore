@@ -35,3 +35,6 @@ apps/client-cocos/assets/resources/dragonbones/viewer/
 
 # staged sprite batches (sprite:batch --capture)
 apps/client-cocos/assets/resources/dragonbones/_batch-*
+
+# file-backed play-test data (STORE=file, D92): accounts, characters, bags, ledger
+.vgtd-data/
