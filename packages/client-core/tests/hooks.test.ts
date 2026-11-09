@@ -65,6 +65,7 @@ const SELF: SelfState = {
   dashCdMs: 0,
   invulnMs: 0,
   vitals: null,
+  status: null,
 };
 
 async function client(events: NetEvents): Promise<{ net: NetClient; sock: FakeSocket }> {

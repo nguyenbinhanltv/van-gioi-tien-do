@@ -7,6 +7,7 @@ import type { TilePos } from './Actors';
 import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 import { getSkillIcon } from './PropArt';
+import { getStatusIcon } from './StatusIcons';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -174,6 +175,8 @@ export class CombatUi {
   private diedAtMs: number | null = null;
   /** Touch input: the skill wheel replaces the bottom hotbar (hidden, not tappable). */
   private touchMode = false;
+  /** status row (D94): one tile per active status, left of the HP bar */
+  private readonly statusTiles: Array<{ root: Node; bg: Sprite; icon: Sprite; label: Label; time: Label }> = [];
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
@@ -218,6 +221,20 @@ export class CombatUi {
     this.shieldFill = quad(hp.back, 'Shield', art.pixel, 0, 4, new Color(240, 240, 255, 255));
     this.shieldFill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.shieldFill.node.setPosition(-BAR_W / 2, BAR_H / 2 - 2, 0);
+    // status row: up to 4 tiles growing leftwards from the HP bar
+    const TILE = 34;
+    for (let n = 0; n < 4; n++) {
+      const root = newNode(`Status${n}`, this.hudRoot);
+      root.setPosition(-BAR_W / 2 - 5 - BAR_W / 2 - 22 - n * (TILE + 4), bars, 0);
+      const bg = quad(root, 'Bg', art.pixel, TILE, TILE, new Color(60, 60, 60, 220));
+      const icon = quad(root, 'Icon', art.pixel, TILE - 6, TILE - 6, new Color(255, 255, 255, 255));
+      icon.node.active = false;
+      const label = text(root, 'Label', 11, new Color(255, 255, 255, 255));
+      const time = text(root, 'Time', 12, new Color(255, 240, 160, 255));
+      time.node.setPosition(0, -TILE / 2 - 8, 0);
+      root.active = false;
+      this.statusTiles.push({ root, bg: bg, icon, label, time });
+    }
     const cast = this.makeBar('Cast', 0, bars + BAR_H + 6, new Color(240, 200, 80, 255), HUD_W, 6);
     this.castBar = cast.fill;
     cast.back.active = false;
@@ -337,6 +354,7 @@ export class CombatUi {
         gcd: this.backend.hotbar.gcdFraction(this.clock),
         floaters: this.floaters.filter((f) => f.node.active).length,
         touchMode: this.touchMode,
+        statusTiles: this.statusTiles.filter((t) => t.root.active).map((t) => t.label.string || 'icon'),
         hotbarShown: this.slots.every((s) => s.root.active),
         deathOverlay: this.deathRoot.active,
         deathText: this.deathCount.string,
@@ -399,6 +417,27 @@ export class CombatUi {
   /** Now (HUD clock, ms): the same clock the hotbar cooldowns use. */
   get nowMs(): number {
     return this.clock;
+  }
+
+  /** The own status row (D94): `items` from client-core `statusRowItems`; an icon when `getStatusIcon` has one, else the text glyph. */
+  setStatuses(items: ReadonlyArray<{ id: string; label: string; secs: number | null; note: string }>): void {
+    const colour: Record<string, Color> = {
+      root: new Color(150, 100, 50, 230),
+      slow: new Color(70, 120, 190, 230),
+      poison: new Color(80, 160, 70, 230),
+      shield: new Color(170, 170, 210, 230),
+    };
+    this.statusTiles.forEach((t, k) => {
+      const it = items[k];
+      t.root.active = !!it;
+      if (!it) return;
+      t.bg.color = colour[it.id] ?? new Color(60, 60, 60, 220);
+      const frame = getStatusIcon(it.id);
+      t.icon.node.active = !!frame;
+      if (frame && t.icon.spriteFrame !== frame) t.icon.spriteFrame = frame;
+      t.label.string = frame ? '' : it.label;
+      t.time.string = it.secs !== null ? `${it.secs}s${it.note ? ' ' + it.note : ''}` : it.note;
+    });
   }
 
   /** Touch input: show the skill wheel instead of the bottom hotbar. */

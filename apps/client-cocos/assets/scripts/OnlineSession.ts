@@ -223,6 +223,7 @@ export class OnlineSession {
         this.actors.set(v.entityId, a);
       }
       a.update(v, v.dir, v.speed, v.hpPct, dtMs);
+      a.setStatusText(core.statusMaskGlyphs(this.net.statusMaskOf(v.entityId)));
     }
     // Cocos transpiles scripts loosely: for-of / spread over a Map silently breaks, so use forEach
     const gone: number[] = [];
