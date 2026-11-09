@@ -681,6 +681,11 @@ export class CombatSystem {
           const corpse = w.entities.find((x) => x.id === c.targetId);
           const reach = c.skill.targeting.range_tiles ?? 0;
           if (!corpse || (reach > 0 && hypot(corpse.i - me.i, corpse.j - me.j) > reach + SKILL_HURTBOX)) break;
+          if (
+            c.skill.targeting.requires_los !== false &&
+            !lineOfSight(this.ctx.grid, me.i, me.j, corpse.i, corpse.j, me.layer, me.flying)
+          )
+            break;
           target.alive = true;
           target.respawnAtMs = 0;
           const hp = Math.max(1, Math.round(target.hpMax * (e.magnitude ?? 0.4)));

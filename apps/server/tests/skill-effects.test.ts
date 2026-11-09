@@ -594,6 +594,32 @@ describe('taunt, group context, revive', () => {
     expect(solo.combat.isAlive(2)).toBe(false);
   });
 
+  it('revive does nothing on a party member beyond the skill range or behind a wall', () => {
+    const range = dataOf('thien_y_vo_phung').targeting.range_tiles!;
+    const open = Array.from({ length: 64 }, () => '.'.repeat(64));
+    const far = rig({
+      path: 'dan_phu',
+      realm: 4,
+      party: true,
+      allies: [{ id: 2, path: 'kiem', i: 20.5 + range + 2, j: 20.5 }],
+    });
+    far.world = far.combat.damagePlayer(far.world, 2, 10_000_000, MOB).world;
+    far.cast('thien_y_vo_phung', { target: 2 });
+    far.run(2600);
+    expect(far.combat.isAlive(2)).toBe(false);
+    const walled = rig({
+      path: 'dan_phu',
+      realm: 4,
+      party: true,
+      allies: [{ id: 2, path: 'kiem', i: 22.5, j: 20.5 }],
+      rows: open.map((row) => row.slice(0, 21) + '#' + row.slice(22)),
+    });
+    walled.world = walled.combat.damagePlayer(walled.world, 2, 10_000_000, MOB).world;
+    walled.cast('thien_y_vo_phung', { target: 2 });
+    walled.run(2600);
+    expect(walled.combat.isAlive(2)).toBe(false);
+  });
+
   it('a ground effect anchors on the caster when the aim point is beyond the skill range', () => {
     const r = rig({ path: 'dan_phu', party: true, allies: [{ id: 2, path: 'kiem', i: 22.5, j: 20.5 }] });
     const key = 'van_moc_hoi_xuan';

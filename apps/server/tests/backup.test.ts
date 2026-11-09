@@ -356,6 +356,33 @@ describe('creating backups', () => {
   });
 });
 
+describe('the write-ahead journal (D102) and backups', () => {
+  it('readLiveDocs refuses a cold copy while journal.json is present (an interrupted commit), and works once it is gone', () => {
+    const d = tmp();
+    writeFileSync(join(d, 'journal.json'), '{}');
+    expect(() => readLiveDocs(d, 2)).toThrow(/journal\.json is present/);
+    rmSync(join(d, 'journal.json'));
+    expect(() => readLiveDocs(d)).not.toThrow();
+  });
+
+  it('a restore moves a leftover journal.json away with the old documents, so it cannot be rolled forward over the restored data', async () => {
+    const dir = tmp();
+    const w = open(dir);
+    await playFirstSession(w);
+    const info = createBackup(
+      join(dir, 'backups'),
+      w.stores.snapshot(() => w.inv.flushAll()),
+      { keep: 5, now: at(1) },
+    );
+    writeFileSync(join(dir, 'journal.json'), '{"stale":true}');
+    const r = restoreBackup(info.dir, dir, { force: true });
+    expect(existsSync(join(dir, 'journal.json'))).toBe(false);
+    expect(existsSync(join(r.preRestoreDir!, 'journal.json'))).toBe(true);
+    // and the restored directory opens (no journal to recover) with the backed-up state
+    expect(openFileStores(dir).recovered).toBeNull();
+  });
+});
+
 describe('verifying', () => {
   async function made(): Promise<{ root: string; info: ReturnType<typeof createBackup>; w: World; dir: string }> {
     const dir = tmp();

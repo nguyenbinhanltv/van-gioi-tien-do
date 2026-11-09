@@ -62,6 +62,7 @@ Bộ thiết kế hệ thống cho MVP. Mục ghi "Đề xuất – chờ duyệ
 | 29  | [29-adr.md](29-adr.md)                                 | Chỉ mục ADR, đề xuất mới, giải quyết điểm mơ hồ của PR #7/#9/#10 (phụ lục A–C)                 |
 | 33  | [33-p1-perf.md](33-p1-perf.md)                         | Đo hiệu năng P1 (client slice) và báo cáo thoát P1                                             |
 | 34  | [34-combat-server.md](34-combat-server.md)             | Combat phía server: lõi giải quyết cast (D75)                                                  |
+| 35  | [35-p5-load-test.md](35-p5-load-test.md)               | Kiểm thử tải P5: bot chơi thật, soak ngắn / dài, khói CI (D100)                                |
 
 ## 4. Art và hoạt cảnh (`art/`)
 

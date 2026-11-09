@@ -99,6 +99,7 @@ describe('ConnectionGuard', () => {
       'inv_cmd',
       'sect_cmd',
       'friend_cmd',
+      'trade_cmd',
       'meditate_start',
       'meditate_stop',
       'breakthrough_start',
