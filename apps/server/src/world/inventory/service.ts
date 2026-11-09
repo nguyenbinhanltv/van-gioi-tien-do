@@ -64,8 +64,17 @@ export type ExchangeResult =
   | { ok: true; tax: bigint[]; replayed: true }
   | { ok: false; reason: ExchangeFailure };
 
+/**
+ * Makes an in-memory multi-owner change durable as ONE unit with the ledger (D102): a file store implements it with a write-ahead journal
+ * (`openFileStores().durable`). Without one (in-memory stores) there is nothing to make durable.
+ */
+export interface DurableCommit {
+  commit(label: string): void;
+}
+
 export interface InventoryServiceOptions {
   store?: InventoryStore;
+  durable?: DurableCommit;
   ledger?: Ledger;
   bagSlots?: number;
   pendingMax?: number;
@@ -83,6 +92,9 @@ export class InventoryService {
   readonly store: InventoryStore;
   /** loot lost because bag AND pending queue were full (quantity of items, cumulative) */
   lostItems = 0;
+  /** durable commits that failed (a disk error): the data stays dirty in the store and the normal debounced write retries it */
+  durableErrors = 0;
+  private readonly durable: DurableCommit | undefined;
   private readonly owners = new Map<string, OwnerState>();
   private readonly listeners: ((owner: string) => void)[] = [];
   private readonly grants = new Map<string, GrantResult>();
@@ -92,6 +104,7 @@ export class InventoryService {
   constructor(opts: InventoryServiceOptions = {}) {
     this.ledger = opts.ledger ?? new Ledger();
     this.store = opts.store ?? new InMemoryInventoryStore();
+    this.durable = opts.durable;
     this.bagSlots = opts.bagSlots ?? INVENTORY_CONFIG.BAG_SLOTS;
     this.pendingMax = opts.pendingMax ?? INVENTORY_CONFIG.PENDING_MAX;
   }
@@ -264,6 +277,12 @@ export class InventoryService {
     // hand both bags to the store NOW (a file store writes within its debounce, together with the ledger tx booked above)
     this.save(a.owner, sa);
     this.save(b.owner, sb);
+    // both bags and the ledger become durable as ONE unit (write-ahead journal): a crash can never leave one side paid and the other not
+    try {
+      this.durable?.commit(`exchange:${key}`);
+    } catch {
+      this.durableErrors++; // the trade stands in memory; the store keeps the documents dirty and retries them
+    }
     this.notify(a.owner);
     this.notify(b.owner);
     return { ok: true, tax, replayed: false };

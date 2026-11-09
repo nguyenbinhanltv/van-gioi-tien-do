@@ -45,7 +45,9 @@ const srv = await startServer({
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
     inventory: flag(process.env.INVENTORY)
-      ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
+      ? new InventoryService(
+          stores ? { store: stores.inventories, ledger: stores.ledger, durable: stores.durable } : {},
+        )
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },

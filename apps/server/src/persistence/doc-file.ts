@@ -30,6 +30,21 @@ export class DocFile {
     this.flushMs = opts.flushMs ?? 250;
   }
 
+  /** The document's current text (what a write would put on disk): the journal records it before it applies a multi-document commit. */
+  text(): string {
+    return this.serialize();
+  }
+
+  /** The journal wrote this document itself: it is clean now and a pending debounced write is pointless. */
+  markWritten(): void {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    this.dirty = false;
+    this.writes++;
+  }
+
   markDirty(): void {
     this.dirty = true;
     if (this.timer || this.flushMs < 0) return;

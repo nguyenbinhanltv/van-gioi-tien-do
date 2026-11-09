@@ -571,7 +571,7 @@ Còn mở / lưu ý:
 ## D102 — giao dịch trực tiếp: còn mở
 
 - **Số tạm** (docs không ghi): tầm 12 ô, hạn lời mời 30 s, 8 dòng vật phẩm, nhịp lệnh (burst 8). Chưa có trần tốc độ / giá trị mỗi ngày chống RMT (docs/26 §5.5 và docs/25 §6.1: tham số, chưa có số), chưa phát hiện wash trading giữa hai tài khoản.
-- **Tính nhất quán ba tệp**: bước thực hiện đổi túi A, túi B và sổ cái (ba tài liệu D92, mỗi tài liệu ghi nguyên tử nhưng riêng). Crash đúng giữa các lần ghi có thể làm một bên nhận được đồ khi bên kia chưa mất (nhân đôi) hoặc ngược lại (mất). Trong bộ nhớ thì nguyên tử; cần adapter PostgreSQL làm cả bước trong một giao dịch SQL (cùng vấn đề với tông môn D98) hoặc một nhật ký ý định có khôi phục.
+- **Cam kết nhiều tệp** (đã đóng cho giao dịch): bước thực hiện đi qua nhật ký ghi trước (`TxJournal`, xem D102 và D92), nên crash giữa các lần ghi không còn nhân đôi / mất đồ. Còn mở: các thao tác nhiều tệp khác chưa dùng nó (mua bí tịch tông môn D98 = sect + sổ cái, dùng vật phẩm = túi + sổ cái; `FileStores.commitAtomic` dùng lại được); nhật ký chưa tự nén / chưa có mã khóa tiến trình duy nhất (hai server cùng `DATA_DIR` vẫn ghi đè nhau); adapter PostgreSQL thay bằng một giao dịch SQL.
 - **Khóa idempotency của sổ cái chỉ sống một tiến trình** (như D92): sau khởi động lại cửa sổ đang mở cũng không còn, nên không có gì để phát lại.
 - Thuế chỉ đánh Linh thạch (docs không định giá vật phẩm): hoán đổi vật phẩm lấy vật phẩm không tốn thuế; nếu muốn thuế theo giá trị vật phẩm cần bảng giá tham chiếu (có liên quan CPI của Vạn Bảo Lâu).
 - Cửa sổ vẫn mở khi hai bên đi xa nhau (chỉ kiểm tầm lúc mời). Nếu cần: hủy khi cách > 2 × tầm.
