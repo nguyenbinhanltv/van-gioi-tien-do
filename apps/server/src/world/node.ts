@@ -397,6 +397,7 @@ export class WorldNode {
           seed,
           respawnPoint: () => this.spawnPoint(),
           isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
+          isInvulnerable: (id) => this.mobAttacks?.isInvulnerable(id) ?? false,
           ...opts.combat,
           mobs: mobPort,
           onDrops: sink
