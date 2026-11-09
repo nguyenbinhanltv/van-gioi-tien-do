@@ -10,6 +10,8 @@
  * joystick zone (`touchChatPlacement`).
  */
 import { core } from './vendor/vgtd.mjs';
+import { domIcon } from './DomIcons';
+import { CHAT_CHANNEL_ICON, channelOfInput } from './ArtRegistry';
 
 const WIDTH = 360;
 const HEIGHT = 200;
@@ -59,6 +61,8 @@ export class ChatBox {
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly onResize: () => void;
   private drawn = -1;
+  /** refreshes the channel icon of the input (after the value was set from code) */
+  private showChannel: () => void = () => undefined;
   /** party commands waiting for their answer (by clientMsgId), to know what a `party_result` was about */
   private readonly asked = new Map<number, { op: number; name: string }>();
   private compact = false;
@@ -188,7 +192,33 @@ export class ChatBox {
       borderRadius: '0 0 6px 6px',
       outline: 'none',
     } as Partial<CSSStyleDeclaration>);
-    root.append(list, input);
+    // the channel the next line goes to, as a round icon inside the input (World / Zone / whisper / party; docs/05 chat channels): only when the
+    // HUD art is there, the placeholder text of the input already says it otherwise
+    const inputWrap = document.createElement('div');
+    inputWrap.style.position = 'relative';
+    inputWrap.style.flex = '0 0 auto';
+    inputWrap.style.pointerEvents = 'none'; // the input inside takes its own events
+    const channelIcon = document.createElement('div');
+    Object.assign(channelIcon.style, {
+      position: 'absolute',
+      left: '6px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      pointerEvents: 'none',
+    } as Partial<CSSStyleDeclaration>);
+    const showChannel = (): void => {
+      const ch = channelOfInput(input.value);
+      if (channelIcon.dataset.channel === ch) return;
+      channelIcon.dataset.channel = ch;
+      const ic = domIcon('hud', CHAT_CHANNEL_ICON[ch], 18);
+      channelIcon.replaceChildren(...(ic ? [ic] : []));
+      input.style.paddingLeft = ic ? '30px' : '8px';
+    };
+    input.addEventListener('input', showChannel);
+    inputWrap.append(input, channelIcon);
+    root.append(list, inputWrap);
+    showChannel();
+    this.showChannel = showChannel;
     parent.appendChild(root);
     this.root = root;
     this.list = list;
@@ -204,6 +234,7 @@ export class ChatBox {
       } else if (e.key === 'Escape') {
         e.preventDefault();
         input.value = ''; // Esc cancels what was typed
+        this.showChannel();
         input.blur();
       }
     });
@@ -301,12 +332,16 @@ export class ChatBox {
 
   focus(prefill = ''): void {
     this.input.focus();
-    if (prefill) this.input.value = prefill;
+    if (prefill) {
+      this.input.value = prefill;
+      this.showChannel();
+    }
   }
 
   private submit(): void {
     const raw = this.input.value;
     this.input.value = '';
+    this.showChannel();
     this.command(raw);
     this.input.blur(); // back to playing; Enter again to continue the conversation
   }
