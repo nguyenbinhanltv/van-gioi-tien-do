@@ -77,7 +77,7 @@ export interface MobCombatStats {
   defense: number;
   /** realm >= 1 */
   realm: number;
-  /** main element (docs/10 "Hệ chính") */
+  /** element of THIS mob: the main element, or the variant element for the odd packs of a normal mob (docs/10 "Hệ chính / biến thể", D114) */
   element: ElementId | null;
   dropSource: DropSource;
   hpMax: number;
@@ -88,6 +88,10 @@ export interface MobInfo {
   slot: number;
   def: MobDef;
   level: number;
+  /** 0 = main element, 1 = variant element (normal mobs with two elements; D114) */
+  variant: number;
+  /** element of this mob (`def.elements[variant]`) */
+  element: ElementId | null;
   maxHp: number;
   zone: MobZoneId;
   home: { i: number; j: number };
@@ -106,6 +110,8 @@ interface Slot {
   def: MobDef;
   rect: MobZone;
   level: number;
+  /** elemental variant (D114): 0 main, 1 the second element of docs/10 "Hệ chính / biến thể" */
+  variant: number;
   maxHp: number;
   defense: number;
   homeI: number;
@@ -160,7 +166,9 @@ export class MobManager {
           // pack leader: a point in the tier band; the other members within MOB_PACK_RADIUS of it (draw order: see makeSlot)
           if (k % pack === 0) anchor = this.drawPoint(rect, def);
           const home = k % pack === 0 ? anchor : this.drawNear(anchor, rect);
-          this.slots.push(this.makeSlot(this.slots.length, def, rect, home));
+          // variants (D114): the packs of a normal mob alternate between its two elements (docs/10 "8 loại x 2 biến thể"); no RNG is drawn
+          const variant = def.tier === 'normal' && def.elements.length > 1 ? Math.floor(k / pack) % 2 : 0;
+          this.slots.push(this.makeSlot(this.slots.length, def, rect, home, variant));
         }
       }
     }
@@ -184,6 +192,8 @@ export class MobManager {
       slot: s.slot,
       def: s.def,
       level: s.level,
+      variant: s.variant,
+      element: s.def.elements[s.variant] ?? s.def.elements[0] ?? null,
       maxHp: s.maxHp,
       zone: s.rect.zone,
       home: { i: s.homeI, j: s.homeJ },
@@ -201,7 +211,7 @@ export class MobManager {
     return {
       defense: s.defense,
       realm: mobRealm(s.level),
-      element: s.def.elements[0] ?? null,
+      element: s.def.elements[s.variant] ?? s.def.elements[0] ?? null,
       dropSource: mobDropSource(s.def.tier),
       hpMax: s.maxHp,
     };
@@ -289,7 +299,7 @@ export class MobManager {
   }
 
   /** RNG order for a spawn: home point (drawn by the caller: pack anchor / pack member), then level (1 int), first idle pause (1 int). */
-  private makeSlot(slot: number, def: MobDef, rect: MobZone, home: [number, number]): Slot {
+  private makeSlot(slot: number, def: MobDef, rect: MobZone, home: [number, number], variant: number): Slot {
     const [homeI, homeJ] = home;
     const level = this.drawLevel(def);
     const stats = mobStats(def, level);
@@ -299,6 +309,7 @@ export class MobManager {
       def,
       rect,
       level,
+      variant,
       maxHp: stats.hp,
       defense: stats.def,
       homeI,
