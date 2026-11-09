@@ -102,6 +102,24 @@ async function playFirstSession(w: World): Promise<void> {
   // draft. Written through the stores the services sit on, so the test needs no sockets.
   w.stores.sect.save({ members: [w.ids.alice_a!], manuals: [[w.ids.alice_a!, 'kiem_manual_1']] });
   w.stores.friends.save({ friends: [[w.ids.alice_a!, w.ids.bob_b!]], requests: [] });
+  // the market book (D112): one escrowed listing of alice's, one sale and a shadow report: the document that holds items OUT of every bag
+  w.stores.market.save({
+    v: 1,
+    nextId: 3,
+    listings: [
+      {
+        id: 2,
+        seller: w.ids.alice_a!,
+        item: { defId: 1, quality: 0, qty: 5 },
+        unitPrice: 20,
+        listedAt: 1_700_000_000_000,
+        expiresAt: 1_700_086_400_000,
+        state: 'active',
+      },
+    ],
+    trades: [{ at: 1_700_000_000_500, defId: 2, quality: 0, qty: 1, unitPrice: 50, total: 50, tax: 3 }],
+    reports: [],
+  });
   w.inv.flushAll();
   w.stores.flush();
 }
@@ -118,6 +136,7 @@ function stateOf(w: World): unknown {
     ledger: JSON.stringify(w.stores.ledger.snapshot()),
     sect: JSON.stringify(w.stores.sect.load() ?? null),
     friends: JSON.stringify(w.stores.friends.load() ?? null),
+    market: JSON.stringify(w.stores.market.load() ?? null),
   };
 }
 
@@ -353,6 +372,33 @@ describe('creating backups', () => {
     expect(readLiveDocs(d)['accounts.json']).toContain('"v":1'); // the .bak
     writeFileSync(join(d, 'accounts.json.bak'), 'also torn');
     expect(() => readLiveDocs(d)).toThrow(BackupError);
+  });
+});
+
+describe('the write-ahead journal (D102) and backups', () => {
+  it('readLiveDocs refuses a cold copy while journal.json is present (an interrupted commit), and works once it is gone', () => {
+    const d = tmp();
+    writeFileSync(join(d, 'journal.json'), '{}');
+    expect(() => readLiveDocs(d, 2)).toThrow(/journal\.json is present/);
+    rmSync(join(d, 'journal.json'));
+    expect(() => readLiveDocs(d)).not.toThrow();
+  });
+
+  it('a restore moves a leftover journal.json away with the old documents, so it cannot be rolled forward over the restored data', async () => {
+    const dir = tmp();
+    const w = open(dir);
+    await playFirstSession(w);
+    const info = createBackup(
+      join(dir, 'backups'),
+      w.stores.snapshot(() => w.inv.flushAll()),
+      { keep: 5, now: at(1) },
+    );
+    writeFileSync(join(dir, 'journal.json'), '{"stale":true}');
+    const r = restoreBackup(info.dir, dir, { force: true });
+    expect(existsSync(join(dir, 'journal.json'))).toBe(false);
+    expect(existsSync(join(r.preRestoreDir!, 'journal.json'))).toBe(true);
+    // and the restored directory opens (no journal to recover) with the backed-up state
+    expect(openFileStores(dir).recovered).toBeNull();
   });
 });
 

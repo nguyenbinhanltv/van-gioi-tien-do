@@ -4,15 +4,15 @@ Nguồn gốc: mục "chưa kiểm tra được" và "việc còn mở" của h�
 
 ## Mục lục theo mảng
 
-| Mảng                                  | Mục                                                                                                         |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Tổng quan, quy trình, tài liệu        | §1, §2, §3, §4, §6, §7, §8, Design A (01, 10, 11), Design C (20–29)                                         |
-| Công thức và dữ liệu (`@vgtd/shared`) | §5, §16, "P2-1", D83 (số quái)                                                                              |
-| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55, Asset Gemini, Asset Gemini PART 2                                    |
-| Hệ kỹ năng và combat                  | §14, "D74 — quái", D83, D88 (hồi HP / MP), D89 (telegraph quái)                                             |
-| Server, mạng, hiệu năng               | "P2-2", "P2-3", D73, "P2 exit", D80, D85, D88 (hồi HP / MP phía server), D92 (lưu trữ bằng tệp), §20 (chat) |
-| Client, render, HUD                   | D71 (hai mục), §15, §18, §19, D79, D84, D89 (telegraph), Mob hiển thị tạm thời (standee), §20 (chat)        |
-| Tu luyện, túi đồ, kinh tế (server)    | §17, D77, D79, D90 (dùng vật phẩm)                                                                          |
+| Mảng                                  | Mục                                                                                                                                |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Tổng quan, quy trình, tài liệu        | §1, §2, §3, §4, §6, §7, §8, Design A (01, 10, 11), Design C (20–29)                                                                |
+| Công thức và dữ liệu (`@vgtd/shared`) | §5, §16, "P2-1", D83 (số quái)                                                                                                     |
+| Nhân vật, rig, art, animation         | §9, §10, §11, §12, §13, §15, D54, D55, Asset Gemini, Asset Gemini PART 2                                                           |
+| Hệ kỹ năng và combat                  | §14, "D74 — quái", D83, D88 (hồi HP / MP), D89 (telegraph quái)                                                                    |
+| Server, mạng, hiệu năng               | "P2-2", "P2-3", D73, "P2 exit", D80, D85, D88 (hồi HP / MP phía server), D92 (lưu trữ bằng tệp), §20 (chat), "P5 load test" (D100) |
+| Client, render, HUD                   | D71 (hai mục), §15, §18, §19, D79, D84, D89 (telegraph), Mob hiển thị tạm thời (standee), §20 (chat)                               |
+| Tu luyện, túi đồ, kinh tế (server)    | §17, D77, D79, D90 (dùng vật phẩm)                                                                                                 |
 
 ## 1. Việc cần làm
 
@@ -614,6 +614,17 @@ Còn mở / lưu ý:
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
 
+## D102 — giao dịch trực tiếp: còn mở
+
+- Sao lưu (D99) và nhật ký ghi trước (D102): `readLiveDocs` từ chối sao lưu nguội khi còn `journal.json` (một commit nhiều tài liệu bị cắt ngang: hãy khởi động server một lần để nó hoàn tất rồi mới sao lưu; khi đang chạy thì tệp biến mất sau vài ms và việc đọc lại tự thử lại), và `restoreBackup` chuyển `journal.json` vào `pre-restore-<id>/` cùng các tài liệu cũ để một nhật ký cũ không bị áp lại lên dữ liệu vừa khôi phục. `--reset-data` cũng xóa `journal.json`. Sao lưu sống (`FileStores.snapshot`) lấy trạng thái trong bộ nhớ nên không bị ảnh hưởng.
+- **Số tạm** (docs không ghi): tầm 12 ô, hạn lời mời 30 s, 8 dòng vật phẩm, nhịp lệnh (burst 8). Chưa có trần tốc độ / giá trị mỗi ngày chống RMT (docs/26 §5.5 và docs/25 §6.1: tham số, chưa có số), chưa phát hiện wash trading giữa hai tài khoản.
+- **Cam kết nhiều tệp** (đã đóng cho giao dịch): bước thực hiện đi qua nhật ký ghi trước (`TxJournal`, xem D102 và D92), nên crash giữa các lần ghi không còn nhân đôi / mất đồ. Còn mở: các thao tác nhiều tệp khác chưa dùng nó (mua bí tịch tông môn D98 = sect + sổ cái, dùng vật phẩm = túi + sổ cái; `FileStores.commitAtomic` dùng lại được); nhật ký chưa tự nén / chưa có mã khóa tiến trình duy nhất (hai server cùng `DATA_DIR` vẫn ghi đè nhau); adapter PostgreSQL thay bằng một giao dịch SQL.
+- **Khóa idempotency của sổ cái chỉ sống một tiến trình** (như D92): sau khởi động lại cửa sổ đang mở cũng không còn, nên không có gì để phát lại.
+- Thuế chỉ đánh Linh thạch (docs không định giá vật phẩm): hoán đổi vật phẩm lấy vật phẩm không tốn thuế; nếu muốn thuế theo giá trị vật phẩm cần bảng giá tham chiếu (có liên quan CPI của Vạn Bảo Lâu).
+- Cửa sổ vẫn mở khi hai bên đi xa nhau (chỉ kiểm tầm lúc mời). Nếu cần: hủy khi cách > 2 × tầm.
+- Cống hiến (`CONG_HIEN`) và vật phẩm khóa không giao dịch được; chưa có giao dịch gửi cho người **ngoại tuyến** (thư, docs/26 chợ).
+- Panel: tên vật phẩm là tên giữ chỗ (chưa có bảng i18n), chưa có icon vật phẩm, chưa có nút mở bảng trên màn hình cảm ứng (dùng `/trade`); smoke trình duyệt chỉ chạy cửa sổ rỗng (tài khoản mới không có đồ): việc chuyển đồ / thuế được kiểm bằng test server.
+
 ## D98 — tông môn NPC: còn mở
 
 - **Số tạm** (docs không ghi, cần game designer): thưởng Cống hiến theo quái (1 / 5 / 25), giá bí tịch cơ bản (3 × cấp), tầm NPC (20 ô), rời tông môn giữ Cống hiến và bí tịch, không trần ngày, không thời gian chờ khi vào lại. Chưa đo tốc độ kiếm so với giá (OPEN-ITEMS X6: Cống hiến chưa có mục tiêu faucet / sink).
@@ -632,6 +643,27 @@ Còn mở / lưu ý:
 - `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
+
+## P5 load test (2026-11-09; D100, [docs/35](35-p5-load-test.md))
+
+Công cụ `npm run soak -w @vgtd/server` (bot chơi thật qua `NetClient`, kho tệp D92, soak ngắn / dài, khói CI 20 bot × 60 giây). Số đo đầu tiên (server và bot chung một máy dev): 200 và 100 bot, 0 bot rớt, xuống 3,4-4,1 KB/s (ngưỡng 8), lên 0,3 KB/s, tối đa 120 thực thể, heap trôi 3-4,4 %. Còn mở:
+
+- **Tick p99 ~98-102 ms (ngưỡng 40) ở cả 100 và 200 bot**, trung vị lành (9,5 / 16,5 ms): đuôi giật cục 100-350 ms, không tỉ lệ với số bot, kho tệp không phải nguyên nhân chính (kho bộ nhớ vẫn 79,5 ms). Nghi tranh chấp CPU giữa server và bot trên cùng máy; **chưa chứng minh**. Cần đo lại trên máy riêng / server tách khỏi bot trước khi kết luận hay tối ưu (chưa chỉnh gì).
+- **Ngoại lệ của khói CI (`GATE_EXEMPT_VIOLATIONS` trong `soak-report.ts`)**: cổng `--ci` chỉ chặn các loại vi phạm mà bot trung thực không thể gây ra; `cooldown` vẫn được báo cáo nhưng không chặn, vì runner chung stall nhiều hơn máy dev. Ngoại lệ này **bỏ đi** khi mục dưới đây được giải quyết.
+- **Bot trung thực dính vi phạm `cooldown`** (81-526 mỗi lần chạy, không ai bị đá): giả thuyết đồng hồ mô phỏng chậm hơn đồng hồ thực khi tick giật; chưa chứng minh; kiểm lại sau khi tick ổn.
+- **Chưa chạy** soak 30 phút / 4-8 giờ / 24 giờ (cổng beta "100 CCU 24 giờ không sự cố"): cần máy riêng, chạy tay (`--hours 24`).
+- Bot chưa gồm bạn bè (D96), đột phá lớn (D97), chợ, nhiều vùng bản đồ.
+
+## Vạn Bảo Lâu (2026-11-09; D112, [docs/38](38-van-bao-lau.md))
+
+Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn, phí 1 % + thuế cố định 5 %, CPI bóng, lưu bằng `market.json`, panel `V`). Còn mở:
+
+- **Bền vững qua crash: ĐÃ nối TxJournal (D102).** `MarketService` commit sổ chợ + túi đồ + sổ cái bằng một bản ghi nhật ký sau mỗi thay đổi (`stores.durableMarket`), lưu túi các chủ liên quan trước khi commit; test giết tiến trình ở từng giai đoạn nhật ký cho đăng / mua / hủy / hết hạn (`market-crash.test.ts`). Còn mở: lỗi commit hiện chỉ được đếm và ghi log (lệnh vẫn trả Ok, store thử lại), chưa có cảnh báo vận hành; ghi nền `DocFile` của D106 (#261) phải giữ thứ tự "hoàn tất nhật ký dở trước mọi lần ghi sau" khi merge; cả sổ vẫn ghi lại toàn bộ mỗi lần (play-test).
+- **Mua một phần** (docs/24 cũ có `qty` ở `market_buy`), **niêm yết bằng trung / thượng phẩm** (chỉ hạ phẩm), **thư (`mail`)** cho hàng hết hạn khi không còn chỗ (hiện: túi, rồi kho nhặt đồ, rồi giữ `returning`).
+- **Cửa sổ giá `P_ref/10 .. P_ref x 10`** (docs/26 §5.2, câu hỏi Q3): chưa có giá tham chiếu nên chưa áp dụng; chưa có phát hiện wash trading (CPI chưa loại giao dịch bị gắn cờ).
+- **Rổ CPI** (`MARKET_BASKET`: đan đột phá, nguyên liệu, bản vẽ trắng-lục) và mọi giá trị mặc định (10 niêm yết / tài khoản, 12 / 24 / 48 giờ, giới hạn tốc độ) là đề xuất **cần game designer duyệt**.
+- **Chưa có smoke trình duyệt cho panel** (cần dựng lại Cocos); `MarketModel` và luồng server-client đã có test; panel mới chỉ qua typecheck của script.
+- `docs/24` cũ nói `requestId` UUID cho mọi lệnh có tác dụng phụ; chợ dùng `clientMsgId` u16 vì lệnh dựa trên trạng thái nên tự idempotent (mua hai lần: lần hai "không còn").
 
 ## Art Gemini phần 3: công trình tông môn, icon vật phẩm, icon HUD (D118): còn mở
 

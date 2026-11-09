@@ -38,8 +38,10 @@ import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
+import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
+import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
@@ -105,8 +107,10 @@ export class Bootstrap extends Component {
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
+  private tradePanel: TradePanel | null = null;
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
@@ -345,8 +349,21 @@ export class Bootstrap extends Component {
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
-      // sect panel (D98): K or /sect; its buttons run the same lines the player could type, the server decides
+      // trade panel (D102): opens by itself with a window / an invite, or with T and /trade; its buttons run the lines the player could type
       const net = this.online.net;
+      this.tradePanel = new TradePanel(chat.trade, {
+        run: (cmd) => chat.command(cmd),
+        bag: () => {
+          const out: { slot: number; defId: number; quality: number; qty: number; bound: boolean }[] = [];
+          for (let i = 0; i < net.bag.slotCount; i++) {
+            const it = net.bag.itemAt(i);
+            if (it) out.push({ slot: i, defId: it.defId, quality: it.quality, qty: it.qty, bound: it.bound });
+          }
+          return out;
+        },
+      });
+      chat.onTradeToggle = () => this.tradePanel?.toggle();
+      // sect panel (D98): K or /sect; its buttons run the same lines the player could type, the server decides
       this.sectPanel = new SectPanel(chat.sect, {
         run: (cmd) => chat.command(cmd),
         position: () => net.selfPosition(),
@@ -358,6 +375,8 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // market panel (D112, Vạn Bảo Lâu): V; it owns net.marketEvents (its own hook object, nobody replaces it)
+      this.marketPanel = new MarketPanel(net);
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -611,8 +630,10 @@ export class Bootstrap extends Component {
     this.tribulationFx?.update(dt);
     this.chatBox?.update();
     this.partyFrames?.update();
+    this.tradePanel?.update();
     this.sectPanel?.update();
     this.friendsPanel?.update();
+    this.marketPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -663,8 +684,10 @@ export class Bootstrap extends Component {
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
+    this.tradePanel?.destroy();
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
+    this.marketPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     this.tribulationFx?.destroy();

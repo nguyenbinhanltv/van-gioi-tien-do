@@ -38,6 +38,7 @@ import { Bag } from '../world/inventory/bag.js';
 import { INVENTORY_CONFIG } from '../world/inventory/service.js';
 import type { InventorySnapshot } from '../world/inventory/store.js';
 import { Ledger } from '../world/inventory/ledger.js';
+import { JOURNAL_FILE } from './journal.js';
 import { STORE_DOC_NAMES, openFileStores, type StoreDocs } from './file-stores.js';
 
 export const BACKUP_FORMAT = 'vgtd-backup';
@@ -87,6 +88,7 @@ const EMPTY_DOCS: Docs = {
   'inventories.json': JSON.stringify({ v: 1, owners: {} }),
   'sect.json': JSON.stringify({ v: 1, members: [], manuals: [] }),
   'friends.json': JSON.stringify({ v: 1, friends: [], requests: [] }),
+  'market.json': JSON.stringify({ v: 1, nextId: 1, listings: [], trades: [], reports: [] }),
   'ledger.json': JSON.stringify({ ...new Ledger().snapshot(), v: 1 }),
 };
 
@@ -192,6 +194,10 @@ export function validateDocs(docs: Docs): DocsReport {
     const orphanMembers = members.filter((m) => !ids.has(m)).length;
     const orphanFriends = [...friendPairs, ...requestPairs].filter(([a, b]) => !ids.has(a) || !ids.has(b)).length;
     if (orphanMembers > 0) warnings.push(`${orphanMembers} sect member(s) without an account`);
+    const orphanListings = ((parsed['market.json']!.listings as Array<{ seller: string }>) ?? []).filter(
+      (l) => !ids.has(l.seller),
+    ).length;
+    if (orphanListings > 0) warnings.push(`${orphanListings} market listing(s) of a missing account`);
     if (orphanFriends > 0)
       warnings.push(`${orphanFriends} friend entr${orphanFriends === 1 ? 'y' : 'ies'} naming a missing account`);
     return { problems, warnings, counts };
@@ -305,19 +311,37 @@ function readDocText(file: string): string | undefined {
  * may be writing: every file is replaced atomically, so a single read is never torn; the set is re-read until two reads are identical,
  * so a document replaced in between is picked up instead of mixing two moments.
  */
+class JournalPending extends Error {}
+
 export function readLiveDocs(dataDir: string, tries = 8): Docs {
   const read = (): Docs => {
+    // a write-ahead journal on disk means a multi-document commit is in flight (or was cut short by a crash): the documents may not all
+    // be at the same moment. In flight it goes away within milliseconds (the retry below picks that up); after a crash it stays, and the
+    // server finishes it on its next start (`recoverJournal`), which is what must happen BEFORE a copy is taken.
+    if (existsSync(join(dataDir, JOURNAL_FILE))) throw new JournalPending();
     const d = {} as Docs;
     for (const name of DOC_NAMES) d[name] = readDocText(join(dataDir, name)) ?? EMPTY_DOCS[name];
     return d;
   };
-  let prev = read();
+  const readOrWait = (): Docs | null => {
+    try {
+      return read();
+    } catch (e) {
+      if (e instanceof JournalPending) return null;
+      throw e;
+    }
+  };
+  let prev = readOrWait();
   for (let k = 0; k < tries; k++) {
     sleepSync(30);
-    const cur = read();
-    if (DOC_NAMES.every((n) => cur[n] === prev[n])) return cur;
+    const cur = readOrWait();
+    if (prev && cur && DOC_NAMES.every((n) => cur[n] === prev![n])) return cur;
     prev = cur;
   }
+  if (existsSync(join(dataDir, JOURNAL_FILE)))
+    throw new BackupError(
+      `${JOURNAL_FILE} is present: a multi-document commit was interrupted. Start the server once (it finishes the commit) and stop it, then back up`,
+    );
   throw new BackupError(
     'the data directory kept changing while it was being read: stop the server or use the live backup',
   );
@@ -434,7 +458,8 @@ export function restoreBackup(backupDir: string, dataDir: string, opts: RestoreO
     fsyncDir(stage);
     opts.onStep?.('staged');
     // safety copy of what is there now: main file, .bak and any stray temp file
-    for (const name of DOC_NAMES)
+    // the journal goes too: a leftover one would be rolled forward over the restored documents at the next start
+    for (const name of [...DOC_NAMES, JOURNAL_FILE])
       for (const suffix of ['', '.bak', '.tmp']) {
         const from = join(dataDir, name + suffix);
         if (!existsSync(from)) continue;
