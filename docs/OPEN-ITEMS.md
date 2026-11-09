@@ -614,6 +614,15 @@ Còn mở / lưu ý:
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
 
+## D103 — Nghiệp Lực / Đạo Tâm: còn mở (worker39, 2026-11-09)
+
+1. **Đạo Tâm khởi đầu = 60 là PLACEHOLDER** (docs/01 §8.3 chỉ có trần theo dải): cần game designer chốt giá trị khởi đầu; các trần 100 / 100 / 80 / 60 cũng là "Đề xuất" của docs/01 §8.3 (câu hỏi G14).
+2. **Chưa có nguồn đổi K trong game**: cần PvP + cờ Gây hấn / Truy nã + vùng PK (docs/14 §3.3), nhiệm vụ nhân quả "Ân / Oán" (docs/12 §3.4, +100 K mỗi tuần), rơi đồ theo nghiệp (docs/14 §3.4). `applyKarma` đã có bảng sự kiện, trần ngày và lưu bền; còn thiếu: phát hiện giết người lặp lần 3 trong 1 giờ, "giết cùng nạn nhân", cờ, ngày máy chủ (`day`) do ai cấp.
+3. **Chưa có nguồn đổi Đạo Tâm**: docs/01 §8.3 ghi "số cụ thể: chưa thiết kế" (nhiệm vụ đạo tâm, giữ lời thề, giết vô tội, chết trong Tâm Cảnh). `adjustDaoTam` chờ số liệu.
+4. **Độ bền × 1,5 Ma đạo chưa có nơi dùng**: máy chủ chưa trừ độ bền khi chết (docs/07 §7). Khi có, nhân với `durabilityLossMultiplier(K)`.
+5. **Nối #252**: Tâm Ma đang dùng `MAJOR_EVENT.DEFAULT_DAO_TAM`; đổi sang `progression.tamMaInputs(entityId)` (D103), thêm bóng phụ Nghiệp Ảnh (`nghiepAnh`) nếu muốn làm đủ docs/01 §5.3.
+6. **Nhãn phe chỉ là chữ trong HUD**: màu tên, danh hiệu và mở nhiệm vụ nhân quả (docs/14 §3.2) chưa làm; theo docs/10 không có nội dung phe độc quyền.
+
 ## D102 — giao dịch trực tiếp: còn mở
 
 - Sao lưu (D99) và nhật ký ghi trước (D102): `readLiveDocs` từ chối sao lưu nguội khi còn `journal.json` (một commit nhiều tài liệu bị cắt ngang: hãy khởi động server một lần để nó hoàn tất rồi mới sao lưu; khi đang chạy thì tệp biến mất sau vài ms và việc đọc lại tự thử lại), và `restoreBackup` chuyển `journal.json` vào `pre-restore-<id>/` cùng các tài liệu cũ để một nhật ký cũ không bị áp lại lên dữ liệu vừa khôi phục. `--reset-data` cũng xóa `journal.json`. Sao lưu sống (`FileStores.snapshot`) lấy trạng thái trong bộ nhớ nên không bị ảnh hưởng.
@@ -653,6 +662,17 @@ Công cụ `npm run soak -w @vgtd/server` (bot chơi thật qua `NetClient`, kho
 - **Bot trung thực dính vi phạm `cooldown`** (81-526 mỗi lần chạy, không ai bị đá): giả thuyết đồng hồ mô phỏng chậm hơn đồng hồ thực khi tick giật; chưa chứng minh; kiểm lại sau khi tick ổn.
 - **Chưa chạy** soak 30 phút / 4-8 giờ / 24 giờ (cổng beta "100 CCU 24 giờ không sự cố"): cần máy riêng, chạy tay (`--hours 24`).
 - Bot chưa gồm bạn bè (D96), đột phá lớn (D97), chợ, nhiều vùng bản đồ.
+
+## Vạn Bảo Lâu (2026-11-09; D112, [docs/38](38-van-bao-lau.md))
+
+Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn, phí 1 % + thuế cố định 5 %, CPI bóng, lưu bằng `market.json`, panel `V`). Còn mở:
+
+- **Bền vững qua crash: ĐÃ nối TxJournal (D102).** `MarketService` commit sổ chợ + túi đồ + sổ cái bằng một bản ghi nhật ký sau mỗi thay đổi (`stores.durableMarket`), lưu túi các chủ liên quan trước khi commit; test giết tiến trình ở từng giai đoạn nhật ký cho đăng / mua / hủy / hết hạn (`market-crash.test.ts`). Còn mở: lỗi commit hiện chỉ được đếm và ghi log (lệnh vẫn trả Ok, store thử lại), chưa có cảnh báo vận hành; ghi nền `DocFile` của D106 (#261) phải giữ thứ tự "hoàn tất nhật ký dở trước mọi lần ghi sau" khi merge; cả sổ vẫn ghi lại toàn bộ mỗi lần (play-test).
+- **Mua một phần** (docs/24 cũ có `qty` ở `market_buy`), **niêm yết bằng trung / thượng phẩm** (chỉ hạ phẩm), **thư (`mail`)** cho hàng hết hạn khi không còn chỗ (hiện: túi, rồi kho nhặt đồ, rồi giữ `returning`).
+- **Cửa sổ giá `P_ref/10 .. P_ref x 10`** (docs/26 §5.2, câu hỏi Q3): chưa có giá tham chiếu nên chưa áp dụng; chưa có phát hiện wash trading (CPI chưa loại giao dịch bị gắn cờ).
+- **Rổ CPI** (`MARKET_BASKET`: đan đột phá, nguyên liệu, bản vẽ trắng-lục) và mọi giá trị mặc định (10 niêm yết / tài khoản, 12 / 24 / 48 giờ, giới hạn tốc độ) là đề xuất **cần game designer duyệt**.
+- **Chưa có smoke trình duyệt cho panel** (cần dựng lại Cocos); `MarketModel` và luồng server-client đã có test; panel mới chỉ qua typecheck của script.
+- `docs/24` cũ nói `requestId` UUID cho mọi lệnh có tác dụng phụ; chợ dùng `clientMsgId` u16 vì lệnh dựa trên trạng thái nên tự idempotent (mua hai lần: lần hai "không còn").
 
 ## Kiểm toán nội dung quái (D114): còn mở
 

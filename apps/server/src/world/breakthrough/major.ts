@@ -110,7 +110,7 @@ export class MajorBreakthroughs implements MajorEventPort {
     this.events.set(info.entityId, {
       info,
       spec,
-      strength: tamMaStrength(MAJOR_EVENT.DEFAULT_DAO_TAM, info.karma),
+      strength: tamMaStrength(info.daoTam ?? MAJOR_EVENT.DEFAULT_DAO_TAM, info.karma),
       phase: MajorPhase.TamMa,
       phaseStartMs: info.nowMs,
       spawned: false,

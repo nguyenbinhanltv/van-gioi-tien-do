@@ -70,6 +70,8 @@ export const SECURITY_CONFIG = {
     /** sect join / leave / buy (D98) and friends (D96): both have their own per-account limiter that answers with a reason; this outer cap is looser so their answer comes first, only a raw flood is dropped */
     sect: { burst: 30, perS: 10 },
     friend: { burst: 30, perS: 10 },
+    /** Vạn Bảo Lâu (D112): the market has its own per-account limiter that answers with a reason (market/config.ts); same looser outer cap */
+    market: { burst: 30, perS: 10 },
     /** direct trade (D102): the trade service has its own per-account limiter that answers with a reason; this outer cap is looser so that answer comes first */
     trade: { burst: 30, perS: 10 },
   },

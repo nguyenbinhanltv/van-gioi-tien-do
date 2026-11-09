@@ -15,6 +15,13 @@ import {
   type ChatResultMsg,
   type FriendResultMsg,
   type FriendStateMsg,
+  type MarketBuyMsg,
+  type MarketCancelMsg,
+  type MarketListMsg,
+  type MarketNoticeMsg,
+  type MarketResultMsg,
+  type MarketResultsMsg,
+  type MarketSearchMsg,
   type PartyInviteMsg,
   type TradeInviteMsg,
   type TradeResultMsg,
@@ -25,6 +32,7 @@ import {
   type PartyStateMsg,
   type PartyVitalsMsg,
   type CharStateMsg,
+  type DaoTamMsg,
   type EnterEntity,
   type MeditateResultMsg,
   type InvResultMsg,
@@ -118,6 +126,8 @@ export interface ReconnectOptions {
  */
 export interface ProgressionEvents {
   onCharState?(msg: CharStateMsg): void;
+  /** the Đạo Tâm that counts (D103); sent on join and whenever it changes */
+  onDaoTam?(msg: DaoTamMsg): void;
   onMeditateResult?(msg: MeditateResultMsg): void;
   onBreakthroughResult?(msg: BreakthroughResultMsg): void;
 }
@@ -171,6 +181,16 @@ export interface SectEvents {
   onSectState?(msg: SectStateMsg): void;
   /** The answer to a `sendSect` (0 = done, otherwise why not). */
   onSectResult?(msg: SectResultMsg): void;
+}
+
+/** Vạn Bảo Lâu callbacks (D112), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface MarketEvents {
+  /** A page of listings (the answer to a `market_search`). */
+  onMarketResults?(msg: MarketResultsMsg): void;
+  /** The answer to a list / buy / cancel (or a refused search). */
+  onMarketResult?(msg: MarketResultMsg): void;
+  /** One of your listings sold or expired. */
+  onMarketNotice?(msg: MarketNoticeMsg): void;
 }
 
 /** Friends callbacks (D96), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
@@ -320,6 +340,8 @@ export class NetClient {
   sectEvents: SectEvents = {};
   /** Callbacks for the friends list (own object, see `FriendEvents`). */
   friendEvents: FriendEvents = {};
+  /** Callbacks for Vạn Bảo Lâu (own object, see `MarketEvents`). */
+  marketEvents: MarketEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -583,6 +605,9 @@ export class NetClient {
       case 'char_state':
         this.emit(() => this.progressionEvents.onCharState?.(msg));
         break;
+      case 'dao_tam':
+        this.emit(() => this.progressionEvents.onDaoTam?.(msg));
+        break;
       case 'meditate_result':
         this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
         break;
@@ -644,6 +669,15 @@ export class NetClient {
         break;
       case 'friend_result':
         this.emit(() => this.friendEvents.onFriendResult?.(msg));
+        break;
+      case 'market_results':
+        this.emit(() => this.marketEvents.onMarketResults?.(msg));
+        break;
+      case 'market_result':
+        this.emit(() => this.marketEvents.onMarketResult?.(msg));
+        break;
+      case 'market_notice':
+        this.emit(() => this.marketEvents.onMarketNotice?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -828,6 +862,21 @@ export class NetClient {
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
       ws.send(encode({ type: 'friend_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one Vạn Bảo Lâu command (D112): a search, list, buy or cancel built by `MarketModel`. `clientMsgId` comes back in the answer.
+   * False when the socket is not open or it cannot be encoded.
+   */
+  sendMarket(m: MarketSearchMsg | MarketListMsg | MarketBuyMsg | MarketCancelMsg): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(encode(m));
     } catch {
       return false;
     }

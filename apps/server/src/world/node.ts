@@ -72,6 +72,7 @@ import type { PartyService } from '../party/service.js';
 import type { TradeService } from '../trade/service.js';
 import type { SectService } from '../sect/service.js';
 import type { FriendService } from '../friends/service.js';
+import type { MarketService } from '../market/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -238,6 +239,8 @@ export interface WorldNodeOptions {
   sect?: SectService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
   friends?: FriendService;
+  /** Vạn Bảo Lâu (D112): list / search / buy / cancel with escrow and fee + tax through the ledger; absent = market commands are rejected as unexpected */
+  market?: MarketService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -366,6 +369,7 @@ export class WorldNode {
   readonly trade: TradeService | undefined;
   readonly sect: SectService | undefined;
   readonly friends: FriendService | undefined;
+  readonly market: MarketService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -430,6 +434,13 @@ export class WorldNode {
       posOf: (id) => this.byId.get(id),
       // the sect NPC stands in the middle of the spawn area unless the sect service was told otherwise
       defaultNpc: { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
+    });
+    this.market = opts.market;
+    this.market?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
     });
     this.friends = opts.friends;
     this.friends?.attach({
@@ -624,6 +635,7 @@ export class WorldNode {
     this.trade?.join({ entityId: id, accountId, name: displayName });
     this.sect?.join({ entityId: id, accountId, path: classPath });
     this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.market?.join({ entityId: id, accountId });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -767,6 +779,7 @@ export class WorldNode {
     this.trade?.leave(id);
     this.sect?.leave(id);
     this.friends?.leave(id);
+    this.market?.leave(id);
     this.chatHistoryDue.delete(id);
     this.heldMajor.delete(id);
     this.majorDue.delete(id);
@@ -1001,6 +1014,15 @@ export class WorldNode {
           this.badFrame(c, 'unexpected');
         } else this.send(c, this.sect.handle(id, msg, this.world.timeMs));
         break;
+      case 'market_search':
+      case 'market_list':
+      case 'market_buy':
+      case 'market_cancel':
+        if (!this.market) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.market.handle(id, msg, this.world.timeMs));
+        break;
       case 'friend_cmd':
         if (!this.friends) {
           this.badFrame(c, 'unexpected');
@@ -1118,6 +1140,7 @@ export class WorldNode {
     this.trade?.tick(this.world.timeMs);
     this.sect?.tick();
     this.friends?.tick();
+    if (this.market && this.world.tick % 20 === 0) this.market.tick(); // expiry, returns and the weekly shadow report: about once a second
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
