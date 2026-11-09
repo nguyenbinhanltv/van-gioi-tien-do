@@ -70,6 +70,12 @@ const shutdown = async (reason: string): Promise<void> => {
   closing = true;
   console.log(`[vgtd/server] ${reason}: ${stores ? 'saving and ' : ''}stopping`);
   await srv.stop().catch(() => undefined);
+  // local-only first-session funnel (D105): printed here, never sent anywhere
+  const f = srv.world.tutorial?.funnel();
+  if (f && f.accounts > 0)
+    console.log(
+      `[vgtd/server] FTUE: ${f.completed}/${f.accounts} completed (${Math.round(f.completionRate * 100)}%), ${f.skipped} skipped, ${f.sessions} sessions; steps ${JSON.stringify(f.byStep)}`,
+    );
   if (stores) {
     await new Promise((r) => setTimeout(r, 100));
     srv.world.inventory?.flushAll();

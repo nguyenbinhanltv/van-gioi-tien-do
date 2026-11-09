@@ -4,6 +4,8 @@
 >
 > Liên quan: nhiệm vụ dẫn nhập `tutorial` ([12-nhiem-vu-cot-truyen.md](12-nhiem-vu-cot-truyen.md) §2), cơ chế chế tạo mở ở Trúc Cơ ([13](13-che-tao.md)), phạm vi MVP ([10-mvp-scope.md](10-mvp-scope.md)).
 
+> **[Cập nhật D105]** Phần hiện thực của luồng này trong MVP: **server theo dõi** 7 bước bắt buộc từ lúc vào game tới lần đột phá đầu tiên (đi, ra khu săn, dùng kỹ năng, hạ 3 yêu thú, nhặt đồ, đả tọa, đột phá) cùng 3 mẹo tùy chọn (dùng đồ, chat, tổ đội), lưu theo tài khoản (D92), hiển thị bằng một thẻ gợi ý không chặn có nút "Bỏ qua" và lời hướng dẫn theo cách nhập; bộ đếm hoàn thành chỉ ở máy (telemetry docs/17 chưa duyệt). Các bước của bảng §3 **chưa có hệ thống đứng sau** (nhiệm vụ, NPC Trưởng lão, Linh căn nghi lễ, tạo nhân vật, trang bị, chế tạo, Ngũ hành) được liệt kê ở [OPEN-ITEMS.md](OPEN-ITEMS.md) mục "Tutorial / FTUE (D105)". Gate tính năng §4.4 chưa được áp.
+
 ## 1. Mục tiêu và nguyên tắc
 
 **Mục tiêu 30 phút:** người chơi (a) biết mình có Linh căn gì và vì sao nó quan trọng, (b) đã di chuyển, đánh, dùng đồ và **đột phá tiểu cảnh lần đầu**, (c) hiểu vòng lặp "tu luyện → săn → đột phá" và có **lý do cụ thể để quay lại** ngày mai.

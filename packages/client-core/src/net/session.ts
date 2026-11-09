@@ -17,6 +17,7 @@ import {
   type PartyResultMsg,
   type PartyStateMsg,
   type PartyVitalsMsg,
+  type TutorialStateMsg,
   type CharStateMsg,
   type EnterEntity,
   type MeditateResultMsg,
@@ -149,6 +150,12 @@ export interface PartyEvents {
   onPartyResult?(msg: PartyResultMsg): void;
 }
 
+/** Tutorial callbacks (D105), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface TutorialEvents {
+  /** The server's first-session state (after joining, and on every change). */
+  onTutorialState?(msg: TutorialStateMsg): void;
+}
+
 export interface NetOptions {
   /** e.g. `http://localhost:8080` */
   baseUrl: string;
@@ -269,6 +276,8 @@ export class NetClient {
   chatEvents: ChatEvents = {};
   /** Callbacks for the party (own object, see `PartyEvents`). */
   partyEvents: PartyEvents = {};
+  /** Callbacks for the tutorial (own object, see `TutorialEvents`). */
+  tutorialEvents: TutorialEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -567,6 +576,9 @@ export class NetClient {
       case 'party_result':
         this.emit(() => this.partyEvents.onPartyResult?.(msg));
         break;
+      case 'tutorial_state':
+        this.emit(() => this.tutorialEvents.onTutorialState?.(msg));
+        break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
         if (t0 !== undefined) {
@@ -696,6 +708,14 @@ export class NetClient {
     } catch {
       return false;
     }
+    return true;
+  }
+
+  /** Dismiss the tutorial hints (D105). The server answers with a fresh `tutorial_state`. False when the socket is not open. */
+  sendTutorialSkip(): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: 'tutorial_skip' }));
     return true;
   }
 
