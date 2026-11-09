@@ -346,6 +346,7 @@ export class Bootstrap extends Component {
     // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
     (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
       this.combat?.setEnemyPhase(entityId, phase, ms);
+    if (new URLSearchParams(location.search).get('castdemo') !== null) this.combat.startCastDemo(); // perf-p1 --casting
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 

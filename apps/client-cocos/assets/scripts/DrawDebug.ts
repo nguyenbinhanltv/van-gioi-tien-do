@@ -33,10 +33,11 @@ function keyOf(c: UIRenderer): { key: string; solo: boolean } | null {
   }
   if (c instanceof Label) {
     if (!c.string) return null;
-    // a label's glyphs live in a dynamic / bitmap atlas texture of their own: they merge with each other, not with sprites
-    const frame = (c as unknown as { _ttfSpriteFrame?: { texture?: { getId(): string } } })._ttfSpriteFrame;
-    const id = frame?.texture?.getId();
-    return { key: `label:${id ? id.slice(0, 8) : c.cacheMode} ${blend}`, solo: false };
+    // the texture a label batches by is its `spriteFrame` (the shared letter / bitmap atlas page in CHAR / BITMAP cache mode, a private
+    // `_ttfSpriteFrame` texture in NONE mode); the key also carries the cache mode so a mixed run shows up
+    const tex = c.spriteFrame as unknown as { getId?(): string; texture?: { getId(): string } } | null;
+    const id = tex?.texture?.getId() ?? tex?.getId?.();
+    return { key: `label:${c.cacheMode}:${id ? id.slice(0, 8) : '?'} ${blend}`, solo: false };
   }
   if (c instanceof Graphics) return { key: 'graphics', solo: true };
   if (c instanceof Mask) return { key: 'mask', solo: true };
@@ -140,6 +141,16 @@ const EXPERIMENTS: Record<string, (root: Node) => void> = {
 
 export function installDrawExperiments(root: Node): void {
   (globalThis as unknown as Record<string, unknown>).__vgtdDrawExp = (name: string) => {
+    // `hide:<path>` / `show:<path>`: toggle one node (path under the Canvas, or `*Prefix` = every child of the parent named Prefix...)
+    const m = /^(hide|show):(.+)$/.exec(name);
+    if (m) {
+      const [parentPath, prefix] = m[2]!.includes('*') ? m[2]!.split('*') : [m[2]!, ''];
+      const parent = root.getChildByPath(parentPath!);
+      if (!parent) return `no node ${parentPath}`;
+      const targets = m[2]!.includes('*') ? parent.children.filter((c) => c.name.startsWith(prefix!)) : [parent];
+      targets.forEach((t) => (t.active = m[1] === 'show'));
+      return `ok ${targets.length}`;
+    }
     const f = EXPERIMENTS[name];
     if (!f) return `unknown experiment ${name}; try ${Object.keys(EXPERIMENTS).join(', ')}`;
     f(root);

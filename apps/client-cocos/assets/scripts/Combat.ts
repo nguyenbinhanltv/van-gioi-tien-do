@@ -187,6 +187,9 @@ export class CombatUi {
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
+  /** `?castdemo=1`: cast the hotbar slots in turn every ~1.1 s (the continuous-casting perf scenario, art review) */
+  private castDemoNext = -1;
+  private castDemoAt = 0;
   private scale = 1;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly pointerDown: (e: PointerEvent) => void;
@@ -458,6 +461,7 @@ export class CombatUi {
       }
     }
     for (const ev of this.backend.update(now)) this.onEvent(ev);
+    this.updateCastDemo(now);
     this.refresh(now, dt);
   }
 
@@ -621,6 +625,26 @@ export class CombatUi {
   /** One-shot flash of an enemy's standee. */
   flashEnemy(entityId: number, seconds?: number): void {
     this.standees.get(entityId)?.flash(seconds);
+  }
+
+  /** `?castdemo=1`: keep casting the hotbar in turn (offline mock combat), the continuous-casting perf scenario. */
+  startCastDemo(): void {
+    this.castDemoNext = 0;
+    this.castDemoAt = 0;
+  }
+
+  private updateCastDemo(now: number): void {
+    if (this.castDemoNext < 0 || now < this.castDemoAt) return;
+    this.castDemoAt = now + 1100;
+    const bar = this.backend.hotbar;
+    if (this.backend.target.current === null) this.backend.target.cycle(this.backend.enemies, this.playerPos(), 15, false);
+    for (let n = 0; n < bar.slots.length; n++) {
+      const slot = (this.castDemoNext + n) % bar.slots.length;
+      if (!bar.slots[slot]?.castable) continue;
+      this.castDemoNext = slot + 1;
+      this.castSlot(slot);
+      return;
+    }
   }
 
   /** A boss entered phase `phase` (wire `boss_phase`, D91): a big floating line above it and a toast; the standee transform / skin swap is `setEnemyPhase`. */
