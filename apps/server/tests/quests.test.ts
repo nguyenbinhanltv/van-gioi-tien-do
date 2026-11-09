@@ -463,6 +463,67 @@ describe('claim safety and persistence', () => {
   });
 });
 
+describe('collect objectives are handed in (no farming by passing items around)', () => {
+  const cm = (r: Rig) => r.inv.bagOf('acct1').count(itemDefByKey('craft_material' as DropItem)!.id);
+  const give = (r: Rig, acct: string, qty: number, key: string) =>
+    r.inv.grantQuestReward(
+      acct,
+      { stones: 0n, items: [{ defId: itemDefByKey('craft_material' as DropItem)!.id, quality: 0, qty }] },
+      key,
+    );
+
+  it('the claim takes the items; with fewer in the bag the claim is refused and the quest stays claimable', () => {
+    const r = rig();
+    join(r);
+    r.at(1, 'npc_thuong_nhan');
+    r.cmd(1, QuestOp.Accept, 'q_daily_hai_thuoc');
+    give(r, 'acct1', 7, 'a');
+    r.step();
+    expect(entryOf(r, 'acct1', 'q_daily_hai_thuoc').status).toBe(QuestStatus.Ready);
+    // the player hands 4 away (a trade) before turning in
+    expect(r.inv.takeStackable('acct1', itemDefByKey('craft_material' as DropItem)!.id, 4)).toBe(true);
+    expect(r.cmd(1, QuestOp.Claim, 'q_daily_hai_thuoc')).toBe(QuestReason.MissingItems);
+    expect(r.statusOf('acct1', 'q_daily_hai_thuoc')).toBe(QuestStatus.Ready);
+    expect(r.tuVi.get(1)).toBeUndefined();
+    give(r, 'acct1', 2, 'b'); // 5 again
+    expect(r.cmd(1, QuestOp.Claim, 'q_daily_hai_thuoc')).toBe(QuestReason.Ok);
+    expect(cm(r)).toBe(0); // all 5 handed in
+  });
+
+  it('a second account cannot complete the quest with the same items handed over', () => {
+    const r = rig();
+    join(r, 1, 'acct1');
+    join(r, 2, 'acct2');
+    const id = itemDefByKey('craft_material' as DropItem)!.id;
+    give(r, 'acct1', 5, 'a');
+    r.at(1, 'npc_thuong_nhan');
+    r.at(2, 'npc_thuong_nhan');
+    r.cmd(1, QuestOp.Accept, 'q_daily_hai_thuoc');
+    r.step();
+    expect(r.cmd(1, QuestOp.Claim, 'q_daily_hai_thuoc')).toBe(QuestReason.Ok);
+    // the same five items would now be passed to acct2 (a trade): there are none left to pass, the first claim consumed them
+    expect(r.inv.takeStackable('acct1', id, 5)).toBe(false);
+    r.cmd(2, QuestOp.Accept, 'q_daily_hai_thuoc');
+    r.step();
+    expect(r.statusOf('acct2', 'q_daily_hai_thuoc')).toBe(QuestStatus.Active);
+    expect(r.cmd(2, QuestOp.Claim, 'q_daily_hai_thuoc')).toBe(QuestReason.NotReady);
+    // and the farming loop "trade the stack to the other account after the first claim" no longer pays twice: only real new items count
+    expect(r.inv.wallet('acct2', 'LT_HA')).toBe(0n);
+  });
+
+  it('a failing commit takes nothing from the bag', () => {
+    const r = rig();
+    join(r);
+    r.at(1, 'npc_thuong_nhan');
+    r.cmd(1, QuestOp.Accept, 'q_daily_hai_thuoc');
+    give(r, 'acct1', 5, 'a');
+    r.step();
+    r.store.failCommit = true;
+    expect(r.cmd(1, QuestOp.Claim, 'q_daily_hai_thuoc')).toBe(QuestReason.RewardFailed);
+    expect(cm(r)).toBe(5);
+  });
+});
+
 describe('abuse', () => {
   it('rate limit first: a burst of bogus ids is refused for rate before any id or NPC is looked at', () => {
     const r = rig();

@@ -46,6 +46,8 @@ export enum QuestReason {
   CycleCap = 11,
   /** claim: the reward could not be paid (the quest stays claimable) */
   RewardFailed = 12,
+  /** claim: a `collect` objective's items are no longer in the bag (they are handed in at the turn-in) */
+  MissingItems = 13,
 }
 
 export const QUEST_WIRE_LIMITS = { MAX_ID_BYTES: 40, MAX_NPC_BYTES: 32 } as const;

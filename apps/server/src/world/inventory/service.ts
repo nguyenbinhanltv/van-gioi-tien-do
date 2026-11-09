@@ -469,6 +469,24 @@ export class InventoryService {
     return result;
   }
 
+  /**
+   * Take `qty` of a stackable item (any quality, lowest first) out of the owner's bag; all-or-nothing, false when there is not enough.
+   * Used by quest turn-ins (D107): `collect` items are consumed, so the same items cannot complete a quest twice or on a second account.
+   */
+  takeStackable(owner: string, defId: number, qty: number): boolean {
+    const done = this.mutate(owner, (st) => {
+      if (st.bag.count(defId) < qty) return false;
+      let left = qty;
+      for (let q = 0; q <= 5 && left > 0; q++) {
+        const have = Math.min(left, st.bag.count(defId, q));
+        if (have > 0 && st.bag.removeStack(defId, q, have).ok) left -= have;
+      }
+      return left === 0;
+    });
+    if (done) this.notify(owner);
+    return done;
+  }
+
   private park(st: OwnerState, g: ItemGrant): Placement {
     const cap = INVENTORY_CONFIG.PENDING_QTY_MAX;
     const same = st.pending.find((p) => p.defId === g.defId && p.quality === g.quality);

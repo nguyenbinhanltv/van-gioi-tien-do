@@ -40,6 +40,7 @@ export const QUEST_REASON_TEXT: Readonly<Record<number, string>> = {
   [QuestReason.NotInWorld]: 'Chưa vào game, chưa thao tác được.',
   [QuestReason.CycleCap]: 'Đã đạt giới hạn nhiệm vụ trong chu kỳ này.',
   [QuestReason.RewardFailed]: 'Chưa nhận được phần thưởng, hãy thử lại.',
+  [QuestReason.MissingItems]: 'Bạn không còn đủ vật phẩm cần nộp trong túi.',
 };
 
 export const QUEST_TYPE_TEXT: Readonly<Record<string, string>> = {

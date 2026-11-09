@@ -369,6 +369,13 @@ export class QuestService {
     if (!e || e.s === QuestStatus.Completed) return QuestReason.NotActive;
     if (e.s !== QuestStatus.Ready) return QuestReason.NotReady;
     if (!this.nearNpc(entityId, def.turnIn)) return QuestReason.TooFar;
+    // collect objectives are HANDED IN: the items must still be in the bag now, and they are taken below (after the claim is committed)
+    const handIn = def.objectives.flatMap((o) => {
+      if (o.kind !== 'collect') return [];
+      const d = itemDefByKey(o.item as DropItem);
+      return d ? [{ defId: d.id, qty: o.count }] : [];
+    });
+    for (const h of handIn) if (this.inventory.bagOf(a.id).count(h.defId) < h.qty) return QuestReason.MissingItems;
     // 1) the claim is committed before anything is paid (see the header)
     const before = snapOf(e);
     e.s = QuestStatus.Completed;
@@ -380,7 +387,8 @@ export class QuestService {
       return QuestReason.RewardFailed;
     }
     this.metrics.completed++;
-    // 2) pay
+    // 2) take the handed-in items (same synchronous turn as the check above, so it cannot fail), then pay
+    for (const h of handIn) if (!this.inventory.takeStackable(a.id, h.defId, h.qty)) this.metrics.payFailures++;
     try {
       this.pay(a, entityId, def, e.e, rs);
     } catch {
