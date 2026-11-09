@@ -76,7 +76,7 @@ export class OnlineSession {
   /** A boss in view entered a new phase (D91, `boss_phase`): the HUD / standee layer reacts (announcement, flash, skin swap). */
   onBossPhase: ((entityId: number, phase: number, transformMs: number) => void) | null = null;
   /** name / max HP of monsters in view (from `aoi_enter`; later snapshots only carry hpPct) */
-  private readonly mobMeta = new Map<number, { name: string; hpMax: number }>();
+  private readonly mobMeta = new Map<number, { name: string; defId: number; hpMax: number }>();
 
   constructor(
     private readonly ysort: YSortLayer,
@@ -110,7 +110,8 @@ export class OnlineSession {
       onSkillResult: (msg) => sc.applySkillResult(msg, performance.now(), (i) => this.net.entityOfIndex(i)),
       onAoiEnter: (entities) => {
         for (const e of entities) {
-          if (e.kind === KIND_MONSTER) this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, hpMax: e.maxHp });
+          if (e.kind === KIND_MONSTER)
+            this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, defId: e.defId, hpMax: e.maxHp });
         }
       },
       onBossPhase: (msg) => this.onBossPhase?.(msg.mobEntityId, msg.phase, msg.transformMs),
@@ -205,7 +206,14 @@ export class OnlineSession {
       if (!meta) continue;
       if (sc.enemy(v.entityId)) sc.syncEnemy(v.entityId, { i: v.i, j: v.j }, v.hpPct);
       else
-        sc.upsertEnemy({ id: v.entityId, name: meta.name, pos: { i: v.i, j: v.j }, hpPct: v.hpPct, hpMax: meta.hpMax });
+        sc.upsertEnemy({
+          id: v.entityId,
+          name: meta.name,
+          defId: meta.defId,
+          pos: { i: v.i, j: v.j },
+          hpPct: v.hpPct,
+          hpMax: meta.hpMax,
+        });
     }
   }
 

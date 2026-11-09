@@ -10,6 +10,7 @@ import {
   DEFAULT_CLASS,
   MOB_ID_BASE,
   NETWORK,
+  PARTY,
   aoiCentre,
   classWireId,
   inAoiAt,
@@ -60,6 +61,7 @@ import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { GATEWAY_CONFIG, WORLD_CONFIG } from '../config.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
+import type { PartyService } from '../party/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -207,6 +209,8 @@ export interface WorldNodeOptions {
   progression?: ProgressionService;
   /** chat module (D87): World / Zone / Whisper channels; absent = chat messages are rejected as unexpected */
   chat?: ChatService;
+  /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
+  party?: PartyService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -316,6 +320,7 @@ export class WorldNode {
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
   readonly progression: ProgressionService | undefined;
   readonly chat: ChatService | undefined;
+  readonly party: PartyService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -353,6 +358,24 @@ export class WorldNode {
         if (c && !c.dead) this.send(c, m);
       },
       posOf: (id) => this.byId.get(id),
+      partyMembers: (id) => this.party?.membersOf(id) ?? [],
+    });
+    this.party = opts.party;
+    this.party?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      vitalsOf: (id) => {
+        const e = this.byId.get(id);
+        if (!e) return undefined;
+        return {
+          hp: Math.round(e.hp),
+          hpMax: Math.round(this.maxHpOf(e)),
+          mp: Math.round(e.mp),
+          mpMax: Math.round(e.mpMax),
+        };
+      },
     });
     this.progression?.attach({
       isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
@@ -398,6 +421,7 @@ export class WorldNode {
           seed,
           respawnPoint: () => this.spawnPoint(),
           isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
+          partyOf: (id) => this.creditGroupOf(id),
           isInvulnerable: (id) => this.mobAttacks?.isInvulnerable(id) ?? false,
           ...opts.combat,
           mobs: mobPort,
@@ -486,6 +510,7 @@ export class WorldNode {
       stats: emptyStats(),
     });
     this.progression?.join(id, accountId, this.world.timeMs);
+    this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -524,6 +549,7 @@ export class WorldNode {
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
     void this.progression?.leave(id);
     this.chat?.leave(id);
+    this.party?.leave(id);
     this.chatHistoryDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -729,6 +755,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.send(c, this.chat.handle(id, msg, this.world.timeMs));
         break;
+      case 'party_cmd':
+        if (!this.party) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           c.stats.badMessages++;
@@ -803,6 +835,7 @@ export class WorldNode {
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
+    this.party?.tick(this.world.timeMs, this.world.tick);
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -848,6 +881,27 @@ export class WorldNode {
         this.metrics.inventorySendErrors++;
       }
     }
+  }
+
+  /**
+   * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
+   * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
+   */
+  private creditGroupOf(killerId: number): number[] {
+    const members = this.party?.membersOf(killerId) ?? [];
+    if (members.length <= 1) return [killerId];
+    const k = this.byId.get(killerId);
+    const out: number[] = [];
+    for (const m of members) {
+      if (m === killerId) {
+        out.push(m);
+        continue;
+      }
+      const e = this.byId.get(m);
+      if (!e || !k || e.hp <= 0) continue;
+      if (Math.hypot(e.i - k.i, e.j - k.j) <= PARTY.SHARE_RANGE_TILES) out.push(m);
+    }
+    return out;
   }
 
   /** The World channel's recent lines go to each newly joined player once (not before the gateway's `hello_ack` is out: next tick). */

@@ -185,9 +185,9 @@ describe('chat end to end (real server, real NetClients)', () => {
       expect(a.say('đ'.repeat(129))).toBe(false);
       expect(a.log.entries.at(-1)).toMatchObject({ tone: 'error' });
       expect(a.net.lastError).toBe('');
-      // the server also refuses the Party channel until parties exist (a raw send, bypassing the parser)
+      // the Party channel needs a party (a raw send, bypassing the parser)
       a.net.sendChat({ channel: ChatChannel.Party, text: 'party?', clientMsgId: 500 });
-      await until('party refused', () => a.log.entries.some((e) => e.text === 'Kênh chat này chưa mở.'));
+      await until('party refused', () => a.log.entries.some((e) => e.text === 'Bạn chưa vào tổ đội nào.'));
       expect(ChatReason.BadChannel).toBe(5);
     } finally {
       a.close();
