@@ -490,6 +490,19 @@ Còn mở / lưu ý:
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ; cần bản @2x khi làm sprite thật.
 - Quái nhận biết qua tên `Mob <id>` của backend (`mobDefIdOfName`) vì `EnemyView` chưa mang `defId`; nên thêm `defId` vào `EnemyView` khi `@vgtd/client-combat` được sửa.
 
+## 20. Chat (D87, worker35): còn mở
+
+- **Danh sách từ cấm thật**: hiện chỉ có 2 từ GIẢ (`placeholder`) để chứng minh cơ chế; cần chủ dự án / kiểm duyệt viên cung cấp danh sách tiếng Việt (có biến thể không dấu, leetspeak, ký tự tách) và chính sách che hay chặn. Che bằng `*` theo ký tự gốc là mặc định tạm.
+- **Lưu bền tin riêng (30 ngày)** và nhật ký kiểm toán (docs/22 §7, docs/25): chưa có bảng `chat_messages`; thì thầm hiện chỉ ở RAM. Cần chính sách riêng tư (docs/23 §7) trước khi lưu.
+- **Báo cáo / chặn người chơi, vi phạm lặp lại**: chưa có `report`, danh sách chặn phía người nhận, tự mute khi spam lặp; `mute()` mới là API nội bộ, chưa có lệnh GM hay tự động.
+- **Hạn mức là đề xuất** (docs/24 §7): Thế giới 1/5 s bùng nổ 2, Vùng và thì thầm 1/2 s bùng nổ 3 (Vùng không có trong bảng nên lấy mức thì thầm). Chưa chặn tin lặp lại giống hệt, chưa có hạn mức theo IP.
+- **Kênh Đội / Tông môn / Hệ thống**: `Party = 4` để dành; Đội cần tính năng tổ đội (docs/10 §7.1), Tông môn cần tông môn NPC. Tin hệ thống (`senderId` 0) chưa dùng.
+- **Vùng = hộp AOI của người gửi**: chưa có khái niệm "vùng bản đồ" (Sơn Môn / Rừng Độc là hai `MapInstance` theo docs/22 §3); khi có nhiều bản đồ, Vùng nên là cả bản đồ.
+- **Link vật phẩm / Shift+click** (docs/05 §tương tác) và **emoji / biểu tượng**: chưa có.
+- **i18n**: chuỗi tiếng Việt của hộp chat và lệnh nằm trong code (`ChatLog.ts`), cùng ghi chú mục 18; tên kênh hiển thị là bản đầu chưa qua biên tập.
+- **Hộp chat là DOM overlay**: không phụ thuộc engine nhưng không nằm trong cây Cocos (không bị camera / zoom chi phối); trên Web/H5 thật cần kiểm với bàn phím ảo che màn hình (viewport resize) và IME.
+- **Hàng đợi gửi / ngân sách**: fan-out Thế giới gửi từng người (mã hóa mỗi lần); ngân sách docs/22 §7 (≤ 0,2 ms/tin) chưa đo ở 200 người.
+
 ## D89 — telegraph quái: còn mở
 
 - Decal chỉ là placeholder (đường viền + tô lớn dần, không art, không âm thanh); thời gian chạy theo đồng hồ cục bộ từ lúc nhận `telegraph_start` (không bù độ trễ).
