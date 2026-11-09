@@ -1,4 +1,4 @@
-import { Color, Label, Node, Sprite, SpriteFrame, UITransform, Vec2, game } from 'cc';
+import { Color, Label, Node, Sprite, SpriteFrame, UITransform, game } from 'cc';
 import { combat as cb, shared } from './vendor/vgtd.mjs';
 import { cellCenterToWorld, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
@@ -7,7 +7,7 @@ import type { TilePos } from './Actors';
 import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 import { getSkillIcon, getStatusIcon } from './PropArt';
-import { sharedAtlas } from './UiLabel';
+import { sharedAtlas, dynamicLabel, setDynamicSize } from './UiLabel';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -183,7 +183,14 @@ export class CombatUi {
   /** Touch input: the skill wheel replaces the bottom hotbar (hidden, not tappable). */
   private touchMode = false;
   /** status row (D94): one tile per active status, left of the HP bar */
-  private readonly statusTiles: Array<{ root: Node; bg: Sprite; icon: Sprite; label: Label; time: Label }> = [];
+  private readonly statusTiles: Array<{
+    root: Node;
+    extra: Node[];
+    bg: Sprite;
+    icon: Sprite;
+    label: Label;
+    time: Label;
+  }> = [];
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
@@ -251,19 +258,18 @@ export class CombatUi {
     this.shieldFill = quad(hp.back, 'Shield', art.pixel, 0, 4, new Color(240, 240, 255, 255));
     this.shieldFill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.shieldFill.node.setPosition(-BAR_W / 2, BAR_H / 2 - 2, 0);
-    // status row: up to 4 tiles growing leftwards from the HP bar
+    // status row: up to 4 tiles growing leftwards from the HP bar. Batching: the tile backgrounds are quads (one shared layer, merging with
+    // the bars); each tile's icon, caption and timer are attached to the icon / text / dynamic-text layers below (`attachStatusParts`), so
+    // a tile never interleaves quad / icon / label / label draws.
     const TILE = 34;
+    const statusBgLayer = newNode('StatusBg', this.hudRoot);
+    const statusBg: Array<{ root: Node; bg: Sprite }> = [];
     for (let n = 0; n < 4; n++) {
-      const root = newNode(`Status${n}`, this.hudRoot);
+      const root = newNode(`Status${n}`, statusBgLayer);
       root.setPosition(-BAR_W / 2 - 5 - BAR_W / 2 - 22 - n * (TILE + 4), bars, 0);
       const bg = quad(root, 'Bg', art.pixel, TILE, TILE, new Color(60, 60, 60, 220));
-      const icon = quad(root, 'Icon', art.pixel, TILE - 6, TILE - 6, new Color(255, 255, 255, 255));
-      icon.node.active = false;
-      const label = text(root, 'Label', 11, new Color(255, 255, 255, 255));
-      const time = sharedAtlas(text(root, 'Time', 12, new Color(255, 240, 160, 255)), 'dynamic'); // remaining seconds
-      time.node.setPosition(0, -TILE / 2 - 8, 0);
       root.active = false;
-      this.statusTiles.push({ root, bg: bg, icon, label, time });
+      statusBg.push({ root, bg });
     }
     const cast = this.makeBar(
       'Cast',
@@ -278,7 +284,7 @@ export class CombatUi {
     this.castBar = cast.fill;
     cast.back.active = false;
     this.castBackNode = cast.back;
-    this.toast = sharedAtlas(text(this.dynText, 'Toast', 16, new Color(255, 220, 160, 255)), 'dynamic');
+    this.toast = dynamicLabel(text(this.dynText, 'Toast', 16, new Color(255, 220, 160, 255)));
     this.toast.node.setPosition(0, bars + BAR_H + 34, 0);
 
     const bar = this.backend.hotbar;
@@ -289,6 +295,25 @@ export class CombatUi {
     const layerIcon = newNode('HotbarIcon', this.hudRoot);
     const layerRing = newNode('HotbarRings', this.hudRoot);
     const layerText = newNode('HotbarText', this.hudRoot);
+    const layerStatusIcon = newNode('StatusIcons', this.hudRoot);
+    layerStatusIcon.setSiblingIndex(layerIcon.getSiblingIndex() + 1);
+    statusBg.forEach(({ root, bg }, n) => {
+      const at = (layer: Node): Node => {
+        const h = newNode(`Status${n}`, layer);
+        h.setPosition(root.position);
+        h.active = false;
+        return h;
+      };
+      const iconHolder = at(layerStatusIcon);
+      const textHolder = at(layerText);
+      const timeHolder = at(this.dynText);
+      const icon = quad(iconHolder, 'Icon', art.pixel, TILE - 6, TILE - 6, new Color(255, 255, 255, 255));
+      icon.node.active = false;
+      const label = text(textHolder, 'Label', 11, new Color(255, 255, 255, 255));
+      const time = dynamicLabel(text(timeHolder, 'Time', 12, new Color(255, 240, 160, 255))); // remaining seconds
+      time.node.setPosition(0, -TILE / 2 - 8, 0);
+      this.statusTiles.push({ root, extra: [iconHolder, textHolder, timeHolder], bg, icon, label, time });
+    });
     bar.slots.forEach((s, i) => {
       const x = -HUD_W / 2 + SLOT / 2 + i * (SLOT + GAP);
       const holder = (layer: Node): Node => {
@@ -327,10 +352,10 @@ export class CombatUi {
       tier.string = s.castable ? s.skill.tier[0]!.toUpperCase() : 'P';
       tier.node.setPosition(SLOT / 2 - 7, -SLOT / 2 + 7, 0);
       const cd = quad(ringRoot, 'Cd', art.pixel, SLOT, SLOT, new Color(0, 0, 0, 175));
-      this.radial(cd);
+      this.curtain(cd);
       const gcd = quad(ringRoot, 'Gcd', art.pixel, SLOT, SLOT, new Color(255, 255, 255, 75));
-      this.radial(gcd);
-      const cdText = sharedAtlas(text(cdRoot, 'CdText', 18, new Color(255, 255, 255, 255)), 'dynamic'); // counts down
+      this.curtain(gcd);
+      const cdText = dynamicLabel(text(cdRoot, 'CdText', 18, new Color(255, 255, 255, 255))); // counts down
       this.slots.push({ root, holders: [root, iconRoot, ringRoot, textRoot, cdRoot], bg, cd, gcd, cdText, x });
     });
 
@@ -338,7 +363,7 @@ export class CombatUi {
     this.targetRoot = newNode('TargetFrame', this.hudRoot);
     const tf = this.makeBar('Target', 0, 0, new Color(200, 80, 80, 255), 260, 16, this.targetRoot);
     this.targetFill = tf.fill;
-    this.targetText = sharedAtlas(tf.label, 'dynamic'); // hp numbers
+    this.targetText = dynamicLabel(tf.label); // hp numbers
     this.targetName = text(this.targetRoot, 'TargetName', 16, new Color(255, 235, 235, 255));
     this.targetName.node.setPosition(0, 20, 0);
     this.targetRoot.active = false;
@@ -346,10 +371,12 @@ export class CombatUi {
 
     // floating text pool (world space, above the Y-sorted entities)
     const l6 = worldUiLayer(worldRoot);
-    this.worldUi = l6;
-    this.selfBar = new OverheadBar(l6, art.pixel, 96);
+    // world UI batching: all bar quads first (one layer), then all floating numbers (the labels): never interleaved
+    this.worldUi = newNode('Bars', l6);
+    const floatLayer = newNode('Floaters', l6);
+    this.selfBar = new OverheadBar(this.worldUi, art.pixel, 96);
     for (let n = 0; n < 24; n++) {
-      const label = sharedAtlas(text(l6, `Float${n}`, 22, new Color(255, 255, 255, 255)), 'dynamic'); // damage numbers
+      const label = dynamicLabel(text(floatLayer, `Float${n}`, 22, new Color(255, 255, 255, 255))); // damage numbers
       label.node.active = false;
       this.floaters.push({
         node: label.node,
@@ -367,7 +394,7 @@ export class CombatUi {
     const title = text(this.deathRoot, 'Title', 40, new Color(255, 225, 225, 255));
     title.string = 'Ban da roi / You have fallen';
     title.node.setPosition(0, 40, 0);
-    this.deathCount = sharedAtlas(text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255)), 'dynamic'); // counts down
+    this.deathCount = dynamicLabel(text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255))); // counts down
     this.deathCount.node.setPosition(0, -10, 0);
     this.deathRoot.active = false;
 
@@ -485,6 +512,7 @@ export class CombatUi {
     this.statusTiles.forEach((t, k) => {
       const it = items[k];
       t.root.active = !!it;
+      for (const h of t.extra) h.active = !!it;
       if (!it) return;
       t.bg.color = colour[it.id] ?? new Color(60, 60, 60, 220);
       const frame = getStatusIcon(it.id);
@@ -637,7 +665,8 @@ export class CombatUi {
     if (this.castDemoNext < 0 || now < this.castDemoAt) return;
     this.castDemoAt = now + 1100;
     const bar = this.backend.hotbar;
-    if (this.backend.target.current === null) this.backend.target.cycle(this.backend.enemies, this.playerPos(), 15, false);
+    if (this.backend.target.current === null)
+      this.backend.target.cycle(this.backend.enemies, this.playerPos(), 15, false);
     for (let n = 0; n < bar.slots.length; n++) {
       const slot = (this.castDemoNext + n) % bar.slots.length;
       if (!bar.slots[slot]?.castable) continue;
@@ -662,8 +691,7 @@ export class CombatUi {
       this.floaters.reduce((a, b) => (a.age / a.life > b.age / b.life ? a : b));
     f.node.active = true;
     f.label.string = str;
-    f.label.fontSize = size;
-    f.label.lineHeight = size + 2;
+    setDynamicSize(f.label, size); // node scale only: assigning fontSize would re-layout and open a new letter atlas
     f.baseColor = color;
     f.age = 0;
     f.life = 1;
@@ -686,10 +714,10 @@ export class CombatUi {
     this.slots.forEach((s, i) => {
       const slot = bar.slots[i]!;
       const cd = bar.cooldownFraction(i, now);
-      s.cd.fillRange = cd;
+      this.setCurtain(s.cd, cd);
       s.cd.node.active = cd > 0;
       const useGcd = slot.castable && bar.usesGcd(i);
-      s.gcd.fillRange = useGcd ? gcd : 0;
+      this.setCurtain(s.gcd, useGcd ? gcd : 0);
       s.gcd.node.active = useGcd && gcd > 0;
       const left = bar.cooldownRemainingMs(i, now) / 1000;
       s.cdText.string = left > 0 ? (left >= 10 ? String(Math.ceil(left)) : left.toFixed(1)) : '';
@@ -844,12 +872,20 @@ export class CombatUi {
     ui.setContentSize(Math.max(0, full * fraction), ui.contentSize.height);
   }
 
-  private radial(sp: Sprite): void {
-    sp.type = Sprite.Type.FILLED;
-    sp.fillType = Sprite.FillType.RADIAL;
-    sp.fillCenter = new Vec2(0.5, 0.5);
-    sp.fillStart = 0.25; // 12 o'clock
-    sp.fillRange = 0;
+  /**
+   * Cooldown / GCD overlay: a plain quad whose height is the remaining fraction, hanging from the top of the slot (the shade recedes
+   * downwards as the cooldown runs out). Radial `FILLED` sprites cannot merge with each other in the engine's 2D batcher (one draw
+   * call each while cooling down); plain quads batch with every other quad of the HUD.
+   */
+  private curtain(sp: Sprite): void {
+    const ui = sp.node.getComponent(UITransform)!;
+    ui.setAnchorPoint(0.5, 1);
+    sp.node.setPosition(0, SLOT / 2, 0);
+    ui.setContentSize(SLOT, 0);
+  }
+
+  private setCurtain(sp: Sprite, fraction: number): void {
+    sp.node.getComponent(UITransform)!.setContentSize(SLOT, SLOT * fraction);
   }
 
   private makeBar(
@@ -874,7 +910,7 @@ export class CombatUi {
       holder = newNode(`${name}TextHolder`, textLayer);
       holder.setPosition(x, y, 0);
     }
-    const label = sharedAtlas(text(holder, `${name}Text`, 11, new Color(255, 255, 255, 255)), 'dynamic');
+    const label = dynamicLabel(text(holder, `${name}Text`, 11, new Color(255, 255, 255, 255)));
     label.string = ''; // a Label starts as the engine default text: bars whose text is never set (the cast bar) must draw nothing
     return { back: back.node, fill, label };
   }

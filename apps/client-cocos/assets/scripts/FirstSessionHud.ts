@@ -2,7 +2,7 @@ import { Color, Label, Node, Sprite, UITransform } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
-import { sharedAtlas } from './UiLabel';
+import { sharedAtlas, dynamicLabel } from './UiLabel';
 
 type Net = InstanceType<typeof core.NetClient>;
 type Tracker = InstanceType<typeof core.FirstSessionTracker>;
@@ -111,7 +111,7 @@ export class FirstSessionHud {
       l.node.setPosition(10, -36 - k * ROW_H, 0);
       this.rows.push(l);
     }
-    this.hint = sharedAtlas(label(this.root, 'Hint', 12, COL.hint), 'dynamic'); // the distance changes as you walk
+    this.hint = dynamicLabel(label(this.root, 'Hint', 12, COL.hint)); // the distance changes as you walk
     this.hint.node.setPosition(10, -PANEL_H + 14, 0);
     this.layout(1280, 720);
     // automation hook (scripts/bag-smoke.mjs): the tracker state without touching the DOM / canvas pixels

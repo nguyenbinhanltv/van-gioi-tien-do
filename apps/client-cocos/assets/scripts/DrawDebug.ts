@@ -97,10 +97,52 @@ export function summarize(root: Node): {
   return { est, real, byKey, layers, runs: runs.map((r) => `${r.count}x ${r.key} ${r.first}`) };
 }
 
+/**
+ * `window.__vgtdBatchTrace(reset?)`: which component ENDS each 2D batch. Wraps the engine's `Batcher2D.autoMergeBatches` (called when
+ * the next renderable cannot join the running batch: other texture / material / render-data hash) and counts, per node path with
+ * digits folded (`Slot3` -> `Slot#`), how often a batch ended at it. Returns { frames, perFrame: [[key, n per frame]...] } since the
+ * last reset. Debug aid only.
+ */
+function installBatchTrace(root: Node): void {
+  const b = (director.root as unknown as { batcher2D?: Record<string, unknown> })?.batcher2D as
+    (Record<string, unknown> & { autoMergeBatches(c?: UIRenderer): void }) | undefined;
+  if (!b || b.__traced) return;
+  b.__traced = true;
+  let counts: Record<string, number> = {};
+  let frames = 0;
+  const orig = b.autoMergeBatches.bind(b);
+  b.autoMergeBatches = (comp?: UIRenderer) => {
+    // (release builds mangle the engine's `_private` fields: only the component handed in by the engine is usable)
+    if (comp) {
+      const key = `${comp.constructor.name} ${pathOf(comp.node, root).replace(/[0-9]+/g, '#')}`;
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    orig(comp);
+  };
+  const g = globalThis as unknown as Record<string, unknown>;
+  const tick = (): void => {
+    frames++;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  g.__vgtdBatchTrace = (reset = false) => {
+    const perFrame: Array<[string, number]> = [];
+    for (const k of Object.keys(counts)) perFrame.push([k, Math.round((counts[k]! / Math.max(1, frames)) * 100) / 100]);
+    perFrame.sort((x, y) => y[1] - x[1]);
+    const out = { frames, perFrame };
+    if (reset) {
+      counts = {};
+      frames = 0;
+    }
+    return out;
+  };
+}
+
 /** Publishes `window.__vgtdDrawDbg()`; call once with the Canvas node. */
 export function installDrawDebug(root: Node): void {
   (globalThis as unknown as Record<string, unknown>).__vgtdDrawDbg = () => summarize(root);
   installDrawExperiments(root);
+  installBatchTrace(root);
 }
 
 /**

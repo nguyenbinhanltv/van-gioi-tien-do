@@ -2,7 +2,7 @@ import { Color, Label, Node, Sprite, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
-import { sharedAtlas } from './UiLabel';
+import { sharedAtlas, dynamicLabel } from './UiLabel';
 import { getRealmBadge, type UiSlice } from './PropArt';
 import { LevelUpFx } from './LevelUpFx';
 
@@ -148,11 +148,11 @@ export class ProgressionHud {
     back.node.setPosition(-PANEL_W / 2, -38, 0);
     this.barFill = quad(this.root, 'BarFill', art, 0, BAR_H - 4, COL.bar, 0);
     this.barFill.node.setPosition(-PANEL_W + 12 + 2, -38, 0);
-    this.barText = sharedAtlas(label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER), 'dynamic'); // tu vi grows every tick
+    this.barText = dynamicLabel(label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER)); // tu vi grows every tick
     this.barText.node.setPosition(-PANEL_W / 2, -38, 0);
     this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, 'Đả tọa [M]');
     this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, 'Đột phá [N]');
-    this.toast = sharedAtlas(label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT), 'dynamic');
+    this.toast = dynamicLabel(label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT));
     this.toast.node.getComponent(UITransform)!.setAnchorPoint(1, 0.5);
     this.toast.node.setPosition(0, -PANEL_H - 14, 0);
 

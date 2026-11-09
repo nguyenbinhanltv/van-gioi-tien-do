@@ -50,6 +50,25 @@ Số 55 / 80 của báo cáo thoát P1 là **không có quái và không có HUD
 
 Kết quả: **60–64** (tối đa trong 30 giây đo, zoom 1,5× mặc định; zoom 1,0× nhìn rộng hơn nên ~66) với cùng cảnh, sau khi gộp thêm code mới (party, status tile, khung UI 9-slice, map vùng); tầm với cắt của chibi 120 px, prop = max(cao, rộng/2) + 30; cảnh cơ sở (20 NPC, không quái, không combat) 49 (trước 53–55); mở túi đồ 37 (không đổi). Cổng đo: `npm run perf:p1 -w client-cocos -- --mobs --draw-limit 65` (chỉ siết được ngưỡng, không nới ngưỡng dùng chung). Mục tiêu 65 chưa có chỗ trống: thêm quái / NPC trên màn hình thì phải gom tiếp (HP bar trên đầu, armature).
 
+## Kịch bản tung chiêu liên tục (`--casting`)
+
+Cảnh 14 quái + 20 NPC + HUD chiến đấu, nhưng thanh kỹ năng liên tục tung chiêu (`?castdemo=1`, mock offline): thanh cast, số hồi chiêu, ô trạng thái, số sát thương nổi và thanh máu trên đầu cùng hiện. Lệnh: `npm run perf:p1 -w client-cocos -- --casting --class dan-phu-tu --draw-limit 80` (chỉ siết được ngưỡng; CI không chạy perf vì cần Cocos Creator headless, đây là cổng chạy tay như `--mobs`).
+
+Cách tìm chỗ vỡ batch (công cụ gỡ lỗi, `?drawdbg=1`): `window.__vgtdBatchTrace(reset)` đếm, theo đường dẫn node, batch nào BẮT ĐẦU ở node nào (bọc `Batcher2D.autoMergeBatches`; bản release làm rối tên trường riêng của engine nên chỉ dùng component engine truyền vào). `__vgtdDrawExp('hide:<đường dẫn>')` / `show:` ẩn / hiện một node để đo chênh lệch `drawCalls`; `Label` trong `?drawdbg` được gom theo texture chữ thật (`spriteFrame`), không phải `_ttfSpriteFrame`.
+
+Phát hiện (lớp Đan Phù): khi tung chiêu, HUD chiến đấu tốn 15,6 draw call so với 3 khi đứng yên; lớp UI thế giới gần như không tốn gì.
+
+| Nguồn vỡ batch khi tung chiêu                                                                | Trước (mỗi frame) |  Sau |
+| -------------------------------------------------------------------------------------------- | ----------------: | ---: |
+| Vòng hồi chiêu / GCD dùng sprite `FILLED` kiểu tròn (không gộp được với nhau)                |               3,8 |    0 |
+| Nhãn động khác cỡ chữ (engine giữ MỘT atlas chữ cho mỗi cỡ chữ: 12 / 14 / 16 / 18 / 22 / 32) |        ~5 (đo ẩn) |   ~2 |
+| Ô trạng thái: quad, icon, nhãn tĩnh, nhãn động xen kẽ trong từng ô                           |                ~4 | ~3,4 |
+| Số nổi xen giữa các thanh máu trên đầu (cùng một lớp L6)                                     |            ~1 - 2 | ~0,3 |
+
+Cách sửa: mọi nhãn động dùng một cỡ chữ (`DYN_FONT_PX` = 24) và đổi cỡ bằng scale của node (`dynamicLabel`, `setDynamicSize` trong `UiLabel.ts`: không dựng lại bố cục, không mở atlas chữ mới); lớp phủ hồi chiêu là quad thường có chiều cao theo tỉ lệ; ô trạng thái tách thành các lớp dùng chung (nền / icon / chữ / chữ động); thanh máu và số nổi ở hai lớp riêng trong L6.
+
+Kết quả (lớp Đan Phù, `--casting`): số batch trung bình mỗi frame **74,0 -> 68,5** (đứng yên 59,7); tối đa trong cổng đo 73 / 79 / 73 -> 70 / 72 / 76 (Thể tu / Đan Phù / Pháp tu, dao động theo số sát thương nổi). **Chưa xuống 65** khi tung chiêu liên tục. Phần còn lại (đo bằng `__vgtdBatchTrace`): nền mặt đất L0 vẫn mất ~9 batch mỗi frame ở CẢ HAI kịch bản (các chunk xen kẽ tileset gốc và tileset mở rộng của vùng, D95: sắp theo texture trong từng lớp sẽ cắt ~4-5), vòng chọn mục tiêu (+1), nền / icon / chữ ô trạng thái (~3), thanh trên đầu (+1,5). Cảnh đứng yên giữ 61 - 64 (`--mobs --draw-limit 65` đạt).
+
 ## Cách đo trên Web (headless)
 
 ```bash
