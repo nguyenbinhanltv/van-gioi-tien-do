@@ -41,7 +41,6 @@ import {
   type ChatLine,
   type EnterEntity,
   type Message,
-  type SnapshotEntity, // TEMP-AB
   TelegraphShape,
 } from '@vgtd/protocol';
 import {
@@ -123,6 +122,8 @@ export interface ClientStats {
 }
 
 interface Visible {
+  /** entity id (the key of `Client.visible`): lets the per-tick snapshot walk the `values()` without a [key, value] pair per entry */
+  id: number;
   index: number;
   /** 0 near (20 Hz), 1 mid (10 Hz), 2 far (5 Hz) */
   band: 0 | 1 | 2;
@@ -264,7 +265,8 @@ export interface WorldNodeOptions {
   inventory?: InventoryService;
 }
 
-const BAND_PERIOD = [1, 2, 4] as const;
+/** band periods are 1 / 2 / 4 ticks (near 20 Hz, mid 10 Hz, far 5 Hz): `(tick + index) % period === 0` as one AND with `period - 1` (the hot per-client snapshot loop, D119) */
+const BAND_MASK = [0, 1, 3] as const;
 const clock = (): number => Number(process.hrtime.bigint()) / 1e6;
 
 /** Append and keep at most `cap` samples (oldest dropped in chunks, so removal is amortised O(1)). */
@@ -1383,7 +1385,7 @@ export class WorldNode {
           const index = c.slots.indexOf(0);
           if (index < 0) break;
           c.slots[index] = e.id;
-          const entry: Visible = { index, band: 0 };
+          const entry: Visible = { id: e.id, index, band: 0 };
           c.visible.set(e.id, entry);
           bandOf(e, entry, e.id);
           const qi = quantizePos(e.i);
@@ -1632,7 +1634,6 @@ export class WorldNode {
   }
 
   private sendSnapshots(): void {
-    if (process.env.VGTD_OLD_SNAP) return this.sendSnapshotsOld(); // TEMP-AB
     this.snapCache.clear();
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
@@ -1655,9 +1656,10 @@ export class WorldNode {
       const rec = this.snapRec;
       const touched = this.snapTouched;
       let n = 0;
-      for (const [eid, v] of c.visible) {
-        if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
-        const cur = this.currentOf(eid);
+      const tick = this.world.tick;
+      for (const v of c.visible.values()) {
+        if (!resync && ((tick + v.index) & BAND_MASK[v.band]) !== 0) continue;
+        const cur = this.currentOf(v.id);
         if (!cur) continue;
         const last = c.last[v.index];
         const hp = cur.hp;
@@ -1723,90 +1725,6 @@ export class WorldNode {
       this.write(c, bytes);
     }
   }
-
-  // TEMP-AB-BEGIN
-  private sendSnapshotsOld(): void {
-    this.snapCache.clear();
-    for (const c of this.clients.values()) {
-      const me = this.byId.get(c.id);
-      if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
-      if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_SKIP_BYTES) {
-        c.stats.snapshotsSkipped++;
-        if (c.transport.buffered() > GATEWAY_CONFIG.BACKPRESSURE_KICK_BYTES) {
-          this.metrics.kicksBackpressure++;
-          this.kick(c, ErrorCode.Internal, 'slow consumer');
-        }
-        continue;
-      }
-      const timedOut = this.world.timeMs - c.lastAckMs > WORLD_CONFIG.ACK_TIMEOUT_MS;
-      const full = timedOut || c.snapSeq === 0;
-      // D73: a resync (first snapshot, or no ack for ACK_TIMEOUT_MS) carries EVERY visible entity with absolute coordinates and HP,
-      // ignoring band turns and the unchanged-record skip, so a client whose state is wrong recovers; once per ACK_TIMEOUT_MS
-      const resync = c.snapSeq === 0 || (timedOut && this.world.timeMs - c.lastResyncMs >= WORLD_CONFIG.ACK_TIMEOUT_MS);
-      if (resync) c.lastResyncMs = this.world.timeMs;
-      const entities: SnapshotEntity[] = [];
-      const touchedIdx: number[] = [];
-      const touchedLast: Last[] = [];
-      for (const [eid, v] of c.visible) {
-        if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
-        const cur = this.currentOf(eid);
-        if (!cur) continue;
-        const last = c.last[v.index];
-        const hp = cur.hp;
-        // D73: nothing changed since the last record we sent for this slot -> the client keeps its state, send nothing
-        if (
-          !resync &&
-          last &&
-          last.hp === hp &&
-          last.qi === cur.qi &&
-          last.qj === cur.qj &&
-          last.anim === cur.anim &&
-          last.dir === cur.dir
-        )
-          continue;
-        entities.push({
-          index: v.index,
-          qi: cur.qi,
-          qj: cur.qj,
-          anim: cur.anim,
-          dir: cur.dir,
-          hpPct: !resync && last && last.hp === hp ? null : hp,
-        });
-        touchedIdx.push(v.index);
-        touchedLast.push({ qi: cur.qi, qj: cur.qj, hp, anim: cur.anim, dir: cur.dir });
-      }
-      // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
-      const vitals = this.vitalsOf(me);
-      const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
-      // own root / slow / poison (D94): only on a change since what this client last got (or on a full / resync snapshot while something is active)
-      const statusSig = this.combat ? this.combat.status.signature(me.id, this.world.timeMs) : '';
-      const sendStatus = statusSig !== c.lastStatusSig || ((full || resync) && statusSig !== '');
-      const seq = (c.snapSeq + 1) & 0xffff;
-      const bytes = encode(
-        {
-          type: 'snapshot',
-          seq,
-          baselineSeq: full ? null : c.snapSeq & 0xffff,
-          tick: this.world.tick,
-          self: selfStateOf(
-            me,
-            sendVitals ? vitals : null,
-            sendStatus && this.combat ? this.combat.status.statusOf(me.id, this.world.timeMs) : null,
-          ),
-          entities,
-        },
-        { baseline: (index) => c.last[index] },
-      );
-      for (let k = 0; k < touchedIdx.length; k++) c.last[touchedIdx[k]!] = touchedLast[k];
-      if (sendVitals) c.lastVitals = vitals;
-      c.lastStatusSig = statusSig;
-      c.snapSeq = seq;
-      c.stats.snapshots++;
-      this.write(c, bytes);
-    }
-  }
-
-  // TEMP-AB-END
 
   // ------------------------------------------------------------------ output
   private send(c: Client, msg: Message): void {
