@@ -548,3 +548,11 @@ Còn mở / lưu ý:
 - **Chưa có**: chuyển quyền đội trưởng chủ động (`/leader tên`), đội hình / đánh dấu mục tiêu, tìm đội công khai, đội liên bản đồ (hiện chỉ một bản đồ), nhóm chat Đội lưu lịch sử, thông báo ngoại tuyến cho người mời khi bị từ chối (từ chối im lặng với người mời).
 - **Hiển thị**: khung đồng đội là DOM overlay dưới khung người chơi, chưa có icon lớp / icon hiệu ứng (buff / debuff), chưa kéo-thả, chưa có "đồng đội ngoài tầm nhìn" trên minimap; HP / MP gửi 5 Hz khi đổi (không tính vào ngân sách snapshot).
 - **Kỹ năng ngữ cảnh nhóm** (docs/11 §2, `context: group`): server combat chưa biết "còn đồng đội sống" nên mọi kỹ năng ⚑C vẫn chạy nhánh solo; cần `PartyService.membersOf` làm nguồn khi hiện thực.
+
+## Nền đất và khung UI từ Gemini (2026-11-09): còn mở
+
+- Map lát cắt chỉ có nước / đất / cỏ: **chưa có** địa hình đá, đầm lầy, nham thạch. Các họ ghép viền tương ứng (bờ đá, vỏ nham thạch, bờ đầm lầy, 16 Wang mỗi họ) đã được sinh vào `tileset_ext` nhưng client chưa tải; cần bản đồ có các chất liệu đó (bộ sinh bản đồ chỉ có 3 chất liệu).
+- Mỗi ô lặp lại cùng một patch (chu kỳ = một ô, biến thể chỉ khác phần trong ô), nên thấy lưới hình thoi nhạt trên mặt nước / cỏ rộng; muốn bớt cần patch lớn hơn một ô (thêm lớp biến thể theo vị trí ô) hoặc nhiều biến thể hơn.
+- Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
+- `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
+
