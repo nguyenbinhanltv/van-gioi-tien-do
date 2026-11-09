@@ -20,6 +20,8 @@ import { ErrorCode, PROTOCOL_VERSION, encode } from '@vgtd/protocol';
 import { AuthError, type AuthService } from './auth/accounts.js';
 import { TokenError } from './auth/jwt.js';
 import { GATEWAY_CONFIG } from './config.js';
+import { DASHBOARD_CSP, DASHBOARD_HTML, dashboardAllowed } from './telemetry/dashboard.js';
+import type { TelemetryService } from './telemetry/service.js';
 import { WorldFullError, type ClientTransport, type WorldNode } from './world/node.js';
 
 export interface GatewayHandle {
@@ -59,6 +61,10 @@ export interface GatewayOptions {
   helloTimeoutMs?: number;
   /** browser origins allowed to call the HTTP endpoints (the web client is served from another port); default none */
   corsOrigins?: readonly string[];
+  /** telemetry pipeline (D109): account events and the `/dashboard` routes; absent = no dashboard */
+  telemetry?: TelemetryService;
+  /** bearer token for the dashboard; without one only loopback connections are served */
+  dashboardToken?: string;
 }
 
 export function createGateway(auth: AuthService, world: WorldNode, opts: GatewayOptions = {}): GatewayHandle {
@@ -81,6 +87,20 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
             return;
           }
         }
+        if (
+          req.method === 'GET' &&
+          opts.telemetry &&
+          (req.url === '/dashboard' || req.url === '/dashboard/summary.json')
+        ) {
+          if (!dashboardAllowed(req, opts.dashboardToken)) return json(res, 403, { error: 'forbidden' });
+          const headers = { 'cache-control': 'no-store', 'content-security-policy': DASHBOARD_CSP };
+          if (req.url === '/dashboard') {
+            res.writeHead(200, { ...headers, 'content-type': 'text/html; charset=utf-8' });
+            res.end(DASHBOARD_HTML);
+            return;
+          }
+          return json(res, 200, opts.telemetry.summary(), headers);
+        }
         if (req.method === 'GET' && req.url === '/health') {
           return json(res, 200, { ok: true, players: world.clients.size, tick: world.world.tick });
         }
@@ -89,9 +109,11 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           if (!body || typeof body !== 'object') throw new AuthError(400, 'bad_json', 'invalid JSON');
           if (req.url === '/auth/register') {
             const r = await auth.register(body.username, body.password, remoteIp(req));
+            opts.telemetry?.emitAccount(r.accountId, 'account.register', { method: 'password' });
             return json(res, 201, r);
           }
           const r = await auth.login(body.username, body.password, remoteIp(req));
+          opts.telemetry?.emitAccount(r.accountId, 'account.login', { method: 'password' });
           return json(res, 200, r);
         }
         json(res, 404, { error: 'not_found' });

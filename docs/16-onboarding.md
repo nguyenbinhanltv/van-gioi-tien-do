@@ -139,6 +139,8 @@ Thông báo đẩy (Mobile / Web, nếu có): tối đa 1 mỗi ngày, mặc đ�
 
 Tên sự kiện và trường bắt buộc nằm ở [17-telemetry-kpi.md](17-telemetry-kpi.md) §3. Phễu tối thiểu:
 
+> **[Cập nhật D109]** Phễu FTUE hiện đo bằng `ftue.step` (một sự kiện, `step` là id bước của D105: `move`, `field`, `skill`, `kills`, `loot`, `meditate`, `breakthrough` và ba mẹo `item`, `chat`, `party`), `ftue.complete` và `ftue.skip`, hiển thị trên `/dashboard`; các sự kiện `ftue.spirit_root_reveal`, `first_equip` chưa có vì hệ thống đứng sau chưa có.
+
 `session.start` → `account.register` → `character.create` → `ftue.spirit_root_reveal` → `ftue.first_move` → `ftue.first_cultivate` → `ftue.first_kill` → `ftue.first_equip` → `ftue.first_breakthrough` → `ftue.complete`.
 
 Mục tiêu khởi điểm (_Đề xuất_, vì chưa có dữ liệu thật): ≥ 70% người tạo nhân vật xong bước 3 (di chuyển), ≥ 50% hoàn thành FTUE trong phiên đầu, thời gian trung vị hoàn thành FTUE ≤ 32 phút. Theo dõi riêng **PC / Mobile / Web** và **loại Linh căn** để phát hiện chênh lệch (ví dụ Tạp Ngũ rời bỏ nhiều hơn).

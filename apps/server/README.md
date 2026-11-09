@@ -77,3 +77,7 @@ teleport after ~5 s), honest players unaffected, and the speedhackers' observed 
 Caveats, also recorded in `docs/OPEN-ITEMS.md`: one earlier run on a busier machine showed a single 122 ms tick (p99 was
 still 31 ms), so p99 depends on host load; loopback means no real network latency/jitter; the Windows timer makes the
 measured tick _interval_ jitter (p50 ~47 ms, p99 ~63 ms) while the simulation time stays exactly 50 ms/tick.
+
+## Telemetry và dashboard KPI (D109)
+
+Server ghi sự kiện giả danh (không PII, `player_pid` = HMAC của account id) theo danh mục đóng `TELEMETRY_EVENTS` (`@vgtd/shared`), lưu cục bộ (log JSON-lines 90 ngày + `rollups.json`; với `STORE=file` nằm trong `<DATA_DIR>/telemetry/`, kèm `pid.key` mode 0600). Trang KPI: `http://127.0.0.1:<port>/dashboard` (JSON: `/dashboard/summary.json`): CCU, DAU, phễu FTUE, giữ chân D1 / D7 / D30, kinh tế từ sổ cái. Chỉ loopback được xem nếu không đặt `DASHBOARD_TOKEN`; có token thì gửi `Authorization: Bearer` (hoặc mở `/dashboard#token=...`). Xem thử với dữ liệu giả: `npm run dashboard:demo -w @vgtd/server` (thêm `-- --check` để mở bằng Chrome thật và kiểm trang).

@@ -142,7 +142,6 @@ describe('TutorialService: the server decides every step', () => {
     svc.observe(9, 1, 1);
     svc.skip(9);
     expect(svc.stateOf(9)).toBeUndefined();
-    expect(svc.funnel().accounts).toBe(0);
   });
 
   it('progress survives leaving and joining again (same account, new entity id), and counts sessions', () => {
@@ -162,24 +161,28 @@ describe('TutorialService: the server decides every step', () => {
     expect(done(b, 7)).toEqual(['skill', 'kills']);
   });
 
-  it('local counters: the funnel counts accounts, completions, skips, steps and sessions (nothing is emitted anywhere)', () => {
-    const svc = new TutorialService({ mapTiles: MAP });
+  it('reports every finished step once, the completion once and the skip once to onEvent (the telemetry funnel feed)', () => {
+    const reports: Array<[string, unknown]> = [];
+    const svc = new TutorialService({ mapTiles: MAP, onEvent: (acc, r) => reports.push([acc, r]) });
     svc.join(1, 'a');
-    svc.join(2, 'b');
-    svc.join(3, 'c');
+    svc.note(1, 'chat');
+    svc.note(1, 'chat'); // repeated: nothing new
+    expect(reports).toEqual([['a', { kind: 'step', step: 'chat' }]]);
+    reports.length = 0;
     finishRequired(svc, 1);
-    svc.note(2, 'chat');
-    svc.skip(2);
-    svc.leave(3);
-    svc.join(4, 'c');
-    const f = svc.funnel();
-    expect(f).toMatchObject({ accounts: 3, completed: 1, skipped: 1, sessions: 4 });
-    expect(f.completionRate).toBeCloseTo(1 / 3);
-    expect(f.byStep.move).toBe(1);
-    expect(f.byStep.breakthrough).toBe(1);
-    expect(f.byStep.chat).toBe(1);
-    expect(f.byStep.party).toBe(0);
-    expect(new TutorialService({ mapTiles: MAP }).funnel()).toMatchObject({ accounts: 0, completionRate: 0 });
+    const steps = reports
+      .filter(([, r]) => (r as { kind: string }).kind === 'step')
+      .map(([, r]) => (r as { step: string }).step);
+    expect([...steps].sort()).toEqual(['move', 'field', 'skill', 'kills', 'loot', 'meditate', 'breakthrough'].sort());
+    expect(reports.filter(([, r]) => (r as { kind: string }).kind === 'complete')).toHaveLength(1);
+    // the completion comes right after the last required step
+    expect((reports.at(-1)![1] as { kind: string }).kind).toBe('complete');
+    reports.length = 0;
+    svc.skip(1);
+    svc.skip(1);
+    expect(reports).toEqual([
+      ['a', { kind: 'skip', stepsDone: TUTORIAL_STEPS.filter((x) => x !== 'item' && x !== 'party').length }],
+    ]);
   });
 });
 
@@ -350,7 +353,7 @@ describe('FileTutorialStore', () => {
     const b = new TutorialService({ mapTiles: MAP, store: s2 });
     b.join(5, 'acc');
     expect(b.stateOf(5)).toMatchObject({ kills: 1, flags: TUTORIAL_FLAG_SKIPPED });
-    expect(b.funnel()).toMatchObject({ accounts: 1, skipped: 1, sessions: 2 });
+    expect(s2.load('acc')!.sessions).toBe(2);
   });
 
   it('refuses to start over a malformed record instead of silently dropping progress', () => {

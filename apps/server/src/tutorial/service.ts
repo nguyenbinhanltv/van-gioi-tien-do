@@ -9,8 +9,9 @@
  * `complete` is set when every REQUIRED step (`TUTORIAL_REQUIRED_MASK`) is done; the optional tips (item, chat, party) never block it.
  * Skipping hides the hints for good but keeps recording progress (docs/16 §3: skipped steps still count).
  *
- * Counters are LOCAL ONLY: `funnel()` reads the store. docs/17 telemetry is not approved, nothing here is emitted anywhere.
- * Time-free and deterministic: no clock is read; the node feeds events.
+ * Counters live in the telemetry module (D109): every step, the completion and the skip are reported through `onEvent` and become
+ * `ftue.*` events and the dashboard funnel. Nothing leaves the machine. Time-free and deterministic: no clock is read here; the node
+ * feeds events.
  */
 import {
   TUTORIAL,
@@ -28,8 +29,14 @@ import { InMemoryTutorialStore, type TutorialRecord, type TutorialStore } from '
 
 export type TutorialEvent = 'skill' | 'kill' | 'loot' | 'meditate' | 'breakthrough' | 'item' | 'chat' | 'party';
 
+/** What the tracker tells the telemetry pipeline (D109). */
+export type TutorialReport =
+  { kind: 'step'; step: TutorialStepId } | { kind: 'complete' } | { kind: 'skip'; stepsDone: number };
+
 export interface TutorialOptions {
   store?: TutorialStore;
+  /** called after a step finished, the flow completed, or the player skipped (idempotent: each fires once per account) */
+  onEvent?: (accountId: string, report: TutorialReport) => void;
   /** map size in tiles: where the field band starts (`fieldBandStart`) */
   mapTiles?: number;
 }
@@ -40,19 +47,6 @@ interface Session {
   /** where the session started (tiles), for the `move` step; null until the first position is seen */
   start: { i: number; j: number } | null;
   dirty: boolean;
-}
-
-export interface TutorialFunnel {
-  /** accounts that have a record (started the flow at least once) */
-  accounts: number;
-  completed: number;
-  skipped: number;
-  /** accounts that finished each step */
-  byStep: Record<TutorialStepId, number>;
-  /** total sessions started across accounts */
-  sessions: number;
-  /** completed / accounts (0 when there are none): the FTUE completion rate of the docs/10 gate, local only */
-  completionRate: number;
 }
 
 const EVENT_STEP: Record<Exclude<TutorialEvent, 'kill'>, TutorialStepId> = {
@@ -70,10 +64,12 @@ export class TutorialService {
   private readonly sessions = new Map<number, Session>();
   private readonly fieldAt: number;
   private readonly mapTiles: number;
+  private readonly onEvent: ((accountId: string, report: TutorialReport) => void) | undefined;
 
   constructor(opts: TutorialOptions = {}) {
     this.store = opts.store ?? new InMemoryTutorialStore();
     this.mapTiles = opts.mapTiles ?? 256;
+    this.onEvent = opts.onEvent;
     this.fieldAt = fieldBandStart(this.mapTiles) + FIRST_SESSION.fieldMarginTiles;
   }
 
@@ -137,6 +133,9 @@ export class TutorialService {
     s.rec.skipped = true;
     s.dirty = true;
     this.persist(s);
+    let n = 0;
+    for (const id of TUTORIAL_STEPS) if (this.hasStep(s, id)) n++;
+    this.onEvent?.(s.accountId, { kind: 'skip', stepsDone: n });
   }
 
   private hasStep(s: Session, id: TutorialStepId): boolean {
@@ -147,9 +146,12 @@ export class TutorialService {
     if (this.hasStep(s, id)) return;
     s.rec.done |= tutorialBit(id);
     if (id === 'kills') s.rec.kills = TUTORIAL.killTarget;
-    if (!s.rec.complete && (s.rec.done & TUTORIAL_REQUIRED_MASK) === TUTORIAL_REQUIRED_MASK) s.rec.complete = true;
+    const wasComplete = s.rec.complete;
+    if (!wasComplete && (s.rec.done & TUTORIAL_REQUIRED_MASK) === TUTORIAL_REQUIRED_MASK) s.rec.complete = true;
     s.dirty = true;
     this.persist(s);
+    this.onEvent?.(s.accountId, { kind: 'step', step: id });
+    if (!wasComplete && s.rec.complete) this.onEvent?.(s.accountId, { kind: 'complete' });
   }
 
   private persist(s: Session): void {
@@ -171,29 +173,6 @@ export class TutorialService {
       out.push({ entityId, msg: toMsg(s.rec) });
     }
     return out;
-  }
-
-  // ------------------------------------------------------------------ local counters
-  funnel(): TutorialFunnel {
-    const rows = this.store.all();
-    const byStep = Object.fromEntries(TUTORIAL_STEPS.map((id) => [id, 0])) as Record<TutorialStepId, number>;
-    let completed = 0;
-    let skipped = 0;
-    let sessions = 0;
-    for (const r of rows) {
-      if (r.complete) completed++;
-      if (r.skipped) skipped++;
-      sessions += r.sessions;
-      for (const id of TUTORIAL_STEPS) if (r.done & tutorialBit(id)) byStep[id]++;
-    }
-    return {
-      accounts: rows.length,
-      completed,
-      skipped,
-      byStep,
-      sessions,
-      completionRate: rows.length ? completed / rows.length : 0,
-    };
   }
 }
 

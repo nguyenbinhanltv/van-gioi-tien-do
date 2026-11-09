@@ -38,6 +38,8 @@ import {
   type Docs,
   type FileStores,
   TutorialService,
+  TelemetryService,
+  openTelemetryFiles,
 } from '../src/index.js';
 import { TEST_ONLY_GOOD } from './fixtures.js';
 
@@ -275,6 +277,33 @@ describe('the document list cannot drift from the file store', () => {
       .sort();
     expect(onDisk).toEqual([...STORE_DOC_NAMES].sort());
     expect([...DOC_NAMES]).toEqual([...STORE_DOC_NAMES]);
+  });
+
+  it('telemetry (D109) lives in its own subdirectory and is deliberately NOT a store document: no backup carries it and a restore leaves it alone', async () => {
+    const dir = tmp();
+    const w = open(dir);
+    const tf = openTelemetryFiles(dir, { flushMs: -1 });
+    const tel = new TelemetryService({ key: tf.key, log: tf.log, rollups: tf.rollups });
+    tel.sessionStart('acc-x', 1);
+    tf.flush();
+    await playFirstSession(w);
+    const keyBefore = read(join(dir, 'telemetry', 'pid.key'));
+    // not a top-level document, so the drift list is unaffected (a stray `telemetry/` directory is no `*.json`)
+    expect(
+      readdirSync(dir)
+        .filter((n) => n.endsWith('.json'))
+        .sort(),
+    ).toEqual([...STORE_DOC_NAMES].sort());
+    const info = createBackup(
+      join(dir, 'backups'),
+      w.stores.snapshot(() => w.inv.flushAll()),
+      { now: at(9) },
+    );
+    expect(readdirSync(info.dir).sort()).toEqual(['manifest.json', ...STORE_DOC_NAMES].sort());
+    expect(readFileSync(join(info.dir, 'manifest.json'), 'utf8')).not.toMatch(/telemetry|pid\.key|rollups/);
+    restoreBackup(info.dir, dir, { liveWindowMs: 0 });
+    expect(read(join(dir, 'telemetry', 'pid.key'))).toBe(keyBefore); // the pseudonym key survives a restore: retention keeps its continuity
+    expect(existsSync(join(dir, 'telemetry', 'rollups.json'))).toBe(true);
   });
 
   it('verify flags sect members and friend entries that name a missing account (counts only) and a restore into a new directory brings both documents back', async () => {

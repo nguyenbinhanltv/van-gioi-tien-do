@@ -21,6 +21,7 @@ export * from './mob-layout.js';
 export * from './first-session.js';
 export * from './tutorial.js';
 export * from './sect-layout.js';
+export * from './telemetry.js';
 export * from './mob-attacks.js';
 export * from './breakthrough-event.js';
 export * from './items.js';
