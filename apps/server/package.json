@@ -18,7 +18,8 @@
     "backups": "node scripts/ops.mjs list",
     "p2exit": "node scripts/p2-exit.mjs",
     "bench:tick": "node scripts/bench-tick.mjs",
-    "soak": "node scripts/soak.mjs"
+    "soak": "node scripts/soak.mjs",
+    "dashboard:demo": "node scripts/dashboard-demo.mjs"
   },
   "dependencies": {
     "@vgtd/protocol": "*",

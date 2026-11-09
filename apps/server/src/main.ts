@@ -3,6 +3,7 @@ import { jsonLineSink } from './world/security-log.js';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createBackup, openFileStores } from './persistence/index.js';
+import { TelemetryService, openTelemetryFiles } from './telemetry/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
 import { TileGrid } from '@vgtd/sim';
@@ -59,11 +60,22 @@ if (process.env.SECT_BUILDINGS !== '0') {
   const n = terrainRows?.length ?? mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES;
   grid = TileGrid.fromRows(blockSectBuildings(terrainRows ?? openRows(n)));
 } else if (terrainRows) grid = TileGrid.fromRows(terrainRows);
+// telemetry (D109): local-only pseudonymous event log + rollups + KPI dashboard at /dashboard; files under DATA_DIR/telemetry with STORE=file
+const telemetryFiles = stores
+  ? openTelemetryFiles(stores.dir, { onError: (e) => console.error('[vgtd/server] telemetry write failed:', e) })
+  : null;
+const telemetry = new TelemetryService(
+  telemetryFiles ? { key: telemetryFiles.key, log: telemetryFiles.log, rollups: telemetryFiles.rollups } : {},
+);
+// the instance above goes in through `world.telemetry`: `startServer` prefers it, wires the ledger and the gateway to it, and main.ts keeps
+// the handle to flush and read it
 const srv = await startServer({
+  dashboardToken: process.env.DASHBOARD_TOKEN || undefined,
   port,
   host: process.env.HOST ?? '127.0.0.1',
   gateway: { corsOrigins },
   world: {
+    telemetry,
     mapTiles,
     grid,
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
@@ -103,6 +115,12 @@ const srv = await startServer({
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
     ...(stores ? { store: stores.progression } : {}),
   },
+  // tutorial progress is stored with the other documents when STORE=file (D105); its steps feed the telemetry funnel (D109)
+  tutorial: {
+    mapTiles,
+    onEvent: (account, report) => telemetry.ftue(account, report),
+    ...(stores ? { store: stores.tutorial } : {}),
+  },
 });
 if (stores) {
   console.log(`[vgtd/server] STORE=file: data in ${stores.dir}`);
@@ -140,11 +158,19 @@ const shutdown = async (reason: string): Promise<void> => {
   closing = true;
   console.log(`[vgtd/server] ${reason}: ${stores ? 'saving and ' : ''}stopping`);
   await srv.stop().catch(() => undefined);
+  // local-only first-session funnel (D105 / D109): printed here, never sent anywhere
+  const f = telemetry.summary().ftue;
+  if (f.started > 0)
+    console.log(
+      `[vgtd/server] FTUE: ${f.completed}/${f.started} completed (${Math.round((f.completionRate ?? 0) * 100)}%), ${f.skipped} skipped; steps ${JSON.stringify(Object.fromEntries(f.steps.map((x) => [x.step, x.players])))}`,
+    );
+  telemetry.flush();
   if (stores) {
     await new Promise((r) => setTimeout(r, 100));
     srv.world.inventory?.flushAll();
     stores.flush();
     if (process.env.BACKUP_ON_EXIT === '1') backupNow('exit');
+    telemetryFiles?.flush();
   }
   process.exit(0);
 };

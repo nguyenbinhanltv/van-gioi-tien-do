@@ -37,6 +37,9 @@ import {
   type BackupManifest,
   type Docs,
   type FileStores,
+  TutorialService,
+  TelemetryService,
+  openTelemetryFiles,
 } from '../src/index.js';
 import { TEST_ONLY_GOOD } from './fixtures.js';
 
@@ -62,6 +65,8 @@ interface World {
   stores: FileStores;
   inv: InventoryService;
   auth: AuthService;
+  /** the tutorial tracker over the tutorial document (D105): without it `tutorial.json` would never be written and the drift test could not see it */
+  tutorial: TutorialService;
   ids: Record<string, string>;
 }
 
@@ -70,7 +75,8 @@ function open(dir: string): World {
   const stores = openFileStores(dir, { flushMs: -1 });
   const inv = new InventoryService({ store: stores.inventories, ledger: stores.ledger });
   const auth = new AuthService({ store: stores.accounts, scrypt: FAST, registerPerIpPerDay: 0 });
-  return { stores, inv, auth, ids: {} };
+  const tutorial = new TutorialService({ mapTiles: 256, store: stores.tutorial });
+  return { stores, inv, auth, tutorial, ids: {} };
 }
 async function playFirstSession(w: World): Promise<void> {
   for (const name of ['alice_a', 'bob_b']) {
@@ -98,6 +104,13 @@ async function playFirstSession(w: World): Promise<void> {
       key,
     );
   }
+  // tutorial progress (D105): alice finished two steps and one kill, bob skipped; through the real service on the real store
+  w.tutorial.join(1, w.ids.alice_a!);
+  w.tutorial.note(1, 'chat');
+  w.tutorial.note(1, 'meditate');
+  w.tutorial.note(1, 'kill');
+  w.tutorial.join(2, w.ids.bob_b!);
+  w.tutorial.skip(2);
   // a sect join with a bought manual (D98) and a friendship plus a pending request (D96): the documents the review found missing from the first D99
   // draft. Written through the stores the services sit on, so the test needs no sockets.
   w.stores.sect.save({ members: [w.ids.alice_a!], manuals: [[w.ids.alice_a!, 'kiem_manual_1']] });
@@ -131,6 +144,7 @@ function stateOf(w: World): unknown {
       .filter(Boolean)
       .map((a) => ({ ...a! })),
     records: ['alice_a', 'bob_b'].map((n) => JSON.stringify(w.stores.progression['rows'].get(w.ids[n]!) ?? null)),
+    tutorial: ['alice_a', 'bob_b'].map((n) => JSON.stringify(w.stores.tutorial.load(w.ids[n]!) ?? null)),
     bags: ['alice_a', 'bob_b'].map((n) => JSON.stringify(w.stores.inventories.load(w.ids[n]!) ?? null)),
     wallets: ['alice_a', 'bob_b'].map((n) => String(w.inv.wallet(w.ids[n]!, HA))),
     ledger: JSON.stringify(w.stores.ledger.snapshot()),
@@ -263,6 +277,33 @@ describe('the document list cannot drift from the file store', () => {
       .sort();
     expect(onDisk).toEqual([...STORE_DOC_NAMES].sort());
     expect([...DOC_NAMES]).toEqual([...STORE_DOC_NAMES]);
+  });
+
+  it('telemetry (D109) lives in its own subdirectory and is deliberately NOT a store document: no backup carries it and a restore leaves it alone', async () => {
+    const dir = tmp();
+    const w = open(dir);
+    const tf = openTelemetryFiles(dir, { flushMs: -1 });
+    const tel = new TelemetryService({ key: tf.key, log: tf.log, rollups: tf.rollups });
+    tel.sessionStart('acc-x', 1);
+    tf.flush();
+    await playFirstSession(w);
+    const keyBefore = read(join(dir, 'telemetry', 'pid.key'));
+    // not a top-level document, so the drift list is unaffected (a stray `telemetry/` directory is no `*.json`)
+    expect(
+      readdirSync(dir)
+        .filter((n) => n.endsWith('.json'))
+        .sort(),
+    ).toEqual([...STORE_DOC_NAMES].sort());
+    const info = createBackup(
+      join(dir, 'backups'),
+      w.stores.snapshot(() => w.inv.flushAll()),
+      { now: at(9) },
+    );
+    expect(readdirSync(info.dir).sort()).toEqual(['manifest.json', ...STORE_DOC_NAMES].sort());
+    expect(readFileSync(join(info.dir, 'manifest.json'), 'utf8')).not.toMatch(/telemetry|pid\.key|rollups/);
+    restoreBackup(info.dir, dir, { liveWindowMs: 0 });
+    expect(read(join(dir, 'telemetry', 'pid.key'))).toBe(keyBefore); // the pseudonym key survives a restore: retention keeps its continuity
+    expect(existsSync(join(dir, 'telemetry', 'rollups.json'))).toBe(true);
   });
 
   it('verify flags sect members and friend entries that name a missing account (counts only) and a restore into a new directory brings both documents back', async () => {

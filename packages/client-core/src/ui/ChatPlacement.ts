@@ -71,3 +71,30 @@ export function partyFramesPlacement(
   const gap = Math.round(8 * res.scale);
   return { x: pf.x, y: pf.y + pf.h + gap, w: pf.w, rowH: Math.round(PARTY_ROW_HEIGHT * res.scale), scale: res.scale };
 }
+
+export interface TutorialHintPlacement {
+  /** the card, CSS px */
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  scale: number;
+}
+
+/** Where the tutorial hint card (D105) sits: the shared `tutorial-hint` widget of the current profile (top centre, under the target frame). */
+export function tutorialHintPlacement(
+  vw: number,
+  vh: number,
+  touch: boolean,
+  insets: Insets = { top: 0, right: 0, bottom: 0, left: 0 },
+): TutorialHintPlacement {
+  const opts: Required<AnchorLayoutOptions> = {
+    refLandscape: [1280, 720],
+    refPortrait: [720, 1280],
+    userScale: 1,
+    touchMargin: 16,
+  };
+  const res = AnchorLayout.compute(vw, vh, insets, touch ? 'touch' : 'pointer', DEFAULT_PROFILES, opts);
+  const r = res.rects.get('tutorial-hint') ?? { x: res.safe.x, y: res.safe.y, w: 0, h: 0 };
+  return { ...r, scale: res.scale };
+}

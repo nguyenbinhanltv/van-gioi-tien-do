@@ -185,6 +185,7 @@ export const DEFAULT_PROFILES: Partial<Record<ProfileKey, WidgetSpec[]>> = {
   'pointer-landscape': [
     { id: 'player-frame', anchor: 'top-left', offset: [16, 16], size: [260, 64] },
     { id: 'target-frame', anchor: 'top', offset: [0, 16], size: [300, 56] },
+    { id: 'tutorial-hint', anchor: 'top', offset: [0, 80], size: [440, 76] }, // FTUE hint card (D105)
     { id: 'minimap', anchor: 'top-right', offset: [16, 16], size: [200, 200] },
     { id: 'chat', anchor: 'bottom-left', offset: [16, 16], size: [360, 200] },
     { id: 'vitals', anchor: 'bottom', offset: [0, 72], size: [480, 20] },
@@ -194,6 +195,7 @@ export const DEFAULT_PROFILES: Partial<Record<ProfileKey, WidgetSpec[]>> = {
   'touch-landscape': [
     { id: 'player-frame', anchor: 'top-left', offset: [16, 16], size: [260, 64] },
     { id: 'target-frame', anchor: 'top', offset: [0, 16], size: [280, 52] },
+    { id: 'tutorial-hint', anchor: 'top', offset: [0, 76], size: [400, 76] },
     { id: 'minimap', anchor: 'top-right', offset: [16, 16], size: [160, 160] },
     { id: 'chat-ticker', anchor: 'left', offset: [16, 40], size: [360, 48] },
     { id: 'joystick-zone', anchor: 'bottom-left', offset: [0, 0], size: [512, 400] },
@@ -204,6 +206,7 @@ export const DEFAULT_PROFILES: Partial<Record<ProfileKey, WidgetSpec[]>> = {
     { id: 'player-frame', anchor: 'top-left', offset: [16, 16], size: [300, 72] },
     { id: 'minimap', anchor: 'top-right', offset: [16, 16], size: [180, 180] },
     { id: 'target-frame', anchor: 'top', offset: [0, 104], size: [400, 56] },
+    { id: 'tutorial-hint', anchor: 'top', offset: [0, 216], size: [688, 84] },
     { id: 'chat-ticker', anchor: 'bottom', offset: [16, 560], size: [688, 56], stretchX: true },
     { id: 'joystick-zone', anchor: 'bottom-left', offset: [0, 0], size: [360, 520] },
     { id: 'skill-wheel', anchor: 'bottom-right', offset: [16, 24], size: [340, 340] },

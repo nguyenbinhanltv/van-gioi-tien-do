@@ -38,6 +38,7 @@ import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
+import { TutorialHints, tutorialRequested } from './TutorialHints';
 import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
@@ -107,6 +108,7 @@ export class Bootstrap extends Component {
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
+  private tutorialHints: TutorialHints | null = null;
   private tradePanel: TradePanel | null = null;
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
@@ -356,6 +358,7 @@ export class Bootstrap extends Component {
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
+      if (tutorialRequested()) this.tutorialHints = new TutorialHints(this.online.net); // server-tracked FTUE hints (D105)
       // trade panel (D102): opens by itself with a window / an invite, or with T and /trade; its buttons run the lines the player could type
       const net = this.online.net;
       this.tradePanel = new TradePanel(chat.trade, {
@@ -641,6 +644,10 @@ export class Bootstrap extends Component {
     this.tribulationFx?.update(dt);
     this.chatBox?.update();
     this.partyFrames?.update();
+    if (this.tutorialHints) {
+      this.tutorialHints.update(dt);
+      this.firstSession?.suppress(this.tutorialHints.active); // the server's tracker replaces the old client-side checklist
+    }
     this.tradePanel?.update();
     this.sectPanel?.update();
     this.friendsPanel?.update();
@@ -695,6 +702,7 @@ export class Bootstrap extends Component {
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
+    this.tutorialHints?.destroy();
     this.tradePanel?.destroy();
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
