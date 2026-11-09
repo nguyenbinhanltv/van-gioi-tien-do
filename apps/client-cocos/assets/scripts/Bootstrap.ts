@@ -31,6 +31,7 @@ import { CHIBI_CLASSES, ChibiBody, chibiIdOfPath, pathOfChibiId } from './ChibiB
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
+import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
@@ -71,6 +72,9 @@ export class Bootstrap extends Component {
   private route: RouteWalker | null = null;
   /** `?combat=1`: combat HUD skeleton + offline mock combat loop (P3 client groundwork). */
   private combat: CombatUi | null = null;
+  /** Touch input: the skill wheel (drawn from client-core's TouchController) + drag-to-aim; built once the combat HUD exists. */
+  private wheel: SkillWheel | null = null;
+  private wheelTouch: boolean | null = null;
   private combatOn = false;
   /** the bag (key B): the server's inventory when online, a local sample with `#bagdemo` */
   private bagPanel: BagPanel | null = null;
@@ -461,6 +465,34 @@ export class Bootstrap extends Component {
     return shared.tileToScreen(p.i, p.j);
   }
 
+  /**
+   * Touch input mode: the wheel replaces the bottom hotbar, and the casts the TouchController produced (tap = auto-target, drag = aim point)
+   * go to the combat HUD. Pointer mode (desktop) never reads `frame.casts`: keys 1-8 and the hotbar are handled by CombatUi itself.
+   */
+  private updateSkillWheel(frame: ReturnType<InputBridge['poll']>): void {
+    const combat = this.combat;
+    if (!combat) return;
+    const touch = this.input.input.mode === 'touch';
+    if (touch !== this.wheelTouch) {
+      this.wheelTouch = touch;
+      combat.setTouchMode(touch);
+    }
+    if (!this.wheel)
+      this.wheel = new SkillWheel(
+        this.uiRoot!,
+        this.worldRootNode!,
+        this.artFrames!,
+        combat,
+        () => this.input.input.touch,
+        () => this.input.input.mode === 'touch',
+        () => this.player.pos,
+        (x, y) => this.rig.clientToUi(x, y),
+      );
+    (globalThis as unknown as Record<string, unknown>).__vgtdZoom = () => this.rig.zoom; // automation: pinch check
+    if (touch) for (const c of frame.casts) combat.castFromWheel(c.slot, c.aimTile);
+    this.wheel.update();
+  }
+
   update(dt: number): void {
     if (!this.ready) return;
     dt = Math.min(dt, 0.05);
@@ -485,6 +517,7 @@ export class Bootstrap extends Component {
     }
     this.applyServerClass();
     this.combat?.update(dt, frame.target);
+    this.updateSkillWheel(frame);
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
