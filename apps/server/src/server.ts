@@ -14,7 +14,7 @@ export interface ServerOptions {
   progression?: ProgressionOptions | false;
   /** chat options, or `false` to run without chat (default: enabled, in-memory) */
   chat?: ChatOptions | false;
-  /** `false` to run without parties (default: enabled, in-memory, session-only: D92) */
+  /** `false` to run without parties (default: enabled, in-memory, session-only: D93) */
   party?: false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */

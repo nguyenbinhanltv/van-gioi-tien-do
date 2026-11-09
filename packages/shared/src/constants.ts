@@ -259,7 +259,7 @@ export const SUB_STAGE_NAMES: readonly string[] = ['sơ kỳ', 'trung kỳ', 'h�
 export const SPRITE_SMOOTH_FPS = 24;
 
 /**
- * Party (D92, docs/10 §7.1 P4 "Tổ đội (4)"). Size 4 comes from docs/10 / docs/07 §6; the rest are PLACEHOLDERS "cần game designer duyệt".
+ * Party (D93, docs/10 §7.1 P4 "Tổ đội (4)"). Size 4 comes from docs/10 / docs/07 §6; the rest are PLACEHOLDERS "cần game designer duyệt".
  * Session-only: a party is never persisted.
  */
 export const PARTY = {

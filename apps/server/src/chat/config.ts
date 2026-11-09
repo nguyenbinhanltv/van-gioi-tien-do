@@ -8,7 +8,7 @@ export const CHAT_CONFIG = {
     world: { refillMs: 5000, burst: 2 },
     zone: { refillMs: 2000, burst: 3 },
     whisper: { refillMs: 2000, burst: 3 },
-    /** party (D92): same placeholder rate as zone / whisper */
+    /** party (D93): same placeholder rate as zone / whisper */
     party: { refillMs: 2000, burst: 3 },
   },
   /** lines kept for the World channel (docs/22 §7: ring of 200 per channel) */

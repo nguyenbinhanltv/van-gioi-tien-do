@@ -208,7 +208,7 @@ export interface WorldNodeOptions {
   progression?: ProgressionService;
   /** chat module (D87): World / Zone / Whisper channels; absent = chat messages are rejected as unexpected */
   chat?: ChatService;
-  /** party module (D92): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
+  /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
   party?: PartyService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
@@ -870,7 +870,7 @@ export class WorldNode {
 
   /**
    * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
-   * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D92, "cần game designer duyệt").
+   * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
    */
   private creditGroupOf(killerId: number): number[] {
     const members = this.party?.membersOf(killerId) ?? [];

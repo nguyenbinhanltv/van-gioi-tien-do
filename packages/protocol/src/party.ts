@@ -1,5 +1,5 @@
 /**
- * Party ("cold family", D92; docs/10 §7.1 P4). Same `[ver][0x80][msgId u16][body]` envelope and strict fixed big-endian bodies as chat.ts.
+ * Party ("cold family", D93; docs/10 §7.1 P4). Same `[ver][0x80][msgId u16][body]` envelope and strict fixed big-endian bodies as chat.ts.
  *
  *   party_cmd     C->S  one command: op, clientMsgId (echoed in the result), other player's name (invite / kick / which invite to answer)
  *   party_result  S->C  answer to every party_cmd (0 = done), so a refusal is never silent

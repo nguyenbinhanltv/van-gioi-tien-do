@@ -41,7 +41,7 @@ export interface ChatHost {
   deliver(entityId: number, msg: ChatMsgMsg): void;
   /** tile position of a player, undefined when gone */
   posOf(entityId: number): { i: number; j: number } | undefined;
-  /** members of the party `entityId` is in (itself included), `[]` when in none: the Party channel's audience (D92) */
+  /** members of the party `entityId` is in (itself included), `[]` when in none: the Party channel's audience (D93) */
   partyMembers?(entityId: number): readonly number[];
 }
 

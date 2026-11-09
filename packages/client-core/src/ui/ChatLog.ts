@@ -4,6 +4,7 @@
  * The server stays authoritative: this only guards obvious mistakes locally (empty, over 256 bytes, unknown command) so the player gets an
  * answer without a round trip; everything else (rate limit, mute, filter, whisper target) is decided and answered by the server.
  *
+ * Party (D93): `/p text` party channel; `/invite name`, `/accept [name]`, `/decline [name]`, `/leave`, `/kick name` are party commands.
  * Commands: plain text = World channel; `/z text` Zone (everyone who can see you); `/w name text` whisper; `/r text` reply to the last
  * player who whispered you; `//text` sends a World line that starts with a slash; `/help`.
  */
@@ -11,13 +12,14 @@ import {
   CHAT_LIMITS,
   ChatChannel,
   ChatReason,
+  PartyOp,
   type ChatHistoryMsg,
   type ChatLine,
   type ChatMsgMsg,
   type ChatResultMsg,
 } from '@vgtd/protocol';
 
-export type ChatTone = 'world' | 'zone' | 'whisper' | 'system' | 'error';
+export type ChatTone = 'world' | 'zone' | 'whisper' | 'party' | 'system' | 'error';
 
 export interface ChatEntry {
   /** increasing, for UI diffing */
@@ -45,13 +47,15 @@ export const CHAT_REASON_TEXT: Readonly<Record<number, string>> = {
 export const CHAT_HELP = [
   'Chat: gõ nội dung để nói ở kênh Thế giới.',
   '/z nội dung: kênh Vùng (người ở gần bạn) · /w tên nội dung: nhắn riêng · /r nội dung: trả lời người vừa nhắn · //nội dung: gửi tin bắt đầu bằng dấu /',
+  'Tổ đội: /invite tên · /accept [tên] · /decline [tên] · /leave · /kick tên (đội trưởng) · /p nội dung: chat tổ đội',
 ].join('\n');
 
 export type ParsedChatInput =
   | { kind: 'empty' }
   | { kind: 'help' }
   | { kind: 'error'; message: string }
-  | { kind: 'send'; channel: number; target: string; text: string };
+  | { kind: 'send'; channel: number; target: string; text: string }
+  | { kind: 'party'; op: number; name: string };
 
 const utf8Bytes = (s: string): number => new TextEncoder().encode(s).length;
 
@@ -81,6 +85,32 @@ export function parseChatInput(raw: string, ctx: { lastWhisperFrom?: string | nu
     case 'world':
     case 'tg':
       return send(ChatChannel.World, rest);
+    case 'p':
+    case 'party':
+    case 'd':
+      return send(ChatChannel.Party, rest);
+    case 'invite':
+    case 'inv':
+    case 'moi':
+    case 'kick': {
+      const name = rest.trim().split(/\s+/)[0] ?? '';
+      if (!name) return { kind: 'error', message: `Dùng: /${cmd} tên` };
+      if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
+      return { kind: 'party', op: cmd === 'kick' ? PartyOp.Kick : PartyOp.Invite, name };
+    }
+    case 'accept':
+    case 'ac':
+    case 'dongy':
+    case 'decline':
+    case 'dc':
+    case 'tuchoi': {
+      const name = rest.trim().split(/\s+/)[0] ?? '';
+      if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
+      return { kind: 'party', op: cmd === 'accept' || cmd === 'ac' || cmd === 'dongy' ? PartyOp.Accept : PartyOp.Decline, name };
+    }
+    case 'leave':
+    case 'roi':
+      return { kind: 'party', op: PartyOp.Leave, name: '' };
     case 'w':
     case 't':
     case 'whisper': {
@@ -109,7 +139,7 @@ const CHANNEL_TONE: Readonly<Record<number, ChatTone>> = {
   [ChatChannel.World]: 'world',
   [ChatChannel.Zone]: 'zone',
   [ChatChannel.Whisper]: 'whisper',
-  [ChatChannel.Party]: 'zone',
+  [ChatChannel.Party]: 'party',
 };
 
 export interface ChatLogOptions {
@@ -120,6 +150,7 @@ export interface ChatLogOptions {
 }
 
 export type SendChat = (m: { channel: number; text: string; target: string; clientMsgId: number }) => boolean;
+export type SendParty = (m: { op: number; name: string; clientMsgId: number }) => boolean;
 
 export class ChatLog {
   readonly entries: ChatEntry[] = [];
@@ -181,7 +212,7 @@ export class ChatLog {
    * What the player typed. Local mistakes and `/help` are answered here; a good line goes to `send` (false = socket closed -> told so).
    * Returns true when something was sent.
    */
-  submit(raw: string, send: SendChat): boolean {
+  submit(raw: string, send: SendChat, sendParty?: SendParty): boolean {
     const p = parseChatInput(raw, { lastWhisperFrom: this.lastWhisperFrom });
     switch (p.kind) {
       case 'empty':
@@ -192,6 +223,15 @@ export class ChatLog {
       case 'error':
         this.system(p.message, 'error');
         return false;
+      case 'party': {
+        if (!sendParty) {
+          this.system('Tổ đội chưa dùng được.', 'error');
+          return false;
+        }
+        const ok = sendParty({ op: p.op, name: p.name, clientMsgId: this.nextClientMsgId() });
+        if (!ok) this.system('Chưa kết nối máy chủ.', 'error');
+        return ok;
+      }
       case 'send': {
         const ok = send({ channel: p.channel, text: p.text, target: p.target, clientMsgId: this.nextClientMsgId() });
         if (!ok) this.system('Chưa kết nối máy chủ.', 'error');

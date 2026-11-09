@@ -98,7 +98,7 @@ export interface CombatOptions {
   /** Is this player meditating (progression)? Meditation raises out-of-combat MP regeneration (D88). Default: never. */
   isMeditating?: (id: number) => boolean;
   /**
-   * The players who share the credit of a kill by `killerId` (D92): the killer's party members that are close enough, the killer included,
+   * The players who share the credit of a kill by `killerId` (D93): the killer's party members that are close enough, the killer included,
    * ascending. Each one gets a separate drop roll with `partySize` = the group size (docs/07 §6, personal loot x 1/sqrt(n)). Default: just the killer.
    */
   partyOf?: (killerId: number) => readonly number[];

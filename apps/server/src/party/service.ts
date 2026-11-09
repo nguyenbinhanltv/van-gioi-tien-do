@@ -1,5 +1,5 @@
 /**
- * PartyService (D92, docs/10 §7.1 P4 "Tổ đội (4)"): invite / accept / decline / leave / kick, one leader, at most `PARTY.MAX_SIZE` members.
+ * PartyService (D93, docs/10 §7.1 P4 "Tổ đội (4)"): invite / accept / decline / leave / kick, one leader, at most `PARTY.MAX_SIZE` members.
  * Session-only by design: parties live in RAM, a disconnect is a leave, nothing is persisted (the persistence files belong to other workers).
  *
  * Authority: every actor is whoever the connection authenticated as; names only select the OTHER player. An unknown and an offline name give
@@ -194,6 +194,12 @@ export class PartyService {
       return PartyReason.NoInvite;
     }
     let party = this.parties.get(this.partyOf.get(from.entityId) ?? -1);
+    // an invite is only good while its sender could still send it: alone, or leading their party. A sender who has since been demoted
+    // (leadership handed over) or who joined someone else's party cannot pull people into it with an old invite.
+    if (party && party.leader !== from.entityId) {
+      this.drop(me, hit.list, hit.at);
+      return PartyReason.NoInvite;
+    }
     if (party && party.members.length >= PARTY.MAX_SIZE) return PartyReason.PartyFull;
     this.drop(me, hit.list, hit.at);
     if (!party) {

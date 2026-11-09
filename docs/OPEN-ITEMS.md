@@ -509,3 +509,12 @@ Còn mở / lưu ý:
 - Chưa có telegraph cho boss có bộ kỹ năng riêng và các hiệu ứng (vũng độc, triệu hồi) vì server chưa mô phỏng chúng (xem mục 11).
 - Chưa gộp nhiều telegraph cùng lúc (bầy quái): mỗi đòn một khung 20 B. Nếu đo thực tế thấy tốn, gộp theo tick.
 - Đã có smoke test trình duyệt thật `npm run telegraph:online -w client-cocos` (decal hiện khi `telegraph_start` tới, biến mất khi đòn kết thúc); nó đếm điểm ảnh đỏ nên chỉ là kiểm tra thô, chưa đánh giá thẩm mỹ / độ rõ của decal trên mọi nền bản đồ.
+
+## 21. Tổ đội (D93, worker35): còn mở
+
+- **Chia chiến lợi phẩm là PLACEHOLDER**: mỗi người trong 20 ô tự roll với hệ số 1/√n (docs/07 §6). Cần game designer duyệt: bán kính chia, có tính người đã chết / ngoại tuyến không, nhặt chung hay riêng (Need / Greed), chia **kinh nghiệm** (MVP chưa có XP khi hạ quái), boss bí cảnh "1 lần mỗi tuần mỗi người" khi đi đội.
+- **Hạn mức là đề xuất**: 1 lệnh / s bùng nổ 5 theo tài khoản; lời mời sống 30 s, tối đa 4 lời mời treo mỗi người; giải tán khi còn 1 người; nhường đội trưởng cho người vào lâu nhất. Chưa có "đồng ý tự nhận lời mời của bạn bè", chưa có cấm nhận lời mời / chặn người chơi (OPEN-ITEMS 20).
+- **Chỉ trong phiên**: đội tan khi ngắt kết nối hoặc server khởi động lại; resume trong cửa sổ giữ chỗ vẫn tính là **chưa** ngắt kết nối (đội giữ nguyên), nhưng chưa có test cho trường hợp này. Chưa lưu bền (cần bàn với nhóm lưu trữ).
+- **Chưa có**: chuyển quyền đội trưởng chủ động (`/leader tên`), đội hình / đánh dấu mục tiêu, tìm đội công khai, đội liên bản đồ (hiện chỉ một bản đồ), nhóm chat Đội lưu lịch sử, thông báo ngoại tuyến cho người mời khi bị từ chối (từ chối im lặng với người mời).
+- **Hiển thị**: khung đồng đội là DOM overlay dưới khung người chơi, chưa có icon lớp / icon hiệu ứng (buff / debuff), chưa kéo-thả, chưa có "đồng đội ngoài tầm nhìn" trên minimap; HP / MP gửi 5 Hz khi đổi (không tính vào ngân sách snapshot).
+- **Kỹ năng ngữ cảnh nhóm** (docs/11 §2, `context: group`): server combat chưa biết "còn đồng đội sống" nên mọi kỹ năng ⚑C vẫn chạy nhánh solo; cần `PartyService.membersOf` làm nguồn khi hiện thực.

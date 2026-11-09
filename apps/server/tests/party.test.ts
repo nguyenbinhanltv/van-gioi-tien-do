@@ -112,6 +112,24 @@ describe('invite / accept / decline', () => {
     expect(r.party.partyCount).toBe(0);
   });
 
+  it('an invite whose sender is no longer solo or leader is void (a non-leader cannot pull people in with an old invite)', () => {
+    const r = rig();
+    r.cmd(1, PartyOp.Invite, 'carol'); // alice, alone, invites carol
+    r.cmd(2, PartyOp.Invite, 'alice'); // bob invites alice, who joins bob's party as a plain member
+    expect(r.cmd(1, PartyOp.Accept, 'bob')).toBe(PartyReason.Ok);
+    expect(r.party.leaderOf(1)).toBe(2);
+    expect(r.cmd(3, PartyOp.Accept, 'alice')).toBe(PartyReason.NoInvite);
+    expect(r.party.partyIdOf(3)).toBe(0);
+    expect(r.party.membersOf(2)).toEqual([1, 2]);
+    // while the sender still leads, an invite stays good even after the party formed around them
+    const s = rig();
+    s.cmd(1, PartyOp.Invite, 'bob');
+    s.cmd(1, PartyOp.Invite, 'carol');
+    expect(s.cmd(2, PartyOp.Accept, 'alice')).toBe(PartyReason.Ok);
+    expect(s.cmd(3, PartyOp.Accept, 'alice')).toBe(PartyReason.Ok);
+    expect(s.party.membersOf(1)).toEqual([1, 2, 3]);
+  });
+
   it('an invite expires after PARTY.INVITE_TTL_MS', () => {
     const r = rig();
     r.cmd(1, PartyOp.Invite, 'bob', 1000);
@@ -419,7 +437,7 @@ function killRig(group: (killer: number) => readonly number[], playerIds = [1, 2
   return { credited, run };
 }
 
-describe('shared kill credit (D92 placeholder: every member in range rolls separately, x 1/sqrt(n))', () => {
+describe('shared kill credit (D93 placeholder: every member in range rolls separately, x 1/sqrt(n))', () => {
   it('without a party the killer alone rolls with partySize 1 (the solo roll is unchanged)', () => {
     const r = killRig((id) => [id]);
     r.run();

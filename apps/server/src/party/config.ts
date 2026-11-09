@@ -1,5 +1,5 @@
 /**
- * Tunables of the party module (D92). Party size, invite lifetime and the kill-credit range live in `PARTY` of `@vgtd/shared`; what is
+ * Tunables of the party module (D93). Party size, invite lifetime and the kill-credit range live in `PARTY` of `@vgtd/shared`; what is
  * here is only the anti-abuse rate. PLACEHOLDER values "cần game designer duyệt".
  */
 export const PARTY_CONFIG = {

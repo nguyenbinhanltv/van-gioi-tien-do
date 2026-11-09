@@ -17,7 +17,7 @@ export enum ChatChannel {
   World = 1,
   Zone = 2,
   Whisper = 3,
-  /** the party channel (D92): delivered to the members of the sender's party, refused with NotInParty otherwise */
+  /** the party channel (D93): delivered to the members of the sender's party, refused with NotInParty otherwise */
   Party = 4,
 }
 
@@ -38,7 +38,7 @@ export enum ChatReason {
   NotReady = 7,
   /** whispering yourself */
   SelfWhisper = 8,
-  /** a Party line from a player who is in no party (D92) */
+  /** a Party line from a player who is in no party (D93) */
   NotInParty = 9,
 }
 

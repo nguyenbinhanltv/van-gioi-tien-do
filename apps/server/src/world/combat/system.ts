@@ -461,7 +461,7 @@ export class CombatSystem {
       this.dropRng = n;
       return v;
     };
-    // personal loot (D92, docs/07 §6): every party member who shares the kill rolls on their own with partySize = the group size; without
+    // personal loot (D93, docs/07 §6): every party member who shares the kill rolls on their own with partySize = the group size; without
     // a party the group is just the killer, so the roll and the rng draws are exactly the solo ones
     const group = [...new Set([killerId, ...(this.opts.partyOf?.(killerId) ?? [])])]
       .filter((id) => id === killerId || this.players.has(id))

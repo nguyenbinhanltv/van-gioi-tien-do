@@ -38,7 +38,7 @@ export enum ColdMsgId {
   ChatMsg = 41,
   ChatHistory = 42,
   ChatResult = 43,
-  /** party (D92, party.ts); 49 is free, 69+ is left to the boss / item messages of other workers */
+  /** party (D93, party.ts); 49 is free, 69+ is left to the boss / item messages of other workers */
   PartyCmd = 44,
   PartyResult = 45,
   PartyInvite = 46,
