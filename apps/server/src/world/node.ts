@@ -1220,16 +1220,20 @@ export class WorldNode {
   }
 
   /**
-   * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
-   * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
+   * A kill counts for the quest objectives of `killerId` (D107). Combat already fans a kill out to every sharing party member: it calls
+   * `onDrops` once PER member with that member as `killerId`, so crediting a group here would multiply the credit by the party size.
+   * The mob is still alive when this runs.
    */
-  /** A kill counts for the quest objectives of the killer and the party members who share the credit (D107). The mob is still alive here. */
   private questKill(killerId: number, mobId: number): void {
     if (!this.quests || !this.mobs) return;
     const def = mobDefById(this.mobs.defIdOf(mobId));
-    if (!def) return;
-    for (const id of this.creditGroupOf(killerId)) this.quests.onKill(id, def.key, def.tier);
+    if (def) this.quests.onKill(killerId, def.key, def.tier);
   }
+
+  /**
+   * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
+   * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
+   */
 
   private creditGroupOf(killerId: number): number[] {
     const members = this.party?.membersOf(killerId) ?? [];

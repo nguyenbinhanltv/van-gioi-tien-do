@@ -4,10 +4,11 @@
  */
 import { describe, expect, it } from 'vitest';
 import { QuestStatus, mobDefByKey, mobDefById, type MobDef } from '@vgtd/shared';
-import { QuestOp, QuestReason, ErrorCode, encode } from '@vgtd/protocol';
+import { QuestOp, QuestReason, ErrorCode, PartyOp, encode } from '@vgtd/protocol';
 import {
   InventoryService,
   ProgressionService,
+  PartyService,
   QuestService,
   SectService,
   WorldNode,
@@ -87,6 +88,50 @@ describe('WorldNode feeds quests', () => {
     expect(quests.progressOf('acc-1', 'q_weekly_tru_ma')).toEqual([1]);
     expect(quests.statusOf('acc-1', 'q_weekly_tru_ma')).toBe(QuestStatus.Ready);
     expect(mobDefByKey('boss_ho_vuong')).toBeDefined();
+  });
+
+  it('a party kill credits each member exactly once (combat fans out one onDrops per member; the node must not fan out again)', async () => {
+    const inventory = new InventoryService();
+    const progression = new ProgressionService({ seed: 5 });
+    const quests = new QuestService({ inventory, clock: () => Date.parse('2026-11-09T12:00:00+07:00'), mapTiles: MAP });
+    const party = new PartyService();
+    const node = new WorldNode({
+      seed: 5,
+      mapTiles: MAP,
+      spawn: { i0: C - 3.2, j0: C + 2.8, side: 0.4 },
+      mobs: true,
+      combat: {},
+      inventory,
+      progression,
+      quests,
+      party,
+    });
+    const a = node.addPlayer(new Quiet(), 'acc-a', undefined, 'alice');
+    const b = node.addPlayer(new Quiet(), 'acc-b', undefined, 'bob');
+    for (let t = 0; t < 40 && quests.statusOf('acc-b', 'q_weekly_tru_ma') === QuestStatus.Locked; t++) {
+      node.tick();
+      await sleep(10);
+    }
+    // form the party a + b (both stand on the same spot, so both are in share range)
+    const pc = (id: number, op: number, name: string) =>
+      node.receive(id, encode({ type: 'party_cmd', op, clientMsgId: 1, name }));
+    pc(a, PartyOp.Invite, 'bob');
+    pc(b, PartyOp.Accept, '');
+    expect(party.membersOf(a).sort()).toEqual([a, b].sort());
+
+    for (const [id, acct] of [
+      [a, 'acc-a'],
+      [b, 'acc-b'],
+    ] as const) {
+      cmd(node, id, QuestOp.Accept, 'q_daily_san_quai', 1);
+      expect(quests.statusOf(acct, 'q_daily_san_quai')).toBe(QuestStatus.Active);
+    }
+    // what combat does for one kill: one onDrops per sharing member, each with that member as killerId
+    const mobId = mobOf(node, (d) => d.tier === 'normal');
+    const onDrops = (node.combat as unknown as { opts: { onDrops: (e: unknown) => void } }).opts.onDrops;
+    for (const killerId of [a, b].sort((x, y) => x - y)) onDrops({ killerId, mobId, rolls: [] });
+    expect(quests.progressOf('acc-a', 'q_daily_san_quai')).toEqual([1]);
+    expect(quests.progressOf('acc-b', 'q_daily_san_quai')).toEqual([1]);
   });
 
   it('claims through the node pay tu vi into the progression record and items into the bag', async () => {
