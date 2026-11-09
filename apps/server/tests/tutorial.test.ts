@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
+import { createRequire } from 'node:module';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -378,5 +379,71 @@ describe('FileTutorialStore', () => {
     s.save({ ...rec });
     s.file.flush();
     expect(s.file.writes).toBe(w);
+  });
+});
+
+// ------------------------------------------------------------------ the D95 zone layout (review of #263)
+const nodeRequire = createRequire(import.meta.url);
+
+describe('the `field` step on the D95 zone map', () => {
+  const N = 256;
+  const Z = nodeRequire('../../../tools/procgen/src/tilemap/zones.js');
+  const Gen = nodeRequire('../../../tools/procgen/src/tilemap/generate_tilemap.js');
+  const o = { ...Gen.parseArgs([]), width: N, height: N };
+  const rows: string[] = Gen.buildZoneMap(
+    o,
+    Z.generateZoneCorners(o, Gen.zoneFields(o)),
+    new Proxy({}, { get: () => 1 }),
+  ).rows;
+  const fieldAt = fieldBandStart(N) + FIRST_SESSION.fieldMarginTiles;
+  const half = N / 2;
+
+  it('the field threshold lies inside the open dirt plaza, so a straight walk out of the spawn square reaches it on every side', () => {
+    expect(fieldAt).toBeLessThan(Z.plazaRadius(N)); // plaza = band start + 4 tiles, threshold = band start + 2
+    const reach = Math.ceil(fieldAt) + 1;
+    for (let d = 0; d <= reach; d++) {
+      expect(rows[half]![half + d], `east ${d}`).toBe('.');
+      expect(rows[half]![half - d], `west ${d}`).toBe('.');
+      expect(rows[half + d]![half], `south ${d}`).toBe('.');
+      expect(rows[half - d]![half], `north ${d}`).toBe('.');
+    }
+  });
+
+  it('every tile of the dev / play spawn square (SPAWN_SIDE 24 at the centre) is open and a walkable route leaves it to the field band', () => {
+    const side = 24; // `npm run dev` / `play` default (SPAWN_SIDE); the server's own default of 96 reaches past the plaza (OPEN-ITEMS)
+    const i0 = (N - side) / 2;
+    for (let j = i0; j < i0 + side; j++)
+      for (let i = i0; i < i0 + side; i++) expect(rows[j]![i], `${i},${j}`).toBe('.');
+    // breadth-first from the spawn square's centre over walkable tiles: some tile at the field distance is reachable
+    const seen = new Set<number>([half * N + half]);
+    const queue: Array<[number, number]> = [[half, half]];
+    let hit = false;
+    while (queue.length && !hit) {
+      const [i, j] = queue.shift()!;
+      if (Math.max(Math.abs(i - half), Math.abs(j - half)) >= fieldAt) hit = true;
+      for (const [di, dj] of [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+      ] as const) {
+        const a = i + di;
+        const b = j + dj;
+        if (a < 0 || b < 0 || a >= N || b >= N || rows[b]![a] !== '.' || seen.has(b * N + a)) continue;
+        seen.add(b * N + a);
+        queue.push([a, b]);
+      }
+    }
+    expect(hit).toBe(true);
+  });
+
+  it('the service completes `field` for a player who walks out of the spawn square on that map', () => {
+    const svc = new TutorialService({ mapTiles: N });
+    svc.join(1, 'walker');
+    svc.observe(1, half + 0.5, half + 0.5);
+    svc.observe(1, half + 0.5 + TUTORIAL.moveTiles, half + 0.5);
+    expect(done(svc, 1)).toEqual(['move']);
+    svc.observe(1, half + 0.5 + fieldAt, half + 0.5);
+    expect(done(svc, 1)).toEqual(['move', 'field']);
   });
 });

@@ -23,6 +23,7 @@ const { Image } = require('../lib/png');
 const { makeSimplex2D, fbm, periodicFbm, periodicNoise, hash2i } = require('../lib/noise');
 const { clamp, lerp, smoothstep } = require('../lib/rng');
 const G = require('./ground_textures');
+const Z = require('./zones');
 
 // ----------------------------------------------------------------------------
 // Cấu hình
@@ -42,6 +43,8 @@ const DEFAULTS = {
   atlasWidth: 1024,
   padding: 2,
   ground: '',           // thư mục patch tuần hoàn (npm run gen:gemini): có thì lấy màu từ ảnh thay vì texture toán học
+  zoneNoiseScale: 0.035, // tần số noise của bản đồ vùng (D95): thấp hơn bản đồ 3 chất liệu = mảng lớn hơn, ít ô viền hơn, ít sprite hơn
+  zones: 0,             // 1 = bản đồ 4 vùng docs/10 §4 (D95): cần --ground; gộp tileset bổ sung vào tileset chính
   ext: 0,               // 1 = sinh thêm tileset_ext (bờ đá, vỏ nham thạch, đầm lầy) cạnh tileset chính
 };
 
@@ -83,23 +86,37 @@ function parseArgs(argv) {
 // ----------------------------------------------------------------------------
 // 1. Địa hình: chất liệu tại từng đỉnh lưới (W + 1) × (H + 1)
 // ----------------------------------------------------------------------------
-function generateCorners(o) {
-  const W1 = o.width + 1, H1 = o.height + 1;
+/** Noise fields at a corner: `{ h, m }` (height, moisture) in 0..1. Shared by the base map and the zone map. */
+function makeFields(o) {
   const heightNoise = makeSimplex2D(o.seed);
   const moistNoise = makeSimplex2D((o.seed ^ 0x9e3779b9) >>> 0);
-  const corners = new Uint8Array(W1 * H1);
   // Xoay miền lấy mẫu một góc lẻ và dịch theo seed: tránh vệt thẳng theo đường chéo của lưới
   // simplex trùng với trục i = j (trên màn hình isometric sẽ thành một đường dọc rất lộ).
   const ang = 0.61, ca = Math.cos(ang), sa = Math.sin(ang);
   const offX = (o.seed % 997) * 0.37, offY = (o.seed % 991) * 0.53;
   const sample = (i, j, k) => [(i * ca - j * sa) * k + offX, (i * sa + j * ca) * k + offY];
+  return (i, j) => {
+    const [hx, hy] = sample(i, j, o.noiseScale);
+    const [mx, my] = sample(i, j, o.noiseScale * 1.4);
+    return {
+      h: (fbm(heightNoise, hx, hy, 5) + 1) / 2,
+      m: (fbm(moistNoise, mx + 37.1, my - 11.7, 4) + 1) / 2,
+    };
+  };
+}
 
+/** Noise fields of the zone map: the same noise as the base map at the (lower) `zoneNoiseScale`, so features are bigger and fewer cells are boundary cells. */
+function zoneFields(o) {
+  return makeFields({ ...o, noiseScale: o.zoneNoiseScale });
+}
+
+function generateCorners(o) {
+  const W1 = o.width + 1, H1 = o.height + 1;
+  const fields = makeFields(o);
+  const corners = new Uint8Array(W1 * H1);
   for (let j = 0; j < H1; j++) {
     for (let i = 0; i < W1; i++) {
-      const [hx, hy] = sample(i, j, o.noiseScale);
-      const [mx, my] = sample(i, j, o.noiseScale * 1.4);
-      const h = (fbm(heightNoise, hx, hy, 5) + 1) / 2;
-      const m = (fbm(moistNoise, mx + 37.1, my - 11.7, 4) + 1) / 2;
+      const { h, m } = fields(i, j);
       corners[j * W1 + i] = h < o.waterLevel ? MAT.WATER : m > o.grassLevel ? MAT.GRASS : MAT.DIRT;
     }
   }
@@ -200,13 +217,15 @@ function cornerField(mask, u, v) {
 }
 
 /**
- * Vẽ một tile. kind: 'water' | 'overlay'. Hình thoi được nới 0,8 px để hai ô kề nhau chồng
- * lên nhau một chút, tránh khe sáng khi ghép.
+ * Vẽ một tile. kind: 'water' | 'overlay'. Hình thoi được nới EXPAND px để hai ô kề nhau chồng
+ * lên nhau, tránh khe khi ghép. Mọi mẫu màu đều tuần hoàn theo (u, v) nên phần nới ra khớp với ô bên cạnh.
+ * Nới 0,8 px là chưa đủ: khi lọc song tuyến ở zoom 1,5x, pixel mép kim cương trộn với texel trong suốt
+ * và để lộ nền tối thành đường chấm chấm dọc cạnh ô ("lưới" quá rõ); 2,4 px che hết.
  */
 function renderTile(o, spec) {
   const { tileW: TW, tileH: TH } = o;
   const img = new Image(TW, TH);
-  const EXPAND = 0.8;
+  const EXPAND = 2.4;
   for (let y = 0; y < TH; y++) {
     for (let x = 0; x < TW; x++) {
       const px = x + 0.5, py = y + 0.5;
@@ -258,13 +277,51 @@ function buildTileList(o) {
 
 const nextPow2 = (n) => 2 ** Math.ceil(Math.log2(n));
 
+/**
+ * Copy of `tile` whose fully transparent pixels carry the colour of the nearest opaque pixel (alpha stays 0). Bilinear filtering
+ * averages RGB without weighting by alpha, so texels that are (0,0,0,0) next to the diamond edge darken every edge pixel: a dark
+ * dotted line along each tile edge at non-integer zoom. `passes` = how far the colour is spread (>= padding + filter radius).
+ */
+function bleedColors(tile, passes) {
+  const W = tile.width, H = tile.height;
+  const out = new Image(W, H);
+  const known = new Uint8Array(W * H);
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const p = tile.getPixel(x, y);
+      out.setPixel(x, y, p[0], p[1], p[2], p[3]);
+      if (p[3] > 0) known[y * W + x] = 1;
+    }
+  for (let n = 0; n < passes; n++) {
+    const add = [];
+    for (let y = 0; y < H; y++)
+      for (let x = 0; x < W; x++) {
+        if (known[y * W + x]) continue;
+        let r = 0, g = 0, b = 0, c = 0;
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H || !known[ny * W + nx]) continue;
+          const p = out.getPixel(nx, ny);
+          r += p[0]; g += p[1]; b += p[2]; c++;
+        }
+        if (c) add.push([x, y, r / c, g / c, b / c]);
+      }
+    for (const [x, y, r, g, b] of add) {
+      out.setPixel(x, y, r, g, b, 0);
+      known[y * W + x] = 1;
+    }
+  }
+  return out;
+}
+
 /** Ghi tile vào ô atlas, kéo dài (extrude) pixel biên ra vùng padding để chống rò màu khi lọc texture. */
 function blitExtruded(sheet, tile, x0, y0, pad) {
+  const src = bleedColors(tile, pad + 2);
   for (let y = -pad; y < tile.height + pad; y++) {
     for (let x = -pad; x < tile.width + pad; x++) {
       const sx = clamp(x, 0, tile.width - 1), sy = clamp(y, 0, tile.height - 1);
-      const [r, g, b, a] = tile.getPixel(sx, sy);
-      if (a === 0) continue;
+      const [r, g, b, a] = src.getPixel(sx, sy);
+      if (a === 0 && r === 0 && g === 0 && b === 0) continue;
       sheet.setPixel(x0 + x, y0 + y, r, g, b, a);
     }
   }
@@ -317,6 +374,8 @@ function buildMap(o, corners, idByName) {
           : `${L.name}_m${String(m).padStart(2, '0')}`;
         layers[L.name][k] = idByName[name];
       }
+      // a full grass tile is opaque over its whole diamond: the dirt under it is invisible, so it is not emitted (same rule as the zone map)
+      if (layers.grass[k] >= 0 && maskFor(MAT.GRASS) === 15) layers.dirt[k] = -1;
       const center = Math.max(cs.N, cs.E, cs.S, cs.W);
       stats[MAT_NAMES[center]]++;
     }
@@ -324,7 +383,75 @@ function buildMap(o, corners, idByName) {
   return { layers, stats };
 }
 
-function renderPreview(o, tiles, layers) {
+/** Layer seeds of the tile variants (base + ext layers), so a layer picks the same variants in every map it appears in. */
+const LAYER_SEEDS = Object.fromEntries([...OVERLAYS, ...EXT_LAYERS].map((L) => [L.name, L.seed]));
+
+/**
+ * Zone map (D95): each cell takes the tile stack of ITS zone (`zones.js` STACKS) from the corner levels. Same Wang rule as `buildMap`.
+ * Returns `{ layers, stats, rows }`; `rows` is the walkability grid (`.` land, `#` water / lava only), the rule the client uses too:
+ * a cell is walkable when any layer above the liquid is drawn in it.
+ */
+function buildZoneMap(o, zc, idByName) {
+  const n = o.width;
+  const N = n * n;
+  const layers = Object.fromEntries(Z.LAYER_ORDER.map((name) => [name, new Array(N).fill(-1)]));
+  const stats = Object.fromEntries(Z.ZONE_IDS.map((id) => [id, { liquid: 0, dirt: 0, ground: 0, stone: 0 }]));
+  const levelNames = ['liquid', 'dirt', 'ground', 'stone'];
+  const lv = (i, j) => zc.level[j * zc.W1 + i];
+  const rows = [];
+  for (let j = 0; j < n; j++) {
+    let row = '';
+    for (let i = 0; i < n; i++) {
+      const k = j * n + i;
+      const cs = { N: lv(i, j), E: lv(i + 1, j), S: lv(i + 1, j + 1), W: lv(i, j + 1) };
+      const maskFor = (min) =>
+        (cs.N >= min ? CORNER_BITS.N : 0) | (cs.E >= min ? CORNER_BITS.E : 0) |
+        (cs.S >= min ? CORNER_BITS.S : 0) | (cs.W >= min ? CORNER_BITS.W : 0);
+      const zi = Z.zoneIndexAt(i + 0.5, j + 0.5, n);
+      const zoneId = Z.ZONE_IDS[zi];
+      const stack = Z.STACKS[zoneId];
+      if (maskFor(1) !== 15) layers.liquid[k] = idByName[stack.liquid === 'lava' ? 'lava_0' : 'water_0'];
+      let land = false;
+      let topFull = -1; // index in `stack.layers` of the highest FULL (opaque, mask 15) tile of this cell
+      stack.layers.forEach((L, n) => {
+        const m = maskFor(L.min);
+        if (m === 0 || (L.fullOnly && m !== 15)) return;
+        const name = m === 15
+          ? `${L.name}_full_${pickVariant(i, j, o.seed + LAYER_SEEDS[L.name], o.variants)}`
+          : `${L.name}_m${String(m).padStart(2, '0')}`;
+        layers[L.name][k] = idByName[name];
+        land = true;
+        if (m === 15) topFull = n;
+      });
+      // a full tile is opaque over its whole diamond: everything under it in this cell is invisible, so it is not emitted (fewer
+      // sprites per chunk -> fewer nodes and draw calls on the client)
+      if (topFull >= 0) {
+        layers.liquid[k] = -1;
+        for (let n = 0; n < topFull; n++) layers[stack.layers[n].name][k] = -1;
+      }
+      row += land ? '.' : '#';
+      stats[zoneId][levelNames[Math.max(cs.N, cs.E, cs.S, cs.W)]]++;
+    }
+    rows.push(row);
+  }
+  return { layers, stats, rows };
+}
+
+/** Walkability rows of a base map: a cell is walkable when its dirt or grass layer is drawn (water-only cells are blocked). */
+function walkRows(o, layers) {
+  const rows = [];
+  for (let j = 0; j < o.height; j++) {
+    let row = '';
+    for (let i = 0; i < o.width; i++) {
+      const k = j * o.width + i;
+      row += layers.dirt[k] >= 0 || layers.grass[k] >= 0 ? '.' : '#';
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+
+function renderPreview(o, tiles, layers, order = ['liquid', 'dirt', 'grass']) {
   const { tileW: TW, tileH: TH } = o;
   const full = new Image((o.width + o.height) * (TW / 2), (o.width + o.height) * (TH / 2));
   full.fill(14, 18, 30, 255);
@@ -334,7 +461,7 @@ function renderPreview(o, tiles, layers) {
     for (let i = Math.max(0, s - o.height + 1); i <= Math.min(o.width - 1, s); i++) {
       const j = s - i, k = j * o.width + i;
       const x = (i - j) * (TW / 2) - TW / 2 + offX, y = (i + j) * (TH / 2);
-      for (const name of ['liquid', 'dirt', 'grass']) {
+      for (const name of order) {
         const id = layers[name][k];
         if (id >= 0) full.drawImage(tiles[id].image, x, y);
       }
@@ -404,11 +531,17 @@ function main() {
   GROUND = o.ground ? G.loadGround(o.ground) : null;
   if (o.ground && !GROUND) console.warn(`⚠ không có patch ảnh nền trong ${o.ground}: dùng texture toán học`);
 
-  const corners = generateCorners(o);
-  const tiles = buildTileList(o).map((t) => ({ ...t, image: renderTile(o, t) }));
+  const useZones = !!o.zones && !!GROUND && !!(GROUND.lava && GROUND.swamp && GROUND.stone);
+  if (o.zones && !useZones) console.warn('⚠ --zones cần --ground có đủ ảnh stone / swamp / lava: dùng bản đồ 3 chất liệu như cũ');
+  const zoneCorners = useZones ? Z.generateZoneCorners(o, zoneFields(o)) : null;
+  const corners = zoneCorners ? { W1: zoneCorners.W1, H1: zoneCorners.H1, data: zoneCorners.level } : generateCorners(o);
+  const tileDefs = buildTileList(o).concat(useZones ? buildExtTileList(o) : []);
+  const tiles = tileDefs.map((t) => ({ ...t, image: renderTile(o, t) }));
   const { sheet, frames } = packAtlas(o, tiles);
   const idByName = Object.fromEntries(frames.map((f) => [f.name, f.id]));
-  const { layers, stats } = buildMap(o, corners, idByName);
+  const built = useZones ? buildZoneMap(o, zoneCorners, idByName) : buildMap(o, corners, idByName);
+  const { layers, stats } = built;
+  const layerOrder = useZones ? Z.LAYER_ORDER : ['liquid', 'dirt', 'grass'];
 
   sheet.save(path.join(o.out, 'tileset.png'));
 
@@ -417,18 +550,21 @@ function main() {
     image: 'tileset.png', imageWidth: sheet.width, imageHeight: sheet.height,
     tileWidth: o.tileW, tileHeight: o.tileH, padding: o.padding,
     tiles: frames,
-    animations: { water: { frames: frames.filter((f) => f.name.startsWith('water_')).map((f) => f.id), fps: 6 } },
+    animations: {
+      water: { frames: frames.filter((f) => f.name.startsWith('water_')).map((f) => f.id), fps: 6 },
+      ...(useZones ? { lava: { frames: frames.filter((f) => /^lava_\d+$/.test(f.name)).map((f) => f.id), fps: 4 } } : {}),
+    },
     wang: {
       type: 'corner', cornerBits: CORNER_BITS,
       note: 'index = N*1 + E*2 + S*4 + W*8; bit = 1 khi góc mang chất liệu của lớp phủ (hoặc cao hơn)',
-      layers: OVERLAYS.map((L) => ({
+      layers: (useZones ? OVERLAYS.concat(EXT_LAYERS) : OVERLAYS).map((L) => ({
         name: L.name, over: L.over, threshold: L.threshold,
         masks: Object.fromEntries(Array.from({ length: 14 }, (_, m) => [String(m + 1), idByName[`${L.name}_m${String(m + 1).padStart(2, '0')}`]])),
         full: Array.from({ length: o.variants }, (_, v) => idByName[`${L.name}_full_${v}`]),
         fullWeights: [0.7, ...Array(o.variants - 1).fill(0.3 / (o.variants - 1))],
       })),
     },
-    drawOrder: ['liquid', 'dirt', 'grass'],
+    drawOrder: layerOrder,
   };
   fs.writeFileSync(path.join(o.out, 'tileset.json'), JSON.stringify(tileset, null, 2));
 
@@ -441,16 +577,20 @@ function main() {
       drawOrder: 'tăng dần theo i + j; trong mỗi ô vẽ liquid -> dirt -> grass',
     },
     tileset: 'tileset.json',
-    materials: MAT_NAMES,
+    materials: useZones ? ['liquid', 'dirt', 'ground', 'stone'] : MAT_NAMES,
     corners: { width: corners.W1, height: corners.H1, data: Array.from(corners.data) },
-    layers: ['liquid', 'dirt', 'grass'].map((name) => ({
+    layers: layerOrder.map((name) => ({
       name, encoding: 'row-major, index = j * width + i, -1 = trống', data: layers[name],
     })),
+    ...(useZones ? { zones: Z.zoneRects(o.width), landmarks: Z.landmarks(o.width) } : {}),
     stats,
   };
   fs.writeFileSync(path.join(o.out, 'map.json'), JSON.stringify(map));
 
-  renderPreview(o, tiles, layers).save(path.join(o.out, 'map_preview.png'));
+  if (o.previewScale > 0) renderPreview(o, tiles, layers, layerOrder).save(path.join(o.out, 'map_preview.png')); // --previewScale 0 = no preview (the preview of a 256 map renders a 2 GB image first)
+  // walkability for the game server (`MAP_FILE`): `.` land, `#` water / lava only; written for every map so one rule holds
+  const rows = built.rows ?? walkRows(o, layers);
+  fs.writeFileSync(path.join(o.out, 'terrain.json'), JSON.stringify({ format: 'tutien-terrain', version: 1, seed: o.seed, width: o.width, height: o.height, rows }));
 
   console.log(`✔ ${tiles.length} tile → ${path.join(o.out, 'tileset.png')} (${sheet.width}×${sheet.height})`);
   console.log(`✔ Bản đồ ${o.width}×${o.height} → map.json  |  ô chủ đạo: ${JSON.stringify(stats)}`);
@@ -466,4 +606,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { generateCorners, renderTile, buildTileList, buildExtTileList, packAtlas, buildMap, parseArgs, setGround: (g) => { GROUND = g; } };
+module.exports = { generateCorners, makeFields, zoneFields, buildZoneMap, walkRows, renderTile, bleedColors, buildTileList, buildExtTileList, packAtlas, buildMap, parseArgs, setGround: (g) => { GROUND = g; } };

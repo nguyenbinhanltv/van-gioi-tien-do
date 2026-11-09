@@ -44,7 +44,7 @@ Không đồng hồ, không `Math.random`; toán hình học chỉ + − × ÷ v
 
 ## Giới hạn đã biết (OPEN-ITEMS)
 
-- Effect khác `damage` / `heal` / `shield` (dot, status, dash, buff, summon ...) chưa mô phỏng; module báo `unsupported_effect`.
+- _[Cập nhật D116]_ Mọi loại hiệu ứng mà `skills.json` đang dùng đã được máy chủ mô phỏng (dot / hot, khống chế quái, buff / debuff, dấu, lướt / đẩy / kéo, khiêu khích, thú triệu hồi, hồi MP, hồi sinh, khiên nổ): xem `combat/effects.ts` và DECISIONS D116. Còn thiếu: `move_speed_pct`, `invuln_ms` của lướt, `silence`, `tribulation_reduction`, `ClassDef.trait`. `unsupported_effect` chỉ còn cho loại hiệu ứng mới chưa ai xử lý.
 - **Điểm ngắm và vitals (D78, giao thức v3)**: `skill_cast` mang điểm ngắm tùy chọn (1/32 ô): kỹ năng `ground` neo vào điểm ngắm (rồi mục tiêu, rồi người cast), cone / line quay theo điểm ngắm; điểm ngắm bị kiểm tầm và LOS lúc giải quyết như mục tiêu. Khối `self` của snapshot mang `vitals` (HP, HP tối đa, MP, MP tối đa, khiên) khi đổi. Client lấy điểm ngắm từ vị trí con trỏ (cảm ứng chưa có điểm ngắm: server dùng mục tiêu hoặc hướng nhìn) và ghim vào tầm kỹ năng.
 - `CombatSystem.setRealm(world, id, realm, substage)`: móc cho tiến trình (#205 `onStageChange`): tính lại hồ sơ, HP / MP tối đa, giữ tỉ lệ HP / MP.
 - Quái tấn công người chơi từ D86 (`MobAttackSystem`, xem bên dưới); `damagePlayer` còn dùng được cho PvP. Chưa có cấp mở khóa kỹ năng, kho đồ, độ bền.

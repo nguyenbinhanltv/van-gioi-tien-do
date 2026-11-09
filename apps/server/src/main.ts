@@ -1,9 +1,14 @@
 /** Local dev entry: `PORT=8080 node <bundle>` (hosting is local-only for now, D27). */
+import { jsonLineSink } from './world/security-log.js';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { openFileStores } from './persistence/index.js';
+import { createBackup, openFileStores } from './persistence/index.js';
 import { TelemetryService, openTelemetryFiles } from './telemetry/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
+import { TileGrid } from '@vgtd/sim';
+import { WORLD_CONFIG } from './config.js';
+import { blockSectBuildings, openRows, parseTerrain } from './world/terrain.js';
 
 const port = Number(process.env.PORT ?? 8080);
 // the Cocos web client is served from http://localhost:8456 (npm run serve -w client-cocos); override with CORS_ORIGINS=a,b
@@ -36,6 +41,25 @@ const stores =
         onError: (e) => console.error('[vgtd/server] persistence write failed:', e),
       })
     : null;
+// MAP_FILE=<terrain.json> (D95): the walkability grid the tile generator wrote, so water / lava block the server like they block the client
+// (mobs spawn and walk on land, prediction sees the same obstacles). Default: an open map. A file that does not match MAP_TILES is refused.
+let terrainRows: string[] | undefined;
+if (process.env.MAP_FILE) {
+  const t = parseTerrain(JSON.parse(readFileSync(process.env.MAP_FILE, 'utf8')));
+  if (mapTiles !== undefined && (t.width !== mapTiles || t.height !== mapTiles))
+    throw new Error(`MAP_FILE is ${t.width}x${t.height} but MAP_TILES is ${mapTiles}`);
+  terrainRows = t.rows;
+  console.log(
+    `[vgtd/server] terrain from ${process.env.MAP_FILE}: ${t.width}x${t.height}, ${t.rows.join('').split('#').length - 1} blocked tiles`,
+  );
+}
+// the Son Mon sect buildings (D118) block their tiles on the server grid, exactly the tiles the client draws and blocks them on (shared
+// SECT_BUILDINGS); SECT_BUILDINGS=0 leaves the map as the terrain file / open map says (A/B measurements, old clients)
+let grid: TileGrid | undefined;
+if (process.env.SECT_BUILDINGS !== '0') {
+  const n = terrainRows?.length ?? mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES;
+  grid = TileGrid.fromRows(blockSectBuildings(terrainRows ?? openRows(n)));
+} else if (terrainRows) grid = TileGrid.fromRows(terrainRows);
 // telemetry (D109): local-only pseudonymous event log + rollups + KPI dashboard at /dashboard; files under DATA_DIR/telemetry with STORE=file
 const telemetryFiles = stores
   ? openTelemetryFiles(stores.dir, { onError: (e) => console.error('[vgtd/server] telemetry write failed:', e) })
@@ -53,14 +77,39 @@ const srv = await startServer({
   world: {
     telemetry,
     mapTiles,
+    grid,
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
+    // structured security events (kicks, flood drops, malformed frames, anti-cheat violations; D101): one JSON line each, no PII; SECURITY_LOG=0 silences
+    securityLog: process.env.SECURITY_LOG === '0' ? undefined : jsonLineSink((line) => console.log(line)),
     inventory: flag(process.env.INVENTORY)
-      ? new InventoryService(stores ? { store: stores.inventories, ledger: stores.ledger } : {})
+      ? new InventoryService(
+          stores ? { store: stores.inventories, ledger: stores.ledger, durable: stores.durable } : {},
+        )
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
+  ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
+  ...(stores ? { friends: { store: stores.friends } } : {}),
+  // Vạn Bảo Lâu (D112): the book is the market.json document; the weekly SHADOW CPI report goes to the log (telemetry can subscribe later)
+  market: {
+    ...(stores
+      ? {
+          store: stores.market,
+          // the book, the ledger and the bags become durable as ONE unit through the write-ahead journal (D102 / D112)
+          durable: (label: string) => stores.durableMarket.commit(label),
+          onDurableError: (label: string, e: unknown) =>
+            console.error(
+              `[vgtd/market] journal commit failed (${label}): ${e instanceof Error ? e.message : String(e)}; the change stands in memory and the stores retry it`,
+            ),
+        }
+      : {}),
+    report: (r) =>
+      console.log(
+        `[vgtd/market] shadow CPI week ${r.week}: cpi ${r.cpi === null ? 'n/a' : r.cpi.toFixed(3)}, applied tax ${r.appliedBps / 100}%, shadow tax ${r.shadowBps / 100}%, ${r.trades} sales, ${r.volume} hạ phẩm (measured, NOT applied)`,
+      ),
+  },
   // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)
   progression: {
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
@@ -79,6 +128,29 @@ if (stores) {
   // Unchanged bags cost no disk write.
   setInterval(() => srv.world.inventory?.flushAll(), 5000).unref();
 }
+// Backups of the file store (D99): BACKUP_EVERY_MIN=N writes a consistent snapshot of every document each N minutes (0 / unset = off),
+// BACKUP_DIR (default DATA_DIR/backups), BACKUP_KEEP (default 10) rotates; a line `backup` on stdin (QUIT_ON_STDIN=1) writes one now, and
+// BACKUP_ON_EXIT=1 writes one at a clean stop. The snapshot serialises all documents in one synchronous turn (after the bags are saved),
+// so the files are one consistent moment. The log carries counts only, never document content.
+const backupEveryMin = Number(process.env.BACKUP_EVERY_MIN ?? 0);
+const backupNow = (reason: string): void => {
+  if (!stores) return;
+  try {
+    const docs = stores.snapshot(() => srv.world.inventory?.flushAll());
+    const info = createBackup(process.env.BACKUP_DIR ?? join(stores.dir, 'backups'), docs, {
+      keep: Number(process.env.BACKUP_KEEP ?? 10) || 10,
+      source: 'live',
+    });
+    const c = info.manifest.counts;
+    console.log(
+      `[vgtd/server] backup ${info.id} (${reason}): ${c.accounts} accounts, ${c.characters} characters, ${c.inventories} bags, ${c.ledgerEntries} ledger entries` +
+        (info.removed.length ? `; rotated out ${info.removed.length}` : ''),
+    );
+  } catch (e) {
+    console.error(`[vgtd/server] backup FAILED (${reason}): ${e instanceof Error ? e.message : 'error'}`);
+  }
+};
+if (stores && backupEveryMin > 0) setInterval(() => backupNow('scheduled'), backupEveryMin * 60_000).unref();
 // Clean shutdown: let the gateway release its connections (they save their bags / progress), then write every document.
 let closing = false;
 const shutdown = async (reason: string): Promise<void> => {
@@ -97,6 +169,7 @@ const shutdown = async (reason: string): Promise<void> => {
     await new Promise((r) => setTimeout(r, 100));
     srv.world.inventory?.flushAll();
     stores.flush();
+    if (process.env.BACKUP_ON_EXIT === '1') backupNow('exit');
     telemetryFiles?.flush();
   }
   process.exit(0);
@@ -112,6 +185,10 @@ if (process.env.QUIT_ON_STDIN === '1') {
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', (d: string) => {
     buf += d;
+    if (/^backup\s*$/m.test(buf)) {
+      buf = buf.replace(/^backup\s*$/m, '');
+      backupNow('stdin');
+    }
     if (/^quit\s*$/m.test(buf)) void shutdown('stdin quit');
     if (buf.length > 1024) buf = buf.slice(-64);
   });

@@ -21,7 +21,9 @@ import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
 import { installDrawDebug } from './DrawDebug';
 import { MobArt, createMobDemoBackend } from './MobArt';
-import { placeProps } from './PropPlacement';
+import { blockSectTiles, placeProps } from './PropPlacement';
+import { NpcArt, type NpcStandee } from './NpcArt';
+import { placeSectNpcs } from './NpcPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
 import { NpcCrowd, chibiNpcBody, placeholderBody } from './Npcs';
 import { YSortLayer } from './YSortLayer';
@@ -37,7 +39,12 @@ import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
 import { TutorialHints, tutorialRequested } from './TutorialHints';
+import { TradePanel } from './TradePanel';
+import { SectPanel } from './SectPanel';
+import { FriendsPanel } from './FriendsPanel';
+import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
+import { TribulationFx } from './TribulationFx';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -86,6 +93,8 @@ export class Bootstrap extends Component {
   private propArt: PropArt | null = null;
   /** INTERIM mob standees (concept art) */
   private mobArt: MobArt | null = null;
+  /** INTERIM Son Mon NPC standees (concept art) */
+  private sectNpcs: NpcStandee[] = [];
   private player!: PlayerActor;
   private rig!: CameraRig;
   private input!: InputBridge;
@@ -100,8 +109,14 @@ export class Bootstrap extends Component {
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
   private tutorialHints: TutorialHints | null = null;
+  private tradePanel: TradePanel | null = null;
+  private sectPanel: SectPanel | null = null;
+  private friendsPanel: FriendsPanel | null = null;
+  private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
+  /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
+  private tribulationFx: TribulationFx | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -143,7 +158,9 @@ export class Bootstrap extends Component {
       load('world/iso-tileset', ImageAsset),
     ]);
     const map = mapAsset.json as unknown as { width: number; height: number; seed?: number };
-    const tilesetJson = tilesetAsset.json as unknown as { animations?: { water?: { frames: number[]; fps: number } } };
+    const tilesetJson = tilesetAsset.json as unknown as {
+      animations?: Record<string, { frames: number[]; fps: number }>;
+    };
     const data = cw.parseProcgenMap(tilesetJson, mapAsset.json);
     const tilesetTex = makeTexture(tilesetImage);
     const art: ArtFrames = buildPlaceholderArt();
@@ -160,6 +177,8 @@ export class Bootstrap extends Component {
 
     // blocked tiles (props) on top of terrain walkability
     const blocked = new Uint8Array(map.width * map.height);
+    // the sect building tiles the SERVER blocks, with or without the art (placeholder path, a building that did not fit): never predict a free walk there
+    blockSectTiles(blocked, map.width, map.height, shared.sectBlockedTiles(map.width));
     const walkable = (i: number, j: number) => this.world.isTerrainWalkable(i, j) && blocked[j * map.width + i] === 0;
 
     // `?at=i,j` (offline QA): start near that tile instead of the map centre, e.g. to look at a mob zone's dressing
@@ -185,10 +204,33 @@ export class Bootstrap extends Component {
         defs: this.propArt.defs(),
         count: 110,
         radius: 40,
+        // the Son Mon sect buildings (D118): the same list and origin the server blocks its grid with (shared SECT_BUILDINGS)
+        sect: shared.SECT_BUILDINGS,
+        sectOrigin: shared.sectOrigin(map.width),
       });
       for (const [i, j] of placed.blocked) blocked[j * map.width + i] = 1;
+      if (placed.sectSkipped.length > 0)
+        console.warn(
+          '[vgtd] sect buildings not drawn (their tiles stay blocked, as on the server):',
+          placed.sectSkipped,
+        );
       for (const p of placed.courtyard) this.propArt.add(this.ysort, p);
       for (const p of placed.props) this.propArt.add(this.ysort, p);
+      // Son Mon NPC standees around the plaza: they block their tile like props and adapt to the land (INTERIM art, keyed npc_<name>)
+      const npcArt = new NpcArt(this.propArt);
+      const npcs = placeSectNpcs({
+        width: map.width,
+        height: map.height,
+        spawn,
+        isLand: (i, j) => this.world.terrainAt(i, j) === 'dirt' || this.world.terrainAt(i, j) === 'grass',
+        isBlocked: (i, j) => i < 0 || j < 0 || i >= map.width || j >= map.height || blocked[j * map.width + i] === 1,
+      });
+      for (const n of npcs) {
+        const st = npcArt.add(this.ysort, n, art.shadow, l2);
+        if (!st) continue;
+        blocked[n.j * map.width + n.i] = 1;
+        this.sectNpcs.push(st);
+      }
     } else {
       const rand = rng(map.seed ?? 1);
       // props are scattered around the spawn only (L3 objects are not chunk-streamed yet; every one is sorted each frame)
@@ -312,10 +354,39 @@ export class Bootstrap extends Component {
         (x, y) => this.rig.clientToUi(x, y),
         (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       );
+      this.tribulationFx = new TribulationFx(hudRoot, this.worldRootNode!, art, this.online.net);
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
       if (tutorialRequested()) this.tutorialHints = new TutorialHints(this.online.net); // server-tracked FTUE hints (D105)
+      // trade panel (D102): opens by itself with a window / an invite, or with T and /trade; its buttons run the lines the player could type
+      const net = this.online.net;
+      this.tradePanel = new TradePanel(chat.trade, {
+        run: (cmd) => chat.command(cmd),
+        bag: () => {
+          const out: { slot: number; defId: number; quality: number; qty: number; bound: boolean }[] = [];
+          for (let i = 0; i < net.bag.slotCount; i++) {
+            const it = net.bag.itemAt(i);
+            if (it) out.push({ slot: i, defId: it.defId, quality: it.quality, qty: it.qty, bound: it.bound });
+          }
+          return out;
+        },
+      });
+      chat.onTradeToggle = () => this.tradePanel?.toggle();
+      // sect panel (D98): K or /sect; its buttons run the same lines the player could type, the server decides
+      this.sectPanel = new SectPanel(chat.sect, {
+        run: (cmd) => chat.command(cmd),
+        position: () => net.selfPosition(),
+      });
+      chat.onSectToggle = () => this.sectPanel?.toggle();
+      // friends panel (D96): O or /friends; its buttons run the same lines the player could type
+      this.friendsPanel = new FriendsPanel(chat.friends, {
+        run: (cmd) => chat.command(cmd),
+        prefill: (text) => chat.focus(text),
+      });
+      chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // market panel (D112, Vạn Bảo Lâu): V; it owns net.marketEvents (its own hook object, nobody replaces it)
+      this.marketPanel = new MarketPanel(net);
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -336,6 +407,9 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToWorld(x, y),
     );
     this.combat.mobArt = this.mobArt;
+    // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
+    (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
+      this.combat?.setEnemyPhase(entityId, phase, ms);
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
@@ -369,7 +443,10 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
-      online.onBossPhase = (entityId, phase) => this.combat?.announceBossPhase(entityId, phase);
+      online.onBossPhase = (entityId, phase, transformMs) => {
+        this.combat?.announceBossPhase(entityId, phase);
+        this.combat?.setEnemyPhase(entityId, phase, transformMs); // skin swap on the boss standee
+      };
       // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
       this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
@@ -560,16 +637,22 @@ export class Bootstrap extends Component {
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
     this.updateStatusRow();
+    this.tribulationFx?.update(dt);
     this.chatBox?.update();
     this.partyFrames?.update();
     if (this.tutorialHints) {
       this.tutorialHints.update(dt);
       this.firstSession?.suppress(this.tutorialHints.active); // the server's tracker replaces the old client-side checklist
     }
+    this.tradePanel?.update();
+    this.sectPanel?.update();
+    this.friendsPanel?.update();
+    this.marketPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
     }
+    for (const n of this.sectNpcs) n.update(dt);
     this.rig.follow(this.playerScreen(), dt);
     this.ysort.cull(this.cameraRect()); // park what is far outside the view: fewer draw calls (docs/33)
     this.ysort.sort();
@@ -589,6 +672,7 @@ export class Bootstrap extends Component {
       this.progressionHud?.layout(w, this.canvasUi.contentSize.height);
       this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
       this.firstSession?.layout(w, this.canvasUi.contentSize.height);
+      this.tribulationFx?.layout(w, this.canvasUi.contentSize.height);
     }
     if (!/autotest/.test(location.hash))
       this.hud.note = this.online
@@ -615,8 +699,13 @@ export class Bootstrap extends Component {
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
     this.tutorialHints?.destroy();
+    this.tradePanel?.destroy();
+    this.sectPanel?.destroy();
+    this.friendsPanel?.destroy();
+    this.marketPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
+    this.tribulationFx?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

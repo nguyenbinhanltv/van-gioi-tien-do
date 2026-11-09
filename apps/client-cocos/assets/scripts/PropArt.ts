@@ -4,6 +4,8 @@ import { allocSortId } from './Actors';
 import { makeFrame, makeTexture } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 import type { PlacedProp, PropDef } from './PropPlacement';
+import { itemIconKey } from './ArtRegistry';
+import { setDomIconProvider } from './DomIcons';
 
 /** One packed frame of the sidecar written by tools/procgen `gen:gemini` (px in the atlas page). */
 interface AtlasFrame {
@@ -28,15 +30,22 @@ interface PropEntry {
 }
 interface Sidecar {
   props: Record<string, PropEntry>;
+  /** item icons (PART 1 items, PART 3 manuals / alchemy): keyed by icon id */
   icons: Record<string, { f2: AtlasFrame; f1: AtlasFrame }>;
   /** skill icons by skill id (packages/shared skills.json) */
   skills?: Record<string, { path: string; index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** INTERIM mob standees (MobArt.ts), packed into the SAME pages as the props so the Y-sort batches them together */
   mobs?: Record<string, MobSprite>;
+  /** INTERIM Son Mon NPC standees by key (npc_<name>), same atlas page; front-facing, not flipped */
+  npcs?: Record<string, NpcSprite & { f2: AtlasFrame; f1: AtlasFrame }>;
+  /** boss skins taken at HP thresholds (phase = the NEW phase index of the boss_phase message), same atlas page */
+  mobPhases?: Record<string, MobSprite & { phase: number }>;
   /** status icons by status id (tools/procgen manifest.json "status.ids"), PART 2 */
   status?: Record<string, { index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** realm badges, keys realm_0 .. realm_8 (0 = Luyen Khi, REALM_NAMES order), PART 2 */
   realms?: Record<string, { index: number; f2: AtlasFrame; f1: AtlasFrame }>;
+  /** HUD / social icons by id (`HUD_ICON_IDS` in ArtRegistry.ts), PART 3 group P */
+  hud?: Record<string, { index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** particle textures by name (ArtRegistry.ts), PART 2 */
   particles?: Record<string, { f2: AtlasFrame; f1: AtlasFrame }>;
   /** login backdrop + emblem: single textures next to the atlas pages */
@@ -50,6 +59,12 @@ interface Sidecar {
     { w: number; h: number; inset: [number, number, number, number]; f2: AtlasFrame; f1: AtlasFrame }
   >;
 }
+export interface NpcSprite {
+  w: number;
+  h: number;
+  pivot: { x: number; y: number };
+}
+
 /** Login screen art as plain image URLs for the DOM class picker (see `PropArt.keyArt`). */
 export interface KeyArtUrls {
   backdrop: string;
@@ -104,6 +119,14 @@ export function getRealmBadge(realmIndex: number): SpriteFrame | null {
   return current?.realm(realmIndex) ?? null;
 }
 
+/**
+ * HUD / social icon (`HUD_ICON_IDS` in ArtRegistry.ts: friend_add, leader, online, close, ...) -> SpriteFrame, round on a dark backing
+ * disc (draw at 24-48 design px), or null when the art was not generated. Available once `PropArt.load` has resolved.
+ */
+export function getHudIcon(id: string): SpriteFrame | null {
+  return current?.hud(id) ?? null;
+}
+
 /** Particle texture by name (`PARTICLE_NAMES` in ArtRegistry.ts), or null. White / coloured glow, alpha = luminance. */
 export function getParticleFrame(name: string): SpriteFrame | null {
   return current?.particle(name) ?? null;
@@ -128,9 +151,18 @@ export class PropArt {
   private readonly statusFrames = new Map<string, SpriteFrame>();
   private readonly realmFrames = new Map<string, SpriteFrame>();
   private readonly particleFrames = new Map<string, SpriteFrame>();
+  private readonly hudFrames = new Map<string, SpriteFrame>();
+  /** decoded atlas pages (for the DOM icon data URLs) and the data URLs already made */
+  private readonly pageImages = new Map<string, ImageAsset>();
+  private readonly urlCache = new Map<string, string | null>();
   /** loads the particle page on first use (not at start: particles are VFX, kept out of the initial download) */
   private particleLoader: (() => Promise<void>) | null = null;
+  private mobPhaseLoader: (() => Promise<void>) | null = null;
+  private mobPhasePromise: Promise<void> | null = null;
   private readonly mobById = new Map<number, { entry: MobSprite; frame: SpriteFrame }>();
+  private readonly npcByKey = new Map<string, { entry: NpcSprite; frame: SpriteFrame }>();
+  /** mob wire id -> phase -> skin (phase 0 = the base standee) */
+  private readonly mobSkinsById = new Map<number, Map<number, { entry: MobSprite; frame: SpriteFrame }>>();
   private readonly uiFrames = new Map<string, SpriteFrame>();
   /** node scale that maps the UI atlas page's pixels to design px: 0.5 on the @2x page, 1 on the @1x page */
   private uiK = 0.5;
@@ -156,6 +188,7 @@ export class PropArt {
         if (!img) throw new Error(`missing atlas page ${page}`);
         t = makeTexture(img);
         textures.set(page, t);
+        art.pageImages.set(page, img);
       }
       return t;
     };
@@ -171,8 +204,25 @@ export class PropArt {
       // mob standees: same page (same Texture2D) as the props
       for (const m of Object.values(meta.mobs ?? {})) {
         const f = low ? m.f1 : m.f2;
-        art.mobById.set(m.id, { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
+        const skin = { entry: m, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) };
+        art.mobById.set(m.id, skin);
+        art.mobSkinsById.set(m.id, new Map([[0, skin]]));
       }
+      for (const [key, n] of Object.entries(meta.npcs ?? {})) {
+        const f = low ? n.f1 : n.f2;
+        art.npcByKey.set(key, { entry: n, frame: makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h) });
+      }
+      // boss phase skins: their own @1x page (both tiers), loaded on first need (`mobSkins`), not in the initial download
+      art.mobPhaseLoader = async () => {
+        for (const m of Object.values(meta.mobPhases ?? {})) {
+          const skins = art.mobSkinsById.get(m.id);
+          if (skins)
+            skins.set(m.phase, {
+              entry: m,
+              frame: makeFrame(await texture(pageOf(m.f1)), m.f1.x, m.f1.y, m.f1.w, m.f1.h),
+            });
+        }
+      };
       // 9-slice UI frames: insets are in the frame's own pixels (x2 on the @2x page)
       art.uiK = low ? 1 : 0.5;
       for (const [key, u] of Object.entries(meta.ui ?? {})) {
@@ -199,6 +249,11 @@ export class PropArt {
         const f = low ? s.f1 : s.f2;
         art.realmFrames.set(key, makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h));
       }
+      // HUD / social icons (PART 3 group P): small pages, @2x unless `tier low`
+      for (const [id, h] of Object.entries(meta.hud ?? {})) {
+        const f = low ? h.f1 : h.f2;
+        art.hudFrames.set(id, makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h));
+      }
       // particles: loaded on demand (`ensureParticles`), not here
       art.particleLoader = async () => {
         for (const [name, s] of Object.entries(meta.particles ?? {})) {
@@ -211,6 +266,8 @@ export class PropArt {
       return null;
     }
     current = art;
+    // DOM panels (friends, party, sect, chat) draw the same icons as <img> data URLs
+    setDomIconProvider((kind, id) => (kind === 'hud' ? art.hudUrl(id) : art.itemUrl(id)));
     return art;
   }
 
@@ -225,6 +282,21 @@ export class PropArt {
   /** INTERIM mob standee sprite by mob wire id (MOB_DEFS id), or undefined. */
   mob(id: number): { entry: MobSprite; frame: SpriteFrame } | undefined {
     return this.mobById.get(id);
+  }
+
+  /** INTERIM NPC standee sprite by key (npc_chuong_mon, ...), or undefined. */
+  npc(key: string): { entry: NpcSprite; frame: SpriteFrame } | undefined {
+    return this.npcByKey.get(key);
+  }
+
+  /** Every skin of a mob by phase (0 = base standee, then the boss phase skins), or undefined for an unknown mob. */
+  mobSkins(id: number): ReadonlyMap<number, { entry: MobSprite; frame: SpriteFrame }> | undefined {
+    // the phase page loads once, on the first request for a mob that has phase skins; the map fills in when it resolves
+    if (Object.values(this.meta.mobPhases ?? {}).some((m) => m.id === id))
+      this.mobPhasePromise ??= (this.mobPhaseLoader?.() ?? Promise.resolve()).catch((e) => {
+        console.warn('[vgtd] boss phase skins unavailable:', e);
+      });
+    return this.mobSkinsById.get(id);
   }
 
   /** node scale mapping the UI atlas page to design px (0.5 on the @2x page) */
@@ -301,12 +373,50 @@ export class PropArt {
     return backdrop && emblemUrl ? { backdrop, emblem: emblemUrl } : null;
   }
 
-  /** Item icon (key = item key such as `heal_pill`, `stone_low`), or null when missing. */
+  /** Item icon (key = item key such as `heal_pill`, `stone_low`, or an alchemy pill via `ITEM_ICON_ALIASES`), or null when missing. */
   icon(key: string): SpriteFrame | null {
-    return this.iconFrames.get(key) ?? null;
+    return this.iconFrames.get(key) ?? this.iconFrames.get(itemIconKey(key)) ?? null;
   }
 
-  /** Sprite size in design px (the 1x tile is 64 px wide). */
+  /** HUD / social icon by id (see `getHudIcon`), or null. */
+  hud(id: string): SpriteFrame | null {
+    return this.hudFrames.get(id) ?? null;
+  }
+
+  /** `data:` URL of a HUD icon for a DOM <img> (made once, cached), or null. */
+  hudUrl(id: string): string | null {
+    const m = this.meta.hud?.[id];
+    return m ? this.frameUrl(`hud:${id}`, this.use2x ? m.f2 : m.f1) : null;
+  }
+
+  /** `data:` URL of an item icon (by item key or icon id) for a DOM <img>, or null. */
+  itemUrl(key: string): string | null {
+    const m = this.meta.icons[key] ?? this.meta.icons[itemIconKey(key)];
+    return m ? this.frameUrl(`item:${key}`, m.f2) : null;
+  }
+
+  /** Cuts one atlas frame out of its decoded page into a PNG data URL; null when the page cannot be drawn (no DOM image data). */
+  private frameUrl(cacheKey: string, f: AtlasFrame): string | null {
+    if (this.urlCache.has(cacheKey)) return this.urlCache.get(cacheKey) ?? null;
+    let url: string | null = null;
+    try {
+      const page = this.pageImages.get(`world/${f.file.replace(/\.png$/, '')}`);
+      const data = page?.data as unknown as CanvasImageSource | undefined;
+      if (data && typeof document !== 'undefined') {
+        const c = document.createElement('canvas');
+        c.width = f.w;
+        c.height = f.h;
+        c.getContext('2d')!.drawImage(data, f.x, f.y, f.w, f.h, 0, 0, f.w, f.h);
+        url = c.toDataURL('image/png');
+      }
+    } catch {
+      url = null; // a tainted / undecodable page: the caller keeps its text glyph
+    }
+    this.urlCache.set(cacheKey, url);
+    return url;
+  }
+
+  /** Sprite size in design px (the 1x tile is 64 px wide). `x1only` props (the sect buildings) are @1x pixels in both pages: w2 / h2 are their virtual @2x size, so this is the same in every tier. */
   sizeOf(name: string): { w: number; h: number } {
     const p = this.meta.props[name]!;
     return { w: (this.use2x ? p.w2 : p.w2 / 2) * this.k, h: (this.use2x ? p.h2 : p.h2 / 2) * this.k };

@@ -142,6 +142,43 @@ function removeSparkle(img, isBg = isStrictBg) {
   return { pixels, components };
 }
 
+/**
+ * The Gemini mark of the part-3 grids that sit ON artwork (the HUD icon backing, an alchemy cell): a translucent white 4-point star
+ * (an astroid |x|^(2/3) + |y|^(2/3) <= r^(2/3)) centred ~5.5% in from the bottom-right corner, blended at alpha ~0.55, so it cannot be
+ * found as "a component in the corner" (it is connected to the art). Un-blend it: P = (P' - 255 a) / (1 - a) inside the star (+1 px).
+ * @returns {{ pixels: number, residual: number }} pixels un-blended and light-grey pixels left inside the star (must be 0)
+ */
+function unmixStar(img, o = {}) {
+  const { width: W, height: H, data: d } = img;
+  const cx = (o.cx ?? 0.9453) * W,
+    cy = (o.cy ?? 0.9453) * H,
+    r = (o.r ?? 0.0245) * W,
+    a = o.alpha ?? 0.55;
+  const inside = (x, y, rr) => Math.pow(Math.abs(x - cx) / rr, 2 / 3) + Math.pow(Math.abs(y - cy) / rr, 2 / 3) <= 1;
+  let pixels = 0;
+  let residual = 0;
+  const x0 = Math.max(0, Math.floor(cx - r - 3)),
+    x1 = Math.min(W - 1, Math.ceil(cx + r + 3)),
+    y0 = Math.max(0, Math.floor(cy - r - 3)),
+    y1 = Math.min(H - 1, Math.ceil(cy + r + 3));
+  for (let y = y0; y <= y1; y++)
+    for (let x = x0; x <= x1; x++) {
+      if (!inside(x, y, r + 1.5)) continue;
+      const i = (y * W + x) * 4;
+      for (let c = 0; c < 3; c++) d[i + c] = Math.max(0, Math.min(255, Math.round((d[i + c] - 255 * a) / (1 - a))));
+      pixels++;
+    }
+  for (let y = y0; y <= y1; y++)
+    for (let x = x0; x <= x1; x++) {
+      if (!inside(x, y, r - 1)) continue;
+      const i = (y * W + x) * 4;
+      const mn = Math.min(d[i], d[i + 1], d[i + 2]),
+        mx = Math.max(d[i], d[i + 1], d[i + 2]);
+      if (mn >= 140 && mx - mn <= 30) residual++; // a light grey / white pixel where the backing should be dark
+    }
+  return { pixels, residual };
+}
+
 /** Mean colour of the strict-background pixels on the image border. */
 function backgroundColor(img) {
   const { width: W, height: H, data: d } = img;
@@ -177,7 +214,12 @@ function backgroundColor(img) {
 function keyMagenta(img, bgOverride, keyOpts = {}) {
   const { width: W, height: H, data: d } = img;
   const bg = bgOverride || estimateBackground(img);
-  const isBg = bgTest(bg);
+  const isBg0 = bgTest(bg);
+  // keyOpts.extraBg: further background colours (a grid whose cells have their own darker magenta backing), within 60 like the main one
+  const extra = keyOpts.extraBg || [];
+  const isBg = extra.length
+    ? (r, g, b) => isBg0(r, g, b) || extra.some((e) => (r - e[0]) ** 2 + (g - e[1]) ** 2 + (b - e[2]) ** 2 <= 3600)
+    : isBg0;
   // family: still clearly magenta (R about equal to B) even when the background is darkened by a dim glow / smoke; a saturated R
   // (a bright warm glow over the background) may have any B
   // keyOpts.famFrac (manifest "key": { famFrac }) lowers both floors for art with dark translucent smoke over the magenta
@@ -464,7 +506,15 @@ function processIcon(src, size2 = 128) {
 function sliceGrid(src, size2, cols, rows, opts = {}) {
   const { fit = 'stretch', pad = 0, eraseCorner = 0 } = opts;
   const n = cols * rows;
-  const { image, sparkle } = cleanSprite(src);
+  let star = null;
+  if (opts.unmixStar) {
+    // the mark sits on the art: un-blend it BEFORE keying (on a copy, the source buffer stays untouched)
+    src = new Image(src.width, src.height);
+    src.data.set(arguments[0].data);
+    star = unmixStar(src, opts.unmixStar === true ? {} : opts.unmixStar);
+  }
+  const { image, sparkle: found } = cleanSprite(src, opts.key);
+  const sparkle = star ? { pixels: star.pixels, components: star.residual === 0 ? 1 : 0 } : found;
   const { width: W, height: H, data: d } = image;
   if (eraseCorner > 0) {
     // the Gemini mark can sit on a tile's glow (not separable by connectivity): erase a box in the bottom-right corner
@@ -516,6 +566,54 @@ function sliceGrid(src, size2, cols, rows, opts = {}) {
       throw new Error('icon grid: row ' + r + ' is not a row of ' + cols + ' tiles');
     ordered.push(...row);
   }
+  if (opts.disc) {
+    // round badges on a backing disc (the part-3 HUD icons): every disc has the radius of the median tile, anchored at the tile's
+    // left / top edge (the Gemini mark can add a wedge to the bottom-right of one disc); anything outside that circle is background
+    const rs = ordered.map((t) => Math.min(t.w, t.h) / 2).sort((p, q) => p - q);
+    const R = rs[rs.length >> 1];
+    for (const t of ordered) {
+      const ccx = t.x + R,
+        ccy = t.y + R;
+      for (let y = t.y; y < t.y + t.h; y++)
+        for (let x = t.x; x < t.x + t.w; x++)
+          if ((x + 0.5 - ccx) ** 2 + (y + 0.5 - ccy) ** 2 > (R + 0.5) ** 2) d[(y * W + x) * 4 + 3] = 0;
+      t.w = Math.round(2 * R);
+      t.h = Math.round(2 * R);
+    }
+    if (opts.unmixStar) {
+      // the mark's arms cross the rim of the last disc: un-blending cannot tell backing from outline there, so repaint the star's area
+      // from the same radius at another angle (the rim is radially symmetric and the icon never reaches it), and clear outside the disc
+      const so = opts.unmixStar === true ? {} : opts.unmixStar;
+      const scx = (so.cx ?? 0.9453) * W,
+        scy = (so.cy ?? 0.9453) * H,
+        sr = (so.r ?? 0.0245) * W + 4;
+      const host = ordered.find((t) => scx >= t.x && scx <= t.x + t.w && scy >= t.y && scy <= t.y + t.h);
+      if (host) {
+        const ccx = host.x + R,
+          ccy = host.y + R;
+        const copy = Uint8ClampedArray.from(d);
+        for (let y = Math.floor(scy - sr); y <= Math.ceil(scy + sr); y++)
+          for (let x = Math.floor(scx - sr); x <= Math.ceil(scx + sr); x++) {
+            if (x < 0 || y < 0 || x >= W || y >= H) continue;
+            if (Math.pow(Math.abs(x - scx) / sr, 2 / 3) + Math.pow(Math.abs(y - scy) / sr, 2 / 3) > 1) continue;
+            const rho = Math.hypot(x + 0.5 - ccx, y + 0.5 - ccy);
+            const i = (y * W + x) * 4;
+            if (rho > R + 0.5) {
+              d[i + 3] = 0;
+              continue;
+            }
+            const th = Math.atan2(y + 0.5 - ccy, x + 0.5 - ccx) + Math.PI / 2; // 90 degrees round: the bottom-left rim, free of art
+            const sx = Math.round(ccx + rho * Math.cos(th) - 0.5),
+              sy = Math.round(ccy + rho * Math.sin(th) - 0.5);
+            const j = (sy * W + sx) * 4;
+            d[i] = copy[j];
+            d[i + 1] = copy[j + 1];
+            d[i + 2] = copy[j + 2];
+            d[i + 3] = copy[j + 3];
+          }
+      }
+    }
+  }
   const x2 = [],
     x1 = [];
   const place = (tile, size) => {
@@ -546,12 +644,14 @@ function sliceSkillGrid(src, size2 = 128) {
  * INTERIM mob standee: concept art keyed + trimmed, scaled so its longest side is `box` px (design px @1x; mobs ship one
  * @1x tier). Source faces LEFT. Returns the sprite, its foot pivot and the sparkle stats.
  */
-function processMob(src, box) {
+function processMob(src, box, opts = {}) {
   const { image, sparkle } = cleanSprite(src);
   const bb = alphaBBox(image);
   if (!bb) throw new Error('empty sprite after keying');
   const trimmed = crop(image, bb.x, bb.y, bb.w, bb.h);
-  const k = box / Math.max(bb.w, bb.h);
+  // `opts.height`: scale to this height instead (front-facing characters are sized by how tall they stand);
+  // `opts.area`: scale so the sprite covers that many px (a wide crouched pose must not look smaller than the tall one it replaces)
+  const k = opts.height ? opts.height / bb.h : opts.area ? Math.sqrt(opts.area / (bb.w * bb.h)) : box / Math.max(bb.w, bb.h);
   const x1 = bleedColor(resizeArea(trimmed, Math.max(2, Math.round(bb.w * k)), Math.max(2, Math.round(bb.h * k))));
   return { x1, pivot: footPivot(trimmed), sparkle };
 }
@@ -774,6 +874,7 @@ module.exports = {
   isStrictBg,
   isFamily,
   removeSparkle,
+  unmixStar,
   backgroundColor,
   estimateBackground,
   bgTest,

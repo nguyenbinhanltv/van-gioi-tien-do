@@ -28,6 +28,12 @@ export interface CastInput {
   targetId: number;
   /** measured by the transport layer, used for the cooldown latency tolerance */
   rttMs: number;
+  /**
+   * Real ms this cast waited between arriving at the server and the tick that processes it (measured by the node, capped by
+   * `ANTICHEAT.CAST_MAX_AGE_MS`). The cast is judged and its cooldown / GCD stamped as of its ARRIVAL, so tick quantization and a stalled
+   * tick cannot make an honest client look early (D106). Omitted = 0 (judged at the processing tick, the previous behaviour).
+   */
+  ageMs?: number;
 }
 export type SimInput = MoveInput | CastInput;
 
