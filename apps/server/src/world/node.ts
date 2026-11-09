@@ -16,12 +16,14 @@ import {
   inAoiAt,
   uwDistSq,
   rngFloat,
+  rngInt,
   rngFork,
   rngSeed,
   toUW,
   type PathId,
   type RngState,
   MajorResult,
+  COLLIDER_RADIUS_TILES,
 } from '@vgtd/shared';
 import {
   ErrorCode,
@@ -45,7 +47,9 @@ import {
   type AntiCheatState,
   CastReason,
   TileGrid,
+  TILE_WALKABLE,
   budgetMs,
+  circleBlocked,
   compileSkills,
   createWorld,
   removeEntity,
@@ -321,6 +325,11 @@ export class WorldNode {
   private tickDriftMs = 0;
   private spawnRng: RngState;
   private readonly spawn: { i0: number; j0: number; side: number };
+  /** tiles inside the spawn square a player may appear on (walkable, reachable from the square's centre, room for the body); null = every tile (an open map) */
+  private readonly spawnTiles: { i: number; j: number }[] | null;
+  private readonly spawnSet: Set<number> | null;
+  /** the tile the reachability search started from (the centre of the spawn square, or the nearest walkable tile to it) */
+  private readonly spawnStart: { i: number; j: number };
   private readonly maxVisible: number;
   private timer: ReturnType<typeof setTimeout> | null = null;
   private running = false;
@@ -369,6 +378,10 @@ export class WorldNode {
     // default spawn: a 96-tile square at the map centre, shrunk to half the map on small maps (same result for 256)
     const side = Math.min(96, n / 2);
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
+    const area = this.computeSpawnArea(grid);
+    this.spawnTiles = area.tiles;
+    this.spawnSet = area.tiles ? new Set(area.tiles.map((t) => t.j * grid.width + t.i)) : null;
+    this.spawnStart = area.start;
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
     this.progression = opts.progression;
     this.chat = opts.chat;
@@ -597,12 +610,106 @@ export class WorldNode {
     return this.clients.get(entityId)?.classPath;
   }
 
-  /** A random point of the spawn region (join and respawn), drawn from the seeded `spawn` stream. */
+  /**
+   * Which tiles of the spawn square a player may appear on (D95: the zone map has water and lava, and the default 96-tile square reaches
+   * them). A tile qualifies when it is walkable and connected to the square's centre over walkable tiles (4-neighbour flood fill over the
+   * whole map), and a body of the player's size fits there. An OPEN square (the old tests, an all-land dev area) returns `tiles: null`:
+   * every tile qualifies and the spawn stream is exactly what it was before.
+   */
+  private computeSpawnArea(grid: TileGrid): {
+    tiles: { i: number; j: number }[] | null;
+    start: { i: number; j: number };
+  } {
+    const w = grid.width;
+    const h = grid.height;
+    const sq = this.spawn;
+    const walkable = (i: number, j: number): boolean => (grid.flags(i, j) & TILE_WALKABLE) !== 0;
+    const free = (i: number, j: number): boolean =>
+      walkable(i, j) && !circleBlocked(grid, i + 0.5, j + 0.5, COLLIDER_RADIUS_TILES, 0);
+    const clampI = (v: number): number => Math.min(w - 1, Math.max(0, v));
+    const clampJ = (v: number): number => Math.min(h - 1, Math.max(0, v));
+    const i0 = Math.floor(sq.i0);
+    const j0 = Math.floor(sq.j0);
+    const i1 = Math.min(w - 1, Math.ceil(sq.i0 + sq.side) - 1);
+    const j1 = Math.min(h - 1, Math.ceil(sq.j0 + sq.side) - 1);
+    // an open square needs no work (the common case: tests, the open dev map)
+    let open = true;
+    for (let j = Math.max(0, j0); j <= j1 && open; j++)
+      for (let i = Math.max(0, i0); i <= i1; i++)
+        if (!free(i, j)) {
+          open = false;
+          break;
+        }
+    const ci = clampI(Math.floor(sq.i0 + sq.side / 2));
+    const cj = clampJ(Math.floor(sq.j0 + sq.side / 2));
+    if (open) return { tiles: null, start: { i: ci, j: cj } };
+    // the nearest walkable tile to the centre (the centre itself unless it is water)
+    let start = { i: ci, j: cj };
+    if (!walkable(ci, cj)) {
+      let found = false;
+      for (let rad = 1; rad <= Math.max(w, h) && !found; rad++)
+        for (let dj = -rad; dj <= rad && !found; dj++)
+          for (let di = -rad; di <= rad; di++) {
+            if (Math.max(Math.abs(di), Math.abs(dj)) !== rad) continue;
+            const ti = ci + di;
+            const tj = cj + dj;
+            if (ti >= 0 && tj >= 0 && ti < w && tj < h && walkable(ti, tj)) {
+              start = { i: ti, j: tj };
+              found = true;
+              break;
+            }
+          }
+    }
+    const seen = new Uint8Array(w * h);
+    const queue: number[] = [start.j * w + start.i];
+    seen[queue[0]!] = 1;
+    for (let q = 0; q < queue.length; q++) {
+      const t = queue[q]!;
+      const ti = t % w;
+      const tj = (t - ti) / w;
+      for (const [di, dj] of [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+      ] as const) {
+        const ni = ti + di;
+        const nj = tj + dj;
+        if (ni < 0 || nj < 0 || ni >= w || nj >= h || seen[nj * w + ni] || !walkable(ni, nj)) continue;
+        seen[nj * w + ni] = 1;
+        queue.push(nj * w + ni);
+      }
+    }
+    const tiles: { i: number; j: number }[] = [];
+    for (let j = Math.max(0, j0); j <= j1; j++)
+      for (let i = Math.max(0, i0); i <= i1; i++) if (seen[j * w + i] && free(i, j)) tiles.push({ i, j });
+    return { tiles, start };
+  }
+
+  /**
+   * A random point of the spawn region (join and respawn), drawn from the seeded `spawn` stream. On a map with obstacles the point is
+   * re-drawn (from the same stream, so it stays deterministic) until it lands on a spawnable tile; after 32 misses a spawnable tile is
+   * picked directly, and a region with none falls back to the tile the search started from.
+   */
   private spawnPoint(): { i: number; j: number } {
-    const [a, r1] = rngFloat(this.spawnRng);
-    const [b, r2] = rngFloat(r1);
-    this.spawnRng = r2;
-    return { i: this.spawn.i0 + a * this.spawn.side, j: this.spawn.j0 + b * this.spawn.side };
+    const g = this.ctx.grid;
+    const ok = (p: { i: number; j: number }): boolean =>
+      !this.spawnSet ||
+      (this.spawnSet.has(Math.floor(p.j) * g.width + Math.floor(p.i)) &&
+        !circleBlocked(g, p.i, p.j, COLLIDER_RADIUS_TILES, 0));
+    for (let k = 0; k < 32; k++) {
+      const [a, r1] = rngFloat(this.spawnRng);
+      const [b, r2] = rngFloat(r1);
+      this.spawnRng = r2;
+      const p = { i: this.spawn.i0 + a * this.spawn.side, j: this.spawn.j0 + b * this.spawn.side };
+      if (ok(p)) return p;
+    }
+    const tiles = this.spawnTiles;
+    if (!tiles || tiles.length === 0) return { i: this.spawnStart.i + 0.5, j: this.spawnStart.j + 0.5 };
+    const [pick, r3] = rngInt(this.spawnRng, tiles.length);
+    this.spawnRng = r3;
+    const t = tiles[pick]!;
+    return { i: t.i + 0.5, j: t.j + 0.5 };
   }
 
   /**
