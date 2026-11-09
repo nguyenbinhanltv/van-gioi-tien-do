@@ -4,6 +4,7 @@ import { newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import { CHIBI_CLASSES, ChibiBody } from './ChibiBody';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
+import { CHIBI_REACH } from './CullMath';
 import type { TilePos } from './Actors';
 
 /** Scene nodes of one NPC: `body` goes into the L3 Y-sort layer, `shadow` into L2. */
@@ -86,7 +87,7 @@ export class NpcCrowd {
       const pos = this.pickTile() ?? { ...around };
       const npc: Npc = { id, body, shadow, chibi, facing: 'S', pos, target: null, wait: this.rand() * 2 };
       this.npcs.push(npc);
-      ysort.add(body, () => pointSortable(id, 0, npc.pos.i, npc.pos.j));
+      ysort.add(body, () => pointSortable(id, 0, npc.pos.i, npc.pos.j), CHIBI_REACH);
       this.place(npc);
     }
   }

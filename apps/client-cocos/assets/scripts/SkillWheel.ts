@@ -5,6 +5,7 @@ import type { ArtFrames } from './PlaceholderArt';
 import type { TilePos } from './Actors';
 import type { CombatUi } from './Combat';
 import { worldUiLayer } from './OverheadBar';
+import { sharedAtlas } from './UiLabel';
 
 interface Btn {
   root: Node;
@@ -80,6 +81,7 @@ export class SkillWheel {
     l.verticalAlign = Label.VerticalAlign.CENTER;
     l.overflow = Label.Overflow.NONE;
     l.color = color;
+    sharedAtlas(l);
     return l;
   }
 
@@ -112,7 +114,7 @@ export class SkillWheel {
     this.radial(cd);
     this.radial(gcd);
     const label = this.text(root, 'Label', 18, new Color(255, 255, 255, 255));
-    const cdText = this.text(root, 'CdText', 20, new Color(255, 255, 255, 255));
+    const cdText = sharedAtlas(this.text(root, 'CdText', 20, new Color(255, 255, 255, 255)), 'dynamic'); // counts down
     b = { root, bg, icon, cd, gcd, label, cdText };
     this.buttons.set(id, b);
     return b;
