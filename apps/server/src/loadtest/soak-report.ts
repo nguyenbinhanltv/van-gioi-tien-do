@@ -386,13 +386,23 @@ function criteriaOf(s: SoakSummary): Criterion[] {
  * The CI smoke gate: correctness and GROSS overruns only (a shared CI runner makes the design budgets meaningless): every bot online and
  * playing, no kicks / violations / errors, and a tick p99 no worse than `maxTickP99Ms`.
  */
+/** Violation kinds the CI gate tolerates (docs/35 §3.2, OPEN-ITEMS "P5 load test"): still reported in the report. */
+export const GATE_EXEMPT_VIOLATIONS: readonly string[] = ['cooldown'];
+
 export function gateFailures(s: SoakSummary, maxTickP99Ms: number): string[] {
   const fails: string[] = [];
   const crit = (name: string) => s.criteria.find((c) => c.name.startsWith(name));
-  for (const n of ['CCU stable', 'no protocol violations', 'the bots actually played']) {
+  for (const n of ['CCU stable', 'the bots actually played']) {
     const k = crit(n);
     if (k && !k.pass) fails.push(`${k.name}: ${k.value}`);
   }
+  // Violations: every kind an honest bot cannot trigger fails the gate. `cooldown` is reported but NOT gated while docs/35 §3.2 is open
+  // (honest bots still get a few when the server stalls; a shared CI runner stalls more than a dev box). Remove GATE_EXEMPT_VIOLATIONS
+  // once that is resolved. Counts are the server's whole-run counters by kind (ramp-up included: the CI smoke has no violations to hide).
+  const gated = Object.entries(s.errors.violationKinds).filter(([kind]) => !GATE_EXEMPT_VIOLATIONS.includes(kind));
+  const gatedCount = gated.reduce((a, [, n]) => a + n, 0);
+  if (gatedCount > 0) fails.push(`protocol violations: ${gated.map(([k, n]) => `${k} ${n}`).join(', ')}`);
+  if (s.errors.botsWithErrors > 0) fails.push(`${s.errors.botsWithErrors} bots with an error text`);
   if (s.tick.p99 > maxTickP99Ms) fails.push(`tick p99 ${s.tick.p99.toFixed(2)} ms > gate ${maxTickP99Ms} ms`);
   return fails;
 }

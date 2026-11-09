@@ -33,6 +33,23 @@ export interface TilesetInfo {
   byId: Map<number, TilesetTile>;
 }
 
+/** A named zone rectangle of the map (tile coordinates, `i0 <= i < i1`), written by the zone generator (D95). */
+export interface WorldZone {
+  id: string;
+  i0: number;
+  j0: number;
+  i1: number;
+  j1: number;
+}
+
+/** A named place of the map (tile coordinates, `radius` in tiles), e.g. the giant-tree clearing of Cổ thụ trung tâm (D95). */
+export interface WorldLandmark {
+  id: string;
+  i: number;
+  j: number;
+  radius: number;
+}
+
 export interface ProcgenWorld {
   seed: number;
   width: number;
@@ -44,6 +61,10 @@ export interface ProcgenWorld {
   layers: Array<{ name: string; data: Int16Array }>;
   elevation: Uint8Array;
   objects: WorldObject[];
+  /** Zones of the map (docs/10 §4, same rectangles as the server's mob zones), empty on a map without zones. */
+  zones: WorldZone[];
+  /** Named places of the zone map (the giant-tree clearing), empty on a map without zones. */
+  landmarks: WorldLandmark[];
 }
 
 /** Optional `objects[]` entry in map.json (forward-compatible; procgen does not emit it yet). */
@@ -222,6 +243,29 @@ export function parseProcgenMap(tilesetJson: unknown, mapJson: unknown): Procgen
     if (ids.has(o.id)) fail(`duplicate object id ${o.id}`);
     ids.add(o.id);
   }
+  const zones: WorldZone[] = Array.isArray(mapJson.zones)
+    ? mapJson.zones.map((z: unknown, n: number) => {
+        if (!isObj(z) || typeof z.id !== 'string') fail(`zones[${n}] must be an object with an id`);
+        return {
+          id: z.id,
+          i0: num(z, 'i0', `zones[${n}]`),
+          j0: num(z, 'j0', `zones[${n}]`),
+          i1: num(z, 'i1', `zones[${n}]`),
+          j1: num(z, 'j1', `zones[${n}]`),
+        };
+      })
+    : [];
+  const landmarks: WorldLandmark[] = Array.isArray(mapJson.landmarks)
+    ? mapJson.landmarks.map((l: unknown, n: number) => {
+        if (!isObj(l) || typeof l.id !== 'string') fail(`landmarks[${n}] must be an object with an id`);
+        return {
+          id: l.id,
+          i: num(l, 'i', `landmarks[${n}]`),
+          j: num(l, 'j', `landmarks[${n}]`),
+          radius: num(l, 'radius', `landmarks[${n}]`),
+        };
+      })
+    : [];
   return {
     seed: typeof mapJson.seed === 'number' ? mapJson.seed : 0,
     width,
@@ -231,6 +275,8 @@ export function parseProcgenMap(tilesetJson: unknown, mapJson: unknown): Procgen
     layers,
     elevation,
     objects,
+    zones,
+    landmarks,
   };
 }
 
