@@ -3,8 +3,10 @@ import { character, shared } from './vendor/vgtd.mjs';
 import { footprintSortable, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
+import { CHIBI_REACH } from './CullMath';
 import { ChibiBody } from './ChibiBody';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
+import { sharedAtlas } from './UiLabel';
 
 let nextId = 1; // id 0 = player
 
@@ -174,7 +176,7 @@ export class RemotePlayer {
     this.body = this.chibi.root;
     this.shadow = spriteNode(`RemoteShadow${entityId}`, art.shadow, 48, 24, 0.5, 0.5);
     shadowLayer.addChild(this.shadow);
-    ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j));
+    ysort.add(this.body, () => pointSortable(entityId, 0, this.pos.i, this.pos.j), CHIBI_REACH);
     this.bar = shadowLayer.parent ? new OverheadBar(worldUiLayer(shadowLayer.parent), art.pixel, 96) : null;
     this.statusParent = shadowLayer.parent ? worldUiLayer(shadowLayer.parent) : null;
     this.place();
@@ -213,6 +215,7 @@ export class RemotePlayer {
       l.lineHeight = 16;
       l.overflow = Label.Overflow.NONE;
       l.color = new Color(255, 230, 120, 255);
+      sharedAtlas(l); // a handful of glyph combinations (root / slow / poison): a small fixed set of strings
       this.statusLabel = l;
     }
     if (this.statusLabel) {
