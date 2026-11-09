@@ -674,6 +674,11 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 - **Chưa có smoke trình duyệt cho panel** (cần dựng lại Cocos); `MarketModel` và luồng server-client đã có test; panel mới chỉ qua typecheck của script.
 - `docs/24` cũ nói `requestId` UUID cho mọi lệnh có tác dụng phụ; chợ dùng `clientMsgId` u16 vì lệnh dựa trên trạng thái nên tự idempotent (mua hai lần: lần hai "không còn").
 
+## Bộ đệm đỉnh Batcher2D 2048 KB (2026-11-10): còn mở
+
+- **Chưa đo bộ nhớ trên máy mobile thật**: số chênh ~1-3 MB (CPU + GPU) là tính toán (docs/33, mục "Bộ đệm đỉnh của Batcher2D"), ArrayBuffer ngoài heap JS nên cổng perf không thấy. Cần chạy trên Android tầm thấp và iOS Safari (tier low) và xem bộ nhớ GPU / tab bị đóng.
+- **Trần 2303 KB** vì chỉ số đỉnh là `Uint16`; nếu sau này cần buffer lớn hơn phải có chỉ số 32-bit cho bộ đệm tĩnh của batcher 2D (chưa kiểm tra engine 3.8.8 có hỗ trợ không).
+
 ## Kiểm toán nội dung quái (D114): còn mở
 
 - **Client chưa biết biến thể**: server đã sinh hai hệ cho mỗi quái thường (docs/10 §4: "tint / palette shader, không vẽ lại" theo 02 §1) nhưng `EnterEntity` chỉ mang `defId`, nên client chưa tô màu theo hệ và người chơi chưa nhìn thấy sự khác nhau giữa hai bầy. Cần một trường biến thể trên dây (cộng thêm) hoặc ghi vào bit cao của `defId`, và bảng tint 5 hệ ở client; việc này đụng giao thức nên chưa làm trong D114.
