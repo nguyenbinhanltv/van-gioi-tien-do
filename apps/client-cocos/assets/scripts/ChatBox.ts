@@ -41,6 +41,10 @@ export class ChatBox {
   readonly log: InstanceType<typeof core.ChatLog>;
   /** the party state shown by `PartyFrames` (D93); fed by the same net hooks as the chat */
   readonly party: InstanceType<typeof core.PartyModel>;
+  /** the friend list shown by `FriendsPanel` (D96); fed by the same net hooks as the chat */
+  readonly friends: InstanceType<typeof core.FriendsModel>;
+  /** set by the friends panel: `/friends` toggles it (without one the list is printed as chat lines) */
+  onFriendsToggle: (() => void) | null = null;
   private readonly root: HTMLDivElement;
   private readonly list: HTMLDivElement;
   private readonly input: HTMLInputElement;
@@ -56,8 +60,9 @@ export class ChatBox {
     username: string,
     parent: HTMLElement = document.body,
   ) {
-    this.log = new core.ChatLog({ myName: () => username });
+    this.log = new core.ChatLog({ myName: () => username, onFriends: () => this.showFriends() });
     this.party = new core.PartyModel({ myId: () => net.entityId, now: () => performance.now() });
+    this.friends = new core.FriendsModel();
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
     net.chatEvents = {
       onChatMsg: (m) => this.log.applyMsg(m),
@@ -78,6 +83,17 @@ export class ChatBox {
         const refusal = this.party.applyResult(m);
         if (refusal) this.log.system(refusal, 'error');
         else if (asked && asked.op === core.PartyOp.Decline) this.party.forgetInvite(asked.name);
+      },
+    };
+    // friends (D96): the list lives in the panel; only requests / new friends / refusals show up as chat lines
+    net.friendEvents = {
+      onFriendState: (m) => {
+        const line = this.friends.applyState(m);
+        if (line) this.log.system(line, 'system');
+      },
+      onFriendResult: (m) => {
+        const refusal = this.friends.applyResult(m);
+        if (refusal) this.log.system(refusal, 'error');
       },
     };
 
@@ -221,7 +237,14 @@ export class ChatBox {
         }
         return ok;
       },
+      (m) => this.net.sendFriend(m),
     );
+  }
+
+  /** `/friends`: toggle the panel when there is one, else print the list. */
+  private showFriends(): void {
+    if (this.onFriendsToggle) this.onFriendsToggle();
+    else for (const l of this.friends.summaryLines()) this.log.system(l);
   }
 
   focus(prefill = ''): void {

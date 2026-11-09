@@ -3,6 +3,8 @@ import { createGateway, type GatewayHandle, type GatewayOptions } from './gatewa
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
 import { TutorialService, type TutorialOptions } from './tutorial/service.js';
+import { FriendService } from './friends/service.js';
+import type { FriendStore } from './friends/store.js';
 import { ProgressionService, type ProgressionOptions } from './progression/service.js';
 import { WorldNode, type WorldNodeOptions } from './world/node.js';
 
@@ -19,6 +21,8 @@ export interface ServerOptions {
   party?: false;
   /** tutorial / FTUE tracker options, or `false` to run without it (default: enabled, in-memory store: D105) */
   tutorial?: TutorialOptions | false;
+  /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
+  friends?: { store?: FriendStore } | false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -44,12 +48,25 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     opts.tutorial === false
       ? undefined
       : (opts.world?.tutorial ?? new TutorialService({ mapTiles: opts.world?.mapTiles, ...opts.tutorial }));
+  const friends =
+    opts.friends === false
+      ? undefined
+      : (opts.world?.friends ??
+        new FriendService({
+          ...(opts.friends?.store ? { store: opts.friends.store } : {}),
+          // friendship hangs on account ids; the directory is the auth store (usernames are stored lower-cased)
+          directory: {
+            idOf: (nameLower) => auth.store.byUsername(nameLower)?.id,
+            nameOf: (id) => auth.store.byId(id)?.username,
+          },
+        }));
   const world = new WorldNode({
     ...opts.world,
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
     ...(party ? { party } : {}),
     ...(tutorial ? { tutorial } : {}),
+    ...(friends ? { friends } : {}),
   });
   const gateway = createGateway(auth, world, opts.gateway);
   await new Promise<void>((resolve, reject) => {

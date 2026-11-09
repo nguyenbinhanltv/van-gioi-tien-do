@@ -80,12 +80,24 @@ const out = join(procgen, 'out/tilemap');
 // always regenerate (0.6 s) so the copied tilemap can never be stale vs tools/procgen
 {
   // Slice map = Son Mon (docs/04 section 5, docs/10 section 12): 256 x 256 tiles = 8 x 8 chunks, so the ChunkStreamer really
-  // streams (keep window 7x7). `VGTD_MAP_TILES` overrides (e.g. 32 = the old single-chunk map). A tiny preview scale keeps
-  // the generator from writing a multi-MB map_preview.png nobody opens here.
+  // streams (keep window 7x7). `VGTD_MAP_TILES` overrides (e.g. 32 = the old single-chunk map). `--previewScale 0` skips
+  // map_preview.png: nobody opens it here and drawing it costs ~1 minute on a 256 map.
   const tiles = String(Number(process.env.VGTD_MAP_TILES) || 256);
   const r = spawnSync(
     'npm',
-    ['run', 'gen:tilemap', '--', '--width', tiles, '--height', tiles, '--previewScale', '0.05'],
+    [
+      'run',
+      'gen:tilemap',
+      '--',
+      '--width',
+      tiles,
+      '--height',
+      tiles,
+      '--previewScale',
+      '0',
+      // VGTD_ZONES=0 builds the old 3-material map (A/B measurements); default: the four zones (D95, `gen:tilemap` has `--zones 1`)
+      ...(process.env.VGTD_ZONES === '0' ? ['--zones', '0'] : []),
+    ],
     { cwd: procgen, stdio: 'inherit', shell: true },
   );
   if (r.status !== 0) throw new Error('gen:tilemap failed');

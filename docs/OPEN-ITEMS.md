@@ -540,6 +540,12 @@ Còn mở / lưu ý:
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ. Đã đo bản @2x (2026-11-09): prop @2x + quái @2x cần 3,74 / 4,19 MP, xếp thành **2 trang** 2048² (thêm ~16 MB GPU và Y-sort bị ngắt batch giữa prop và quái), nên chưa làm; làm khi có sprite hoạt hình thật (atlas riêng cho quái, nén ASTC).
 - Quái nhận biết bằng `EnemyView.defId` (id dây của `MOB_DEFS`, do `aoi_enter` mang); tên `Mob <id>` chỉ còn là đường lùi cho backend chưa gán `defId`.
 
+## Skin pha boss (INTERIM, 2026-11-09): còn mở
+
+- Skin pha đổi khi client nhận `boss_phase`; client vào tầm nhìn SAU lúc boss đã đổi pha (AOI) chưa nhận lại thông điệp nên vẫn thấy skin pha đầu cho tới lần đổi pha kế: cần `phase` trong `aoi_enter` / snapshot (giao thức) để dựng đúng skin ngay.
+- Thanh máu trên đầu boss giữ độ cao của skin pha đầu (skin pha sau thấp hơn); chưa dùng sprite hoạt hình: chỉ nháy + đổi ảnh tĩnh trong cửa sổ biến hình (`TRANSFORM_SWAP_AT` = giữa cửa sổ).
+- Skin pha boss nằm trong trang atlas riêng `atl_mobphase_1x` (@1x cho mọi tier, ~0,9 MB PNG, tải lười khi có boss có pha trong tầm nhìn; cổng ngân sách tính riêng qua `LAZY_ATLAS_PREFIXES`, không vào gói tải đầu). Trang prop vẫn một trang (`atl_prop_2x` 2048², `atl_prop_1x` 2048×1024). Còn mở: nếu boss đổi pha trước khi trang tải xong thì dùng tạm màu pha (hiếm: trang tải ngay khi boss vào tầm nhìn).
+
 ## 21. Tổ đội (D93, worker35): còn mở
 
 - **Chia chiến lợi phẩm là PLACEHOLDER**: mỗi người trong 20 ô tự roll với hệ số 1/√n (docs/07 §6). Cần game designer duyệt: bán kính chia, có tính người đã chết / ngoại tuyến không, nhặt chung hay riêng (Need / Greed), chia **kinh nghiệm** (MVP chưa có XP khi hạ quái), boss bí cảnh "1 lần mỗi tuần mỗi người" khi đi đội.
@@ -556,17 +562,36 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## D95 — bản đồ 4 vùng: còn mở (worker39, 2026-11-09)
+
+1. **Mọi bố cục là mặc định tạm, cần game designer duyệt**: tên và vị trí vùng (bốn góc phần tư của bản đồ thử, chưa phải tọa độ Sơn Môn thật của docs/10 §4 / level designer), bãi trống cây cổ thụ ở giữa `co_thu_trung_tam` (chưa có cây: prop do worker 40), tỉ lệ nước / nham thạch (ngưỡng 0,52 của nham thạch, độ ẩm đầm lầy).
+2. **Đường nét vẫn khá "nhão"**: bản đồ vùng đã dùng nhiễu thưa hơn (`zoneNoiseScale` 0,035, mảng lớn hơn bản đồ cũ), nhưng vẫn chỉ là một trường nhiễu: chưa có đường mòn, hồ lớn, vách, cầu qua nham thạch; một vùng nham thạch lớn không có lối đi riêng cho người chơi bay (chưa có luật ngự kiếm trên nham thạch).
+3. **Mép chuyển vùng là dải đất thẳng** rộng ~6 ô dọc các đường chia vùng và quảng trường vuông ở giữa: nhìn nhân tạo; chưa có tile chuyển tiếp trực tiếp giữa các họ (cỏ ↔ nham thạch...).
+4. **Tile viền của họ bổ sung** (bờ đá có bọt trắng, bờ đầm lầy) vẽ cho viền với nước; trong vùng cổ thụ vòng đá nằm trên cỏ nên viền trắng hơi sáng; cần Gemini / 42 duyệt hoặc vẽ riêng viền đá-trên-cỏ.
+5. **Server vẫn chỉ biết ô đi được hay không**, không biết loại nền: chưa có sát thương nền (nham thạch, độc), chậm chân trong đầm lầy, hay quái theo loại nền; `terrain.json` chỉ có `.` / `#`.
+6. **`MAP_FILE` chỉ ở server dev**: `npm run play` / dev dùng khi file có; server test và loadtest giữ bản đồ mở; đồng bộ client-server do người chạy giữ (cùng lần `prepare:assets`).
+7. **Chi phí**: tileset 1024 × 1024 (tăng gấp đôi so với 1024 × 512); số đo ngân sách và P1 xem PR D95.
+
 ## Asset Gemini PART 2 (props vùng, icon trạng thái, huy hiệu cảnh giới, hạt, key art, 2026-11-09): còn mở
 
 1. **Địa hình vùng chưa có trên bản đồ lát cắt**: bản đồ chỉ có nước / đất / cỏ, không có đầm lầy, rừng cổ thụ hay dung nham. Prop vùng (swamp\_\*, ancient\_\*, lava\_\*) được rải trên đất / cỏ trong bốn góc phần tư mà server dùng cho vùng mob (`mobZoneAt` trong `@vgtd/shared`, trùng `defaultMobZones`), nên là "trang trí theo vùng", không phải địa hình thật. Trang trí vùng là một lượt rải riêng (PRNG riêng, +60 prop trên lượt rải gốc) và chỉ cách điểm xuất phát từ 16 ô (`ZONE_MIN_DIST`): khung nhìn lúc vào game giữ nguyên bố cục cũ, vì prop vùng gần điểm xuất phát làm cổng draw call 65 của `perf:p1 --mobs` vượt (68–70 so với 62). Khi có tọa độ vùng Sơn Môn thật (D83 mục 2) và ground từng vùng (PR Gemini ground), đổi `mobZoneAt` sang hình chữ nhật của bản đồ thật.
 2. **Số đo prop vùng là ước lượng**: kích thước `target` (ancient_tree_giant 520 px @2x cho nền 4×4 ô, lava_charred_tree cao 342 px) bị ép để trang atlas prop @2x vẫn là MỘT trang 2048×2048 (đang dùng ~74 % diện tích; thêm prop lớn nữa sẽ tràn sang trang 2 và phá batch Y-sort: cần nâng trần trang hoặc tách atlas theo vùng). Ô chặn (khối 2×2 cho fire_vent / obsidian / sulfur, 4×4 cho cây cổ thụ, 2×2 cho cổng rễ và đền đá) chưa qua level designer; `swamp_lilypads` là prop phẳng bằng chuẩn "lá sen trên nước" nhưng chưa có nước trong vùng đầm, nên đang đặt ven bờ.
 3. **Hàng trạng thái của HUD (D94) đã dùng icon**: `Combat.setStatuses` gọi `getStatusIcon(id)` của `PropArt.ts` (ids root, slow, poison, shield; bản stub `StatusIcons.ts` đã xóa). Còn mở: `burn`, `regen`, `atk_up`, `def_up`, `invulnerable`, `breakthrough_buff` đã có icon nhưng chưa có hiệu ứng tương ứng ở server / client-core (`statusRowItems` mới có root / slow / poison / shield).
 4. **Huy hiệu cảnh giới chỉ ở HUD tu luyện** (cạnh tên cảnh giới, 30 px); chưa có ở khung nhân vật / bảng xếp hạng / chat. Huy hiệu thứ 9 (Độ Kiếp) có quầng sáng bị cắt nhẹ ở góc dưới-phải do dấu ✦ chồng lên nó (xoá bằng hộp góc 7,5 %).
-5. **Hạt chỉ là kho texture + registry** (`ArtRegistry.ts`, `getParticleFrame`): chưa hệ VFX nào dùng; chế độ blend (additive / alpha) chỉ là gợi ý trong `ParticleSpec`, node dùng chúng phải đặt blend riêng. Chưa kiểm hiển thị trên máy thật với `tier low` (trang @1x, 96 px).
+5. **Hạt chỉ là kho texture + registry** (`ArtRegistry.ts`, `getParticleFrame`): chưa hệ VFX nào dùng; chế độ blend (additive / alpha) chỉ là gợi ý (Cocos 3.8 không có hệ số blend theo sprite; thử vật liệu custom `builtin-sprite` với blend cộng thì render lỗi `localSetLayout`, nên `LevelUpFx` vẽ bằng alpha thường) trong `ParticleSpec`, node dùng chúng phải đặt blend riêng. Chưa kiểm hiển thị trên máy thật với `tier low` (trang @1x, 96 px).
 6. **Màn "đăng nhập" chỉ là hộp chọn Đạo Lộ**: client chưa có màn đăng nhập thật (tài khoản tự sinh), nên nền `login_bg` và emblem hiện ở hộp chọn Đạo Lộ của lần đăng nhập online đầu tiên; thêm màn đăng nhập / tạo nhân vật thật (D82 mục "Nhiều nhân vật") thì chuyển sang đó. URL ảnh cho DOM lấy từ `ImageAsset` (nguồn `HTMLImageElement.src`, dự phòng `nativeUrl`); chưa kiểm trong mọi cấu hình build (đóng bundle từ xa / CDN).
 7. **Dung lượng key art**: `login_bg` 1024×576 PNG ≈ 1,4 MB và emblem 512 px ≈ 0,6 MB (tải theo yêu cầu, chỉ khi hộp chọn Đạo Lộ hiện); chưa có preset nén WebP/ASTC cho hai ảnh này. Cần nén nếu gói tải đầu sát trần 25 MB.
 8. **NPC và pha boss mới là concept**: `assets-src/concepts/npcs/` (6) và `assets-src/concepts/mobs_phase/` (3) chỉ là tham chiếu; worker 42 dựng NPC đứng và skin đổi pha boss sau.
 9. **Giấy phép**: như mục "Asset Gemini": điều khoản thương mại của output Gemini chưa kiểm riêng; mục GEMINI-PART2 trong `ASSET-LICENSES.md`.
+
+## D96 — bạn bè: còn mở
+
+- Chưa có danh sách chặn / bỏ qua, chưa có ghi chú bạn bè, nhóm bạn, hay gợi ý bạn (người cùng tổ đội gần đây). Mọi giới hạn (50 / 20 / 20, 5 lệnh burst) là tạm.
+- Lời mời không hết hạn (chỉ mất khi nhận, từ chối hoặc thu hồi); cần quyết định của game designer (hạn dùng, hoặc xóa lời mời cũ khi đầy hộp thư).
+- Gửi lời mời cho tên không tồn tại vẫn trả `NoSuchPlayer` (đã tốn token nên không dò nhanh được); vẫn có thể dò chậm tên tài khoản đã đăng ký, giống `/auth/register` (`username_taken`). Nếu cần kín hơn: luôn trả `Ok` và chỉ báo "đã gửi" (đổi UX).
+- `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
+- Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
+- Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
 
 ## Tutorial / FTUE (D105): còn mở
 

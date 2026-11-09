@@ -15,6 +15,13 @@ import {
   type ChatServerMessage,
 } from './chat.js';
 import {
+  decodeFriendBody,
+  encodeFriendBody,
+  validateFriendMessage,
+  type FriendClientMessage,
+  type FriendServerMessage,
+} from './friends.js';
+import {
   decodePartyBody,
   encodePartyBody,
   validatePartyMessage,
@@ -54,6 +61,10 @@ export enum ColdMsgId {
   /** tutorial / FTUE (D105, tutorial.ts) */
   TutorialState = 49,
   TutorialSkip = 50,
+  /** friends (D96, friends.ts); 92-94 sit between the docs/24 craft (90-91) and sect (100+) ranges */
+  FriendCmd = 92,
+  FriendResult = 93,
+  FriendState = 94,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -87,6 +98,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyVitals]: 'party_vitals',
   [ColdMsgId.TutorialState]: 'tutorial_state',
   [ColdMsgId.TutorialSkip]: 'tutorial_skip',
+  [ColdMsgId.FriendCmd]: 'friend_cmd',
+  [ColdMsgId.FriendResult]: 'friend_result',
+  [ColdMsgId.FriendState]: 'friend_state',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -109,6 +123,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_vitals: ColdMsgId.PartyVitals,
   tutorial_state: ColdMsgId.TutorialState,
   tutorial_skip: ColdMsgId.TutorialSkip,
+  friend_cmd: ColdMsgId.FriendCmd,
+  friend_result: ColdMsgId.FriendResult,
+  friend_state: ColdMsgId.FriendState,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -209,7 +226,8 @@ export type ColdClientMessage =
   | InvClientMessage
   | ChatClientMessage
   | PartyClientMessage
-  | TutorialClientMessage;
+  | TutorialClientMessage
+  | FriendClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
   | BreakthroughResultMsg
@@ -217,7 +235,8 @@ export type ColdServerMessage =
   | InvServerMessage
   | ChatServerMessage
   | PartyServerMessage
-  | TutorialServerMessage;
+  | TutorialServerMessage
+  | FriendServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -282,7 +301,11 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
       };
     default:
       return (
-        validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o) ?? validateTutorialMessage(o)
+        validateInventoryMessage(o) ??
+        validateChatMessage(o) ??
+        validatePartyMessage(o) ??
+        validateTutorialMessage(o) ??
+        validateFriendMessage(o)
       );
   }
 }
@@ -361,6 +384,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'tutorial_skip':
       encodeTutorialBody(w, m);
       break;
+    case 'friend_cmd':
+    case 'friend_result':
+    case 'friend_state':
+      encodeFriendBody(w, m);
+      break;
   }
 }
 
@@ -420,5 +448,9 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'tutorial_state':
     case 'tutorial_skip':
       return decodeTutorialBody(r, type);
+    case 'friend_cmd':
+    case 'friend_result':
+    case 'friend_state':
+      return decodeFriendBody(r, type);
   }
 }

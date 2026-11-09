@@ -67,6 +67,7 @@ import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
 import type { TutorialService } from '../tutorial/service.js';
+import type { FriendService } from '../friends/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -220,6 +221,8 @@ export interface WorldNodeOptions {
   party?: PartyService;
   /** tutorial / FTUE tracker (D105): server-decided first-session steps, persisted per account; absent = tutorial messages are rejected as unexpected */
   tutorial?: TutorialService;
+  /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
+  friends?: FriendService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -331,6 +334,7 @@ export class WorldNode {
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
   readonly tutorial: TutorialService | undefined;
+  readonly friends: FriendService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -369,6 +373,13 @@ export class WorldNode {
       },
       posOf: (id) => this.byId.get(id),
       partyMembers: (id) => this.party?.membersOf(id) ?? [],
+    });
+    this.friends = opts.friends;
+    this.friends?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
     });
     this.party = opts.party;
     this.tutorial = opts.tutorial;
@@ -530,6 +541,7 @@ export class WorldNode {
       if (me) this.tutorial.observe(id, me.i, me.j);
     }
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -570,6 +582,7 @@ export class WorldNode {
     this.chat?.leave(id);
     this.party?.leave(id);
     this.tutorial?.leave(id);
+    this.friends?.leave(id);
     this.chatHistoryDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
@@ -810,6 +823,12 @@ export class WorldNode {
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.tutorial.skip(id); // the answer is the state that `drain()` sends this tick
         break;
+      case 'friend_cmd':
+        if (!this.friends) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.friends.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           c.stats.badMessages++;
@@ -889,6 +908,7 @@ export class WorldNode {
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     this.party?.tick(this.world.timeMs, this.world.tick);
     if (this.tutorial) this.tickTutorial();
+    this.friends?.tick();
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
