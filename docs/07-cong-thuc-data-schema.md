@@ -308,6 +308,8 @@ Ba kênh tiêu hao chính dưới đây đều tính theo cảnh giới hoặc t
 - CPI_w = giá trung bình tuần này của rổ hàng (đan đột phá, nguyên liệu phổ biến, bản vẽ phẩm thấp) chia cho tuần trước. Ví dụ CPI tăng 8% trong tuần → τ = 0,05 + 0,5 × 0,06 = 8%.
 - Giao dịch trực tiếp giữa người chơi chịu thuế cố định 3%.
 
+[Cập nhật D112: trong beta thuế chợ áp dụng **cố định 5 %** (công thức động ở trên chỉ chạy ở chế độ bóng: tính, lưu, báo cáo, không áp dụng); dạng số nguyên và làm tròn: `@vgtd/shared` `formulas/market.ts`, [docs/36](36-van-bao-lau.md).]
+
 ### Phí truyền tống trận
 
 ```latex

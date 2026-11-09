@@ -125,6 +125,13 @@ export class InventoryService {
   subscribe(listener: (owner: string) => void): void {
     this.listeners.push(listener);
   }
+  /**
+   * Tell the listeners (the `inv_state` push) that something changed in the owner's WALLET without a bag change: a ledger transaction posted
+   * by another module (a market sale paying the seller) moves stones but does not go through the bag, so nobody would refresh the HUD.
+   */
+  refresh(owner: string): void {
+    this.notify(owner);
+  }
   private notify(owner: string): void {
     for (const l of this.listeners) l(owner);
   }
@@ -165,6 +172,54 @@ export class InventoryService {
    */
   bagOf(owner: string): Bag {
     return (this.owners.get(owner) ?? this.fromStore(owner)).bag;
+  }
+  /**
+   * Change an owner's bag in one synchronous step (the market escrows and delivers items this way). `fn` gets the live bag (online owner) or a
+   * loaded copy that is written back at once (offline owner), and the pending-loot queue; whatever it does is kept, listeners are told. Throwing
+   * from `fn` propagates: callers must check every precondition BEFORE mutating (the bag methods are all-or-nothing).
+   */
+  editBag<T>(owner: string, fn: (bag: Bag, pending: PendingLoot[]) => T): T {
+    const result = this.mutate(owner, (st) => fn(st.bag, st.pending));
+    this.notify(owner);
+    return result;
+  }
+  /**
+   * Give an owner an item WITHOUT ever losing it (the market returns an expired lot this way): the bag first, then the pending-loot queue
+   * (claimed later like any loot that did not fit). 'none' = neither has room and nothing changed, the caller keeps the item and retries.
+   * `instance` restores an instance's wear / affixes when it lands in the bag (the pending queue only keeps what the wire can carry).
+   */
+  deposit(
+    owner: string,
+    grant: ItemGrant,
+    instance?: { durability: number; affixes: readonly string[] },
+  ): 'bag' | 'pending' | 'none' {
+    const where = this.mutate(owner, (st): 'bag' | 'pending' | 'none' => {
+      const r = st.bag.add(grant);
+      if (r.ok) {
+        if (instance) {
+          for (const slot of r.value.slots) {
+            const inst = st.bag.instanceAt(slot);
+            if (inst) {
+              inst.durability = instance.durability;
+              (inst as { affixes: readonly string[] }).affixes = [...instance.affixes];
+            }
+          }
+        }
+        return 'bag';
+      }
+      const same = st.pending.find((p) => p.defId === grant.defId && p.quality === grant.quality);
+      if (same && same.qty + grant.qty <= INVENTORY_CONFIG.PENDING_QTY_MAX) {
+        same.qty += grant.qty;
+        return 'pending';
+      }
+      if (!same && st.pending.length < this.pendingMax && grant.qty <= INVENTORY_CONFIG.PENDING_QTY_MAX) {
+        st.pending.push({ defId: grant.defId, quality: grant.quality, qty: grant.qty });
+        return 'pending';
+      }
+      return 'none';
+    });
+    if (where !== 'none') this.notify(owner);
+    return where;
   }
   pendingOf(owner: string): readonly PendingLoot[] {
     return (this.owners.get(owner) ?? this.fromStore(owner)).pending;

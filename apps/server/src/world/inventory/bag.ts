@@ -202,6 +202,20 @@ export class Bag {
     return ok(out);
   }
 
+  /** Take `qty` units out of exactly `slot` (a stack; all-or-nothing). The market escrows a lot this way: the slot the player picked, not "any stack of that kind". */
+  takeFromSlot(slot: number, qty: number): BagResult<{ defId: number; quality: number }> {
+    if (!this.validSlot(slot)) return fail('BAD_SLOT');
+    const s = this.slots[slot];
+    if (!s) return fail('EMPTY_SLOT');
+    if (s.kind !== 'stack') return fail('NOT_STACKABLE');
+    if (!Number.isInteger(qty) || qty < 1) return fail('BAD_QTY');
+    if (s.qty < qty) return fail('NOT_ENOUGH');
+    s.qty -= qty;
+    const out = { defId: s.defId, quality: s.quality };
+    if (s.qty === 0) this.slots[slot] = null;
+    return ok(out);
+  }
+
   removeInstance(slot: number): BagResult<ItemInstance> {
     if (!this.validSlot(slot)) return fail('BAD_SLOT');
     const s = this.slots[slot];

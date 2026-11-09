@@ -7,6 +7,7 @@ export * from './progression.js';
 export * from './inventory.js';
 export * from './sect.js';
 export * from './friends.js';
+export * from './market.js';
 export * from './chat.js';
 export * from './party.js';
 export * from './major.js';

@@ -102,6 +102,24 @@ async function playFirstSession(w: World): Promise<void> {
   // draft. Written through the stores the services sit on, so the test needs no sockets.
   w.stores.sect.save({ members: [w.ids.alice_a!], manuals: [[w.ids.alice_a!, 'kiem_manual_1']] });
   w.stores.friends.save({ friends: [[w.ids.alice_a!, w.ids.bob_b!]], requests: [] });
+  // the market book (D112): one escrowed listing of alice's, one sale and a shadow report: the document that holds items OUT of every bag
+  w.stores.market.save({
+    v: 1,
+    nextId: 3,
+    listings: [
+      {
+        id: 2,
+        seller: w.ids.alice_a!,
+        item: { defId: 1, quality: 0, qty: 5 },
+        unitPrice: 20,
+        listedAt: 1_700_000_000_000,
+        expiresAt: 1_700_086_400_000,
+        state: 'active',
+      },
+    ],
+    trades: [{ at: 1_700_000_000_500, defId: 2, quality: 0, qty: 1, unitPrice: 50, total: 50, tax: 3 }],
+    reports: [],
+  });
   w.inv.flushAll();
   w.stores.flush();
 }
@@ -118,6 +136,7 @@ function stateOf(w: World): unknown {
     ledger: JSON.stringify(w.stores.ledger.snapshot()),
     sect: JSON.stringify(w.stores.sect.load() ?? null),
     friends: JSON.stringify(w.stores.friends.load() ?? null),
+    market: JSON.stringify(w.stores.market.load() ?? null),
   };
 }
 

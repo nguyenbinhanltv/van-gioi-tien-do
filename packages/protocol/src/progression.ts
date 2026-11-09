@@ -29,6 +29,13 @@ import {
   type FriendServerMessage,
 } from './friends.js';
 import {
+  decodeMarketBody,
+  encodeMarketBody,
+  validateMarketMessage,
+  type MarketClientMessage,
+  type MarketServerMessage,
+} from './market.js';
+import {
   decodePartyBody,
   encodePartyBody,
   validatePartyMessage,
@@ -66,6 +73,14 @@ export enum ColdMsgId {
   /** major breakthrough events (D97, major.ts) */
   MajorEvent = 69,
   TribulationStrike = 70,
+  /** Vạn Bảo Lâu (D112, market.ts): the 50-54 block docs/24 reserved for the market, plus 55-56 */
+  MarketSearch = 50,
+  MarketResults = 51,
+  MarketList = 52,
+  MarketBuy = 53,
+  MarketResult = 54,
+  MarketCancel = 55,
+  MarketNotice = 56,
   /** friends (D96, friends.ts); 92-94 sit between the docs/24 craft (90-91) and sect (100+) ranges */
   FriendCmd = 92,
   FriendResult = 93,
@@ -106,6 +121,13 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.SectState]: 'sect_state',
   [ColdMsgId.MajorEvent]: 'major_event',
   [ColdMsgId.TribulationStrike]: 'tribulation_strike',
+  [ColdMsgId.MarketSearch]: 'market_search',
+  [ColdMsgId.MarketResults]: 'market_results',
+  [ColdMsgId.MarketList]: 'market_list',
+  [ColdMsgId.MarketBuy]: 'market_buy',
+  [ColdMsgId.MarketResult]: 'market_result',
+  [ColdMsgId.MarketCancel]: 'market_cancel',
+  [ColdMsgId.MarketNotice]: 'market_notice',
   [ColdMsgId.FriendCmd]: 'friend_cmd',
   [ColdMsgId.FriendResult]: 'friend_result',
   [ColdMsgId.FriendState]: 'friend_state',
@@ -134,6 +156,13 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   sect_state: ColdMsgId.SectState,
   major_event: ColdMsgId.MajorEvent,
   tribulation_strike: ColdMsgId.TribulationStrike,
+  market_search: ColdMsgId.MarketSearch,
+  market_results: ColdMsgId.MarketResults,
+  market_list: ColdMsgId.MarketList,
+  market_buy: ColdMsgId.MarketBuy,
+  market_result: ColdMsgId.MarketResult,
+  market_cancel: ColdMsgId.MarketCancel,
+  market_notice: ColdMsgId.MarketNotice,
   friend_cmd: ColdMsgId.FriendCmd,
   friend_result: ColdMsgId.FriendResult,
   friend_state: ColdMsgId.FriendState,
@@ -244,7 +273,8 @@ export type ColdClientMessage =
   | ChatClientMessage
   | PartyClientMessage
   | SectClientMessage
-  | FriendClientMessage;
+  | FriendClientMessage
+  | MarketClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
   | BreakthroughResultMsg
@@ -254,7 +284,8 @@ export type ColdServerMessage =
   | PartyServerMessage
   | SectServerMessage
   | MajorServerMessage
-  | FriendServerMessage;
+  | FriendServerMessage
+  | MarketServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -324,7 +355,8 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validatePartyMessage(o) ??
         validateSectMessage(o) ??
         validateMajorMessage(o) ??
-        validateFriendMessage(o)
+        validateFriendMessage(o) ??
+        validateMarketMessage(o)
       );
   }
 }
@@ -413,6 +445,15 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'friend_state':
       encodeFriendBody(w, m);
       break;
+    case 'market_search':
+    case 'market_results':
+    case 'market_list':
+    case 'market_buy':
+    case 'market_result':
+    case 'market_cancel':
+    case 'market_notice':
+      encodeMarketBody(w, m);
+      break;
   }
 }
 
@@ -480,5 +521,13 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'friend_result':
     case 'friend_state':
       return decodeFriendBody(r, type);
+    case 'market_search':
+    case 'market_results':
+    case 'market_list':
+    case 'market_buy':
+    case 'market_result':
+    case 'market_cancel':
+    case 'market_notice':
+      return decodeMarketBody(r, type);
   }
 }

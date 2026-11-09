@@ -7,6 +7,8 @@ import type { SectStore } from './sect/store.js';
 import { Ledger } from './world/inventory/ledger.js';
 import { FriendService } from './friends/service.js';
 import type { FriendStore } from './friends/store.js';
+import { MarketService, type MarketServiceOptions } from './market/service.js';
+import type { MarketStore } from './market/store.js';
 import { ProgressionService, type ProgressionOptions } from './progression/service.js';
 import { WorldNode, type WorldNodeOptions } from './world/node.js';
 
@@ -25,6 +27,11 @@ export interface ServerOptions {
   sect?: { store?: SectStore; ledger?: Ledger } | false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
   friends?: { store?: FriendStore } | false;
+  /**
+   * Vạn Bảo Lâu options (D112). The market needs an inventory (items and the ledger): it is created whenever `world.inventory` exists, unless
+   * `false`. `store` = where the book is kept (default in memory), `report` / `now` / `durable` as in `MarketServiceOptions`.
+   */
+  market?: ({ store?: MarketStore } & Pick<MarketServiceOptions, 'now' | 'report' | 'durable'>) | false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -73,6 +80,23 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
             nameOf: (id) => auth.store.byId(id)?.username,
           },
         }));
+  const inventory = opts.world?.inventory;
+  const market =
+    opts.market === false || !inventory
+      ? undefined
+      : (opts.world?.market ??
+        new MarketService({
+          ledger: inventory.ledger,
+          inventory,
+          ...(opts.market?.store ? { store: opts.market.store } : {}),
+          ...(opts.market?.now ? { now: opts.market.now } : {}),
+          ...(opts.market?.report ? { report: opts.market.report } : {}),
+          ...(opts.market?.durable ? { durable: opts.market.durable } : {}),
+          directory: {
+            idOf: (nameLower) => auth.store.byUsername(nameLower)?.id,
+            nameOf: (id) => auth.store.byId(id)?.username,
+          },
+        }));
   const world = new WorldNode({
     ...opts.world,
     ...(progression ? { progression } : {}),
@@ -80,6 +104,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     ...(party ? { party } : {}),
     ...(sect ? { sect } : {}),
     ...(friends ? { friends } : {}),
+    ...(market ? { market } : {}),
   });
   const gateway = createGateway(auth, world, opts.gateway);
   await new Promise<void>((resolve, reject) => {

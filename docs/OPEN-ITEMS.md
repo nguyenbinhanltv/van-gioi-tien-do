@@ -624,3 +624,14 @@ Còn mở / lưu ý:
 - `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
+
+## Vạn Bảo Lâu (2026-11-09; D112, [docs/36](36-van-bao-lau.md))
+
+Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn, phí 1 % + thuế cố định 5 %, CPI bóng, lưu bằng `market.json`, panel `V`). Còn mở:
+
+- **Bền vững qua crash (quan trọng):** sổ chợ, sổ cái và túi đồ là ba tài liệu riêng; một crash giữa hai lần ghi có thể làm mất hoặc nhân đôi giá trị. Cần TxJournal (D102 / #257): `MarketService` đã có móc `durable(label)`; nối `journal.commit(label, [market, inventories, ledger])` khi #257 vào, và giữ thứ tự ghi nền D106 ("hoàn tất giao dịch dở trước mọi lần ghi sau"). Test crash hiện chỉ mô phỏng "chết" giữa các lệnh.
+- **Mua một phần** (docs/24 cũ có `qty` ở `market_buy`), **niêm yết bằng trung / thượng phẩm** (chỉ hạ phẩm), **thư (`mail`)** cho hàng hết hạn khi không còn chỗ (hiện: túi, rồi kho nhặt đồ, rồi giữ `returning`).
+- **Cửa sổ giá `P_ref/10 .. P_ref x 10`** (docs/26 §5.2, câu hỏi Q3): chưa có giá tham chiếu nên chưa áp dụng; chưa có phát hiện wash trading (CPI chưa loại giao dịch bị gắn cờ).
+- **Rổ CPI** (`MARKET_BASKET`: đan đột phá, nguyên liệu, bản vẽ trắng-lục) và mọi giá trị mặc định (10 niêm yết / tài khoản, 12 / 24 / 48 giờ, giới hạn tốc độ) là đề xuất **cần game designer duyệt**.
+- **Chưa có smoke trình duyệt cho panel** (cần dựng lại Cocos); `MarketModel` và luồng server-client đã có test; panel mới chỉ qua typecheck của script.
+- `docs/24` cũ nói `requestId` UUID cho mọi lệnh có tác dụng phụ; chợ dùng `clientMsgId` u16 vì lệnh dựa trên trạng thái nên tự idempotent (mua hai lần: lần hai "không còn").
