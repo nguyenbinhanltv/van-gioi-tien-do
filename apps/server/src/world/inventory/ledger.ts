@@ -15,8 +15,12 @@
 import type { Currency } from './items.js';
 
 export type AccountKind =
-  'PLAYER_WALLET' | 'SYSTEM_FAUCET_DROP_MOB' | 'SYSTEM_FAUCET_DROP_ELITE' | 'SYSTEM_FAUCET_DROP_BOSS';
-export type LedgerReason = 'DROP';
+  | 'PLAYER_WALLET'
+  | 'SYSTEM_FAUCET_DROP_MOB'
+  | 'SYSTEM_FAUCET_DROP_ELITE'
+  | 'SYSTEM_FAUCET_DROP_BOSS'
+  | 'SYSTEM_SINK_TRADE_TAX';
+export type LedgerReason = 'DROP' | 'TRADE';
 
 export interface AccountRef {
   kind: AccountKind;

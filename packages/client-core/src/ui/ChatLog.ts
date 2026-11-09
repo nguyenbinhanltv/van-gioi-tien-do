@@ -5,6 +5,8 @@
  * answer without a round trip; everything else (rate limit, mute, filter, whisper target) is decided and answered by the server.
  *
  * Party (D93): `/p text` party channel; `/invite name`, `/accept [name]`, `/decline [name]`, `/leave`, `/kick name` are party commands.
+ * Trade (D102): `/trade name` invites, `/trade accept|decline [name]`, `/trade add slot [qty]` (qty 0 removes), `/trade stones ha|trung|thuong amount`,
+ * `/trade lock`, `/trade confirm`, `/trade cancel`; `/trade` alone shows the window (the panel).
  * Commands: plain text = World channel; `/z text` Zone (everyone who can see you); `/w name text` whisper; `/r text` reply to the last
  * player who whispered you; `//text` sends a World line that starts with a slash; `/help`.
  */
@@ -13,6 +15,7 @@ import {
   ChatChannel,
   ChatReason,
   PartyOp,
+  TradeOp,
   type ChatHistoryMsg,
   type ChatLine,
   type ChatMsgMsg,
@@ -47,6 +50,7 @@ export const CHAT_REASON_TEXT: Readonly<Record<number, string>> = {
 export const CHAT_HELP = [
   'Chat: gõ nội dung để nói ở kênh Thế giới.',
   '/z nội dung: kênh Vùng (người ở gần bạn) · /w tên nội dung: nhắn riêng · /r nội dung: trả lời người vừa nhắn · //nội dung: gửi tin bắt đầu bằng dấu /',
+  'Giao dịch (cần đứng gần): /trade tên · /trade accept|decline · /trade add ô [số] · /trade stones ha|trung|thuong số · /trade lock · /trade confirm · /trade cancel (phím T mở bảng giao dịch)',
   'Tổ đội: /invite tên · /accept [tên] · /decline [tên] · /leave · /kick tên (đội trưởng) · /p nội dung: chat tổ đội',
 ].join('\n');
 
@@ -55,7 +59,9 @@ export type ParsedChatInput =
   | { kind: 'help' }
   | { kind: 'error'; message: string }
   | { kind: 'send'; channel: number; target: string; text: string }
-  | { kind: 'party'; op: number; name: string };
+  | { kind: 'party'; op: number; name: string }
+  | { kind: 'trade'; op: number; name: string; slot: number; qty: number; currency: number; amount: number }
+  | { kind: 'trades' };
 
 const utf8Bytes = (s: string): number => new TextEncoder().encode(s).length;
 
@@ -108,6 +114,63 @@ export function parseChatInput(raw: string, ctx: { lastWhisperFrom?: string | nu
       if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
       return { kind: 'party', op: cmd === 'accept' || cmd === 'ac' || cmd === 'dongy' ? PartyOp.Accept : PartyOp.Decline, name };
     }
+    case 'trade':
+    case 'gd': {
+      const parts = rest.trim().split(/\s+/).filter(Boolean);
+      const sub = (parts[0] ?? '').toLowerCase();
+      const t = (op: number, extra: { name?: string; slot?: number; qty?: number; currency?: number; amount?: number } = {}): ParsedChatInput => ({
+        kind: 'trade',
+        op,
+        name: extra.name ?? '',
+        slot: extra.slot ?? 0,
+        qty: extra.qty ?? 0,
+        currency: extra.currency ?? 0,
+        amount: extra.amount ?? 0,
+      });
+      const num = (s: string | undefined, max: number): number | null => (s !== undefined && /^\d{1,10}$/.test(s) && Number(s) <= max ? Number(s) : null);
+      switch (sub) {
+        case '':
+          return { kind: 'trades' };
+        case 'accept':
+        case 'ac':
+        case 'dongy':
+        case 'decline':
+        case 'dc':
+        case 'tuchoi': {
+          const name = parts[1] ?? '';
+          if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
+          return t(sub === 'accept' || sub === 'ac' || sub === 'dongy' ? TradeOp.Accept : TradeOp.Decline, { name });
+        }
+        case 'lock':
+        case 'khoa':
+          return t(TradeOp.Lock);
+        case 'confirm':
+        case 'xacnhan':
+          return t(TradeOp.Confirm);
+        case 'cancel':
+        case 'huy':
+          return t(TradeOp.Cancel);
+        case 'add':
+        case 'them': {
+          const slot = num(parts[1], 255);
+          const qty = parts[2] === undefined ? 1 : num(parts[2], 65535);
+          if (slot === null || qty === null) return { kind: 'error', message: 'Dùng: /trade add ô [số lượng] (số lượng 0 để bỏ ra)' };
+          return t(TradeOp.SetItem, { slot: slot - 1, qty });
+        }
+        case 'stones':
+        case 'linhthach': {
+          const cur = ['ha', 'trung', 'thuong'].indexOf((parts[1] ?? '').toLowerCase());
+          const amount = num(parts[2], 4294967295);
+          if (cur < 0 || amount === null) return { kind: 'error', message: 'Dùng: /trade stones ha|trung|thuong số lượng' };
+          return t(TradeOp.SetStones, { currency: cur, amount });
+        }
+        default: {
+          // /trade name  = invite
+          if (utf8Bytes(sub) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
+          return t(TradeOp.Invite, { name: parts[0]! });
+        }
+      }
+    }
     case 'leave':
     case 'roi':
       return { kind: 'party', op: PartyOp.Leave, name: '' };
@@ -147,10 +210,21 @@ export interface ChatLogOptions {
   myName: () => string;
   /** lines kept (oldest dropped) */
   max?: number;
+  /** `/trade` alone was typed: show the trade window (the panel, or its text lines) */
+  onTrade?: () => void;
 }
 
 export type SendChat = (m: { channel: number; text: string; target: string; clientMsgId: number }) => boolean;
 export type SendParty = (m: { op: number; name: string; clientMsgId: number }) => boolean;
+export type SendTrade = (m: {
+  op: number;
+  clientMsgId: number;
+  name: string;
+  slot: number;
+  qty: number;
+  currency: number;
+  amount: number;
+}) => boolean;
 
 export class ChatLog {
   readonly entries: ChatEntry[] = [];
@@ -212,7 +286,7 @@ export class ChatLog {
    * What the player typed. Local mistakes and `/help` are answered here; a good line goes to `send` (false = socket closed -> told so).
    * Returns true when something was sent.
    */
-  submit(raw: string, send: SendChat, sendParty?: SendParty): boolean {
+  submit(raw: string, send: SendChat, sendParty?: SendParty, sendTrade?: SendTrade): boolean {
     const p = parseChatInput(raw, { lastWhisperFrom: this.lastWhisperFrom });
     switch (p.kind) {
       case 'empty':
@@ -223,6 +297,26 @@ export class ChatLog {
       case 'error':
         this.system(p.message, 'error');
         return false;
+      case 'trades':
+        this.o.onTrade?.();
+        return false;
+      case 'trade': {
+        if (!sendTrade) {
+          this.system('Giao dịch chưa dùng được.', 'error');
+          return false;
+        }
+        const ok = sendTrade({
+          op: p.op,
+          clientMsgId: this.nextClientMsgId(),
+          name: p.name,
+          slot: p.slot,
+          qty: p.qty,
+          currency: p.currency,
+          amount: p.amount,
+        });
+        if (!ok) this.system('Chưa kết nối máy chủ.', 'error');
+        return ok;
+      }
       case 'party': {
         if (!sendParty) {
           this.system('Tổ đội chưa dùng được.', 'error');

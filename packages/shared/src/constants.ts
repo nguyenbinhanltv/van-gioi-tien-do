@@ -259,6 +259,23 @@ export const SUB_STAGE_NAMES: readonly string[] = ['sơ kỳ', 'trung kỳ', 'h�
 export const SPRITE_SMOOTH_FPS = 24;
 
 /**
+ * Direct player trade (D102, docs/10 §7.1 P4 "Giao dịch trực tiếp (thuế 3%)", docs/26 §5.5). The tax (3%, `MARKET.DIRECT_TRADE_TAX`) and the
+ * 60 s idle expiry come from the docs; the range, the invite lifetime and the number of item lines are PLACEHOLDERS "cần game designer duyệt".
+ */
+export const TRADE = {
+  /** both players must stand within this many tiles to start a trade (placeholder) */
+  RANGE_TILES: 12,
+  /** an invite expires after this long (placeholder) */
+  INVITE_TTL_MS: 30_000,
+  /** a trade window with no change for this long is cancelled (docs/26 §5.5: 60 s) */
+  IDLE_MS: 60_000,
+  /** item lines one side can offer (placeholder) */
+  MAX_LINES: 8,
+  /** pending invites one player can hold at once (placeholder) */
+  MAX_PENDING_INVITES: 4,
+} as const;
+
+/**
  * Party (D93, docs/10 §7.1 P4 "Tổ đội (4)"). Size 4 comes from docs/10 / docs/07 §6; the rest are PLACEHOLDERS "cần game designer duyệt".
  * Session-only: a party is never persisted.
  */

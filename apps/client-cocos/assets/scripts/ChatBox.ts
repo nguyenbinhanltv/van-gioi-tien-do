@@ -41,6 +41,10 @@ export class ChatBox {
   readonly log: InstanceType<typeof core.ChatLog>;
   /** the party state shown by `PartyFrames` (D93); fed by the same net hooks as the chat */
   readonly party: InstanceType<typeof core.PartyModel>;
+  /** the trade window shown by `TradePanel` (D102); fed by the same net hooks as the chat */
+  readonly trade: InstanceType<typeof core.TradeModel>;
+  /** set by the trade panel: `/trade` alone toggles it (without one the window is printed as chat lines) */
+  onTradeToggle: (() => void) | null = null;
   private readonly root: HTMLDivElement;
   private readonly list: HTMLDivElement;
   private readonly input: HTMLInputElement;
@@ -56,8 +60,9 @@ export class ChatBox {
     username: string,
     parent: HTMLElement = document.body,
   ) {
-    this.log = new core.ChatLog({ myName: () => username });
+    this.log = new core.ChatLog({ myName: () => username, onTrade: () => this.showTrade() });
     this.party = new core.PartyModel({ myId: () => net.entityId, now: () => performance.now() });
+    this.trade = new core.TradeModel({ now: () => performance.now() });
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
     net.chatEvents = {
       onChatMsg: (m) => this.log.applyMsg(m),
@@ -78,6 +83,18 @@ export class ChatBox {
         const refusal = this.party.applyResult(m);
         if (refusal) this.log.system(refusal, 'error');
         else if (asked && asked.op === core.PartyOp.Decline) this.party.forgetInvite(asked.name);
+      },
+    };
+    // trade (D102): the window lives in the panel; invites, a window opening / closing / completing and refusals show up as chat lines
+    net.tradeEvents = {
+      onTradeInvite: (m) => this.log.system(this.trade.applyInvite(m), 'system'),
+      onTradeState: (m) => {
+        const line = this.trade.applyState(m);
+        if (line) this.log.system(line, 'system');
+      },
+      onTradeResult: (m) => {
+        const refusal = this.trade.applyResult(m);
+        if (refusal) this.log.system(refusal, 'error');
       },
     };
 
@@ -221,7 +238,14 @@ export class ChatBox {
         }
         return ok;
       },
+      (m) => this.net.sendTrade(m),
     );
+  }
+
+  /** `/trade` alone: toggle the panel when there is one, else print the window as chat lines. */
+  private showTrade(): void {
+    if (this.onTradeToggle) this.onTradeToggle();
+    else for (const l of this.trade.summaryLines()) this.log.system(l);
   }
 
   focus(prefill = ''): void {

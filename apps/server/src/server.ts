@@ -2,6 +2,7 @@ import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
+import { TradeService } from './trade/service.js';
 import { ProgressionService, type ProgressionOptions } from './progression/service.js';
 import { WorldNode, type WorldNodeOptions } from './world/node.js';
 
@@ -16,6 +17,8 @@ export interface ServerOptions {
   chat?: ChatOptions | false;
   /** `false` to run without parties (default: enabled, in-memory, session-only: D93) */
   party?: false;
+  /** direct trade (D102): on whenever the world has an inventory, or `false` to run without it */
+  trade?: false;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -37,11 +40,18 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
       : (opts.world?.progression ?? new ProgressionService({ seed: opts.world?.seed, ...opts.progression }));
   const chat = opts.chat === false ? undefined : (opts.world?.chat ?? new ChatService(opts.chat));
   const party = opts.party === false ? undefined : (opts.world?.party ?? new PartyService());
+  // a trade moves bag items and stones, so it only exists where the world has an inventory
+  const trade =
+    opts.trade === false
+      ? undefined
+      : (opts.world?.trade ??
+        (opts.world?.inventory ? new TradeService({ inventory: opts.world.inventory }) : undefined));
   const world = new WorldNode({
     ...opts.world,
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
     ...(party ? { party } : {}),
+    ...(trade ? { trade } : {}),
   });
   const gateway = createGateway(auth, world, opts.gateway);
   await new Promise<void>((resolve, reject) => {

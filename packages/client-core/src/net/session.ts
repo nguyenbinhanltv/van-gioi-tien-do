@@ -14,6 +14,9 @@ import {
   type ChatMsgMsg,
   type ChatResultMsg,
   type PartyInviteMsg,
+  type TradeInviteMsg,
+  type TradeResultMsg,
+  type TradeStateMsg,
   type PartyResultMsg,
   type PartyStateMsg,
   type PartyVitalsMsg,
@@ -135,6 +138,16 @@ export interface ChatEvents {
   onChatHistory?(msg: ChatHistoryMsg): void;
   /** The answer to a `sendChat` (0 = delivered, otherwise why not). */
   onChatResult?(msg: ChatResultMsg): void;
+}
+
+/** Trade callbacks (D102), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface TradeEvents {
+  /** The trade window changed (phase Open), was closed (Closed) or executed (Done). */
+  onTradeState?(msg: TradeStateMsg): void;
+  /** Someone asked to trade with you. */
+  onTradeInvite?(msg: TradeInviteMsg): void;
+  /** The answer to a `sendTrade` (0 = done, otherwise why not). */
+  onTradeResult?(msg: TradeResultMsg): void;
 }
 
 /** Party callbacks (D93), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
@@ -269,6 +282,8 @@ export class NetClient {
   chatEvents: ChatEvents = {};
   /** Callbacks for the party (own object, see `PartyEvents`). */
   partyEvents: PartyEvents = {};
+  /** Callbacks for the direct trade (own object, see `TradeEvents`). */
+  tradeEvents: TradeEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -567,6 +582,15 @@ export class NetClient {
       case 'party_result':
         this.emit(() => this.partyEvents.onPartyResult?.(msg));
         break;
+      case 'trade_state':
+        this.emit(() => this.tradeEvents.onTradeState?.(msg));
+        break;
+      case 'trade_invite':
+        this.emit(() => this.tradeEvents.onTradeInvite?.(msg));
+        break;
+      case 'trade_result':
+        this.emit(() => this.tradeEvents.onTradeResult?.(msg));
+        break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
         if (t0 !== undefined) {
@@ -693,6 +717,33 @@ export class NetClient {
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
       ws.send(encode({ type: 'party_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one trade command (D102): `op` is a `TradeOp`. `name` = the other player (invite) or the inviter (accept / decline, '' = the newest);
+   * `slot` / `qty` = a bag slot and a quantity for set-item (qty 0 takes the line out); `currency` / `amount` for set-stones. `clientMsgId` (uint16)
+   * comes back in the `trade_result`. False when the socket is not open or the command cannot be encoded.
+   */
+  sendTrade(m: { op: number; clientMsgId: number; name?: string; slot?: number; qty?: number; currency?: number; amount?: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({
+          type: 'trade_cmd',
+          op: m.op,
+          clientMsgId: m.clientMsgId & 0xffff,
+          name: m.name ?? '',
+          slot: m.slot ?? 0,
+          qty: m.qty ?? 0,
+          currency: m.currency ?? 0,
+          amount: m.amount ?? 0,
+        }),
+      );
     } catch {
       return false;
     }

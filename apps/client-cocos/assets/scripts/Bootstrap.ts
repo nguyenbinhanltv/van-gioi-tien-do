@@ -36,6 +36,7 @@ import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
+import { TradePanel } from './TradePanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -98,6 +99,7 @@ export class Bootstrap extends Component {
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
+  private tradePanel: TradePanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -306,6 +308,20 @@ export class Bootstrap extends Component {
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
+      // trade panel (D102): opens by itself with a window / an invite, or with T and /trade; its buttons run the lines the player could type
+      const net = this.online.net;
+      this.tradePanel = new TradePanel(chat.trade, {
+        run: (cmd) => chat.command(cmd),
+        bag: () => {
+          const out: { slot: number; defId: number; quality: number; qty: number; bound: boolean }[] = [];
+          for (let i = 0; i < net.bag.slotCount; i++) {
+            const it = net.bag.itemAt(i);
+            if (it) out.push({ slot: i, defId: it.defId, quality: it.quality, qty: it.qty, bound: it.bound });
+          }
+          return out;
+        },
+      });
+      chat.onTradeToggle = () => this.tradePanel?.toggle();
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -549,6 +565,7 @@ export class Bootstrap extends Component {
     this.updateStatusRow();
     this.chatBox?.update();
     this.partyFrames?.update();
+    this.tradePanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -597,6 +614,7 @@ export class Bootstrap extends Component {
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
+    this.tradePanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

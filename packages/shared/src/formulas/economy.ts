@@ -146,6 +146,15 @@ export function sellerProceeds(price: number, tax: number): number {
 export function directTradeTax(amount: number): number {
   return amount * MARKET.DIRECT_TRADE_TAX;
 }
+/** `DIRECT_TRADE_TAX` in basis points (3% = 300): the ledger works in integers, never in floats. */
+export const DIRECT_TRADE_TAX_BPS = Math.round(MARKET.DIRECT_TRADE_TAX * 10_000);
+/**
+ * Direct-trade tax on a currency amount in the smallest unit, by the rounding rule of docs/26 §2.1: `tax = ceil(amount x bps / 10000)`;
+ * the receiver gets `amount - tax`, the tax goes to `SYSTEM_SINK_TRADE_TAX`. Exact for any size (bigint), 0 for 0.
+ */
+export function directTradeTaxUnits(amount: bigint): bigint {
+  return amount <= 0n ? 0n : (amount * BigInt(DIRECT_TRADE_TAX_BPS) + 9_999n) / 10_000n;
+}
 
 // ---------------------------------------------------------------- teleport / durability / repair
 /** Fee = 20 · 1.5^(r−1) · (1 + 0.5·d) hạ phẩm; r = player realm, d = zones crossed. */

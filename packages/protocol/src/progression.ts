@@ -15,6 +15,13 @@ import {
   type ChatServerMessage,
 } from './chat.js';
 import {
+  decodeTradeBody,
+  encodeTradeBody,
+  validateTradeMessage,
+  type TradeClientMessage,
+  type TradeServerMessage,
+} from './trade.js';
+import {
   decodePartyBody,
   encodePartyBody,
   validatePartyMessage,
@@ -44,6 +51,11 @@ export enum ColdMsgId {
   PartyInvite = 46,
   PartyState = 47,
   PartyVitals = 48,
+  /** direct trade (D102, trade.ts); 69-70 are the major-breakthrough messages of D97, so the docs/24 trade block starts at 71 here */
+  TradeCmd = 71,
+  TradeResult = 72,
+  TradeState = 73,
+  TradeInvite = 74,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -75,6 +87,10 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyInvite]: 'party_invite',
   [ColdMsgId.PartyState]: 'party_state',
   [ColdMsgId.PartyVitals]: 'party_vitals',
+  [ColdMsgId.TradeCmd]: 'trade_cmd',
+  [ColdMsgId.TradeResult]: 'trade_result',
+  [ColdMsgId.TradeState]: 'trade_state',
+  [ColdMsgId.TradeInvite]: 'trade_invite',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -95,6 +111,10 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_invite: ColdMsgId.PartyInvite,
   party_state: ColdMsgId.PartyState,
   party_vitals: ColdMsgId.PartyVitals,
+  trade_cmd: ColdMsgId.TradeCmd,
+  trade_result: ColdMsgId.TradeResult,
+  trade_state: ColdMsgId.TradeState,
+  trade_invite: ColdMsgId.TradeInvite,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -189,9 +209,21 @@ export interface MeditateResultMsg {
   reason: number;
 }
 export type ColdClientMessage =
-  BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg | InvClientMessage | ChatClientMessage | PartyClientMessage;
+  | BreakthroughStartMsg
+  | MeditateStartMsg
+  | MeditateStopMsg
+  | InvClientMessage
+  | ChatClientMessage
+  | PartyClientMessage
+  | TradeClientMessage;
 export type ColdServerMessage =
-  CharStateMsg | BreakthroughResultMsg | MeditateResultMsg | InvServerMessage | ChatServerMessage | PartyServerMessage;
+  | CharStateMsg
+  | BreakthroughResultMsg
+  | MeditateResultMsg
+  | InvServerMessage
+  | ChatServerMessage
+  | PartyServerMessage
+  | TradeServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -255,7 +287,9 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         reason: int(o.reason, 0, 255, 'reason'),
       };
     default:
-      return validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o);
+      return (
+        validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o) ?? validateTradeMessage(o)
+      );
   }
 }
 
@@ -329,6 +363,12 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'party_vitals':
       encodePartyBody(w, m);
       break;
+    case 'trade_cmd':
+    case 'trade_result':
+    case 'trade_state':
+    case 'trade_invite':
+      encodeTradeBody(w, m);
+      break;
   }
 }
 
@@ -385,5 +425,10 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'party_state':
     case 'party_vitals':
       return decodePartyBody(r, type);
+    case 'trade_cmd':
+    case 'trade_result':
+    case 'trade_state':
+    case 'trade_invite':
+      return decodeTradeBody(r, type);
   }
 }
