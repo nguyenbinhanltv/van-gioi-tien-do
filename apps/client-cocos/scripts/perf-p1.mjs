@@ -160,6 +160,7 @@ try {
   tPlayable = Date.now();
   console.log(`running: warm-up ${warmup}s, sampling ${seconds}s (SwiftShader software WebGL)`);
   await sleep(warmup * 1000);
+  if (opt('shot', '')) await page.screenshot({ path: resolve(opt('shot', '')) }); // `--shot <file.png>`: viewport after the warm-up
   const heapAfterGc = async () => {
     await page.evaluate('window.gc && window.gc()');
     return (await page.metrics()).JSHeapUsedSize / MB;
