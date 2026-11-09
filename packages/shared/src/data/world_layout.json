@@ -1,0 +1,19 @@
+{
+  "_note": "Layout numbers of the slice map shared by the server (mob zones, D74/D83), the client (first-session field band, D84) and the tile generator (tools/procgen, D95). PLACEHOLDERS, cần game designer duyệt. Fractions are of R = half the mob area.",
+  "mobZoneMargin": { "min": 8, "divisor": 32 },
+  "mobBands": {
+    "normal": { "minFrac": 0.12, "maxFrac": 0.55 },
+    "elite": { "minFrac": 0.4, "maxFrac": 0.85 },
+    "boss": { "minFrac": 0.7, "maxFrac": 1.0 }
+  },
+  "zones": [
+    { "id": "bia_rung", "quadrant": [0, 0] },
+    { "id": "dam_lay_doc", "quadrant": [1, 0] },
+    { "id": "co_thu_trung_tam", "quadrant": [0, 1] },
+    { "id": "doc_hoa_dam", "quadrant": [1, 1] }
+  ],
+  "zoneBorderCorners": 3,
+  "plazaMarginTiles": 4,
+  "clearingFrac": 0.22,
+  "stoneRingFrac": 0.4
+}

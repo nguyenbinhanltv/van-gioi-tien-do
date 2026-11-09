@@ -60,3 +60,82 @@ const BY_NAME = new Map(PARTICLES.map((p) => [p.name, p] as const));
 export function particleSpec(name: string): ParticleSpec | undefined {
   return BY_NAME.get(name);
 }
+
+/** HUD / social icons (PART 3 group P), in the 4 x 4 grid order of tools/procgen manifest.json `hud.ids`: round, on their own backing disc. */
+export const HUD_ICON_IDS: readonly string[] = [
+  'friend_add',
+  'friend_remove',
+  'chat',
+  'party_invite',
+  'leader',
+  'online',
+  'offline',
+  'world',
+  'zone',
+  'quest_available',
+  'quest_turnin',
+  'sect',
+  'bag',
+  'map',
+  'settings',
+  'close',
+];
+
+/** Chat channel -> HUD icon (the channel the next line goes to: plain text World, /z Zone, /w /r whisper, /p party). */
+export const CHAT_CHANNEL_ICON: Readonly<Record<'world' | 'zone' | 'whisper' | 'party', string>> = {
+  world: 'world',
+  zone: 'zone',
+  whisper: 'chat',
+  party: 'party_invite',
+};
+
+/** Which chat channel a typed line will use, from its first characters (same rules as `parseChatInput` in client-core). */
+export function channelOfInput(raw: string): 'world' | 'zone' | 'whisper' | 'party' {
+  const m = /^\/(\S*)/.exec(raw.trimStart());
+  if (!m || raw.trimStart().startsWith('//')) return 'world';
+  switch (m[1]!.toLowerCase()) {
+    case 'z':
+    case 'zone':
+    case 'v':
+      return 'zone';
+    case 'w':
+    case 't':
+    case 'whisper':
+    case 'r':
+    case 'reply':
+      return 'whisper';
+    case 'p':
+    case 'party':
+    case 'd':
+      return 'party';
+    default:
+      return 'world';
+  }
+}
+
+/**
+ * Sect library manual -> item icon key (PART 3 group O: `manual_t<tier>_<form>`). Tier follows the manual's level (the data marks the
+ * tome skills at 20 / 31 / 40 / 51 / 65: low <= 31, mid <= 51, high above); the form (book / scroll / tablet) follows its index in the
+ * class library so a library does not show one shape three times in a row.
+ */
+export function manualIconKey(levelMin: number, index: number): string {
+  const tier = levelMin <= 31 ? 1 : levelMin <= 51 ? 2 : 3;
+  const form = ['book', 'scroll', 'tablet'][((Math.trunc(index) % 3) + 3) % 3]!;
+  return `manual_t${tier}_${form}`;
+}
+
+/**
+ * Item key -> icon key for items whose art was exported under a descriptive name (PART 3 group O: the alchemy pills). Items without an
+ * entry keep their own key; icons without an item stay registered (the alchemy herbs and the Cống hiến token have no item def yet).
+ * PROVISIONAL mapping by colour / name: ho_mach_pill (hộ mạch, green mist), dinh_tam_pill (định tâm, blue wave); the Trúc Cơ and Kết Kim
+ * pill recipe ids (D108) take the gold ring and the white wind. Re-map when the owner confirms which pill is which.
+ */
+export const ITEM_ICON_ALIASES: Readonly<Record<string, string>> = {
+  ho_mach_pill: 'pill_green_mist',
+  dinh_tam_pill: 'pill_blue_wave',
+  truc_co_pill: 'pill_gold_ring',
+  ket_kim_pill: 'pill_white_wind',
+  pill_truc_co_dan: 'pill_gold_ring',
+  pill_ket_kim_dan: 'pill_white_wind',
+};
+export const itemIconKey = (key: string): string => ITEM_ICON_ALIASES[key] ?? key;

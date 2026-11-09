@@ -70,6 +70,8 @@ function rig(
     seed?: number;
     state?: string;
     level?: number;
+    /** the mob's own element (a variant, D114); default: the def's main element */
+    element?: MobDef['elements'][number];
     /** max HP of the main mob (default 5000) and its starting HP (default = max) */
     hpMax?: number;
     hp?: number;
@@ -101,7 +103,13 @@ function rig(
   });
   world = spawnEntity(world, { id: MOB, i: o.mob?.i ?? 21.7, j: o.mob?.j ?? 20.5, hp: o.hp ?? hpMax, mpMax: 0 });
   const port = new FakeView();
-  port.views.set(MOB, { state: o.state ?? 'chase', target: PLAYER, level: o.level ?? 12, def });
+  port.views.set(MOB, {
+    state: o.state ?? 'chase',
+    target: PLAYER,
+    level: o.level ?? 12,
+    def,
+    ...(o.element ? { element: o.element } : {}),
+  });
   for (const m of o.extraMobs ?? []) {
     world = spawnEntity(world, { id: m.id, i: m.i, j: m.j, hp: 100, mpMax: 0 });
     port.views.set(m.id, { state: 'idle', target: 0, level: 12, def: mobDefByKey(m.key) as MobDef });
@@ -178,6 +186,27 @@ describe('basic attack reach vs the AI stop distance', () => {
     r.tick(ms(1300)); // its first skill (1000 ms telegraph) is in reach at the engage distance
     expect(r.hp()).toBeLessThan(hp0);
     expect(r.events[0]).toMatchObject({ type: 'damage', sourceId: MOB, targetId: PLAYER });
+  });
+});
+
+describe('elemental variants attack with their own element (D114)', () => {
+  // Độc Thố (basic attack only): Mộc (main) / Thủy (variant). The kiem class defends as Kim: Mộc is broken by Kim (x0.85), Thủy is neutral (x1) (07 §4)
+  const hit = (element: 'moc' | 'thuy' | undefined): number => {
+    const r = rig({ key: 'mob_doc_tho', level: 10, ...(element ? { element } : {}) });
+    const hp0 = r.hp();
+    r.tick(ms(500)); // the basic attack (400 ms windup) has landed, nothing else has started
+    expect(r.events.filter((e) => e.type === 'damage')).toHaveLength(1);
+    return hp0 - r.hp();
+  };
+
+  it('the same mob (def, level, seed, target) deals more with the variant element than with the main one when the main is the one the target breaks', () => {
+    const main = hit(undefined); // no element in the view: the def's main element (Mộc)
+    const asMain = hit('moc');
+    const variant = hit('thuy');
+    expect(asMain).toBe(main); // an explicit main element is the default
+    expect(variant).toBeGreaterThan(main);
+    // 07 §4: neutral x1 against bị khắc x0.85 (the same roll, the same stats): the ratio is the matrix, not a side effect
+    expect(variant / main).toBeCloseTo(1 / 0.85, 1);
   });
 });
 
