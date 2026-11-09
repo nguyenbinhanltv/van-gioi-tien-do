@@ -108,6 +108,7 @@ describe('file stores round trip', () => {
     const d = tmp();
     const a = new FileAccountStore(join(d, 'accounts.json'), { flushMs: -1 });
     const acc = account('id1', 'alice');
+    acc.failures = 4; // attempts in flight at the moment of a write must not become a permanent lock
     expect(a.create(acc)).toBe(true);
     expect(a.create(account('id2', 'alice'))).toBe(false);
     acc.lockLevel = 2;
@@ -115,7 +116,7 @@ describe('file stores round trip', () => {
     a.save(acc);
     a.file.flush();
     const b = new FileAccountStore(join(d, 'accounts.json'), { flushMs: -1 });
-    expect(b.byUsername('alice')).toEqual(acc);
+    expect(b.byUsername('alice')).toEqual({ ...acc, failures: 0 });
     expect(b.byId('id1')?.lockLevel).toBe(2);
     expect(b.byUsername('nobody')).toBeUndefined();
   });

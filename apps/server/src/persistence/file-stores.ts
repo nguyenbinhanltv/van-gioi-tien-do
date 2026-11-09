@@ -54,11 +54,19 @@ function checkAccount(a: unknown): Account {
     username: o.username,
     passwordHash: o.passwordHash,
     tokenVersion: o.tokenVersion,
-    failures: o.failures,
+    failures: 0, // transient (counts attempts still being verified): a restart starts with none in flight, see `serializeAccount`
     lockedUntilMs: o.lockedUntilMs,
     lockLevel: o.lockLevel,
   };
 }
+
+/**
+ * `failures` is NOT persisted: the service increments it while a login is still being verified (so parallel guesses cannot beat the
+ * limit) and decrements it again afterwards. A write that lands in that window would otherwise store an in-flight attempt as a real
+ * failure, and a crash before the matching decrement would lock the account for good (the `failures >= LOCK_AFTER_FAILURES` check
+ * has no expiry). The settled lockout state, `lockedUntilMs` and `lockLevel`, is what must survive a restart.
+ */
+const serializeAccount = (a: Account): Account => ({ ...a, failures: 0 });
 
 export class FileAccountStore implements AccountStore {
   private readonly byName = new Map<string, Account>();
@@ -73,7 +81,11 @@ export class FileAccountStore implements AccountStore {
       this.byName.set(a.username, a);
       this.ids.set(a.id, a);
     }
-    this.file = new DocFile(path, () => JSON.stringify({ v: VERSION, accounts: [...this.byName.values()] }), opts);
+    this.file = new DocFile(
+      path,
+      () => JSON.stringify({ v: VERSION, accounts: [...this.byName.values()].map(serializeAccount) }),
+      opts,
+    );
   }
   create(a: Account): boolean {
     if (this.byName.has(a.username)) return false;
