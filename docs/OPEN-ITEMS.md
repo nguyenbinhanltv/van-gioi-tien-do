@@ -556,3 +556,11 @@ Còn mở / lưu ý:
 - Khung UI mới đã áp dụng cho túi đồ, HUD tu luyện, nút Claim; **hộp chat là lớp phủ HTML** (`ChatBox.ts`, không phải node Cocos) nên chưa áp khung 9-slice (cần CSS `border-image` từ ảnh khung); nút của bộ chọn lớp và các HUD khác vẫn phẳng.
 - `progression-online-smoke.mjs` đã lỗi thời trên `main`: bộ chọn lớp (D82) chặn luồng đăng nhập của nó nên chờ `__vgtdProgression` quá hạn (không liên quan khung UI); cần sửa riêng.
 
+## D96 — bạn bè: còn mở
+
+- Chưa có danh sách chặn / bỏ qua, chưa có ghi chú bạn bè, nhóm bạn, hay gợi ý bạn (người cùng tổ đội gần đây). Mọi giới hạn (50 / 20 / 20, 5 lệnh burst) là tạm.
+- Lời mời không hết hạn (chỉ mất khi nhận, từ chối hoặc thu hồi); cần quyết định của game designer (hạn dùng, hoặc xóa lời mời cũ khi đầy hộp thư).
+- Gửi lời mời cho tên không tồn tại vẫn trả `NoSuchPlayer` (đã tốn token nên không dò nhanh được); vẫn có thể dò chậm tên tài khoản đã đăng ký, giống `/auth/register` (`username_taken`). Nếu cần kín hơn: luôn trả `Ok` và chỉ báo "đã gửi" (đổi UX).
+- `friend_state` luôn gửi đầy đủ (tối đa ~1 KB) và gộp theo tick; một người có 50 bạn đăng nhập / thoát liên tục làm 50 bạn nhận một tin mỗi lần. Nếu đo thấy tốn: tin delta riêng cho trạng thái online.
+- Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
+- Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).

@@ -35,6 +35,7 @@ import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
+import { FriendsPanel } from './FriendsPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -97,6 +98,7 @@ export class Bootstrap extends Component {
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
+  private friendsPanel: FriendsPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -305,6 +307,12 @@ export class Bootstrap extends Component {
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
+      // friends panel (D96): O or /friends; its buttons run the same lines the player could type
+      this.friendsPanel = new FriendsPanel(chat.friends, {
+        run: (cmd) => chat.command(cmd),
+        prefill: (text) => chat.focus(text),
+      });
+      chat.onFriendsToggle = () => this.friendsPanel?.toggle();
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
@@ -537,6 +545,7 @@ export class Bootstrap extends Component {
     this.updateSkillWheel(frame);
     this.chatBox?.update();
     this.partyFrames?.update();
+    this.friendsPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -584,6 +593,7 @@ export class Bootstrap extends Component {
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
+    this.friendsPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

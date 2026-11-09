@@ -22,7 +22,7 @@ export const USAGE = `npm run play -- [options]
   --smoke              start, wait until healthy, print the URLs, then stop again (used to check the setup / CI)
   --memory             keep nothing between runs (STORE=memory). Default: STORE=file, accounts / characters / bags in
                        ./.vgtd-data (or $DATA_DIR) survive a restart
-  --reset-data         delete the saved play-test data (only accounts.json, progression.json, inventories.json, ledger.json and
+  --reset-data         delete the saved play-test data (only accounts.json, progression.json, inventories.json, friends.json, ledger.json and
                        their .bak) before starting; with a custom $DATA_DIR it also needs --yes
   --yes                confirm --reset-data on a custom $DATA_DIR
   --help               this text
@@ -134,7 +134,13 @@ export function parseArgs(argv) {
 
 // ------------------------------------------------------------------------------------------------ persistent play-test data (D92)
 /** The only files `--reset-data` ever deletes (file store documents + their `.bak` / `.tmp`), never anything else in the directory. */
-export const DATA_FILES = Object.freeze(['accounts.json', 'progression.json', 'inventories.json', 'ledger.json']);
+export const DATA_FILES = Object.freeze([
+  'accounts.json',
+  'progression.json',
+  'inventories.json',
+  'friends.json',
+  'ledger.json',
+]);
 
 /**
  * Which store the play-test server uses and where its data lives. `STORE=file` unless `--memory` (or `STORE=memory` in the

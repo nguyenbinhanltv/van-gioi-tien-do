@@ -5,6 +5,7 @@
  * answer without a round trip; everything else (rate limit, mute, filter, whisper target) is decided and answered by the server.
  *
  * Party (D93): `/p text` party channel; `/invite name`, `/accept [name]`, `/decline [name]`, `/leave`, `/kick name` are party commands.
+ * Friends (D96): `/friend add name`, `/friend accept [name]`, `/friend decline [name]`, `/friend remove name` (also withdraws a request), `/friends` lists.
  * Commands: plain text = World channel; `/z text` Zone (everyone who can see you); `/w name text` whisper; `/r text` reply to the last
  * player who whispered you; `//text` sends a World line that starts with a slash; `/help`.
  */
@@ -12,6 +13,7 @@ import {
   CHAT_LIMITS,
   ChatChannel,
   ChatReason,
+  FriendOp,
   PartyOp,
   type ChatHistoryMsg,
   type ChatLine,
@@ -48,6 +50,7 @@ export const CHAT_HELP = [
   'Chat: gõ nội dung để nói ở kênh Thế giới.',
   '/z nội dung: kênh Vùng (người ở gần bạn) · /w tên nội dung: nhắn riêng · /r nội dung: trả lời người vừa nhắn · //nội dung: gửi tin bắt đầu bằng dấu /',
   'Tổ đội: /invite tên · /accept [tên] · /decline [tên] · /leave · /kick tên (đội trưởng) · /p nội dung: chat tổ đội',
+  'Bạn bè: /friend add tên · /friend accept [tên] · /friend decline [tên] · /friend remove tên · /friends: xem danh sách (phím O mở bảng bạn bè)',
 ].join('\n');
 
 export type ParsedChatInput =
@@ -55,7 +58,9 @@ export type ParsedChatInput =
   | { kind: 'help' }
   | { kind: 'error'; message: string }
   | { kind: 'send'; channel: number; target: string; text: string }
-  | { kind: 'party'; op: number; name: string };
+  | { kind: 'party'; op: number; name: string }
+  | { kind: 'friend'; op: number; name: string }
+  | { kind: 'friends' };
 
 const utf8Bytes = (s: string): number => new TextEncoder().encode(s).length;
 
@@ -108,6 +113,40 @@ export function parseChatInput(raw: string, ctx: { lastWhisperFrom?: string | nu
       if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
       return { kind: 'party', op: cmd === 'accept' || cmd === 'ac' || cmd === 'dongy' ? PartyOp.Accept : PartyOp.Decline, name };
     }
+    case 'friends':
+    case 'banbe':
+      return { kind: 'friends' };
+    case 'friend':
+    case 'f':
+    case 'ketban': {
+      const m2 = /^(\S*)\s*(\S*)/.exec(rest)!;
+      const sub = m2[1]!.toLowerCase();
+      const name = m2[2]!;
+      if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: CHAT_REASON_TEXT[ChatReason.NoSuchPlayer]! };
+      switch (sub) {
+        case 'add':
+        case 'them':
+        case 'moi':
+          return name ? { kind: 'friend', op: FriendOp.Request, name } : { kind: 'error', message: 'Dùng: /friend add tên' };
+        case 'remove':
+        case 'rm':
+        case 'xoa':
+          return name ? { kind: 'friend', op: FriendOp.Remove, name } : { kind: 'error', message: 'Dùng: /friend remove tên' };
+        case 'accept':
+        case 'ac':
+        case 'dongy':
+          return { kind: 'friend', op: FriendOp.Accept, name };
+        case 'decline':
+        case 'dc':
+        case 'tuchoi':
+          return { kind: 'friend', op: FriendOp.Decline, name };
+        case 'list':
+        case '':
+          return { kind: 'friends' };
+        default:
+          return { kind: 'error', message: 'Dùng: /friend add|accept|decline|remove [tên] hoặc /friends' };
+      }
+    }
     case 'leave':
     case 'roi':
       return { kind: 'party', op: PartyOp.Leave, name: '' };
@@ -147,10 +186,13 @@ export interface ChatLogOptions {
   myName: () => string;
   /** lines kept (oldest dropped) */
   max?: number;
+  /** `/friends` was typed: show the friend list (the panel, or its text lines) */
+  onFriends?: () => void;
 }
 
 export type SendChat = (m: { channel: number; text: string; target: string; clientMsgId: number }) => boolean;
 export type SendParty = (m: { op: number; name: string; clientMsgId: number }) => boolean;
+export type SendFriend = (m: { op: number; name: string; clientMsgId: number }) => boolean;
 
 export class ChatLog {
   readonly entries: ChatEntry[] = [];
@@ -212,7 +254,7 @@ export class ChatLog {
    * What the player typed. Local mistakes and `/help` are answered here; a good line goes to `send` (false = socket closed -> told so).
    * Returns true when something was sent.
    */
-  submit(raw: string, send: SendChat, sendParty?: SendParty): boolean {
+  submit(raw: string, send: SendChat, sendParty?: SendParty, sendFriend?: SendFriend): boolean {
     const p = parseChatInput(raw, { lastWhisperFrom: this.lastWhisperFrom });
     switch (p.kind) {
       case 'empty':
@@ -223,6 +265,18 @@ export class ChatLog {
       case 'error':
         this.system(p.message, 'error');
         return false;
+      case 'friends':
+        this.o.onFriends?.();
+        return false;
+      case 'friend': {
+        if (!sendFriend) {
+          this.system('Bạn bè chưa dùng được.', 'error');
+          return false;
+        }
+        const ok = sendFriend({ op: p.op, name: p.name, clientMsgId: this.nextClientMsgId() });
+        if (!ok) this.system('Chưa kết nối máy chủ.', 'error');
+        return ok;
+      }
       case 'party': {
         if (!sendParty) {
           this.system('Tổ đội chưa dùng được.', 'error');
