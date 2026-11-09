@@ -52,13 +52,13 @@ describe('trade commands in the chat input', () => {
     const l = new ChatLog({ myName: () => 'me', onTrade: () => shown++ });
     const got: unknown[] = [];
     const never = () => false;
-    expect(l.submit('/trade bob', never, never, (m) => (got.push(m), true))).toBe(true);
+    expect(l.submit('/trade bob', never, never, undefined, undefined, (m) => (got.push(m), true))).toBe(true);
     expect(got).toEqual([{ op: TradeOp.Invite, name: 'bob', slot: 0, qty: 0, currency: 0, amount: 0, clientMsgId: expect.any(Number) }]);
-    expect(l.submit('/trade lock', never, never, () => false)).toBe(false);
+    expect(l.submit('/trade lock', never, never, undefined, undefined, () => false)).toBe(false);
     expect(l.entries.at(-1)).toMatchObject({ tone: 'error', text: 'Chưa kết nối máy chủ.' });
     expect(l.submit('/trade lock', never)).toBe(false); // no trade sender wired
     expect(l.entries.at(-1)).toMatchObject({ tone: 'error' });
-    expect(l.submit('/trade', never, never, () => true)).toBe(false);
+    expect(l.submit('/trade', never, never, undefined, undefined, () => true)).toBe(false);
     expect(shown).toBe(1);
   });
 });

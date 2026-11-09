@@ -276,6 +276,49 @@ export const TRADE = {
 } as const;
 
 /**
+ * NPC sect "Sơn Môn Đại Phái" (D98, docs/01 §9.2, docs/10 §7.1 P4 "Tông môn NPC: gia nhập, Cống hiến, kho bí tịch"). The beta has exactly
+ * one sect, run by NPCs (no player-made sects). Cống hiến is an in-game currency in the ledger (docs/26 `CONG_HIEN`, never transferable
+ * between players). The docs name the currency, the library and the rank-up table (docs/11 §5) but give NO rates for earning it from
+ * kills and NO price for the basic manuals: those numbers are PROVISIONAL "cần game designer duyệt khi cân bằng".
+ */
+export const SECT = {
+  ID: 'son_mon',
+  NAME: 'Sơn Môn Đại Phái',
+  /** the ledger currency code of Cống hiến (docs/26 §2.1) */
+  CURRENCY: 'CONG_HIEN',
+  /**
+   * The six Sơn Môn NPC ids: the stable string keys of the client standees (worker 42's `NPC_STANDEE_KEYS`, docs/12 style, no numeric ids).
+   * Only `JOIN_NPC` and `LIBRARY_NPC` have a function in D98; the others are decoration until their systems exist.
+   */
+  NPCS: ['npc_su_huynh', 'npc_truong_lao_dan', 'npc_chuong_mon', 'npc_ve_binh', 'npc_tho_ren', 'npc_thuong_nhan'],
+  /** NPC where a character joins / leaves the sect (the "sư huynh" who receives disciples) */
+  JOIN_NPC: 'npc_su_huynh',
+  /** NPC of the library, Tàng Kinh Các (the elder) */
+  LIBRARY_NPC: 'npc_truong_lao_dan',
+  /** how close (tiles) a character must stand to the sect NPC to join, leave or buy (placeholder; wide enough for the whole 24-tile dev spawn square) */
+  NPC_RANGE_TILES: 20,
+  /** Cống hiến earned per kill by drop source, only while a member (placeholder; docs only give the quest `contribution` as fixed data) */
+  KILL_REWARD: { field: 1, elite: 5, boss: 25 },
+  /** library price of a manual = `MANUAL_PRICE_PER_LEVEL` x its `unlock.level_min` (placeholder; docs/11 §5 prices only the rank-up) */
+  MANUAL_PRICE_PER_LEVEL: 3,
+  /** most manuals one class library can list on the wire */
+  MAX_MANUALS: 8,
+} as const;
+
+/**
+ * Friends list (D96, docs/10 §7.1 P4 "bạn bè"). Persisted per ACCOUNT (not per session like a party). Sizes are PLACEHOLDERS "cần game
+ * designer duyệt khi cân bằng": docs/10 only names the feature.
+ */
+export const FRIENDS = {
+  /** friends one account can have */
+  MAX_FRIENDS: 50,
+  /** pending requests one account can hold at once (received) */
+  MAX_INCOMING: 20,
+  /** pending requests one account can have sent at once */
+  MAX_OUTGOING: 20,
+} as const;
+
+/**
  * Party (D93, docs/10 §7.1 P4 "Tổ đội (4)"). Size 4 comes from docs/10 / docs/07 §6; the rest are PLACEHOLDERS "cần game designer duyệt".
  * Session-only: a party is never persisted.
  */

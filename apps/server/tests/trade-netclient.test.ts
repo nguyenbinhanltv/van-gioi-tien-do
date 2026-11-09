@@ -93,6 +93,8 @@ async function player(s: RunningServer, name: string): Promise<Player> {
         raw,
         () => false,
         undefined,
+        undefined, // sect
+        undefined, // friend
         (m) => net.sendTrade(m),
       ),
     close: () => {

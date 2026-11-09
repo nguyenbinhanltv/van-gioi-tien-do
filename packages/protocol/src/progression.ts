@@ -22,12 +22,27 @@ import {
   type TradeServerMessage,
 } from './trade.js';
 import {
+  decodeSectBody,
+  encodeSectBody,
+  validateSectMessage,
+  type SectClientMessage,
+  type SectServerMessage,
+} from './sect.js';
+import {
+  decodeFriendBody,
+  encodeFriendBody,
+  validateFriendMessage,
+  type FriendClientMessage,
+  type FriendServerMessage,
+} from './friends.js';
+import {
   decodePartyBody,
   encodePartyBody,
   validatePartyMessage,
   type PartyClientMessage,
   type PartyServerMessage,
 } from './party.js';
+import { decodeMajorBody, encodeMajorBody, validateMajorMessage, type MajorServerMessage } from './major.js';
 import {
   decodeInventoryBody,
   encodeInventoryBody,
@@ -56,6 +71,17 @@ export enum ColdMsgId {
   TradeResult = 72,
   TradeState = 73,
   TradeInvite = 74,
+  /** NPC sect (D98, sect.ts): the docs/24 block 100-119 is reserved for `sect_*` */
+  SectCmd = 100,
+  SectResult = 101,
+  SectState = 102,
+  /** major breakthrough events (D97, major.ts) */
+  MajorEvent = 69,
+  TribulationStrike = 70,
+  /** friends (D96, friends.ts); 92-94 sit between the docs/24 craft (90-91) and sect (100+) ranges */
+  FriendCmd = 92,
+  FriendResult = 93,
+  FriendState = 94,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -91,6 +117,14 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.TradeResult]: 'trade_result',
   [ColdMsgId.TradeState]: 'trade_state',
   [ColdMsgId.TradeInvite]: 'trade_invite',
+  [ColdMsgId.SectCmd]: 'sect_cmd',
+  [ColdMsgId.SectResult]: 'sect_result',
+  [ColdMsgId.SectState]: 'sect_state',
+  [ColdMsgId.MajorEvent]: 'major_event',
+  [ColdMsgId.TribulationStrike]: 'tribulation_strike',
+  [ColdMsgId.FriendCmd]: 'friend_cmd',
+  [ColdMsgId.FriendResult]: 'friend_result',
+  [ColdMsgId.FriendState]: 'friend_state',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -115,6 +149,14 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   trade_result: ColdMsgId.TradeResult,
   trade_state: ColdMsgId.TradeState,
   trade_invite: ColdMsgId.TradeInvite,
+  sect_cmd: ColdMsgId.SectCmd,
+  sect_result: ColdMsgId.SectResult,
+  sect_state: ColdMsgId.SectState,
+  major_event: ColdMsgId.MajorEvent,
+  tribulation_strike: ColdMsgId.TribulationStrike,
+  friend_cmd: ColdMsgId.FriendCmd,
+  friend_result: ColdMsgId.FriendResult,
+  friend_state: ColdMsgId.FriendState,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -131,6 +173,12 @@ export enum ProgressionReason {
   Cooldown = 8,
   /** a major threshold needs Tâm Ma and Lôi Kiếp (docs/01 §5), which do not exist yet: major attempts are refused */
   TribulationRequired = 9,
+  /** a major event (Tâm Ma / Lôi Kiếp) of this character is already running (D97) */
+  EventActive = 10,
+  /** the character must be nearly at full HP to start a major breakthrough (D97) */
+  NotPrepared = 11,
+  /** the major breakthrough is locked after a lost Tâm Ma or a Nặng death in a Kiếp (D97) */
+  Locked = 12,
 }
 export enum BreakthroughOutcome {
   Success = 1,
@@ -215,7 +263,9 @@ export type ColdClientMessage =
   | InvClientMessage
   | ChatClientMessage
   | PartyClientMessage
-  | TradeClientMessage;
+  | TradeClientMessage
+  | SectClientMessage
+  | FriendClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
   | BreakthroughResultMsg
@@ -223,7 +273,10 @@ export type ColdServerMessage =
   | InvServerMessage
   | ChatServerMessage
   | PartyServerMessage
-  | TradeServerMessage;
+  | TradeServerMessage
+  | SectServerMessage
+  | MajorServerMessage
+  | FriendServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -288,7 +341,13 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
       };
     default:
       return (
-        validateInventoryMessage(o) ?? validateChatMessage(o) ?? validatePartyMessage(o) ?? validateTradeMessage(o)
+        validateInventoryMessage(o) ??
+        validateChatMessage(o) ??
+        validatePartyMessage(o) ??
+        validateTradeMessage(o) ??
+        validateSectMessage(o) ??
+        validateMajorMessage(o) ??
+        validateFriendMessage(o)
       );
   }
 }
@@ -369,6 +428,20 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'trade_invite':
       encodeTradeBody(w, m);
       break;
+    case 'sect_cmd':
+    case 'sect_result':
+    case 'sect_state':
+      encodeSectBody(w, m);
+      break;
+    case 'major_event':
+    case 'tribulation_strike':
+      encodeMajorBody(w, m);
+      break;
+    case 'friend_cmd':
+    case 'friend_result':
+    case 'friend_state':
+      encodeFriendBody(w, m);
+      break;
   }
 }
 
@@ -430,5 +503,16 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'trade_state':
     case 'trade_invite':
       return decodeTradeBody(r, type);
+    case 'sect_cmd':
+    case 'sect_result':
+    case 'sect_state':
+      return decodeSectBody(r, type);
+    case 'major_event':
+    case 'tribulation_strike':
+      return decodeMajorBody(r, type);
+    case 'friend_cmd':
+    case 'friend_result':
+    case 'friend_state':
+      return decodeFriendBody(r, type);
   }
 }
