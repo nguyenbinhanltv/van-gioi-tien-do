@@ -1269,7 +1269,6 @@ export class WorldNode {
   private deliver(out: Outbound[]): void {
     for (const o of out) {
       const c = this.clients.get(o.entityId);
-      if (c && !c.dead) this.send(c, o.msg);
       // a successful breakthrough is a quest event (D107); the roll itself stays the progression module's
       if (o.msg.type === 'breakthrough_result' && o.msg.outcome === BreakthroughOutcome.Success)
         this.quests?.onBreakthrough(o.entityId);

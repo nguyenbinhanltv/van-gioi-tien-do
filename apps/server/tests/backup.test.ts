@@ -102,6 +102,8 @@ async function playFirstSession(w: World): Promise<void> {
   // draft. Written through the stores the services sit on, so the test needs no sockets.
   w.stores.sect.save({ members: [w.ids.alice_a!], manuals: [[w.ids.alice_a!, 'kiem_manual_1']] });
   w.stores.friends.save({ friends: [[w.ids.alice_a!, w.ids.bob_b!]], requests: [] });
+  // quest progress (D107): one finished quest of alice's
+  w.stores.quests.save(w.ids.alice_a!, { v: 1, quests: { q_c1_nhap_mon: { s: 4, p: [1], e: 0 } } });
   // the market book (D112): one escrowed listing of alice's, one sale and a shadow report: the document that holds items OUT of every bag
   w.stores.market.save({
     v: 1,
@@ -192,6 +194,7 @@ describe('the restore drill (P5 gate: no data lost in a restore trial)', () => {
     // the sect and the friends came back exactly as they were at the snapshot, and the later changes are gone (but kept in the safety copy)
     expect(w2.stores.sect.load()).toEqual({ members: [w1.ids.alice_a], manuals: [[w1.ids.alice_a, 'kiem_manual_1']] });
     expect(w2.stores.friends.load()).toEqual({ friends: [[w1.ids.alice_a, w1.ids.bob_b]], requests: [] });
+    expect(w2.stores.quests.load(w1.ids.alice_a!)?.quests.q_c1_nhap_mon?.s).toBe(4); // quest progress came back (D107)
     expect(JSON.parse(read(join(r.preRestoreDir!, 'sect.json'))).members).toHaveLength(2);
     expect(JSON.parse(read(join(r.preRestoreDir!, 'friends.json'))).requests).toHaveLength(1);
     expect(w2.inv.wallet(w2.ids.alice_a!, HA)).toBe(walletAlice);
