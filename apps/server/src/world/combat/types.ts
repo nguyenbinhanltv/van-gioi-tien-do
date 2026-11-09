@@ -104,4 +104,6 @@ export interface CombatOptions {
   partyOf?: (killerId: number) => readonly number[];
   /** A mob that cannot be hurt right now (a boss in its phase transform, D91): it is not a valid target and takes no player damage. */
   isInvulnerable?: (id: number) => boolean;
+  /** May this caster's skills hit / target this mob at all? (D97: a Tâm Ma shadow belongs to its owner alone.) Default: yes. */
+  canTarget?: (casterId: number, mobId: number) => boolean;
 }

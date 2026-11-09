@@ -13,6 +13,8 @@ import {
   type ChatHistoryMsg,
   type ChatMsgMsg,
   type ChatResultMsg,
+  type FriendResultMsg,
+  type FriendStateMsg,
   type PartyInviteMsg,
   type PartyResultMsg,
   type PartyStateMsg,
@@ -26,6 +28,8 @@ import {
   type SelfState,
   type SkillResultMsg,
   type BossPhaseMsg,
+  type MajorEventMsg,
+  type TribulationStrikeMsg,
   type SelfStatus,
   type StatusUpdateMsg,
   type SnapshotEntity,
@@ -114,6 +118,15 @@ export interface ProgressionEvents {
 }
 
 /**
+ * Major breakthrough callbacks (D97), a SEPARATE object from `NetEvents` (the scene replaces `events` wholesale). The Tâm Ma / Lôi Kiếp
+ * overlay listens here; a throwing hook never breaks the session.
+ */
+export interface MajorEvents {
+  onMajorEvent?(msg: MajorEventMsg): void;
+  onTribulationStrike?(msg: TribulationStrikeMsg): void;
+}
+
+/**
  * Inventory callbacks (D79), a SEPARATE object from `NetEvents` on purpose: the scene replaces `events` wholesale (combat attaches its own),
  * which would silently drop hooks living there. Set `net.inventoryEvents`; `net.bag` is always up to date whether or not anyone listens.
  */
@@ -135,6 +148,14 @@ export interface ChatEvents {
   onChatHistory?(msg: ChatHistoryMsg): void;
   /** The answer to a `sendChat` (0 = delivered, otherwise why not). */
   onChatResult?(msg: ChatResultMsg): void;
+}
+
+/** Friends callbacks (D96), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface FriendEvents {
+  /** The whole picture (friends with online status, requests received / sent), after every change. */
+  onFriendState?(msg: FriendStateMsg): void;
+  /** The answer to a `sendFriend` (0 = done, otherwise why not). */
+  onFriendResult?(msg: FriendResultMsg): void;
 }
 
 /** Party callbacks (D93), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
@@ -210,6 +231,7 @@ export class NetClient {
   events: NetEvents;
   /** progression listeners (tu vi state, meditation / breakthrough answers); survives `events` being replaced */
   progressionEvents: ProgressionEvents = {};
+  majorEvents: MajorEvents = {};
   private ws: SocketLike | null = null;
   private lastSnapshotSeq = 0;
   private acc = 0;
@@ -269,6 +291,8 @@ export class NetClient {
   chatEvents: ChatEvents = {};
   /** Callbacks for the party (own object, see `PartyEvents`). */
   partyEvents: PartyEvents = {};
+  /** Callbacks for the friends list (own object, see `FriendEvents`). */
+  friendEvents: FriendEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -535,6 +559,12 @@ export class NetClient {
       case 'meditate_result':
         this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
         break;
+      case 'major_event':
+        this.emit(() => this.majorEvents.onMajorEvent?.(msg));
+        break;
+      case 'tribulation_strike':
+        this.emit(() => this.majorEvents.onTribulationStrike?.(msg));
+        break;
       case 'breakthrough_result':
         this.emit(() => this.progressionEvents.onBreakthroughResult?.(msg));
         break;
@@ -566,6 +596,12 @@ export class NetClient {
         break;
       case 'party_result':
         this.emit(() => this.partyEvents.onPartyResult?.(msg));
+        break;
+      case 'friend_state':
+        this.emit(() => this.friendEvents.onFriendState?.(msg));
+        break;
+      case 'friend_result':
+        this.emit(() => this.friendEvents.onFriendResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -693,6 +729,21 @@ export class NetClient {
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
       ws.send(encode({ type: 'party_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one friend command (D96): `op` is a `FriendOp`, `name` the other player (request / remove) or the requester (accept / decline,
+   * '' = the oldest). `clientMsgId` (uint16) comes back in the `friend_result`. False when the socket is not open or it cannot be encoded.
+   */
+  sendFriend(m: { op: number; name?: string; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(encode({ type: 'friend_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
     } catch {
       return false;
     }

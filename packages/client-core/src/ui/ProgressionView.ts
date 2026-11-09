@@ -28,6 +28,9 @@ export const PROGRESSION_REASON_KEY: Readonly<Record<number, StringKey | null>> 
   [ProgressionReason.AtMaxStage]: 'progression.reason.at_max_stage',
   [ProgressionReason.Cooldown]: 'progression.reason.cooldown',
   [ProgressionReason.TribulationRequired]: 'progression.reason.tribulation_required',
+  [ProgressionReason.EventActive]: 'progression.reason.event_active',
+  [ProgressionReason.NotPrepared]: 'progression.reason.not_prepared',
+  [ProgressionReason.Locked]: 'progression.reason.locked',
 };
 
 export interface ProgressionSnapshot {
@@ -129,6 +132,7 @@ export class ProgressionView {
     const pct = `${(m.chance / 100).toFixed(m.chance % 100 === 0 ? 0 : 1)}%`;
     if (m.outcome === BreakthroughOutcome.Success)
       this.say(t('progression.toast.success', { kind, stage: stageLabel(m.toStage), chance: pct }), 'good');
+    else if (m.kind === BreakthroughKind.Major) this.say(t('progression.toast.failure_major', { kind, chance: pct }), 'bad');
     else this.say(t('progression.toast.failure', { kind, chance: pct }), 'bad');
   }
 

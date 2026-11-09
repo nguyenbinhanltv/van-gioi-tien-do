@@ -107,6 +107,7 @@ export class OnlineSession {
   attachCombat(sc: InstanceType<typeof cb.ServerCombat>): void {
     this.serverCombat = sc;
     this.net.events = {
+      ...this.net.events, // keep hooks other HUD pieces chained (TribulationFx: onReconnect)
       onSkillResult: (msg) => sc.applySkillResult(msg, performance.now(), (i) => this.net.entityOfIndex(i)),
       onAoiEnter: (entities) => {
         for (const e of entities) {

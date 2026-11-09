@@ -5,6 +5,7 @@
  * answer without a round trip; everything else (rate limit, mute, filter, whisper target) is decided and answered by the server.
  *
  * Party (D93): `/p text` party channel; `/invite name`, `/accept [name]`, `/decline [name]`, `/leave`, `/kick name` are party commands.
+ * Friends (D96): `/friend add name`, `/friend accept [name]`, `/friend decline [name]`, `/friend remove name` (also withdraws a request), `/friends` lists.
  * Commands: plain text = World channel; `/z text` Zone (everyone who can see you); `/w name text` whisper; `/r text` reply to the last
  * player who whispered you; `//text` sends a World line that starts with a slash; `/help`.
  */
@@ -12,6 +13,7 @@ import {
   CHAT_LIMITS,
   ChatChannel,
   ChatReason,
+  FriendOp,
   PartyOp,
   type ChatHistoryMsg,
   type ChatLine,
@@ -55,7 +57,7 @@ export function chatReasonText(reason: number): string {
 
 /** The `/help` lines, in the installed language. */
 export function chatHelpLines(): string[] {
-  return [t('chat.help.world'), t('chat.help.channels'), t('chat.help.party')];
+  return [t('chat.help.world'), t('chat.help.channels'), t('chat.help.party'), t('chat.help.friends')];
 }
 
 export type ParsedChatInput =
@@ -63,7 +65,9 @@ export type ParsedChatInput =
   | { kind: 'help' }
   | { kind: 'error'; message: string }
   | { kind: 'send'; channel: number; target: string; text: string }
-  | { kind: 'party'; op: number; name: string };
+  | { kind: 'party'; op: number; name: string }
+  | { kind: 'friend'; op: number; name: string }
+  | { kind: 'friends' };
 
 const utf8Bytes = (s: string): number => new TextEncoder().encode(s).length;
 
@@ -116,6 +120,40 @@ export function parseChatInput(raw: string, ctx: { lastWhisperFrom?: string | nu
       if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: chatReasonText(ChatReason.NoSuchPlayer) };
       return { kind: 'party', op: cmd === 'accept' || cmd === 'ac' || cmd === 'dongy' ? PartyOp.Accept : PartyOp.Decline, name };
     }
+    case 'friends':
+    case 'banbe':
+      return { kind: 'friends' };
+    case 'friend':
+    case 'f':
+    case 'ketban': {
+      const m2 = /^(\S*)\s*(\S*)/.exec(rest)!;
+      const sub = m2[1]!.toLowerCase();
+      const name = m2[2]!;
+      if (utf8Bytes(name) > CHAT_LIMITS.MAX_NAME_BYTES) return { kind: 'error', message: chatReasonText(ChatReason.NoSuchPlayer) };
+      switch (sub) {
+        case 'add':
+        case 'them':
+        case 'moi':
+          return name ? { kind: 'friend', op: FriendOp.Request, name } : { kind: 'error', message: t('chat.err.usage_friend_add') };
+        case 'remove':
+        case 'rm':
+        case 'xoa':
+          return name ? { kind: 'friend', op: FriendOp.Remove, name } : { kind: 'error', message: t('chat.err.usage_friend_remove') };
+        case 'accept':
+        case 'ac':
+        case 'dongy':
+          return { kind: 'friend', op: FriendOp.Accept, name };
+        case 'decline':
+        case 'dc':
+        case 'tuchoi':
+          return { kind: 'friend', op: FriendOp.Decline, name };
+        case 'list':
+        case '':
+          return { kind: 'friends' };
+        default:
+          return { kind: 'error', message: t('chat.err.usage_friend') };
+      }
+    }
     case 'leave':
     case 'roi':
       return { kind: 'party', op: PartyOp.Leave, name: '' };
@@ -155,10 +193,13 @@ export interface ChatLogOptions {
   myName: () => string;
   /** lines kept (oldest dropped) */
   max?: number;
+  /** `/friends` was typed: show the friend list (the panel, or its text lines) */
+  onFriends?: () => void;
 }
 
 export type SendChat = (m: { channel: number; text: string; target: string; clientMsgId: number }) => boolean;
 export type SendParty = (m: { op: number; name: string; clientMsgId: number }) => boolean;
+export type SendFriend = (m: { op: number; name: string; clientMsgId: number }) => boolean;
 
 export class ChatLog {
   readonly entries: ChatEntry[] = [];
@@ -221,7 +262,7 @@ export class ChatLog {
    * What the player typed. Local mistakes and `/help` are answered here; a good line goes to `send` (false = socket closed -> told so).
    * Returns true when something was sent.
    */
-  submit(raw: string, send: SendChat, sendParty?: SendParty): boolean {
+  submit(raw: string, send: SendChat, sendParty?: SendParty, sendFriend?: SendFriend): boolean {
     const p = parseChatInput(raw, { lastWhisperFrom: this.lastWhisperFrom });
     switch (p.kind) {
       case 'empty':
@@ -232,6 +273,18 @@ export class ChatLog {
       case 'error':
         this.system(p.message, 'error');
         return false;
+      case 'friends':
+        this.o.onFriends?.();
+        return false;
+      case 'friend': {
+        if (!sendFriend) {
+          this.system(t('chat.err.friends_unavailable'), 'error');
+          return false;
+        }
+        const ok = sendFriend({ op: p.op, name: p.name, clientMsgId: this.nextClientMsgId() });
+        if (!ok) this.system(t('net.err.offline'), 'error');
+        return ok;
+      }
       case 'party': {
         if (!sendParty) {
           this.system(t('chat.err.party_unavailable'), 'error');
