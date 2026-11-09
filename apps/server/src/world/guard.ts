@@ -20,6 +20,10 @@ export function budgetClassOf(type: string): BudgetClass | null {
       return 'party';
     case 'inv_cmd':
       return 'inventory';
+    case 'sect_cmd':
+      return 'sect';
+    case 'friend_cmd':
+      return 'friend';
     case 'meditate_start':
     case 'meditate_stop':
     case 'breakthrough_start':

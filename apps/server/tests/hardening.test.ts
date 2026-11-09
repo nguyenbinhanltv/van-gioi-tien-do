@@ -97,6 +97,8 @@ describe('ConnectionGuard', () => {
       'chat_send',
       'party_cmd',
       'inv_cmd',
+      'sect_cmd',
+      'friend_cmd',
       'meditate_start',
       'meditate_stop',
       'breakthrough_start',

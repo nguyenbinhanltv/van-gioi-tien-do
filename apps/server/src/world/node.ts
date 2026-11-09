@@ -16,11 +16,14 @@ import {
   inAoiAt,
   uwDistSq,
   rngFloat,
+  rngInt,
   rngFork,
   rngSeed,
   toUW,
   type PathId,
   type RngState,
+  MajorResult,
+  COLLIDER_RADIUS_TILES,
 } from '@vgtd/shared';
 import {
   ErrorCode,
@@ -44,7 +47,9 @@ import {
   type AntiCheatState,
   CastReason,
   TileGrid,
+  TILE_WALKABLE,
   budgetMs,
+  circleBlocked,
   compileSkills,
   createWorld,
   removeEntity,
@@ -64,6 +69,8 @@ import type { SecurityEvent } from './security-log.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
+import type { SectService } from '../sect/service.js';
+import type { FriendService } from '../friends/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -74,7 +81,8 @@ import {
   type CombatResult,
 } from './combat/index.js';
 import { MobManager, defaultMobZones, type MobZone } from './mobs/index.js';
-import { DropSink, InventorySync, itemUseFor, type InventoryService } from './inventory/index.js';
+import { MajorBreakthroughs, SHADOW_DEF_ID, ShadowRegistry } from './breakthrough/index.js';
+import { DropSink, InventorySync, dropKillKey, itemUseFor, type InventoryService } from './inventory/index.js';
 
 /** No entity id left for a new player (D74: with mobs enabled, player ids stay below `MOB_ID_BASE`). */
 export class WorldFullError extends Error {
@@ -223,6 +231,10 @@ export interface WorldNodeOptions {
   chat?: ChatService;
   /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
   party?: PartyService;
+  /** NPC sect module (D98): join / leave at the sect NPC, Cống hiến from kills, the library; absent = sect commands are rejected as unexpected */
+  sect?: SectService;
+  /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
+  friends?: FriendService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -329,6 +341,11 @@ export class WorldNode {
   private tickDriftMs = 0;
   private spawnRng: RngState;
   private readonly spawn: { i0: number; j0: number; side: number };
+  /** tiles inside the spawn square a player may appear on (walkable, reachable from the square's centre, room for the body); null = every tile (an open map) */
+  private readonly spawnTiles: { i: number; j: number }[] | null;
+  private readonly spawnSet: Set<number> | null;
+  /** the tile the reachability search started from (the centre of the spawn square, or the nearest walkable tile to it) */
+  private readonly spawnStart: { i: number; j: number };
   private readonly maxVisible: number;
   private timer: ReturnType<typeof setTimeout> | null = null;
   private running = false;
@@ -337,13 +354,23 @@ export class WorldNode {
   /** per-tick cache of what a snapshot says about each entity (see `currentOf`) */
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
   readonly progression: ProgressionService | undefined;
+  /** Tâm Ma / Lôi Kiếp events of major breakthroughs (D97); null without combat + progression */
+  readonly major: MajorBreakthroughs | null;
+  /** Tâm Ma shadows as combat targets (the `MobPort` of the combat core wraps the mob manager); null without combat + progression */
+  private readonly shadows: ShadowRegistry | null;
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
+  readonly sect: SectService | undefined;
+  readonly friends: FriendService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
    */
   private readonly chatHistoryDue = new Map<number, ChatLine[]>();
+  /** Major-event messages a player missed while held (D97): their final answer, kept until they resume. */
+  private readonly heldMajor = new Map<number, Message[]>();
+  /** Major-event state to re-send to resumed players on the next tick (after the client has reset its overlay on `hello_ack`). */
+  private readonly majorDue = new Map<number, Message[]>();
   /** Combat core (cast resolution, HP, death / respawn, drops); null when the node was built without `opts.combat`. */
   readonly combat: CombatSystem | null;
   /** Mobs in chase hurt their target (D86); null without mobs + combat or with `combat.mobAttacks: false`. */
@@ -367,6 +394,10 @@ export class WorldNode {
     // default spawn: a 96-tile square at the map centre, shrunk to half the map on small maps (same result for 256)
     const side = Math.min(96, n / 2);
     this.spawn = opts.spawn ?? { i0: (n - side) / 2, j0: (n - side) / 2, side };
+    const area = this.computeSpawnArea(grid);
+    this.spawnTiles = area.tiles;
+    this.spawnSet = area.tiles ? new Set(area.tiles.map((t) => t.j * grid.width + t.i)) : null;
+    this.spawnStart = area.start;
     this.maxVisible = opts.maxVisible ?? WORLD_CONFIG.MAX_VISIBLE;
     this.progression = opts.progression;
     this.chat = opts.chat;
@@ -377,6 +408,23 @@ export class WorldNode {
       },
       posOf: (id) => this.byId.get(id),
       partyMembers: (id) => this.party?.membersOf(id) ?? [],
+    });
+    this.sect = opts.sect;
+    this.sect?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
+      // the sect NPC stands in the middle of the spawn area unless the sect service was told otherwise
+      defaultNpc: { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
+    });
+    this.friends = opts.friends;
+    this.friends?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
     });
     this.party = opts.party;
     this.party?.attach({
@@ -423,7 +471,11 @@ export class WorldNode {
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
     // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it
-    const mobPort = opts.combat?.mobs ?? this.mobs ?? undefined;
+    const basePort = opts.combat?.mobs ?? this.mobs ?? undefined;
+    // Tâm Ma shadows (D97) are combat targets too: the combat core talks to a registry that answers for them and forwards the rest
+    this.shadows = opts.combat && this.progression ? new ShadowRegistry(basePort) : null;
+    const mobPort = this.shadows ?? basePort;
+    const shadows = this.shadows;
     // kills fill the killer's bag: combat's `onDrops` feeds the inventory (the caller's own `onDrops` still runs)
     this.dropSink =
       opts.combat && this.inventory
@@ -442,20 +494,45 @@ export class WorldNode {
           isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
           partyOf: (id) => this.creditGroupOf(id),
           isInvulnerable: (id) => this.mobAttacks?.isInvulnerable(id) ?? false,
+          canTarget: (casterId, mobId) => shadows?.canTarget(casterId, mobId) ?? true,
           ...opts.combat,
           mobs: mobPort,
-          onDrops: sink
-            ? (e) => {
-                sink.handle(e);
-                opts.combat?.onDrops?.(e);
-              }
-            : opts.combat.onDrops,
+          onDrops:
+            sink || opts.sect
+              ? (e) => {
+                  if (shadows?.owns(e.mobId)) return; // a Tâm Ma shadow drops nothing
+                  sink?.handle(e);
+                  // a sect member's kill pays Cống hiến (D98); the kill key makes a repeated event a replay
+                  const owner = this.clients.get(e.killerId)?.accountId;
+                  if (owner !== undefined && opts.sect)
+                    opts.sect.onKill(
+                      owner,
+                      mobPort?.combatStats(e.mobId)?.dropSource ?? 'field',
+                      dropKillKey(e.mobId, this.world.tick),
+                    );
+                  opts.combat?.onDrops?.(e);
+                }
+              : (e) => {
+                  if (shadows?.owns(e.mobId)) return;
+                  opts.combat?.onDrops?.(e);
+                },
         })
       : null;
     this.mobAttacks =
       this.combat && this.mobs && opts.combat?.mobAttacks !== false
         ? new MobAttackSystem(this.ctx, this.combat, this.mobs, seed)
         : null;
+    this.major =
+      this.combat && this.progression && this.shadows
+        ? new MajorBreakthroughs({
+            ctx: this.ctx,
+            combat: this.combat,
+            progression: this.progression,
+            shadows: this.shadows,
+            world: () => this.world,
+          })
+        : null;
+    if (this.major) this.progression!.attachMajor(this.major);
   }
 
   // ------------------------------------------------------------------ players
@@ -532,6 +609,8 @@ export class WorldNode {
     });
     this.progression?.join(id, accountId, this.world.timeMs);
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.sect?.join({ entityId: id, accountId, path: classPath });
+    this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
       const lines = this.chat.history();
@@ -549,12 +628,106 @@ export class WorldNode {
     return this.clients.get(entityId)?.classPath;
   }
 
-  /** A random point of the spawn region (join and respawn), drawn from the seeded `spawn` stream. */
+  /**
+   * Which tiles of the spawn square a player may appear on (D95: the zone map has water and lava, and the default 96-tile square reaches
+   * them). A tile qualifies when it is walkable and connected to the square's centre over walkable tiles (4-neighbour flood fill over the
+   * whole map), and a body of the player's size fits there. An OPEN square (the old tests, an all-land dev area) returns `tiles: null`:
+   * every tile qualifies and the spawn stream is exactly what it was before.
+   */
+  private computeSpawnArea(grid: TileGrid): {
+    tiles: { i: number; j: number }[] | null;
+    start: { i: number; j: number };
+  } {
+    const w = grid.width;
+    const h = grid.height;
+    const sq = this.spawn;
+    const walkable = (i: number, j: number): boolean => (grid.flags(i, j) & TILE_WALKABLE) !== 0;
+    const free = (i: number, j: number): boolean =>
+      walkable(i, j) && !circleBlocked(grid, i + 0.5, j + 0.5, COLLIDER_RADIUS_TILES, 0);
+    const clampI = (v: number): number => Math.min(w - 1, Math.max(0, v));
+    const clampJ = (v: number): number => Math.min(h - 1, Math.max(0, v));
+    const i0 = Math.floor(sq.i0);
+    const j0 = Math.floor(sq.j0);
+    const i1 = Math.min(w - 1, Math.ceil(sq.i0 + sq.side) - 1);
+    const j1 = Math.min(h - 1, Math.ceil(sq.j0 + sq.side) - 1);
+    // an open square needs no work (the common case: tests, the open dev map)
+    let open = true;
+    for (let j = Math.max(0, j0); j <= j1 && open; j++)
+      for (let i = Math.max(0, i0); i <= i1; i++)
+        if (!free(i, j)) {
+          open = false;
+          break;
+        }
+    const ci = clampI(Math.floor(sq.i0 + sq.side / 2));
+    const cj = clampJ(Math.floor(sq.j0 + sq.side / 2));
+    if (open) return { tiles: null, start: { i: ci, j: cj } };
+    // the nearest walkable tile to the centre (the centre itself unless it is water)
+    let start = { i: ci, j: cj };
+    if (!walkable(ci, cj)) {
+      let found = false;
+      for (let rad = 1; rad <= Math.max(w, h) && !found; rad++)
+        for (let dj = -rad; dj <= rad && !found; dj++)
+          for (let di = -rad; di <= rad; di++) {
+            if (Math.max(Math.abs(di), Math.abs(dj)) !== rad) continue;
+            const ti = ci + di;
+            const tj = cj + dj;
+            if (ti >= 0 && tj >= 0 && ti < w && tj < h && walkable(ti, tj)) {
+              start = { i: ti, j: tj };
+              found = true;
+              break;
+            }
+          }
+    }
+    const seen = new Uint8Array(w * h);
+    const queue: number[] = [start.j * w + start.i];
+    seen[queue[0]!] = 1;
+    for (let q = 0; q < queue.length; q++) {
+      const t = queue[q]!;
+      const ti = t % w;
+      const tj = (t - ti) / w;
+      for (const [di, dj] of [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+      ] as const) {
+        const ni = ti + di;
+        const nj = tj + dj;
+        if (ni < 0 || nj < 0 || ni >= w || nj >= h || seen[nj * w + ni] || !walkable(ni, nj)) continue;
+        seen[nj * w + ni] = 1;
+        queue.push(nj * w + ni);
+      }
+    }
+    const tiles: { i: number; j: number }[] = [];
+    for (let j = Math.max(0, j0); j <= j1; j++)
+      for (let i = Math.max(0, i0); i <= i1; i++) if (seen[j * w + i] && free(i, j)) tiles.push({ i, j });
+    return { tiles, start };
+  }
+
+  /**
+   * A random point of the spawn region (join and respawn), drawn from the seeded `spawn` stream. On a map with obstacles the point is
+   * re-drawn (from the same stream, so it stays deterministic) until it lands on a spawnable tile; after 32 misses a spawnable tile is
+   * picked directly, and a region with none falls back to the tile the search started from.
+   */
   private spawnPoint(): { i: number; j: number } {
-    const [a, r1] = rngFloat(this.spawnRng);
-    const [b, r2] = rngFloat(r1);
-    this.spawnRng = r2;
-    return { i: this.spawn.i0 + a * this.spawn.side, j: this.spawn.j0 + b * this.spawn.side };
+    const g = this.ctx.grid;
+    const ok = (p: { i: number; j: number }): boolean =>
+      !this.spawnSet ||
+      (this.spawnSet.has(Math.floor(p.j) * g.width + Math.floor(p.i)) &&
+        !circleBlocked(g, p.i, p.j, COLLIDER_RADIUS_TILES, 0));
+    for (let k = 0; k < 32; k++) {
+      const [a, r1] = rngFloat(this.spawnRng);
+      const [b, r2] = rngFloat(r1);
+      this.spawnRng = r2;
+      const p = { i: this.spawn.i0 + a * this.spawn.side, j: this.spawn.j0 + b * this.spawn.side };
+      if (ok(p)) return p;
+    }
+    const tiles = this.spawnTiles;
+    if (!tiles || tiles.length === 0) return { i: this.spawnStart.i + 0.5, j: this.spawnStart.j + 0.5 };
+    const [pick, r3] = rngInt(this.spawnRng, tiles.length);
+    this.spawnRng = r3;
+    const t = tiles[pick]!;
+    return { i: t.i + 0.5, j: t.j + 0.5 };
   }
 
   /**
@@ -568,10 +741,21 @@ export class WorldNode {
     this.clients.delete(id);
     this.inventory?.onLeave(c.accountId);
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
+    if (this.major?.isActive(id)) {
+      // leaving in the middle of a Tâm Ma / Kiếp counts as losing it (the outcome is applied before the character is written)
+      const mj = this.major.onLeave(this.world, id);
+      this.world = mj.world;
+      if (mj.telegraphs.length > 0) this.sendTelegraphs(mj.telegraphs);
+      this.deliver(mj.outbound);
+    }
     void this.progression?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
+    this.sect?.leave(id);
+    this.friends?.leave(id);
     this.chatHistoryDue.delete(id);
+    this.heldMajor.delete(id);
+    this.majorDue.delete(id);
     this.combat?.removePlayer(id);
     this.world = removeEntity(this.world, id);
     this.freeIds.push({ id, reusableAtMs: this.world.timeMs + this.idQuarantineMs });
@@ -672,6 +856,11 @@ export class WorldNode {
     c.snapSeq = 0;
     c.lastAckMs = now;
     c.lastResyncMs = -Infinity;
+    // a Tâm Ma / Kiếp that ran (or ended) while the player was held: tell the client where it stands, next tick (D97)
+    const snap = this.major?.snapshotMsg(id, now);
+    const missed = this.heldMajor.get(id);
+    this.heldMajor.delete(id);
+    if (snap || missed?.length) this.majorDue.set(id, snap ? [snap] : missed!);
     this.world = {
       ...this.world,
       entities: this.world.entities.map((e) =>
@@ -788,6 +977,16 @@ export class WorldNode {
           this.badFrame(c, 'unexpected');
         } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
         break;
+      case 'sect_cmd':
+        if (!this.sect) {
+          this.badFrame(c, 'unexpected');
+        } else this.send(c, this.sect.handle(id, msg, this.world.timeMs));
+        break;
+      case 'friend_cmd':
+        if (!this.friends) {
+          this.badFrame(c, 'unexpected');
+        } else this.send(c, this.friends.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           this.badFrame(c, 'unexpected');
@@ -882,13 +1081,23 @@ export class WorldNode {
       if (mobAtk.telegraphs.length > 0) this.sendTelegraphs(mobAtk.telegraphs);
       if (mobAtk.phases.length > 0) this.sendBossPhases(mobAtk.phases);
     }
+    if (this.major) {
+      // Tâm Ma / Lôi Kiếp of running major breakthroughs (D97): after combat and mobs, so a killed shadow is already gone
+      const mj = this.major.step(this.world);
+      this.world = mj.world;
+      if (mj.telegraphs.length > 0) this.sendTelegraphs(mj.telegraphs);
+      if (mj.outbound.length > 0) this.deliver(mj.outbound);
+    }
     this.byId = new Map(this.world.entities.map((e) => [e.id, e]));
     this.sendStatusUpdates(); // other players' root / slow / poison, on change (D94)
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
+    if (this.majorDue.size) this.sendMajorDue();
     this.party?.tick(this.world.timeMs, this.world.tick);
+    this.sect?.tick();
+    this.friends?.tick();
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -966,11 +1175,29 @@ export class WorldNode {
     this.chatHistoryDue.clear();
   }
 
+  private sendMajorDue(): void {
+    for (const [id, msgs] of this.majorDue) {
+      const c = this.clients.get(id);
+      if (c && !c.dead) for (const m of msgs) this.send(c, m);
+    }
+    this.majorDue.clear();
+  }
+
   /** Send progression replies/state to their owners (a kicked or gone client is skipped). */
   private deliver(out: Outbound[]): void {
     for (const o of out) {
       const c = this.clients.get(o.entityId);
-      if (c && !c.dead) this.send(c, o.msg);
+      if (!c || c.dead) continue;
+      if (c.suspendedAtMs !== null) {
+        // held player: the final answer of an event is kept for the resume (the rest is rebuilt from the live event)
+        const m = o.msg;
+        if ((m.type === 'major_event' && m.result !== MajorResult.Running) || m.type === 'breakthrough_result') {
+          const q = this.heldMajor.get(o.entityId) ?? [];
+          q.push(m);
+          this.heldMajor.set(o.entityId, q);
+        }
+      }
+      this.send(c, o.msg);
     }
   }
 
@@ -1045,6 +1272,7 @@ export class WorldNode {
       if (l) l.push(e);
       else cells.set(k, [e]);
     }
+    const hideShadows = !!this.shadows && this.shadows.size > 0;
     for (const c of this.clients.values()) {
       const me = this.byId.get(c.id);
       if (!me || c.dead || c.suspendedAtMs !== null) continue; // a held (dropped) player has nobody to send to
@@ -1094,6 +1322,7 @@ export class WorldNode {
             if (!l) continue;
             for (const e of l) {
               if (e.id === c.id || c.visible.has(e.id)) continue;
+              if (hideShadows && this.shadows!.hiddenFor(e.id, c.id)) continue; // a Tâm Ma shadow is seen by its owner only (D97)
               if (!inAoiAt(e.i, e.j, u0, w0, false)) continue;
               cand.push({ e, d: uwDistSq(e.i, e.j, u0, w0) + e.id * 1e-9 });
             }
@@ -1116,9 +1345,10 @@ export class WorldNode {
           enters.push({
             index,
             entityId: e.id,
-            kind: this.mobs?.kindOf(e.id) ?? 0,
+            kind: this.mobs?.kindOf(e.id) ?? (this.shadows?.owns(e.id) ? 1 : 0),
             // monsters: their definition id; players: the class wire id (D82, 0 when unknown)
-            defId: this.mobs?.defIdOf(e.id) || this.classWireIdOf(e.id),
+            defId:
+              this.mobs?.defIdOf(e.id) || (this.shadows?.owns(e.id) ? SHADOW_DEF_ID : 0) || this.classWireIdOf(e.id),
             qi,
             qj,
             anim: se.anim,
@@ -1220,6 +1450,7 @@ export class WorldNode {
       const to: number[] = [];
       for (const c of this.clients.values()) {
         if (c.dead || c.suspendedAtMs !== null) continue;
+        if (t.audience !== undefined && c.id !== t.audience) continue;
         const me = this.byId.get(c.id);
         if (!me) continue;
         const centre = aoiCentre({ i: me.i, j: me.j }, { i: me.vi, j: me.vj }, me.flying);
