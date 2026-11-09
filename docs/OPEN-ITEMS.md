@@ -490,9 +490,30 @@ Còn mở / lưu ý:
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ; cần bản @2x khi làm sprite thật.
 - Quái nhận biết qua tên `Mob <id>` của backend (`mobDefIdOfName`) vì `EnemyView` chưa mang `defId`; nên thêm `defId` vào `EnemyView` khi `@vgtd/client-combat` được sửa.
 
+## 20. Chat (D87, worker35): còn mở
+
+- **Danh sách từ cấm thật**: hiện chỉ có 2 từ GIẢ (`placeholder`) để chứng minh cơ chế; cần chủ dự án / kiểm duyệt viên cung cấp danh sách tiếng Việt (có biến thể không dấu, leetspeak, ký tự tách) và chính sách che hay chặn. Che bằng `*` theo ký tự gốc là mặc định tạm.
+- **Lưu bền tin riêng (30 ngày)** và nhật ký kiểm toán (docs/22 §7, docs/25): chưa có bảng `chat_messages`; thì thầm hiện chỉ ở RAM. Cần chính sách riêng tư (docs/23 §7) trước khi lưu.
+- **Báo cáo / chặn người chơi, vi phạm lặp lại**: chưa có `report`, danh sách chặn phía người nhận, tự mute khi spam lặp; `mute()` mới là API nội bộ, chưa có lệnh GM hay tự động.
+- **Hạn mức là đề xuất** (docs/24 §7): Thế giới 1/5 s bùng nổ 2, Vùng và thì thầm 1/2 s bùng nổ 3 (Vùng không có trong bảng nên lấy mức thì thầm). Chưa chặn tin lặp lại giống hệt, chưa có hạn mức theo IP.
+- **Kênh Đội / Tông môn / Hệ thống**: `Party = 4` để dành; Đội cần tính năng tổ đội (docs/10 §7.1), Tông môn cần tông môn NPC. Tin hệ thống (`senderId` 0) chưa dùng.
+- **Vùng = hộp AOI của người gửi**: chưa có khái niệm "vùng bản đồ" (Sơn Môn / Rừng Độc là hai `MapInstance` theo docs/22 §3); khi có nhiều bản đồ, Vùng nên là cả bản đồ.
+- **Link vật phẩm / Shift+click** (docs/05 §tương tác) và **emoji / biểu tượng**: chưa có.
+- **i18n**: chuỗi tiếng Việt của hộp chat và lệnh nằm trong code (`ChatLog.ts`), cùng ghi chú mục 18; tên kênh hiển thị là bản đầu chưa qua biên tập.
+- **Hộp chat là DOM overlay**: không phụ thuộc engine nhưng không nằm trong cây Cocos (không bị camera / zoom chi phối); trên Web/H5 thật cần kiểm với bàn phím ảo che màn hình (viewport resize) và IME.
+- **Hàng đợi gửi / ngân sách**: fan-out Thế giới gửi từng người (mã hóa mỗi lần); ngân sách docs/22 §7 (≤ 0,2 ms/tin) chưa đo ở 200 người.
+
 ## D89 — telegraph quái: còn mở
 
 - Decal chỉ là placeholder (đường viền + tô lớn dần, không art, không âm thanh); thời gian chạy theo đồng hồ cục bộ từ lúc nhận `telegraph_start` (không bù độ trễ).
 - Chưa có telegraph cho boss có bộ kỹ năng riêng và các hiệu ứng (vũng độc, triệu hồi) vì server chưa mô phỏng chúng (xem mục 11).
 - Chưa gộp nhiều telegraph cùng lúc (bầy quái): mỗi đòn một khung 20 B. Nếu đo thực tế thấy tốn, gộp theo tick.
 - Đã có smoke test trình duyệt thật `npm run telegraph:online -w client-cocos` (decal hiện khi `telegraph_start` tới, biến mất khi đòn kết thúc); nó đếm điểm ảnh đỏ nên chỉ là kiểm tra thô, chưa đánh giá thẩm mỹ / độ rõ của decal trên mọi nền bản đồ.
+
+## D92 — lưu trữ bằng tệp: còn mở
+
+- Không phải cơ sở dữ liệu: một tệp JSON mỗi kho, nạp hết vào bộ nhớ lúc khởi động, ghi lại toàn bộ tệp (gộp theo 250 ms). Đủ cho play-test và vài nghìn nhân vật; `ledger.json` tăng vô hạn vì bút toán chỉ thêm (cần JSONL hoặc DB thật trước khi mở cho nhiều người).
+- Một tiến trình duy nhất: không khóa tệp, hai server cùng `DATA_DIR` sẽ ghi đè nhau. Chưa có sao lưu định kỳ ngoài `.bak` (bản trước đó).
+- Chưa lưu: khóa idempotency của sổ cái (xem D92), nhật ký roll (`roll_log`), token nối lại; vị trí / máu hiện tại của nhân vật không được lưu (vào lại ở điểm xuất hiện, như trước). Kỹ năng / hotbar / hồi chiêu không thuộc dữ liệu bền.
+- `npm run play` dừng tiến trình con bằng `taskkill /F` trên Windows nên không có tắt máy sạch: dữ liệu có thể mất tới ~5 s thay đổi túi đồ gần nhất (bản ghi tài khoản / nhân vật ghi sau <= 250 ms).
+- Adapter PostgreSQL chưa viết (giao diện `AccountStore` / `InventoryStore` cần chuyển sang bất đồng bộ; xem D92).

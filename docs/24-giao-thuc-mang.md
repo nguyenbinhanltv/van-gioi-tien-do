@@ -165,6 +165,8 @@ Ghi chú: mọi thông điệp C→S là **ý định**; không có thông đi�
 
 > **[Cập nhật D82]** `hello` (JSON) có thêm `classId` tùy chọn (chuỗi `PathId` hoặc id dây 1..6; sai giá trị: `BadMessage`), dùng chỉ khi nhân vật chưa tồn tại; `hello_ack` có `classId` (id dây của lớp server giữ). `EnterEntity.defId` của người chơi (kind 0) mang id lớp 1..6 (0 = không rõ), của quái vẫn là id định nghĩa quái: không đổi bố cục `aoi_enter`, không tăng `PROTOCOL_VERSION`. Hiện thực: `apps/server/src/gateway.ts`, `packages/shared/src/classes.ts`.
 
+> **[Cập nhật D87]** Chat dùng phong bì họ Lạnh, thân nhị phân cố định: id 40 `chat_send`, 41 `chat_msg`, 42 `chat_history`, và **43 `chat_result {clientMsgId u16, reason u8}`** (thêm để mọi `chat_send` có đúng một phản hồi; `ChatReason`: 0 đã gửi, 1 quá nhanh, 2 quá dài, 3 trống, 4 bị cấm chat, 5 kênh không có / chưa mở, 6 không có người nhận, 7 chưa vào game, 8 tự thì thầm). Kênh 1 Thế giới, 2 Vùng, 3 Thì thầm, 4 Đội (để dành). Giới hạn theo byte UTF-8: nội dung ≤ 256, tên ≤ 24, lịch sử ≤ 50 dòng. Hiện thực: `packages/protocol/src/chat.ts`.
+
 ### 5.1 Quy tắc ứng dụng
 
 - **Lệnh có tác dụng phụ** (`inv_cmd`, `market_*`, `craft_*`, `breakthrough_*`) mang `requestId` (UUIDv7 do client sinh) → ánh xạ thành khóa idempotency; gửi lại sau mất kết nối là an toàn ([26 §4](26-kinh-te-ledger.md)). Server trả đúng kết quả cũ cho cùng `requestId`.
