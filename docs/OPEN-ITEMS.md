@@ -540,6 +540,12 @@ Còn mở / lưu ý:
 - Chỉ có ảnh @1x (chung trang atlas với prop, 128 / 192 / 256 / 512 px thiết kế): ở zoom 1,5–2,0× (D81) quái hơi mờ. Đã đo bản @2x (2026-11-09): prop @2x + quái @2x cần 3,74 / 4,19 MP, xếp thành **2 trang** 2048² (thêm ~16 MB GPU và Y-sort bị ngắt batch giữa prop và quái), nên chưa làm; làm khi có sprite hoạt hình thật (atlas riêng cho quái, nén ASTC).
 - Quái nhận biết bằng `EnemyView.defId` (id dây của `MOB_DEFS`, do `aoi_enter` mang); tên `Mob <id>` chỉ còn là đường lùi cho backend chưa gán `defId`.
 
+## Skin pha boss (INTERIM, 2026-11-09): còn mở
+
+- Skin pha đổi khi client nhận `boss_phase`; client vào tầm nhìn SAU lúc boss đã đổi pha (AOI) chưa nhận lại thông điệp nên vẫn thấy skin pha đầu cho tới lần đổi pha kế: cần `phase` trong `aoi_enter` / snapshot (giao thức) để dựng đúng skin ngay.
+- Thanh máu trên đầu boss giữ độ cao của skin pha đầu (skin pha sau thấp hơn); chưa dùng sprite hoạt hình: chỉ nháy + đổi ảnh tĩnh trong cửa sổ biến hình (`TRANSFORM_SWAP_AT` = giữa cửa sổ).
+- Skin pha boss nằm trong trang atlas riêng `atl_mobphase_1x` (@1x cho mọi tier, ~0,9 MB PNG, tải lười khi có boss có pha trong tầm nhìn; cổng ngân sách tính riêng qua `LAZY_ATLAS_PREFIXES`, không vào gói tải đầu). Trang prop vẫn một trang (`atl_prop_2x` 2048², `atl_prop_1x` 2048×1024). Còn mở: nếu boss đổi pha trước khi trang tải xong thì dùng tạm màu pha (hiếm: trang tải ngay khi boss vào tầm nhìn).
+
 ## 21. Tổ đội (D93, worker35): còn mở
 
 - **Chia chiến lợi phẩm là PLACEHOLDER**: mỗi người trong 20 ô tự roll với hệ số 1/√n (docs/07 §6). Cần game designer duyệt: bán kính chia, có tính người đã chết / ngoại tuyến không, nhặt chung hay riêng (Need / Greed), chia **kinh nghiệm** (MVP chưa có XP khi hạ quái), boss bí cảnh "1 lần mỗi tuần mỗi người" khi đi đội.
