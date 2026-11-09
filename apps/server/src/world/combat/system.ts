@@ -40,6 +40,7 @@ import {
   type SimWorld,
 } from '@vgtd/sim';
 import { DEFAULT_PATH, makeProfile } from './profile.js';
+import { StatusSystem } from './status.js';
 import { resolveCast, type ResolveTarget } from './resolve.js';
 import {
   type AimedInput,
@@ -95,6 +96,8 @@ export class CombatSystem {
   private pending: Pending[] = [];
   private dropRng: RngState;
   private readonly respawnDelayMs: number;
+  /** root / slow / poison / pools put on players by elite and boss skills (D91) */
+  readonly status = new StatusSystem();
 
   constructor(
     private readonly ctx: SimContext,
@@ -150,6 +153,7 @@ export class CombatSystem {
   }
 
   removePlayer(id: number): void {
+    this.status.clear(id);
     this.players.delete(id);
     this.pending = this.pending.filter((p) => p.casterId !== id);
   }
@@ -204,7 +208,7 @@ export class CombatSystem {
         continue;
       }
       if (inp.kind === 'move') {
-        if (p.alive) keep.push(inp);
+        if (p.alive) keep.push(this.status.adjustMove(inp, world.timeMs));
         continue;
       }
       // a client seq is unique: a second cast with the same (entity, seq) in one tick is malformed, the first one wins
@@ -270,8 +274,23 @@ export class CombatSystem {
     for (const p of due) w = this.resolve(w, p, results, events);
     w = this.respawnDue(w, events);
     w = this.regenerate(w);
+    w = this.applyStatus(w, events);
     this.inflight.clear(); // every entry belongs to this tick's inputs: anything left (no sim event) is stale
     return { world: w, results, events };
+  }
+
+  /** Poison and pool ticks that are due (D91): plain damage on living players, through `damagePlayer`. */
+  private applyStatus(world: SimWorld, events: CombatEvent[]): SimWorld {
+    const living: Array<{ id: number; i: number; j: number }> = [];
+    for (const e of world.entities)
+      if (e.hp > 0 && this.players.get(e.id)?.alive) living.push({ id: e.id, i: e.i, j: e.j });
+    let w = world;
+    for (const hit of this.status.tick(world.timeMs, living)) {
+      const r = this.damagePlayer(w, hit.targetId, hit.amount, hit.sourceId);
+      w = r.world;
+      for (const ev of r.events) events.push(ev);
+    }
+    return w;
   }
 
   /** Damage a player from outside the cast pipeline (mob attacks, PvP, environment). Shields absorb first. */
@@ -390,7 +409,7 @@ export class CombatSystem {
     if (!mobs) return [];
     const out: ResolveTarget[] = [];
     for (const e of world.entities) {
-      if (e.hp <= 0) continue;
+      if (e.hp <= 0 || this.opts.isInvulnerable?.(e.id)) continue;
       const s = mobs.combatStats(e.id);
       if (s)
         out.push({ id: e.id, i: e.i, j: e.j, hpMax: s.hpMax, defense: s.defense, realm: s.realm, element: s.element });
@@ -520,6 +539,7 @@ export class CombatSystem {
       const e = w.entities.find((x) => x.id === id);
       if (!e) continue;
       p.alive = true;
+      this.status.clear(id);
       p.shield = 0;
       p.shieldUntilMs = 0;
       const at = this.opts.respawnPoint?.(id) ?? { i: e.i, j: e.j };
@@ -568,6 +588,7 @@ export class CombatSystem {
         ]),
       pending: this.pending.map((p) => [p.resolveAtMs, p.casterId, p.seq, p.wireId, p.targetId]),
       drop: this.dropRng,
+      status: this.status.digest(),
     });
   }
 }

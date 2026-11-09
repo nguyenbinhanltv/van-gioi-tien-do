@@ -59,6 +59,14 @@ export const accountKey = (a: AccountRef): string => `${a.kind}|${a.ownerId ?? '
 const hashOf = (tx: LedgerTx): string =>
   `${tx.reason}|${tx.entries.map((e) => `${accountKey(e.account)}=${e.delta.toString()}`).join(',')}`;
 
+/** JSON-safe form of a ledger (bigint as decimal strings) for the file store (D92). */
+export interface LedgerSnapshot {
+  v: 1;
+  nextTx: number;
+  accounts: { key: string; ref: AccountRef; balance: string }[];
+  entries: { txId: number; accountKey: string; delta: string }[];
+}
+
 export class Ledger {
   private readonly balances = new Map<string, bigint>();
   private readonly accountOf = new Map<string, AccountRef>();
@@ -66,6 +74,39 @@ export class Ledger {
   /** append-only */
   readonly entries: LedgerEntry[] = [];
   private nextTx = 1;
+  /**
+   * Called after every committed transaction (never for a rejected one or a replay). The file store marks its document dirty here;
+   * it must not throw and must not call back into the ledger.
+   */
+  onCommit: (() => void) | null = null;
+
+  /**
+   * Everything needed to rebuild this ledger after a restart. The idempotency keys are NOT persisted: a key only protects against a
+   * replay inside one process lifetime (kill keys contain the world tick, which starts again at 0 on a restart).
+   */
+  snapshot(): LedgerSnapshot {
+    return {
+      v: 1,
+      nextTx: this.nextTx,
+      accounts: [...this.balances].map(([key, b]) => ({ key, ref: this.accountOf.get(key)!, balance: b.toString() })),
+      entries: this.entries.map((e) => ({ txId: e.txId, accountKey: e.accountKey, delta: e.delta.toString() })),
+    };
+  }
+
+  /** Rebuild a ledger from `snapshot()`. Throws on a malformed or inconsistent snapshot (the caller refuses to start on it). */
+  static restore(snap: LedgerSnapshot): Ledger {
+    if (snap.v !== 1) throw new Error(`unsupported ledger snapshot version ${String(snap.v)}`);
+    const l = new Ledger();
+    l.nextTx = snap.nextTx;
+    for (const a of snap.accounts) {
+      l.balances.set(a.key, BigInt(a.balance));
+      l.accountOf.set(a.key, a.ref);
+    }
+    for (const e of snap.entries) l.entries.push({ txId: e.txId, accountKey: e.accountKey, delta: BigInt(e.delta) });
+    const problems = l.reconcile();
+    if (problems.length > 0) throw new Error(`ledger snapshot is inconsistent: ${problems[0]}`);
+    return l;
+  }
 
   balance(a: AccountRef): bigint {
     return this.balances.get(accountKey(a)) ?? 0n;
@@ -103,6 +144,7 @@ export class Ledger {
       this.entries.push({ txId, accountKey: k, delta: e.delta });
     }
     this.applied.set(tx.idempotencyKey, { hash, txId });
+    this.onCommit?.();
     return { txId, replayed: false };
   }
 

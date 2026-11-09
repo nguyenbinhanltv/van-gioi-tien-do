@@ -8,6 +8,13 @@
  */
 import { ProtocolError } from './errors.js';
 import {
+  decodeChatBody,
+  encodeChatBody,
+  validateChatMessage,
+  type ChatClientMessage,
+  type ChatServerMessage,
+} from './chat.js';
+import {
   decodeInventoryBody,
   encodeInventoryBody,
   validateInventoryMessage,
@@ -19,6 +26,11 @@ import {
 export const COLD_ENVELOPE = 0x80;
 
 export enum ColdMsgId {
+  /** chat (D87, chat.ts; docs/24 ids 40-42, 43 = result) */
+  ChatSend = 40,
+  ChatMsg = 41,
+  ChatHistory = 42,
+  ChatResult = 43,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -41,6 +53,10 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.InvState]: 'inv_state',
   [ColdMsgId.InvCmd]: 'inv_cmd',
   [ColdMsgId.InvResult]: 'inv_result',
+  [ColdMsgId.ChatSend]: 'chat_send',
+  [ColdMsgId.ChatMsg]: 'chat_msg',
+  [ColdMsgId.ChatHistory]: 'chat_history',
+  [ColdMsgId.ChatResult]: 'chat_result',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -52,6 +68,10 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   inv_state: ColdMsgId.InvState,
   inv_cmd: ColdMsgId.InvCmd,
   inv_result: ColdMsgId.InvResult,
+  chat_send: ColdMsgId.ChatSend,
+  chat_msg: ColdMsgId.ChatMsg,
+  chat_history: ColdMsgId.ChatHistory,
+  chat_result: ColdMsgId.ChatResult,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -145,8 +165,10 @@ export interface MeditateResultMsg {
   meditating: boolean;
   reason: number;
 }
-export type ColdClientMessage = BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg | InvClientMessage;
-export type ColdServerMessage = CharStateMsg | BreakthroughResultMsg | MeditateResultMsg | InvServerMessage;
+export type ColdClientMessage =
+  BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg | InvClientMessage | ChatClientMessage;
+export type ColdServerMessage =
+  CharStateMsg | BreakthroughResultMsg | MeditateResultMsg | InvServerMessage | ChatServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -210,7 +232,7 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         reason: int(o.reason, 0, 255, 'reason'),
       };
     default:
-      return validateInventoryMessage(o);
+      return validateInventoryMessage(o) ?? validateChatMessage(o);
   }
 }
 
@@ -218,12 +240,14 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
 export interface ColdWriter {
   u8(v: number): void;
   u16(v: number): void;
+  u32(v: number): void;
   f64(v: number): void;
   bytes(b: Uint8Array): void;
 }
 export interface ColdReader {
   u8(): number;
   u16(): number;
+  u32(): number;
   f64(): number;
   sub(n: number): Uint8Array;
 }
@@ -268,6 +292,12 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'inv_cmd':
     case 'inv_result':
       encodeInventoryBody(w, m);
+      break;
+    case 'chat_send':
+    case 'chat_msg':
+    case 'chat_history':
+    case 'chat_result':
+      encodeChatBody(w, m);
       break;
   }
 }
@@ -314,5 +344,10 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'inv_cmd':
     case 'inv_result':
       return decodeInventoryBody(r, type);
+    case 'chat_send':
+    case 'chat_msg':
+    case 'chat_history':
+    case 'chat_result':
+      return decodeChatBody(r, type);
   }
 }

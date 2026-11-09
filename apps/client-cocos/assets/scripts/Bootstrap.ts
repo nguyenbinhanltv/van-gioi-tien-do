@@ -33,6 +33,7 @@ import { PerfHud } from './PerfHud';
 import { OnlineSession, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
+import { ChatBox } from './ChatBox';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -92,6 +93,8 @@ export class Bootstrap extends Component {
   private online: OnlineSession | null = null;
   /** tu vi panel (D76), only online: the server owns the progression state */
   private progressionHud: ProgressionHud | null = null;
+  /** chat (D87), only online: the server owns the channels, rate limits and moderation */
+  private chatBox: ChatBox | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
@@ -289,8 +292,10 @@ export class Bootstrap extends Component {
       hudRoot,
       this.combatOn ? (tile) => this.combat?.pick(tile) ?? null : undefined,
     );
-    if (this.online)
+    if (this.online) {
       this.progressionHud = new ProgressionHud(hudRoot, art, this.online.net, (x, y) => this.rig.clientToUi(x, y));
+      this.chatBox = new ChatBox(this.online.net, this.online.username);
+    }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
@@ -339,6 +344,7 @@ export class Bootstrap extends Component {
     if (this.combatOn && !this.combat) {
       const sc = new cb.ServerCombat({ path, send: (m) => online.sendCast(m) });
       online.attachCombat(sc);
+      online.onBossPhase = (entityId, phase) => this.combat?.announceBossPhase(entityId, phase);
       // count the player's own kills (server-confirmed skill_result KILL flag) for the first-session tracker
       this.makeCombatUi(cb.withKillObserver(sc, () => this.firstSession?.tracker.onKill()));
     }
@@ -518,6 +524,7 @@ export class Bootstrap extends Component {
     this.applyServerClass();
     this.combat?.update(dt, frame.target);
     this.updateSkillWheel(frame);
+    this.chatBox?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -563,6 +570,7 @@ export class Bootstrap extends Component {
     this.online?.destroy();
     this.combat?.destroy();
     this.progressionHud?.destroy();
+    this.chatBox?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     if (this.keyHandlers) {

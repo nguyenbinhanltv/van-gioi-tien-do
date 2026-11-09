@@ -97,4 +97,6 @@ export interface CombatOptions {
   mobAttacks?: boolean;
   /** Is this player meditating (progression)? Meditation raises out-of-combat MP regeneration (D88). Default: never. */
   isMeditating?: (id: number) => boolean;
+  /** A mob that cannot be hurt right now (a boss in its phase transform, D91): it is not a valid target and takes no player damage. */
+  isInvulnerable?: (id: number) => boolean;
 }

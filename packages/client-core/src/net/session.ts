@@ -10,6 +10,9 @@ import {
   decode,
   encode,
   type BreakthroughResultMsg,
+  type ChatHistoryMsg,
+  type ChatMsgMsg,
+  type ChatResultMsg,
   type CharStateMsg,
   type EnterEntity,
   type MeditateResultMsg,
@@ -18,6 +21,7 @@ import {
   type Message,
   type SelfState,
   type SkillResultMsg,
+  type BossPhaseMsg,
   type SnapshotEntity,
 } from '@vgtd/protocol';
 import { NETWORK } from '@vgtd/shared';
@@ -65,6 +69,8 @@ export type NetStatus = 'idle' | 'connecting' | 'online' | 'reconnecting' | 'clo
  */
 export interface NetEvents {
   onSkillResult?(msg: SkillResultMsg): void;
+  /** a boss in view entered a new phase (D91): `phase` is the new phase index (>= 1); the boss is invulnerable for `transformMs` */
+  onBossPhase?(msg: BossPhaseMsg): void;
   onAoiEnter?(entities: readonly EnterEntity[]): void;
   /** Runs BEFORE the entities are dropped from `remote`, so `entityOfIndex(index)` still resolves each of them. */
   onAoiLeave?(indices: readonly number[]): void;
@@ -108,6 +114,19 @@ export interface InventoryEvents {
   onInventory?(msg: InvStateMsg): void;
   /** The server answered an inventory command (`net.bag.lastResult` is set). */
   onInvResult?(msg: InvResultMsg): void;
+}
+
+/**
+ * Chat callbacks (D87), a SEPARATE object from `NetEvents` for the same reason as `InventoryEvents` / `ProgressionEvents`: the scene
+ * replaces `events` wholesale. A throwing hook never breaks the session.
+ */
+export interface ChatEvents {
+  /** One delivered line (any channel, own whispers echoed back). */
+  onChatMsg?(msg: ChatMsgMsg): void;
+  /** The World channel's recent lines, once after joining. */
+  onChatHistory?(msg: ChatHistoryMsg): void;
+  /** The answer to a `sendChat` (0 = delivered, otherwise why not). */
+  onChatResult?(msg: ChatResultMsg): void;
 }
 
 export interface NetOptions {
@@ -222,6 +241,8 @@ export class NetClient {
   readonly bag: BagModel;
   /** Callbacks for the bag (own object, see `InventoryEvents`). */
   inventoryEvents: InventoryEvents = {};
+  /** Callbacks for chat (own object, see `ChatEvents`). */
+  chatEvents: ChatEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -464,6 +485,9 @@ export class NetClient {
       case 'telegraph_end':
         this.telegraph.end(msg);
         break;
+      case 'boss_phase':
+        this.emit(() => this.events.onBossPhase?.(msg));
+        break;
       case 'skill_result':
         this.emit(() => this.events.onSkillResult?.(msg));
         break;
@@ -483,6 +507,15 @@ export class NetClient {
       case 'inv_result':
         this.bag.applyResult(msg);
         this.emit(() => this.inventoryEvents.onInvResult?.(msg));
+        break;
+      case 'chat_msg':
+        this.emit(() => this.chatEvents.onChatMsg?.(msg));
+        break;
+      case 'chat_history':
+        this.emit(() => this.chatEvents.onChatHistory?.(msg));
+        break;
+      case 'chat_result':
+        this.emit(() => this.chatEvents.onChatResult?.(msg));
         break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
@@ -573,6 +606,30 @@ export class NetClient {
         aim: quantizeAim(m.aim),
       }),
     );
+    return true;
+  }
+
+  /**
+   * Send one chat line (D87). `channel` is a `ChatChannel`; `target` is the whisper recipient's name ('' for the other channels);
+   * `clientMsgId` (uint16) comes back in the `chat_result`. Returns false when the socket is not open or the line cannot be encoded
+   * (over 256 bytes, bad channel...): the caller shows its own refusal instead of waiting for an answer that will never come.
+   */
+  sendChat(m: { channel: number; text: string; target?: string; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({
+          type: 'chat_send',
+          channel: m.channel,
+          clientMsgId: m.clientMsgId & 0xffff,
+          target: m.target ?? '',
+          text: m.text,
+        }),
+      );
+    } catch {
+      return false;
+    }
     return true;
   }
 

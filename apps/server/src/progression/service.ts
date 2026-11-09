@@ -15,7 +15,9 @@ import {
   ProgressionReason,
   type BreakthroughResultMsg,
   type CharStateMsg,
-  type ColdClientMessage,
+  type BreakthroughStartMsg,
+  type MeditateStartMsg,
+  type MeditateStopMsg,
   type ColdServerMessage,
   type MeditateResultMsg,
 } from '@vgtd/protocol';
@@ -320,7 +322,7 @@ export class ProgressionService {
   }
 
   // ------------------------------------------------------------------ commands
-  handle(entityId: number, msg: ColdClientMessage, nowMs: number): Outbound[] {
+  handle(entityId: number, msg: BreakthroughStartMsg | MeditateStartMsg | MeditateStopMsg, nowMs: number): Outbound[] {
     const s = this.sessions.get(entityId);
     if (!s) return [];
     const cached = s.answers.get(msg.requestId);

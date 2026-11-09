@@ -285,6 +285,8 @@ Tiền tệ (`currency`): `LT_HA`, `LT_TRUNG`, `LT_THUONG` (Linh thạch ba ph�
 - **Sinh kiểu và dữ liệu tĩnh** không qua migration (D4).
 - **Phiên bản schema** kiểm tra khi khởi động ([22 §9](22-server-modules.md)).
 
+[Cập nhật D92: ngoài PostgreSQL, play-test có hiện thực lưu bằng tệp (`STORE=file`, `apps/server/src/persistence`) cho ba cổng lưu trữ đã có; adapter PostgreSQL phải thỏa cùng các giao diện đó. Phác thảo migration đầu tiên cho phần đã có mã (mọi cột khớp `Account`, `ProgressRecord`, `InventorySnapshot`, `LedgerSnapshot`): `accounts(id uuid pk, username text unique, password_hash text, token_version int, failures int, locked_until_ms bigint, lock_level int)`; `characters(id text pk, account_id uuid, class_id text, realm int, sub_realm int, spirit_root jsonb, karma int, exp double precision, n_fail int, version int)` với `UPDATE ... WHERE version = $expected` làm khóa lạc quan; `inventories(owner text pk, snapshot jsonb)`; `ledger_accounts(key text pk, kind text, owner_id text, currency text, balance numeric)` và `ledger_entries(tx_id bigint, account_key text, delta numeric)` ghi trong cùng một giao dịch SQL với số dư. Đây chỉ là phác thảo, chưa chạy.]
+
 ## 6. Thiết kế Redis (khi bật – tùy chọn trong MVP)
 
 Quy ước khóa: `vgtd:{env}:{miền}:{id}[:phần]`; mọi khóa có TTL trừ khi ghi chú; giá trị JSON gọn hoặc hash. Mọi truy cập qua `KeyValueStore`/`PubSub` (có bản RAM cho MVP không có Redis).
