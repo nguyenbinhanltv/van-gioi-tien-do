@@ -222,3 +222,64 @@ describe('report text and series', () => {
     expect(csv[1]!.split(',')).toHaveLength(csv[0]!.split(',').length);
   });
 });
+
+describe('tick profile (D106)', () => {
+  it('counts the tick-time histogram in buckets, the last one above the last edge', () => {
+    const h = new TickHistogram(0.25, 100);
+    h.add([1, 4.9, 5.1, 12, 49, 51, 130, 500]);
+    // edges 5, 10, 50, 100: (0,5] 2 values, (5,10] 1, (10,50] 2, (50,100] 1, above 100: 2
+    expect(h.counts([5, 10, 50, 100])).toEqual([2, 1, 2, 1, 2]);
+    expect(h.mean()).toBeCloseTo((1 + 4.9 + 5.1 + 12 + 49 + 51 + 130 + 500) / 8, 6);
+  });
+
+  it('the report carries the per-phase table, the histogram, GC, event-loop delay and file-write cost', () => {
+    const h = new TickHistogram();
+    h.add([5, 6, 7, 60, 120]);
+    const phase = (v: number[]) => {
+      const x = new TickHistogram(0.1, 200);
+      x.add(v);
+      return x;
+    };
+    const interval = new TickHistogram(1, 2000);
+    interval.add([50, 51, 400]);
+    const s = summarizeSoak(
+      config(),
+      series(10),
+      h,
+      {},
+      {
+        phases: { sim: phase([1, 1, 2]), snap: phase([3, 3, 90]) },
+        slowTicks: 2,
+        slowBy: { sim: 0, snap: 2 },
+        interval,
+        gc: { scavenge: { count: 10, totalMs: 12, maxMs: 3 }, major: { count: 1, totalMs: 9, maxMs: 9 } },
+        eventLoop: { p50: 11, p99: 40, max: 300 },
+        fileWrites: {
+          count: 5,
+          totalMs: 20,
+          maxMs: 9,
+          serializeMs: 4,
+          serializeMaxMs: 2,
+          asyncCount: 5,
+          asyncTotalMs: 300,
+        },
+        cpuCores: 1.5,
+      },
+    );
+    expect(s.profile!.phases.find((p) => p.phase === 'snap')).toMatchObject({ slowBiggest: 2, max: 90 });
+    expect(s.profile!.gc).toMatchObject({ count: 11, totalMs: 21, maxMs: 9 });
+    expect(s.profile!.histogram.counts.reduce((a, b) => a + b, 0)).toBe(5);
+    const text = formatSoak(s);
+    for (const part of [
+      'tick profile',
+      'snap',
+      'tick histogram',
+      'event loop delay',
+      'GC pauses',
+      'file-store writes',
+      'process CPU',
+    ])
+      expect(text).toContain(part);
+    expect(formatSoak(summarizeSoak(config(), series(10), h))).not.toContain('tick profile'); // no profile, no section
+  });
+});

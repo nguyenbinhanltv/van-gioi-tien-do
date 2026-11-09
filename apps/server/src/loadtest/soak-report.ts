@@ -31,6 +31,7 @@ export class TickHistogram {
   private readonly bins: number[];
   private overflow = 0;
   n = 0;
+  sum = 0;
   max = 0;
   constructor(
     private readonly binMs = 0.25,
@@ -41,11 +42,29 @@ export class TickHistogram {
   add(values: readonly number[]): void {
     for (const v of values) {
       this.n++;
+      this.sum += v;
       if (v > this.max) this.max = v;
       const k = Math.floor(v / this.binMs);
       if (k >= this.bins.length) this.overflow++;
       else this.bins[Math.max(0, k)]!++;
     }
+  }
+  mean(): number {
+    return this.n ? this.sum / this.n : 0;
+  }
+  /** How many values fall in each bucket `(edges[k-1], edges[k]]`, plus one last bucket above the last edge (bin resolution applies). */
+  counts(edges: readonly number[]): number[] {
+    const out = new Array<number>(edges.length + 1).fill(0);
+    for (let k = 0; k < this.bins.length; k++) {
+      const c = this.bins[k]!;
+      if (c === 0) continue;
+      const hi = (k + 1) * this.binMs; // the upper edge of the bin
+      let b = edges.findIndex((e) => hi <= e + 1e-9);
+      if (b < 0) b = edges.length;
+      out[b]! += c;
+    }
+    out[edges.length]! += this.overflow;
+    return out;
   }
   /** value at quantile q (0..1), the upper edge of its bin (never below the true value by more than one bin) */
   quantile(q: number): number {
@@ -139,6 +158,51 @@ export interface Criterion {
   info?: boolean;
 }
 
+/** What the soak driver collected for the profile (D106); the pure report turns it into `SoakSummary.profile`. */
+export interface ProfileInput {
+  /** per tick phase (`WorldNode.profile`), whole run */
+  phases: Record<string, TickHistogram>;
+  /** ticks over the 50 ms budget, and how many of them each phase was the biggest of */
+  slowTicks: number;
+  slowBy: Record<string, number>;
+  /** gap between consecutive tick starts (setTimeout drift + tick length), whole run */
+  interval: TickHistogram;
+  /** V8 GC pauses seen on the server thread (PerformanceObserver 'gc'), by kind */
+  gc: Record<string, { count: number; totalMs: number; maxMs: number }>;
+  /** event-loop delay percentiles (perf_hooks.monitorEventLoopDelay, ms) over the whole run */
+  eventLoop: { p50: number; p99: number; max: number };
+  /** synchronous file writes of the file stores (persistence/atomic.ts) */
+  fileWrites: {
+    /** writes that blocked the loop (whole sync writes + the commit renames of async ones) */
+    count: number;
+    totalMs: number;
+    maxMs: number;
+    /** document serialisation on the loop */
+    serializeMs: number;
+    serializeMaxMs: number;
+    /** background writes (thread pool, off the loop) and their wall time */
+    asyncCount: number;
+    asyncTotalMs: number;
+  };
+  /** process CPU (user+system) as a share of one core over the measured run */
+  cpuCores: number;
+}
+
+/** Bucket edges (ms) of the tick-time histogram in the report: the 20 Hz period is the 50 ms edge. */
+export const TICK_BUCKETS_MS = [5, 10, 15, 20, 30, 40, 50, 75, 100, 150, 200] as const;
+
+export interface ProfileSummary {
+  phases: Array<{ phase: string; mean: number; p50: number; p99: number; max: number; slowBiggest: number }>;
+  slowTicks: number;
+  /** tick duration histogram: `counts[k]` ticks in `(edges[k-1], edges[k]]`, the last one above the last edge */
+  histogram: { edgesMs: readonly number[]; counts: number[] };
+  interval: { p50: number; p99: number; max: number };
+  gc: { count: number; totalMs: number; maxMs: number; byKind: ProfileInput['gc'] };
+  eventLoop: ProfileInput['eventLoop'];
+  fileWrites: ProfileInput['fileWrites'];
+  cpuCores: number;
+}
+
 export interface SoakSummary {
   config: SoakConfig;
   samples: number;
@@ -178,6 +242,8 @@ export interface SoakSummary {
   };
   activity: BotTotals;
   criteria: Criterion[];
+  /** where the tick time goes (D106); absent when the driver did not profile */
+  profile?: ProfileSummary;
 }
 
 const mean = (a: readonly number[]): number => (a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0);
@@ -226,6 +292,8 @@ export function summarizeSoak(
   samples: readonly SoakSample[],
   hist: TickHistogram,
   violationKinds: Record<string, number> = {},
+  profile?: ProfileInput,
+  tickHist: TickHistogram = hist,
 ): SoakSummary {
   const last = samples[samples.length - 1];
   const down = samples.map((s) => s.downKBps);
@@ -309,8 +377,35 @@ export function summarizeSoak(
     criteria: [],
   };
   sum.errors.violationKinds = violationKinds;
+  if (profile) sum.profile = profileOf(profile, tickHist);
   sum.criteria = criteriaOf(sum);
   return sum;
+}
+
+function profileOf(p: ProfileInput, ticks: TickHistogram): ProfileSummary {
+  const gcAll = Object.values(p.gc);
+  return {
+    phases: Object.entries(p.phases).map(([phase, h]) => ({
+      phase,
+      mean: h.mean(),
+      p50: h.quantile(0.5),
+      p99: h.quantile(0.99),
+      max: h.max,
+      slowBiggest: p.slowBy[phase] ?? 0,
+    })),
+    slowTicks: p.slowTicks,
+    histogram: { edgesMs: TICK_BUCKETS_MS, counts: ticks.counts(TICK_BUCKETS_MS) },
+    interval: { p50: p.interval.quantile(0.5), p99: p.interval.quantile(0.99), max: p.interval.max },
+    gc: {
+      count: gcAll.reduce((a, g) => a + g.count, 0),
+      totalMs: gcAll.reduce((a, g) => a + g.totalMs, 0),
+      maxMs: Math.max(0, ...gcAll.map((g) => g.maxMs)),
+      byKind: p.gc,
+    },
+    eventLoop: p.eventLoop,
+    fileWrites: p.fileWrites,
+    cpuCores: p.cpuCores,
+  };
 }
 
 function criteriaOf(s: SoakSummary): Criterion[] {
@@ -434,11 +529,42 @@ export function formatSoak(s: SoakSummary): string {
   lines.push(
     `bots               online ${a.online}/${c.bots}, ended ${a.ended}, reconnects ${a.reconnects}, rtt p95 ${f(a.rttP95, 1)} ms; casts ${a.casts} (${a.castsAccepted} ok / ${a.castsRefused} refused), kills ${a.kills}, deaths ${a.deaths}, chat ${a.chatDelivered}/${a.chatSent}, party invites ${a.partyInvitesSent} joins ${a.partyJoins} leaves ${a.partyLeaves}, claims ${a.bagClaims}, pills ${a.pillsUsed}, meditations ${a.meditations}, walked ${f(a.walked, 0)} tiles`,
   );
+  if (s.profile) lines.push(...formatProfile(s.profile));
   lines.push('');
   lines.push('criteria');
   for (const k of s.criteria)
     lines.push(`  [${k.info ? 'INFO' : k.pass ? 'PASS' : 'FAIL'}] ${k.name}: ${k.value}  (target ${k.target})`);
   return lines.join('\n');
+}
+
+function formatProfile(p: ProfileSummary): string[] {
+  const f = (n: number, d = 2): string => n.toFixed(d);
+  const out: string[] = [
+    '',
+    `tick profile (ms per tick; "slow" = ticks over ${BUDGETS.tickBudgetMs} ms, ${p.slowTicks} in total, split by their biggest phase)`,
+  ];
+  for (const k of p.phases)
+    out.push(
+      `  ${k.phase.padEnd(7)} mean ${f(k.mean).padStart(6)}  p50 ${f(k.p50).padStart(6)}  p99 ${f(k.p99).padStart(7)}  max ${f(k.max).padStart(7)}   biggest phase of ${String(k.slowBiggest).padStart(4)} slow ticks`,
+    );
+  const e = p.histogram.edgesMs;
+  const labels = [...e.map((x, k) => `${k === 0 ? 0 : e[k - 1]}-${x}`), `>${e[e.length - 1]}`];
+  out.push(`  tick histogram (ms: ticks)  ${labels.map((l, k) => `${l}: ${p.histogram.counts[k]}`).join('  ')}`);
+  out.push(
+    `  tick start interval  p50 ${f(p.interval.p50)}  p99 ${f(p.interval.p99)}  max ${f(p.interval.max)}  (setTimeout drift + tick length; the period is ${BUDGETS.tickBudgetMs})`,
+  );
+  out.push(`  event loop delay     p50 ${f(p.eventLoop.p50)}  p99 ${f(p.eventLoop.p99)}  max ${f(p.eventLoop.max)}`);
+  const kinds = Object.entries(p.gc.byKind)
+    .map(([k, g]) => `${k} ${g.count}x max ${f(g.maxMs)}`)
+    .join(', ');
+  out.push(
+    `  GC pauses            ${p.gc.count} totalling ${f(p.gc.totalMs)} ms, max ${f(p.gc.maxMs)} ms${kinds ? ` (${kinds})` : ''}`,
+  );
+  out.push(
+    `  file-store writes    on the loop: ${p.fileWrites.count} commits totalling ${f(p.fileWrites.totalMs)} ms (max ${f(p.fileWrites.maxMs)}) + serialising ${f(p.fileWrites.serializeMs)} ms (max ${f(p.fileWrites.serializeMaxMs)}); off the loop: ${p.fileWrites.asyncCount} background writes, ${f(p.fileWrites.asyncTotalMs)} ms wall`,
+  );
+  out.push(`  process CPU          ${f(p.cpuCores)} cores busy on average (server + bots share the machine)`);
+  return out;
 }
 
 /** One CSV line per sample (the time series of a run, for plotting / the docs). */

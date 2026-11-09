@@ -19,13 +19,25 @@ import {
   rmSync,
   writeSync,
 } from 'node:fs';
+import { open, rm } from 'node:fs/promises';
 import { dirname } from 'node:path';
 
 /**
  * Synchronous file-write cost since start (profiling, D106): every `writeFileAtomic` blocks the event loop for its open + write + fsync +
  * renames, so a store flush on the tick path is a stall of exactly this long. Read it, never reset it from game code.
  */
-export const fileWriteStats = { count: 0, totalMs: 0, maxMs: 0 };
+export const fileWriteStats = {
+  /** writes that blocked the loop: whole synchronous writes (`writeFileAtomic`) and the on-loop commit of an async one */
+  count: 0,
+  totalMs: 0,
+  maxMs: 0,
+  /** time `DocFile` spent serialising documents (always on the loop) */
+  serializeMs: 0,
+  serializeMaxMs: 0,
+  /** asynchronous writes (open + write + fsync run on the libuv pool, off the loop) and their wall time */
+  asyncCount: 0,
+  asyncTotalMs: 0,
+};
 
 export function writeFileAtomic(file: string, data: string): void {
   const t0 = performance.now();
@@ -64,6 +76,57 @@ function writeFileAtomicUntimed(file: string, data: string): void {
   }
 }
 
+/**
+ * Same file protocol as `writeFileAtomic`, but the slow part (open + write + fsync of the temp file) runs on the libuv thread pool so
+ * the tick loop keeps running; only the commit (move the current file to `.bak`, rename the temp file over it: two cheap metadata
+ * operations) happens on the loop, in ONE synchronous segment together with `shouldCommit()`, so a newer synchronous write can never
+ * be overwritten by this older one. The temp file is `<file>.a.tmp` (a synchronous write uses `<file>.tmp`), so the two never share a
+ * file. Resolves true when committed, false when `shouldCommit()` said no (the temp file is removed). Rejects on I/O errors.
+ */
+export async function writeFileAtomicAsync(file: string, data: string, shouldCommit: () => boolean): Promise<boolean> {
+  const t0 = performance.now();
+  const dir = dirname(file);
+  mkdirSync(dir, { recursive: true });
+  const tmp = `${file}.a.tmp`;
+  try {
+    const fh = await open(tmp, 'w', 0o600);
+    try {
+      await fh.writeFile(data);
+      await fh.sync();
+    } finally {
+      await fh.close();
+    }
+    if (!shouldCommit()) {
+      await rm(tmp, { force: true });
+      return false;
+    }
+    const c0 = performance.now();
+    if (existsSync(file)) renameSync(file, `${file}.bak`);
+    renameSync(tmp, file);
+    const blocked = performance.now() - c0;
+    fileWriteStats.count++;
+    fileWriteStats.totalMs += blocked;
+    if (blocked > fileWriteStats.maxMs) fileWriteStats.maxMs = blocked;
+  } catch (e) {
+    await rm(tmp, { force: true }).catch(() => undefined);
+    throw e;
+  } finally {
+    fileWriteStats.asyncCount++;
+    fileWriteStats.asyncTotalMs += performance.now() - t0;
+  }
+  try {
+    const d = await open(dir, 'r'); // best-effort directory sync: not available everywhere
+    try {
+      await d.sync();
+    } finally {
+      await d.close();
+    }
+  } catch {
+    // the data file itself is already synced
+  }
+  return true;
+}
+
 function tryParse(file: string): unknown {
   try {
     return JSON.parse(readFileSync(file, 'utf8')) as unknown;
@@ -88,4 +151,5 @@ export function readJsonFile(file: string): unknown {
 
 export function removeStray(file: string): void {
   rmSync(`${file}.tmp`, { force: true });
+  rmSync(`${file}.a.tmp`, { force: true });
 }

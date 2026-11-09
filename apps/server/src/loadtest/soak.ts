@@ -13,18 +13,20 @@
  * Options: --bots N (200) · --seconds S / --minutes M / --hours H (the measured time) · --warmup-s S (ramp-up not measured, default
  * 15 + bots / connect-per-s) · --sample-s S · --workers N · --connect-per-s N (8) · --mobs N (150) · --area TILES (96) · --map TILES (256)
  * · --store file|memory · --data-dir DIR · --seed N · --out DIR (samples.csv, samples.jsonl, summary.json, report.txt)
- * · --social-pace F (1 = realistic chat / party / bag cadence; --ci uses 0.12 so a minute still exercises them) · --gc / --no-gc (heap sampled after a GC: default on when node runs with --expose-gc, which the script does)
+ * · --social-pace F (1 = realistic chat / party / bag cadence; --ci uses 0.12 so a minute still exercises them) · --sync-writes (file store writes on the loop like before D106, for A/B) · --gc / --no-gc (heap sampled after a GC: default on when node runs with --expose-gc, which the script does)
  * · --ci (20 bots, 60 s, memory-light gate) · --max-tick-p99 MS (gate for --ci, default 100) · --json
  * Exit code: 0 all criteria pass (--ci: gate passes), 1 a criterion / the gate failed, 2 the harness itself failed.
  */
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync, appendFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { monitorEventLoopDelay, PerformanceObserver } from 'node:perf_hooks';
 import { Worker } from 'node:worker_threads';
 import { ZONE_SPAWN_TABLES } from '@vgtd/shared';
 import { compileSkills } from '@vgtd/sim';
 import { startServer } from '../server.js';
-import { openFileStores } from '../persistence/index.js';
+import { openFileStores, fileWriteStats } from '../persistence/index.js';
+import { TICK_PHASES } from '../world/node.js';
 import { InventoryService } from '../world/inventory/index.js';
 import type { GameBotStats } from './game-bot.js';
 import type { GameWorkerConfig } from './game-worker.js';
@@ -81,7 +83,7 @@ const outDir =
   flag('out') || durationS >= 3600 ? str('out', join(tmpdir(), `vgtd-soak-${Date.now().toString(36)}`)) : '';
 const dataDir = str('data-dir', '');
 const tmpData = storeKind === 'file' && !dataDir ? mkdtempSync(join(tmpdir(), 'vgtd-soak-data-')) : '';
-const stores = storeKind === 'file' ? openFileStores(dataDir || tmpData) : null;
+const stores = storeKind === 'file' ? openFileStores(dataDir || tmpData, { background: !flag('sync-writes') }) : null;
 
 /** One zone over the bots' area, table counts scaled so that about `--mobs` monsters live there. */
 function mobConfig(): {
@@ -233,6 +235,33 @@ function totalsOf(list: readonly GameBotStats[]): BotTotals {
 // ------------------------------------------------------------------ run
 const samples: SoakSample[] = [];
 const hist = new TickHistogram();
+// the tick profile (D106): per-phase histograms, tick start gaps, GC pauses, event-loop delay, synchronous file writes
+const phaseHists = Object.fromEntries(TICK_PHASES.map((k) => [k, new TickHistogram(0.1, 200)])) as Record<
+  string,
+  TickHistogram
+>;
+const intervalHist = new TickHistogram(1, 2000);
+const slowBy: Record<string, number> = Object.fromEntries(TICK_PHASES.map((k) => [k, 0]));
+let slowTicks = 0;
+const gcStats: Record<string, { count: number; totalMs: number; maxMs: number }> = {};
+let inForcedGc = false; // the sampler's own gc() is not a pause of the game
+let observing = false;
+const gcObserver = new PerformanceObserver((list) => {
+  if (!observing || inForcedGc) return;
+  for (const e of list.getEntries()) {
+    const kind =
+      ({ 1: 'scavenge', 2: 'minor', 4: 'major', 8: 'incremental', 16: 'weakcb' } as Record<number, string>)[
+        (e as unknown as { detail?: { kind?: number } }).detail?.kind ?? 0
+      ] ?? 'other';
+    const g = (gcStats[kind] ??= { count: 0, totalMs: 0, maxMs: 0 });
+    g.count++;
+    g.totalMs += e.duration;
+    g.maxMs = Math.max(g.maxMs, e.duration);
+  }
+});
+gcObserver.observe({ entryTypes: ['gc'] });
+const loopDelay = monitorEventLoopDelay({ resolution: 10 });
+let fileWrites0 = { ...fileWriteStats };
 let exitCode = 0;
 let stopRequested = false;
 process.on('SIGINT', () => {
@@ -244,6 +273,10 @@ try {
   await sleep(warmupS * 1000);
   if (outDir) mkdirSync(outDir, { recursive: true });
   resetWindow(srv);
+  observing = true;
+  loopDelay.enable();
+  fileWrites0 = { ...fileWriteStats };
+  const cpuRun0 = process.cpuUsage();
   let base = copyStats(srv);
   let m0 = { ...srv.world.metrics };
   let cpu0 = process.cpuUsage();
@@ -255,9 +288,21 @@ try {
     const win = (now - tLast) / 1000;
     const s = windowSample(srv, base, win, process.cpuUsage(cpu0));
     hist.add(s.tickMs);
+    intervalHist.add(s.tickIntervalMs);
+    if (s.profile) {
+      for (const k of TICK_PHASES) {
+        phaseHists[k]!.add(s.profile.samples[k] ?? []);
+        slowBy[k]! += s.profile.slowBy[k] ?? 0;
+      }
+      slowTicks += s.profile.slowTicks;
+    }
     const list = await botStats();
     const tot = totalsOf(list);
-    if (useGc) (globalThis as { gc?: () => void }).gc!();
+    if (useGc) {
+      inForcedGc = true;
+      (globalThis as { gc?: () => void }).gc!();
+      inForcedGc = false;
+    }
     const mem = process.memoryUsage();
     const m1 = srv.world.metrics;
     const honest = s.clients;
@@ -306,7 +351,33 @@ try {
     cpu0 = process.cpuUsage();
     tLast = performance.now();
   }
-  const summary = summarizeSoak(config, samples, hist, { ...srv.world.metrics.violations });
+  observing = false;
+  loopDelay.disable();
+  const cpuRun = process.cpuUsage(cpuRun0);
+  const summary = summarizeSoak(
+    config,
+    samples,
+    hist,
+    { ...srv.world.metrics.violations },
+    {
+      phases: phaseHists,
+      slowTicks,
+      slowBy,
+      interval: intervalHist,
+      gc: gcStats,
+      eventLoop: { p50: loopDelay.percentile(50) / 1e6, p99: loopDelay.percentile(99) / 1e6, max: loopDelay.max / 1e6 },
+      fileWrites: {
+        count: fileWriteStats.count - fileWrites0.count,
+        totalMs: fileWriteStats.totalMs - fileWrites0.totalMs,
+        maxMs: fileWriteStats.maxMs, // whole-process max (it is not windowed); the ramp-up does its own writes too
+        serializeMs: fileWriteStats.serializeMs - fileWrites0.serializeMs,
+        serializeMaxMs: fileWriteStats.serializeMaxMs,
+        asyncCount: fileWriteStats.asyncCount - fileWrites0.asyncCount,
+        asyncTotalMs: fileWriteStats.asyncTotalMs - fileWrites0.asyncTotalMs,
+      },
+      cpuCores: (cpuRun.user + cpuRun.system) / 1000 / Math.max(1, durationS * 1000),
+    },
+  );
   const text = formatSoak(summary);
   if (outDir) {
     writeFileSync(join(outDir, 'samples.csv'), samplesCsv(samples));
