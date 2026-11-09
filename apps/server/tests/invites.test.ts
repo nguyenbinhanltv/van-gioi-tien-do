@@ -267,4 +267,61 @@ describe('NetClient with an invitation code', () => {
       await srv.stop();
     }
   });
+
+  it('an existing account logs in 15+ times from one IP (register without a code on every login) and is never locked out', async () => {
+    const invites = new InviteService();
+    const srv = await startServer({
+      port: 0,
+      autoTick: false,
+      auth: { scrypt: FAST, invites, registerPerIpPerDay: 0, ipFailLimit: 1_000_000 },
+      world: { mapTiles: 64 },
+    });
+    const deps: NetDeps = {
+      fetch: (u, init) => fetch(u, init),
+      WebSocket: WebSocket as unknown as NetDeps['WebSocket'],
+      now: () => performance.now(),
+    };
+    const make = (name: string, inviteCode?: string): NetClient =>
+      new NetClient({
+        baseUrl: `http://127.0.0.1:${srv.port}`,
+        username: name,
+        password: PW,
+        ...(inviteCode ? { inviteCode } : {}),
+        deps,
+        makeGrid: (n) => TileGrid.fromRows(Array.from({ length: n }, () => '.'.repeat(n))),
+      });
+    try {
+      const first = make('loop_user_1', invites.mint(1)[0]!.code);
+      await first.connect();
+      first.close();
+      for (let i = 0; i < INVITE_CONFIG.FAIL_LIMIT + 6; i++) {
+        const c = make('loop_user_1');
+        await c.connect();
+        expect(c.status).toBe('online');
+        c.close();
+      }
+      // wrong codes still count and limit, but a code-less request is never limited: it keeps the same 403
+      for (let i = 0; i < INVITE_CONFIG.FAIL_LIMIT; i++)
+        await fetch(`http://127.0.0.1:${srv.port}/auth/register`, {
+          method: 'POST',
+          body: JSON.stringify({ username: 'x_user_' + i, password: PW, inviteCode: 'AAAA-AAAA-AAAA-AAAA' }),
+        });
+      const limited = await fetch(`http://127.0.0.1:${srv.port}/auth/register`, {
+        method: 'POST',
+        body: JSON.stringify({ username: 'x_user_z', password: PW, inviteCode: 'AAAA-AAAA-AAAA-AAAA' }),
+      });
+      expect(limited.status).toBe(429);
+      const codeless = await fetch(`http://127.0.0.1:${srv.port}/auth/register`, {
+        method: 'POST',
+        body: JSON.stringify({ username: 'loop_user_1', password: PW }),
+      });
+      expect(codeless.status).toBe(403);
+      const again = make('loop_user_1'); // the same IP is now invite-limited, and the existing account still gets in
+      await again.connect();
+      expect(again.status).toBe('online');
+      again.close();
+    } finally {
+      await srv.stop();
+    }
+  });
 });

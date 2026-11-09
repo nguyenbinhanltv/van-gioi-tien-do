@@ -373,13 +373,14 @@ export class NetClient {
   private async login(onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     const cred = { username: this.o.username, password: this.o.password };
     const reg = await this.post('/auth/register', this.inviteCode ? { ...cred, inviteCode: this.inviteCode } : cred);
+    const inviteLimited = reg.status === 429 && reg.json.error === 'invite_limited';
     // 409: already registered. 403 invite_invalid: with BETA_INVITE_ONLY an existing account re-registering has no valid code; the login
     // below decides (a wrong code for a new account fails there with a 401)
-    if (reg.status !== 201 && reg.status !== 409 && reg.status !== 403)
+    if (reg.status !== 201 && reg.status !== 409 && reg.status !== 403 && !inviteLimited)
       throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     const login = await this.post('/auth/login', cred);
-    if (login.status !== 200 && reg.status === 403)
-      throw new Error(`register: 403 ${String(reg.json.message ?? reg.json.error ?? '')}`);
+    if (login.status !== 200 && (reg.status === 403 || inviteLimited))
+      throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     if (login.status !== 200)
       throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
     this.inviteCode = undefined; // used (or not needed): never sent again by a reconnect
@@ -642,7 +643,8 @@ export class NetClient {
       }
       case 'error':
         this.lastError = `server: ${msg.text} (${ErrorCode[msg.code] ?? msg.code})`;
-        if (FATAL_CODES.has(msg.code)) this.fatal = true; // kicked / wrong protocol: do not reconnect
+        if (FATAL_CODES.has(msg.code))
+          this.fatal = true; // kicked / wrong protocol: do not reconnect
         else if (msg.code === ErrorCode.Unauthorized && this.status === 'reconnecting') this.resumeRejected = true;
         break;
       default:
@@ -684,7 +686,8 @@ export class NetClient {
     // If this loop itself was starved (busy tab / CPU-starved host) frames sat unread in the socket queue: silence we cannot
     // attribute to the link. Forgive the gap instead of tearing down a healthy connection.
     const rcStale = this.rc?.staleMs ?? 0;
-    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0) this.lastRxMs = now;
+    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0)
+      this.lastRxMs = now;
     this.lastUpdateMs = now;
     // half-open connection: the server sends a snapshot every tick, so silence means the link is dead
     const rc = this.rc;
@@ -818,7 +821,12 @@ export class NetClient {
     const el = Math.max(0, this.o.deps.now() - s.at);
     const left = (ms: number): number => Math.max(0, Math.round(ms - el));
     const slowMs = left(s.status.slowMs);
-    return { rootMs: left(s.status.rootMs), slowMs, slowPct: slowMs > 0 ? s.status.slowPct : 0, poisonMs: left(s.status.poisonMs) };
+    return {
+      rootMs: left(s.status.rootMs),
+      slowMs,
+      slowPct: slowMs > 0 ? s.status.slowPct : 0,
+      poisonMs: left(s.status.poisonMs),
+    };
   }
 
   /** Another player's `StatusBit` flags (0 = none known), from `status_update`. */

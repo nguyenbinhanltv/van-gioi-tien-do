@@ -167,6 +167,10 @@ export class InviteService {
    */
   claim(raw: unknown, ip: string): InviteClaim {
     const W = INVITE_CONFIG.FAIL_WINDOW_MS;
+    // No code at all: nothing to guess, so it is neither counted nor limited (existing accounts re-register on every login / reconnect
+    // and must not lock their own IP out); the answer is the same 403 as for a wrong code
+    if (raw === undefined || raw === null || raw === '')
+      throw new AuthError(403, 'invite_invalid', 'invalid or expired invitation code');
     const fails = this.recentFails(ip);
     if (fails.length >= INVITE_CONFIG.FAIL_LIMIT)
       throw new AuthError(
