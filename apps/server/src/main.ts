@@ -57,23 +57,39 @@ const srv = await startServer({
 });
 if (stores) {
   console.log(`[vgtd/server] STORE=file: data in ${stores.dir}`);
-  // online players' bags are saved when they leave; also save them every few seconds so a hard kill (npm run play stops its children
-  // forcefully on Windows) loses seconds, not a whole session. Unchanged bags cost no disk write.
+  // online players' bags are saved when they leave; also save them every few seconds so a hard kill loses seconds, not a whole session.
+  // Unchanged bags cost no disk write.
   setInterval(() => srv.world.inventory?.flushAll(), 5000).unref();
-  // flush on a clean shutdown: let the gateway release its connections (they save their bags / progress), then write every document
-  let closing = false;
-  const shutdown = async (signal: string): Promise<void> => {
-    if (closing) return;
-    closing = true;
-    console.log(`[vgtd/server] ${signal}: saving and stopping`);
-    await srv.stop().catch(() => undefined);
+}
+// Clean shutdown: let the gateway release its connections (they save their bags / progress), then write every document.
+let closing = false;
+const shutdown = async (reason: string): Promise<void> => {
+  if (closing) return;
+  closing = true;
+  console.log(`[vgtd/server] ${reason}: ${stores ? 'saving and ' : ''}stopping`);
+  await srv.stop().catch(() => undefined);
+  if (stores) {
     await new Promise((r) => setTimeout(r, 100));
     srv.world.inventory?.flushAll();
     stores.flush();
-    process.exit(0);
-  };
+  }
+  process.exit(0);
+};
+if (stores) {
   process.on('SIGINT', () => void shutdown('SIGINT'));
   process.on('SIGTERM', () => void shutdown('SIGTERM'));
+}
+// QUIT_ON_STDIN=1 (set by `npm run play`): a line `quit` on stdin is a clean stop. Windows has no signals to send, and this adds no listening
+// port. End of input is NOT a quit (a closed or null stdin must never stop a server).
+if (process.env.QUIT_ON_STDIN === '1') {
+  let buf = '';
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', (d: string) => {
+    buf += d;
+    if (/^quit\s*$/m.test(buf)) void shutdown('stdin quit');
+    if (buf.length > 1024) buf = buf.slice(-64);
+  });
+  process.stdin.on('error', () => undefined);
 }
 if (srv.world.dropSink)
   srv.world.dropSink.onGranted = (owner, e, r) =>
