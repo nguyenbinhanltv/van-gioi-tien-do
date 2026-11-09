@@ -126,7 +126,11 @@ prepareChibiBundles({ root, repo });
   // never leave stale art behind: the sidecar, every atlas page (a page count can change) and the key-art textures
   rmSync(join(worldDir, 'gemini.json'), { force: true });
   for (const f of readdirSync(worldDir)) {
-    if (/^(atl_(prop|gicon|skill|ui|status|realm|ptcl)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png)$/.test(f))
+    if (
+      /^(atl_(prop|gicon|skill|ui|status|realm|ptcl|hud|mobphase)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png)$/.test(
+        f,
+      )
+    )
       rmSync(join(worldDir, f), { force: true });
   }
   if (existsSync(join(gdir, 'gemini.json'))) {

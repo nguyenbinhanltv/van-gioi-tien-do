@@ -1,11 +1,10 @@
-import { Node, Sprite, UITransform, UIOpacity, game, gfx } from 'cc';
+import { Node, Sprite, UITransform, UIOpacity, game } from 'cc';
 import { newNode } from './IsoAdapter';
 import { getParticleFrame, preloadParticles } from './PropArt';
-import { particleSpec } from './ArtRegistry';
 
 /**
  * Demo effect for the PART 2 particle textures: a short flourish when the server reports a higher stage (breakthrough or
- * sub-stage up): a star flare, an expanding ring and a handful of sparks flying out, all additive. Pure client decoration: it only
+ * sub-stage up): a star flare, an expanding ring and a handful of sparks flying out, drawn with normal alpha blending (Cocos 3.8 has no per-sprite blend factors; an additive custom sprite material was tried and breaks rendering, see OPEN-ITEMS "Asset Gemini PART 2" item 5). Pure client decoration: it only
  * reads what the progression view already shows and never sends anything. Does nothing when the particle art was not generated.
  */
 
@@ -48,10 +47,6 @@ export class LevelUpFx {
       const sp = node.addComponent(Sprite);
       sp.sizeMode = Sprite.SizeMode.CUSTOM;
       sp.spriteFrame = frame;
-      if (particleSpec(spriteName)?.blend === 'additive') {
-        sp.srcBlendFactor = gfx.BlendFactor.SRC_ALPHA;
-        sp.dstBlendFactor = gfx.BlendFactor.ONE;
-      }
       const opacity = node.addComponent(UIOpacity);
       opacity.opacity = 0;
       this.puffs.push({ node, opacity, ...p });

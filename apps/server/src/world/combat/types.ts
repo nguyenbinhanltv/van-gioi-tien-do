@@ -14,7 +14,7 @@ import type { SimInput, SimWorld } from '@vgtd/sim';
 export { HIT_FLAG_CRIT, HIT_FLAG_KILL } from '@vgtd/shared';
 
 /** A cast the node hands to `CombatSystem.preStep`: the sim's `CastInput` plus the aim point of the wire message (tile coordinates). */
-export type AimedInput = SimInput & { aim?: { i: number; j: number } | null };
+export type AimedInput = SimInput & { aim?: { i: number; j: number } | null; recvAtMs?: number };
 
 /** What the combat step needs to know about a living mob: defined by the mob module (`MobManager.combatStats`), re-exported here. */
 export type { MobCombatStats } from '../mobs/index.js';
@@ -52,6 +52,13 @@ export interface CombatProfile {
   critChance: number;
   /** Passive armour penetration, added to a skill's own `pen`. */
   pen: number;
+  /** Passive stats of the class kit (D116): share of damage dealt healed, DEF multiplier bonus, extra damage below 40 % HP, heal-pill power. */
+  lifesteal: number;
+  defPct: number;
+  lowHpDmgPct: number;
+  potionPower: number;
+  /** A passive `summon` (the pet of `phu_linh`): ATK coefficient and strike interval, or null. */
+  pet: { coeff: number; intervalMs: number } | null;
 }
 
 /** A skill result for one caster, ready to be turned into a `skill_result` packet. */
@@ -104,4 +111,6 @@ export interface CombatOptions {
   partyOf?: (killerId: number) => readonly number[];
   /** A mob that cannot be hurt right now (a boss in its phase transform, D91): it is not a valid target and takes no player damage. */
   isInvulnerable?: (id: number) => boolean;
+  /** May this caster's skills hit / target this mob at all? (D97: a Tâm Ma shadow belongs to its owner alone.) Default: yes. */
+  canTarget?: (casterId: number, mobId: number) => boolean;
 }
