@@ -564,7 +564,16 @@ export class CombatSystem {
       if (!effectActive(e, grouped)) continue;
       const me = w.entities.find((x) => x.id === casterId);
       if (!me) break;
-      const centre = aimPt && Number.isFinite(aimPt.i) && Number.isFinite(aimPt.j) ? aimPt : { i: me.i, j: me.j };
+      // the client's aim point is only trusted when it is finite, within the skill's range and (if needed) in sight, like `resolveCast`
+      const range = c.skill.targeting.range_tiles ?? 0;
+      const aimOk =
+        !!aimPt &&
+        Number.isFinite(aimPt.i) &&
+        Number.isFinite(aimPt.j) &&
+        (range <= 0 || hypot(aimPt.i - me.i, aimPt.j - me.j) <= range) &&
+        (c.skill.targeting.requires_los === false ||
+          lineOfSight(this.ctx.grid, me.i, me.j, aimPt.i, aimPt.j, me.layer, me.flying));
+      const centre = aimOk ? aimPt! : { i: me.i, j: me.j };
       switch (e.type) {
         case 'status':
           for (const v of out.victims) this.applyMobStatus(v.id, e, now);
@@ -667,6 +676,11 @@ export class CombatSystem {
         case 'revive': {
           const target = this.players.get(c.targetId);
           if (!target || target.alive || c.targetId === casterId) break;
+          // only a party member, within the skill's reach, can be revived (the target id is client-supplied)
+          if (!this.groupOf(w, casterId, true).includes(c.targetId)) break;
+          const corpse = w.entities.find((x) => x.id === c.targetId);
+          const reach = c.skill.targeting.range_tiles ?? 0;
+          if (!corpse || (reach > 0 && hypot(corpse.i - me.i, corpse.j - me.j) > reach + SKILL_HURTBOX)) break;
           target.alive = true;
           target.respawnAtMs = 0;
           const hp = Math.max(1, Math.round(target.hpMax * (e.magnitude ?? 0.4)));

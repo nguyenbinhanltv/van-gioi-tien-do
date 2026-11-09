@@ -584,6 +584,26 @@ describe('taunt, group context, revive', () => {
       Math.round(r.combat.maxHpOf(2)! * effectOf('thien_y_vo_phung', 'revive').magnitude!) - 5,
     );
   });
+
+  it('revive refuses a dead player outside the caster party (the target id is client-supplied)', () => {
+    // player 2 is NOT grouped with the caster here: no party
+    const solo = rig({ path: 'dan_phu', realm: 4, allies: [{ id: 2, path: 'kiem', i: 22.5, j: 20.5 }] });
+    solo.world = solo.combat.damagePlayer(solo.world, 2, 10_000_000, MOB).world;
+    solo.cast('thien_y_vo_phung', { target: 2, aim: { i: 22.5, j: 20.5 } });
+    solo.run(2600);
+    expect(solo.combat.isAlive(2)).toBe(false);
+  });
+
+  it('a ground effect anchors on the caster when the aim point is beyond the skill range', () => {
+    const r = rig({ path: 'dan_phu', party: true, allies: [{ id: 2, path: 'kiem', i: 22.5, j: 20.5 }] });
+    const key = 'van_moc_hoi_xuan';
+    const sk = dataOf(key);
+    r.cast(key, { aim: { i: 20.5 + (sk.targeting.range_tiles ?? 5) + 20, j: 20.5 } });
+    r.run(sk.timing.cast_ms + 200);
+    const z = r.combat.effects.zones[0]!;
+    expect(z).toBeDefined();
+    expect(dist({ i: z.i, j: z.j }, r.ent(PLAYER))).toBeLessThan(1e-6);
+  });
 });
 
 describe('shields: overheal and explosion', () => {
