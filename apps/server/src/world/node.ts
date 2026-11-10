@@ -1480,7 +1480,7 @@ export class WorldNode {
       const c = this.clients.get(o.entityId);
       // a successful breakthrough is a quest event (D107); the roll itself stays the progression module's
       if (o.msg.type === 'breakthrough_result' && o.msg.outcome === BreakthroughOutcome.Success)
-        this.quests?.onBreakthrough(o.entityId);
+        this.quests?.onBreakthrough(o.entityId, o.msg.fromStage, o.msg.toStage);
       if (!c || c.dead) continue;
       if (c.suspendedAtMs !== null) {
         // held player: the final answer of an event is kept for the resume (the rest is rebuilt from the live event)

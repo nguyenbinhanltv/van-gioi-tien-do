@@ -29,6 +29,7 @@ import {
   questDefById,
   questEpochOf,
   questNpc,
+  stageToRealm,
   questResetIn,
   stoneWildHoursToStones,
   itemDefByKey,
@@ -418,10 +419,18 @@ export class QuestService {
     const a = this.byEntity.get(entityId);
     if (a) this.bump(a, (o) => (o.kind === 'kill' && killMatches(o.target, mobKey, tier) ? 1 : 0));
   }
-  /** A breakthrough roll succeeded for this player. */
-  onBreakthrough(entityId: number): void {
+  /**
+   * A breakthrough roll succeeded for this player, moving it from flat stage `fromStage` to `toStage`. An objective without `toRealm` counts any
+   * success; one with `toRealm` counts only the breakthrough that crosses INTO that realm (never a minor stage inside the old one).
+   */
+  onBreakthrough(entityId: number, fromStage: number, toStage: number): void {
     const a = this.byEntity.get(entityId);
-    if (a) this.bump(a, (o) => (o.kind === 'breakthrough' ? 1 : 0));
+    if (!a) return;
+    const from = stageToRealm(fromStage).realm;
+    const to = stageToRealm(toStage).realm;
+    this.bump(a, (o) =>
+      o.kind === 'breakthrough' && (o.toRealm === undefined || (from < o.toRealm && to >= o.toRealm)) ? 1 : 0,
+    );
   }
   private bump(a: Account, inc: (o: QuestDef['objectives'][number]) => number): void {
     let changed = false;
