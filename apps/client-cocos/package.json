@@ -18,6 +18,7 @@
     "capture": "node scripts/capture.mjs",
     "capture:play": "node scripts/capture-play.mjs",
     "perf:p1": "node scripts/perf-p1.mjs",
+    "mem:p1": "node scripts/mem-p1.mjs",
     "test": "vitest run test",
     "combat:smoke": "node scripts/combat-smoke.mjs",
     "combat:online": "node scripts/combat-online-smoke.mjs",

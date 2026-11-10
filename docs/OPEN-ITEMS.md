@@ -694,6 +694,7 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 
 ## Bộ đệm đỉnh Batcher2D 2048 KB (2026-11-10): còn mở
 
+- **Đã đo bằng giả lập mobile (docs/39)**: `measureUserAgentSpecificMemory` +1,3..1,5 MB cho 2048 KB (+0,3..0,4 MB cho 1024 KB), các số tiến trình trong nhiễu; khuyến nghị giữ 2048 KB, dự phòng 1024 KB.
 - **Chưa đo bộ nhớ trên máy mobile thật**: số chênh ~1-3 MB (CPU + GPU) là tính toán (docs/33, mục "Bộ đệm đỉnh của Batcher2D"), ArrayBuffer ngoài heap JS nên cổng perf không thấy. Cần chạy trên Android tầm thấp và iOS Safari (tier low) và xem bộ nhớ GPU / tab bị đóng.
 - **Trần 2303 KB** vì chỉ số đỉnh là `Uint16`; nếu sau này cần buffer lớn hơn phải có chỉ số 32-bit cho bộ đệm tĩnh của batcher 2D (chưa kiểm tra engine 3.8.8 có hỗ trợ không).
 
