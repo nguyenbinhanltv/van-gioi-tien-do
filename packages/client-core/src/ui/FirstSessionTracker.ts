@@ -7,6 +7,7 @@
  */
 import { BreakthroughOutcome } from '@vgtd/protocol';
 import { FIRST_SESSION, fieldBandStart } from '@vgtd/shared';
+import { t, type StringKey } from '../i18n/strings.js';
 
 export type FirstSessionStepId = 'field' | 'kills' | 'bag' | 'meditate' | 'breakthrough';
 export const FIRST_SESSION_STEPS: readonly FirstSessionStepId[] = ['field', 'kills', 'bag', 'meditate', 'breakthrough'];
@@ -55,13 +56,19 @@ export interface FirstSessionOptions {
   onChange?: (s: FirstSessionSnapshot) => void;
 }
 
-export const FIRST_SESSION_TEXT: Readonly<Record<FirstSessionStepId, string>> = {
-  field: 'Rời điểm xuất phát, tiến vào khu săn yêu thú',
-  kills: 'Hạ yêu thú bằng kỹ năng của mình',
-  bag: 'Mở túi đồ [B] và xem chiến lợi phẩm',
-  meditate: 'Đả tọa [M] để tăng tu vi',
-  breakthrough: 'Đột phá tiểu cảnh [N] khi tu vi đầy',
+/** String key of each step's text (`firstSessionStepText`). */
+export const FIRST_SESSION_KEY: Readonly<Record<FirstSessionStepId, StringKey>> = {
+  field: 'firstsession.step.field',
+  kills: 'firstsession.step.kills',
+  bag: 'firstsession.step.bag',
+  meditate: 'firstsession.step.meditate',
+  breakthrough: 'firstsession.step.breakthrough',
 };
+
+/** The player-facing text of a step in the installed language. */
+export function firstSessionStepText(id: FirstSessionStepId): string {
+  return t(FIRST_SESSION_KEY[id]);
+}
 
 /** Parse a stored snapshot defensively (anything unexpected gives null = start fresh). */
 export function parseFirstSessionSnapshot(raw: string | null | undefined): FirstSessionSnapshot | null {
@@ -176,9 +183,13 @@ export class FirstSessionTracker {
     const cur = this.current;
     const steps = FIRST_SESSION_STEPS.map((id, k): FirstSessionStepView => {
       const state = k < cur ? 'done' : k === cur ? 'current' : 'todo';
-      let text = FIRST_SESSION_TEXT[id];
+      let text = firstSessionStepText(id);
       if (id === 'kills')
-        text = `${text} (${Math.min(this.killCount, FIRST_SESSION.killTarget)}/${FIRST_SESSION.killTarget})`;
+        text = t('firstsession.step.kills_progress', {
+          text,
+          n: Math.min(this.killCount, FIRST_SESSION.killTarget),
+          target: FIRST_SESSION.killTarget,
+        });
       return { id, text, state, hint: state === 'current' ? this.hint(id) : '' };
     });
     return { done: cur >= FIRST_SESSION_STEPS.length, completed: cur, steps };
@@ -190,18 +201,20 @@ export class FirstSessionTracker {
     switch (id) {
       case 'field': {
         const d = Math.max(0, Math.ceil(this.fieldAt - i.fromCentre));
-        return d > 0 ? `còn khoảng ${d} ô` : '';
+        return d > 0 ? t('firstsession.hint.field', { tiles: d }) : '';
       }
       case 'kills':
-        return 'Tab chọn mục tiêu, phím 1-8 dùng kỹ năng';
+        return t('firstsession.hint.kills');
       case 'bag':
-        if (!i.bagOpen) return 'nhấn B';
-        if (i.pending > 0) return 'bấm "Claim loot" để nhận hàng chờ';
-        return i.hasLoot ? '' : 'chưa có gì: hạ thêm yêu thú';
+        if (!i.bagOpen) return t('firstsession.hint.bag_open');
+        if (i.pending > 0) return t('firstsession.hint.bag_claim', { button: t('bag.claim.button') });
+        return i.hasLoot ? '' : t('firstsession.hint.bag_empty');
       case 'meditate':
-        return 'đứng yên rồi nhấn M';
+        return t('firstsession.hint.meditate');
       case 'breakthrough':
-        return i.tuViFraction >= 1 ? 'tu vi đầy: nhấn N' : `tu vi ${Math.floor(i.tuViFraction * 100)}%: tiếp tục đả tọa`;
+        return i.tuViFraction >= 1
+          ? t('firstsession.hint.breakthrough_ready')
+          : t('firstsession.hint.breakthrough_filling', { percent: Math.floor(i.tuViFraction * 100) });
     }
   }
 }

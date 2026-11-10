@@ -17,6 +17,8 @@ import {
   type FriendStateMsg,
   type QuestResultMsg,
   type QuestStateMsg,
+  type CraftResultMsg,
+  type CraftStateMsg,
   type MarketBuyMsg,
   type MarketCancelMsg,
   type MarketListMsg,
@@ -33,7 +35,9 @@ import {
   type PartyResultMsg,
   type PartyStateMsg,
   type PartyVitalsMsg,
+  type TutorialStateMsg,
   type CharStateMsg,
+  type DaoTamMsg,
   type EnterEntity,
   type MeditateResultMsg,
   type InvResultMsg,
@@ -127,6 +131,8 @@ export interface ReconnectOptions {
  */
 export interface ProgressionEvents {
   onCharState?(msg: CharStateMsg): void;
+  /** the Đạo Tâm that counts (D103); sent on join and whenever it changes */
+  onDaoTam?(msg: DaoTamMsg): void;
   onMeditateResult?(msg: MeditateResultMsg): void;
   onBreakthroughResult?(msg: BreakthroughResultMsg): void;
 }
@@ -208,6 +214,14 @@ export interface QuestEvents {
   onQuestResult?(msg: QuestResultMsg): void;
 }
 
+/** Crafting callbacks (D108), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface CraftEvents {
+  /** Furnace position, the running job and the mastery of every recipe, after every change. */
+  onCraftState?(msg: CraftStateMsg): void;
+  /** The answer to a `sendCraft` or one finished / cancelled craft. */
+  onCraftResult?(msg: CraftResultMsg): void;
+}
+
 /** Party callbacks (D93), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
 export interface PartyEvents {
   /** The roster changed (0 members = you are in no party). */
@@ -218,6 +232,12 @@ export interface PartyEvents {
   onPartyInvite?(msg: PartyInviteMsg): void;
   /** The answer to a `sendParty` (0 = done, otherwise why not). */
   onPartyResult?(msg: PartyResultMsg): void;
+}
+
+/** Tutorial callbacks (D105), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface TutorialEvents {
+  /** The server's first-session state (after joining, and on every change). */
+  onTutorialState?(msg: TutorialStateMsg): void;
 }
 
 export interface NetOptions {
@@ -341,6 +361,8 @@ export class NetClient {
   chatEvents: ChatEvents = {};
   /** Callbacks for the party (own object, see `PartyEvents`). */
   partyEvents: PartyEvents = {};
+  /** Callbacks for the tutorial (own object, see `TutorialEvents`). */
+  tutorialEvents: TutorialEvents = {};
   /** Callbacks for the direct trade (own object, see `TradeEvents`). */
   tradeEvents: TradeEvents = {};
   /** Callbacks for the NPC sect (own object, see `SectEvents`). */
@@ -349,6 +371,8 @@ export class NetClient {
   friendEvents: FriendEvents = {};
   /** Callbacks for the quest log (own object, see `QuestEvents`). */
   questEvents: QuestEvents = {};
+  /** Callbacks for alchemy (own object, see `CraftEvents`). */
+  craftEvents: CraftEvents = {};
   /** Callbacks for Vạn Bảo Lâu (own object, see `MarketEvents`). */
   marketEvents: MarketEvents = {};
 
@@ -614,6 +638,9 @@ export class NetClient {
       case 'char_state':
         this.emit(() => this.progressionEvents.onCharState?.(msg));
         break;
+      case 'dao_tam':
+        this.emit(() => this.progressionEvents.onDaoTam?.(msg));
+        break;
       case 'meditate_result':
         this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
         break;
@@ -655,6 +682,9 @@ export class NetClient {
       case 'party_result':
         this.emit(() => this.partyEvents.onPartyResult?.(msg));
         break;
+      case 'tutorial_state':
+        this.emit(() => this.tutorialEvents.onTutorialState?.(msg));
+        break;
       case 'trade_state':
         this.emit(() => this.tradeEvents.onTradeState?.(msg));
         break;
@@ -682,6 +712,12 @@ export class NetClient {
       case 'quest_result':
         this.emit(() => this.questEvents.onQuestResult?.(msg));
         break;
+      case 'craft_state':
+        this.emit(() => this.craftEvents.onCraftState?.(msg));
+        break;
+      case 'craft_result':
+        this.emit(() => this.craftEvents.onCraftResult?.(msg));
+        break;
       case 'market_results':
         this.emit(() => this.marketEvents.onMarketResults?.(msg));
         break;
@@ -701,7 +737,8 @@ export class NetClient {
       }
       case 'error':
         this.lastError = `server: ${msg.text} (${ErrorCode[msg.code] ?? msg.code})`;
-        if (FATAL_CODES.has(msg.code)) this.fatal = true; // kicked / wrong protocol: do not reconnect
+        if (FATAL_CODES.has(msg.code))
+          this.fatal = true; // kicked / wrong protocol: do not reconnect
         else if (msg.code === ErrorCode.Unauthorized && this.status === 'reconnecting') this.resumeRejected = true;
         break;
       default:
@@ -743,7 +780,8 @@ export class NetClient {
     // If this loop itself was starved (busy tab / CPU-starved host) frames sat unread in the socket queue: silence we cannot
     // attribute to the link. Forgive the gap instead of tearing down a healthy connection.
     const rcStale = this.rc?.staleMs ?? 0;
-    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0) this.lastRxMs = now;
+    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0)
+      this.lastRxMs = now;
     this.lastUpdateMs = now;
     // half-open connection: the server sends a snapshot every tick, so silence means the link is dead
     const rc = this.rc;
@@ -823,12 +861,28 @@ export class NetClient {
     return true;
   }
 
+  /** Dismiss the tutorial hints (D105). The server answers with a fresh `tutorial_state`. False when the socket is not open. */
+  sendTutorialSkip(): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: 'tutorial_skip' }));
+    return true;
+  }
+
   /**
    * Send one trade command (D102): `op` is a `TradeOp`. `name` = the other player (invite) or the inviter (accept / decline, '' = the newest);
    * `slot` / `qty` = a bag slot and a quantity for set-item (qty 0 takes the line out); `currency` / `amount` for set-stones. `clientMsgId` (uint16)
    * comes back in the `trade_result`. False when the socket is not open or the command cannot be encoded.
    */
-  sendTrade(m: { op: number; clientMsgId: number; name?: string; slot?: number; qty?: number; currency?: number; amount?: number }): boolean {
+  sendTrade(m: {
+    op: number;
+    clientMsgId: number;
+    name?: string;
+    slot?: number;
+    qty?: number;
+    currency?: number;
+    amount?: number;
+  }): boolean {
     const ws = this.ws;
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
@@ -921,6 +975,14 @@ export class NetClient {
     return true;
   }
 
+  /** Start `count` crafts of a recipe, or cancel the running job (D108). Returns false when the socket is not open. */
+  sendCraft(m: { op: number; requestId: string; recipeId: number; count: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: 'craft_cmd', ...m }));
+    return true;
+  }
+
   /** Ask the server for a breakthrough attempt (D76); the server picks minor / major and rolls. False when the socket is not open. */
   sendBreakthrough(requestId: string): boolean {
     const ws = this.ws;
@@ -937,7 +999,12 @@ export class NetClient {
     const el = Math.max(0, this.o.deps.now() - s.at);
     const left = (ms: number): number => Math.max(0, Math.round(ms - el));
     const slowMs = left(s.status.slowMs);
-    return { rootMs: left(s.status.rootMs), slowMs, slowPct: slowMs > 0 ? s.status.slowPct : 0, poisonMs: left(s.status.poisonMs) };
+    return {
+      rootMs: left(s.status.rootMs),
+      slowMs,
+      slowPct: slowMs > 0 ? s.status.slowPct : 0,
+      poisonMs: left(s.status.poisonMs),
+    };
   }
 
   /** Another player's `StatusBit` flags (0 = none known), from `status_update`. */

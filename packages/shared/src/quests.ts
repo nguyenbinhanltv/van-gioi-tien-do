@@ -2,7 +2,7 @@
  * Quests (D107, docs/12-nhiem-vu-cot-truyen.md, owner-approved 2026-11-09): the main chain of chapter 1 "Phàm Căn" (full), chapters 2-3
  * as data, a daily set, a weekly quest and sect quests. This module is the executable form of docs/12 §2, §4, §5: types, the content
  * table, the reset clock (05:00 UTC+7) and the reward unit conversions. The server owns every state change (`apps/server/src/quests`);
- * the client only shows what the server sends and prints the names from `QUEST_TEXT`.
+ * the client only shows what the server sends and prints the names from the vi-VN string table (`quest.*` keys, D104).
  *
  * All numbers are the docs/12 PROPOSALS (owner-approved as a starting point, "cần game designer duyệt khi cân bằng"): the per-type
  * faucet budgets of §4.2 are asserted by tests so no later content edit can silently break them.
@@ -347,61 +347,6 @@ export function questDefById(id: string): QuestDef | undefined {
 export function questIndexOf(id: string): number {
   return QUEST_DEFS.findIndex((q) => q.id === id);
 }
-
-/** Vietnamese names, descriptions and the verb of each objective (docs/12 §5.2 keeps i18n keys; `quest.<id>.name|desc`). */
-export const QUEST_TEXT: Readonly<Record<string, { name: string; desc: string }>> = {
-  q_c1_nhap_mon: { name: 'Nhập Môn', desc: 'Gặp Sư Huynh ở quảng trường để nhận hướng dẫn tu hành đầu tiên.' },
-  q_c1_van_khi: {
-    name: 'Vận Khí Đầu Tiên',
-    desc: 'Đả tọa vận khí (không di chuyển, không giao chiến) tổng cộng 3 phút.',
-  },
-  q_c1_ra_chan_nui: { name: 'Ra Chân Núi', desc: 'Rời quảng trường, tiến tới bãi quái ở Bìa Rừng.' },
-  q_c1_san_doc_tho: { name: 'Săn Độc Thố', desc: 'Hạ 5 Độc Thố đang gặm nhấm linh mạch.' },
-  q_c1_thu_thap: { name: 'Thu Thập Nguyên Liệu', desc: 'Nhặt 3 Nguyên liệu chế tạo từ quái rơi ra.' },
-  q_c1_hau_son: { name: 'Hậu Sơn Dậy Sóng', desc: 'Hạ 4 Hôi Lang ở hậu sơn.' },
-  q_c1_tinh_anh: { name: 'Hạ Tinh Anh', desc: 'Hạ một quái tinh anh để chứng minh đủ sức trước ngưỡng đột phá.' },
-  q_c1_dot_pha: {
-    name: 'Đột Phá Tiểu Cảnh',
-    desc: 'Đột phá thành công một cảnh giới. Trưởng Lão tặng Trúc Cơ Đan phẩm Trắng.',
-  },
-  q_c2_bi_canh: { name: 'Vào Bí Cảnh', desc: 'Tiến vào Độc Hỏa Đầm, nguồn của độc khí.' },
-  q_c2_doc_nguyen: { name: 'Truy Tìm Độc Nguyên', desc: 'Hạ 3 quái tinh anh canh giữ Độc Nguyên.' },
-  q_c2_ho_vuong: { name: 'Hổ Vương', desc: 'Hạ Hổ Vương, thủ lĩnh của bí cảnh.' },
-  q_c3_tam_ma: { name: 'Đối Mặt Tâm Ma', desc: 'Đả tọa 10 phút để ổn định tâm cảnh trước Kim Đan.' },
-  q_c3_hau_son: { name: 'Cổng Kim Đan', desc: 'Hạ Cổ Mãng canh giữ cổng sang Kim Đan.' },
-  q_daily_san_quai: { name: 'Nhật Thường: Săn Quái', desc: 'Hạ 8 quái thường.' },
-  q_daily_hai_thuoc: { name: 'Nhật Thường: Thu Nguyên Liệu', desc: 'Có trong túi 5 Nguyên liệu chế tạo.' },
-  q_daily_tu_luyen: { name: 'Nhật Thường: Tu Luyện', desc: 'Đả tọa tổng cộng 5 phút.' },
-  q_weekly_tru_ma: { name: 'Chu Thường: Trừ Ma', desc: 'Hạ một boss.' },
-  q_sect_tuan_tra: { name: 'Tông Môn: Tuần Tra', desc: 'Hạ 10 quái thường quanh sơn môn. Thưởng Cống hiến.' },
-  q_sect_thanh_loc: { name: 'Tông Môn: Thanh Lọc', desc: 'Hạ 3 quái tinh anh. Thưởng Cống hiến.' },
-};
-
-/** Vietnamese names of the mobs, items and tiers the objectives and rewards mention (the client prints them; unknown keys fall back to the key). */
-export const QUEST_TARGET_TEXT: Readonly<Record<string, string>> = {
-  mob_doc_tho: 'Độc Thố',
-  mob_hoi_lang: 'Hôi Lang',
-  boss_ho_vuong: 'Hổ Vương',
-  boss_co_mang: 'Cổ Mãng',
-  'tier:normal': 'quái thường',
-  'tier:elite': 'quái tinh anh',
-  'tier:boss': 'boss',
-  heal_pill: 'Hồi Huyết Đan',
-  breakthrough_pill: 'Trúc Cơ Đan',
-  craft_material: 'Nguyên liệu chế tạo',
-  bia_rung: 'Bìa Rừng',
-  dam_lay_doc: 'Đầm Lầy Độc',
-  co_thu_trung_tam: 'Cổ Thụ Trung Tâm',
-  doc_hoa_dam: 'Độc Hỏa Đầm',
-};
-
-export const NPC_TEXT: Readonly<Record<string, string>> = {
-  npc_truong_lao_dan: 'Trưởng Lão',
-  npc_su_huynh: 'Sư Huynh',
-  npc_ve_binh: 'Vệ Binh',
-  npc_thuong_nhan: 'Thương Nhân',
-  npc_chuong_mon: 'Chưởng Môn',
-};
 
 // ------------------------------------------------------------------ objectives
 

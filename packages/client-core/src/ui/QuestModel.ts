@@ -6,12 +6,9 @@
  * NPC markers: `markerFor(npcKey)` is '?' when a quest waits to be turned in at that NPC, '!' when one can be accepted there, else null.
  */
 import {
-  NPC_TEXT,
   QUESTS,
   QUEST_DEFS,
   QUEST_NPCS,
-  QUEST_TARGET_TEXT,
-  QUEST_TEXT,
   QuestStatus,
   objectiveTarget,
   questDefById,
@@ -19,79 +16,92 @@ import {
   type QuestDef,
   type QuestObjective,
 } from '@vgtd/shared';
+import { t, type StringKey } from '../i18n/strings.js';
+import { QUEST_DESC_KEY, QUEST_NAME_KEY, QUEST_NPC_KEY, QUEST_TARGET_KEY } from './QuestText.js';
 import { QuestReason, type QuestResultMsg, type QuestStateMsg } from '@vgtd/protocol';
 
 /** re-exported so engine scripts (which only see client-core) can name the ops and statuses */
 export { QuestOp, QuestReason } from '@vgtd/protocol';
 export { QuestStatus } from '@vgtd/shared';
 
-/** Vietnamese text of every quest refusal (user-facing). */
-export const QUEST_REASON_TEXT: Readonly<Record<number, string>> = {
-  [QuestReason.Ok]: '',
-  [QuestReason.RateLimited]: 'Bạn thao tác quá nhanh, hãy chờ giây lát.',
-  [QuestReason.NoSuchQuest]: 'Không có nhiệm vụ này.',
-  [QuestReason.Locked]: 'Chưa đủ điều kiện nhận nhiệm vụ này (cảnh giới, nhiệm vụ trước hoặc tông môn).',
-  [QuestReason.NotAvailable]: 'Nhiệm vụ này đã nhận hoặc đã hoàn thành trong chu kỳ này.',
-  [QuestReason.TooFar]: 'Bạn đứng quá xa NPC.',
-  [QuestReason.NotReady]: 'Chưa hoàn thành mục tiêu của nhiệm vụ.',
-  [QuestReason.TooManyActive]: 'Bạn đang làm quá nhiều nhiệm vụ cùng loại.',
-  [QuestReason.NotActive]: 'Bạn không đang làm nhiệm vụ này.',
-  [QuestReason.NoSuchNpc]: 'Không có NPC này.',
-  [QuestReason.NotInWorld]: 'Chưa vào game, chưa thao tác được.',
-  [QuestReason.CycleCap]: 'Đã đạt giới hạn nhiệm vụ trong chu kỳ này.',
-  [QuestReason.RewardFailed]: 'Chưa nhận được phần thưởng, hãy thử lại.',
-  [QuestReason.MissingItems]: 'Bạn không còn đủ vật phẩm cần nộp trong túi.',
+/** String key of every quest refusal (`quest.reason.*` in the vi-VN table). */
+export const QUEST_REASON_KEY: Readonly<Record<number, StringKey | null>> = {
+  [QuestReason.Ok]: null,
+  [QuestReason.RateLimited]: 'quest.reason.rate_limited',
+  [QuestReason.NoSuchQuest]: 'quest.reason.no_such_quest',
+  [QuestReason.Locked]: 'quest.reason.locked',
+  [QuestReason.NotAvailable]: 'quest.reason.not_available',
+  [QuestReason.TooFar]: 'quest.reason.too_far',
+  [QuestReason.NotReady]: 'quest.reason.not_ready',
+  [QuestReason.TooManyActive]: 'quest.reason.too_many_active',
+  [QuestReason.NotActive]: 'quest.reason.not_active',
+  [QuestReason.NoSuchNpc]: 'quest.reason.no_such_npc',
+  [QuestReason.NotInWorld]: 'quest.reason.not_in_world',
+  [QuestReason.CycleCap]: 'quest.reason.cycle_cap',
+  [QuestReason.RewardFailed]: 'quest.reason.reward_failed',
+  [QuestReason.MissingItems]: 'quest.reason.missing_items',
+};
+/** The player-facing text of a refusal: '' for Ok, the generic "refused (code n)" line for a code this client does not know. */
+export function questReasonText(reason: number): string {
+  const key = QUEST_REASON_KEY[reason];
+  if (key === null) return '';
+  return key === undefined ? t('quest.reason.unknown', { code: reason }) : t(key);
+}
+
+const QUEST_TYPE_KEY: Readonly<Record<string, StringKey>> = {
+  main: 'quest.type.main',
+  side: 'quest.type.side',
+  daily: 'quest.type.daily',
+  weekly: 'quest.type.weekly',
+  sect: 'quest.type.sect',
+};
+const QUEST_STATUS_KEY: Readonly<Record<number, StringKey>> = {
+  [QuestStatus.Locked]: 'quest.status.locked',
+  [QuestStatus.Available]: 'quest.status.available',
+  [QuestStatus.Active]: 'quest.status.active',
+  [QuestStatus.Ready]: 'quest.status.ready',
+  [QuestStatus.Completed]: 'quest.status.completed',
+};
+export const questStatusText = (status: number): string => {
+  const key = QUEST_STATUS_KEY[status];
+  return key ? t(key) : '';
 };
 
-export const QUEST_TYPE_TEXT: Readonly<Record<string, string>> = {
-  main: 'Chủ tuyến',
-  side: 'Chi tuyến',
-  daily: 'Nhật thường',
-  weekly: 'Chu thường',
-  sect: 'Tông môn',
-};
-export const QUEST_STATUS_TEXT: Readonly<Record<number, string>> = {
-  [QuestStatus.Locked]: 'Chưa mở',
-  [QuestStatus.Available]: 'Có thể nhận',
-  [QuestStatus.Active]: 'Đang làm',
-  [QuestStatus.Ready]: 'Chờ trả nhiệm vụ',
-  [QuestStatus.Completed]: 'Đã xong',
-};
-
-export const questName = (id: string): string => QUEST_TEXT[id]?.name ?? id;
-export const npcName = (key: string): string => NPC_TEXT[key] ?? key;
-const target = (key: string): string => QUEST_TARGET_TEXT[key] ?? key;
+export const questName = (id: string): string => (QUEST_NAME_KEY[id] ? t(QUEST_NAME_KEY[id]!) : id);
+export const npcName = (key: string): string => (QUEST_NPC_KEY[key] ? t(QUEST_NPC_KEY[key]!) : key);
+const target = (key: string): string => (QUEST_TARGET_KEY[key] ? t(QUEST_TARGET_KEY[key]!) : key);
 
 /** One objective as a line with its progress (`Hạ Độc Thố 3/5`). */
 export function objectiveLine(o: QuestObjective, progress: number): string {
-  const t = objectiveTarget(o);
-  const p = Math.min(t, progress);
+  const n = objectiveTarget(o);
+  const p = Math.min(n, progress);
+  const mark = p >= 1 ? '✓' : '·';
   switch (o.kind) {
     case 'kill':
-      return `Hạ ${target(o.target)} ${p}/${t}`;
+      return t('quest.obj.kill', { target: target(o.target), p, n });
     case 'collect':
-      return `Có ${target(o.item)} trong túi ${p}/${t}`;
+      return t('quest.obj.collect', { target: target(o.item), p, n });
     case 'talk':
-      return `${p >= 1 ? '✓' : '·'} Gặp ${npcName(o.npc)}`;
+      return t('quest.obj.talk', { mark, npc: npcName(o.npc) });
     case 'reach':
-      return `${p >= 1 ? '✓' : '·'} Tiến tới ${target(o.zone)}`;
+      return t('quest.obj.reach', { mark, target: target(o.zone) });
     case 'breakthrough':
-      return `${p >= 1 ? '✓' : '·'} Đột phá thành công`;
+      return t('quest.obj.breakthrough', { mark });
     case 'cultivate': {
-      const m = (s: number): string => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-      return `Đả tọa ${m(p)}/${m(t)}`;
+      const m = (sec: number): string => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+      return t('quest.obj.cultivate', { p: m(p), n: m(n) });
     }
   }
 }
 
-/** Rewards as one line (`+4 phút tu luyện · 9 Linh thạch hạ phẩm tương đương · Hồi Huyết Đan ×2`), in the units of docs/12 §4.1. */
+/** Rewards as one line (`4 phút tu luyện · 0,05 giờ Linh thạch dã ngoại · Hồi Huyết Đan ×2`), in the units of docs/12 §4.1. */
 export function rewardLine(def: QuestDef): string {
   const r = def.rewards;
   const parts: string[] = [];
-  if (r.cultMinutes) parts.push(`${r.cultMinutes} phút tu luyện`);
-  if (r.stoneWildHours) parts.push(`${r.stoneWildHours} giờ Linh thạch dã ngoại`);
-  if (r.contribution) parts.push(`${r.contribution} Cống hiến`);
-  for (const it of r.items ?? []) parts.push(`${target(it.item)} ×${it.count}`);
+  if (r.cultMinutes) parts.push(t('quest.reward.cult', { n: r.cultMinutes }));
+  if (r.stoneWildHours) parts.push(t('quest.reward.stone', { n: r.stoneWildHours }));
+  if (r.contribution) parts.push(t('quest.reward.contribution', { n: r.contribution }));
+  for (const it of r.items ?? []) parts.push(t('quest.reward.item', { item: target(it.item), n: it.count }));
   return parts.join(' · ');
 }
 
@@ -140,9 +150,9 @@ export class QuestModel {
       next.set(q.id, { status: q.status, progress: [...q.progress] });
       const was = prev.get(q.id)?.status;
       if (!had || was === undefined || was === q.status) continue;
-      if (q.status === QuestStatus.Ready) lines.push(`Đã đủ mục tiêu: ${questName(q.id)}. Quay về gặp ${npcName(questDefById(q.id)!.turnIn)}.`);
-      else if (q.status === QuestStatus.Completed) lines.push(`Hoàn thành nhiệm vụ: ${questName(q.id)}.`);
-      else if (q.status === QuestStatus.Active && was === QuestStatus.Available) lines.push(`Đã nhận nhiệm vụ: ${questName(q.id)}.`);
+      if (q.status === QuestStatus.Ready) lines.push(t('quest.event.ready', { name: questName(q.id), npc: npcName(questDefById(q.id)!.turnIn) }));
+      else if (q.status === QuestStatus.Completed) lines.push(t('quest.event.completed', { name: questName(q.id) }));
+      else if (q.status === QuestStatus.Active && was === QuestStatus.Available) lines.push(t('quest.event.accepted', { name: questName(q.id) }));
     }
     this.entries = next;
     this.dailyAt = m.dailyResetIn;
@@ -156,7 +166,7 @@ export class QuestModel {
   /** The answer to a command: the line to show when refused, null when done. */
   applyResult(m: QuestResultMsg): string | null {
     if (m.reason === QuestReason.Ok) return null;
-    return QUEST_REASON_TEXT[m.reason] ?? `Thao tác bị từ chối (mã ${m.reason}).`;
+    return questReasonText(m.reason);
   }
 
   statusOf(id: string): QuestStatus {
@@ -178,8 +188,8 @@ export class QuestModel {
       def,
       id: def.id,
       name: questName(def.id),
-      desc: QUEST_TEXT[def.id]?.desc ?? '',
-      type: QUEST_TYPE_TEXT[def.type] ?? def.type,
+      desc: QUEST_DESC_KEY[def.id] ? t(QUEST_DESC_KEY[def.id]!) : '',
+      type: QUEST_TYPE_KEY[def.type] ? t(QUEST_TYPE_KEY[def.type]!) : def.type,
       status,
       progress,
       lines: def.objectives.map((o, i) => objectiveLine(o, progress[i] ?? 0)),
@@ -255,16 +265,17 @@ export class QuestModel {
 
   /** The log as plain lines (for `/quest` in the chat log). */
   summaryLines(): string[] {
-    if (!this.seen) return ['Sổ nhiệm vụ chưa tải xong.'];
+    if (!this.seen) return [t('quest.summary.not_loaded')];
     const lines: string[] = [];
     const act = this.active();
-    lines.push(act.length ? `Đang làm (${act.length}):` : 'Chưa nhận nhiệm vụ nào đang làm.');
+    lines.push(act.length ? t('quest.summary.active', { n: act.length }) : t('quest.summary.none_active'));
     for (const v of act) {
       lines.push(`  ${v.status === QuestStatus.Ready ? '?' : '·'} ${v.name}${v.goTo ? ` → ${v.goToName}` : ''}`);
       for (const l of v.lines) lines.push(`      ${l}`);
     }
     const av = this.available();
-    if (av.length) lines.push(`Có thể nhận (${av.length}): ${av.map((v) => `${v.name} [${v.goToName}]`).join(' · ')}`);
+    if (av.length)
+      lines.push(t('quest.summary.available', { n: av.length, list: av.map((v) => `${v.name} [${v.goToName}]`).join(' · ') }));
     return lines;
   }
 }

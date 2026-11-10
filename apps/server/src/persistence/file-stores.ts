@@ -18,6 +18,8 @@ import type { ProgressRecord } from '../progression/state.js';
 import type { ProgressionStore } from '../progression/store.js';
 import { Ledger, type LedgerSnapshot } from '../world/inventory/ledger.js';
 import type { InventorySnapshot, InventoryStore } from '../world/inventory/store.js';
+import type { TutorialRecord, TutorialStore } from '../tutorial/store.js';
+import { TUTORIAL_ALL_MASK } from '@vgtd/shared';
 import { readJsonFile, removeStray } from './atomic.js';
 import { TxJournal, recoverJournal, type JournalOptions } from './journal.js';
 import { DocFile, type DocFileOptions } from './doc-file.js';
@@ -163,6 +165,57 @@ export class FileInventoryStore implements InventoryStore {
     if (prev !== undefined && JSON.stringify(prev) === JSON.stringify(snap)) return;
     this.rows.set(owner, structuredClone(snap));
     this.file.markDirty();
+  }
+}
+
+/** Tutorial progress (D105): one tiny record per account. */
+export class FileTutorialStore implements TutorialStore {
+  private readonly rows = new Map<string, TutorialRecord>();
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    const doc = load(path, 'tutorial', (d) => {
+      if (!Array.isArray(d.records)) throw new Error('tutorial: missing records');
+      return d.records as unknown[];
+    });
+    for (const r of doc ?? []) {
+      const o = r as Record<string, unknown>;
+      if (
+        typeof r !== 'object' ||
+        r === null ||
+        !isStr(o.accountId) ||
+        !isNum(o.done) ||
+        !Number.isInteger(o.done) ||
+        o.done < 0 ||
+        o.done > TUTORIAL_ALL_MASK ||
+        !isNum(o.kills) ||
+        typeof o.skipped !== 'boolean' ||
+        typeof o.complete !== 'boolean' ||
+        !isNum(o.sessions)
+      )
+        throw new Error('tutorial: malformed record');
+      this.rows.set(o.accountId, {
+        accountId: o.accountId,
+        done: o.done,
+        kills: o.kills,
+        skipped: o.skipped,
+        complete: o.complete,
+        sessions: o.sessions,
+      });
+    }
+    this.file = new DocFile(path, () => JSON.stringify({ v: VERSION, records: [...this.rows.values()] }), opts);
+  }
+  load(accountId: string): TutorialRecord | undefined {
+    const r = this.rows.get(accountId);
+    return r ? { ...r } : undefined;
+  }
+  save(record: TutorialRecord): void {
+    const prev = this.rows.get(record.accountId);
+    if (prev && JSON.stringify(prev) === JSON.stringify(record)) return;
+    this.rows.set(record.accountId, { ...record });
+    this.file.markDirty();
+  }
+  all(): TutorialRecord[] {
+    return [...this.rows.values()].map((r) => ({ ...r }));
   }
 }
 
@@ -350,6 +403,7 @@ export const STORE_DOC_NAMES = [
   'accounts.json',
   'progression.json',
   'inventories.json',
+  'tutorial.json',
   'sect.json',
   'friends.json',
   'quests.json',
@@ -364,6 +418,7 @@ export interface FileStores {
   accounts: FileAccountStore;
   progression: FileProgressionStore;
   inventories: FileInventoryStore;
+  tutorial: FileTutorialStore;
   sect: FileSectStore;
   friends: FileFriendStore;
   quests: FileQuestStore;
@@ -397,6 +452,7 @@ export interface FileStores {
 }
 
 /** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `friends.json`, `quests.json`, `market.json`, `ledger.json`. */
+/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `tutorial.json`, `friends.json`, `market.json`, `ledger.json`. */
 export function openFileStores(dir: string, opts: DocFileOptions & JournalOptions = {}): FileStores {
   // FIRST finish a commit a crash interrupted: every document below is then loaded in its committed state
   const recovered = recoverJournal(dir);
@@ -407,6 +463,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
   const progression = new FileProgressionStore(join(dir, 'progression.json'), opts);
   const inventories = new FileInventoryStore(join(dir, 'inventories.json'), opts);
   const sect = new FileSectStore(join(dir, 'sect.json'), opts);
+  const tutorial = new FileTutorialStore(join(dir, 'tutorial.json'), opts);
   const friends = new FileFriendStore(join(dir, 'friends.json'), opts);
   const quests = new FileQuestStore(join(dir, 'quests.json'), opts);
   const market = new FileMarketStore(join(dir, 'market.json'), opts);
@@ -416,6 +473,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
     accounts,
     progression,
     inventories,
+    tutorial,
     sect,
     friends,
     quests,
@@ -431,6 +489,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
       accounts.file.flush();
       progression.file.flush();
       inventories.file.flush();
+      tutorial.file.flush();
       sect.file.flush();
       friends.file.flush();
       quests.file.flush();
@@ -443,6 +502,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
         'accounts.json': accounts.file.serializeNow(),
         'progression.json': progression.file.serializeNow(),
         'inventories.json': inventories.file.serializeNow(),
+        'tutorial.json': tutorial.file.serializeNow(),
         'sect.json': sect.file.serializeNow(),
         'friends.json': friends.file.serializeNow(),
         'quests.json': quests.file.serializeNow(),

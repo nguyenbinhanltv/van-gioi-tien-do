@@ -138,7 +138,19 @@ describe('NetClient event hooks', () => {
       onTribulationStrike: (m) => seen.push(`strike ${m.wave}/${m.waves} ${m.damage}`),
     };
     net.events = {}; // the scene replacing `events` must not drop them
-    sock.push({ type: 'major_event', phase: 3, wave: 1, waves: 3, remainingMs: 0, strengthPct: 120, result: 0, tier: 0, expLostPct: 0, lockMin: 0, tamMaId: 0 });
+    sock.push({
+      type: 'major_event',
+      phase: 3,
+      wave: 1,
+      waves: 3,
+      remainingMs: 0,
+      strengthPct: 120,
+      result: 0,
+      tier: 0,
+      expLostPct: 0,
+      lockMin: 0,
+      tamMaId: 0,
+    });
     sock.push({ type: 'tribulation_strike', wave: 1, waves: 3, strike: 0, qi: 640, qj: 640, damage: 4200 });
     expect(seen).toEqual(['event 3/0', 'strike 1/3 4200']);
   });
@@ -243,7 +255,13 @@ describe('NetClient.sendSkillCast (wire v3)', () => {
     expect(net.sendSkillCast({ seq: 3, skillId: 7, targetId: 1_000_002, aim: { i: 20.5, j: 31.25 } })).toBe(true);
     expect(net.sendSkillCast({ seq: 0x10004, skillId: 1, targetId: 0, aim: null })).toBe(true);
     const frames = sock.sent.slice(before).map((d) => decode(d as Uint8Array));
-    expect(frames[0]).toEqual({ type: 'skill_cast', seq: 3, skillId: 7, targetId: 1_000_002, aim: { qi: 656, qj: 1000 } });
+    expect(frames[0]).toEqual({
+      type: 'skill_cast',
+      seq: 3,
+      skillId: 7,
+      targetId: 1_000_002,
+      aim: { qi: 656, qj: 1000 },
+    });
     expect(frames[1]).toEqual({ type: 'skill_cast', seq: 4, skillId: 1, targetId: 0, aim: null }); // seq wraps to u16
   });
 

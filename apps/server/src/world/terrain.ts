@@ -5,6 +5,7 @@
  * and the anti-cheat distance check see the same obstacles. Without it (tests, `main.ts` defaults) the map stays open.
  * Pure parsing, no I/O: the dev entry reads the file.
  */
+import { sectBlockedTiles } from '@vgtd/shared';
 import { TileGrid } from '@vgtd/sim';
 
 export interface TerrainFile {
@@ -36,4 +37,22 @@ export function parseTerrain(json: unknown): TerrainFile {
 /** The server grid of a terrain file (`.` walkable level 0, `#` blocked). */
 export function terrainGrid(t: TerrainFile): TileGrid {
   return TileGrid.fromRows(t.rows);
+}
+
+/** The rows of an open `size` x `size` map (every tile land). */
+export function openRows(size: number): string[] {
+  return Array.from({ length: size }, () => '.'.repeat(size));
+}
+
+/**
+ * The same rows with the Sơn Môn sect buildings (D118, `SECT_BUILDINGS` of @vgtd/shared) blocked: the client draws those buildings and
+ * blocks their tiles in its own walkability, so the server must block the very same tiles or prediction and the real simulation
+ * disagree at every wall. Rows are returned as new strings; a map that is not square is returned unchanged.
+ */
+export function blockSectBuildings(rows: readonly string[]): string[] {
+  const n = rows.length;
+  if (n === 0 || rows.some((r) => r.length !== n)) return [...rows];
+  const out = rows.map((r) => r.split(''));
+  for (const [i, j] of sectBlockedTiles(n)) out[j]![i] = '#';
+  return out.map((r) => r.join(''));
 }

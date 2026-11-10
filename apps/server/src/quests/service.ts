@@ -19,7 +19,6 @@
  * enters through the injected wall clock (the 05:00 UTC+7 resets) and the simulation clock handed in by `WorldNode`.
  */
 import {
-  NPC_TEXT,
   QUESTS,
   QUEST_DEFS,
   QuestStatus,
@@ -554,9 +553,5 @@ export class QuestService {
   npcTile(npcKey: string): { i: number; j: number } | undefined {
     const n = questNpc(npcKey);
     return n ? { i: this.mapTiles / 2 + n.offset[0], j: this.mapTiles / 2 + n.offset[1] } : undefined;
-  }
-  /** Display name of an NPC key (diagnostics). */
-  static npcName(key: string): string {
-    return NPC_TEXT[key] ?? key;
   }
 }

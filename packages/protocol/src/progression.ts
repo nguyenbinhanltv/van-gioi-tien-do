@@ -15,6 +15,13 @@ import {
   type ChatServerMessage,
 } from './chat.js';
 import {
+  decodeCraftBody,
+  encodeCraftBody,
+  validateCraftMessage,
+  type CraftClientMessage,
+  type CraftServerMessage,
+} from './craft.js';
+import {
   decodeTradeBody,
   encodeTradeBody,
   validateTradeMessage,
@@ -58,6 +65,13 @@ import {
 } from './party.js';
 import { decodeMajorBody, encodeMajorBody, validateMajorMessage, type MajorServerMessage } from './major.js';
 import {
+  decodeTutorialBody,
+  encodeTutorialBody,
+  validateTutorialMessage,
+  type TutorialClientMessage,
+  type TutorialServerMessage,
+} from './tutorial.js';
+import {
   decodeInventoryBody,
   encodeInventoryBody,
   validateInventoryMessage,
@@ -80,6 +94,9 @@ export enum ColdMsgId {
   PartyInvite = 46,
   PartyState = 47,
   PartyVitals = 48,
+  /** tutorial / FTUE (D105, tutorial.ts) */
+  TutorialState = 49,
+  TutorialSkip = 50,
   /** direct trade (D102, trade.ts); 69-70 are the major-breakthrough messages of D97, so the docs/24 trade block starts at 71 here */
   TradeCmd = 71,
   TradeResult = 72,
@@ -108,6 +125,10 @@ export enum ColdMsgId {
   QuestCmd = 120,
   QuestResult = 121,
   QuestState = 122,
+  /** crafting (D108, craft.ts): docs/24 ids 90-91, the state message sits after the friends range */
+  CraftCmd = 90,
+  CraftResult = 91,
+  CraftState = 95,
   CharState = 60,
   BreakthroughStart = 61,
   BreakthroughResult = 62,
@@ -118,6 +139,8 @@ export enum ColdMsgId {
   InvState = 66,
   InvCmd = 67,
   InvResult = 68,
+  /** Đạo Tâm (D103) */
+  DaoTam = 59,
 }
 
 export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
@@ -130,6 +153,7 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.InvState]: 'inv_state',
   [ColdMsgId.InvCmd]: 'inv_cmd',
   [ColdMsgId.InvResult]: 'inv_result',
+  [ColdMsgId.DaoTam]: 'dao_tam',
   [ColdMsgId.ChatSend]: 'chat_send',
   [ColdMsgId.ChatMsg]: 'chat_msg',
   [ColdMsgId.ChatHistory]: 'chat_history',
@@ -139,6 +163,8 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.PartyInvite]: 'party_invite',
   [ColdMsgId.PartyState]: 'party_state',
   [ColdMsgId.PartyVitals]: 'party_vitals',
+  [ColdMsgId.TutorialState]: 'tutorial_state',
+  [ColdMsgId.TutorialSkip]: 'tutorial_skip',
   [ColdMsgId.TradeCmd]: 'trade_cmd',
   [ColdMsgId.TradeResult]: 'trade_result',
   [ColdMsgId.TradeState]: 'trade_state',
@@ -161,6 +187,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.QuestCmd]: 'quest_cmd',
   [ColdMsgId.QuestResult]: 'quest_result',
   [ColdMsgId.QuestState]: 'quest_state',
+  [ColdMsgId.CraftCmd]: 'craft_cmd',
+  [ColdMsgId.CraftResult]: 'craft_result',
+  [ColdMsgId.CraftState]: 'craft_state',
 };
 export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   char_state: ColdMsgId.CharState,
@@ -172,6 +201,7 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   inv_state: ColdMsgId.InvState,
   inv_cmd: ColdMsgId.InvCmd,
   inv_result: ColdMsgId.InvResult,
+  dao_tam: ColdMsgId.DaoTam,
   chat_send: ColdMsgId.ChatSend,
   chat_msg: ColdMsgId.ChatMsg,
   chat_history: ColdMsgId.ChatHistory,
@@ -181,6 +211,8 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   party_invite: ColdMsgId.PartyInvite,
   party_state: ColdMsgId.PartyState,
   party_vitals: ColdMsgId.PartyVitals,
+  tutorial_state: ColdMsgId.TutorialState,
+  tutorial_skip: ColdMsgId.TutorialSkip,
   trade_cmd: ColdMsgId.TradeCmd,
   trade_result: ColdMsgId.TradeResult,
   trade_state: ColdMsgId.TradeState,
@@ -203,6 +235,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   quest_cmd: ColdMsgId.QuestCmd,
   quest_result: ColdMsgId.QuestResult,
   quest_state: ColdMsgId.QuestState,
+  craft_cmd: ColdMsgId.CraftCmd,
+  craft_result: ColdMsgId.CraftResult,
+  craft_state: ColdMsgId.CraftState,
 };
 
 /** Why a progression command was refused (0 = accepted). Values are wire-stable. */
@@ -246,6 +281,7 @@ export const PROGRESSION_LIMITS = {
   MAX_N_FAIL: 255,
   KARMA_MIN: -1000,
   KARMA_MAX: 1000,
+  DAO_TAM_MAX: 100,
   /** chance is sent in 1/10000 */
   CHANCE_SCALE: 10000,
 } as const;
@@ -302,6 +338,15 @@ export interface MeditateResultMsg {
   meditating: boolean;
   reason: number;
 }
+/**
+ * Server -> client: the character's Đạo Tâm (D103), the value that counts (already under the ceiling of the Nghiệp band). Nghiệp Lực itself is
+ * in `char_state.karma`; the faction label is derived from it on the client (`factionOf`). Sent on join and whenever the value changes.
+ */
+export interface DaoTamMsg {
+  type: 'dao_tam';
+  /** 0..100 */
+  daoTam: number;
+}
 export type ColdClientMessage =
   | BreakthroughStartMsg
   | MeditateStartMsg
@@ -312,10 +357,13 @@ export type ColdClientMessage =
   | QuestClientMessage
   | TradeClientMessage
   | SectClientMessage
+  | TutorialClientMessage
   | FriendClientMessage
-  | MarketClientMessage;
+  | MarketClientMessage
+  | CraftClientMessage;
 export type ColdServerMessage =
   | CharStateMsg
+  | DaoTamMsg
   | BreakthroughResultMsg
   | MeditateResultMsg
   | InvServerMessage
@@ -325,8 +373,10 @@ export type ColdServerMessage =
   | TradeServerMessage
   | SectServerMessage
   | MajorServerMessage
+  | TutorialServerMessage
   | FriendServerMessage
-  | MarketServerMessage;
+  | MarketServerMessage
+  | CraftServerMessage;
 export type ColdMessage = ColdClientMessage | ColdServerMessage;
 
 // ---------------------------------------------------------------- validation
@@ -363,6 +413,8 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         tuVi: fin(o.tuVi, 0, 'tuVi'),
         tuViReq: fin(o.tuViReq, 0, 'tuViReq'),
       };
+    case 'dao_tam':
+      return { type: 'dao_tam', daoTam: int(o.daoTam, 0, PROGRESSION_LIMITS.DAO_TAM_MAX, 'daoTam') };
     case 'breakthrough_start':
       return { type: 'breakthrough_start', requestId: reqId(o.requestId) };
     case 'meditate_start':
@@ -398,8 +450,10 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validateTradeMessage(o) ??
         validateSectMessage(o) ??
         validateMajorMessage(o) ??
+        validateTutorialMessage(o) ??
         validateFriendMessage(o) ??
-        validateMarketMessage(o)
+        validateMarketMessage(o) ??
+        validateCraftMessage(o)
       );
   }
 }
@@ -435,6 +489,9 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
       w.u16(m.karma + 1000); // 0..2000, unsigned on the wire
       w.f64(m.tuVi);
       w.f64(m.tuViReq);
+      break;
+    case 'dao_tam':
+      w.u8(m.daoTam);
       break;
     case 'breakthrough_start':
     case 'meditate_start':
@@ -474,6 +531,10 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'party_vitals':
       encodePartyBody(w, m);
       break;
+    case 'tutorial_state':
+    case 'tutorial_skip':
+      encodeTutorialBody(w, m);
+      break;
     case 'trade_cmd':
     case 'trade_result':
     case 'trade_state':
@@ -498,6 +559,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'quest_result':
     case 'quest_state':
       encodeQuestBody(w, m);
+      break;
+    case 'craft_cmd':
+    case 'craft_result':
+    case 'craft_state':
+      encodeCraftBody(w, m);
       break;
     case 'market_search':
     case 'market_results':
@@ -527,6 +593,8 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
         tuVi: r.f64(),
         tuViReq: r.f64(),
       };
+    case 'dao_tam':
+      return { type, daoTam: r.u8() };
     case 'breakthrough_start':
     case 'meditate_start':
     case 'meditate_stop':
@@ -564,6 +632,9 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'party_state':
     case 'party_vitals':
       return decodePartyBody(r, type);
+    case 'tutorial_state':
+    case 'tutorial_skip':
+      return decodeTutorialBody(r, type);
     case 'trade_cmd':
     case 'trade_result':
     case 'trade_state':
@@ -584,6 +655,10 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'quest_result':
     case 'quest_state':
       return decodeQuestBody(r, type);
+    case 'craft_cmd':
+    case 'craft_result':
+    case 'craft_state':
+      return decodeCraftBody(r, type);
     case 'market_search':
     case 'market_results':
     case 'market_list':

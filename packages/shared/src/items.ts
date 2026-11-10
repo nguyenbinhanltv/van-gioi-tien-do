@@ -11,12 +11,16 @@
 import { STONE_ITEMS } from './formulas/drops.js';
 import type { DropItem } from './formulas/economy.js';
 
+/** Items that exist only as the product of crafting (D108): no drop table gives them. */
+export type CraftedItemKey = 'ho_mach_pill' | 'dinh_tam_pill';
+export type ItemKey = DropItem | CraftedItemKey;
+
 export type ItemKind = 'stackable' | 'instance';
 
 export interface ItemDef {
   /** stable id (u16) */
   id: number;
-  key: DropItem;
+  key: ItemKey;
   kind: ItemKind;
   /** stackables only: max quantity per bag slot */
   stackLimit: number;
@@ -32,13 +36,16 @@ export const ITEM_DEFS: readonly ItemDef[] = [
   { id: 4, key: 'blueprint_blue_purple', kind: 'instance', stackLimit: 1, tradable: true },
   { id: 5, key: 'blueprint_gold_red', kind: 'instance', stackLimit: 1, tradable: true },
   { id: 6, key: 'craft_material', kind: 'stackable', stackLimit: 999, tradable: true },
+  /** support pills of docs/07 §2 / docs/13 §5.2 (D108): crafted only; no effect is defined for them yet, so they cannot be used */
+  { id: 7, key: 'ho_mach_pill', kind: 'stackable', stackLimit: 99, tradable: true },
+  { id: 8, key: 'dinh_tam_pill', kind: 'stackable', stackLimit: 99, tradable: true },
 ];
 
 /** Items the player can use from the bag (`inv_cmd` op Use, D90). */
 export const USABLE_ITEM_KEYS: readonly string[] = ['heal_pill', 'breakthrough_pill'];
 export const isUsableItem = (key: string | undefined): boolean => key !== undefined && USABLE_ITEM_KEYS.includes(key);
 
-export function itemDefByKey(key: DropItem): ItemDef | undefined {
+export function itemDefByKey(key: ItemKey): ItemDef | undefined {
   return ITEM_DEFS.find((d) => d.key === key);
 }
 export function itemDefById(id: number): ItemDef | undefined {

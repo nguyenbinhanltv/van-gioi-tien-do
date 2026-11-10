@@ -23,6 +23,7 @@ import {
   type MeditateResultMsg,
 } from '@vgtd/protocol';
 import {
+  DAO_TAM,
   ConsequenceTier,
   DEFAULT_CLASS,
   MAJOR_EVENT,
@@ -30,15 +31,20 @@ import {
   MajorResult,
   NETWORK,
   ROOT_TYPES,
+  applyKarmaEvent,
   TIER_EXP_LOSS,
   consequenceTier,
   majorEventOf,
   tierLockMs,
   breakthroughPillChance,
+  clampDaoTam,
+  effectiveDaoTam,
+  nghiepAnhCount,
   parseClass,
   rngFloat,
   rngFork,
   rngSeed,
+  type KarmaEventId,
   type PathId,
   type RngState,
 } from '@vgtd/shared';
@@ -66,6 +72,8 @@ export interface MajorStartInfo {
   realm: number;
   subRealm: number;
   karma: number;
+  /** Đạo Tâm that counts (D103: under the ceiling of the Nghiệp band); omitted = `MAJOR_EVENT.DEFAULT_DAO_TAM` */
+  daoTam?: number;
   nFail: number;
   fromStage: number;
   toStage: number;
@@ -141,6 +149,8 @@ interface Session {
   answers: Map<string, ColdServerMessage>;
   /** quality of the breakthrough pill waiting for the next attempt (D90); session-only, not persisted */
   pill: number | null;
+  /** Đạo Tâm last sent to the client (-1 = nothing sent yet); `dao_tam` goes out when the value that counts changes (D103) */
+  lastSentDao: number;
   /** a major event (Tâm Ma / Lôi Kiếp, D97) is running for this character */
   event: { requestId: string; chance: number } | null;
   /** sim time until which the major breakthrough is locked (D97), null = not locked; persisted as the remaining time */
@@ -262,6 +272,7 @@ export class ProgressionService {
       tokenMs: nowMs,
       answers: new Map(),
       pill: null,
+      lastSentDao: -1,
       event: null,
       lockUntilMs: null,
     });
@@ -349,6 +360,105 @@ export class ProgressionService {
   }
   recordOf(entityId: number): ProgressRecord | null {
     return this.sessions.get(entityId)?.rec ?? null;
+  }
+  /** Alchemy mastery points (0..100) of a recipe key (D108); 0 for a character without any or before its profile loads. */
+  masteryOf(entityId: number, recipeKey: string): number {
+    return this.sessions.get(entityId)?.rec?.craftMastery?.[recipeKey] ?? 0;
+  }
+  /** The next craft nonce of a character (never repeats, persisted): the only thing a craft roll is seeded from besides the server seed. Null when not loaded. */
+  takeCraftNonce(entityId: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const n = (s.rec.craftNonce ?? 0) + 1;
+    s.rec = { ...s.rec, craftNonce: n };
+    s.dirty = true;
+    void this.save(s);
+    return n;
+  }
+  /** Has this character already used `requestId` for a craft command (one of its last `craftRequests` ids)? */
+  seenCraftRequest(entityId: number, requestId: string): boolean {
+    return this.sessions.get(entityId)?.rec?.craftRequests?.includes(requestId) ?? false;
+  }
+  /** Remember a craft requestId (a ring of the last `keep`), persisted. */
+  rememberCraftRequest(entityId: number, requestId: string, keep: number): void {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return;
+    const ring = [...(s.rec.craftRequests ?? []).filter((x) => x !== requestId), requestId].slice(-keep);
+    s.rec = { ...s.rec, craftRequests: ring };
+    s.dirty = true;
+    void this.save(s);
+  }
+  /** All the character's mastery entries (recipe key -> points). */
+  masteryAll(entityId: number): Readonly<Record<string, number>> {
+    return this.sessions.get(entityId)?.rec?.craftMastery ?? {};
+  }
+  /** Add mastery points to a recipe (capped at `max`), saved like every progression change. Returns the new total, or null when not loaded. */
+  addMastery(entityId: number, recipeKey: string, points: number, max: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const cur = s.rec.craftMastery?.[recipeKey] ?? 0;
+    const next = Math.min(max, Math.max(0, cur + Math.trunc(points)));
+    if (next !== cur) {
+      s.rec = { ...s.rec, craftMastery: { ...s.rec.craftMastery, [recipeKey]: next } };
+      s.dirty = true;
+      void this.save(s);
+    }
+    return next;
+  }
+
+  // ------------------------------------------------------------------ Nghiệp Lực / Đạo Tâm (D103)
+  /** Nghiệp Lực K of a joined player (0 until the profile is loaded). */
+  karmaOf(entityId: number): number {
+    return this.sessions.get(entityId)?.rec?.karma ?? 0;
+  }
+  /** The Đạo Tâm that counts for a joined player: the stored value under the ceiling of its Nghiệp band (the start value until loaded). */
+  daoTamOf(entityId: number): number {
+    const r = this.sessions.get(entityId)?.rec;
+    return r ? effectiveDaoTam(r.daoTam ?? DAO_TAM.START, r.karma) : DAO_TAM.START;
+  }
+  /**
+   * What the Tâm Ma needs (docs/01 §5.3): `tamMaStrength(inputs.daoTam, inputs.karma)`, plus the number of Nghiệp Ảnh shadows. This is the
+   * adapter the major-breakthrough module calls instead of its provisional constant.
+   */
+  tamMaInputs(entityId: number): { karma: number; daoTam: number; nghiepAnh: number } {
+    const karma = this.karmaOf(entityId);
+    return { karma, daoTam: this.daoTamOf(entityId), nghiepAnh: nghiepAnhCount(karma) };
+  }
+  /**
+   * Apply a documented K event (docs/14 §3.3) to a joined player. `day` is the server day number (the daily gain budget resets when it
+   * changes). Returns the new K and the change, or null when the profile is not loaded. Persisted like every progression change.
+   */
+  applyKarma(entityId: number, event: KarmaEventId, day: number): { karma: number; delta: number } | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const r = s.rec;
+    const used = r.karmaGain && r.karmaGain.day === day ? r.karmaGain.gained : 0;
+    const out = applyKarmaEvent(r.karma, event, used);
+    if (out.delta === 0 && out.gained === 0) return { karma: r.karma, delta: 0 };
+    s.rec = {
+      ...r,
+      karma: out.karma,
+      karmaGain:
+        out.gained > 0 || (r.karmaGain && r.karmaGain.day === day) ? { day, gained: used + out.gained } : r.karmaGain,
+    };
+    this.changed(s);
+    return { karma: out.karma, delta: out.delta };
+  }
+  /** Change the stored Đạo Tâm by `delta` (clamped 0..100). Returns the value that counts afterwards, or null when not loaded. */
+  adjustDaoTam(entityId: number, delta: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const next = clampDaoTam((s.rec.daoTam ?? DAO_TAM.START) + delta);
+    if (next !== (s.rec.daoTam ?? DAO_TAM.START)) {
+      s.rec = { ...s.rec, daoTam: next };
+      this.changed(s);
+    }
+    return this.daoTamOf(entityId);
+  }
+  private changed(s: Session): void {
+    s.dirty = true;
+    void this.save(s);
+    this.queueState(s);
   }
   /**
    * A breakthrough pill (D90) of `quality` is drunk: its bonus applies to the NEXT breakthrough attempt of this character. One at a
@@ -513,6 +623,7 @@ export class ProgressionService {
         realm: r.realm,
         subRealm: r.subRealm,
         karma: r.karma,
+        daoTam: effectiveDaoTam(r.daoTam ?? DAO_TAM.START, r.karma),
         nFail: r.nFail,
         fromStage: plan.fromStage,
         toStage: plan.toStage,
@@ -742,6 +853,11 @@ export class ProgressionService {
     s.lastSentMs = nowMs ?? s.lastSentMs;
     s.lastSentExp = s.rec.exp;
     this.outbox.push({ entityId: s.entityId, msg: this.stateMsg(s, s.rec) });
+    const dao = effectiveDaoTam(s.rec.daoTam ?? DAO_TAM.START, s.rec.karma);
+    if (dao !== s.lastSentDao) {
+      s.lastSentDao = dao;
+      this.outbox.push({ entityId: s.entityId, msg: { type: 'dao_tam', daoTam: dao } });
+    }
   }
 
   /**

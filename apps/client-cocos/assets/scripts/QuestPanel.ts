@@ -104,7 +104,7 @@ export class QuestPanel {
     this.logTitle.style.fontWeight = 'bold';
     const close = document.createElement('button');
     close.textContent = '×';
-    close.title = 'Đóng (J)';
+    close.title = core.t('quest.panel.close_hint');
     Object.assign(close.style, BTN);
     close.addEventListener('click', () => this.toggle(false));
     head.append(this.logTitle, close);
@@ -166,7 +166,7 @@ export class QuestPanel {
 
   private send(op: number, arg: string): boolean {
     const ok = this.hooks.send(op, arg, this.nextId++ & 0xffff);
-    if (!ok) this.say('Chưa kết nối máy chủ.', 'error');
+    if (!ok) this.say(core.t('chat.err.not_connected'), 'error');
     return ok;
   }
 
@@ -177,7 +177,10 @@ export class QuestPanel {
     const out: { label: string; run: () => void }[] = [];
     for (const v of this.model.list([core.QuestStatus.Ready])) {
       if (v.def.turnIn === near.key)
-        out.push({ label: `Trả nhiệm vụ: ${v.name}`, run: () => void this.send(core.QuestOp.Claim, v.id) });
+        out.push({
+          label: core.t('quest.panel.action_claim', { name: v.name }),
+          run: () => void this.send(core.QuestOp.Claim, v.id),
+        });
     }
     const talk = this.model
       .active()
@@ -190,10 +193,16 @@ export class QuestPanel {
           ),
       );
     if (talk)
-      out.push({ label: `Nói chuyện với ${near.name}`, run: () => void this.send(core.QuestOp.Talk, near.key) });
+      out.push({
+        label: core.t('quest.panel.action_talk', { npc: near.name }),
+        run: () => void this.send(core.QuestOp.Talk, near.key),
+      });
     for (const v of this.model.available()) {
       if (v.def.giver === near.key)
-        out.push({ label: `Nhận: ${v.name}`, run: () => void this.send(core.QuestOp.Accept, v.id) });
+        out.push({
+          label: core.t('quest.panel.action_accept', { name: v.name }),
+          run: () => void this.send(core.QuestOp.Accept, v.id),
+        });
     }
     return out;
   }
@@ -243,7 +252,10 @@ export class QuestPanel {
       frag.appendChild(
         this.text(v.name, v.status === core.QuestStatus.Ready ? '#8fe0a0' : GOLD, { fontWeight: 'bold' }),
       );
-      const first = v.status === core.QuestStatus.Ready ? `Trả tại ${v.goToName}` : (v.lines[0] ?? '');
+      const first =
+        v.status === core.QuestStatus.Ready
+          ? core.t('quest.panel.turn_in_at', { npc: v.goToName })
+          : (v.lines[0] ?? '');
       frag.appendChild(this.text(first, MUTED));
     }
     if (acts.length) {
@@ -260,61 +272,74 @@ export class QuestPanel {
   private fmt(s: number): string {
     const h = Math.floor(s / 3600);
     const m = Math.floor((s % 3600) / 60);
-    return h >= 24 ? `${Math.floor(h / 24)} ngày ${h % 24} giờ` : `${h} giờ ${m} phút`;
+    return h >= 24
+      ? core.t('quest.panel.duration_days', { d: Math.floor(h / 24), h: h % 24 })
+      : core.t('quest.panel.duration_hours', { h, m });
   }
 
   private drawLog(): void {
     this.drawnLog = this.model.version;
     const reset = this.model.resetIn(performance.now());
-    this.logTitle.textContent = `Nhiệm vụ (${this.model.completedCount()} đã xong)`;
+    this.logTitle.textContent = core.t('quest.panel.title', { n: this.model.completedCount() });
     const frag = document.createDocumentFragment();
     const heading = (s: string): HTMLDivElement => this.text(s, GOLD, { margin: '8px 0 2px', fontWeight: 'bold' });
     frag.appendChild(
-      this.text(
-        `Làm mới nhật thường sau ${this.fmt(reset.daily)}, chu thường sau ${this.fmt(reset.weekly)} (05:00 giờ Việt Nam)`,
-        MUTED,
-        { fontSize: '11px' },
-      ),
+      this.text(core.t('quest.panel.reset', { daily: this.fmt(reset.daily), weekly: this.fmt(reset.weekly) }), MUTED, {
+        fontSize: '11px',
+      }),
     );
 
-    frag.appendChild(heading('Đang làm'));
+    frag.appendChild(heading(core.t('quest.panel.active')));
     const act = this.model.active();
-    if (act.length === 0) frag.appendChild(this.text('Chưa nhận nhiệm vụ nào. Đến gặp NPC có dấu "!".', MUTED));
+    if (act.length === 0) frag.appendChild(this.text(core.t('quest.panel.none_active'), MUTED));
     for (const v of act) {
       const box = document.createElement('div');
       Object.assign(box.style, { padding: '4px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' });
       const top = document.createElement('div');
       Object.assign(top.style, { display: 'flex', alignItems: 'center' });
       const name = this.text(
-        `${v.status === core.QuestStatus.Ready ? '? ' : ''}${v.name} · ${v.type}`,
+        core.t('quest.panel.active_row', {
+          mark: v.status === core.QuestStatus.Ready ? '? ' : '',
+          name: v.name,
+          type: v.type,
+        }),
         v.status === core.QuestStatus.Ready ? '#8fe0a0' : '#f0f0f5',
         { flex: '1 1 auto', fontWeight: 'bold' },
       );
       top.append(
         name,
-        this.btn(this.model.pinned === v.id ? 'Bỏ ghim' : 'Ghim', () => this.model.pin(v.id)),
-        this.btn('Bỏ', () => void this.send(core.QuestOp.Abandon, v.id)),
+        this.btn(this.model.pinned === v.id ? core.t('quest.panel.unpin') : core.t('quest.panel.pin'), () =>
+          this.model.pin(v.id),
+        ),
+        this.btn(core.t('quest.panel.abandon'), () => void this.send(core.QuestOp.Abandon, v.id)),
       );
       box.appendChild(top);
       box.appendChild(this.text(v.desc, MUTED, { fontSize: '11px' }));
       for (const l of v.lines) box.appendChild(this.text(`  ${l}`));
       if (v.goTo)
         box.appendChild(
-          this.text(`→ ${v.status === core.QuestStatus.Ready ? 'Trả nhiệm vụ' : 'Gặp'} ${v.goToName}`, '#7fd4ff'),
+          this.text(
+            core.t(v.status === core.QuestStatus.Ready ? 'quest.panel.go_turn_in' : 'quest.panel.go_meet', {
+              npc: v.goToName,
+            }),
+            '#7fd4ff',
+          ),
         );
-      box.appendChild(this.text(`Thưởng: ${v.reward}`, GOLD, { fontSize: '11px' }));
+      box.appendChild(this.text(core.t('quest.panel.reward', { reward: v.reward }), GOLD, { fontSize: '11px' }));
       frag.appendChild(box);
     }
 
     const av = this.model.available();
-    frag.appendChild(heading(`Có thể nhận (${av.length})`));
-    if (av.length === 0) frag.appendChild(this.text('Không có nhiệm vụ mới lúc này.', MUTED));
+    frag.appendChild(heading(core.t('quest.panel.available', { n: av.length })));
+    if (av.length === 0) frag.appendChild(this.text(core.t('quest.panel.none_available'), MUTED));
     for (const v of av) {
       const row = document.createElement('div');
       Object.assign(row.style, { padding: '3px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' });
-      row.appendChild(this.text(`! ${v.name} · ${v.type} · gặp ${v.goToName}`, '#f0f0f5'));
+      row.appendChild(
+        this.text(core.t('quest.panel.available_row', { name: v.name, type: v.type, npc: v.goToName }), '#f0f0f5'),
+      );
       row.appendChild(this.text(v.desc, MUTED, { fontSize: '11px' }));
-      row.appendChild(this.text(`Thưởng: ${v.reward}`, GOLD, { fontSize: '11px' }));
+      row.appendChild(this.text(core.t('quest.panel.reward', { reward: v.reward }), GOLD, { fontSize: '11px' }));
       frag.appendChild(row);
     }
     this.logBody.replaceChildren(frag);

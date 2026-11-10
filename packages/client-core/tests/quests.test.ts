@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { QUEST_DEFS, QUESTS, QuestStatus } from '@vgtd/shared';
 import { QuestReason, type QuestStateMsg } from '@vgtd/protocol';
-import { ChatLog, QUEST_REASON_TEXT, QuestModel, objectiveLine, parseChatInput, rewardLine } from '../src/index.js';
+import { ChatLog, QUEST_DESC_KEY, QUEST_NAME_KEY, QUEST_REASON_KEY, questReasonText, QuestModel, questName, objectiveLine, parseChatInput, rewardLine } from '../src/index.js';
 
 /** A state where every quest has `status` except the listed overrides. */
 const state = (over: Record<string, { status: number; progress?: number[] }> = {}, base = QuestStatus.Locked): QuestStateMsg => ({
@@ -106,7 +106,7 @@ describe('QuestModel', () => {
     const m = new QuestModel();
     expect(m.applyResult({ type: 'quest_result', clientMsgId: 1, reason: QuestReason.Ok })).toBeNull();
     for (const r of Object.values(QuestReason).filter((x): x is number => typeof x === 'number' && x > 0))
-      expect(QUEST_REASON_TEXT[r], `reason ${r}`).toBeTruthy();
+      expect(questReasonText(r), `reason ${r}`).toBeTruthy();
     expect(m.applyResult({ type: 'quest_result', clientMsgId: 1, reason: QuestReason.TooFar })).toBe('Bạn đứng quá xa NPC.');
     expect(m.applyResult({ type: 'quest_result', clientMsgId: 1, reason: 99 })).toMatch(/mã 99/);
   });
@@ -131,6 +131,18 @@ describe('QuestModel', () => {
     expect(rewardLine(QUEST_DEFS.find((d) => d.id === 'q_sect_tuan_tra')!)).toMatch(/10 Cống hiến/);
     // no price / currency wording in any reward line
     for (const d of QUEST_DEFS) expect(rewardLine(d)).not.toMatch(/\$|USD|VND|mua|giá/i);
+  });
+});
+
+describe('quest text is in the string table (D104)', () => {
+  it('every quest has a name and a description key, every refusal reason has a key', () => {
+    for (const d of QUEST_DEFS) {
+      expect(QUEST_NAME_KEY[d.id], d.id).toBeTruthy();
+      expect(QUEST_DESC_KEY[d.id], d.id).toBeTruthy();
+      expect(questName(d.id)).not.toBe(d.id);
+    }
+    for (const r of Object.values(QuestReason).filter((x): x is number => typeof x === 'number'))
+      expect(r in QUEST_REASON_KEY, `reason ${r}`).toBe(true);
   });
 });
 

@@ -83,6 +83,7 @@ export class FirstSessionHud {
   private readonly hint: Label;
   private scale = 1;
   private doneForS = 0;
+  private suppressed = false;
 
   constructor(
     hudParent: Node,
@@ -135,6 +136,12 @@ export class FirstSessionHud {
     };
   }
 
+  /** The server-side tutorial (D105) took over: hide this checklist (it keeps tracking, so its debug hook stays valid). */
+  suppress(on: boolean): void {
+    this.suppressed = on;
+    if (on) this.root.active = false;
+  }
+
   /** Top-left, below the perf HUD, shrunk on narrow canvases. */
   layout(canvasW: number, canvasH: number): void {
     this.scale = Math.min(1, (canvasW - 2 * MARGIN) / PANEL_W);
@@ -157,11 +164,11 @@ export class FirstSessionHud {
     const v = this.tracker.view();
     if (v.done) {
       this.doneForS += dt;
-      this.root.active = this.doneForS < SHOW_DONE_S;
-    }
+      this.root.active = this.doneForS < SHOW_DONE_S && !this.suppressed;
+    } else if (this.suppressed) this.root.active = false;
     this.title.string = v.done
-      ? 'Hành trình đầu tiên: hoàn thành!'
-      : `Hành trình đầu tiên  ${v.completed}/${v.steps.length}`;
+      ? core.t('firstsession.hud.title_done')
+      : core.t('firstsession.hud.title', { done: v.completed, total: v.steps.length });
     let hint = '';
     for (let k = 0; k < v.steps.length; k++) {
       const s = v.steps[k]!;

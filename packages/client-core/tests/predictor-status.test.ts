@@ -143,6 +143,6 @@ describe('status HUD data (D94)', () => {
     expect(items[1]!.note).toBe('-50%');
     expect(items[3]!.note).toBe('80');
     expect(statusMaskGlyphs(0)).toBe('');
-    expect(statusMaskGlyphs(1 | 4)).toBe('TROI DOC');
+    expect(statusMaskGlyphs(1 | 4)).toBe('TRÓI ĐỘC');
   });
 });

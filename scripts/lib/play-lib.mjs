@@ -1,10 +1,21 @@
 // Pure helpers of `npm run play` (scripts/play.mjs): argument parsing, "does the web client need a rebuild", preflight checks, URLs and
 // the controls cheat sheet. No process spawning here, so everything is unit-tested (apps/client-cocos/test/play-lib.test.ts).
-import { existsSync, readdirSync, rmSync, rmdirSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync, readdirSync, rmSync, rmdirSync, statSync } from 'node:fs';
 import { homedir, networkInterfaces } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 
-export const DEFAULTS = Object.freeze({ clientPort: 8456, serverPort: 8080, minNodeMajor: 18, buildTimeoutMin: 10 });
+export const DEFAULTS = Object.freeze({
+  clientPort: 8456,
+  serverPort: 8080,
+  minNodeMajor: 18,
+  /** a build is stopped after this many minutes WITHOUT any sign of life (no new log line, no file written by the editor) */
+  buildTimeoutMin: 5,
+  /** the same, for the FIRST build (no asset database yet: the editor imports every asset, which is silent and slow) */
+  firstBuildTimeoutMin: 20,
+  /** hard cap on the whole build, however alive it looks */
+  buildMaxMin: 120,
+});
 
 export const USAGE = `npm run play -- [options]
 
@@ -18,7 +29,8 @@ export const USAGE = `npm run play -- [options]
   --server-port <n>    game server port, default ${DEFAULTS.serverPort}
                        a busy DEFAULT port is replaced by the next free one and the URLs show the real port; a busy port you
                        asked for explicitly is an error
-  --build-timeout <m>  give up on a web client build after <m> minutes (default ${DEFAULTS.buildTimeoutMin}); a normal build takes 1-2 minutes
+  --build-timeout <m>  give up on a web client build after <m> minutes with NO progress (no new build-log line, no file written by the
+                       editor; default ${DEFAULTS.buildTimeoutMin}, ${DEFAULTS.firstBuildTimeoutMin} for the first build, which imports every asset); a normal build takes 1-2 minutes
   --smoke              start, wait until healthy, print the URLs, then stop again (used to check the setup / CI)
   --memory             keep nothing between runs (STORE=memory). Default: STORE=file, accounts / characters / bags in
                        ./.vgtd-data (or $DATA_DIR) survive a restart
@@ -55,6 +67,7 @@ export function parseArgs(argv) {
     clientPort: DEFAULTS.clientPort,
     serverPort: DEFAULTS.serverPort,
     buildTimeoutMin: DEFAULTS.buildTimeoutMin,
+    buildTimeoutExplicit: false,
     // true when the port was given on the command line: an explicit port is never moved, a busy one is an error
     clientPortExplicit: false,
     serverPortExplicit: false,
@@ -104,7 +117,10 @@ export function parseArgs(argv) {
         const m = raw !== undefined && /^\d+$/.test(raw) ? Number(raw) : 0;
         if (m < 1 || m > 120)
           errors.push(`--build-timeout needs minutes 1-120 (got ${raw === undefined ? 'nothing' : `"${raw}"`})`);
-        else opts.buildTimeoutMin = m;
+        else {
+          opts.buildTimeoutMin = m;
+          opts.buildTimeoutExplicit = true;
+        }
         break;
       }
       case '--port':
@@ -227,6 +243,17 @@ export const variantOf = (opts) => (opts.dev ? 'dev' : 'release');
  * @returns {{ rebuild: boolean, code: 'forced' | 'none' | 'variant' | 'stale' | 'ok', reason: string, file?: string }}
  */
 export function needsRebuild(i) {
+  const r = decideRebuild(i);
+  // timestamps moved (a `git switch`, a merge, a checkout touch every file) but the CONTENT is what the build was made from: reuse it
+  if (r.code === 'stale' && i.sameSources === true)
+    return {
+      rebuild: false,
+      code: 'ok',
+      reason: 'the build is up to date (source timestamps changed, content did not)',
+    };
+  return r;
+}
+function decideRebuild(i) {
   if (i.force) return { rebuild: true, code: 'forced', reason: 'forced by --rebuild' };
   if (!i.build.exists) return { rebuild: true, code: 'none', reason: 'no build yet' };
   if (i.build.variant !== i.wantedVariant)
@@ -463,4 +490,141 @@ export function openCommand(platform, target) {
   if (platform === 'win32') return ['rundll32', ['url.dll,FileProtocolHandler', target]];
   if (platform === 'darwin') return ['open', [target]];
   return ['xdg-open', [target]];
+}
+
+// ------------------------------------------------------------------------------------------------ build progress
+/**
+ * Content fingerprint of the build inputs: sha1 over every input's repo-relative path and size, plus the CONTENT of every file up to 1 MiB
+ * (code, scenes, small assets; a big binary asset is covered by path + size). Stored next to the build; when the timestamps say "stale" but the
+ * fingerprint still matches, the build is reused (switching branches, merging, or a `touch` must not trigger a 1-60 minute rebuild, and
+ * neither may a change that only the game SERVER cares about: `apps/server` is not an input at all).
+ * @param {string} root repo root
+ * @param {readonly string[]} [dirs]
+ * @returns {string} hex digest
+ */
+export function sourceFingerprint(root, dirs = SOURCE_DIRS) {
+  const h = createHash('sha1');
+  const files = [];
+  const visit = (abs) => {
+    const rel = relative(root, abs).split(sep).join('/');
+    let st;
+    try {
+      st = statSync(abs);
+    } catch {
+      return;
+    }
+    if (st.isDirectory()) {
+      const base = rel.split('/').pop();
+      if (SKIP_SEGMENTS.has(base) || GENERATED_PREFIXES.includes(rel)) return;
+      for (const name of readdirSync(abs).sort()) visit(join(abs, name));
+    } else if (isBuildInput(rel)) files.push([rel, abs, st.size]);
+  };
+  for (const d of dirs) visit(join(root, d));
+  files.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+  for (const [rel, abs, size] of files) {
+    h.update(`${rel}\0${size}\0`);
+    if (size <= 1_048_576) {
+      try {
+        h.update(readFileSync(abs));
+      } catch {
+        h.update('?');
+      }
+    }
+  }
+  return h.digest('hex');
+}
+
+/** True when the editor has no asset database for the project yet (no `library/`): its first build imports every asset, silently, for minutes. */
+export function isFirstBuild(clientDir) {
+  const lib = join(clientDir, 'library');
+  try {
+    return !statSync(lib).isDirectory() || readdirSync(lib).length === 0;
+  } catch {
+    return true;
+  }
+}
+
+/**
+ * Latest modification time of the places the editor writes while it imports / builds: `library/` and its immediate sub-directories (the
+ * imported assets land in two-character folders), `temp/`, and the build output. A growing number means the editor is alive even while it
+ * prints nothing. 0 when none exists.
+ */
+export function editorActivityMs(clientDir) {
+  let best = 0;
+  const touch = (p) => {
+    try {
+      best = Math.max(best, statSync(p).mtimeMs);
+    } catch {
+      /* missing */
+    }
+  };
+  for (const top of ['library', 'temp', 'build/web-mobile']) {
+    const dir = join(clientDir, top);
+    touch(dir);
+    let names = [];
+    try {
+      names = readdirSync(dir);
+    } catch {
+      continue;
+    }
+    for (const n of names.length > 600 ? names.slice(0, 600) : names) touch(join(dir, n));
+  }
+  return best;
+}
+
+/**
+ * Progress-aware build watchdog. The build is "alive" while something new appears: `touch(now)` on every log line and whenever the editor's
+ * files change. `check(now)` says `'idle'` after `idleMs` without a sign of life, `'max'` after `maxMs` in total, else null.
+ */
+export function makeBuildWatchdog({ idleMs, maxMs, now }) {
+  const startedAt = now;
+  let lastAt = now;
+  return {
+    touch(t) {
+      if (t > lastAt) lastAt = t;
+    },
+    check(t) {
+      if (t - startedAt >= maxMs) return 'max';
+      if (t - lastAt >= idleMs) return 'idle';
+      return null;
+    },
+    idleSec: (t) => Math.max(0, Math.round((t - lastAt) / 1000)),
+    elapsedSec: (t) => Math.max(0, Math.round((t - startedAt) / 1000)),
+  };
+}
+
+/** How many idle minutes a build gets: what the user asked for, else the default (much more for the first, asset-importing build). */
+export function idleLimitMin(opts, firstBuild) {
+  if (opts.buildTimeoutExplicit) return opts.buildTimeoutMin;
+  return firstBuild ? DEFAULTS.firstBuildTimeoutMin : DEFAULTS.buildTimeoutMin;
+}
+
+/**
+ * Did the build produce a usable client? Cocos Creator's exit code is unreliable (it reports 36 after a good build, 0 after errors): the
+ * artifact is the truth. `build-web.mjs` deletes `index.html` before building, so one that exists was made by THIS build. Success = it exists
+ * AND (exit code 0, or the build log said "build Task ... Finished").
+ * @returns {{ ok: boolean, note: string }}
+ */
+export function buildOutcome({ code, indexExists, sawFinished }) {
+  if (!indexExists) return { ok: false, note: 'index.html is missing' };
+  if (code === 0) return { ok: true, note: '' };
+  if (sawFinished)
+    return {
+      ok: true,
+      note: `the editor exited with code ${code} but its log says the build finished and the output is there`,
+    };
+  return { ok: false, note: `exit code ${code} and no "Finished" line in the build log` };
+}
+
+/**
+ * What the build is doing, from a log line: 'import' (asset database), 'build' (bundling / compiling), 'finished', or null when the line says
+ * nothing new. Error / warning lines never name a phase (an error that mentions "import" is not the import phase).
+ */
+export function buildPhaseOf(line) {
+  const t = line.trim();
+  if (/\b(error|failed|exception|warn(ing)?)\b/i.test(t)) return null;
+  if (/build Task .* Finished/.test(t)) return 'finished';
+  if (/\b(import(ing)?|refresh(ing)?|asset-?db)\b/i.test(t)) return 'import';
+  if (/\b(build|bundle|compil|minif|pack)/i.test(t)) return 'build';
+  return null;
 }

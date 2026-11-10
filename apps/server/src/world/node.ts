@@ -23,12 +23,17 @@ import {
   toUW,
   type PathId,
   type RngState,
+  type ZoneSpawnTable,
   MajorResult,
   COLLIDER_RADIUS_TILES,
 } from '@vgtd/shared';
 import {
   BreakthroughOutcome,
+  PROGRESSION_LIMITS,
+  ChatReason,
   ErrorCode,
+  InvOp,
+  InvReason,
   ProtocolError,
   decode,
   encode,
@@ -71,12 +76,15 @@ import type { SecurityEvent } from './security-log.js';
 import type { Outbound, ProgressionService } from '../progression/service.js';
 import type { ChatService } from '../chat/service.js';
 import type { PartyService } from '../party/service.js';
+import { CraftService, type CraftLogEntry } from '../craft/service.js';
+import type { TutorialService } from '../tutorial/service.js';
 import type { TradeService } from '../trade/service.js';
 import type { SectService } from '../sect/service.js';
 import type { FriendService } from '../friends/service.js';
 import type { QuestService } from '../quests/service.js';
 import { stageOf as recordStage } from '../progression/state.js';
 import type { MarketService } from '../market/service.js';
+import type { TelemetryService } from '../telemetry/service.js';
 import {
   CombatSystem,
   MobAttackSystem,
@@ -237,6 +245,8 @@ export interface WorldNodeOptions {
   chat?: ChatService;
   /** party module (D93): invite / accept / leave / kick, Party chat audience, shared kill credit; absent = party commands are rejected as unexpected */
   party?: PartyService;
+  /** tutorial / FTUE tracker (D105): server-decided first-session steps, persisted per account; absent = tutorial messages are rejected as unexpected */
+  tutorial?: TutorialService;
   /** direct trade module (D102): needs `inventory`; absent = trade commands are rejected as unexpected */
   trade?: TradeService;
   /** NPC sect module (D98): join / leave at the sect NPC, Cống hiến from kills, the library; absent = sect commands are rejected as unexpected */
@@ -245,8 +255,15 @@ export interface WorldNodeOptions {
   friends?: FriendService;
   /** quests module (D107): needs `progression` and `inventory`; absent = quest commands are rejected as unexpected */
   quests?: QuestService;
+  /**
+   * Minimal alchemy (D108): needs `inventory` and `progression`. `true` = the furnace NPC in the middle of the spawn area; absent / false = no crafting
+   * (craft messages are rejected as unexpected).
+   */
+  craft?: boolean | { furnaceAt?: { i: number; j: number }; seed?: number; onLog?: (e: CraftLogEntry) => void };
   /** Vạn Bảo Lâu (D112): list / search / buy / cancel with escrow and fee + tax through the ledger; absent = market commands are rejected as unexpected */
   market?: MarketService;
+  /** telemetry pipeline (D109): session / progression / combat / drop events; absent = nothing is recorded */
+  telemetry?: TelemetryService;
   /** Enable server-authoritative combat (D75). Omitted = the node only validates casts and answers `skill_result` with no hits. */
   combat?: CombatOptions;
   /** sim time a released player id waits before it can be reused (default `WORLD_CONFIG.PLAYER_ID_QUARANTINE_MS`) */
@@ -263,10 +280,25 @@ export interface WorldNodeOptions {
    */
   wallClock?: () => number;
   /** spawn monsters (D74): `true` = default zones and density 1; omit / false = a world without mobs */
-  mobs?: boolean | { zones?: readonly MobZone[]; density?: number };
+  mobs?:
+    | boolean
+    | {
+        zones?: readonly MobZone[];
+        density?: number;
+        /** spawn tables override (the class-balance harness spawns exactly one mob of a chosen def, D115); default `ZONE_SPAWN_TABLES` */
+        tables?: readonly ZoneSpawnTable[];
+        /** centre of the mob area for the tier bands (tiles); default: the centre of the bounding box of `zones` */
+        center?: { i: number; j: number };
+      };
   /** inventory + drop sink (D77): loads an account's inventory on join and saves it on leave; omit = no inventory */
   inventory?: InventoryService;
 }
+
+/** The phases `WorldNode.profile` times, in tick order. */
+export const TICK_PHASES = ['pre', 'sim', 'post', 'mobs', 'events', 'aoi', 'snap'] as const;
+export type TickPhase = (typeof TICK_PHASES)[number];
+/** A tick longer than this is "slow": its biggest phase is counted in `profile.slowBy` (the 20 Hz period). */
+const SLOW_TICK_MS = 50;
 
 const BAND_PERIOD = [1, 2, 4] as const;
 const clock = (): number => Number(process.hrtime.bigint()) / 1e6;
@@ -335,6 +367,20 @@ export class WorldNode {
   readonly tickIntervalMs: number[] = [];
   /** cumulative ms per tick phase (sim step / AOI / snapshot encode+send) and the slowest single sample of each */
   readonly phases = { stepMs: 0, aoiMs: 0, snapMs: 0, aoiTicks: 0, maxStepMs: 0, maxAoiMs: 0, maxSnapMs: 0 };
+  /**
+   * Per-phase duration samples (ms, capped like `tickMs`) and, for every tick over the budget, which phase was the biggest (profiling, D106).
+   * Phases: `pre` (hold scan, inbox drain, combat pre-step), `sim` (`step`), `post` (combat post-step), `mobs` (mob AI + attacks),
+   * `events` (event handling, progression / chat / party ticks, anti-cheat kicks), `aoi`, `snap` (inventory flush + snapshot encode + send).
+   */
+  readonly profile: {
+    samples: Record<TickPhase, number[]>;
+    slowTicks: number;
+    slowBy: Record<TickPhase, number>;
+  } = {
+    samples: { pre: [], sim: [], post: [], mobs: [], events: [], aoi: [], snap: [] },
+    slowTicks: 0,
+    slowBy: { pre: 0, sim: 0, post: 0, mobs: 0, events: 0, aoi: 0, snap: 0 },
+  };
   private nextId = 1;
   /** released player ids, oldest first, with the sim time from which each may be reused */
   private readonly freeIds: { id: number; reusableAtMs: number }[] = [];
@@ -372,11 +418,15 @@ export class WorldNode {
   private readonly shadows: ShadowRegistry | null;
   readonly chat: ChatService | undefined;
   readonly party: PartyService | undefined;
+  readonly tutorial: TutorialService | undefined;
   readonly trade: TradeService | undefined;
   readonly sect: SectService | undefined;
   readonly friends: FriendService | undefined;
   readonly quests: QuestService | undefined;
+  /** alchemy (D108); null when the node runs without it */
+  readonly craft: CraftService | null = null;
   readonly market: MarketService | undefined;
+  readonly telemetry: TelemetryService | undefined;
   /**
    * players who joined and have not been sent the World chat history yet: the lines that existed AT JOIN TIME, sent on the next tick (after
    * `hello_ack`). A snapshot, so a line spoken between the join and that tick is delivered live only, never twice.
@@ -471,6 +521,8 @@ export class WorldNode {
       grantTuVi: (id, amount) => this.progression?.grantTuVi(id, amount, this.world.timeMs) ?? 0,
     });
     this.party = opts.party;
+    this.tutorial = opts.tutorial;
+    this.telemetry = opts.telemetry;
     this.party?.attach({
       deliver: (id, m) => {
         const c = this.clients.get(id);
@@ -508,10 +560,29 @@ export class WorldNode {
     this.inventory = opts.inventory ?? null;
     this.invSync = this.inventory ? new InventorySync(this.inventory) : null;
     this.inventory?.subscribe((owner) => this.invSync?.markDirty(owner));
+    if (opts.craft && this.inventory && this.progression) {
+      const co = opts.craft === true ? {} : opts.craft;
+      this.craft = new CraftService({
+        inventory: this.inventory,
+        progression: this.progression,
+        furnaceAt: co.furnaceAt ?? { i: this.spawn.i0 + this.spawn.side / 2, j: this.spawn.j0 + this.spawn.side / 2 },
+        seed: co.seed ?? seed,
+        onLog: co.onLog,
+        isAlive: (id) => (this.byId.get(id)?.hp ?? 1) > 0,
+        tickOf: () => this.world.tick,
+      });
+    }
     const mo = opts.mobs;
     if (mo) {
       const o = mo === true ? {} : mo;
-      this.mobs = new MobManager({ seed, grid, zones: o.zones ?? defaultMobZones(n), density: o.density });
+      this.mobs = new MobManager({
+        seed,
+        grid,
+        zones: o.zones ?? defaultMobZones(n),
+        density: o.density,
+        tables: o.tables,
+        center: o.center,
+      });
       this.world = this.mobs.populate(this.world);
     } else this.mobs = null;
     // the mob manager is the combat core's default `MobPort` (combatStats + kill); `opts.combat.mobs` overrides it
@@ -541,28 +612,27 @@ export class WorldNode {
           canTarget: (casterId, mobId) => shadows?.canTarget(casterId, mobId) ?? true,
           ...opts.combat,
           mobs: mobPort,
-          onDrops:
-            sink || opts.sect || opts.quests
-              ? (e) => {
-                  if (shadows?.owns(e.mobId)) return; // a Tâm Ma shadow drops nothing
-                  sink?.handle(e);
-                  this.questKill(e.killerId, e.mobId);
-                  // a sect member's kill pays Cống hiến (D98); the kill key makes a repeated event a replay
-                  const owner = this.clients.get(e.killerId)?.accountId;
-                  if (owner !== undefined && opts.sect)
-                    opts.sect.onKill(
-                      owner,
-                      mobPort?.combatStats(e.mobId)?.dropSource ?? 'field',
-                      dropKillKey(e.mobId, this.world.tick),
-                    );
-                  opts.combat?.onDrops?.(e);
-                }
-              : (e) => {
-                  if (shadows?.owns(e.mobId)) return;
-                  opts.combat?.onDrops?.(e);
-                },
+          onDrops: (e) => {
+            if (shadows?.owns(e.mobId)) return; // a Tâm Ma shadow drops nothing and counts for nothing
+            // tutorial (D105): a kill credited to this player; a drop (something for the bag) is the `loot` step
+            this.tutorial?.note(e.killerId, 'kill');
+            this.recordKill(e.killerId, e.mobId, e.rolls.length, mobPort);
+            if (e.rolls.length > 0) this.tutorial?.note(e.killerId, 'loot');
+            sink?.handle(e);
+            this.questKill(e.killerId, e.mobId); // one event per sharing member: credit exactly that member (D107)
+            // a sect member's kill pays Cống hiến (D98); the kill key makes a repeated event a replay
+            const owner = this.clients.get(e.killerId)?.accountId;
+            if (owner !== undefined && opts.sect)
+              opts.sect.onKill(
+                owner,
+                mobPort?.combatStats(e.mobId)?.dropSource ?? 'field',
+                dropKillKey(e.mobId, this.world.tick),
+              );
+            opts.combat?.onDrops?.(e);
+          },
         })
       : null;
+    if (this.combat && this.mobs) this.mobs.control = this.combat.effects; // stun / root / slow / taunt from player skills (D116)
     this.mobAttacks =
       this.combat && this.mobs && opts.combat?.mobAttacks !== false
         ? new MobAttackSystem(this.ctx, this.combat, this.mobs, seed)
@@ -624,6 +694,7 @@ export class WorldNode {
       mpMax: stats?.mpMax ?? WORLD_CONFIG.PLAYER_MAX_MP,
     });
     this.inventory?.onJoin(accountId);
+    this.craft?.join(id, accountId, this.world.timeMs);
     this.invSync?.markDirty(accountId); // the joining client gets its first inv_state this tick
     this.clients.set(id, {
       id,
@@ -653,6 +724,13 @@ export class WorldNode {
       stats: emptyStats(),
     });
     this.progression?.join(id, accountId, this.world.timeMs);
+    this.telemetry?.sessionStart(accountId, classWireId(classPath));
+    if (this.tutorial) {
+      this.tutorial.join(id, accountId);
+      // the session's starting point (for the `move` step) is where the entity spawned, not wherever it is when first observed
+      const me = this.world.entities.find((e) => e.id === id);
+      if (me) this.tutorial.observe(id, me.i, me.j);
+    }
     this.party?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
     this.trade?.join({ entityId: id, accountId, name: displayName });
     this.sect?.join({ entityId: id, accountId, path: classPath });
@@ -783,10 +861,11 @@ export class WorldNode {
    * id which has since been recycled to someone else is ignored instead of removing the new owner. Internal callers (kick)
    * omit it.
    */
-  removePlayer(id: number, from?: ClientTransport): void {
+  removePlayer(id: number, from?: ClientTransport, reason: 'quit' | 'kick' = 'quit'): void {
     const c = this.clients.get(id);
     if (!c || (from !== undefined && c.transport !== from)) return;
     this.clients.delete(id);
+    this.telemetry?.sessionEnd(c.accountId, reason);
     this.inventory?.onLeave(c.accountId);
     if (this.inventory && !this.inventory.isOnline(c.accountId)) this.invSync?.forget(c.accountId);
     if (this.major?.isActive(id)) {
@@ -797,8 +876,10 @@ export class WorldNode {
       this.deliver(mj.outbound);
     }
     void this.progression?.leave(id);
+    this.craft?.leave(id);
     this.chat?.leave(id);
     this.party?.leave(id);
+    this.tutorial?.leave(id);
     this.trade?.leave(id);
     this.sect?.leave(id);
     this.friends?.leave(id);
@@ -983,7 +1064,10 @@ export class WorldNode {
       case 'input': {
         c.lastAckMs = this.world.timeMs;
         for (const p of msg.inputs) {
-          if (p.mag > 0) this.progression?.onInput(id, p.mag, this.world.timeMs);
+          if (p.mag > 0) {
+            this.progression?.onInput(id, p.mag, this.world.timeMs);
+            if (this.craft) this.deliver(this.craft.onMove(id, this.world.timeMs));
+          }
           // the packet re-sends the previous inputs; apply each seq once (uint16 wrap-aware)
           if (c.lastRecvSeq !== null && !seqNewer(p.seq, c.lastRecvSeq)) continue;
           c.lastRecvSeq = p.seq;
@@ -1001,6 +1085,7 @@ export class WorldNode {
       }
       case 'skill_cast':
         this.progression?.onCombat(id, this.world.timeMs);
+        if (this.craft) this.deliver(this.craft.onCombat(id, this.world.timeMs));
         c.inbox.push({
           kind: 'cast',
           entityId: c.id,
@@ -1008,6 +1093,7 @@ export class WorldNode {
           skillId: msg.skillId,
           targetId: msg.targetId,
           rttMs: 0,
+          recvAtMs: this.wallClock(),
           aim: msg.aim ? { i: dequantizePos(msg.aim.qi), j: dequantizePos(msg.aim.qj) } : null,
         });
         break;
@@ -1016,17 +1102,55 @@ export class WorldNode {
       case 'breakthrough_start':
         if (!this.progression) {
           this.badFrame(c, 'unexpected');
-        } else this.deliver(this.progression.handle(id, msg, this.world.timeMs));
+        } else {
+          const out = this.progression.handle(id, msg, this.world.timeMs);
+          this.deliver(out);
+          // tutorial (D105): an accepted meditation, a breakthrough the server rolled (success or failure, not a refusal)
+          for (const o of out) {
+            if (o.entityId !== id) continue;
+            if (o.msg.type === 'meditate_result' && o.msg.meditating) {
+              this.tutorial?.note(id, 'meditate');
+              this.telemetry?.emitAccount(c.accountId, 'cultivate.start');
+            } else if (
+              o.msg.type === 'breakthrough_result' &&
+              (o.msg.outcome === BreakthroughOutcome.Success || o.msg.outcome === BreakthroughOutcome.Failure)
+            ) {
+              this.tutorial?.note(id, 'breakthrough');
+              this.telemetry?.emitAccount(c.accountId, 'breakthrough.attempt', {
+                to_stage: o.msg.toStage,
+                success: o.msg.outcome === BreakthroughOutcome.Success,
+                p_success: o.msg.chance / PROGRESSION_LIMITS.CHANCE_SCALE,
+              });
+            }
+          }
+        }
+        break;
+      case 'craft_cmd':
+        if (!this.craft) {
+          this.badFrame(c, 'unexpected');
+        } else {
+          const e = this.byId.get(id);
+          this.deliver(this.craft.handle(id, msg, this.world.timeMs, e ? { i: e.i, j: e.j } : null));
+        }
         break;
       case 'chat_send':
         if (!this.chat) {
           this.badFrame(c, 'unexpected');
-        } else this.send(c, this.chat.handle(id, msg, this.world.timeMs));
+        } else {
+          const res = this.chat.handle(id, msg, this.world.timeMs);
+          this.send(c, res);
+          if (res.reason === ChatReason.Ok) this.tutorial?.note(id, 'chat');
+        }
         break;
       case 'party_cmd':
         if (!this.party) {
           this.badFrame(c, 'unexpected');
-        } else this.send(c, this.party.handle(id, msg, this.world.timeMs));
+        } else {
+          this.send(c, this.party.handle(id, msg, this.world.timeMs));
+          // tutorial (D105): being in a party with someone (the inviter's and the new member's tips both complete)
+          for (const m of this.party.membersOf(id).length > 1 ? this.party.membersOf(id) : [])
+            this.tutorial?.note(m, 'party');
+        }
         break;
       case 'trade_cmd':
         if (!this.trade) {
@@ -1046,6 +1170,11 @@ export class WorldNode {
           c.stats.badMessages++;
           this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
         } else this.send(c, this.market.handle(id, msg, this.world.timeMs));
+        break;
+      case 'tutorial_skip':
+        if (!this.tutorial) {
+          this.badFrame(c, 'unexpected');
+        } else this.tutorial.skip(id); // the answer is the state that `drain()` sends this tick
         break;
       case 'friend_cmd':
         if (!this.friends) {
@@ -1072,7 +1201,9 @@ export class WorldNode {
             },
             c.id,
           );
-          this.send(c, this.invSync.handle(c.accountId, msg, this.world.timeMs, use));
+          const res = this.invSync.handle(c.accountId, msg, this.world.timeMs, use);
+          this.send(c, res);
+          if (msg.op === InvOp.Use && res.reason === InvReason.Ok) this.tutorial?.note(id, 'item'); // tutorial (D105)
         }
         break;
       case 'ping':
@@ -1123,8 +1254,14 @@ export class WorldNode {
     }
 
     const inputs: AimedInput[] = [];
+    const wallNow = this.wallClock();
     for (const c of this.clients.values()) {
-      for (const i of c.inbox) inputs.push(i);
+      for (const i of c.inbox) {
+        // how long a cast waited for this tick (D106): the sim judges it as of its arrival
+        if (i.kind === 'cast' && i.recvAtMs !== undefined)
+          inputs.push({ ...i, ageMs: Math.max(0, wallNow - i.recvAtMs) });
+        else inputs.push(i);
+      }
       c.inbox.length = 0;
     }
     let simInputs: SimInput[] = inputs;
@@ -1133,6 +1270,7 @@ export class WorldNode {
       simInputs = pre.inputs;
       for (const res of pre.results) this.sendCombatResult(res);
     }
+    const tPre = clock();
     if (Number.isNaN(this.wall0)) this.wall0 = this.wallClock() - this.world.timeMs; // the wall clock starts counting at the first tick
     this.tickDriftMs = this.driftNow();
     const r = step(this.world, simInputs, this.ctx, NETWORK.TICK_MS, { lagMs: (id) => this.lagCreditOf(id) });
@@ -1143,6 +1281,7 @@ export class WorldNode {
       this.world = post.world;
       for (const res of post.results) this.sendCombatResult(res);
     }
+    const tPost = clock();
     // mob AI after combat, so a mob killed this tick is already despawned (and its respawn timer running)
     if (this.mobs) this.world = this.mobs.step(this.world);
     // mob attacks resolve after the AI moved the mobs: telegraphs start / land on the new positions
@@ -1152,6 +1291,7 @@ export class WorldNode {
       if (mobAtk.telegraphs.length > 0) this.sendTelegraphs(mobAtk.telegraphs);
       if (mobAtk.phases.length > 0) this.sendBossPhases(mobAtk.phases);
     }
+    const tMob = clock();
     if (this.major) {
       // Tâm Ma / Lôi Kiếp of running major breakthroughs (D97): after combat and mobs, so a killed shadow is already gone
       const mj = this.major.step(this.world);
@@ -1164,14 +1304,23 @@ export class WorldNode {
     this.metrics.ticks++;
     this.handleEvents(r.events);
     if (this.progression) this.deliver(this.progression.tick(this.world.timeMs, NETWORK.TICK_MS));
+    if (this.craft)
+      this.deliver(
+        this.craft.tick(this.world.timeMs, (id) => {
+          const e = this.byId.get(id);
+          return e ? { i: e.i, j: e.j } : null;
+        }),
+      );
     if (this.chat && this.chatHistoryDue.size) this.sendChatHistory();
     if (this.majorDue.size) this.sendMajorDue();
     this.party?.tick(this.world.timeMs, this.world.tick);
+    if (this.tutorial) this.tickTutorial();
     this.trade?.tick(this.world.timeMs);
     this.sect?.tick();
     this.friends?.tick();
     this.quests?.tick(this.world.timeMs);
     if (this.market && this.world.tick % 20 === 0) this.market.tick(); // expiry, returns and the weekly shadow report: about once a second
+    this.telemetry?.tick(this.clients.size);
     for (const e of this.world.entities) {
       if (!e.connected) {
         const c = this.clients.get(e.id);
@@ -1195,9 +1344,24 @@ export class WorldNode {
     ph.maxAoiMs = Math.max(ph.maxAoiMs, t3 - t2);
     ph.maxSnapMs = Math.max(ph.maxSnapMs, t4 - t3);
 
-    const dt = clock() - t0;
+    const tEnd = clock();
+    const dt = tEnd - t0;
     pushCapped(this.tickMs, dt, WORLD_CONFIG.TICK_SAMPLES);
+    this.recordProfile(dt, [tPre - t0, t1 - tPre, tPost - t1, tMob - tPost, t2 - tMob, t3 - t2, t4 - t3]);
     return dt;
+  }
+
+  private recordProfile(dt: number, ms: readonly number[]): void {
+    const p = this.profile;
+    let biggest = 0;
+    for (let k = 0; k < TICK_PHASES.length; k++) {
+      pushCapped(p.samples[TICK_PHASES[k]!], ms[k]!, WORLD_CONFIG.TICK_SAMPLES);
+      if (ms[k]! > ms[biggest]!) biggest = k;
+    }
+    if (dt > SLOW_TICK_MS) {
+      p.slowTicks++;
+      p.slowBy[TICK_PHASES[biggest]!]++;
+    }
   }
 
   /** One `inv_state` per changed inventory per tick (D79), to the owner's live connection(s); offline owners just drop out. */
@@ -1252,6 +1416,39 @@ export class WorldNode {
     return out;
   }
 
+  /** Telemetry (D109): a kill credited to `killerId` and what its drop roll produced. */
+  private recordKill(
+    killerId: number,
+    mobId: number,
+    items: number,
+    mobs: { combatStats(id: number): { dropSource: string } | undefined } | undefined,
+  ): void {
+    const t = this.telemetry;
+    const account = this.clients.get(killerId)?.accountId;
+    if (!t || account === undefined) return;
+    t.emitAccount(account, 'combat.kill', { target_type: 'mob' });
+    const src = mobs?.combatStats(mobId)?.dropSource;
+    t.emitAccount(account, 'loot.drop', {
+      source: src === 'elite' || src === 'boss' ? src : 'field',
+      item_count: items,
+    });
+  }
+
+  /** Tutorial (D105): watch positions a few times a second (steps `move` / `field`) and send every changed state. */
+  private tickTutorial(): void {
+    const t = this.tutorial!;
+    if (this.world.tick % 4 === 0) {
+      for (const id of this.clients.keys()) {
+        const e = this.byId.get(id);
+        if (e) t.observe(id, e.i, e.j);
+      }
+    }
+    for (const { entityId, msg } of t.drain()) {
+      const c = this.clients.get(entityId);
+      if (c && !c.dead) this.send(c, msg);
+    }
+  }
+
   /** The World channel's recent lines go to each newly joined player once (not before the gateway's `hello_ack` is out: next tick). */
   private sendChatHistory(): void {
     for (const [id, lines] of this.chatHistoryDue) {
@@ -1295,6 +1492,7 @@ export class WorldNode {
       switch (ev.type) {
         case 'cast_ok': {
           this.metrics.castOk++;
+          this.tutorial?.note(ev.entityId, 'skill'); // tutorial (D105)
           const c = this.clients.get(ev.entityId);
           // with combat on, the `skill_result` (with hits) is sent when the cast resolves
           if (c && !this.combat)
@@ -1442,6 +1640,8 @@ export class WorldNode {
             qj,
             anim: se.anim,
             dir: se.dir,
+            // monsters: their element (D120: variant elements of D114 included); 0 = none, omitted from the message
+            ...(this.mobs?.elementWireIdOf(e.id) ? { element: this.mobs.elementWireIdOf(e.id) } : {}),
             hpPct,
             maxHp: this.maxHpOf(e),
           });
@@ -1588,9 +1788,14 @@ export class WorldNode {
     const combat = this.combat;
     if (!combat) return;
     const now = this.world.timeMs;
-    const ids = new Set<number>([...combat.status.affectedIds(), ...this.statusMasks.keys()]);
+    const ids = new Set<number>([
+      ...combat.status.affectedIds(),
+      ...combat.effects.mobIds(),
+      ...this.statusMasks.keys(),
+    ]);
     for (const id of [...ids].sort((a, b) => a - b)) {
-      const mask = combat.status.maskOf(id, now);
+      // players: root / slow / poison from mob attacks (D94); mobs: stun / root / slow from player skills (D116)
+      const mask = combat.status.maskOf(id, now) | combat.effects.maskOfMob(id, now);
       const prev = this.statusMasks.get(id) ?? 0;
       if (mask === prev) {
         if (mask === 0) this.statusMasks.delete(id);
@@ -1769,7 +1974,7 @@ export class WorldNode {
     c.dead = true;
     this.emitSecurity('kick', c, text, { code });
     c.transport.close(code, text);
-    this.removePlayer(c.id);
+    this.removePlayer(c.id, undefined, 'kick');
   }
 
   // ------------------------------------------------------------------ scheduling

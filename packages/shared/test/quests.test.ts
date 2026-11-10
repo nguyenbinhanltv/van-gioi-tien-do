@@ -4,7 +4,6 @@ import {
   QUESTS,
   QUEST_DEFS,
   QUEST_NPCS,
-  QUEST_TEXT,
   chapterCultBudgetMinutes,
   cultMinutesToTuVi,
   itemDefByKey,
@@ -64,8 +63,6 @@ describe('content table', () => {
     expect(QUEST_DEFS.length).toBeLessThanOrEqual(QUESTS.MAX_ENTRIES);
     for (const q of QUEST_DEFS) {
       expect(q.id).toMatch(/^q_[a-z0-9_]+$/);
-      expect(QUEST_TEXT[q.id]?.name, q.id).toBeTruthy();
-      expect(QUEST_TEXT[q.id]?.desc, q.id).toBeTruthy();
       expect(questNpc(q.giver), q.id).toBeDefined();
       expect(questNpc(q.turnIn), q.id).toBeDefined();
       expect(q.objectives.length).toBeGreaterThan(0);

@@ -70,16 +70,16 @@ export class MarketPanel {
     this.title.style.fontWeight = 'bold';
     const close = document.createElement('button');
     close.textContent = '×';
-    close.title = 'Đóng (V)';
+    close.title = core.t('market.panel.close_hint');
     Object.assign(close.style, BTN_STYLE);
     close.addEventListener('click', () => this.toggle(false));
     head.append(this.title, close);
     const tabs = document.createElement('div');
     tabs.style.marginBottom = '6px';
     for (const [t, label] of [
-      ['buy', 'Mua'],
-      ['mine', 'Hàng của tôi'],
-      ['sell', 'Bán'],
+      ['buy', core.t('market.panel.tab_buy')],
+      ['mine', core.t('market.panel.tab_mine')],
+      ['sell', core.t('market.panel.tab_sell')],
     ] as const) {
       const b = document.createElement('button');
       b.textContent = label;
@@ -213,7 +213,7 @@ export class MarketPanel {
     const f = this.model.filter;
     const bar = document.createElement('div');
     bar.style.marginBottom = '4px';
-    const items: Array<[string, string]> = [['0', 'Mọi loại']];
+    const items: Array<[string, string]> = [['0', core.t('market.panel.any_item')]];
     for (const d of shared.ITEM_DEFS) items.push([String(d.id), core.itemLabel(d.id)]);
     bar.appendChild(
       this.select(items, String(f.defId), (v) => {
@@ -225,7 +225,9 @@ export class MarketPanel {
       this.select(
         [0, 1, 2, 3, 4, 5].map((q): [string, string] => [
           String(q),
-          q === 0 ? 'Mọi phẩm' : `Từ ${core.QUALITY_LABEL[q]}`,
+          q === 0
+            ? core.t('market.panel.any_quality')
+            : core.t('market.panel.min_quality', { q: core.QUALITY_LABEL[q] ?? '' }),
         ]),
         String(f.minQuality),
         (v) => {
@@ -245,15 +247,23 @@ export class MarketPanel {
       ),
     );
     frag.appendChild(bar);
-    if (!this.model.ready) frag.appendChild(this.note('Đang tải…'));
-    else if (this.model.listings().length === 0) frag.appendChild(this.note('Không có món nào khớp bộ lọc.'));
+    if (!this.model.ready) frag.appendChild(this.note(core.t('market.panel.loading')));
+    else if (this.model.listings().length === 0) frag.appendChild(this.note(core.t('market.panel.no_match')));
     for (const l of this.model.listings()) {
-      const left = `${core.itemLabel(l.defId)} ${core.QUALITY_LABEL[l.quality] ?? ''} x${l.qty} · ${l.unitPrice}/cái = ${l.unitPrice * l.qty} hạ · ${l.seller} · ${l.minutesLeft}p`;
+      const left = core.t('market.panel.row_buy', {
+        item: core.itemLabel(l.defId),
+        quality: core.QUALITY_LABEL[l.quality] ?? '',
+        qty: l.qty,
+        price: l.unitPrice,
+        total: l.unitPrice * l.qty,
+        seller: l.seller,
+        mins: l.minutesLeft,
+      });
       const id = l.listingId;
       frag.appendChild(
         this.row(left, QUALITY_COLOR[l.quality] ?? '#f0f0f5', [
           l.mine
-            ? this.button('Gỡ', () => this.send(this.model.cancelCmd(id)))
+            ? this.button(core.t('market.panel.cancel'), () => this.send(this.model.cancelCmd(id)))
             : this.button('Mua', () => this.send(this.model.buyCmd(id))),
         ]),
       );
@@ -262,14 +272,20 @@ export class MarketPanel {
   }
 
   private drawMine(frag: DocumentFragment): void {
-    if (!this.model.ready) frag.appendChild(this.note('Đang tải…'));
-    else if (this.model.listings().length === 0) frag.appendChild(this.note('Bạn chưa đăng bán món nào.'));
+    if (!this.model.ready) frag.appendChild(this.note(core.t('market.panel.loading')));
+    else if (this.model.listings().length === 0) frag.appendChild(this.note(core.t('market.panel.none_mine')));
     for (const l of this.model.listings()) {
-      const left = `${core.itemLabel(l.defId)} ${core.QUALITY_LABEL[l.quality] ?? ''} x${l.qty} · ${l.unitPrice}/cái · ${l.minutesLeft}p`;
+      const left = core.t('market.panel.row_mine', {
+        item: core.itemLabel(l.defId),
+        quality: core.QUALITY_LABEL[l.quality] ?? '',
+        qty: l.qty,
+        price: l.unitPrice,
+        mins: l.minutesLeft,
+      });
       const id = l.listingId;
       frag.appendChild(
         this.row(left, QUALITY_COLOR[l.quality] ?? '#f0f0f5', [
-          this.button('Gỡ', () => this.send(this.model.cancelCmd(id))),
+          this.button(core.t('market.panel.cancel'), () => this.send(this.model.cancelCmd(id))),
         ]),
       );
     }
@@ -289,7 +305,7 @@ export class MarketPanel {
         },
         page <= 0,
       ),
-      this.note(`Trang ${page + 1}/${this.model.pages} · ${this.model.total} món`),
+      this.note(core.t('market.panel.page', { page: page + 1, pages: this.model.pages, total: this.model.total })),
       this.button(
         '›',
         () => {
@@ -298,7 +314,7 @@ export class MarketPanel {
         },
         page + 1 >= this.model.pages,
       ),
-      this.button('Làm mới', () => this.refresh()),
+      this.button(core.t('market.panel.refresh'), () => this.refresh()),
     );
     return p;
   }
@@ -313,18 +329,24 @@ export class MarketPanel {
 
   private drawSell(frag: DocumentFragment): void {
     const bag = this.net.bag;
-    frag.appendChild(this.note('Chọn món trong túi để đăng bán:'));
+    frag.appendChild(this.note(core.t('market.panel.pick')));
     let any = false;
     for (let i = 0; i < bag.slotCount; i++) {
       const it = bag.itemAt(i);
       if (!it) continue;
       any = true;
-      const left = `[${i}] ${core.itemLabel(it.defId)} ${core.QUALITY_LABEL[it.quality] ?? ''} x${it.qty}${it.bound ? ' (khóa)' : ''}`;
+      const left = core.t('market.panel.bag_row', {
+        slot: i,
+        item: core.itemLabel(it.defId),
+        quality: core.QUALITY_LABEL[it.quality] ?? '',
+        qty: it.qty,
+        bound: it.bound ? core.t('market.panel.bound') : '',
+      });
       const slot = i;
       frag.appendChild(
         this.row(left, QUALITY_COLOR[it.quality] ?? '#f0f0f5', [
           this.button(
-            this.slot === i ? 'Đã chọn' : 'Chọn',
+            core.t(this.slot === i ? 'market.panel.selected' : 'market.panel.select'),
             () => {
               this.slot = slot;
               this.qty = String(it.qty);
@@ -335,7 +357,7 @@ export class MarketPanel {
         ]),
       );
     }
-    if (!any) frag.appendChild(this.note('Túi đồ trống.'));
+    if (!any) frag.appendChild(this.note(core.t('market.panel.bag_empty')));
     const picked = this.slot >= 0 ? bag.itemAt(this.slot) : null;
     if (!picked) return;
     const form = document.createElement('div');
@@ -366,18 +388,18 @@ export class MarketPanel {
     preview.style.color = '#f0dc96';
     const qty =
       picked.kind === 'instance'
-        ? this.note('Số lượng: 1')
-        : input('Số lượng', this.qty, (v) => (this.qty = v), '60px');
+        ? this.note(core.t('market.panel.qty_one'))
+        : input(core.t('market.panel.qty'), this.qty, (v) => (this.qty = v), '60px');
     if (picked.kind === 'instance') this.qty = '1';
-    const price = input('Giá mỗi cái (hạ phẩm)', this.price, (v) => (this.price = v), '120px');
+    const price = input(core.t('market.panel.unit_price'), this.price, (v) => (this.price = v), '120px');
     const dur = this.select(
-      shared.MARKET_BOARD.DURATIONS_H.map((h): [string, string] => [String(h), `${h} giờ`]),
+      shared.MARKET_BOARD.DURATIONS_H.map((h): [string, string] => [String(h), core.t('market.panel.hours', { h })]),
       String(this.duration),
       (v) => {
         this.duration = Number(v);
       },
     );
-    const send = this.button('Đăng bán', () => {
+    const send = this.button(core.t('market.panel.list'), () => {
       const q = Number(this.qty);
       const p = Number(this.price);
       const problem = this.model.listProblem(p, q, picked.qty, this.duration);
@@ -399,8 +421,8 @@ export class MarketPanel {
     const p = this.model.preview(Number(this.price) || 0, Number(this.qty) || 0);
     el.textContent =
       p.total > 0
-        ? `Tổng ${p.total} hạ · phí niêm yết ${p.fee} (không hoàn) · thuế khi bán ${p.tax} · bạn nhận ${p.proceeds}`
-        : 'Nhập giá để xem phí niêm yết và thuế.';
+        ? core.t('market.panel.preview', { total: p.total, fee: p.fee, tax: p.tax, proceeds: p.proceeds })
+        : core.t('market.panel.preview_hint');
   }
 
   /** Per frame: redraw only when something that is shown changed (or the panel was just opened). */
@@ -410,7 +432,7 @@ export class MarketPanel {
     const key = `${this.tab}|${this.model.version}|${bag.states}|${this.slot}`;
     if (key === this.drawn) return;
     this.drawn = key;
-    this.title.textContent = `Vạn Bảo Lâu · Hạ phẩm: ${bag.wallet.LT_HA}`;
+    this.title.textContent = core.t('market.panel.title', { stones: bag.wallet.LT_HA });
     for (const b of Array.from(this.root.querySelectorAll<HTMLButtonElement>('button[data-tab]')))
       b.style.background = b.dataset.tab === this.tab ? '#5a4a22' : '#33405a';
     const frag = document.createDocumentFragment();

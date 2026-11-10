@@ -12,7 +12,7 @@ import { InputMode } from '../input/types.js';
  */
 export interface InventoryModel {
   canMove(from: number, to: number): boolean;
-  move(from: number, to: number): void;               // gửi yêu cầu lên Economy, chờ xác nhận
+  move(from: number, to: number): void; // gửi yêu cầu lên Economy, chờ xác nhận
   use(slot: number): void;
   split(slot: number): void;
   linkToChat(slot: number): void;
@@ -37,7 +37,10 @@ export interface InventoryView {
   showDetail(slot: number | null): void;
 }
 
-interface Strategy { attach(): void; detach(): void }
+interface Strategy {
+  attach(): void;
+  detach(): void;
+}
 
 const DRAG_THRESHOLD_PX = 4;
 const LONG_PRESS_MS = 400;
@@ -45,7 +48,10 @@ const LONG_PRESS_MS = 400;
 class DragDropStrategy implements Strategy {
   private drag: { slot: number; startX: number; startY: number; active: boolean; pointerId: number } | null = null;
   private off: Array<() => void> = [];
-  constructor(private m: InventoryModel, private v: InventoryView) {}
+  constructor(
+    private m: InventoryModel,
+    private v: InventoryView,
+  ) {}
 
   attach(): void {
     const r = this.v.root;
@@ -57,10 +63,19 @@ class DragDropStrategy implements Strategy {
     on(r, 'pointerdown', (e) => {
       const slot = this.v.slotAt(e.clientX, e.clientY);
       if (slot === null || !this.m.hasItem(slot)) return;
-      if (e.button === 2) { this.m.use(slot); return; }
+      if (e.button === 2) {
+        this.m.use(slot);
+        return;
+      }
       if (e.button !== 0) return;
-      if (e.shiftKey) { this.m.linkToChat(slot); return; }
-      if (e.ctrlKey || e.metaKey) { this.m.split(slot); return; }
+      if (e.shiftKey) {
+        this.m.linkToChat(slot);
+        return;
+      }
+      if (e.ctrlKey || e.metaKey) {
+        this.m.split(slot);
+        return;
+      }
       this.drag = { slot, startX: e.clientX, startY: e.clientY, active: false, pointerId: e.pointerId };
       r.setPointerCapture(e.pointerId);
     });
@@ -81,7 +96,10 @@ class DragDropStrategy implements Strategy {
       if (!d || d.pointerId !== e.pointerId) return;
       this.drag = null;
       this.v.setDropHint(null, false);
-      if (!d.active) { this.v.showDetail(d.slot); return; }       // click thường = xem chi tiết
+      if (!d.active) {
+        this.v.showDetail(d.slot);
+        return;
+      } // click thường = xem chi tiết
       this.v.hideGhost();
       const target = this.v.slotAt(e.clientX, e.clientY);
       const quick = this.v.quickSlotAt(e.clientX, e.clientY);
@@ -90,7 +108,12 @@ class DragDropStrategy implements Strategy {
       else if (!this.v.insideWindow(e.clientX, e.clientY)) this.m.requestDiscard(d.slot);
     };
     on(r, 'pointerup', end);
-    on(r, 'pointercancel', (e) => { if (this.drag?.pointerId === e.pointerId) { this.drag = null; this.v.hideGhost(); } });
+    on(r, 'pointercancel', (e) => {
+      if (this.drag?.pointerId === e.pointerId) {
+        this.drag = null;
+        this.v.hideGhost();
+      }
+    });
     const ctx = (e: Event) => e.preventDefault();
     r.addEventListener('contextmenu', ctx);
     this.off.push(() => r.removeEventListener('contextmenu', ctx));
@@ -109,7 +132,10 @@ class TapSelectStrategy implements Strategy {
   private selected: number[] = [];
   private press: { slot: number; pointerId: number; timer: number; long: boolean; x: number; y: number } | null = null;
   private off: Array<() => void> = [];
-  constructor(private m: InventoryModel, private v: InventoryView) {}
+  constructor(
+    private m: InventoryModel,
+    private v: InventoryView,
+  ) {}
 
   attach(): void {
     const r = this.v.root;
@@ -123,7 +149,7 @@ class TapSelectStrategy implements Strategy {
       if (slot === null) return;
       const timer = window.setTimeout(() => {
         if (!this.press) return;
-        this.press.long = true;                                   // giữ lâu: bật chọn nhiều
+        this.press.long = true; // giữ lâu: bật chọn nhiều
         if (this.m.hasItem(slot) && !this.selected.includes(slot)) this.selected.push(slot);
         this.v.setSelection(this.selected);
         navigator.vibrate?.(15);
@@ -133,15 +159,23 @@ class TapSelectStrategy implements Strategy {
     on('pointermove', (e) => {
       const p = this.press;
       if (!p || p.pointerId !== e.pointerId) return;
-      if (!p.long && Math.hypot(e.clientX - p.x, e.clientY - p.y) > 10) { clearTimeout(p.timer); this.press = null; return; }
-      if (p.long) { this.v.showGhost(p.slot, e.clientX, e.clientY); this.v.moveGhost(e.clientX, e.clientY); }
+      if (!p.long && Math.hypot(e.clientX - p.x, e.clientY - p.y) > 10) {
+        clearTimeout(p.timer);
+        this.press = null;
+        return;
+      }
+      if (p.long) {
+        this.v.showGhost(p.slot, e.clientX, e.clientY);
+        this.v.moveGhost(e.clientX, e.clientY);
+      }
     });
     on('pointerup', (e) => {
       const p = this.press;
       if (!p || p.pointerId !== e.pointerId) return;
       clearTimeout(p.timer);
       this.press = null;
-      if (p.long) {                                               // giữ rồi kéo tới ô nhanh
+      if (p.long) {
+        // giữ rồi kéo tới ô nhanh
         this.v.hideGhost();
         const quick = this.v.quickSlotAt(e.clientX, e.clientY);
         if (quick !== null && this.m.hasItem(p.slot)) this.m.assignQuickSlot(p.slot, quick);
@@ -149,26 +183,36 @@ class TapSelectStrategy implements Strategy {
       }
       this.tap(p.slot);
     });
-    on('pointercancel', () => { if (this.press) clearTimeout(this.press.timer); this.press = null; this.v.hideGhost(); });
+    on('pointercancel', () => {
+      if (this.press) clearTimeout(this.press.timer);
+      this.press = null;
+      this.v.hideGhost();
+    });
   }
 
   private tap(slot: number): void {
     if (this.selected.length === 1 && this.selected[0] !== slot && this.m.canMove(this.selected[0], slot)) {
-      this.m.move(this.selected[0], slot);                        // chạm ô thứ hai = di chuyển / đổi chỗ
+      this.m.move(this.selected[0], slot); // chạm ô thứ hai = di chuyển / đổi chỗ
       this.selected = [];
       this.v.setSelection([]);
       this.v.showDetail(null);
       return;
     }
-    if (this.selected.length > 1) {                               // đang chọn nhiều: chạm để thêm / bớt
+    if (this.selected.length > 1) {
+      // đang chọn nhiều: chạm để thêm / bớt
       this.selected = this.selected.includes(slot) ? this.selected.filter((s) => s !== slot) : [...this.selected, slot];
       this.v.setSelection(this.selected);
       return;
     }
-    if (!this.m.hasItem(slot)) { this.selected = []; this.v.setSelection([]); this.v.showDetail(null); return; }
-    this.selected = this.selected[0] === slot ? [] : [slot];       // chạm lại ô đang chọn = bỏ chọn
+    if (!this.m.hasItem(slot)) {
+      this.selected = [];
+      this.v.setSelection([]);
+      this.v.showDetail(null);
+      return;
+    }
+    this.selected = this.selected[0] === slot ? [] : [slot]; // chạm lại ô đang chọn = bỏ chọn
     this.v.setSelection(this.selected);
-    this.v.showDetail(this.selected[0] ?? null);                   // bảng chi tiết có nút Dùng / Mặc / Bán
+    this.v.showDetail(this.selected[0] ?? null); // bảng chi tiết có nút Dùng / Mặc / Bán
   }
 
   detach(): void {
@@ -186,7 +230,11 @@ export class InventoryController {
   private strategy: Strategy;
   private unsub: () => void;
 
-  constructor(private model: InventoryModel, private view: InventoryView, input: InputManager) {
+  constructor(
+    private model: InventoryModel,
+    private view: InventoryView,
+    input: InputManager,
+  ) {
     this.strategy = this.make(input.mode);
     this.strategy.attach();
     this.unsub = input.on('modeChange', (mode) => {
@@ -197,7 +245,9 @@ export class InventoryController {
   }
 
   private make(mode: InputMode): Strategy {
-    return mode === 'pointer' ? new DragDropStrategy(this.model, this.view) : new TapSelectStrategy(this.model, this.view);
+    return mode === 'pointer'
+      ? new DragDropStrategy(this.model, this.view)
+      : new TapSelectStrategy(this.model, this.view);
   }
 
   destroy(): void {

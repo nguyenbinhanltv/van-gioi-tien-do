@@ -76,7 +76,7 @@ export class OnlineSession {
   /** A boss in view entered a new phase (D91, `boss_phase`): the HUD / standee layer reacts (announcement, flash, skin swap). */
   onBossPhase: ((entityId: number, phase: number, transformMs: number) => void) | null = null;
   /** name / max HP of monsters in view (from `aoi_enter`; later snapshots only carry hpPct) */
-  private readonly mobMeta = new Map<number, { name: string; defId: number; hpMax: number }>();
+  private readonly mobMeta = new Map<number, { name: string; defId: number; element: number; hpMax: number }>();
 
   constructor(
     private readonly ysort: YSortLayer,
@@ -112,7 +112,12 @@ export class OnlineSession {
       onAoiEnter: (entities) => {
         for (const e of entities) {
           if (e.kind === KIND_MONSTER)
-            this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, defId: e.defId, hpMax: e.maxHp });
+            this.mobMeta.set(e.entityId, {
+              name: core.t('combat.mob.fallback_name', { id: e.defId }),
+              defId: e.defId,
+              element: e.element ?? 0,
+              hpMax: e.maxHp,
+            });
         }
       },
       onBossPhase: (msg) => this.onBossPhase?.(msg.mobEntityId, msg.phase, msg.transformMs),
@@ -211,6 +216,7 @@ export class OnlineSession {
           id: v.entityId,
           name: meta.name,
           defId: meta.defId,
+          element: meta.element,
           pos: { i: v.i, j: v.j },
           hpPct: v.hpPct,
           hpMax: meta.hpMax,

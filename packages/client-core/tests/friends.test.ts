@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { FRIENDS } from '@vgtd/shared';
 import { FriendOp, FriendReason, type FriendStateMsg } from '@vgtd/protocol';
-import { ChatLog, FRIEND_REASON_TEXT, FriendsModel, parseChatInput } from '../src/index.js';
+import { ChatLog, friendReasonText, FriendsModel, parseChatInput } from '../src/index.js';
 
 const state = (o: Partial<FriendStateMsg> = {}): FriendStateMsg => ({
   type: 'friend_state',
@@ -90,8 +90,8 @@ describe('FriendsModel', () => {
     expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason: FriendReason.Ok })).toBeNull();
     for (const reason of Object.values(FriendReason).filter((v): v is number => typeof v === 'number')) {
       if (reason === FriendReason.Ok) continue;
-      expect(FRIEND_REASON_TEXT[reason], `reason ${reason}`).toBeTruthy();
-      expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason })).toBe(FRIEND_REASON_TEXT[reason]);
+      expect(friendReasonText(reason), `reason ${reason}`).toBeTruthy();
+      expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason })).toBe(friendReasonText(reason));
     }
     expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason: 200 })).toMatch(/mã 200/);
   });

@@ -5,8 +5,17 @@
  * The server is authoritative: the model never edits the bag locally. A move shows up when the next `inv_state` arrives.
  * In-game stone currencies only: no price / shop / real-money notions.
  */
-import { CURRENCIES, isUsableItem, itemDefById, type Currency, type DropItem } from '@vgtd/shared';
-import { InvOp, InvReason, type InvCmdMsg, type InvPending, type InvResultMsg, type InvSlot, type InvStateMsg } from '@vgtd/protocol';
+import { CURRENCIES, isUsableItem, itemDefById, type Currency, type ItemKey } from '@vgtd/shared';
+import { t } from '../i18n/strings.js';
+import {
+  InvOp,
+  InvReason,
+  type InvCmdMsg,
+  type InvPending,
+  type InvResultMsg,
+  type InvSlot,
+  type InvStateMsg,
+} from '@vgtd/protocol';
 
 export type WalletView = Readonly<Record<Currency, number>>;
 
@@ -14,8 +23,8 @@ export interface BagItemView {
   slot: number;
   kind: 'stack' | 'instance';
   defId: number;
-  /** `DropItem` key of the definition, undefined for an id this client does not know (a newer server) */
-  key: DropItem | undefined;
+  /** `ItemKey` of the definition, undefined for an id this client does not know (a newer server) */
+  key: ItemKey | undefined;
   quality: number;
   /** stacks: quantity; instances: 1 */
   qty: number;
@@ -94,8 +103,36 @@ export class BagModel {
     const s = this._slots[slot];
     if (!s) return null;
     const def = itemDefById(s.defId);
-    if (s.kind === 'stack') return { slot, kind: 'stack', defId: s.defId, key: def?.key, quality: s.quality, qty: s.qty, durability: null, bound: false };
-    return { slot, kind: 'instance', defId: s.defId, key: def?.key, quality: s.quality, qty: 1, durability: s.durability, bound: s.bound };
+    if (s.kind === 'stack')
+      return {
+        slot,
+        kind: 'stack',
+        defId: s.defId,
+        key: def?.key,
+        quality: s.quality,
+        qty: s.qty,
+        durability: null,
+        bound: false,
+      };
+    return {
+      slot,
+      kind: 'instance',
+      defId: s.defId,
+      key: def?.key,
+      quality: s.quality,
+      qty: 1,
+      durability: s.durability,
+      bound: s.bound,
+    };
+  }
+  /** Units of an item (any quality) across the bag slots: stacks count their quantity, instances count one each. */
+  count(defId: number): number {
+    let n = 0;
+    for (let i = 0; i < this.slotCount; i++) {
+      const it = this.itemAt(i);
+      if (it && it.defId === defId) n += it.qty;
+    }
+    return n;
   }
   freeSlots(): number {
     return this._slots.reduce((n, s) => n + (s ? 0 : 1), 0);
@@ -162,32 +199,32 @@ export class BagModel {
   }
 }
 
-/** Short text for a refused command (UI toast). */
+/** Short player-facing text for a refused command (UI toast). */
 export function invReasonText(reason: number): string {
   switch (reason) {
     case InvReason.Ok:
-      return 'ok';
+      return t('bag.reason.ok');
     case InvReason.BadSlot:
-      return 'bad slot';
+      return t('bag.reason.bad_slot');
     case InvReason.EmptySlot:
-      return 'nothing in that slot';
+      return t('bag.reason.empty_slot');
     case InvReason.RateLimited:
-      return 'too fast';
+      return t('bag.reason.rate_limited');
     case InvReason.NotReady:
-      return 'bag not ready';
+      return t('bag.reason.not_ready');
     case InvReason.NothingMoved:
-      return 'nothing fits';
+      return t('bag.reason.nothing_moved');
     case InvReason.NotUsable:
-      return 'cannot be used';
+      return t('bag.reason.not_usable');
     case InvReason.OnCooldown:
-      return 'still cooling down';
+      return t('bag.reason.on_cooldown');
     case InvReason.Dead:
-      return 'you are dead';
+      return t('bag.reason.dead');
     case InvReason.NothingToHeal:
-      return 'HP is full';
+      return t('bag.reason.nothing_to_heal');
     case InvReason.PillActive:
-      return 'a pill is already waiting';
+      return t('bag.reason.pill_active');
     default:
-      return `refused (${reason})`;
+      return t('bag.reason.unknown', { code: reason });
   }
 }
