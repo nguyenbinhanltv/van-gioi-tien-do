@@ -1,0 +1,30 @@
+{
+  "name": "@vgtd/econ-sim",
+  "version": "0.1.0",
+  "description": "Deterministic offline economy simulator (D113): replays a cohort of simulated players over 30-90 days with the real @vgtd/shared formulas and reports stone supply, sink/faucet ratio, pacing and dominant-loop flags.",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "sim": "node scripts/run-ts.mjs src/cli.ts"
+  },
+  "dependencies": {
+    "@vgtd/shared": "*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.5"
+  }
+}

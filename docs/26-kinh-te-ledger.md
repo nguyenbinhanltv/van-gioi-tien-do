@@ -233,6 +233,8 @@ Mục tiêu: **khóa các hệ số** (OPEN-ITEMS §1 mục 7) bằng dữ liệ
 | M2        | **Kịch bản gian lận:** bot farm (×N thu nhập), RMT, wash trading, dup giả định                                                                                                        | Mô phỏng tác động lên CPI và `ratio_w`; thử các ngưỡng phát hiện ([25 §7](25-xac-thuc-bao-mat.md))  | Phát hiện trước khi lệch > 5% so với kịch bản gốc                                             |
 | M3        | **Đối chiếu với dữ liệu thật:** closed beta đo `faucet/sink` theo kênh, so với M1, hiệu chỉnh                                                                                         | Báo cáo §7.1 hằng tuần                                                                              | Sai lệch mô hình/thực ≤ 15% cho các kênh chính                                                |
 
+_[Cập nhật D113: M0 và một phần M1 đã làm: `tools/econ-sim`, báo cáo [37-mo-phong-kinh-te.md](37-mo-phong-kinh-te.md). M2 (gian lận) và M3 (đối chiếu dữ liệu thật) chưa làm.]_
+
 Ghi chú: M0–M2 phụ thuộc docs game design (nghề luyện đan/chế tạo, nhiệm vụ, kiếm tiền) chưa có; mô phỏng ban đầu dùng đúng bảng 07 §6–7 và đánh dấu tham số thiếu là **giả định**. Mọi tham số được đặt trong tệp dữ liệu có phiên bản để tái hiện.
 
 ## 9. Chế độ lỗi (tóm tắt, chi tiết [22 §6](22-server-modules.md))
