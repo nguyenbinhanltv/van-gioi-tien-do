@@ -203,7 +203,7 @@ describe('reward units', () => {
   });
 });
 
-describe('mobZoneAnchor (D124)', () => {
+describe('mobZoneAnchor (D125)', () => {
   it.each([64, 128, 256])('is inside its own zone on a %i-tile map', (n) => {
     for (const z of ['bia_rung', 'dam_lay_doc', 'co_thu_trung_tam', 'doc_hoa_dam'] as const) {
       const a = mobZoneAnchor(z, n);

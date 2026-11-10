@@ -99,7 +99,7 @@ export interface QuestNpc {
 
 /**
  * Quest-giving NPCs. Keys follow the interim standee keys of D98 / #255 (`npc_*`). The offsets are the tiles where the client
- * draws the NPC standees (D124: `SECT_NPC_LAYOUT` in the Cocos client is asserted equal to this table), so what the player sees is what
+ * draws the NPC standees (D125: `SECT_NPC_LAYOUT` in the Cocos client is asserted equal to this table), so what the player sees is what
  * the server range-checks. PLACEHOLDER layout, the server only needs "is the player near this NPC".
  */
 export const QUEST_NPCS: readonly QuestNpc[] = [

@@ -31,7 +31,7 @@ export interface MapFeed {
   self(): { i: number; j: number } | null;
   remotes(): ReadonlyArray<{ entityId: number; kind: number; defId: number; i: number; j: number }>;
   isPartyMember(entityId: number): boolean;
-  /** the quest objective to mark (D124): a yellow diamond, pinned to the rim when it is outside the shown area */
+  /** the quest objective to mark (D125): a yellow diamond, pinned to the rim when it is outside the shown area */
   objective?(): { i: number; j: number; label: string } | null;
 }
 
@@ -84,9 +84,10 @@ export class Minimap {
       top: '12px',
       width: `${this.size}px`,
       height: `${this.size}px`,
-      borderRadius: '12px',
-      border: '2px solid #c9a24a',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.6)',
+      borderRadius: '10px',
+      border: '3px double #c9a24a', // the HUD's gold frame (HudChrome.GOLD)
+      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.7), 0 2px 10px rgba(0,0,0,0.6)',
+      boxSizing: 'border-box',
       background: '#101018',
       zIndex: '300',
       cursor: 'pointer',
@@ -95,6 +96,17 @@ export class Minimap {
     parent.appendChild(c);
     this.canvas = c;
     this.ctx = c.getContext('2d')!;
+  }
+
+  /** Put the minimap at a design rect of the shared HUD layout (`f` CSS px per design unit). */
+  place(r: { x: number; y: number; w: number; h: number }, f: number): void {
+    Object.assign(this.canvas.style, {
+      left: `${r.x * f}px`,
+      top: `${r.y * f}px`,
+      right: 'auto',
+      width: `${r.w * f}px`,
+      height: `${r.h * f}px`,
+    } as Partial<CSSStyleDeclaration>);
   }
 
   /** Clicking the minimap opens the world map. */

@@ -434,7 +434,7 @@ describe('AOI replicates mobs', () => {
   });
 });
 
-describe('starter packs (D124)', () => {
+describe('starter packs (D125)', () => {
   it('the first packs of the first-quest mob spawn within a short walk of the spawn square, on the full slice map', () => {
     const n = 256;
     const grid = TileGrid.fromRows(Array.from({ length: n }, () => '.'.repeat(n)));
@@ -450,7 +450,7 @@ describe('starter packs (D124)', () => {
   });
 });
 
-describe('starter packs on small maps (D124)', () => {
+describe('starter packs on small maps (D125)', () => {
   it.each([64, 96, 128])(
     'every mob of a %i-tile map stays inside its zone rectangle (the starter band may not reach it)',
     (n) => {

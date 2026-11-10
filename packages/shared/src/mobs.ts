@@ -268,7 +268,7 @@ export interface SpawnGroup {
   count: number;
   /** members that spawn together around one anchor point (packs); 1 = every mob has its own point (D83) */
   pack?: number;
-  /** the first N packs spawn in the starter band (`MOB_STARTER_BAND`, D124) instead of the tier band: the mob of the first kill quest */
+  /** the first N packs spawn in the starter band (`MOB_STARTER_BAND`, D125) instead of the tier band: the mob of the first kill quest */
   starterPacks?: number;
 }
 export interface ZoneSpawnTable {
@@ -297,7 +297,7 @@ export const MOB_THREAT = {
   minThreat: 1,
 } as const;
 
-/** The mob of the first kill quest (`q_c1_san_doc_tho`) and how many of its packs spawn near the start (D124, PLACEHOLDER). */
+/** The mob of the first kill quest (`q_c1_san_doc_tho`) and how many of its packs spawn near the start (D125, PLACEHOLDER). */
 export const STARTER_MOB_KEY = 'mob_doc_tho';
 export const STARTER_MOB_PACKS = 2;
 

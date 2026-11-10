@@ -275,7 +275,7 @@ export class MobManager {
   }
 
   /**
-   * A walkable point inside `rect` and inside the tier's distance band (D83; the starter band of D124 for `starter` packs). Up to SPAWN_ATTEMPTS tries (2 floats each);
+   * A walkable point inside `rect` and inside the tier's distance band (D83; the starter band of D125 for `starter` packs). Up to SPAWN_ATTEMPTS tries (2 floats each);
    * when none lands in the band the last WALKABLE point is used, else the rect centre.
    */
   private drawPoint(rect: MobZone, def: MobDef, wantStarter = false): [number, number] {

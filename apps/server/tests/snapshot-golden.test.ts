@@ -35,7 +35,7 @@ describe('snapshot stream golden (byte-identical to the pre-optimisation impleme
     expect(stream(r)).toEqual({ checksum: 'a4e17b5c', frames: 20983, bytes: 5676093 });
   });
 
-  it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged (checksum re-pinned by D116: the skill effects now act; again by D124: the starter mob packs spawn elsewhere)', () => {
+  it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged (checksum re-pinned by D116: the skill effects now act; again by D125: the starter mob packs spawn elsewhere)', () => {
     const r = runTickBench({ players: 150, ticks: 120, warm: 30, area: 20, mobs: 30, mobAttacks: false, hash: true });
     // re-captured for D114: the odd packs of a normal mob now carry their variant element, which changes the Ngũ hành multiplier of the
     // fights in this run (the combat outcomes, so frames / bytes move with the checksum); nothing else about the stream changed

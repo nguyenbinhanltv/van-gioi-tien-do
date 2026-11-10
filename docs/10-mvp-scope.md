@@ -70,7 +70,7 @@ Hai bản đồ từ [04 §5](04-tilemap.md); số liệu giữ nguyên.
 
 ### 3.1 Phân vùng và dải level _(Đề xuất)_
 
-> [Cập nhật D124: đàn Độc Thố đầu tiên (`starterPacks`) sinh trong dải khởi điểm 0,15-0,22 R (18-26 ô quanh tâm) để nhiệm vụ săn đầu tiên đi bộ vài giây là tới; các đàn còn lại và mọi số lượng / cấp / chỉ số giữ nguyên.]
+> [Cập nhật D125: đàn Độc Thố đầu tiên (`starterPacks`) sinh trong dải khởi điểm 0,15-0,22 R (18-26 ô quanh tâm) để nhiệm vụ săn đầu tiên đi bộ vài giây là tới; các đàn còn lại và mọi số lượng / cấp / chỉ số giữ nguyên.]
 
 Các khu vực là của 04; dải level và luật vùng là đề xuất.
 

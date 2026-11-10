@@ -135,8 +135,17 @@ export class TutorialHints {
     this.net.sendTutorialSkip();
   }
 
+  /** Placement from the shared HUD layout (`hint-card`: design rect + CSS px per design unit); overrides the standalone placement. */
+  place(r: { x: number; y: number; w: number; h: number }, f: number): void {
+    this.override = { x: r.x * f, y: r.y * f, w: r.w * f, h: r.h * f, scale: f };
+    this.layout();
+  }
+
+  private override: { x: number; y: number; w: number; h: number; scale: number } | null = null;
+
   private layout(): void {
-    const p = core.tutorialHintPlacement(window.innerWidth, window.innerHeight, this.inputMode() === 'touch');
+    const p =
+      this.override ?? core.tutorialHintPlacement(window.innerWidth, window.innerHeight, this.inputMode() === 'touch');
     Object.assign(this.root.style, {
       left: `${p.x}px`,
       top: `${p.y}px`,
