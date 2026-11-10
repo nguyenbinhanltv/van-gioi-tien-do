@@ -278,16 +278,23 @@ export class MobManager {
    * A walkable point inside `rect` and inside the tier's distance band (D83; the starter band of D124 for `starter` packs). Up to SPAWN_ATTEMPTS tries (2 floats each);
    * when none lands in the band the last WALKABLE point is used, else the rect centre.
    */
-  private drawPoint(rect: MobZone, def: MobDef, starter = false): [number, number] {
+  private drawPoint(rect: MobZone, def: MobDef, wantStarter = false): [number, number] {
+    // a starter pack samples only the box around the centre that the starter band reaches (the band is a thin ring of the rect: sampling
+    // the whole rect would mostly miss it); when that box does not meet the zone rect (small map, custom zones) it is a normal pack
+    const reach = MOB_STARTER_BAND.maxFrac * this.radius;
+    const sI0 = Math.max(rect.i0, this.centre.i - reach);
+    const sI1 = Math.min(rect.i1, this.centre.i + reach);
+    const sJ0 = Math.max(rect.j0, this.centre.j - reach);
+    const sJ1 = Math.min(rect.j1, this.centre.j + reach);
+    const starter = wantStarter && sI0 < sI1 && sJ0 < sJ1;
     const band = starter ? MOB_STARTER_BAND : MOB_BANDS[def.tier];
     const lo = band.minFrac * this.radius;
     const hi = band.maxFrac * this.radius;
     let walkable: [number, number] | null = null;
-    // a starter pack samples only the box around the centre that the band reaches (the band is a thin ring of the rect: sampling the whole rect would mostly miss it)
-    const i0 = starter ? Math.max(rect.i0, this.centre.i - hi) : rect.i0;
-    const i1 = starter ? Math.min(rect.i1, this.centre.i + hi) : rect.i1;
-    const j0 = starter ? Math.max(rect.j0, this.centre.j - hi) : rect.j0;
-    const j1 = starter ? Math.min(rect.j1, this.centre.j + hi) : rect.j1;
+    const i0 = starter ? sI0 : rect.i0;
+    const i1 = starter ? sI1 : rect.i1;
+    const j0 = starter ? sJ0 : rect.j0;
+    const j1 = starter ? sJ1 : rect.j1;
     for (let a = 0; a < SPAWN_ATTEMPTS; a++) {
       const [fa, r1] = rngFloat(this.rng);
       const [fb, r2] = rngFloat(r1);

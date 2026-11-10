@@ -58,7 +58,11 @@ export const MOB_STARTER_BAND: { minFrac: number; maxFrac: number } = layout.sta
  */
 export function mobZoneAnchor(zone: MobLayoutZone, mapTiles: number): { i: number; j: number } {
   const q = layout.zones.find((z) => z.id === zone)?.quadrant ?? [0, 0];
-  const d = ((MOB_STARTER_BAND.minFrac + MOB_STARTER_BAND.maxFrac) / 2) * mobAreaHalfSize(mapTiles);
+  // inside the zone rectangle (see `mobZoneAt`): at least one tile past the margin on each axis, whatever the map size
+  const d = Math.max(
+    ((MOB_STARTER_BAND.minFrac + MOB_STARTER_BAND.maxFrac) / 2) * mobAreaHalfSize(mapTiles),
+    mobZoneMargin(mapTiles) + 1,
+  );
   const c = mapTiles / 2;
   return { i: c + (q[0] === 0 ? -d : d), j: c + (q[1] === 0 ? -d : d) };
 }

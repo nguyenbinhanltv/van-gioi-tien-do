@@ -449,7 +449,7 @@ export class Bootstrap extends Component {
           npcs: () => this.sectNpcs.map((n) => ({ key: n.key, i: n.tile.i, j: n.tile.j, height: n.height })),
           self: () => net.selfPosition(),
           mapTiles: () => map.width,
-          mobs: () => net.remotes().filter((r) => r.kind === 1),
+          mobs: () => net.remotes().filter((r) => r.kind === shared.MOB_ENTITY_KIND),
           send: (op, arg) => this.questPanel!.sendIntent(op, arg),
           findPath: (from, to) =>
             this.input.input.pathfinder.findPath(

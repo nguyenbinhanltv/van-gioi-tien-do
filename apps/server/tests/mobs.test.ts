@@ -449,3 +449,22 @@ describe('starter packs (D124)', () => {
     expect(near.length).toBeGreaterThanOrEqual(STARTER_MOB_PACKS * 3);
   });
 });
+
+describe('starter packs on small maps (D124)', () => {
+  it.each([64, 96, 128])(
+    'every mob of a %i-tile map stays inside its zone rectangle (the starter band may not reach it)',
+    (n) => {
+      const grid = TileGrid.fromRows(Array.from({ length: n }, () => '.'.repeat(n)));
+      const zones = defaultMobZones(n);
+      const m = new MobManager({ seed: SEED, zones, grid });
+      const w = m.populate(createWorld(SEED));
+      for (const e of mobs(w)) {
+        const z = zones.find((r) => r.zone === m.info(e.id)!.def.zone)!;
+        expect(e.i).toBeGreaterThanOrEqual(z.i0);
+        expect(e.i).toBeLessThanOrEqual(z.i1);
+        expect(e.j).toBeGreaterThanOrEqual(z.j0);
+        expect(e.j).toBeLessThanOrEqual(z.j1);
+      }
+    },
+  );
+});
