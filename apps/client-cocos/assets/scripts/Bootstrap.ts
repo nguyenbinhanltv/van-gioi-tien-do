@@ -660,6 +660,7 @@ export class Bootstrap extends Component {
     this.questPanel?.place(lay.rects['quest-tracker'], f);
     this.partyFrames?.place(lay.rects['party-frames'], f);
     this.tutorialHints?.place(lay.rects['hint-card'], f);
+    this.chatBox?.place(lay.narrow ? lay.rects.chat : null, f);
     // the debug overlay (when on) sits right of the player frame column
     this.hud.layout(w, h, lay.rects['player-frame'].x + lay.rects['player-frame'].w + 16);
   }

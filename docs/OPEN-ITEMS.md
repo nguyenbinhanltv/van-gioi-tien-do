@@ -823,7 +823,7 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 2. **Chữ hệ trên thanh máu đầu quái** và **icon hệ**: mới có `[KIM]` ở khung mục tiêu; icon khi bộ icon trạng thái / hệ có.
 3. Hệ của **người chơi** (hệ chính của lớp) và NPC chưa gửi trên `aoi_enter` (khả năng mở rộng cùng nửa byte cao).
 
-## D123 — HUD và menu (P0 polish, 2026-11-10)
+## D124 — HUD và menu (P0 polish, 2026-11-10)
 
 1. **Panel Kỹ năng** chưa có: nút trong thanh menu đang mờ. Cần quyết phím (`K` đang là Tông môn, D98) và nội dung (cây kỹ năng, gán thanh kỹ năng).
 2. **Cửa sổ Tổ đội** chưa có (chỉ có khung đội tự hiện): nút Tổ đội mới mở chat với `/invite `.

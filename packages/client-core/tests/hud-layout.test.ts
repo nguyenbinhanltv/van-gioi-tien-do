@@ -11,6 +11,9 @@ import {
 
 /** canvas sizes (design units, height 720): 16:9, 4:3, 21:9 desktop; 16:9 / 19.5:9 / 16:10 landscape phones; 9:16 / 9:19.5 portrait phones */
 const CASES: Array<[HudProfile, number]> = [
+  ['desktop', 480],
+  ['desktop', 640],
+  ['desktop', 800],
   ['desktop', 960],
   ['desktop', 1280],
   ['desktop', 1680],

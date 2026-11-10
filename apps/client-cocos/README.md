@@ -147,7 +147,7 @@ Nguồn `assets-src/gemini/{props2,status,realms,particles,key_art}` được `n
 
 Phím **B** bật/tắt bảng túi (`assets/scripts/BagPanel.ts`): lưới 8×5, ví Linh thạch hạ/trung/thượng, nhấn một vật rồi nhấn ô khác để chuyển / hoán đổi / gộp, nút "Claim loot" khi có hàng chờ. Online (`?online=1`) bảng hiện túi thật của server (`net.bag`, thông điệp `inv_state`/`inv_cmd`/`inv_result`); máy chủ dev (`npm run dev -w @vgtd/server`) bật sẵn `INVENTORY=1` nên giết quái online làm túi đầy. Kiểm tra bằng client thật: `npm run bag:smoke -w client-cocos` (build + server dev thật: giết quái → túi cập nhật; chạm trên giả lập di động 360x640 / 390x844 / 844x390; không chạy trong CI). Bố cục / kích thước bảng: `bagPanelPlacement` trong client-core. `#bagdemo` (không cần server) hiện túi mẫu cục bộ để kiểm tra giao diện / chụp headless. Hình tạm: ô màu + mã ngắn + thanh phẩm chất; chưa có art vật phẩm. Logic bố cục / chọn ô nằm ở `packages/client-core/src/ui/BagPanelLogic.ts` (có test).
 
-## Bố cục HUD, thanh menu, overlay debug (D123)
+## Bố cục HUD, thanh menu, overlay debug (D124)
 
 - Vị trí mọi widget HUD nằm ở một chỗ: `computeHudLayout` (`packages/client-core/src/ui/HudLayout.ts`, có test không-đè-nhau). Trên-trái khung nhân vật + bảng tu vi + khung đội, trên-giữa khung mục tiêu, trên-phải minimap rồi tracker nhiệm vụ, giữa-đáy thanh kỹ năng, dưới-trái chat, dưới-phải thanh menu. `Bootstrap.applyHudLayout` phát vị trí cho từng widget khi đổi kích thước / chế độ chạm.
 - Thanh menu (9 nút): Túi đồ `B`, Nhân vật `C`, Kỹ năng (chưa có), Nhiệm vụ `J`, Bản đồ `L`, Tông môn `K`, Bạn bè `O`, Tổ đội (mở chat `/invite `), Cài đặt `Esc`. `M` là Đả tọa nên bản đồ ở `L`.

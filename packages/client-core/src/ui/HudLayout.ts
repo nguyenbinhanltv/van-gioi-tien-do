@@ -41,6 +41,8 @@ export interface HudInsets {
 
 export interface HudLayoutResult {
   profile: HudProfile;
+  /** a pointer window below `NARROW_BELOW` units wide: stacked layout, chat is a strip above the hotbar */
+  narrow: boolean;
   canvas: { w: number; h: number };
   rects: Record<HudWidgetId, Rect>;
   /** menu bar geometry: button side, gap, columns and rows (the rect above is the bounding box) */
@@ -57,6 +59,8 @@ export const SKILL_BAR_H = 56;
 export const CULTIVATION_NATIVE = { w: 300, h: 104 };
 
 const GAP = 8;
+/** pointer windows narrower than this (design units, height 720) get the stacked layout */
+export const NARROW_BELOW = 900;
 
 const intersects = (a: Rect, b: Rect): boolean =>
   a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
@@ -98,11 +102,15 @@ export function computeHudLayout(
 
   const desktop = profile === 'desktop';
   const portrait = profile === 'mobile-portrait';
+  // a pointer window narrower than ~900 units (half a 1080p screen, a docked browser) cannot hold the three-column desktop layout:
+  // it uses the same top-to-bottom stack as the portrait phone, keeping the desktop-sized buttons and the hotbar
+  const narrow = desktop && canvasW < NARROW_BELOW;
+  const stack = portrait || narrow;
 
   // top-left column: player frame, cultivation panel, party frames
-  const leftW = desktop ? 280 : portrait ? Math.min(200, R - L - 100 - GAP) : 232;
+  const leftW = desktop && !narrow ? 280 : stack ? Math.min(200, R - L - 100 - GAP) : 232;
   const player = r(L, T, leftW, desktop ? 86 : 82);
-  const cultW = desktop ? CULTIVATION_NATIVE.w : leftW;
+  const cultW = desktop && !narrow ? CULTIVATION_NATIVE.w : leftW;
   const cultivation = r(
     L,
     bottomOf(player) + GAP,
@@ -112,17 +120,20 @@ export function computeHudLayout(
   // the cultivation toast hangs ~28 units under its panel: the party frames start below that
   let party = r(L, bottomOf(cultivation) + 36, desktop ? 220 : 180, 150);
 
-  const mmSize = desktop ? 176 : portrait ? 100 : 130;
+  const mmSize = desktop && !narrow ? 176 : stack ? 100 : 130;
   const minimap = r(R - mmSize, T, mmSize, mmSize);
 
-  const targetW = desktop ? 300 : portrait ? 240 : 280;
+  const targetW = Math.min(desktop && !narrow ? 300 : stack ? 240 : 280, R - L);
   let target = r((canvasW - targetW) / 2, T, targetW, 52);
 
-  const skill = r((canvasW - SKILL_BAR_W) / 2, B - SKILL_BAR_H + 2, SKILL_BAR_W, SKILL_BAR_H);
+  const skillW = Math.min(SKILL_BAR_W, R - L); // the combat HUD scales its hotbar down the same way on narrow canvases
+  const skill = r((canvasW - skillW) / 2, B - SKILL_BAR_H + 2, skillW, SKILL_BAR_H);
   // the chat leaves the hotbar its room on narrow desktop windows; on touch it is only the folded 2-line strip (ChatPlacement
   // owns the exact spot next to the joystick zone)
-  const chatH = desktop ? 200 : 56;
-  const chat = r(L, B - chatH, Math.max(180, Math.min(360, skill.x - L - GAP)), chatH);
+  const chatH = desktop && !narrow ? 200 : 56;
+  const chat = narrow
+    ? r(L, skill.y - GAP - chatH, Math.min(360, R - L), chatH) // narrow: a strip right above the hotbar
+    : r(L, B - chatH, Math.max(180, Math.min(360, skill.x - L - GAP)), chatH);
 
   // menu bar: buttons big enough to tap on touch (design units are scaled by the window height, ~0.5 on a phone in landscape)
   const button = desktop ? 36 : portrait ? 48 : 64;
@@ -140,11 +151,11 @@ export function computeHudLayout(
 
   let tracker: Rect;
   let menuPick: { menu: Rect; cols: number };
-  if (desktop) {
+  if (desktop && !narrow) {
     tracker = r(R - 240, bottomOf(minimap) + GAP, 240, 96);
     menuPick = pickMenu([9, 5], (w, h) => r(R - w, B - h, w, h), [skill, chat, tracker, minimap]);
-  } else if (portrait) {
-    // portrait: the tracker and the menu stack full-width under the two top columns, then the target frame
+  } else if (stack) {
+    // portrait / narrow desktop: the tracker and the menu stack full-width under the two top columns, then the target frame
     tracker = r(L, Math.max(bottomOf(cultivation), bottomOf(minimap)) + GAP, R - L, 64);
     menuPick = pickMenu([9, 5, 3], (w, h) => r(R - w, bottomOf(tracker) + GAP, w, h), [tracker]);
     target = r((canvasW - targetW) / 2, bottomOf(menuPick.menu) + GAP, targetW, 52);
@@ -163,7 +174,7 @@ export function computeHudLayout(
 
   // tutorial hint card (D105): centred under the target frame, as wide as the space between the side columns allows
   let hint: Rect;
-  if (portrait) {
+  if (stack) {
     hint = r(L, bottomOf(target) + GAP, R - L, 84);
     party = r(L, bottomOf(hint) + GAP, 180, 120);
   } else {
@@ -177,6 +188,7 @@ export function computeHudLayout(
 
   return {
     profile,
+    narrow,
     canvas: { w: canvasW, h: canvasH },
     rects: {
       'player-frame': player,
@@ -207,5 +219,5 @@ export function hudWidgetsFor(profile: HudProfile): HudWidgetId[] {
     'chat',
     'menu-bar',
   ];
-  return profile === 'desktop' ? [...all, 'skill-bar'] : all;
+  return profile === 'desktop' ? [...all, 'skill-bar'] : all; // narrow desktop windows have the hotbar too
 }

@@ -359,6 +359,14 @@ export class ChatBox {
     this.layout();
   }
 
+  /** Narrow pointer windows: the HUD layout gives the chat a strip above the hotbar (design rect + CSS px per design unit); null = default. */
+  place(r: { x: number; y: number; w: number; h: number } | null, f: number): void {
+    this.placed = r ? { x: r.x * f, y: r.y * f, w: r.w * f, h: r.h * f } : null;
+    this.layout();
+  }
+
+  private placed: { x: number; y: number; w: number; h: number } | null = null;
+
   /** Small or touch screens: a 2-line strip until the player taps / focuses it (docs/05). */
   private layout(): void {
     const touch = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
@@ -377,6 +385,15 @@ export class ChatBox {
         left: `${strip.x}px`,
         bottom: `${bottom}px`,
         width: `${strip.w}px`,
+        maxWidth: 'none',
+      } as Partial<CSSStyleDeclaration>);
+    } else if (this.placed) {
+      const p = this.placed;
+      height = p.h;
+      Object.assign(this.root.style, {
+        left: `${p.x}px`,
+        bottom: `${window.innerHeight - (p.y + p.h)}px`,
+        width: `${p.w}px`,
         maxWidth: 'none',
       } as Partial<CSSStyleDeclaration>);
     } else {
