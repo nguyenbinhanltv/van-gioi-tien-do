@@ -24,6 +24,13 @@ describe('CameraFilter', () => {
     expect(f.update({ x: 500, y: 300 }, 1 / 60)).toEqual({ x: 500, y: 300 });
   });
 
+  it('reports the snapped centre immediately (the streaming warmup reads it before the first follow)', () => {
+    const f = new CameraFilter(0.1, 2, 480);
+    expect(f.position).toEqual({ x: 0, y: 0 }); // un-snapped: origin, which is why Bootstrap snaps right after creating the rig
+    f.snap({ x: 1234, y: 567 });
+    expect(f.position).toEqual({ x: 1234, y: 567 });
+  });
+
   it('ignores movement inside the dead-zone', () => {
     const f = new CameraFilter(0.1, 2, 480);
     f.snap({ x: 0, y: 0 });

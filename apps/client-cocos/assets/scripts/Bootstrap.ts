@@ -289,6 +289,8 @@ export class Bootstrap extends Component {
       this.canvasUi,
       new core.ZoomController(core.parseZoomParam(params.get('zoom'))),
     );
+    // centre the camera on the spawn now: `cameraRect()` (used by the warmup below) reads the camera centre, which is the origin until snapped
+    this.rig.snap(this.playerScreen());
     // P1 perf harness: `?npcs=N` wandering NPCs around the spawn (default 20 = the exit-criterion crowd, 0 = none)
     const npcParam = params.get('npcs');
     const npcCount = npcParam === null ? 20 : Math.max(0, Math.min(200, Math.floor(Number(npcParam)) || 0));
