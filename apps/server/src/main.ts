@@ -73,6 +73,12 @@ const srv = await startServer({
   dashboardToken: process.env.DASHBOARD_TOKEN || undefined,
   port,
   host: process.env.HOST ?? '127.0.0.1',
+  // D110: client crash reports land in CRASH_DIR (default <DATA_DIR>/crash with STORE=file, else memory); the crash-free numbers are in /dashboard (loopback-only
+  // unless DASHBOARD_TOKEN is set (then Bearer <token> also works)
+  crash: {
+    ...(process.env.CRASH_DIR || stores ? { dir: process.env.CRASH_DIR ?? join(stores!.dir, 'crash') } : {}),
+    onError: (e) => console.error('[vgtd/server] crash store write failed:', e),
+  },
   gateway: { corsOrigins },
   world: {
     telemetry,
@@ -92,6 +98,7 @@ const srv = await startServer({
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
+  ...(stores ? { friends: { store: stores.friends }, quests: { store: stores.quests } } : {}),
   ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
   ...(stores ? { friends: { store: stores.friends } } : {}),
   // Vạn Bảo Lâu (D112): the book is the market.json document; the weekly SHADOW CPI report goes to the log (telemetry can subscribe later)

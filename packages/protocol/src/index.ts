@@ -8,6 +8,7 @@ export * from './inventory.js';
 export * from './trade.js';
 export * from './sect.js';
 export * from './friends.js';
+export * from './quests.js';
 export * from './craft.js';
 export * from './market.js';
 export * from './chat.js';
