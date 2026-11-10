@@ -25,4 +25,5 @@ export * from './ui/FirstSessionTracker.js';
 export * from './i18n/strings.js';
 export * from './i18n/glyphs.js';
 export * from './net/index.js';
+export * from './crash/CrashReporter.js';
 export * from './ui/MobElement.js';
