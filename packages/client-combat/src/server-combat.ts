@@ -174,7 +174,15 @@ export class ServerCombat implements CombatBackend {
   }
 
   /** An enemy came into view or its state changed (`aoi_enter` / snapshot `hpPct`). */
-  upsertEnemy(e: { id: number; name: string; defId?: number; pos: TilePoint; hpPct: number; hpMax: number }): void {
+  upsertEnemy(e: {
+    id: number;
+    name: string;
+    defId?: number;
+    element?: number;
+    pos: TilePoint;
+    hpPct: number;
+    hpMax: number;
+  }): void {
     const cur = this.byId.get(e.id);
     const hp = Math.round((Math.max(0, Math.min(100, e.hpPct)) / 100) * e.hpMax);
     if (cur) {
@@ -183,11 +191,13 @@ export class ServerCombat implements CombatBackend {
       cur.hpMax = e.hpMax;
       cur.alive = hp > 0;
       if (e.defId !== undefined) cur.defId = e.defId;
+      if (e.element !== undefined) cur.element = e.element;
     } else
       this.byId.set(e.id, {
         id: e.id,
         name: e.name,
         defId: e.defId,
+        element: e.element,
         pos: e.pos,
         alive: hp > 0,
         hostile: true,

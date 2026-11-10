@@ -127,6 +127,7 @@ function snapEntity(x: unknown): SnapshotEntity {
 
 function enterEntity(x: unknown): EnterEntity {
   const o = rec(x, 'enter entity');
+  const element = o.element === undefined ? 0 : int(o.element, 0, 5, 'enter.element');
   return {
     index: int(o.index, 0, LIMITS.MAX_LOCAL_INDEX, 'enter.index'),
     entityId: int(o.entityId, 0, U32, 'enter.entityId'),
@@ -136,6 +137,7 @@ function enterEntity(x: unknown): EnterEntity {
     qj: int(o.qj, 0, LIMITS.POS_MAX_Q, 'enter.qj'),
     anim: int(o.anim, 0, 255, 'enter.anim'),
     dir: int(o.dir, 0, 7, 'enter.dir'),
+    ...(element > 0 ? { element } : {}),
     hpPct: int(o.hpPct, 0, 255, 'enter.hpPct'),
     maxHp: int(o.maxHp, 0, U32, 'enter.maxHp'),
   };

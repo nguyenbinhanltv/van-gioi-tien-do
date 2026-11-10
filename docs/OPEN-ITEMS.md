@@ -770,3 +770,9 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 5. **Khống chế (uptime) và đóng góp debuff / buff của đội không đo được trên mã thật**; mục 2 của báo cáo chỉ cho tiềm năng theo dữ liệu.
 6. **Đấu tay đôi chỉ là mô hình tham khảo** (chưa có PvP trên máy chủ, docs/14): không dùng để chốt cân bằng PvP.
 7. **Ma trận đội** chỉ có một đội tham chiếu (the, dan_phu, dao, kiem); chưa có ma trận đội đầy đủ vai trò, chưa đo đội 2 / 3 người.
+
+## D120 — hệ của quái trên client (worker39, 2026-11-10)
+
+1. **Viền hệ (rim)** quanh standee cần shader / vật liệu riêng: bỏ qua để giữ giới hạn draw call; hiện chỉ có màu đỉnh nhạt (22%, cần duyệt bằng mắt trên máy thật, đặc biệt hệ Kim gần trắng).
+2. **Chữ hệ trên thanh máu đầu quái** và **icon hệ**: mới có `[KIM]` ở khung mục tiêu; icon khi bộ icon trạng thái / hệ có.
+3. Hệ của **người chơi** (hệ chính của lớp) và NPC chưa gửi trên `aoi_enter` (khả năng mở rộng cùng nửa byte cao).
