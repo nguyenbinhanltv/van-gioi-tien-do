@@ -1,4 +1,6 @@
 import { ImageAsset, JsonAsset, Node, Sprite, SpriteFrame, UITransform, resources } from 'cc';
+import { shared } from './vendor/vgtd.mjs';
+import { propScale } from './WorldScale';
 import { footprintSortable, newNode, tileToWorld } from './IsoAdapter';
 import { allocSortId } from './Actors';
 import { makeFrame, makeTexture } from './PlaceholderArt';
@@ -565,7 +567,10 @@ export class PropArt {
   /** Creates the sprite node of a placed prop on the Y-sort layer. */
   add(ysort: YSortLayer, placed: PlacedProp): Node {
     const p = this.meta.props[placed.name]!;
-    const { w, h } = this.sizeOf(placed.name);
+    const raw = this.sizeOf(placed.name);
+    const sc = propScale(placed.name, raw.h, shared.TILE_WIDTH); // D123 world scale (1 for most props)
+    const w = raw.w * sc,
+      h = raw.h * sc;
     const n = newNode(`${placed.name}${placed.i},${placed.j}`);
     const ui = n.addComponent(UITransform);
     ui.setContentSize(w, h);

@@ -32,7 +32,7 @@ export class PointerController {
     private readonly pickEntity?: (world: TilePos) => number | null,
   ) {}
 
-  /** Walks `path` as if the player had clicked its end (quest guidance, D123); WASD or a new click cancels it. */
+  /** Walks `path` as if the player had clicked its end (quest guidance, D124); WASD or a new click cancels it. */
   followPath(path: TilePos[] | null): void {
     this.holding = false;
     this.path = path && path.length > 0 ? path.map((p) => ({ ...p })) : null;

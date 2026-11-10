@@ -49,7 +49,7 @@ Sổ nhiệm vụ trên UI: Mobile dùng tab "Nhiệm vụ" trong túi đồ to�
 
 ### 3.1 Bối cảnh (Đề xuất – chờ duyệt)
 
-> [Cập nhật D123: tọa độ NPC nhiệm vụ (`QUEST_NPCS`) trùng ô client vẽ tượng NPC; tracker nhiệm vụ có mũi tên dẫn đường, nhấp để tự đi, hội thoại NPC và dấu `!` / `?` trên đầu NPC.]
+> [Cập nhật D124: tọa độ NPC nhiệm vụ (`QUEST_NPCS`) trùng ô client vẽ tượng NPC; tracker nhiệm vụ có mũi tên dẫn đường, nhấp để tự đi, hội thoại NPC và dấu `!` / `?` trên đầu NPC.]
 
 Vạn Giới là chuỗi các thế giới nối nhau qua Linh Mạch; mỗi Linh Mạch là một con đường về phía Tiên Giới. Người tu hành là kẻ **đi trên tiên đồ** — vì vậy tên game. Nhân vật chính là một phàm nhân vừa thức tỉnh Linh Căn tại chân núi của **Sơn Môn Đại Phái** (tạm gọi Thiên Kiếm Tông, theo tên asset `tset_sect_tianjian` ở [02-asset-matrix-2d.md](02-asset-matrix-2d.md)). Xung đột chính: Linh Mạch của sơn môn đang bị **độc khí** ăn mòn từ **Bí Cảnh Rừng Độc**; ai kiểm soát nguồn độc sẽ nắm Linh Mạch — kéo theo ba đường Chính, Tà, Ma.
 

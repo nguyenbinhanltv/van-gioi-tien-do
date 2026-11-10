@@ -31,7 +31,7 @@ export interface MapFeed {
   self(): { i: number; j: number } | null;
   remotes(): ReadonlyArray<{ entityId: number; kind: number; defId: number; i: number; j: number }>;
   isPartyMember(entityId: number): boolean;
-  /** the quest objective to mark (D123): a yellow diamond, pinned to the rim when it is outside the shown area */
+  /** the quest objective to mark (D124): a yellow diamond, pinned to the rim when it is outside the shown area */
   objective?(): { i: number; j: number; label: string } | null;
 }
 

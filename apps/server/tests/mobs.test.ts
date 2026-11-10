@@ -434,7 +434,7 @@ describe('AOI replicates mobs', () => {
   });
 });
 
-describe('starter packs (D123)', () => {
+describe('starter packs (D124)', () => {
   it('the first packs of the first-quest mob spawn within a short walk of the spawn square, on the full slice map', () => {
     const n = 256;
     const grid = TileGrid.fromRows(Array.from({ length: n }, () => '.'.repeat(n)));

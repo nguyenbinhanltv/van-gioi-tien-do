@@ -33,7 +33,7 @@ async function rig() {
   const node = new WorldNode({
     seed: 5,
     mapTiles: MAP,
-    // on top of npc_ve_binh (6 west, 12 north of the centre, D123)
+    // on top of npc_ve_binh (6 west, 12 north of the centre, D124)
     spawn: { i0: C - 6.2, j0: C - 12.2, side: 0.4 },
     mobs: true,
     combat: {},

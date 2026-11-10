@@ -1,5 +1,6 @@
 import { Node, UITransform, dragonBones } from 'cc';
 import { character, shared } from './vendor/vgtd.mjs';
+import { chibiScale } from './WorldScale';
 import { newNode } from './IsoAdapter';
 import {
   chibiTierFor,
@@ -50,8 +51,8 @@ export function pathOfChibiId(id: string): string | undefined {
 }
 
 export type MoveState = 'idle' | 'walk' | 'run';
-/** Chibi masters are ~208 px tall in a 256 px cell; tiles are 64 px wide, so scale to ~1.3 tiles of height. */
-export const CHIBI_SCALE = 0.42;
+/** Chibi masters are ~208 px tall in a 256 px cell; scaled to the player height of the world-scale table (WorldScale.ts, D123). */
+export const CHIBI_SCALE = chibiScale(shared.TILE_WIDTH);
 
 export interface ChibiPick {
   /** Authored direction whose armature plays. */
@@ -196,6 +197,30 @@ export class ChibiBody {
     this.playing = '';
     this.playClip();
   }
+
+  /**
+   * Per-frame fallback motion. When the player is moving but the rig has no walk/run clip (so `playClip` fell back to `idle`),
+   * the body would glide frozen; bob it (hop + slight sway, in the armature's own units, no scale change) so movement still reads.
+   */
+  animate(dt: number): void {
+    const fallback = this.moveState !== 'idle' && !this.seated && this.playing === 'idle' && !!this.display.armature();
+    if (!fallback) {
+      if (this.bobT !== 0) {
+        this.bobT = 0;
+        this.dbNode.setPosition(0, 0, 0);
+        this.dbNode.angle = 0;
+      }
+      return;
+    }
+    this.bobT += dt;
+    const ph = this.bobT * ChibiBody.BOB_HZ * Math.PI * 2;
+    this.dbNode.setPosition(0, Math.abs(Math.sin(ph)) * ChibiBody.BOB_UNITS, 0);
+    this.dbNode.angle = Math.sin(ph) * ChibiBody.SWAY_DEG;
+  }
+  private bobT = 0;
+  static readonly BOB_HZ = 2.2;
+  static readonly BOB_UNITS = 14;
+  static readonly SWAY_DEG = 2.5;
 
   state(s: MoveState): void {
     if (s === this.moveState) return;

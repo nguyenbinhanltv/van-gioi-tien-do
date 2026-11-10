@@ -283,7 +283,7 @@ export class QuestModel {
   }
 
   /**
-   * What floats over an NPC (D123): 'ready' = a quest waits to be turned in here (yellow ?), 'available' = one can be accepted here
+   * What floats over an NPC (D124): 'ready' = a quest waits to be turned in here (yellow ?), 'available' = one can be accepted here
    * (yellow !), 'active' = a quest turned in here is still being worked on (grey ?), null = nothing.
    */
   markerState(npcKey: string): 'ready' | 'available' | 'active' | null {

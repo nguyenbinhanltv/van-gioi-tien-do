@@ -153,7 +153,7 @@ describe('placeSectNpcs', () => {
   });
 });
 
-describe('quest NPC tiles (D123)', () => {
+describe('quest NPC tiles (D124)', () => {
   it('the standee layout is the table the server range-checks against (shared QUEST_NPCS offsets)', () => {
     for (const n of QUEST_NPCS)
       expect(SECT_NPC_LAYOUT[n.key as keyof typeof SECT_NPC_LAYOUT]).toEqual({ di: n.offset[0], dj: n.offset[1] });

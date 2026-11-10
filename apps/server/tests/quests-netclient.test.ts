@@ -108,7 +108,7 @@ async function player(s: RunningServer, name: string): Promise<Player> {
 
 async function boot(dir: string): Promise<RunningServer> {
   stores = openFileStores(dir, { flushMs: -1 });
-  // spawn on top of the elder (npc_truong_lao_dan stands 4 west and 9 north of the map centre, D123)
+  // spawn on top of the elder (npc_truong_lao_dan stands 4 west and 9 north of the map centre, D124)
   srv = await startServer({
     port: 0,
     auth: { scrypt: FAST, registerPerIpPerDay: 0, ipFailLimit: 1_000_000, store: stores.accounts },

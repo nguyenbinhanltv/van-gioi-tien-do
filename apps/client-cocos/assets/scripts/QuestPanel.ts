@@ -33,9 +33,9 @@ export interface QuestPanelHooks {
   position(): { i: number; j: number } | null;
   /** side of the (square) map in tiles */
   mapTiles(): number;
-  /** the tracker was clicked: walk to the current objective (D123) */
+  /** the tracker was clicked: walk to the current objective (D124) */
   go?(): void;
-  /** objective progress / completion to show as floating text and a tracker flash (D123) */
+  /** objective progress / completion to show as floating text and a tracker flash (D124) */
   feedback?(items: ReturnType<InstanceType<typeof core.QuestModel>['drainFeedback']>): void;
 }
 
@@ -64,7 +64,7 @@ export class QuestPanel {
     Object.assign(tracker.style, {
       position: 'fixed',
       right: '12px',
-      top: '204px', // below the minimap (176 px + its 12 px margin), D123
+      top: '204px', // below the minimap (176 px + its 12 px margin), D124
       width: '230px',
       maxWidth: 'calc(100vw - 32px)',
       maxHeight: '150px',
@@ -250,7 +250,7 @@ export class QuestPanel {
     const near = this.model.nearestNpc(this.hooks.position(), this.hooks.mapTiles());
     const acts = this.actions();
     const tracked = this.model.tracker(2);
-    // nothing being worked on: show the first quest that can be accepted, so the player always has somewhere to go (D123)
+    // nothing being worked on: show the first quest that can be accepted, so the player always has somewhere to go (D124)
     const offer = tracked.length === 0 ? this.model.available().slice(0, 1) : [];
     const items = tracked.length ? tracked : offer;
     const marker = near && near.inReach ? this.model.markerFor(near.key) : null;

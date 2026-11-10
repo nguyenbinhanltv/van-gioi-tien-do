@@ -47,7 +47,7 @@ export function mobZoneAt(i: number, j: number, mapTiles: number): MobLayoutZone
 }
 
 /**
- * Where the first packs of a zone's starter mob live (D123), as a fraction of `R` like `MOB_BANDS`: a short walk from the spawn so the first
+ * Where the first packs of a zone's starter mob live (D124), as a fraction of `R` like `MOB_BANDS`: a short walk from the spawn so the first
  * kill quest is reachable in seconds. Applies only to spawn groups that set `starterPacks`. PLACEHOLDER (cần game designer duyệt).
  */
 export const MOB_STARTER_BAND: { minFrac: number; maxFrac: number } = layout.starterBand;

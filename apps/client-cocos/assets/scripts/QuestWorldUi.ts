@@ -1,5 +1,5 @@
 /**
- * Quest guidance in the world (D123): NPC name plates with quest markers, the NPC dialogue, the edge-of-screen objective arrow, the walk
+ * Quest guidance in the world (D124): NPC name plates with quest markers, the NPC dialogue, the edge-of-screen objective arrow, the walk
  * to the objective and the floating feedback text. All DOM overlays over the game canvas (like the chat, minimap and quest log), so they cost
  * no draw call of the world scene. Everything is drawn with `textContent` only and every string comes from the vi-VN table (D104).
  *
