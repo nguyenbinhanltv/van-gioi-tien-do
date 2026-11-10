@@ -1,5 +1,6 @@
 import { Node, Sprite, UITransform, UIOpacity, game } from 'cc';
 import { newNode } from './IsoAdapter';
+import { afterFirstWorldFrame } from './Milestones';
 import { getParticleFrame, preloadParticles } from './PropArt';
 
 /**
@@ -32,7 +33,7 @@ export class LevelUpFx {
 
   constructor(private readonly parent: Node) {
     // the particle page is not in the initial download: fetch it a few seconds after the HUD exists (long before a first level-up)
-    setTimeout(() => void preloadParticles(), 4000);
+    afterFirstWorldFrame(() => setTimeout(() => void preloadParticles(), 4000)); // lazy set: never before the first world frame
   }
 
   /** Start the flourish centred on (x, y) in `parent`-local design px. Restarts when already playing. */

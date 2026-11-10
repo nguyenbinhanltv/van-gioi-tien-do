@@ -1,6 +1,7 @@
 import { Color, Node, Sprite, UITransform } from 'cc';
 import { shared } from './vendor/vgtd.mjs';
 import { newNode, tileToWorld } from './IsoAdapter';
+import { afterFirstWorldFrame } from './Milestones';
 import { getParticleFrame, preloadParticles } from './PropArt';
 import { PARTICLE_NAMES } from './ArtRegistry';
 import { ParticlePool } from './ParticleSim';
@@ -42,7 +43,7 @@ export class SkillVfx {
   private ensureArt(): void {
     if (this.asked.value) return;
     this.asked.value = true;
-    void preloadParticles();
+    afterFirstWorldFrame(() => void preloadParticles()); // lazy set: never before the first world frame
   }
 
   /**

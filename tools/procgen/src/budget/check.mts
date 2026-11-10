@@ -383,6 +383,15 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
       msg: `Gói tải đầu ước tính ${totalMb.toFixed(2)} MB (asset ${(assetBytes / MB).toFixed(2)} + dự phòng ${reservedMb}) vượt ${limitMb} MB`,
     });
   }
+  // the lazy pages are out of the initial estimate, so they get their own ceiling (a lazy page cannot hide weight from the gate);
+  // `perf:p1` budgets what the browser really fetches after the first world frame against the same constant
+  if (enforced && lazyBytes / MB > BUDGETS.LAZY_DOWNLOAD_MB_WEB) {
+    findings.push({
+      level: 'error',
+      code: 'LAZY_PACKAGE_OVER',
+      msg: `Atlas tải lười ${(lazyBytes / MB).toFixed(2)} MB vượt ${BUDGETS.LAZY_DOWNLOAD_MB_WEB} MB`,
+    });
+  }
   if (!useCompressed) {
     findings.push({
       level: 'warn',

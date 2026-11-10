@@ -49,6 +49,7 @@ import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
 import { Minimap, WorldMapPanel } from './MapUi';
+import { markFirstWorldFrame } from './Milestones';
 import { installCrashReporting, setCrashClass } from './CrashReport';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -269,6 +270,7 @@ export class Bootstrap extends Component {
     // classes, the player's other directions, rest clips).
     this.chibi.onInstalled = () => {
       if (chibiStreamer.backgroundOpen) return;
+      markFirstWorldFrame(); // the cut of the initial package (Milestones.ts): what is fetched from here on is the lazy set
       chibiStreamer.openBackground();
       this.chibi.prefetchDirections();
     };

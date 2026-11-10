@@ -8,8 +8,11 @@
 // and draw calls / RAM / chunk count over the walk.
 //
 // 1. (unless --skip-build) builds web-mobile (scripts/build-web.mjs, needs the Cocos editor, see README)
-// 2. serves it and records every file the page requests; the initial package = files first requested until the world is playable
-//    (raw and gzip), the total fetched during the whole run (lazy / streamed assets) is reported separately
+// 2. serves it and records every file the page requests IN ARRIVAL ORDER. The page sends one marker request when it reaches the named
+//    milestone `first_world_frame` (`?milestone=1`, Milestones.ts: world built + the local player's body on screen); the initial package =
+//    the files requested before that marker (raw and gzip), the LAZY set = everything requested after it (budgeted separately:
+//    BUDGETS.LAZY_DOWNLOAD_MB_WEB). Nothing lazy is requested before the marker (the client defers it), so the cut does not depend on how
+//    fast the machine is. If the marker never arrives (no chibi art) the old "world playable" instant is used and a warning is printed.
 // 3. serves the build on loopback, opens `/?npcs=N&tier=T` in headless Chrome/Edge (puppeteer-core, set CHROME_PATH to
 //    override) and samples `window.__vgtdPerf` (published by PerfHud) twice a second after a warm-up
 // 4. prints a table against the exit criteria and writes <out>/p1-perf.json (default <tmpdir>/vgtd-perf)
@@ -106,14 +109,24 @@ const types = {
   '.webp': 'image/webp',
 };
 const served = new Set(); // files the page actually requested
-const servedAt = new Map(); // file -> ms timestamp of first request (initial vs streamed split)
+const servedOrder = []; // files in the order of their FIRST request (the marker request is not a file)
+const servedAt = new Map(); // file -> ms of first request (fallback cut only)
+let markerAt = -1; // index into servedOrder where the first_world_frame marker arrived, -1 = not seen
 const server = createServer((req, res) => {
   const p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
+  const pUrl = p.split(String.fromCharCode(92)).join('/'); // normalize() uses the platform separator
+  if (pUrl.startsWith('__vgtd_milestone/')) {
+    if (pUrl === '__vgtd_milestone/first_world_frame' && markerAt < 0) markerAt = servedOrder.length;
+    return void res.writeHead(204).end();
+  }
   let f = join(webDir, p || 'index.html');
   if (!f.startsWith(webDir) || !existsSync(f)) return void res.writeHead(404).end();
   if (statSync(f).isDirectory()) f = join(f, 'index.html');
+  if (!served.has(f)) {
+    servedOrder.push(f);
+    servedAt.set(f, Date.now());
+  }
   served.add(f);
-  if (!servedAt.has(f)) servedAt.set(f, Date.now());
   res.writeHead(200, { 'content-type': types[extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' });
   createReadStream(f).pipe(res);
 });
@@ -151,7 +164,7 @@ try {
     console.error('[page error]', e.message);
     failures++;
   });
-  const url = `http://127.0.0.1:${port}/?npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}${mobs ? '&combat=1&mobdemo=1' : ''}${flag('drawdbg') ? '&drawdbg=1' : ''}${flag('vfxdemo') || casting ? '&vfxdemo=1' : ''}${flag('vfxoff') ? '&vfxoff=1' : ''}${opt('class', '') ? `&class=${opt('class', '')}` : ''}`; // --vfxdemo: the hotbar keeps casting (skill VFX on screen); --class <id>
+  const url = `http://127.0.0.1:${port}/?milestone=1&npcs=${npcs}&tier=${tier}&npcart=${npcart}${route ? '&route=1' : ''}${zoom ? `&zoom=${zoom}` : ''}${mobs ? '&combat=1&mobdemo=1' : ''}${flag('drawdbg') ? '&drawdbg=1' : ''}${flag('vfxdemo') || casting ? '&vfxdemo=1' : ''}${flag('vfxoff') ? '&vfxoff=1' : ''}${opt('class', '') ? `&class=${opt('class', '')}` : ''}`; // --vfxdemo: the hotbar keeps casting (skill VFX on screen); --class <id>
   console.log('opening', url);
   await page.goto(url);
   await page.waitForFunction('window.__vgtdPerf && window.__vgtdPerf.fps > 0 && window.__vgtdPerf.nodes > 100', {
@@ -159,6 +172,17 @@ try {
     polling: 250,
   });
   tPlayable = Date.now();
+  // the named milestone: wait for the page to have sent its marker (it is a few frames after the world is playable); without chibi art it
+  // never comes and the cut falls back to the playable instant
+  await page
+    .waitForFunction('window.__vgtdMilestones && window.__vgtdMilestones.firstWorldFrame', {
+      timeout: 60000,
+      polling: 250,
+    })
+    .catch(() =>
+      console.warn('WARNING: no first_world_frame marker within 60 s: initial package cut at the playable instant'),
+    );
+  await sleep(1500); // the marker request is in flight; lazy fetches that follow it are counted as lazy, not initial
   console.log(`running: warm-up ${warmup}s, sampling ${seconds}s (SwiftShader software WebGL)`);
   await sleep(warmup * 1000);
   if (opt('shot', '')) await page.screenshot({ path: resolve(opt('shot', '')) }); // `--shot <file.png>`: viewport after the warm-up
@@ -194,15 +218,19 @@ let gzipBytes = 0;
 const fetched = [];
 let initRaw = 0;
 let initGzip = 0;
+const markerSeen = markerAt >= 0;
+const initialSet = new Set(
+  markerSeen ? servedOrder.slice(0, markerAt) : servedOrder.filter((f) => servedAt.get(f) <= tPlayable),
+);
 served.forEach((f) => {
   const buf = readFileSync(f);
   rawBytes += buf.length;
   gzipBytes += gzipSync(buf, { level: 6 }).length;
-  if (servedAt.get(f) <= tPlayable) {
+  if (initialSet.has(f)) {
     initRaw += buf.length;
     initGzip += gzipSync(buf, { level: 6 }).length;
   }
-  fetched.push({ file: relative(webDir, f).replaceAll(sep, '/'), bytes: buf.length });
+  fetched.push({ file: relative(webDir, f).replaceAll(sep, '/'), bytes: buf.length, lazy: !initialSet.has(f) });
 });
 fetched.sort((a, b) => b.bytes - a.bytes);
 const col = (k) => samples.map((s) => s[k]).filter((v) => typeof v === 'number');
@@ -263,7 +291,8 @@ const result = {
     loadedMB: Math.max(...col('loadedMB')),
     initialMBRaw: initRaw / MB,
     initialMBGzip: initGzip / MB,
-    lazyFetchedMBRaw: (rawBytes - initRaw) / MB, // fetched after the world was playable (lazy / streamed assets)
+    cutBy: markerSeen ? 'first_world_frame marker' : 'playable instant (fallback)',
+    lazyFetchedMBRaw: (rawBytes - initRaw) / MB, // requested after the milestone (lazy / streamed assets)
     lazyFetchedMBGzip: (gzipBytes - initGzip) / MB,
     packageMBRaw: rawBytes / MB,
     packageMBGzip: gzipBytes / MB,
@@ -271,6 +300,10 @@ const result = {
   },
   streaming: route ? streaming() : undefined,
   fetchedFiles: fetched.length,
+  lazyFiles: fetched
+    .filter((x) => x.lazy)
+    .slice(0, 12)
+    .map((b) => ({ ...b, MB: +(b.bytes / MB).toFixed(2) })),
   largestFetched: fetched.slice(0, 8).map((b) => ({ ...b, MB: +(b.bytes / MB).toFixed(2) })),
   buildOutputByDirMB: Object.fromEntries(
     Object.entries(byDir)
@@ -288,6 +321,7 @@ const LIMITS = {
   drawCalls: Math.min(b.drawCalls, drawLimit),
   ramMB: b.ramMB,
   packageMB: b.initialDownloadMB,
+  lazyMB: b.lazyDownloadMB,
   minFps: MIN_FPS,
 };
 const rows = [
@@ -301,10 +335,17 @@ const rows = [
     flag('gate-fps'),
   ],
   [
-    'Initial package MB until playable (raw / gzip)',
+    'Initial package MB until first world frame (raw / gzip)',
     `${m.initialMBRaw.toFixed(2)} / ${m.initialMBGzip.toFixed(2)}`,
     `<= ${LIMITS.packageMB}`,
     m.initialMBRaw <= LIMITS.packageMB,
+    true,
+  ],
+  [
+    'Lazy set MB after first world frame (raw / gzip)',
+    `${m.lazyFetchedMBRaw.toFixed(2)} / ${m.lazyFetchedMBGzip.toFixed(2)}`,
+    `<= ${LIMITS.lazyMB}`,
+    m.lazyFetchedMBRaw <= LIMITS.lazyMB,
     true,
   ],
 ];
@@ -315,7 +356,7 @@ for (const [name, value, limit, ok, gates] of rows) {
   );
 }
 console.log(
-  `  info  fetched after playable (lazy, not in the gate): ${m.lazyFetchedMBRaw.toFixed(2)} MB raw / ${m.lazyFetchedMBGzip.toFixed(2)} MB gzip; whole run ${m.packageMBRaw.toFixed(2)} / ${m.packageMBGzip.toFixed(2)}
+  `  info  cut by ${m.cutBy}; lazy set (gated separately): ${m.lazyFetchedMBRaw.toFixed(2)} MB raw / ${m.lazyFetchedMBGzip.toFixed(2)} MB gzip; whole run ${m.packageMBRaw.toFixed(2)} / ${m.packageMBGzip.toFixed(2)}
 ` +
     `  info  frame ${m.frameMsMedian.toFixed(1)} ms (update ${m.updateMsMedian.toFixed(2)} + render submit ${m.renderMsMedian.toFixed(2)}), ` +
     `heap ${m.jsHeapMBMax.toFixed(1)} MB, tex ${m.textureMBMax.toFixed(1)} MB, nodes ${m.nodesMax}, chunks ${m.chunksMax}, loaded ${m.loadedMB.toFixed(2)} MB, fetched ${fetched.length} files, whole build dir ${m.buildOutputMB.toFixed(0)} MB (lazy resources incl.)`,
