@@ -119,6 +119,47 @@ describe('binary round trip', () => {
   });
 });
 
+describe('aoi_enter monster element (D120)', () => {
+  const ent = (o: Partial<import('../src/index.js').EnterEntity> = {}) => ({
+    index: 3,
+    entityId: 7,
+    kind: 1,
+    defId: 12,
+    qi: 100,
+    qj: 200,
+    anim: 0,
+    dir: 5,
+    hpPct: 100,
+    maxHp: 900,
+    ...o,
+  });
+  it('round-trips the element (1..5) next to the direction, and an absent element stays absent', () => {
+    for (const element of [1, 2, 3, 4, 5]) {
+      const m = { type: 'aoi_enter' as const, entities: [ent({ element })] };
+      expect(decode(encode(m))).toEqual(m);
+    }
+    const none = { type: 'aoi_enter' as const, entities: [ent()] };
+    const back = decode(encode(none));
+    expect(back).toEqual(none);
+    expect('element' in (back as { entities: object[] }).entities[0]!).toBe(false);
+  });
+  it('costs no extra byte: the element shares the direction byte, and the direction is not disturbed', () => {
+    const base = encode({ type: 'aoi_enter', entities: [ent()] });
+    const withEl = encode({ type: 'aoi_enter', entities: [ent({ element: 4 })] });
+    expect(withEl.length).toBe(base.length);
+    for (let dir = 0; dir < 8; dir++) {
+      const m = decode(encode({ type: 'aoi_enter', entities: [ent({ dir, element: 5 })] })) as {
+        entities: { dir: number; element?: number }[];
+      };
+      expect(m.entities[0]).toMatchObject({ dir, element: 5 });
+    }
+  });
+  it('an element outside 0..5 is rejected', () => {
+    expect(() => encode({ type: 'aoi_enter', entities: [ent({ element: 6 })] })).toThrow();
+    expect(() => encode({ type: 'aoi_enter', entities: [ent({ element: -1 })] })).toThrow();
+  });
+});
+
 describe('snapshot deltas', () => {
   const base = new Map<number, { qi: number; qj: number }>();
   const lookup: BaselineLookup = (i) => base.get(i);
@@ -388,6 +429,13 @@ describe('own status block (D94)', () => {
   });
 
   it('status_update is 7 bytes with the stable hot id 18', () => {
+    // D116: a mob can also be stunned (bit 3); bit 4 and above do not exist
+    expect(decode(encode({ type: 'status_update', entityId: 7, mask: 8 | 2 }))).toEqual({
+      type: 'status_update',
+      entityId: 7,
+      mask: 10,
+    });
+    expect(() => encode({ type: 'status_update', entityId: 7, mask: 16 })).toThrow();
     const b = encode({ type: 'status_update', entityId: 12345, mask: 3 });
     expect(b.length).toBe(7);
     expect(b[1]).toBe(18);

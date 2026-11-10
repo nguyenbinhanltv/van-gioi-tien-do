@@ -20,6 +20,8 @@ export interface EnemyView extends Targetable {
   name: string;
   /** Mob wire id (`MOB_DEFS[].id`, EnterEntity.defId) when the backend knows it: picks the mob's art. Absent for dummies. */
   defId?: number;
+  /** Ngũ hành element wire code of the mob (D120; 0 / absent = none): drives the standee tint and the glyph next to the name. */
+  element?: number;
   hp: number;
   hpMax: number;
 }

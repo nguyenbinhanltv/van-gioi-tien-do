@@ -85,7 +85,9 @@ describe('SectModel', () => {
     expect(m.applyState(state())).toBeNull();
     expect(m.applyState(state({ member: true }))).toMatch(/đã gia nhập/);
     expect(m.applyState(state({ member: true, contribution: 5 }))).toBeNull(); // Cống hiến from a kill: silent
-    expect(m.applyState(state({ member: true, contribution: 5, library: lib([true, false]) }))).toMatch(/đã học bí tịch Kim Quang Quet/);
+    expect(m.applyState(state({ member: true, contribution: 5, library: lib([true, false]) }))).toMatch(
+      /đã học bí tịch Kim Quang Quet/,
+    );
     expect(m.applyState(state({ member: false, contribution: 5, library: lib([true, false]) }))).toMatch(/đã rời/);
     const first = new SectModel();
     expect(first.applyState(state({ member: true }))).toMatch(/là đệ tử/);
