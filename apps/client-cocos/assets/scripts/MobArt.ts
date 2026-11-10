@@ -1,8 +1,9 @@
 import { Color, Node, Sprite, SpriteFrame, UITransform } from 'cc';
-import { combat as cb, core } from './vendor/vgtd.mjs';
+import { combat as cb, core, shared } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { MobSprite, PropArt } from './PropArt';
 import { ELEMENT_COLORS } from './SkillVfxPresets';
+import { mobScale } from './WorldScale';
 import { beginTransform, flashMotion, mobDefIdOfName, newMotion, stepMotion, type MotionState } from './MobMotion';
 
 /**
@@ -29,6 +30,8 @@ export class MobStandee {
   private readonly motion: MotionState;
   /** sprite height above the foot (design px): where an overhead bar goes (follows the current skin) */
   heightPx: number;
+  /** world scale of the current skin (WorldScale.ts, D123): design px of the art -> world px */
+  private scale = 1;
   /** false once the death fade finished (hide the node) */
   visible = true;
 
@@ -42,25 +45,39 @@ export class MobStandee {
   private elementTint = new Color(255, 255, 255, 255);
   private elementKey: string | null = null;
 
-  constructor(id: number, entry: MobSprite, frame: SpriteFrame, skins?: ReadonlyMap<number, Skin>) {
+  constructor(
+    id: number,
+    entry: MobSprite,
+    frame: SpriteFrame,
+    skins?: ReadonlyMap<number, Skin>,
+    private readonly mobDef: { tier: 'normal' | 'elite' | 'boss'; footprint: number } = {
+      tier: 'normal',
+      footprint: 1,
+    },
+  ) {
     this.entry = entry;
+    this.scale = this.scaleOf(entry);
     this.skins = skins ?? new Map([[0, { entry, frame }]]);
     this.node = newNode(`Mob${id}`);
     this.body = newNode('body', this.node);
     const ui = this.body.addComponent(UITransform);
-    ui.setContentSize(entry.w, entry.h);
+    ui.setContentSize(entry.w, entry.h); // the world scale is on the body node (update), so the art keeps its pixel size
     ui.setAnchorPoint(entry.pivot.x, 1 - entry.pivot.y); // Cocos anchor y is up
     this.sprite = this.body.addComponent(Sprite);
     this.sprite.sizeMode = Sprite.SizeMode.CUSTOM;
     this.sprite.spriteFrame = frame;
     this.motion = newMotion(id);
-    this.heightPx = entry.h * entry.pivot.y;
+    this.heightPx = entry.h * entry.pivot.y * this.scale;
+  }
+
+  private scaleOf(e: MobSprite): number {
+    return mobScale(this.mobDef.tier, this.mobDef.footprint, e, shared.TILE_WIDTH);
   }
 
   /** Soft ground shadow under the mob, in the shadow layer (placeholder atlas, like the player's): call once after `create`. */
   attachShadow(frame: SpriteFrame, parent: Node): void {
     if (this.shadow) return;
-    const w = this.entry.w * SHADOW_W_FRAC;
+    const w = this.entry.w * this.scale * SHADOW_W_FRAC;
     this.shadow = newNode(`MobShadow${this.node.name}`, parent);
     this.shadow.addComponent(UITransform).setContentSize(w, w * SHADOW_ASPECT);
     this.shadowSprite = this.shadow.addComponent(Sprite);
@@ -104,11 +121,12 @@ export class MobStandee {
     this.tinted = !skin && phase > 0;
     if (!skin) return;
     this.entry = skin.entry;
+    this.scale = this.scaleOf(skin.entry);
     const ui = this.body.getComponent(UITransform)!;
     ui.setContentSize(skin.entry.w, skin.entry.h);
     ui.setAnchorPoint(skin.entry.pivot.x, 1 - skin.entry.pivot.y);
     this.sprite.spriteFrame = skin.frame;
-    this.heightPx = skin.entry.h * skin.entry.pivot.y;
+    this.heightPx = skin.entry.h * skin.entry.pivot.y * this.scale;
   }
 
   /**
@@ -129,7 +147,7 @@ export class MobStandee {
       this.shadow.setPosition(this.node.position.x, this.node.position.y + 2, 0);
       this.shadowSprite.color = new Color(255, 255, 255, o.alpha);
     }
-    this.body.setScale(o.scaleX, 1, 1);
+    this.body.setScale(o.scaleX * this.scale, this.scale, 1);
     this.body.setPosition(0, o.bobY, 0);
     this.sprite.color = o.flashing
       ? new Color(255, 90, 90, o.alpha)
@@ -150,7 +168,9 @@ export class MobArt {
   create(entityId: number, name: string, defId?: number): MobStandee | null {
     const id = defId ?? mobDefIdOfName(name);
     const m = id === null ? undefined : this.props.mob(id);
-    return m ? new MobStandee(entityId, m.entry, m.frame, this.props.mobSkins(id!)) : null;
+    if (!m) return null;
+    const def = shared.mobDefById(id!);
+    return new MobStandee(entityId, m.entry, m.frame, this.props.mobSkins(id!), def ?? undefined);
   }
 }
 
