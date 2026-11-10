@@ -20,8 +20,9 @@ import { RouteWalker } from './Route';
 import { BagPanel } from './BagPanel';
 import { PropArt } from './PropArt';
 import { installDrawDebug } from './DrawDebug';
+import { installGlyphSheet } from './GlyphSheet';
 import { MobArt, createMobDemoBackend } from './MobArt';
-import { placeProps } from './PropPlacement';
+import { blockSectTiles, placeProps } from './PropPlacement';
 import { NpcArt, type NpcStandee } from './NpcArt';
 import { placeSectNpcs } from './NpcPlacement';
 import { CombatUi, createMockBackend, pathOfClass } from './Combat';
@@ -33,17 +34,22 @@ import { chibiStreamer } from './ChibiAssets';
 import { CHIBI_CLASSES, ChibiBody, chibiIdOfPath, pathOfChibiId } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
-import { OnlineSession, onlineRequested } from './OnlineSession';
+import { OnlineSession, markInviteUsed, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
 import { PartyFrames } from './PartyFrames';
+import { TutorialHints, tutorialRequested } from './TutorialHints';
 import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
+import { QuestPanel } from './QuestPanel';
+import { CraftPanel } from './CraftPanel';
+import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
 import { Minimap, WorldMapPanel } from './MapUi';
+import { installCrashReporting, setCrashClass } from './CrashReport';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -107,9 +113,13 @@ export class Bootstrap extends Component {
   /** chat (D87), only online: the server owns the channels, rate limits and moderation */
   private chatBox: ChatBox | null = null;
   private partyFrames: PartyFrames | null = null;
+  private tutorialHints: TutorialHints | null = null;
   private tradePanel: TradePanel | null = null;
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private questPanel: QuestPanel | null = null;
+  private craftPanel: CraftPanel | null = null;
+  private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
@@ -137,6 +147,7 @@ export class Bootstrap extends Component {
       return;
     }
     console.log('[vgtd] Bootstrap.start');
+    installCrashReporting();
     try {
       await this.build();
       this.ready = true;
@@ -168,6 +179,8 @@ export class Bootstrap extends Component {
     const worldRoot = newNode('World', this.node);
     // `?tier=low|medium|high` picks the chunk-streaming window (D63); default medium
     const params = new URLSearchParams(location.search);
+    // `?lang=pseudo`: pseudo-localized text (longer, accented, bracketed) to spot clipped or concatenated strings (docs/19 §2.4)
+    if (params.get('lang') === 'pseudo') core.setStrings(core.pseudoLocalize(core.sourceStrings()), 'pseudo');
     const tierParam = params.get('tier');
     const tier: cw.StreamTier = tierParam === 'low' || tierParam === 'high' ? tierParam : 'medium';
     this.world = new WorldView(data, tilesetJson.animations, tilesetTex, worldRoot, tier);
@@ -177,6 +190,8 @@ export class Bootstrap extends Component {
 
     // blocked tiles (props) on top of terrain walkability
     const blocked = new Uint8Array(map.width * map.height);
+    // the sect building tiles the SERVER blocks, with or without the art (placeholder path, a building that did not fit): never predict a free walk there
+    blockSectTiles(blocked, map.width, map.height, shared.sectBlockedTiles(map.width));
     const walkable = (i: number, j: number) => this.world.isTerrainWalkable(i, j) && blocked[j * map.width + i] === 0;
 
     // `?at=i,j` (offline QA): start near that tile instead of the map centre, e.g. to look at a mob zone's dressing
@@ -202,8 +217,16 @@ export class Bootstrap extends Component {
         defs: this.propArt.defs(),
         count: 110,
         radius: 40,
+        // the Son Mon sect buildings (D118): the same list and origin the server blocks its grid with (shared SECT_BUILDINGS)
+        sect: shared.SECT_BUILDINGS,
+        sectOrigin: shared.sectOrigin(map.width),
       });
       for (const [i, j] of placed.blocked) blocked[j * map.width + i] = 1;
+      if (placed.sectSkipped.length > 0)
+        console.warn(
+          '[vgtd] sect buildings not drawn (their tiles stay blocked, as on the server):',
+          placed.sectSkipped,
+        );
       for (const p of placed.courtyard) this.propArt.add(this.ysort, p);
       for (const p of placed.props) this.propArt.add(this.ysort, p);
       // Son Mon NPC standees around the plaza: they block their tile like props and adapt to the land (INTERIM art, keyed npc_<name>)
@@ -364,6 +387,7 @@ export class Bootstrap extends Component {
         this.worldMapPanel = new WorldMapPanel(mapWorld, feed);
         this.minimap.onClick(() => this.worldMapPanel?.toggle());
       }
+      if (tutorialRequested()) this.tutorialHints = new TutorialHints(this.online.net); // server-tracked FTUE hints (D105)
       // trade panel (D102): opens by itself with a window / an invite, or with T and /trade; its buttons run the lines the player could type
       const net = this.online.net;
       this.tradePanel = new TradePanel(chat.trade, {
@@ -390,11 +414,47 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // quest log + tracker (D107): J or /quest; the buttons only send intents, the server decides and pays
+      this.questPanel = new QuestPanel(
+        new core.QuestModel(),
+        {
+          send: (op, arg, clientMsgId) =>
+            net.sendQuest({
+              op,
+              clientMsgId,
+              ...(op === core.QuestOp.Talk ? { npc: arg } : { questId: arg }),
+            }),
+          position: () => net.selfPosition(),
+          mapTiles: () => map.width,
+        },
+        (line, tone) => chat.log.system(line, tone),
+      );
+      net.questEvents = {
+        onQuestState: (m) => this.questPanel?.onState(m),
+        onQuestResult: (m) => this.questPanel?.onResult(m),
+      };
+      chat.onQuestsToggle = () => this.questPanel?.toggle();
+      // alchemy panel (D108): P; the numbers come from the same shared formulas the server uses, the server decides everything
+      const craft = new core.CraftModel({
+        now: () => performance.now(),
+        newRequestId: () => core.requestIdFrom(Math.random),
+        bagCount: (id) => net.bag.count(id),
+        stones: () => Number(net.bag.wallet.LT_HA ?? 0),
+        realm: () => this.progressionHud?.view.state?.realm ?? null,
+      });
+      net.craftEvents = {
+        onCraftState: (m) => craft.applyState(m),
+        onCraftResult: (m) => craft.applyResult(m),
+      };
+      this.craftPanel = new CraftPanel(craft, { position: () => net.selfPosition(), send: (m) => net.sendCraft(m) });
+      // market panel (D112, Vạn Bảo Lâu): V; it owns net.marketEvents (its own hook object, nobody replaces it)
+      this.marketPanel = new MarketPanel(net);
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
     this.rig.follow(this.playerScreen());
     if (this.online) void this.startOnline();
     if (params.get('drawdbg') !== null) installDrawDebug(this.node); // window.__vgtdDrawDbg(): batch-break report
+    if (params.get('glyphs') !== null) installGlyphSheet(this.uiRoot!); // every supported glyph through the shared label atlas (D104)
     this.maybeAutotest();
   }
 
@@ -413,6 +473,10 @@ export class Bootstrap extends Component {
     // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
     (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
       this.combat?.setEnemyPhase(entityId, phase, ms);
+    if (new URLSearchParams(location.search).get('vfxdemo') !== null) this.combat.startVfxDemo(); // casts the hotbar in turn: art review / perf gate
+    // debug hook: window.__vgtdVfx(slot) casts hotbar slot `slot` (0-based) through the normal combat path
+    (globalThis as unknown as Record<string, unknown>).__vgtdVfx = (slot: number) => this.combat?.castFromWheel(slot);
+    (globalThis as unknown as Record<string, unknown>).__vgtdVfxLive = () => this.combat?.vfxLive ?? 0;
     this.combat.layout(this.canvasUi.contentSize.width, this.canvasUi.contentSize.height);
   }
 
@@ -441,6 +505,8 @@ export class Bootstrap extends Component {
     if (!path) return;
     this.classApplied = true;
     rememberClass(online.accountKey, path);
+    markInviteUsed(online.accountKey);
+    setCrashClass(path);
     const chibiId = chibiIdOfPath(path);
     if (chibiId) this.chibi.setClass(chibiId);
     if (this.combatOn && !this.combat) {
@@ -644,9 +710,16 @@ export class Bootstrap extends Component {
     this.minimap?.update(performance.now());
     this.chatBox?.update();
     this.partyFrames?.update();
+    if (this.tutorialHints) {
+      this.tutorialHints.update(dt);
+      this.firstSession?.suppress(this.tutorialHints.active); // the server's tracker replaces the old client-side checklist
+    }
     this.tradePanel?.update();
     this.sectPanel?.update();
     this.friendsPanel?.update();
+    this.questPanel?.update();
+    this.craftPanel?.update();
+    this.marketPanel?.update();
     if (this.progressionHud) {
       this.progressionHud.update();
       this.chibi.setSeated(this.progressionHud.view.state?.meditating ?? false);
@@ -697,9 +770,13 @@ export class Bootstrap extends Component {
     this.progressionHud?.destroy();
     this.chatBox?.destroy();
     this.partyFrames?.destroy();
+    this.tutorialHints?.destroy();
     this.tradePanel?.destroy();
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
+    this.questPanel?.destroy();
+    this.craftPanel?.destroy();
+    this.marketPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     this.tribulationFx?.destroy();

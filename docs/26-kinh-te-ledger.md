@@ -136,6 +136,8 @@ Giá trị từ [07 §7](07-cong-thuc-data-schema.md); không đổi:
 - Giao dịch trực tiếp giữa người chơi: **3%** cố định.
 - Mọi Linh thạch thu qua các kênh này **bị hủy**, không chuyển cho người chơi khác.
 
+[Cập nhật D112: Vạn Bảo Lâu cơ bản đã cài ([docs/38](38-van-bao-lau.md)): thuế bán **cố định 5 %** trong beta, CPI tuần chạy bóng và không áp dụng; dạng số nguyên của phí / thuế (`listingFeeInt`, `marketTaxInt`, `sellerProceedsInt`, quy tắc làm tròn §2.1) đã có trong `@vgtd/shared` `formulas/market.ts`, nên "Khoảng trống" ở §5.3 về làm tròn đã đóng; hạng mục `SYSTEM_SINK_LISTING_FEE` / `SYSTEM_SINK_MARKET_TAX` đã có trong sổ cái. Hàng hết hạn về túi, rồi kho nhặt đồ (chưa có thư `mail`).]
+
 ### 5.1 Niêm yết – hủy – hết hạn
 
 ```mermaid
@@ -230,6 +232,8 @@ Mục tiêu: **khóa các hệ số** (OPEN-ITEMS §1 mục 7) bằng dữ liệ
 | M1        | **Thêm hành vi:** đột phá thất bại + pity, chợ (cung–cầu đơn giản), thuế động CPI, sửa chữa, truyền tống, nhiều nhóm người chơi (ít/nhiều giờ chơi)                                   | Mô phỏng 10.000 tác nhân × 12 tuần; quét tham số (τ sàn, hệ số sửa chữa, tỷ lệ drop ±20%)           | Không lạm phát/giảm phát kéo dài; phân phối tài sản hợp lý (Gini mục tiêu do game design đặt) |
 | M2        | **Kịch bản gian lận:** bot farm (×N thu nhập), RMT, wash trading, dup giả định                                                                                                        | Mô phỏng tác động lên CPI và `ratio_w`; thử các ngưỡng phát hiện ([25 §7](25-xac-thuc-bao-mat.md))  | Phát hiện trước khi lệch > 5% so với kịch bản gốc                                             |
 | M3        | **Đối chiếu với dữ liệu thật:** closed beta đo `faucet/sink` theo kênh, so với M1, hiệu chỉnh                                                                                         | Báo cáo §7.1 hằng tuần                                                                              | Sai lệch mô hình/thực ≤ 15% cho các kênh chính                                                |
+
+_[Cập nhật D113: M0 và một phần M1 đã làm: `tools/econ-sim`, báo cáo [37-mo-phong-kinh-te.md](37-mo-phong-kinh-te.md). M2 (gian lận) và M3 (đối chiếu dữ liệu thật) chưa làm.]_
 
 Ghi chú: M0–M2 phụ thuộc docs game design (nghề luyện đan/chế tạo, nhiệm vụ, kiếm tiền) chưa có; mô phỏng ban đầu dùng đúng bảng 07 §6–7 và đánh dấu tham số thiếu là **giả định**. Mọi tham số được đặt trong tệp dữ liệu có phiên bản để tái hiện.
 

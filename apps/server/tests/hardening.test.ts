@@ -97,8 +97,13 @@ describe('ConnectionGuard', () => {
       'chat_send',
       'party_cmd',
       'inv_cmd',
+      'craft_cmd',
       'sect_cmd',
       'friend_cmd',
+      'market_search',
+      'market_list',
+      'market_buy',
+      'market_cancel',
       'trade_cmd',
       'meditate_start',
       'meditate_stop',
@@ -114,6 +119,11 @@ describe('ConnectionGuard', () => {
       'error',
       'status_update',
       'boss_phase',
+      'craft_result',
+      'craft_state',
+      'market_results',
+      'market_result',
+      'market_notice',
     ];
     for (const t of server) expect(budgetClassOf(t), t).toBeNull();
   });

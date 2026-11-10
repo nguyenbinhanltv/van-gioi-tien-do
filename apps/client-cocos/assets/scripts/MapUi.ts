@@ -9,12 +9,17 @@
  * (`net.remotes()`, the party roster): no new messages. Text is set with `textContent` only.
  *
  * The painting does not follow the D95 quadrants (its forest is NW, lava NE, giant trees E, swamp SW), so the player marker on the map is placed
- * by REGION (`worldMapPoint` in ArtRegistry.ts), not by raw tile position. Strings are plain Vietnamese here and move to the string table (D104)
- * when it reaches main.
+ * by REGION (`worldMapPoint` in ArtRegistry.ts), not by raw tile position. Every string comes from the string table (D104).
  */
-import { shared } from './vendor/vgtd.mjs';
+import { core, shared } from './vendor/vgtd.mjs';
 import { getMinimapSheet, loadWorldMapUrl } from './PropArt';
-import { WORLD_MAP_NAMES, WORLD_MAP_REGIONS, worldMapPoint, type WorldMapRegion, type ZoneRect } from './ArtRegistry';
+import {
+  WORLD_MAP_NAME_KEYS,
+  WORLD_MAP_REGIONS,
+  worldMapPoint,
+  type WorldMapRegion,
+  type ZoneRect,
+} from './ArtRegistry';
 
 export interface MapWorld {
   width: number;
@@ -43,6 +48,8 @@ function typing(e: KeyboardEvent): boolean {
   const t = e.target as HTMLElement | null;
   return !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
 }
+
+const regionName = (r: WorldMapRegion): string => core.t(WORLD_MAP_NAME_KEYS[r] as Parameters<typeof core.t>[0]);
 
 /** The region the player stands in, for the corner caption and the map. */
 export function regionOf(world: MapWorld, i: number, j: number): WorldMapRegion {
@@ -82,7 +89,7 @@ export class Minimap {
       zIndex: '300',
       cursor: 'pointer',
     } satisfies Partial<CSSStyleDeclaration>);
-    c.title = 'L';
+    c.title = core.t('map.minimap_hint');
     parent.appendChild(c);
     this.canvas = c;
     this.ctx = c.getContext('2d')!;
@@ -165,7 +172,7 @@ export class Minimap {
     ctx.fillStyle = 'rgba(0,0,0,0.55)';
     ctx.fillRect(0, 0, S, 16);
     ctx.fillStyle = '#f4e8c8';
-    ctx.fillText(`${WORLD_MAP_NAMES[region]}  (${Math.floor(me.i)}, ${Math.floor(me.j)})`, 6, 2);
+    ctx.fillText(core.t('map.caption', { region: regionName(region), i: Math.floor(me.i), j: Math.floor(me.j) }), 6, 2);
   }
 
   destroy(): void {
@@ -221,7 +228,7 @@ export class WorldMapPanel {
     for (const id of Object.keys(WORLD_MAP_REGIONS) as WorldMapRegion[]) {
       const r = WORLD_MAP_REGIONS[id];
       const label = document.createElement('div');
-      label.textContent = WORLD_MAP_NAMES[id];
+      label.textContent = regionName(id);
       Object.assign(label.style, {
         position: 'absolute',
         left: `${((r.x0 + r.x1) / 2) * 100}%`,
@@ -247,7 +254,7 @@ export class WorldMapPanel {
     });
     frame.appendChild(status);
     const title = document.createElement('div');
-    title.textContent = 'Bản đồ thế giới (L / Esc: đóng)';
+    title.textContent = core.t('map.title');
     Object.assign(title.style, {
       position: 'absolute',
       left: '8px',
@@ -297,12 +304,12 @@ export class WorldMapPanel {
     this.layout();
     if (!this.loadStarted) {
       this.loadStarted = true;
-      this.status.textContent = 'Đang tải bản đồ…';
+      this.status.textContent = core.t('map.loading');
       void loadWorldMapUrl().then((url) => {
         if (url) {
           this.img.src = url;
           this.status.textContent = '';
-        } else this.status.textContent = 'Chưa có bản đồ';
+        } else this.status.textContent = core.t('map.missing');
       });
     }
     this.refresh();

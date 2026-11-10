@@ -246,3 +246,63 @@ describe('PART 3: effect textures, cell grids, rim despill', () => {
     expect(core.slice(0, 3)).toEqual([200, 60, 200]);
   });
 });
+
+// ------------------------------------------------------------------ PART 3 (groups N, O, P)
+describe('part 3: sect props, item grids, HUD icons', () => {
+  const part3 = ['sect_main_hall', 'sect_gate', 'sect_scripture_pavilion', 'sect_alchemy_furnace', 'sect_forge_anvil', 'sect_training_dummy', 'sect_contribution_board', 'sect_lantern_post', 'sect_banner'];
+  const manifestP3 = JSON.parse(fs.readFileSync(path.resolve(here, '../src/gemini/manifest.json'), 'utf8'));
+
+  it('the nine sect props are registered from the sect inbox, placed by the layout only (no biome, weight 0) and kept @1x in both pages', () => {
+    for (const n of part3) {
+      const d = manifestP3.props[n];
+      expect(d, n).toBeDefined();
+      expect(d.src).toBe(`sect/${n}`);
+      expect(d.biomes).toEqual([]);
+      expect(d.weight).toBe(0);
+      expect(d.x1only).toBe(true);
+    }
+  });
+
+  it('every grid fills its cells with unique ids; the HUD grid is 4 x 4 with a 96 px @2x size', () => {
+    for (const g of manifestP3.itemGrids) expect(g.ids).toHaveLength(g.cols * g.rows);
+    expect(manifestP3.hud.cols * manifestP3.hud.rows).toBe(manifestP3.hud.ids.length);
+    expect(manifestP3.hud.size2).toBe(96);
+    const all = [...manifestP3.icons, ...manifestP3.itemGrids.flatMap((g) => g.ids)];
+    expect(new Set(all).size).toBe(all.length);
+  });
+
+  it('unmixStar removes a translucent white 4-point star blended over the art and reports no light grey left behind', () => {
+    const W = 400;
+    const img = new Image(W, W);
+    img.fill(35, 60, 55, 255); // dark teal backing everywhere
+    const cx = 0.9453 * W;
+    const r = 0.0245 * W;
+    const a = 0.55;
+    // paint the star as the Gemini mark does: P' = P (1 - a) + 255 a
+    for (let y = 0; y < W; y++)
+      for (let x = 0; x < W; x++)
+        if (Math.pow(Math.abs(x - cx) / r, 2 / 3) + Math.pow(Math.abs(y - cx) / r, 2 / 3) <= 1) {
+          const i = (y * W + x) * 4;
+          for (let c = 0; c < 3; c++) img.data[i + c] = Math.round(img.data[i + c] * (1 - a) + 255 * a);
+        }
+    const centre = (cx | 0) * 4 + (cx | 0) * W * 4;
+    expect(img.data[centre]).toBeGreaterThan(120); // the star is there
+    const res = G.unmixStar(img);
+    expect(res.pixels).toBeGreaterThan(30);
+    expect(res.residual).toBe(0);
+    for (let c = 0; c < 3; c++) expect(Math.abs(img.data[centre + c] - [35, 60, 55][c])).toBeLessThan(8);
+  });
+
+  it('extraBg keys a second background colour (a grid cell with its own darker magenta backing) without touching the art', () => {
+    const img = new Image(40, 40);
+    img.fill(253, 3, 250, 255); // gutter magenta
+    for (let y = 8; y < 32; y++) for (let x = 8; x < 32; x++) img.setPixel(x, y, 193, 30, 181, 255); // the cell backing
+    for (let y = 16; y < 24; y++) for (let x = 16; x < 24; x++) img.setPixel(x, y, 220, 170, 40, 255); // the icon
+    const keyed = G.keyMagenta(img, undefined, { extraBg: [[193, 30, 181]] }).image;
+    expect(keyed.data[(10 * 40 + 10) * 4 + 3]).toBe(0); // backing gone
+    expect(keyed.data[(1 * 40 + 1) * 4 + 3]).toBe(0); // gutter gone
+    expect(keyed.data[(20 * 40 + 20) * 4 + 3]).toBe(255); // gold icon kept
+    const plain = G.keyMagenta(img).image;
+    expect(plain.data[(10 * 40 + 10) * 4 + 3]).toBeGreaterThan(0); // without extraBg the cell backing would survive
+  });
+});

@@ -14,9 +14,7 @@ import { InputMode, Rect } from '../input/types.js';
  *    touch-portrait. Đổi chế độ hoặc xoay máy thì tính lại và phát sự kiện 'layout'.
  */
 export type Anchor =
-  | 'top-left' | 'top' | 'top-right'
-  | 'left' | 'center' | 'right'
-  | 'bottom-left' | 'bottom' | 'bottom-right';
+  'top-left' | 'top' | 'top-right' | 'left' | 'center' | 'right' | 'bottom-left' | 'bottom' | 'bottom-right';
 
 export type Orientation = 'landscape' | 'portrait';
 export type ProfileKey = `${InputMode}-${Orientation}`;
@@ -34,7 +32,12 @@ export interface WidgetSpec {
   ignoreSafeArea?: boolean;
 }
 
-export interface Insets { top: number; right: number; bottom: number; left: number }
+export interface Insets {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
 
 export interface LayoutResult {
   scale: number;
@@ -42,21 +45,27 @@ export interface LayoutResult {
   profile: ProfileKey;
   viewport: { w: number; h: number };
   safe: Rect;
-  rects: Map<string, Rect>;   // CSS px, gốc tại góc trên trái phần tử gốc
+  rects: Map<string, Rect>; // CSS px, gốc tại góc trên trái phần tử gốc
 }
 
 export interface AnchorLayoutOptions {
   refLandscape?: [number, number];
   refPortrait?: [number, number];
-  userScale?: number;            // 0,8 – 1,2 theo Cài đặt
+  userScale?: number; // 0,8 – 1,2 theo Cài đặt
   /** Khoảng cách tối thiểu tới safe area cho cụm điều khiển cảm ứng (px logic). */
   touchMargin?: number;
 }
 
 const ANCHOR_FACTORS: Record<Anchor, [number, number]> = {
-  'top-left': [0, 0], top: [0.5, 0], 'top-right': [1, 0],
-  left: [0, 0.5], center: [0.5, 0.5], right: [1, 0.5],
-  'bottom-left': [0, 1], bottom: [0.5, 1], 'bottom-right': [1, 1],
+  'top-left': [0, 0],
+  top: [0.5, 0],
+  'top-right': [1, 0],
+  left: [0, 0.5],
+  center: [0.5, 0.5],
+  right: [1, 0.5],
+  'bottom-left': [0, 1],
+  bottom: [0.5, 1],
+  'bottom-right': [1, 1],
 };
 
 export class AnchorLayout extends Emitter<{ layout: LayoutResult }> {
@@ -67,7 +76,11 @@ export class AnchorLayout extends Emitter<{ layout: LayoutResult }> {
   private last: LayoutResult | null = null;
   readonly opts: Required<AnchorLayoutOptions>;
 
-  constructor(private readonly root: HTMLElement, profiles = DEFAULT_PROFILES, opts: AnchorLayoutOptions = {}) {
+  constructor(
+    private readonly root: HTMLElement,
+    profiles = DEFAULT_PROFILES,
+    opts: AnchorLayoutOptions = {},
+  ) {
     super();
     this.profiles = profiles;
     this.opts = { refLandscape: [1280, 720], refPortrait: [720, 1280], userScale: 1, touchMargin: 16, ...opts };
@@ -82,14 +95,27 @@ export class AnchorLayout extends Emitter<{ layout: LayoutResult }> {
     window.addEventListener('orientationchange', this.refresh);
   }
 
-  setMode(mode: InputMode): void { this.mode = mode; this.refresh(); }
-  setUserScale(s: number): void { this.opts.userScale = Math.min(1.2, Math.max(0.8, s)); this.refresh(); }
-  get result(): LayoutResult | null { return this.last; }
+  setMode(mode: InputMode): void {
+    this.mode = mode;
+    this.refresh();
+  }
+  setUserScale(s: number): void {
+    this.opts.userScale = Math.min(1.2, Math.max(0.8, s));
+    this.refresh();
+  }
+  get result(): LayoutResult | null {
+    return this.last;
+  }
 
   readSafeArea(): Insets {
     const cs = getComputedStyle(this.probe);
     const px = (v: string) => parseFloat(v) || 0;
-    return { top: px(cs.paddingTop), right: px(cs.paddingRight), bottom: px(cs.paddingBottom), left: px(cs.paddingLeft) };
+    return {
+      top: px(cs.paddingTop),
+      right: px(cs.paddingRight),
+      bottom: px(cs.paddingBottom),
+      left: px(cs.paddingLeft),
+    };
   }
 
   refresh = (): void => {
@@ -101,15 +127,25 @@ export class AnchorLayout extends Emitter<{ layout: LayoutResult }> {
 
   /** Tính bố cục thuần (không đụng DOM) – dùng được cả cho renderer canvas của engine. */
   static compute(
-    vw: number, vh: number, insets: Insets, mode: InputMode,
-    profiles: Partial<Record<ProfileKey, WidgetSpec[]>>, opts: Required<AnchorLayoutOptions>,
+    vw: number,
+    vh: number,
+    insets: Insets,
+    mode: InputMode,
+    profiles: Partial<Record<ProfileKey, WidgetSpec[]>>,
+    opts: Required<AnchorLayoutOptions>,
   ): LayoutResult {
     const orientation: Orientation = vh > vw * 1.05 ? 'portrait' : 'landscape';
     let profile: ProfileKey = `${mode}-${orientation}`;
-    if (!profiles[profile]) profile = `${mode}-landscape`;           // PC không có bố cục dọc
-    const [refW, refH] = orientation === 'portrait' && profiles[`${mode}-portrait`] ? opts.refPortrait : opts.refLandscape;
+    if (!profiles[profile]) profile = `${mode}-landscape`; // PC không có bố cục dọc
+    const [refW, refH] =
+      orientation === 'portrait' && profiles[`${mode}-portrait`] ? opts.refPortrait : opts.refLandscape;
     const scale = Math.min(vw / refW, vh / refH) * opts.userScale;
-    const safe: Rect = { x: insets.left, y: insets.top, w: vw - insets.left - insets.right, h: vh - insets.top - insets.bottom };
+    const safe: Rect = {
+      x: insets.left,
+      y: insets.top,
+      w: vw - insets.left - insets.right,
+      h: vh - insets.top - insets.bottom,
+    };
     const full: Rect = { x: 0, y: 0, w: vw, h: vh };
     const rects = new Map<string, Rect>();
 
@@ -118,14 +154,20 @@ export class AnchorLayout extends Emitter<{ layout: LayoutResult }> {
       const [fx, fy] = ANCHOR_FACTORS[w.anchor];
       let width = w.size[0] * scale;
       const height = w.size[1] * scale;
-      const ox = w.offset[0] * scale, oy = w.offset[1] * scale;
+      const ox = w.offset[0] * scale,
+        oy = w.offset[1] * scale;
       if (w.stretchX) width = area.w - 2 * ox;
       // Điểm neo trong vùng; ở mép thì offset hướng vào trong, ở giữa thì offset là độ lệch có dấu.
       // Pivot của widget trùng phía neo (neo phải dưới -> góc phải dưới của widget).
       const ax = area.x + area.w * fx + (fx === 1 ? -ox : ox);
       const ay = area.y + area.h * fy + (fy === 1 ? -oy : oy);
       const x = w.stretchX ? area.x + ox : ax - width * fx;
-      rects.set(w.id, { x: Math.round(x), y: Math.round(ay - height * fy), w: Math.round(width), h: Math.round(height) });
+      rects.set(w.id, {
+        x: Math.round(x),
+        y: Math.round(ay - height * fy),
+        w: Math.round(width),
+        h: Math.round(height),
+      });
     }
     return { scale, orientation, profile, viewport: { w: vw, h: vh }, safe, rects };
   }
@@ -134,12 +176,19 @@ export class AnchorLayout extends Emitter<{ layout: LayoutResult }> {
   private apply(res: LayoutResult): void {
     this.root.querySelectorAll<HTMLElement>('[data-ui]').forEach((el) => {
       const rect = res.rects.get(el.dataset.ui!);
-      if (!rect) { el.style.display = 'none'; return; }
+      if (!rect) {
+        el.style.display = 'none';
+        return;
+      }
       Object.assign(el.style, {
-        display: '', position: 'absolute',
-        left: `${rect.x}px`, top: `${rect.y}px`, width: `${rect.w}px`, height: `${rect.h}px`,
+        display: '',
+        position: 'absolute',
+        left: `${rect.x}px`,
+        top: `${rect.y}px`,
+        width: `${rect.w}px`,
+        height: `${rect.h}px`,
       });
-      el.style.setProperty('--ui-scale', String(res.scale));   // CSS bên trong dùng calc(var(--ui-scale) * …)
+      el.style.setProperty('--ui-scale', String(res.scale)); // CSS bên trong dùng calc(var(--ui-scale) * …)
     });
   }
 
@@ -164,9 +213,9 @@ export function touchLayoutFromRects(res: LayoutResult, tilesPerPixel: number): 
     joystickZone: zone,
     joystickRadius: 64 * s,
     wheelCenter: center,
-    mainRadius: 48 * s,                 // nút 96 px logic
+    mainRadius: 48 * s, // nút 96 px logic
     arcRadius: 128 * s,
-    skillRadius: 32 * s,                // nút 64 px logic (≥ 44 pt khi scale ≥ 0,7)
+    skillRadius: 32 * s, // nút 64 px logic (≥ 44 pt khi scale ≥ 0,7)
     arcFromDeg: 165,
     arcToDeg: 285,
     dodgeButton: { x: center.x + 4 * s, y: center.y - 196 * s },
@@ -185,6 +234,7 @@ export const DEFAULT_PROFILES: Partial<Record<ProfileKey, WidgetSpec[]>> = {
   'pointer-landscape': [
     { id: 'player-frame', anchor: 'top-left', offset: [16, 16], size: [260, 64] },
     { id: 'target-frame', anchor: 'top', offset: [0, 16], size: [300, 56] },
+    { id: 'tutorial-hint', anchor: 'top', offset: [0, 80], size: [440, 76] }, // FTUE hint card (D105)
     { id: 'minimap', anchor: 'top-right', offset: [16, 16], size: [200, 200] },
     { id: 'chat', anchor: 'bottom-left', offset: [16, 16], size: [360, 200] },
     { id: 'vitals', anchor: 'bottom', offset: [0, 72], size: [480, 20] },
@@ -194,6 +244,7 @@ export const DEFAULT_PROFILES: Partial<Record<ProfileKey, WidgetSpec[]>> = {
   'touch-landscape': [
     { id: 'player-frame', anchor: 'top-left', offset: [16, 16], size: [260, 64] },
     { id: 'target-frame', anchor: 'top', offset: [0, 16], size: [280, 52] },
+    { id: 'tutorial-hint', anchor: 'top', offset: [0, 76], size: [400, 76] },
     { id: 'minimap', anchor: 'top-right', offset: [16, 16], size: [160, 160] },
     { id: 'chat-ticker', anchor: 'left', offset: [16, 40], size: [360, 48] },
     { id: 'joystick-zone', anchor: 'bottom-left', offset: [0, 0], size: [512, 400] },
@@ -204,6 +255,7 @@ export const DEFAULT_PROFILES: Partial<Record<ProfileKey, WidgetSpec[]>> = {
     { id: 'player-frame', anchor: 'top-left', offset: [16, 16], size: [300, 72] },
     { id: 'minimap', anchor: 'top-right', offset: [16, 16], size: [180, 180] },
     { id: 'target-frame', anchor: 'top', offset: [0, 104], size: [400, 56] },
+    { id: 'tutorial-hint', anchor: 'top', offset: [0, 216], size: [688, 84] },
     { id: 'chat-ticker', anchor: 'bottom', offset: [16, 560], size: [688, 56], stretchX: true },
     { id: 'joystick-zone', anchor: 'bottom-left', offset: [0, 0], size: [360, 520] },
     { id: 'skill-wheel', anchor: 'bottom-right', offset: [16, 24], size: [340, 340] },

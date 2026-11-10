@@ -120,7 +120,7 @@ export class BagPanel {
       );
     }
     this.title = label(this.root, 'title', 16, new Color(235, 225, 190, 255));
-    this.title.string = 'BAG  [B]';
+    this.title.string = core.t('bag.title');
     this.title.node.setPosition(0, this.size.h / 2 - 16, 0);
     this.wallet = label(this.root, 'wallet', 13, new Color(200, 210, 230, 255));
     this.wallet.node.setPosition(0, this.size.h / 2 - 38, 0);
@@ -252,7 +252,7 @@ export class BagPanel {
     const bag = this.bag();
     this.hint.node.active = !bag;
     if (!bag) {
-      this.hint.string = this.hooks.bag() ? 'waiting for the server...' : 'bag needs ?online=1';
+      this.hint.string = this.hooks.bag() ? core.t('bag.status.waiting') : core.t('bag.status.needs_online');
       this.wallet.string = '';
       for (const s of this.slots) this.hideSlot(s);
       this.claimBtn.active = false;
@@ -308,7 +308,7 @@ export class BagPanel {
             : '';
     }
     this.claimBtn.active = bag.pending.length > 0;
-    this.claimText.string = `Claim loot (${bag.pendingTotal})`;
+    this.claimText.string = core.t('bag.claim.pending', { button: core.t('bag.claim.button'), n: bag.pendingTotal });
     const last = bag.lastResult;
     this.toast.string = last && last.reason !== 0 ? core.invReasonText(last.reason) : '';
   }

@@ -3,7 +3,7 @@
  * Every number in `data/skills.json` is "Đề xuất – chờ duyệt"; the balance simulation lives in `skill_sim.ts`.
  */
 import { SKILL_DEFINITIONS_JSON } from '../generated.js';
-import { statsAtX } from './stats.js';
+import { statsAt, statsAtX, type Stats } from './stats.js';
 
 export type PathId = 'kiem' | 'phap' | 'the' | 'dan_phu' | 'thuong' | 'dao';
 export const PATHS: readonly PathId[] = ['kiem', 'phap', 'the', 'dan_phu', 'thuong', 'dao'];
@@ -198,6 +198,22 @@ export function skillE(s: SkillDef): number {
   return s.effects
     .filter((e) => e.type === 'damage' && e.scale)
     .reduce((n, e) => n + equivalentHits(e.scale!.coeff, e.hits ?? 1), 0);
+}
+
+/**
+ * Integer stats of a class at (realm, sub-stage) (D117): the realm stats of docs/07 s1 (`statsAt`) times the class `stat_weights`
+ * (docs/11 s2), each rounded to the nearest integer; HP and MP never drop below 1.
+ */
+export function classStatsAt(path: PathId, r: number, k: number, defs: SkillDefinitions = skillDefinitions): Stats {
+  const base = statsAt(r, k);
+  const w = classOf(path, defs).stat_weights;
+  return {
+    hp: Math.max(1, Math.round(base.hp * w.hp)),
+    mp: Math.max(1, Math.round(base.mp * w.mp)),
+    atk: Math.round(base.atk * w.atk),
+    def: Math.round(base.def * w.def),
+    agi: Math.round(base.agi * w.agi),
+  };
 }
 
 /**

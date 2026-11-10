@@ -15,7 +15,7 @@ import { LevelUpFx } from './LevelUpFx';
  * so this panel never overlaps them. A pointer press on a button is consumed here and must not also start click-to-move.
  */
 export const PANEL_W = 300;
-export const PANEL_H = 92;
+export const PANEL_H = 104;
 const MARGIN = 8;
 const BAR_W = PANEL_W - 24;
 const BAR_H = 14;
@@ -101,6 +101,8 @@ export class ProgressionHud {
   private readonly meditate: Button;
   private readonly breakthrough: Button;
   private readonly toast: Label;
+  /** Nghiệp Lực band, K and Đạo Tâm (D103): display only */
+  private readonly standing: Label;
   private scale = 1;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly pointerDown: (e: PointerEvent) => void;
@@ -119,6 +121,7 @@ export class ProgressionHud {
     // a separate hook object: combat replaces `net.events` wholesale when it attaches
     net.progressionEvents = {
       onCharState: (m) => this.view.applyCharState(m),
+      onDaoTam: (m) => this.view.applyDaoTam(m),
       onMeditateResult: (m) => this.view.applyMeditateResult(m),
       onBreakthroughResult: (m) => this.view.applyBreakthroughResult(m),
     };
@@ -150,8 +153,11 @@ export class ProgressionHud {
     this.barFill.node.setPosition(-PANEL_W + 12 + 2, -38, 0);
     this.barText = sharedAtlas(label(this.root, 'BarText', 12, Label.HorizontalAlign.CENTER), 'dynamic'); // tu vi grows every tick
     this.barText.node.setPosition(-PANEL_W / 2, -38, 0);
-    this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, 'Đả tọa [M]');
-    this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, 'Đột phá [N]');
+    this.meditate = this.button('Meditate', -PANEL_W + 12 + BTN_W / 2, -70, core.t('progression.hud.meditate'));
+    this.breakthrough = this.button('Breakthrough', -12 - BTN_W / 2, -70, core.t('progression.hud.breakthrough'));
+    this.standing = sharedAtlas(label(this.root, 'Standing', 12, Label.HorizontalAlign.CENTER), 'dynamic');
+    this.standing.node.setPosition(-PANEL_W / 2, -94, 0);
+    this.standing.color = COL.info;
     this.toast = sharedAtlas(label(this.root, 'Toast', 14, Label.HorizontalAlign.RIGHT), 'dynamic');
     this.toast.node.getComponent(UITransform)!.setAnchorPoint(1, 0.5);
     this.toast.node.setPosition(0, -PANEL_H - 14, 0);
@@ -195,7 +201,7 @@ export class ProgressionHud {
   update(): void {
     const v = this.view;
     const s = v.state;
-    this.title.string = s ? s.label : 'Tu luyện…';
+    this.title.string = s ? s.label : core.t('progression.hud.title_loading');
     // realm badge: the server's realm is 1-based, the art index 0-based (REALM_NAMES order)
     // level-up flourish (PART 2 particle demo): only when a stage is gained while we are watching, never on the first state
     if (s) {
@@ -213,15 +219,16 @@ export class ProgressionHud {
     this.barText.string = !s
       ? ''
       : s.maxStage
-        ? 'cảnh giới cao nhất'
+        ? core.t('progression.hud.max_stage')
         : `${Math.floor(s.tuVi)} / ${Math.floor(s.tuViReq)}`;
     this.setButton(
       this.meditate,
-      s?.meditating ? 'Dừng [M]' : 'Đả tọa [M]',
+      s?.meditating ? core.t('progression.hud.meditate_stop') : core.t('progression.hud.meditate'),
       v.canMeditate(),
       s?.meditating ? COL.btnMeditating : COL.btnOn,
     );
-    this.setButton(this.breakthrough, 'Đột phá [N]', v.canBreakthrough(), COL.btnBreak);
+    this.setButton(this.breakthrough, core.t('progression.hud.breakthrough'), v.canBreakthrough(), COL.btnBreak);
+    this.standing.string = v.standingText();
     const t = v.currentToast();
     this.toast.string = t?.text ?? '';
     this.toast.color = t ? COL[t.tone] : COL.text;

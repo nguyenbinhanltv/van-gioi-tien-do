@@ -86,8 +86,11 @@ const EMPTY_DOCS: Docs = {
   'accounts.json': JSON.stringify({ v: 1, accounts: [] }),
   'progression.json': JSON.stringify({ v: 1, records: [] }),
   'inventories.json': JSON.stringify({ v: 1, owners: {} }),
+  'tutorial.json': JSON.stringify({ v: 1, records: [] }),
   'sect.json': JSON.stringify({ v: 1, members: [], manuals: [] }),
   'friends.json': JSON.stringify({ v: 1, friends: [], requests: [] }),
+  'quests.json': JSON.stringify({ v: 1, owners: {} }),
+  'market.json': JSON.stringify({ v: 1, nextId: 1, listings: [], trades: [], reports: [] }),
   'ledger.json': JSON.stringify({ ...new Ledger().snapshot(), v: 1 }),
 };
 
@@ -193,6 +196,10 @@ export function validateDocs(docs: Docs): DocsReport {
     const orphanMembers = members.filter((m) => !ids.has(m)).length;
     const orphanFriends = [...friendPairs, ...requestPairs].filter(([a, b]) => !ids.has(a) || !ids.has(b)).length;
     if (orphanMembers > 0) warnings.push(`${orphanMembers} sect member(s) without an account`);
+    const orphanListings = ((parsed['market.json']!.listings as Array<{ seller: string }>) ?? []).filter(
+      (l) => !ids.has(l.seller),
+    ).length;
+    if (orphanListings > 0) warnings.push(`${orphanListings} market listing(s) of a missing account`);
     if (orphanFriends > 0)
       warnings.push(`${orphanFriends} friend entr${orphanFriends === 1 ? 'y' : 'ies'} naming a missing account`);
     return { problems, warnings, counts };

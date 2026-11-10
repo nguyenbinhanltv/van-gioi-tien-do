@@ -127,7 +127,7 @@ prepareChibiBundles({ root, repo });
   rmSync(join(worldDir, 'gemini.json'), { force: true });
   for (const f of readdirSync(worldDir)) {
     if (
-      /^(atl_(prop|gicon|skill|ui|status|realm|ptcl|fx|equip|mmap)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png|map_world_[0-9a-z]+\.png)$/.test(
+      /^(atl_(prop|gicon|skill|ui|status|realm|ptcl|hud|mobphase|fx|equip|mmap)_[0-9a-z]+_[0-9]+\.png|keyart_[a-z0-9_]+\.png|map_world_[0-9a-z]+\.png)$/.test(
         f,
       )
     )

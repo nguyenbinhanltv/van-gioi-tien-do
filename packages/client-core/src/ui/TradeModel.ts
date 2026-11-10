@@ -16,43 +16,51 @@ import {
   type TradeSideView,
   type TradeStateMsg,
 } from '@vgtd/protocol';
+import { reasonTexts, t, type StringKey } from '../i18n/strings.js';
 
 /** re-exported so engine scripts (which only see client-core) can name the ops */
 export { TradeOp, TradePhase } from '@vgtd/protocol';
 
-/** Vietnamese text of every trade refusal (user-facing). */
-export const TRADE_REASON_TEXT: Readonly<Record<number, string>> = {
-  [TradeReason.Ok]: '',
-  [TradeReason.RateLimited]: 'Bạn thao tác quá nhanh, hãy chờ giây lát.',
-  [TradeReason.NotReady]: 'Chưa vào game, chưa giao dịch được.',
-  [TradeReason.NoSuchPlayer]: 'Không tìm thấy người chơi này (hoặc họ đang ngoại tuyến).',
-  [TradeReason.Self]: 'Không thể giao dịch với chính mình.',
-  [TradeReason.TooFar]: `Hai bên phải đứng gần nhau (trong ${TRADE.RANGE_TILES} ô).`,
-  [TradeReason.AlreadyTrading]: 'Bạn đang trong một giao dịch, hãy hoàn tất hoặc hủy trước.',
-  [TradeReason.TargetBusy]: 'Người này đang giao dịch (hoặc đã được mời).',
-  [TradeReason.NoInvite]: 'Không có lời mời giao dịch nào còn hiệu lực.',
-  [TradeReason.NotTrading]: 'Bạn không ở trong giao dịch nào.',
-  [TradeReason.BadSlot]: 'Ô túi đồ này trống hoặc không hợp lệ.',
-  [TradeReason.NotTradable]: 'Vật phẩm này không giao dịch được.',
-  [TradeReason.TooManyLines]: `Mỗi bên đặt tối đa ${TRADE.MAX_LINES} dòng vật phẩm.`,
-  [TradeReason.NotEnough]: 'Bạn không có đủ số lượng này.',
-  [TradeReason.BadAmount]: 'Số lượng hoặc loại linh thạch không hợp lệ.',
-  [TradeReason.NotLocked]: 'Cả hai bên phải khóa đề nghị trước khi xác nhận.',
-  [TradeReason.ItemsChanged]: 'Vật phẩm đã thay đổi (dùng, bỏ, hoặc đã giao đi): giao dịch được đặt lại, hãy kiểm tra rồi khóa lại.',
-  [TradeReason.NoSpace]: 'Túi đồ của một bên không đủ chỗ: giao dịch chưa thực hiện.',
-  [TradeReason.NotEnoughStones]: 'Một bên không còn đủ linh thạch: giao dịch chưa thực hiện.',
-};
+/** Text of every trade refusal (user-facing, from the string table; `{range}` / `{max}` = the shared limits). */
+export const TRADE_REASON_TEXT: Readonly<Record<number, string>> = reasonTexts(
+  {
+    [TradeReason.Ok]: null,
+    [TradeReason.RateLimited]: 'trade.reason.rate_limited',
+    [TradeReason.NotReady]: 'trade.reason.not_ready',
+    [TradeReason.NoSuchPlayer]: 'trade.reason.no_such_player',
+    [TradeReason.Self]: 'trade.reason.self',
+    [TradeReason.TooFar]: 'trade.reason.too_far',
+    [TradeReason.AlreadyTrading]: 'trade.reason.already_trading',
+    [TradeReason.TargetBusy]: 'trade.reason.target_busy',
+    [TradeReason.NoInvite]: 'trade.reason.no_invite',
+    [TradeReason.NotTrading]: 'trade.reason.not_trading',
+    [TradeReason.BadSlot]: 'trade.reason.bad_slot',
+    [TradeReason.NotTradable]: 'trade.reason.not_tradable',
+    [TradeReason.TooManyLines]: 'trade.reason.too_many_lines',
+    [TradeReason.NotEnough]: 'trade.reason.not_enough',
+    [TradeReason.BadAmount]: 'trade.reason.bad_amount',
+    [TradeReason.NotLocked]: 'trade.reason.not_locked',
+    [TradeReason.ItemsChanged]: 'trade.reason.items_changed',
+    [TradeReason.NoSpace]: 'trade.reason.no_space',
+    [TradeReason.NotEnoughStones]: 'trade.reason.not_enough_stones',
+  },
+  () => ({ range: TRADE.RANGE_TILES, max: TRADE.MAX_LINES }),
+);
 
-/** Stone labels in `CURRENCIES` order (docs/26 §2.1). */
-export const STONE_LABELS: readonly string[] = ['hạ phẩm', 'trung phẩm', 'thượng phẩm'];
+/** Stone labels in `CURRENCIES` order (docs/26 s2.1): `STONE_LABELS[i]`. */
+export const STONE_LABELS: Readonly<Record<number, string>> = reasonTexts({
+  0: 'trade.stone.ha',
+  1: 'trade.stone.trung',
+  2: 'trade.stone.thuong',
+});
 
-const ITEM_NAMES: Readonly<Record<string, string>> = {
-  heal_pill: 'Đan hồi máu',
-  breakthrough_pill: 'Đan đột phá',
-  craft_material: 'Nguyên liệu',
-  blueprint_white_green: 'Bản vẽ (trắng-lục)',
-  blueprint_blue_purple: 'Bản vẽ (lam-tím)',
-  blueprint_gold_red: 'Bản vẽ (vàng-đỏ)',
+const ITEM_NAME_KEY: Readonly<Record<string, StringKey>> = {
+  heal_pill: 'trade.item.heal_pill',
+  breakthrough_pill: 'trade.item.breakthrough_pill',
+  craft_material: 'trade.item.craft_material',
+  blueprint_white_green: 'trade.item.blueprint_white_green',
+  blueprint_blue_purple: 'trade.item.blueprint_blue_purple',
+  blueprint_gold_red: 'trade.item.blueprint_gold_red',
 };
 
 export interface TradeLineRow {
@@ -98,11 +106,12 @@ export class TradeModel {
 
   constructor(private readonly o: TradeModelOptions) {}
 
-  /** What a bag item is called: the key made readable (placeholder names; there is no i18n table yet). */
+  /** What a bag item is called: the key made readable (names from the string table). */
   itemName(defId: number, quality: number): string {
     const key = itemDefById(defId)?.key;
-    const base = (key && ITEM_NAMES[key]) || (key ?? `Vật phẩm ${defId}`);
-    return quality > 0 ? `${base} (phẩm ${quality})` : base;
+    const k = key && ITEM_NAME_KEY[key];
+    const base = k ? t(k) : (key ?? t('trade.item.unknown', { id: defId }));
+    return quality > 0 ? t('trade.item.quality', { base, quality }) : base;
   }
 
   private row(s: TradeSideView): TradeSideRow {
@@ -156,7 +165,7 @@ export class TradeModel {
     this.invites = this.invites.filter((i) => i.fromName !== m.fromName);
     this.invites.push({ fromName: m.fromName, expiresAtMs: this.o.now() + m.ttlMs });
     this.version++;
-    return `${m.fromName} mời bạn giao dịch. Gõ /trade accept để nhận hoặc /trade decline để từ chối.`;
+    return t('trade.line.invite', { from: m.fromName });
   }
 
   /**
@@ -169,37 +178,50 @@ export class TradeModel {
     this.version++;
     if (m.phase === TradePhase.Open) {
       this.invites = []; // a window is open: pending invites are moot (the server dropped them too)
-      return !was || was.phase !== TradePhase.Open ? `Đã mở giao dịch với ${m.partner}.` : null;
+      return !was || was.phase !== TradePhase.Open ? t('trade.line.opened', { partner: m.partner }) : null;
     }
     if (m.phase === TradePhase.Done) {
-      const tax = m.tax.map((t, i) => (t > 0 ? `${t} linh thạch ${STONE_LABELS[i]}` : '')).filter(Boolean);
-      return `Giao dịch với ${m.partner} đã hoàn tất${tax.length ? ` (thuế 3%: ${tax.join(', ')})` : ''}.`;
+      const tax = m.tax
+        .map((n, i) => (n > 0 ? t('trade.stones', { n, kind: STONE_LABELS[i] ?? '' }) : ''))
+        .filter(Boolean);
+      return tax.length
+        ? t('trade.line.done_tax', { partner: m.partner, tax: tax.join(', ') })
+        : t('trade.line.done', { partner: m.partner });
     }
     switch (m.closed) {
       case TradeClosed.PartnerLeft:
-        return `${m.partner || 'Đối phương'} đã rời game: giao dịch bị hủy, không có gì bị mất.`;
+        return t('trade.line.partner_left', { partner: m.partner || t('trade.partner_unknown') });
       case TradeClosed.Expired:
-        return 'Giao dịch hết hạn (60 giây không thay đổi): không có gì bị mất.';
+        return t('trade.line.expired');
       default:
-        return 'Giao dịch đã hủy: không có gì bị mất.';
+        return t('trade.line.cancelled');
     }
   }
 
   /** The answer to a command: the line to show when refused, null when done. */
   applyResult(m: TradeResultMsg): string | null {
     if (m.reason === TradeReason.Ok) return null;
-    return TRADE_REASON_TEXT[m.reason] ?? `Thao tác bị từ chối (mã ${m.reason}).`;
+    return TRADE_REASON_TEXT[m.reason] ?? t('trade.line.refused', { code: m.reason });
   }
 
   /** The window as plain lines (for `/trade` in the chat log). */
   summaryLines(): string[] {
     const v = this.view();
-    if (!v.open) return ['Bạn không ở trong giao dịch nào. Gõ /trade tên để mời người chơi đứng gần.'];
+    if (!v.open) return [t('trade.summary.none')];
     const side = (label: string, s: TradeSideRow): string => {
       const parts = s.items.map((l) => `${l.qty}× ${l.name}`);
-      s.stones.forEach((n, i) => n > 0 && parts.push(`${n} linh thạch ${STONE_LABELS[i]}`));
-      return `${label}: ${parts.length ? parts.join(', ') : '(chưa đặt gì)'}${s.confirmed ? ' [đã xác nhận]' : s.locked ? ' [đã khóa]' : ''}`;
+      s.stones.forEach((n, i) => n > 0 && parts.push(t('trade.stones', { n, kind: STONE_LABELS[i] ?? '' })));
+      const state = s.confirmed ? t('trade.summary.confirmed') : s.locked ? t('trade.summary.locked') : '';
+      return t('trade.summary.side', {
+        label,
+        items: parts.length ? parts.join(', ') : t('trade.summary.nothing'),
+        state,
+      });
     };
-    return [`Giao dịch với ${v.partner}:`, side('  Bạn đưa', v.mine), side(`  ${v.partner} đưa`, v.theirs)];
+    return [
+      t('trade.summary.head', { partner: v.partner }),
+      side(t('trade.summary.you_give'), v.mine),
+      side(t('trade.summary.they_give', { partner: v.partner }), v.theirs),
+    ];
   }
 }

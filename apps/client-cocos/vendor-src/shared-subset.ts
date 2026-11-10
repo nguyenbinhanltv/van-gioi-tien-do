@@ -7,6 +7,7 @@ export * from '../../../packages/shared/src/constants.js';
 export * from '../../../packages/shared/src/iso.js';
 export * from '../../../packages/shared/src/formulas/stats.js';
 export * from '../../../packages/shared/src/formulas/breakthrough.js';
+export * from '../../../packages/shared/src/formulas/karma.js'; // Nghiệp Lực band / Đạo Tâm (D103)
 export * from '../../../packages/shared/src/formulas/tribulation.js';
 export * from '../../../packages/shared/src/formulas/combat.js';
 export * from '../../../packages/shared/src/formulas/cultivation.js';
@@ -15,6 +16,12 @@ export * from '../../../packages/shared/src/formulas/skills.js'; // class skill 
 export * from '../../../packages/shared/src/items.js'; // item / currency definitions for the bag panel (D79)
 export * from '../../../packages/shared/src/mob-layout.js'; // tier bands / default mob area (D83)
 export * from '../../../packages/shared/src/first-session.js'; // first-session objective numbers (D84)
+export * from '../../../packages/shared/src/tutorial.js'; // tutorial steps (D105)
+export * from '../../../packages/shared/src/sect-layout.js'; // sect building layout (D118)
 export * from '../../../packages/shared/src/classes.js'; // class wire ids (D82)
+export * from '../../../packages/shared/src/quests.js'; // quest table, NPCs, reset clock, reward units (D107)
+export * from '../../../packages/shared/src/alchemy.js'; // alchemy recipes / formulas for the crafting panel (D108)
+export * from '../../../packages/shared/src/formulas/market.js'; // Van Bao Lau constants (D112): protocol / client-core market import them from @vgtd/shared
 export * from '../../../packages/shared/src/breakthrough-event.js'; // Tâm Ma / Lôi Kiếp event numbers (D97)
 export * from '../../../packages/shared/src/mobs.js'; // mob definitions: tier of a mob wire id for the minimap markers (PART 3)
+export * from '../../../packages/shared/src/crash.js'; // crash report contract: limits, scrub, fingerprint (D110)

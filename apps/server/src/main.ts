@@ -2,10 +2,14 @@
 import { jsonLineSink } from './world/security-log.js';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { FileInviteLog, InviteService, defaultInviteFile } from './invites/index.js';
 import { createBackup, openFileStores } from './persistence/index.js';
+import { TelemetryService, openTelemetryFiles } from './telemetry/index.js';
 import { InventoryService } from './world/inventory/index.js';
 import { startServer } from './server.js';
-import { parseTerrain, terrainGrid } from './world/terrain.js';
+import { TileGrid } from '@vgtd/sim';
+import { WORLD_CONFIG } from './config.js';
+import { blockSectBuildings, openRows, parseTerrain } from './world/terrain.js';
 
 const port = Number(process.env.PORT ?? 8080);
 // the Cocos web client is served from http://localhost:8456 (npm run serve -w client-cocos); override with CORS_ORIGINS=a,b
@@ -40,26 +44,65 @@ const stores =
     : null;
 // MAP_FILE=<terrain.json> (D95): the walkability grid the tile generator wrote, so water / lava block the server like they block the client
 // (mobs spawn and walk on land, prediction sees the same obstacles). Default: an open map. A file that does not match MAP_TILES is refused.
-let grid;
+let terrainRows: string[] | undefined;
 if (process.env.MAP_FILE) {
   const t = parseTerrain(JSON.parse(readFileSync(process.env.MAP_FILE, 'utf8')));
   if (mapTiles !== undefined && (t.width !== mapTiles || t.height !== mapTiles))
     throw new Error(`MAP_FILE is ${t.width}x${t.height} but MAP_TILES is ${mapTiles}`);
-  grid = terrainGrid(t);
+  terrainRows = t.rows;
   console.log(
     `[vgtd/server] terrain from ${process.env.MAP_FILE}: ${t.width}x${t.height}, ${t.rows.join('').split('#').length - 1} blocked tiles`,
   );
 }
+// BETA_INVITE_ONLY=1 (D111): registration needs a single-use invitation code minted with `npm run invites -w @vgtd/server -- mint`; the codes
+// live (hashed) in INVITES_FILE (default <DATA_DIR>/invites.jsonl). Existing accounts keep logging in without a code.
+const inviteOnly = flag(process.env.BETA_INVITE_ONLY);
+const invites = inviteOnly
+  ? new InviteService({
+      log: new FileInviteLog(defaultInviteFile(process.env)),
+      onError: (e) => console.error('[vgtd/server] invite log write failed:', e),
+    })
+  : undefined;
+if (invites)
+  console.log(
+    `[vgtd/server] BETA_INVITE_ONLY: registration needs an invitation code (${invites.list().filter((r) => r.status === 'unused').length} unused)`,
+  );
+// the Son Mon sect buildings (D118) block their tiles on the server grid, exactly the tiles the client draws and blocks them on (shared
+// SECT_BUILDINGS); SECT_BUILDINGS=0 leaves the map as the terrain file / open map says (A/B measurements, old clients)
+let grid: TileGrid | undefined;
+if (process.env.SECT_BUILDINGS !== '0') {
+  const n = terrainRows?.length ?? mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES;
+  grid = TileGrid.fromRows(blockSectBuildings(terrainRows ?? openRows(n)));
+} else if (terrainRows) grid = TileGrid.fromRows(terrainRows);
+// telemetry (D109): local-only pseudonymous event log + rollups + KPI dashboard at /dashboard; files under DATA_DIR/telemetry with STORE=file
+const telemetryFiles = stores
+  ? openTelemetryFiles(stores.dir, { onError: (e) => console.error('[vgtd/server] telemetry write failed:', e) })
+  : null;
+const telemetry = new TelemetryService(
+  telemetryFiles ? { key: telemetryFiles.key, log: telemetryFiles.log, rollups: telemetryFiles.rollups } : {},
+);
+// the instance above goes in through `world.telemetry`: `startServer` prefers it, wires the ledger and the gateway to it, and main.ts keeps
+// the handle to flush and read it
 const srv = await startServer({
+  dashboardToken: process.env.DASHBOARD_TOKEN || undefined,
   port,
   host: process.env.HOST ?? '127.0.0.1',
+  // D110: client crash reports land in CRASH_DIR (default <DATA_DIR>/crash with STORE=file, else memory); the crash-free numbers are in /dashboard (loopback-only
+  // unless DASHBOARD_TOKEN is set (then Bearer <token> also works)
+  crash: {
+    ...(process.env.CRASH_DIR || stores ? { dir: process.env.CRASH_DIR ?? join(stores!.dir, 'crash') } : {}),
+    onError: (e) => console.error('[vgtd/server] crash store write failed:', e),
+  },
   gateway: { corsOrigins },
   world: {
+    telemetry,
     mapTiles,
     grid,
     spawn: spawnSide ? { i0: centre, j0: centre, side: spawnSide } : undefined,
     mobs: flag(process.env.MOBS),
     combat: flag(process.env.COMBAT) ? {} : undefined,
+    // alchemy at the furnace NPC (D108): needs INVENTORY (bags, stones) and the progression module (realm, mastery)
+    craft: flag(process.env.INVENTORY) ? true : undefined,
     // structured security events (kicks, flood drops, malformed frames, anti-cheat violations; D101): one JSON line each, no PII; SECURITY_LOG=0 silences
     securityLog: process.env.SECURITY_LOG === '0' ? undefined : jsonLineSink((line) => console.log(line)),
     inventory: flag(process.env.INVENTORY)
@@ -68,13 +111,38 @@ const srv = await startServer({
         )
       : undefined,
   },
-  auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
+  auth: { registerPerIpPerDay, ...(invites ? { invites } : {}), ...(stores ? { store: stores.accounts } : {}) },
+  ...(stores ? { friends: { store: stores.friends }, quests: { store: stores.quests } } : {}),
   ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
   ...(stores ? { friends: { store: stores.friends } } : {}),
+  // Vạn Bảo Lâu (D112): the book is the market.json document; the weekly SHADOW CPI report goes to the log (telemetry can subscribe later)
+  market: {
+    ...(stores
+      ? {
+          store: stores.market,
+          // the book, the ledger and the bags become durable as ONE unit through the write-ahead journal (D102 / D112)
+          durable: (label: string) => stores.durableMarket.commit(label),
+          onDurableError: (label: string, e: unknown) =>
+            console.error(
+              `[vgtd/market] journal commit failed (${label}): ${e instanceof Error ? e.message : String(e)}; the change stands in memory and the stores retry it`,
+            ),
+        }
+      : {}),
+    report: (r) =>
+      console.log(
+        `[vgtd/market] shadow CPI week ${r.week}: cpi ${r.cpi === null ? 'n/a' : r.cpi.toFixed(3)}, applied tax ${r.appliedBps / 100}%, shadow tax ${r.shadowBps / 100}%, ${r.trades} sales, ${r.volume} hạ phẩm (measured, NOT applied)`,
+      ),
+  },
   // DEV ONLY: PROGRESSION_SPEED=2000 makes tu vi accumulate 2000x faster (headless capture of the progression HUD)
   progression: {
     ...(process.env.PROGRESSION_SPEED ? { devTuViSpeed: Number(process.env.PROGRESSION_SPEED) } : {}),
     ...(stores ? { store: stores.progression } : {}),
+  },
+  // tutorial progress is stored with the other documents when STORE=file (D105); its steps feed the telemetry funnel (D109)
+  tutorial: {
+    mapTiles,
+    onEvent: (account, report) => telemetry.ftue(account, report),
+    ...(stores ? { store: stores.tutorial } : {}),
   },
 });
 if (stores) {
@@ -113,11 +181,19 @@ const shutdown = async (reason: string): Promise<void> => {
   closing = true;
   console.log(`[vgtd/server] ${reason}: ${stores ? 'saving and ' : ''}stopping`);
   await srv.stop().catch(() => undefined);
+  // local-only first-session funnel (D105 / D109): printed here, never sent anywhere
+  const f = telemetry.summary().ftue;
+  if (f.started > 0)
+    console.log(
+      `[vgtd/server] FTUE: ${f.completed}/${f.started} completed (${Math.round((f.completionRate ?? 0) * 100)}%), ${f.skipped} skipped; steps ${JSON.stringify(Object.fromEntries(f.steps.map((x) => [x.step, x.players])))}`,
+    );
+  telemetry.flush();
   if (stores) {
     await new Promise((r) => setTimeout(r, 100));
     srv.world.inventory?.flushAll();
     stores.flush();
     if (process.env.BACKUP_ON_EXIT === '1') backupNow('exit');
+    telemetryFiles?.flush();
   }
   process.exit(0);
 };

@@ -53,4 +53,3 @@ describe('party frames placement (D93)', () => {
     });
   }
 });
-

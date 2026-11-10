@@ -26,6 +26,7 @@ import {
   mobDefByKey,
   mobDropSource,
   mobZoneMargin,
+  elementWireId,
   mobRealm,
   mobStats,
   rngFloat,
@@ -38,6 +39,7 @@ import {
   type MobZoneId,
   type RngState,
   type ZoneSpawnTable,
+  type MobTier,
 } from '@vgtd/shared';
 import {
   circleBlocked,
@@ -77,10 +79,12 @@ export interface MobCombatStats {
   defense: number;
   /** realm >= 1 */
   realm: number;
-  /** main element (docs/10 "Hệ chính") */
+  /** element of THIS mob: the main element, or the variant element for the odd packs of a normal mob (docs/10 "Hệ chính / biến thể", D114) */
   element: ElementId | null;
   dropSource: DropSource;
   hpMax: number;
+  /** docs/10 tier: bosses ignore control (D116) */
+  tier?: MobTier;
 }
 
 export interface MobInfo {
@@ -88,6 +92,10 @@ export interface MobInfo {
   slot: number;
   def: MobDef;
   level: number;
+  /** 0 = main element, 1 = variant element (normal mobs with two elements; D114) */
+  variant: number;
+  /** element of this mob (`def.elements[variant]`) */
+  element: ElementId | null;
   maxHp: number;
   zone: MobZoneId;
   home: { i: number; j: number };
@@ -106,6 +114,8 @@ interface Slot {
   def: MobDef;
   rect: MobZone;
   level: number;
+  /** elemental variant (D114): 0 main, 1 the second element of docs/10 "Hệ chính / biến thể" */
+  variant: number;
   maxHp: number;
   defense: number;
   homeI: number;
@@ -127,7 +137,19 @@ const byThreat = (a: { id: number; value: number }, b: { id: number; value: numb
 
 export const isMobId = (id: number): boolean => id >= MOB_ID_BASE;
 
+/** What player skills do to mobs, asked each tick (`CombatSystem.effects` satisfies it, D116): control, slows and taunts. */
+export interface MobControl {
+  isStunned(id: number, nowMs: number): boolean;
+  isRooted(id: number, nowMs: number): boolean;
+  /** speed factor 0..1 (1 = no slow) */
+  speedFactor(id: number, nowMs: number): number;
+  /** the player a mob is forced to attack (taunt), or 0 */
+  taunter(id: number, nowMs: number): number;
+}
+
 export class MobManager {
+  /** set by the node when combat is on: stun / root / slow / taunt from player skills */
+  control: MobControl | null = null;
   private readonly slots: Slot[] = [];
   private readonly grid: CollisionGrid;
   private readonly centre: { i: number; j: number };
@@ -160,7 +182,9 @@ export class MobManager {
           // pack leader: a point in the tier band; the other members within MOB_PACK_RADIUS of it (draw order: see makeSlot)
           if (k % pack === 0) anchor = this.drawPoint(rect, def);
           const home = k % pack === 0 ? anchor : this.drawNear(anchor, rect);
-          this.slots.push(this.makeSlot(this.slots.length, def, rect, home));
+          // variants (D114): the packs of a normal mob alternate between its two elements (docs/10 "8 loại x 2 biến thể"); no RNG is drawn
+          const variant = def.tier === 'normal' && def.elements.length > 1 ? Math.floor(k / pack) % 2 : 0;
+          this.slots.push(this.makeSlot(this.slots.length, def, rect, home, variant));
         }
       }
     }
@@ -184,6 +208,8 @@ export class MobManager {
       slot: s.slot,
       def: s.def,
       level: s.level,
+      variant: s.variant,
+      element: s.def.elements[s.variant] ?? s.def.elements[0] ?? null,
       maxHp: s.maxHp,
       zone: s.rect.zone,
       home: { i: s.homeI, j: s.homeJ },
@@ -201,9 +227,10 @@ export class MobManager {
     return {
       defense: s.defense,
       realm: mobRealm(s.level),
-      element: s.def.elements[0] ?? null,
+      element: s.def.elements[s.variant] ?? s.def.elements[0] ?? null,
       dropSource: mobDropSource(s.def.tier),
       hpMax: s.maxHp,
+      tier: s.def.tier,
     };
   }
   /** max HP of a mob entity (no allocation: used per entity per snapshot) */
@@ -216,15 +243,28 @@ export class MobManager {
     const s = this.slots[id - MOB_ID_BASE];
     return s && s.id === id ? s.def.id : 0;
   }
+  /** wire `EnterEntity.element` of a mob (D120): its own element (variant, D114) as `elementWireId`, 0 for anything else or an elementless mob */
+  elementWireIdOf(id: number): number {
+    const s = this.slots[id - MOB_ID_BASE];
+    return s && s.id === id ? elementWireId(s.def.elements[s.variant] ?? s.def.elements[0] ?? null) : 0;
+  }
   /** wire `EnterEntity.kind` of an entity id: 1 monster, 0 player */
   kindOf(id: number): number {
     return isMobId(id) ? MOB_ENTITY_KIND : 0;
   }
-  /** What the mob attack system reads (D86): AI state, chase target, level, def. No allocation; undefined for dead / unknown mobs. */
-  attackView(id: number): { state: MobBrain['state']; target: number; level: number; def: MobDef } | undefined {
+  /** What the mob attack system reads (D86): AI state, chase target, level, def and the mob's own element (variant, D114). No allocation; undefined for dead / unknown mobs. */
+  attackView(
+    id: number,
+  ): { state: MobBrain['state']; target: number; level: number; def: MobDef; element: ElementId | null } | undefined {
     const s = this.slots[id - MOB_ID_BASE];
     if (!s || s.id !== id || !s.alive) return undefined;
-    return { state: s.brain.state, target: s.brain.target, level: s.level, def: s.def };
+    return {
+      state: s.brain.state,
+      target: s.brain.target,
+      level: s.level,
+      def: s.def,
+      element: s.def.elements[s.variant] ?? s.def.elements[0] ?? null,
+    };
   }
 
   // ------------------------------------------------------------------ spawning
@@ -289,7 +329,7 @@ export class MobManager {
   }
 
   /** RNG order for a spawn: home point (drawn by the caller: pack anchor / pack member), then level (1 int), first idle pause (1 int). */
-  private makeSlot(slot: number, def: MobDef, rect: MobZone, home: [number, number]): Slot {
+  private makeSlot(slot: number, def: MobDef, rect: MobZone, home: [number, number], variant: number): Slot {
     const [homeI, homeJ] = home;
     const level = this.drawLevel(def);
     const stats = mobStats(def, level);
@@ -299,6 +339,7 @@ export class MobManager {
       def,
       rect,
       level,
+      variant,
       maxHp: stats.hp,
       defense: stats.def,
       homeI,
@@ -398,7 +439,14 @@ export class MobManager {
       if (k === undefined) continue; // not in the world (e.g. removed externally)
       const e = (entities ?? world.entities)[k]!;
       const p = MOB_AI[s.def.tier];
-      if (s.threat.size > 0) s.brain = this.applyThreat(s, e, playerById);
+      const now = world.timeMs;
+      // a stunned (or knocked-up) mob does nothing at all this tick
+      if (this.control?.isStunned(s.id, now)) continue;
+      // taunt: the mob is forced onto the taunting player while it lasts
+      const forced = this.control?.taunter(s.id, now) ?? 0;
+      if (forced !== 0 && playerById(forced) && s.brain.state !== 'return')
+        s.brain = { state: 'chase', timerMs: 0, target: forced, wi: 0, wj: 0 };
+      else if (s.threat.size > 0) s.brain = this.applyThreat(s, e, playerById);
       const d = decide(
         { i: e.i, j: e.j, homeI: s.homeI, homeJ: s.homeJ, slot: s.slot },
         s.brain,
@@ -416,7 +464,10 @@ export class MobManager {
       if (s.threat.size > 0 && s.brain.state === 'chase' && d.brain.state !== 'chase') s.threat.clear();
       s.brain = d.brain;
       if (d.dir === 255 && e.vi === 0 && e.vj === 0) continue;
-      const m = stepMove(e, { dtMs: TICK_MS, dir: d.dir, mag: d.mag, flags: 0 }, this.grid);
+      // root: no movement; slow: the movement magnitude is scaled
+      const rooted = this.control?.isRooted(s.id, now) ?? false;
+      const mag = rooted ? 0 : Math.round(d.mag * (this.control?.speedFactor(s.id, now) ?? 1));
+      const m = stepMove(e, { dtMs: TICK_MS, dir: d.dir, mag, flags: 0 }, this.grid);
       if (!entities) entities = world.entities.slice();
       entities[k] = withMove(e, m);
     }

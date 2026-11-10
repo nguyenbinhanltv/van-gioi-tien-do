@@ -114,8 +114,11 @@ export interface SelfVitals {
   shield: number;
 }
 
-/** Status bits (`status_update.mask`, the bit order of the own status block): root, slow, poison. */
-export const StatusBit = { Root: 1, Slow: 2, Poison: 4 } as const;
+/**
+ * Status bits (`status_update.mask`): root, slow, poison (the bit order of the own status block) and, since D116, stun (a stunned / frozen / knocked-up
+ * mob, bit 3). The own status block keeps its three bits; only `status_update` may carry Stun.
+ */
+export const StatusBit = { Root: 1, Slow: 2, Poison: 4, Stun: 8 } as const;
 
 /**
  * Own movement / damage statuses (D94): remaining time of each effect, 0 = not active. Sent only when an effect was applied, refreshed or
@@ -187,6 +190,8 @@ export interface EnterEntity {
   qj: number;
   anim: number;
   dir: number;
+  /** Ngũ hành element of a monster (D120): 0 / absent = none, else `elementWireId` (1..5). Shares the `dir` byte on the wire (`dir` is 0-7), so the entry stays 20 B. */
+  element?: number;
   hpPct: number;
   maxHp: number;
 }

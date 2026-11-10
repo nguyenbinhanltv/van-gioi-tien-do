@@ -80,7 +80,7 @@ export class TradePanel {
     this.title.style.color = '#8fe0a0';
     const close = document.createElement('button');
     close.textContent = '×';
-    close.title = 'Ẩn bảng (T). Giao dịch vẫn mở: dùng Hủy để hủy.';
+    close.title = core.t('trade.panel.close_hint');
     Object.assign(close.style, BTN_STYLE);
     close.addEventListener('click', () => this.toggle(false));
     head.append(this.title, close);
@@ -177,12 +177,14 @@ export class TradePanel {
     col.appendChild(this.text(label, '#e8c872'));
     for (const l of s.items) col.appendChild(this.text(`${l.qty}× ${l.name}`));
     s.stones.forEach(
-      (n, i) => n > 0 && col.appendChild(this.text(`${n} linh thạch ${core.STONE_LABELS[i]}`, '#9fd6ff')),
+      (n, i) =>
+        n > 0 && col.appendChild(this.text(core.t('trade.stones', { n, kind: core.STONE_LABELS[i] ?? '' }), '#9fd6ff')),
     );
-    if (s.items.length === 0 && s.stones.every((n) => n === 0)) col.appendChild(this.text('(chưa đặt gì)', '#8a8fa0'));
+    if (s.items.length === 0 && s.stones.every((n) => n === 0))
+      col.appendChild(this.text(core.t('trade.summary.nothing'), '#8a8fa0'));
     col.appendChild(
       this.text(
-        s.confirmed ? '✔ Đã xác nhận' : s.locked ? '🔒 Đã khóa' : 'Chưa khóa',
+        core.t(s.confirmed ? 'trade.panel.confirmed' : s.locked ? 'trade.panel.locked' : 'trade.panel.unlocked'),
         s.confirmed ? '#8fe0a0' : s.locked ? '#f0dc96' : '#8a8fa0',
       ),
     );
@@ -205,7 +207,9 @@ export class TradePanel {
     this.drawn = this.model.version;
     this.inviteShown = invKey;
     this.bagSig = bagSig;
-    this.title.textContent = v.open ? `Giao dịch với ${v.partner}` : 'Giao dịch';
+    this.title.textContent = v.open
+      ? core.t('trade.panel.title_with', { partner: v.partner })
+      : core.t('trade.panel.title');
     const frag = document.createDocumentFragment();
     if (inv) {
       const card = document.createElement('div');
@@ -215,37 +219,40 @@ export class TradePanel {
         border: '1px solid #7fd4ff',
         borderRadius: '6px',
       });
-      card.appendChild(this.text(`${inv.fromName} mời bạn giao dịch.`, '#7fd4ff'));
+      card.appendChild(this.text(core.t('trade.panel.invite', { from: inv.fromName }), '#7fd4ff'));
       const row = document.createElement('div');
-      row.append(this.button('Đồng ý', '/trade accept'), this.button('Từ chối', '/trade decline'));
+      row.append(
+        this.button(core.t('trade.panel.accept'), '/trade accept'),
+        this.button(core.t('trade.panel.decline'), '/trade decline'),
+      );
       (row.firstElementChild as HTMLElement).style.marginLeft = '0';
       card.appendChild(row);
       frag.appendChild(card);
     }
     if (!v.open) {
-      if (!inv)
-        frag.appendChild(this.text('Không có giao dịch. Gõ /trade tên (người chơi đứng gần) để mời.', '#b6bccb'));
+      if (!inv) frag.appendChild(this.text(core.t('trade.panel.none'), '#b6bccb'));
       this.body.replaceChildren(frag);
       return;
     }
     const cols = document.createElement('div');
     Object.assign(cols.style, { display: 'flex', gap: '6px' });
-    cols.append(this.sideColumn('Bạn đưa', v.mine), this.sideColumn(`${v.partner} đưa`, v.theirs));
-    frag.appendChild(cols);
-    frag.appendChild(
-      this.text('Thuế giao dịch trực tiếp: 3% linh thạch bên nhận (làm tròn lên). Vật phẩm không bị thuế.', '#8a8fa0'),
+    cols.append(
+      this.sideColumn(core.t('trade.panel.you_give'), v.mine),
+      this.sideColumn(core.t('trade.panel.they_give', { partner: v.partner }), v.theirs),
     );
+    frag.appendChild(cols);
+    frag.appendChild(this.text(core.t('trade.panel.tax_note'), '#8a8fa0'));
 
     // stones I give: one input per stone, Enter or the OK button sends `/trade stones ...`
     const stones = document.createElement('div');
     Object.assign(stones.style, { display: 'flex', alignItems: 'center', margin: '6px 0', flexWrap: 'wrap' });
-    stones.appendChild(this.text('Linh thạch đưa:', '#f0dc96'));
+    stones.appendChild(this.text(core.t('trade.panel.stones_give'), '#f0dc96'));
     (['ha', 'trung', 'thuong'] as const).forEach((code, i) => {
       const input = document.createElement('input');
       input.type = 'number';
       input.min = '0';
       input.value = String(v.mine.stones[i] ?? 0);
-      input.title = `Linh thạch ${core.STONE_LABELS[i]}`;
+      input.title = core.t('trade.panel.stone_title', { kind: core.STONE_LABELS[i] ?? '' });
       Object.assign(input.style, { width: '70px', margin: '0 2px 0 8px', font: '12px sans-serif', padding: '2px 4px' });
       const send = (): void =>
         this.hooks.run(`/trade stones ${code} ${Math.max(0, Math.floor(Number(input.value) || 0))}`);
@@ -256,10 +263,12 @@ export class TradePanel {
       });
       input.addEventListener('keyup', (e) => e.stopPropagation());
       const label = document.createElement('span');
-      label.textContent = ['hạ', 'trung', 'thượng'][i]!;
+      label.textContent = core.t(
+        (['trade.panel.stone_ha', 'trade.panel.stone_trung', 'trade.panel.stone_thuong'] as const)[i]!,
+      );
       label.style.color = '#9fd6ff';
       const ok = document.createElement('button');
-      ok.textContent = 'OK';
+      ok.textContent = core.t('trade.panel.ok');
       Object.assign(ok.style, BTN_STYLE);
       ok.addEventListener('click', send);
       stones.append(label, input, ok);
@@ -267,7 +276,7 @@ export class TradePanel {
     frag.appendChild(stones);
 
     // my bag: put items in
-    frag.appendChild(this.text('Túi đồ của bạn (bấm để đặt vào giao dịch):', '#f0dc96'));
+    frag.appendChild(this.text(core.t('trade.panel.bag_head'), '#f0dc96'));
     const bag = document.createElement('div');
     Object.assign(bag.style, { maxHeight: '110px', overflowY: 'auto' });
     for (const r of rows) {
@@ -281,23 +290,28 @@ export class TradePanel {
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
       });
-      label.textContent = `${r.slot + 1}. ${r.qty}× ${this.model.itemName(r.defId, r.quality)}${r.bound ? ' (khóa, không giao dịch)' : ''}`;
+      label.textContent = core.t('trade.panel.bag_row', {
+        slot: r.slot + 1,
+        qty: r.qty,
+        name: this.model.itemName(r.defId, r.quality),
+        bound: r.bound ? core.t('trade.panel.bound') : '',
+      });
       line.appendChild(label);
       if (!r.bound) {
         line.appendChild(this.button('+1', `/trade add ${r.slot + 1} 1`));
-        if (r.qty > 1) line.appendChild(this.button('Tất cả', `/trade add ${r.slot + 1} ${r.qty}`));
+        if (r.qty > 1) line.appendChild(this.button(core.t('trade.panel.all'), `/trade add ${r.slot + 1} ${r.qty}`));
       }
       bag.appendChild(line);
     }
-    if (rows.length === 0) bag.appendChild(this.text('(túi trống)', '#8a8fa0'));
+    if (rows.length === 0) bag.appendChild(this.text(core.t('trade.panel.bag_empty'), '#8a8fa0'));
     frag.appendChild(bag);
 
     const actions = document.createElement('div');
     actions.style.marginTop = '8px';
     actions.append(
-      this.button('Khóa', '/trade lock', v.canLock),
-      this.button('Xác nhận', '/trade confirm', v.canConfirm),
-      this.button('Hủy', '/trade cancel'),
+      this.button(core.t('trade.panel.lock'), '/trade lock', v.canLock),
+      this.button(core.t('trade.panel.confirm'), '/trade confirm', v.canConfirm),
+      this.button(core.t('trade.panel.cancel'), '/trade cancel'),
     );
     (actions.firstElementChild as HTMLElement).style.marginLeft = '0';
     frag.appendChild(actions);

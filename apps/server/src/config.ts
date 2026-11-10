@@ -48,6 +48,19 @@ export const WORLD_CONFIG = {
   TICK_SAMPLES: 20_000,
 } as const;
 
+/** Closed-beta invitation codes (D111). Server-only tunables. */
+export const INVITE_CONFIG = {
+  /** random characters of a code (Crockford base32: 5 bits each, so 80 bits); printed as 4 groups of 4 */
+  CODE_CHARS: 16,
+  DEFAULT_TTL_DAYS: 14,
+  MAX_TTL_DAYS: 90,
+  /** codes minted by one CLI call */
+  MAX_MINT: 200,
+  /** invalid codes per IP per window before 429 (the same shape as the login IP limit, docs/25 section 2.4) */
+  FAIL_LIMIT: 10,
+  FAIL_WINDOW_MS: 15 * 60_000,
+} as const;
+
 /**
  * Input hardening (D101, docs/25). One token bucket per message class per connection, on top of `GATEWAY_CONFIG.MAX_PACKETS_PER_S`. The
  * numbers leave honest clients plenty of room (the client sends ~20 input packets/s; a lag spike or a tab resume sends a short burst) and
@@ -70,6 +83,8 @@ export const SECURITY_CONFIG = {
     /** sect join / leave / buy (D98) and friends (D96): both have their own per-account limiter that answers with a reason; this outer cap is looser so their answer comes first, only a raw flood is dropped */
     sect: { burst: 30, perS: 10 },
     friend: { burst: 30, perS: 10 },
+    /** Vạn Bảo Lâu (D112): the market has its own per-account limiter that answers with a reason (market/config.ts); same looser outer cap */
+    market: { burst: 30, perS: 10 },
     /** direct trade (D102): the trade service has its own per-account limiter that answers with a reason; this outer cap is looser so that answer comes first */
     trade: { burst: 30, perS: 10 },
   },

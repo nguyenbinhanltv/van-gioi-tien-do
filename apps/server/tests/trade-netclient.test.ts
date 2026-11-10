@@ -200,6 +200,12 @@ describe('direct trade end to end', () => {
     const slot = bagSlot(s, A, PILL);
     a.say(`/trade add ${slot + 1} 5`);
     a.say('/trade stones ha 100');
+    // b must lock AFTER it has seen alice's whole offer: any change resets both locks, and the two sockets are not ordered against each
+    // other, so b's lock could otherwise arrive first and be wiped by alice's last change (a rare 'timeout: both locked')
+    await until(
+      'b sees the offer',
+      () => b.trade.view().theirs.items.length === 1 && b.trade.view().theirs.stones[0] === 100,
+    );
     a.say('/trade lock');
     b.say('/trade lock');
     await until('both locked', () => a.trade.view().canConfirm);
@@ -301,6 +307,11 @@ describe('a trade survives a restart on the durable file store (D92)', () => {
     await until('open', () => a.trade.open && b.trade.open);
     a.say(`/trade add ${bagSlot(s, A, PILL) + 1} 8`);
     a.say('/trade stones ha 1000');
+    // b locks only after it has seen the whole offer (a later change would wipe an earlier lock; the two sockets are unordered)
+    await until(
+      'b sees the offer',
+      () => b.trade.view().theirs.items.length === 1 && b.trade.view().theirs.stones[0] === 1000,
+    );
     a.say('/trade lock');
     b.say('/trade lock');
     await until('locked', () => a.trade.view().canConfirm && b.trade.view().canConfirm);

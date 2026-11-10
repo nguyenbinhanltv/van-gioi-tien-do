@@ -48,3 +48,7 @@ net.sendInput(InputManager.toPacket(frame));           // { dir, mag, flags } nh
 - `camera.clientToWorld(clientX, clientY)` trả về tọa độ màn hình logic của thế giới (trước khi đổi sang ô).
 - `uiHitTest` trả về true khi điểm nằm trên UI (chat, túi đồ) để click không làm nhân vật đi.
 - Trên PC, A* chạy khi click và tối đa mỗi 150 ms khi giữ chuột; với khoảng cách trong một màn hình, một lần tìm đường mất dưới 1 ms. Lưới 256 × 256 với 15% ô chặn, đường dài khoảng 150 ô, mất khoảng 26 ms trên máy kiểm thử; nếu cần tìm đường xa hơn, chuyển sang Web Worker.
+
+## Chuỗi hiển thị (i18n, D104)
+
+Mọi chữ người chơi đọc được lấy từ bảng `src/i18n/vi-VN.ts` qua `t('domain.sub.name', { tham_so })` (khóa sai là lỗi biên dịch). Thêm chuỗi: thêm khóa vào bảng (sắp theo khóa, tham số `{ten}`, không nối chuỗi), dùng `t(...)`; `npm test` có `tests/i18n-guard.test.ts` bắt chuỗi cứng, khóa thiếu / thừa, tham số thiếu và ký tự ngoài bộ glyph (`SUPPORTED_GLYPHS`). Ngoại lệ chẩn đoán ghi `// i18n-exempt: <lý do>`. `?lang=pseudo` ở client Cocos bật bản giả dài có dấu để soát tràn chữ.

@@ -39,6 +39,26 @@ export interface ParticleSpec {
   readonly use: string;
 }
 
+/** Skill VFX stills of the owner's PART 3 group Q (vfx/<class>.png, 3 panels each): see tools/procgen manifest.json `vfx`. */
+export const VFX_CLASSES: readonly string[] = ['kiem', 'phap', 'the', 'dan_phu', 'thuong', 'dao'];
+export const VFX_PANELS: readonly string[] = ['proj', 'burst', 'ring'];
+/** Particle texture name of a class' VFX still: `vfxTex('phap', 'proj')` -> `vfx_phap_proj`. */
+export const vfxTex = (path: string, panel: string): string => `vfx_${path}_${panel}`;
+const VFX_USE: Record<string, string> = {
+  proj: 'projectile (points +x, tail on the left): full-colour art, draw untinted',
+  burst: 'impact burst: full-colour art, draw untinted',
+  ring: 'ground ring / zone mark (top-down circle, squash for the iso ellipse): full-colour art, draw untinted',
+};
+const VFX_SIZE: Record<string, number> = { proj: 128, burst: 160, ring: 256 };
+const VFX_PARTICLES: ParticleSpec[] = VFX_CLASSES.flatMap((c) =>
+  VFX_PANELS.map((p): ParticleSpec => ({
+    name: vfxTex(c, p),
+    blend: 'alpha',
+    size: VFX_SIZE[p]!,
+    use: `${c} ${VFX_USE[p]}`,
+  })),
+);
+
 export const PARTICLES: readonly ParticleSpec[] = [
   { name: 'p_flame', blend: 'additive', size: 64, use: 'fire / burn / Hoa skills' },
   { name: 'p_glow', blend: 'additive', size: 96, use: 'soft orb: aura, heal, level-up / breakthrough flare' },
@@ -50,6 +70,7 @@ export const PARTICLES: readonly ParticleSpec[] = [
   { name: 'p_slash', blend: 'additive', size: 96, use: 'sword / blade slash arc' },
   { name: 'p_smoke', blend: 'alpha', size: 80, use: 'smoke puff: death, dash dust' },
   { name: 'p_spark', blend: 'additive', size: 48, use: 'four-point spark: hit flash, sparkle' },
+  ...VFX_PARTICLES,
 ];
 
 export const PARTICLE_NAMES: readonly string[] = PARTICLES.map((p) => p.name);
@@ -112,13 +133,13 @@ export const WORLD_MAP_REGIONS: Readonly<Record<WorldMapRegion, { x0: number; y0
   son_mon: { x0: 0.34, y0: 0.36, x1: 0.62, y1: 0.64 },
 };
 
-/** Vietnamese names of the regions (docs/10 section 3.1). */
-export const WORLD_MAP_NAMES: Readonly<Record<WorldMapRegion, string>> = {
-  bia_rung: 'Bìa rừng',
-  dam_lay_doc: 'Đầm lầy độc',
-  co_thu_trung_tam: 'Cổ thụ trung tâm',
-  doc_hoa_dam: 'Độc Hỏa Đàm',
-  son_mon: 'Sơn Môn',
+/** String-table keys of the region names (docs/10 section 3.1): `core.t(WORLD_MAP_NAME_KEYS[region])` (D104). */
+export const WORLD_MAP_NAME_KEYS: Readonly<Record<WorldMapRegion, string>> = {
+  bia_rung: 'map.region.bia_rung',
+  dam_lay_doc: 'map.region.dam_lay_doc',
+  co_thu_trung_tam: 'map.region.co_thu_trung_tam',
+  doc_hoa_dam: 'map.region.doc_hoa_dam',
+  son_mon: 'map.region.son_mon',
 };
 
 export interface ZoneRect {
@@ -173,3 +194,81 @@ export function worldMapPoint(
   }
   return { x: r.x0 + u * (r.x1 - r.x0), y: r.y0 + v * (r.y1 - r.y0), region };
 }
+/** HUD / social icons (PART 3 group P), in the 4 x 4 grid order of tools/procgen manifest.json `hud.ids`: round, on their own backing disc. */
+export const HUD_ICON_IDS: readonly string[] = [
+  'friend_add',
+  'friend_remove',
+  'chat',
+  'party_invite',
+  'leader',
+  'online',
+  'offline',
+  'world',
+  'zone',
+  'quest_available',
+  'quest_turnin',
+  'sect',
+  'bag',
+  'map',
+  'settings',
+  'close',
+];
+
+/** Chat channel -> HUD icon (the channel the next line goes to: plain text World, /z Zone, /w /r whisper, /p party). */
+export const CHAT_CHANNEL_ICON: Readonly<Record<'world' | 'zone' | 'whisper' | 'party', string>> = {
+  world: 'world',
+  zone: 'zone',
+  whisper: 'chat',
+  party: 'party_invite',
+};
+
+/** Which chat channel a typed line will use, from its first characters (same rules as `parseChatInput` in client-core). */
+export function channelOfInput(raw: string): 'world' | 'zone' | 'whisper' | 'party' {
+  const m = /^\/(\S*)/.exec(raw.trimStart());
+  if (!m || raw.trimStart().startsWith('//')) return 'world';
+  switch (m[1]!.toLowerCase()) {
+    case 'z':
+    case 'zone':
+    case 'v':
+      return 'zone';
+    case 'w':
+    case 't':
+    case 'whisper':
+    case 'r':
+    case 'reply':
+      return 'whisper';
+    case 'p':
+    case 'party':
+    case 'd':
+      return 'party';
+    default:
+      return 'world';
+  }
+}
+
+/**
+ * Sect library manual -> item icon key (PART 3 group O: `manual_t<tier>_<form>`). Tier follows the manual's level (the data marks the
+ * tome skills at 20 / 31 / 40 / 51 / 65: low <= 31, mid <= 51, high above); the form (book / scroll / tablet) follows its index in the
+ * class library so a library does not show one shape three times in a row.
+ */
+export function manualIconKey(levelMin: number, index: number): string {
+  const tier = levelMin <= 31 ? 1 : levelMin <= 51 ? 2 : 3;
+  const form = ['book', 'scroll', 'tablet'][((Math.trunc(index) % 3) + 3) % 3]!;
+  return `manual_t${tier}_${form}`;
+}
+
+/**
+ * Item key -> icon key for items whose art was exported under a descriptive name (PART 3 group O: the alchemy pills). Items without an
+ * entry keep their own key; icons without an item stay registered (the alchemy herbs and the Cống hiến token have no item def yet).
+ * PROVISIONAL mapping by colour / name: ho_mach_pill (hộ mạch, green mist), dinh_tam_pill (định tâm, blue wave); the Trúc Cơ and Kết Kim
+ * pill recipe ids (D108) take the gold ring and the white wind. Re-map when the owner confirms which pill is which.
+ */
+export const ITEM_ICON_ALIASES: Readonly<Record<string, string>> = {
+  ho_mach_pill: 'pill_green_mist',
+  dinh_tam_pill: 'pill_blue_wave',
+  truc_co_pill: 'pill_gold_ring',
+  ket_kim_pill: 'pill_white_wind',
+  pill_truc_co_dan: 'pill_gold_ring',
+  pill_ket_kim_dan: 'pill_white_wind',
+};
+export const itemIconKey = (key: string): string => ITEM_ICON_ALIASES[key] ?? key;

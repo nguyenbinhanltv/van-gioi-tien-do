@@ -621,6 +621,201 @@
       "key": {
         "famFrac": 0.3
       }
+    },
+    "sect_main_hall": {
+      "src": "sect/sect_main_hall",
+      "target": {
+        "w": 380
+      },
+      "block": [
+        [
+          -1,
+          -1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_gate": {
+      "src": "sect/sect_gate",
+      "target": {
+        "w": 380
+      },
+      "block": [
+        [
+          -2,
+          2
+        ],
+        [
+          2,
+          -2
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_scripture_pavilion": {
+      "src": "sect/sect_scripture_pavilion",
+      "target": {
+        "w": 340
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_alchemy_furnace": {
+      "src": "sect/sect_alchemy_furnace",
+      "target": {
+        "w": 200
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_forge_anvil": {
+      "src": "sect/sect_forge_anvil",
+      "target": {
+        "w": 330
+      },
+      "block": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_training_dummy": {
+      "src": "sect/sect_training_dummy",
+      "target": {
+        "h": 230
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_contribution_board": {
+      "src": "sect/sect_contribution_board",
+      "target": {
+        "w": 280
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_lantern_post": {
+      "src": "sect/sect_lantern_post",
+      "target": {
+        "h": 230
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
+    },
+    "sect_banner": {
+      "src": "sect/sect_banner",
+      "target": {
+        "h": 300
+      },
+      "block": [
+        [
+          0,
+          0
+        ]
+      ],
+      "biomes": [],
+      "weight": 0,
+      "x1only": true
     }
   },
   "icons": [
@@ -830,6 +1025,32 @@
       "p_spark"
     ]
   },
+  "vfx": {
+    "_doc": "PART 3 group Q: vfx/<class>.png, 3 panels side by side on BLACK (projectile, impact burst, ground ring), luminance -> alpha, full colour kept. Panel k is trimmed and scaled to a longest side of panels[k].size2 px @2x (@1x half); the projectile is rotated to point +x. Packed into the PARTICLE atlas as vfx_<class>_<panel>; registry in ArtRegistry.ts, presets in SkillVfxPresets.ts.",
+    "classes": [
+      "kiem",
+      "phap",
+      "the",
+      "dan_phu",
+      "thuong",
+      "dao"
+    ],
+    "panels": [
+      {
+        "id": "proj",
+        "size2": 256,
+        "rotate": true
+      },
+      {
+        "id": "burst",
+        "size2": 320
+      },
+      {
+        "id": "ring",
+        "size2": 512
+      }
+    ]
+  },
   "keyArt": {
     "_doc": "key_art: login backdrop (opaque, w x h design px) and emblem (keyed, trimmed, longest side px @2x; @1x half). Loaded as single textures, not atlased.",
     "backdrop": {
@@ -914,5 +1135,78 @@
       "file": "map/world_map",
       "w": 512
     }
+  },
+  "itemGrids": [
+    {
+      "_doc": "PART 3 group O: items2/manuals.png, 3 x 3, row-major = tier 1..3 (rows) x form book / scroll / tablet (columns). Tier follows the sect library manual level (manualIconKey in ArtRegistry.ts).",
+      "file": "items2/manuals",
+      "cols": 3,
+      "rows": 3,
+      "pad": 0.03,
+      "ids": [
+        "manual_t1_book",
+        "manual_t1_scroll",
+        "manual_t1_tablet",
+        "manual_t2_book",
+        "manual_t2_scroll",
+        "manual_t2_tablet",
+        "manual_t3_book",
+        "manual_t3_scroll",
+        "manual_t3_tablet"
+      ]
+    },
+    {
+      "_doc": "PART 3 group O: items2/alchemy.png, 3 x 3, row-major. The Gemini mark sits ON the last cell (un-blended: unmixStar); the cells have their own darker magenta backing (extraBg).",
+      "file": "items2/alchemy",
+      "cols": 3,
+      "rows": 3,
+      "pad": 0.03,
+      "unmixStar": true,
+      "key": {
+        "extraBg": [
+          [
+            193,
+            30,
+            181
+          ]
+        ]
+      },
+      "ids": [
+        "cong_hien_token",
+        "herb_jade_ginseng",
+        "herb_fire_lotus",
+        "herb_silver_grass",
+        "herb_thunder_fruit",
+        "pill_blue_wave",
+        "pill_green_mist",
+        "pill_gold_ring",
+        "pill_white_wind"
+      ]
+    }
+  ],
+  "hud": {
+    "_doc": "PART 3 group P: ui2/hud_icons.png, 4 x 4 round icons on a dark-teal backing disc, row-major = ids. The mark overlaps the last disc (unmixStar + radial repaint + disc mask). getHudIcon(id) in PropArt.ts; hudIconKey / HUD_ICON_IDS in ArtRegistry.ts.",
+    "file": "ui2/hud_icons",
+    "cols": 4,
+    "rows": 4,
+    "size2": 96,
+    "ids": [
+      "friend_add",
+      "friend_remove",
+      "chat",
+      "party_invite",
+      "leader",
+      "online",
+      "offline",
+      "world",
+      "zone",
+      "quest_available",
+      "quest_turnin",
+      "sect",
+      "bag",
+      "map",
+      "settings",
+      "close"
+    ]
   }
 }

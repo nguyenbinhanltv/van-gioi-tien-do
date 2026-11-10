@@ -12,10 +12,14 @@ import { join } from 'node:path';
 import type { Account, AccountStore } from '../auth/accounts.js';
 import type { SectSnapshot, SectStore } from '../sect/store.js';
 import type { FriendSnapshot, FriendStore } from '../friends/store.js';
+import type { QuestSnapshot, QuestStore } from '../quests/store.js';
+import type { MarketSnapshot, MarketStore } from '../market/store.js';
 import type { ProgressRecord } from '../progression/state.js';
 import type { ProgressionStore } from '../progression/store.js';
 import { Ledger, type LedgerSnapshot } from '../world/inventory/ledger.js';
 import type { InventorySnapshot, InventoryStore } from '../world/inventory/store.js';
+import type { TutorialRecord, TutorialStore } from '../tutorial/store.js';
+import { TUTORIAL_ALL_MASK } from '@vgtd/shared';
 import { readJsonFile, removeStray } from './atomic.js';
 import { TxJournal, recoverJournal, type JournalOptions } from './journal.js';
 import { DocFile, type DocFileOptions } from './doc-file.js';
@@ -164,6 +168,57 @@ export class FileInventoryStore implements InventoryStore {
   }
 }
 
+/** Tutorial progress (D105): one tiny record per account. */
+export class FileTutorialStore implements TutorialStore {
+  private readonly rows = new Map<string, TutorialRecord>();
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    const doc = load(path, 'tutorial', (d) => {
+      if (!Array.isArray(d.records)) throw new Error('tutorial: missing records');
+      return d.records as unknown[];
+    });
+    for (const r of doc ?? []) {
+      const o = r as Record<string, unknown>;
+      if (
+        typeof r !== 'object' ||
+        r === null ||
+        !isStr(o.accountId) ||
+        !isNum(o.done) ||
+        !Number.isInteger(o.done) ||
+        o.done < 0 ||
+        o.done > TUTORIAL_ALL_MASK ||
+        !isNum(o.kills) ||
+        typeof o.skipped !== 'boolean' ||
+        typeof o.complete !== 'boolean' ||
+        !isNum(o.sessions)
+      )
+        throw new Error('tutorial: malformed record');
+      this.rows.set(o.accountId, {
+        accountId: o.accountId,
+        done: o.done,
+        kills: o.kills,
+        skipped: o.skipped,
+        complete: o.complete,
+        sessions: o.sessions,
+      });
+    }
+    this.file = new DocFile(path, () => JSON.stringify({ v: VERSION, records: [...this.rows.values()] }), opts);
+  }
+  load(accountId: string): TutorialRecord | undefined {
+    const r = this.rows.get(accountId);
+    return r ? { ...r } : undefined;
+  }
+  save(record: TutorialRecord): void {
+    const prev = this.rows.get(record.accountId);
+    if (prev && JSON.stringify(prev) === JSON.stringify(record)) return;
+    this.rows.set(record.accountId, { ...record });
+    this.file.markDirty();
+  }
+  all(): TutorialRecord[] {
+    return [...this.rows.values()].map((r) => ({ ...r }));
+  }
+}
+
 /** Sect membership and bought manuals (D98): account ids and skill ids, see `SectSnapshot`. The Cống hiến balance is in the ledger. */
 export class FileSectStore implements SectStore {
   private snap: SectSnapshot | undefined;
@@ -228,6 +283,109 @@ export class FileFriendStore implements FriendStore {
   }
 }
 
+/** Quest progress per account (D107): see `QuestSnapshot`. `commit()` writes the document NOW and reports whether that worked. */
+export class FileQuestStore implements QuestStore {
+  private readonly rows = new Map<string, QuestSnapshot>();
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    const doc = load(path, 'quests', (d) => {
+      if (typeof d.owners !== 'object' || d.owners === null || Array.isArray(d.owners))
+        throw new Error('quests: missing owners');
+      return d.owners as Record<string, QuestSnapshot>;
+    });
+    for (const [owner, snap] of Object.entries(doc ?? {})) {
+      if ((snap as { v?: unknown } | null)?.v !== 1 || typeof snap.quests !== 'object' || snap.quests === null)
+        throw new Error(`quests: malformed record for ${owner}`);
+      this.rows.set(owner, snap);
+    }
+    this.file = new DocFile(path, () => JSON.stringify({ v: VERSION, owners: Object.fromEntries(this.rows) }), opts);
+  }
+  load(owner: string): QuestSnapshot | undefined {
+    const s = this.rows.get(owner);
+    return s === undefined ? undefined : structuredClone(s);
+  }
+  save(owner: string, snap: QuestSnapshot): void {
+    const prev = this.rows.get(owner);
+    if (prev !== undefined && JSON.stringify(prev) === JSON.stringify(snap)) return;
+    if (prev === undefined && Object.keys(snap.quests).length === 0) return;
+    this.rows.set(owner, structuredClone(snap));
+    this.file.markDirty();
+  }
+  commit(): boolean {
+    const errors = this.file.errors;
+    this.file.flush();
+    return this.file.errors === errors;
+  }
+}
+
+/** The market book (D112): active listings (each one holds its escrowed item), recent sales and the weekly shadow reports, see `MarketSnapshot`. */
+export class FileMarketStore implements MarketStore {
+  private snap: MarketSnapshot | undefined;
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    const arr = (v: unknown, what: string): Record<string, unknown>[] => {
+      if (!Array.isArray(v)) throw new Error(`market: missing ${what}`);
+      return v.map((x) => {
+        if (typeof x !== 'object' || x === null || Array.isArray(x)) throw new Error(`market: malformed ${what} entry`);
+        return x as Record<string, unknown>;
+      });
+    };
+    this.snap = load(path, 'market', (d) => {
+      if (!isNum(d.nextId) || d.nextId < 1) throw new Error('market: missing nextId');
+      const listings = arr(d.listings, 'listings').map((l) => {
+        const it = l.item as Record<string, unknown> | undefined;
+        if (
+          !isNum(l.id) ||
+          !isStr(l.seller) ||
+          !it ||
+          !isNum(it.defId) ||
+          !isNum(it.quality) ||
+          !isNum(it.qty) ||
+          !isNum(l.unitPrice) ||
+          !isNum(l.listedAt) ||
+          !isNum(l.expiresAt) ||
+          (l.state !== 'active' && l.state !== 'returning')
+        )
+          throw new Error('market: malformed listing');
+        return l as unknown as MarketSnapshot['listings'][number];
+      });
+      for (const t of arr(d.trades, 'trades'))
+        if (![t.at, t.defId, t.quality, t.qty, t.unitPrice, t.total, t.tax].every(isNum))
+          throw new Error('market: malformed trade');
+      for (const r of arr(d.reports, 'reports'))
+        if (![r.week, r.appliedBps, r.shadowBps, r.trades, r.volume].every(isNum) || !(r.cpi === null || isNum(r.cpi)))
+          throw new Error('market: malformed report');
+      return {
+        v: 1 as const,
+        nextId: d.nextId,
+        listings,
+        trades: d.trades as MarketSnapshot['trades'],
+        reports: d.reports as MarketSnapshot['reports'],
+      };
+    });
+    this.file = new DocFile(
+      path,
+      () =>
+        JSON.stringify({
+          v: VERSION,
+          nextId: this.snap?.nextId ?? 1,
+          listings: this.snap?.listings ?? [],
+          trades: this.snap?.trades ?? [],
+          reports: this.snap?.reports ?? [],
+        }),
+      opts,
+    );
+  }
+  load(): MarketSnapshot | undefined {
+    return this.snap === undefined ? undefined : structuredClone(this.snap);
+  }
+  save(s: MarketSnapshot): void {
+    if (this.snap !== undefined && JSON.stringify(this.snap) === JSON.stringify(s)) return;
+    this.snap = structuredClone(s);
+    this.file.markDirty();
+  }
+}
+
 /** The ledger lives in its own document (docs/23 §4.4: separate from the inventory snapshots). */
 export function openFileLedger(path: string, opts: DocFileOptions = {}): { ledger: Ledger; file: DocFile } {
   const snap = load(path, 'ledger', (d) => d as unknown as LedgerSnapshot);
@@ -245,8 +403,11 @@ export const STORE_DOC_NAMES = [
   'accounts.json',
   'progression.json',
   'inventories.json',
+  'tutorial.json',
   'sect.json',
   'friends.json',
+  'quests.json',
+  'market.json',
   'ledger.json',
 ] as const;
 export type StoreDocName = (typeof STORE_DOC_NAMES)[number];
@@ -257,8 +418,11 @@ export interface FileStores {
   accounts: FileAccountStore;
   progression: FileProgressionStore;
   inventories: FileInventoryStore;
+  tutorial: FileTutorialStore;
   sect: FileSectStore;
   friends: FileFriendStore;
+  quests: FileQuestStore;
+  market: FileMarketStore;
   ledger: Ledger;
   /** write every document now (shutdown, tests) */
   flush(): void;
@@ -276,13 +440,18 @@ export interface FileStores {
   commitAtomic(label: string, docs: readonly DocFile[]): void;
   /** The hook `InventoryService` calls after an exchange: commits the inventories and the ledger together. */
   readonly durable: { commit(label: string): void };
+  /**
+   * The hook `MarketService` calls after every change of the book (D112): commits `market.json`, `inventories.json` and `ledger.json` together, so a
+   * crash can never leave the listing, the stones and the item disagreeing (a sale that is half on disk would be an item dupe or a lost payment).
+   */
+  readonly durableMarket: { commit(label: string): void };
   /** True while a multi-document commit's journal is still waiting to be finished after an error (it is finished before the next write). */
   readonly journalPending: () => boolean;
   /** The journal recovered at open (the label of the interrupted commit it finished), or null. */
   readonly recovered: string | null;
 }
 
-/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `friends.json`, `ledger.json`. */
+/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `tutorial.json`, `friends.json`, `quests.json`, `market.json`, `ledger.json`. */
 export function openFileStores(dir: string, opts: DocFileOptions & JournalOptions = {}): FileStores {
   // FIRST finish a commit a crash interrupted: every document below is then loaded in its committed state
   const recovered = recoverJournal(dir);
@@ -293,27 +462,37 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
   const progression = new FileProgressionStore(join(dir, 'progression.json'), opts);
   const inventories = new FileInventoryStore(join(dir, 'inventories.json'), opts);
   const sect = new FileSectStore(join(dir, 'sect.json'), opts);
+  const tutorial = new FileTutorialStore(join(dir, 'tutorial.json'), opts);
   const friends = new FileFriendStore(join(dir, 'friends.json'), opts);
+  const quests = new FileQuestStore(join(dir, 'quests.json'), opts);
+  const market = new FileMarketStore(join(dir, 'market.json'), opts);
   const { ledger, file: ledgerFile } = openFileLedger(join(dir, 'ledger.json'), opts);
   const commitAtomic = (label: string, docs: readonly DocFile[]): void => journal.commit(label, docs);
   return {
     accounts,
     progression,
     inventories,
+    tutorial,
     sect,
     friends,
+    quests,
+    market,
     ledger,
     dir,
     recovered,
     commitAtomic,
     journalPending: () => journal.pending,
     durable: { commit: (label) => commitAtomic(label, [inventories.file, ledgerFile]) },
+    durableMarket: { commit: (label) => commitAtomic(label, [market.file, inventories.file, ledgerFile]) },
     flush: () => {
       accounts.file.flush();
       progression.file.flush();
       inventories.file.flush();
+      tutorial.file.flush();
       sect.file.flush();
       friends.file.flush();
+      quests.file.flush();
+      market.file.flush();
       ledgerFile.flush();
     },
     snapshot: (prepare) => {
@@ -322,8 +501,11 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
         'accounts.json': accounts.file.serializeNow(),
         'progression.json': progression.file.serializeNow(),
         'inventories.json': inventories.file.serializeNow(),
+        'tutorial.json': tutorial.file.serializeNow(),
         'sect.json': sect.file.serializeNow(),
         'friends.json': friends.file.serializeNow(),
+        'quests.json': quests.file.serializeNow(),
+        'market.json': market.file.serializeNow(),
         'ledger.json': ledgerFile.serializeNow(),
       };
     },

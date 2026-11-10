@@ -48,20 +48,23 @@ Sơ đồ trích từ bản gốc nằm ở [assets/](assets/) (02, 03, 04, 05, 
 
 Bộ thiết kế hệ thống cho MVP. Mục ghi "Đề xuất – chờ duyệt" chưa có hiệu lực cho tới khi vào DECISIONS.
 
-| #   | File                                                   | Nội dung                                                                                       |
-| --- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| 20  | [20-kien-truc-tong-the.md](20-kien-truc-tong-the.md)   | C4, ranh giới module monolith ↔ microservice, tiến trình/luồng, docker-compose cục bộ          |
-| 21  | [21-kien-truc-client.md](21-kien-truc-client.md)       | Phân tầng client, bootstrap, store, bundle/streaming, UI AnchorLayout, y-flip, hoạt cảnh, perf |
-| 22  | [22-server-modules.md](22-server-modules.md)           | Từng module: trách nhiệm, cổng, trạng thái, ngân sách tick, AOI, handover, chế độ lỗi          |
-| 23  | [23-mo-hinh-du-lieu.md](23-mo-hinh-du-lieu.md)         | ERD PostgreSQL, Redis key, migration, chiến lược ID, lưu giữ dữ liệu                           |
-| 24  | [24-giao-thuc-mang.md](24-giao-thuc-mang.md)           | Khung gói, phiên bản, danh mục thông điệp, rate limit, ngân sách băng thông                    |
-| 25  | [25-xac-thuc-bao-mat.md](25-xac-thuc-bao-mat.md)       | Mật khẩu, JWT + refresh, SSO, STRIDE, tín hiệu anti-cheat                                      |
-| 26  | [26-kinh-te-ledger.md](26-kinh-te-ledger.md)           | Sổ cái kép, giao dịch idempotent, chợ/đấu giá, faucet/sink, mô phỏng kinh tế                   |
-| 27  | [27-van-hanh-quan-sat.md](27-van-hanh-quan-sat.md)     | Log, metric, trace, telemetry, dashboard, cấu hình và cờ tính năng                             |
-| 28  | [28-chien-luoc-kiem-thu.md](28-chien-luoc-kiem-thu.md) | Đơn vị/thuộc tính/xác định, replay, tích hợp, loadbot, hiệu năng thiết bị, CI                  |
-| 29  | [29-adr.md](29-adr.md)                                 | Chỉ mục ADR, đề xuất mới, giải quyết điểm mơ hồ của PR #7/#9/#10 (phụ lục A–C)                 |
-| 33  | [33-p1-perf.md](33-p1-perf.md)                         | Đo hiệu năng P1 (client slice) và báo cáo thoát P1                                             |
-| 34  | [34-combat-server.md](34-combat-server.md)             | Combat phía server: lõi giải quyết cast (D75)                                                  |
+| #   | File                                                   | Nội dung                                                                                                                       |
+| --- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| 20  | [20-kien-truc-tong-the.md](20-kien-truc-tong-the.md)   | C4, ranh giới module monolith ↔ microservice, tiến trình/luồng, docker-compose cục bộ                                          |
+| 21  | [21-kien-truc-client.md](21-kien-truc-client.md)       | Phân tầng client, bootstrap, store, bundle/streaming, UI AnchorLayout, y-flip, hoạt cảnh, perf                                 |
+| 22  | [22-server-modules.md](22-server-modules.md)           | Từng module: trách nhiệm, cổng, trạng thái, ngân sách tick, AOI, handover, chế độ lỗi                                          |
+| 23  | [23-mo-hinh-du-lieu.md](23-mo-hinh-du-lieu.md)         | ERD PostgreSQL, Redis key, migration, chiến lược ID, lưu giữ dữ liệu                                                           |
+| 24  | [24-giao-thuc-mang.md](24-giao-thuc-mang.md)           | Khung gói, phiên bản, danh mục thông điệp, rate limit, ngân sách băng thông                                                    |
+| 25  | [25-xac-thuc-bao-mat.md](25-xac-thuc-bao-mat.md)       | Mật khẩu, JWT + refresh, SSO, STRIDE, tín hiệu anti-cheat                                                                      |
+| 26  | [26-kinh-te-ledger.md](26-kinh-te-ledger.md)           | Sổ cái kép, giao dịch idempotent, chợ/đấu giá, faucet/sink, mô phỏng kinh tế                                                   |
+| 27  | [27-van-hanh-quan-sat.md](27-van-hanh-quan-sat.md)     | Log, metric, trace, telemetry, dashboard, cấu hình và cờ tính năng                                                             |
+| 28  | [28-chien-luoc-kiem-thu.md](28-chien-luoc-kiem-thu.md) | Đơn vị/thuộc tính/xác định, replay, tích hợp, loadbot, hiệu năng thiết bị, CI                                                  |
+| 29  | [29-adr.md](29-adr.md)                                 | Chỉ mục ADR, đề xuất mới, giải quyết điểm mơ hồ của PR #7/#9/#10 (phụ lục A–C)                                                 |
+| 33  | [33-p1-perf.md](33-p1-perf.md)                         | Đo hiệu năng P1 (client slice) và báo cáo thoát P1                                                                             |
+| 34  | [34-combat-server.md](34-combat-server.md)             | Combat phía server: lõi giải quyết cast (D75)                                                                                  |
+| 35  | [35-p5-load-test.md](35-p5-load-test.md)               | Kiểm thử tải P5: bot chơi thật, soak ngắn / dài, khói CI (D100)                                                                |
+| 37  | [37-mo-phong-kinh-te.md](37-mo-phong-kinh-te.md)       | Báo cáo mô phỏng kinh tế (D113, sinh tự động bởi `tools/econ-sim`): lạm phát, kênh sinh ra / tiêu hao, nhịp tu luyện, cảnh báo |
+| 38  | [38-van-bao-lau.md](38-van-bao-lau.md)                 | Vạn Bảo Lâu cơ bản: ký quỹ, mua nguyên tử, phí 1 % + thuế cố định 5 %, CPI bóng (D112)                                         |
 
 ## 4. Art và hoạt cảnh (`art/`)
 

@@ -38,7 +38,17 @@ export function onlineRequested(): boolean {
   return new URLSearchParams(location.search).get('online') === '1';
 }
 
-export function onlineCredentials(): { baseUrl: string; username: string; password: string } {
+/** closed beta (D111): `?invite=CODE` is sent with the first registration only; once the server accepted the character it is not sent again */
+const invitedKey = (accountKey: string): string => `vgtd.invited.${accountKey}`;
+export function markInviteUsed(accountKey: string): void {
+  try {
+    localStorage.setItem(invitedKey(accountKey), '1');
+  } catch {
+    /* private mode: the code is simply sent again, which costs one counted attempt */
+  }
+}
+
+export function onlineCredentials(): { baseUrl: string; username: string; password: string; inviteCode?: string } {
   const q = new URLSearchParams(location.search);
   const srv = core.resolveServer(q.get('server'), location.hostname);
   if (srv.ignored)
@@ -50,7 +60,14 @@ export function onlineCredentials(): { baseUrl: string; username: string; passwo
   // named accounts keep their password in localStorage (so a reload / server restart can log in again); guests per tab.
   // Keyed by server origin too: a password is only ever sent to the origin it was generated for.
   const password = stored(named ? localStorage : sessionStorage, `vgtd.pw.${baseUrl}|${username}`, () => randomHex(16));
-  return { baseUrl, username, password };
+  const invite = (q.get('invite') ?? '').trim().slice(0, 64);
+  let used = false;
+  try {
+    used = localStorage.getItem(invitedKey(`${baseUrl}|${username}`)) === '1';
+  } catch {
+    /* ignore */
+  }
+  return { baseUrl, username, password, ...(invite && !used ? { inviteCode: invite } : {}) };
 }
 
 /** Remote players have no class on the wire yet: pick one deterministically from the entity id. */
@@ -76,7 +93,7 @@ export class OnlineSession {
   /** A boss in view entered a new phase (D91, `boss_phase`): the HUD / standee layer reacts (announcement, flash, skin swap). */
   onBossPhase: ((entityId: number, phase: number, transformMs: number) => void) | null = null;
   /** name / max HP of monsters in view (from `aoi_enter`; later snapshots only carry hpPct) */
-  private readonly mobMeta = new Map<number, { name: string; defId: number; hpMax: number }>();
+  private readonly mobMeta = new Map<number, { name: string; defId: number; element: number; hpMax: number }>();
 
   constructor(
     private readonly ysort: YSortLayer,
@@ -117,7 +134,12 @@ export class OnlineSession {
       onAoiEnter: (entities) => {
         for (const e of entities) {
           if (e.kind === KIND_MONSTER)
-            this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, defId: e.defId, hpMax: e.maxHp });
+            this.mobMeta.set(e.entityId, {
+              name: core.t('combat.mob.fallback_name', { id: e.defId }),
+              defId: e.defId,
+              element: e.element ?? 0,
+              hpMax: e.maxHp,
+            });
         }
       },
       onBossPhase: (msg) => this.onBossPhase?.(msg.mobEntityId, msg.phase, msg.transformMs),
@@ -216,6 +238,7 @@ export class OnlineSession {
           id: v.entityId,
           name: meta.name,
           defId: meta.defId,
+          element: meta.element,
           pos: { i: v.i, j: v.j },
           hpPct: v.hpPct,
           hpMax: meta.hpMax,

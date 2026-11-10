@@ -48,7 +48,10 @@ const files = [
     f.split('/'),
   ),
   ...manifest.particles.names.map((n) => ['particles', n]),
+  ...manifest.vfx.classes.map((c) => ['vfx', c]),
   ...manifest.icons.map((n) => ['items', n]),
+  ...manifest.itemGrids.map((g) => g.file.split('/')),
+  manifest.hud.file.split('/'),
   ...GRID_PATHS.map((n) => ['skills', n]),
   ...Object.keys(manifest.mobs).map((n) => ['mobs', n]),
   ...Object.keys(manifest.npcs)
@@ -169,6 +172,8 @@ function main() {
     'realms_1x',
     'particles_2x',
     'particles_1x',
+    'hud_2x',
+    'hud_1x',
     'keyart',
     'fx_2x',
     'fx_1x',
@@ -195,6 +200,7 @@ function main() {
     status: {},
     realms: {},
     particles: {},
+    hud: {},
     keyArt: {},
     fx: {},
     equip: {},
@@ -219,9 +225,13 @@ function main() {
     const r = G.processProp(decodePNG(buf), def.target, { clear: def.clear, key: def.key });
     verify(propSrc(name), buf, r.sparkle);
     if (def.pivotX !== undefined) r.pivot.x = def.pivotX;
-    r.x2.save(path.join(OUT, 'props_2x', `${name}.png`));
+    // x1only (the sect buildings, PART 3 group N): the @1x pixels go into BOTH pages and are drawn 1:1 (w2 / h2 stay the virtual @2x size,
+    // so PropArt.sizeOf gives the same design size in every tier): the @2x prop page is 93% full without them, and a second page would
+    // break the L3 batch next to the spawn (draw-call gate 65, docs/33)
+    (def.x1only ? r.x1 : r.x2).save(path.join(OUT, 'props_2x', `${name}.png`));
     r.x1.save(path.join(OUT, 'props_1x', `${name}.png`));
     sidecar.props[name] = {
+      ...(def.x1only ? { x1only: true } : {}),
       w2: r.x2.width,
       h2: r.x2.height,
       pivot: r.pivot,
@@ -243,6 +253,40 @@ function main() {
     r.x1.save(path.join(OUT, 'icons_1x', `${name}.png`));
     sidecar.icons[name] = {};
     console.log(`  items/${name}: ${r.x2.width}px @2x, sparkle ${r.sparkle.pixels}px`);
+  }
+  // PART 3 group O: item icon grids (manual tiers, alchemy herbs / pills / token): sliced into the same icon atlas, keyed by id
+  for (const g of manifest.itemGrids) {
+    const buf = bufs.get(g.file);
+    const r = G.sliceGrid(decodePNG(buf), manifest.iconSize2x, g.cols, g.rows, {
+      fit: 'contain',
+      pad: g.pad,
+      unmixStar: g.unmixStar,
+      key: g.key,
+    });
+    verify(g.file, buf, r.sparkle);
+    if (g.ids.length !== g.cols * g.rows)
+      problems.push(`${g.file}: ${g.ids.length} ids for a ${g.cols}x${g.rows} grid`);
+    g.ids.forEach((id, k) => {
+      if (sidecar.icons[id]) problems.push(`${g.file}: icon id ${id} is used twice`);
+      r.x2[k].save(path.join(OUT, 'icons_2x', `${id}.png`));
+      r.x1[k].save(path.join(OUT, 'icons_1x', `${id}.png`));
+      sidecar.icons[id] = { grid: g.file, index: k };
+    });
+    console.log(`  ${g.file}: ${g.ids.length} item icons, sparkle ${r.sparkle.pixels}px`);
+  }
+  // PART 3 group P: HUD / social icons (round, on their own backing disc)
+  {
+    const h = manifest.hud;
+    const buf = bufs.get(h.file);
+    const r = G.sliceGrid(decodePNG(buf), h.size2, h.cols, h.rows, { fit: 'contain', unmixStar: true, disc: true });
+    verify(h.file, buf, r.sparkle);
+    if (h.ids.length !== h.cols * h.rows) problems.push(`hud: ${h.ids.length} ids for a ${h.cols}x${h.rows} grid`);
+    h.ids.forEach((id, k) => {
+      r.x2[k].save(path.join(OUT, 'hud_2x', `${id}.png`));
+      r.x1[k].save(path.join(OUT, 'hud_1x', `${id}.png`));
+      sidecar.hud[id] = { index: k };
+    });
+    console.log(`  ${h.file}: ${h.ids.length} HUD icons, sparkle ${r.sparkle.pixels}px`);
   }
   // skill icons: one grid per class path, 8 tiles row-major = skills.json order; keyed by skill id
   const grids = classGrids(skillsJson);
@@ -295,6 +339,26 @@ function main() {
     r.x1.save(path.join(OUT, 'particles_1x', `${name}.png`));
     sidecar.particles[name] = {};
     console.log(`  particles/${name}: ${r.x2.width}px @2x, gain ${r.gain.toFixed(2)}, sparkle ${r.sparkle.pixels}px`);
+  }
+  // PART 3 group Q: skill VFX sheets (3 panels on black) -> vfx_<class>_<panel>, packed with the particle textures
+  const vfxPanels = manifest.vfx.panels;
+  for (const cls of manifest.vfx.classes) {
+    const buf = bufs.get(`vfx/${cls}`);
+    const r = G.processVfxSheet(
+      decodePNG(buf),
+      vfxPanels.map((p) => p.size2),
+      vfxPanels.map((p) => !!p.rotate),
+    );
+    verify(`vfx/${cls}`, buf, r.sparkle, G.isDark);
+    r.panels.forEach((p, k) => {
+      const name = `vfx_${cls}_${vfxPanels[k].id}`;
+      p.x2.save(path.join(OUT, 'particles_2x', `${name}.png`));
+      p.x1.save(path.join(OUT, 'particles_1x', `${name}.png`));
+      sidecar.particles[name] = {};
+    });
+    console.log(
+      `  vfx/${cls}: ${r.panels.map((p, k) => `${vfxPanels[k].id} ${p.x2.width}x${p.x2.height}`).join(', ')} @2x, sparkle ${r.sparkle.pixels}px`,
+    );
   }
   // PART 2: login backdrop + emblem: single textures next to the atlases (not packed)
   {
@@ -488,6 +552,8 @@ function main() {
     ['status_1x', 'atl_status_1x', 'status'],
     ['realms_2x', 'atl_realm_2x', 'realms'],
     ['realms_1x', 'atl_realm_1x', 'realms'],
+    ['hud_2x', 'atl_hud_2x', 'hud'],
+    ['hud_1x', 'atl_hud_1x', 'hud'],
     ['particles_2x', 'atl_ptcl_2x', 'particles'],
     ['particles_1x', 'atl_ptcl_1x', 'particles'],
     ['fx_2x', 'atl_fx_2x', 'fx'],
