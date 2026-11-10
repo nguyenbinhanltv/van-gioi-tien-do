@@ -187,3 +187,47 @@ Mã thoát 0 = mọi tiêu chí đạt (độ dốc heap / RSS ở bản 25 phú
 | Bot bị rớt hàng loạt          | `kicks`, `disconnects`, `report.txt` mục vi phạm                           | ngân sách tin nhắn (D101) hoặc backpressure                                                                                           |
 
 Số đo của lần chạy 24 giờ đầu tiên **chưa có** (chưa chạy ở đây): bản 25 phút `smoke` chỉ là kiểm công cụ. Ngưỡng độ dốc và backup là đề xuất của công cụ; sau lần chạy thật cần xem lại.
+
+## 7. D119: giảm chi phí mã hóa snapshot
+
+Số đo đầu tiên (mục 5.2) cho thấy `snap` (mã hóa + gửi snapshot) là pha lớn nhất của tick: 7,9 ms trung bình ở 200 bot, 55-60 % thời gian tick. D119 cắt phần mã hóa, **không đổi định dạng dây, không đổi `PROTOCOL_VERSION`, không đổi số gameplay**.
+
+### 7.1 Cái gì tốn
+
+Hồ sơ CPU (`npm run bench:tick -w @vgtd/server -- --cpu-prof`, 200 người, 150 quái, đầu vào xác định): `sendSnapshots` tự nó chiếm 26 % tổng thời gian CPU, cộng `encodeSnapshot` 3,7 %, `write` 3,1 %, `finish` 2,7 %, `result` 2,0 %, kiểm tra lại cấu trúc `validateMessage` + `snapEntity` 2,9 %, GC 7,8 %. Trong `sendSnapshots`, số tick theo dòng cho thấy vòng quét `c.visible` mỗi client là chỗ nóng: tạo một cặp `[khóa, giá trị]` cho mỗi phần tử Map, phép `%` theo chu kỳ dải, rồi dựng một object `SnapshotEntity` cho mỗi bản ghi, để `encode` kiểm tra lại từng object và đẩy từng bản ghi qua một `BitWriter` rồi **sao chép** hai lần.
+
+### 7.2 Đã làm
+
+- `encodeSnapshotRecords` (`packages/protocol/src/binary.ts`): mã hóa snapshot từ các **mảng song song** (`SnapshotRecords`, một bộ đệm dùng lại cho mọi client của mọi tick) thay vì dựng `SnapshotMsg` + object cho từng thực thể; không chạy lại `validateMessage` trên cả thông điệp (mọi trường của bản ghi vẫn bị kiểm tra phạm vi: giới hạn dây bằng đúng độ rộng bit nên `BitWriter` tự từ chối; phần đầu thông điệp và `self` kiểm tra như cũ; mảng là `Float64Array` để một giá trị ngoài phạm vi hay số lẻ không bị cắt âm thầm); chuỗi bit được nối vào thông điệp qua `BitWriter.finishView()` (không sao chép).
+- `WorldNode.sendSnapshots`: điền `SnapshotRecords` thay vì mảng object; cập nhật `Client.last` **tại chỗ** sau khi mã hóa (không cấp phát cặp object mới mỗi bản ghi); duyệt `c.visible.values()` (id nằm trong `Visible`) thay vì `entries()`, và phép `% chu kỳ` thành `& (chu kỳ - 1)` (chu kỳ dải là 1 / 2 / 4).
+- Không làm (đã cân nhắc): **chia sẻ byte đã mã hóa giữa các client**: bản ghi của mỗi client dùng delta so với vị trí client đó nhận gần nhất (`Client.last`), nên hai client thấy cùng thực thể thường mã hóa khác nhau; chia sẻ chỉ có nghĩa nếu bỏ delta theo client hoặc nhóm client theo trạng thái đã nhận, tức là đổi giao thức / băng thông (cần quyết định riêng). Delta so với snapshot đã xác nhận cuối và bỏ trường không đổi **đã có từ D73** (`Client.last`, bỏ bản ghi không đổi, dải theo khoảng cách).
+
+### 7.3 Số đo (cùng một máy, trước = `main`, sau = nhánh này)
+
+**Tính đúng:** luồng byte **không đổi**: `npm run bench:tick -- --hash` in cùng checksum `57976c24` (29.449.495 byte, 260.146 khung) trước và sau; `snapshot-golden.test.ts` (byte vàng), test tương đương mới (`snapshot-records.test.ts`: byte-giống-hệt `encode()` trên 300 snapshot ngẫu nhiên có seed + biên delta, từ chối đúng những gì `encode` từ chối) và toàn bộ test xác định đều xanh.
+
+**Đo trong tiến trình** (`bench:tick`, 200 người, 40x40 ô, 150 quái, 600 tick, đầu vào xác định, không socket; chạy xen kẽ cũ / mới, máy dev chung nên mỗi cặp là phép so cùng điều kiện gần nhau nhất):
+
+| Cặp                                      | `snap` ms/tick (cũ → mới) | CPU ms/tick (cũ → mới) | tick trung bình ms (cũ → mới) |
+| ---------------------------------------- | ------------------------- | ---------------------- | ----------------------------- |
+| 1                                        | 3,38 → 2,17               | 7,00 → 5,96            | 5,70 → 4,37                   |
+| 2                                        | 3,07 → 2,05               | 6,33 → 5,31            | 5,24 → 4,13                   |
+| 3                                        | 3,36 → 2,31               | 7,63 → 5,94            | 5,78 → 4,69                   |
+| 4 (sau khi thêm `values()` + mặt nạ bit) | 4,59 → 2,50               | 9,43 → 6,64            | 7,79 → 5,14                   |
+
+Ba cặp chạy lúc máy rảnh cho `snap` **-32 đến -35 %**, CPU -14 đến -22 %; các cặp chạy lúc máy nghẽn (CPU hệ thống 100 %, nhiều tiến trình khác) vẫn cùng chiều nhưng nhiễu hơn (cặp 4: -46 %, hai cặp nghẽn khác lệch). Hồ sơ CPU sau cải thiện: tổng thời gian mẫu 10,6 s → 6,0 s cho cùng khối lượng việc (có phần nhờ máy rảnh hơn lúc đo).
+
+**Đo bằng soak** (`npm run soak`, bot thật qua socket, kho bộ nhớ, 150 s đo sau 30 s khởi động; bộ cũ và mới build từ hai bản mã, chạy xen kẽ). **Nhiễu máy át tín hiệu 2 ms**: vòng 1 bị tranh chấp CPU nặng (p99 hàng trăm ms ở CẢ cũ lẫn mới, `snap` 6-18 ms ở cả hai), nên chỉ vòng 2 (máy rảnh) dùng được:
+
+| Vòng 2 (máy rảnh) | tick p50 / p95 / p99 (ms) | `snap` ms/tick   | tick > 50 ms |
+| ----------------- | ------------------------- | ---------------- | ------------ |
+| 200 bot, cũ       | 14,00 / 30,75 / 61,50     | 9,16             | 46 (1,56 %)  |
+| 200 bot, mới      | 12,25 / 22,75 / **32,50** | **6,39** (-30 %) | 4 (0,13 %)   |
+| 100 bot, cũ       | 6,00 / 10,00 / 12,50      | 3,00             | 0            |
+| 100 bot, mới      | 5,50 / 9,50 / 12,75       | **2,53** (-16 %) | 0            |
+
+(Vòng 1, máy nghẽn: 100 bot cũ p99 76,75 / mới 106,50; 200 bot cũ 739 / mới 647: **không kết luận được**, chỉ cho thấy máy dev chung không phân giải nổi chênh lệch vài ms; ngoài ra thứ tự chạy xen kẽ không loại được hiệu ứng nhiệt / nền.) Kết luận thận trọng: **bằng chứng chính là phép đo trong tiến trình có checksum byte**; soak ở vòng sạch cùng chiều (200 bot: p99 61,5 → 32,5 ms, nhưng mẫu đơn, chưa lặp lại trên máy riêng).
+
+### 7.4 Còn lại
+
+`snap` vẫn chiếm ~55 % thời gian tick ở bench (2,1-2,5 ms trong 4-5 ms): phần dư gồm duyệt `visible` của từng client (tuyến tính theo người nhận x thực thể thấy), tạo `self`, `write` / `frameHeader` và bản sao cuối mỗi thông điệp. Giảm thêm cần đổi mức chi tiết (tần số, trần 120 thực thể: quyết định thiết kế, không phải sửa mã) hoặc tách mã hóa sang worker. `updateAoi` (~19 % CPU ở hồ sơ) và `mobs` chưa đụng tới.

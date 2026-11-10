@@ -30,7 +30,7 @@ import {
   encodeColdBody,
   type ColdMessage,
 } from './progression.js';
-import { validateMessage } from './validate.js';
+import { validateMessage, validateSelf } from './validate.js';
 
 /** Position of an entity (1/32 tile) in the snapshot the deltas are relative to. */
 export interface BaselinePos {
@@ -363,6 +363,107 @@ function decodeSelfStatus(r: ByteReader): SelfStatus {
   }
   if (mask & 4) st.poisonMs = r.u16();
   return st;
+}
+
+/**
+ * The entity records of one snapshot as parallel arrays ("struct of arrays"), for `encodeSnapshotRecords`: the server fills ONE instance per
+ * tick and reuses it for every client, so a snapshot costs no per-entity object. `hp[k]` < 0 means "no hpPct in this record".
+ */
+export class SnapshotRecords {
+  count = 0;
+  // Float64Array on purpose: a typed array of a narrow integer type would silently wrap or truncate an out-of-range / fractional value, and the
+  // bit writer must see it to throw exactly like `encode` does.
+  index = new Float64Array(LIMITS.MAX_LOCAL_INDEX + 1);
+  qi = new Float64Array(LIMITS.MAX_LOCAL_INDEX + 1);
+  qj = new Float64Array(LIMITS.MAX_LOCAL_INDEX + 1);
+  anim = new Float64Array(LIMITS.MAX_LOCAL_INDEX + 1);
+  dir = new Float64Array(LIMITS.MAX_LOCAL_INDEX + 1);
+  /** hpPct 0..127, or -1 for none */
+  hp = new Float64Array(LIMITS.MAX_LOCAL_INDEX + 1);
+}
+
+export interface SnapshotHeader {
+  seq: number;
+  baselineSeq: number | null;
+  tick: number;
+  self: SelfState | null;
+}
+
+const U16_MAX = 0xffff;
+const U32_MAX = 0xffffffff;
+const isU = (v: number, max: number): boolean => Number.isInteger(v) && v >= 0 && v <= max;
+
+/**
+ * The same bytes as `encode({ type: 'snapshot', ... })`, without building the message: no per-entity objects, no re-validation pass, and the
+ * bit stream is appended without an intermediate copy (one copy of the finished message remains: the caller owns the result). Every
+ * field is still range-checked: the header here, `self` by `validateSelf`, and each record by the bit writer itself (every wire limit
+ * equals its bit width), so a bad value throws the same `ProtocolError` as before. `baseline[index]` is the client's last-sent position of
+ * that slot (a delta is used when it fits), exactly like `CodecOptions.baseline`.
+ */
+export function encodeSnapshotRecords(
+  head: SnapshotHeader,
+  rec: SnapshotRecords,
+  baseline: ArrayLike<BaselinePos | undefined>,
+): Uint8Array {
+  if (!isU(head.seq, U16_MAX))
+    throw new ProtocolError('range', `seq must be an integer in 0..${U16_MAX}, got ${String(head.seq)}`);
+  if (head.baselineSeq !== null && !isU(head.baselineSeq, U16_MAX))
+    throw new ProtocolError(
+      'range',
+      `baselineSeq must be an integer in 0..${U16_MAX}, got ${String(head.baselineSeq)}`,
+    );
+  if (!isU(head.tick, U32_MAX))
+    throw new ProtocolError('range', `tick must be an integer in 0..${U32_MAX}, got ${String(head.tick)}`);
+  const n = rec.count;
+  const self = head.self === null ? null : validateSelf(head.self);
+  const w = SCRATCH;
+  w.reset();
+  w.u8(PROTOCOL_VERSION);
+  w.u8(MsgType.Snapshot);
+  const hasBase = head.baselineSeq !== null;
+  w.u8((self ? SNAP_FLAG_SELF : 0) | (hasBase ? SNAP_FLAG_BASELINE : 0));
+  w.u16(head.seq);
+  if (head.baselineSeq !== null) w.u16(head.baselineSeq);
+  w.u32(head.tick);
+  if (self) encodeSelf(w, self);
+  w.u16(n);
+  w.reserve(48 + n * 6);
+  const bits = SCRATCH_BITS;
+  bits.reset();
+  for (let k = 0; k < n; k++) {
+    const index = rec.index[k]!;
+    const qi = rec.qi[k]!;
+    const qj = rec.qj[k]!;
+    bits.write(index, 10);
+    const base = hasBase ? baseline[index] : undefined;
+    if (base !== undefined) {
+      const di = qi - base.qi;
+      const dj = qj - base.qj;
+      if (di >= LIMITS.DELTA_MIN && di <= LIMITS.DELTA_MAX && dj >= LIMITS.DELTA_MIN && dj <= LIMITS.DELTA_MAX) {
+        bits.write(0, 1);
+        bits.write(di & 0xff, 8);
+        bits.write(dj & 0xff, 8);
+      } else {
+        bits.write(1, 1);
+        bits.write(qi, 16);
+        bits.write(qj, 16);
+      }
+    } else {
+      bits.write(1, 1);
+      bits.write(qi, 16);
+      bits.write(qj, 16);
+    }
+    bits.write(rec.anim[k]!, 6);
+    bits.write(rec.dir[k]!, 3);
+    const hp = rec.hp[k]!;
+    if (hp < 0) bits.write(0, 1);
+    else {
+      bits.write(1, 1);
+      bits.write(hp, 7);
+    }
+  }
+  w.bytes(bits.finishView());
+  return w.result();
 }
 
 function encodeSnapshot(w: ByteWriter, m: SnapshotMsg, opts: CodecOptions): void {
