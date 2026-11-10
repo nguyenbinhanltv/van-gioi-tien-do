@@ -156,10 +156,7 @@ export class QuestWorldUi {
       if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      if (e.code === 'Escape' && this.openNpc) {
-        this.close();
-        return;
-      }
+      // Esc is owned by the HUD's single escAction order (Bootstrap.openPanelCloser lists the dialogue first)
       if (e.code !== 'KeyF') return;
       const near = this.nearNpc();
       if (!near) return;

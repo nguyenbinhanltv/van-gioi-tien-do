@@ -659,6 +659,7 @@ export class Bootstrap extends Component {
   /** The close action of the first open panel (Esc closes it before anything else), null when no panel is open. */
   private openPanelCloser(): (() => void) | null {
     const closers: Array<[boolean, () => void]> = [
+      [this.questWorld?.dialogueOpen ?? false, () => this.questWorld?.close()], // the NPC dialogue is the topmost overlay
       [this.worldMapPanel?.isOpen ?? false, () => this.worldMapPanel?.toggle(false)],
       [this.characterPanel?.visible ?? false, () => this.characterPanel?.toggle(false)],
       [this.bagPanel?.isOpen ?? false, () => this.bagPanel?.toggle()],
