@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2020", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowArbitraryExtensions": true
+  },
+  "include": ["assets/scripts/**/*.ts", "assets/scripts/vendor/*.d.mts", "scripts/cc-stub.d.ts"]
+}
