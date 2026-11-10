@@ -2,6 +2,7 @@ import { Color, Node, Sprite, SpriteFrame, UITransform } from 'cc';
 import { combat as cb, core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { MobSprite, PropArt } from './PropArt';
+import { ELEMENT_COLORS } from './SkillVfxPresets';
 import { beginTransform, flashMotion, mobDefIdOfName, newMotion, stepMotion, type MotionState } from './MobMotion';
 
 /**
@@ -37,6 +38,9 @@ export class MobStandee {
   private readonly skins: ReadonlyMap<number, Skin>;
   private pendingPhase = 0;
   private tinted = false;
+  /** sprite colour of the mob's element (D120): white pulled slightly towards the element colour; plain white without one */
+  private elementTint = new Color(255, 255, 255, 255);
+  private elementKey: string | null = null;
 
   constructor(id: number, entry: MobSprite, frame: SpriteFrame, skins?: ReadonlyMap<number, Skin>) {
     this.entry = entry;
@@ -76,6 +80,18 @@ export class MobStandee {
   setPhase(phase: number, transformMs = 0): void {
     this.pendingPhase = phase;
     beginTransform(this.motion, transformMs);
+  }
+
+  /**
+   * Subtle element tint (D120): a vertex colour on the one sprite, so no extra material or draw call. `wire` = `EnterEntity.element`
+   * (0 / absent = none). Cheap to call every frame: it only recomputes when the element changes.
+   */
+  setElement(wire: number | undefined): void {
+    const el = core.mobElementOf(wire);
+    if (el === this.elementKey) return;
+    this.elementKey = el;
+    const [r, g, b] = core.mobElementTint(el ? (ELEMENT_COLORS[el]?.primary ?? null) : null);
+    this.elementTint = new Color(r, g, b, 255);
   }
 
   /** One-shot flash (the hit flash) for `seconds`. */
@@ -119,7 +135,7 @@ export class MobStandee {
       ? new Color(255, 90, 90, o.alpha)
       : this.tinted
         ? new Color(PHASE_TINT.r, PHASE_TINT.g, PHASE_TINT.b, o.alpha)
-        : new Color(255, 255, 255, o.alpha);
+        : new Color(this.elementTint.r, this.elementTint.g, this.elementTint.b, o.alpha);
   }
 }
 

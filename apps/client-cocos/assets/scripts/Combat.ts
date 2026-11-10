@@ -787,7 +787,7 @@ export class CombatUi {
     this.targetRoot.active = !!t;
     this.ring.active = !!t;
     if (t) {
-      this.targetName.string = t.name;
+      this.targetName.string = core.mobNameWithElement(t.name, core.mobElementOf(t.element)); // [KIM] Name (D120)
       this.setBar(this.targetFill, 260, frac(t.hp, t.hpMax));
       this.targetText.string = `${Math.ceil(t.hp)} / ${t.hpMax}`;
       this.ring.setPosition(cellCenterToWorld(Math.floor(t.pos.i), Math.floor(t.pos.j)));
@@ -855,6 +855,7 @@ export class CombatUi {
       n.setPosition(tileToWorld(e.pos.i, e.pos.j));
       const st = this.standees.get(e.id);
       if (st) {
+        st.setElement(e.element);
         st.update(dt, e, this.playerPos());
         n.active = st.visible;
       } else n.active = e.alive;

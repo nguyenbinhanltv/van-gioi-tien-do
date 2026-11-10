@@ -134,6 +134,7 @@ export function randMessage(r: Rng, type?: HotType): Message {
           qj: r.int(0, 65535),
           anim: r.int(0, 255),
           dir: r.int(0, 7),
+          ...(r.bool() ? { element: r.int(1, 5) } : {}),
           hpPct: r.int(0, 255),
           maxHp: r.int(0, 2 ** 32 - 1),
         })),
