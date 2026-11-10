@@ -86,8 +86,10 @@ const EMPTY_DOCS: Docs = {
   'accounts.json': JSON.stringify({ v: 1, accounts: [] }),
   'progression.json': JSON.stringify({ v: 1, records: [] }),
   'inventories.json': JSON.stringify({ v: 1, owners: {} }),
+  'tutorial.json': JSON.stringify({ v: 1, records: [] }),
   'sect.json': JSON.stringify({ v: 1, members: [], manuals: [] }),
   'friends.json': JSON.stringify({ v: 1, friends: [], requests: [] }),
+  'quests.json': JSON.stringify({ v: 1, owners: {} }),
   'market.json': JSON.stringify({ v: 1, nextId: 1, listings: [], trades: [], reports: [] }),
   'ledger.json': JSON.stringify({ ...new Ledger().snapshot(), v: 1 }),
 };

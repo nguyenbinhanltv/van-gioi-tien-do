@@ -5,6 +5,7 @@
  */
 import { randomBytes, randomUUID } from 'node:crypto';
 import { AUTH_CONFIG } from '../config.js';
+import type { InviteService } from '../invites/service.js';
 import { TokenService } from './jwt.js';
 import {
   DEFAULT_SCRYPT,
@@ -18,7 +19,7 @@ import {
 
 export class AuthError extends Error {
   constructor(
-    readonly status: 400 | 401 | 409 | 429 | 503,
+    readonly status: 400 | 401 | 403 | 409 | 429 | 503,
     readonly code: string,
     message: string,
     readonly retryAfterS?: number,
@@ -75,6 +76,8 @@ export interface AuthOptions {
   maxPendingHashes?: number;
   /** failed (or still unverified) logins per IP per 15 min before 429; default 10. Raise for load tests behind one IP. */
   ipFailLimit?: number;
+  /** closed beta (D111): when set, `register` needs a valid single-use invitation code */
+  invites?: InviteService;
 }
 
 export interface LoginResult {
@@ -92,6 +95,7 @@ export class AuthService {
   private readonly registerLimit: number;
   private readonly maxPending: number;
   private readonly ipFailLimit: number;
+  private readonly invites: InviteService | undefined;
   private pending = 0;
   private readonly ipFails = new Map<string, number[]>();
   private readonly ipRegs = new Map<string, number[]>();
@@ -106,6 +110,7 @@ export class AuthService {
     this.registerLimit = opts.registerPerIpPerDay ?? AUTH_CONFIG.REGISTER_PER_IP_PER_DAY;
     this.maxPending = opts.maxPendingHashes ?? AUTH_CONFIG.MAX_PENDING_HASHES;
     this.ipFailLimit = opts.ipFailLimit ?? AUTH_CONFIG.IP_FAIL_LIMIT;
+    this.invites = opts.invites;
     this.dummyHash = hashPassword(randomBytes(24).toString('base64'), this.scryptParams); // random per process, never a real credential;
   }
 
@@ -140,17 +145,32 @@ export class AuthService {
     if (k >= 0) list.splice(k, 1);
   }
 
-  async register(usernameRaw: unknown, password: unknown, ip: string): Promise<{ accountId: string }> {
+  /** true when registration needs an invitation code (BETA_INVITE_ONLY, D111) */
+  get inviteOnly(): boolean {
+    return this.invites !== undefined;
+  }
+
+  async register(
+    usernameRaw: unknown,
+    password: unknown,
+    ip: string,
+    inviteCode?: unknown,
+  ): Promise<{ accountId: string }> {
     const uErr = validateUsername(usernameRaw);
     if (uErr) throw new AuthError(400, 'bad_username', uErr);
     const username = (usernameRaw as string).toLowerCase();
     const pErr = validatePassword(password, username);
     if (pErr) throw new AuthError(400, 'bad_password', pErr);
+    // closed beta (D111): the code is checked BEFORE the daily quota and any username lookup, so a caller without a valid code learns
+    // nothing about which names exist, and every kind of invalid code answers alike
+    const claim = this.invites?.claim(inviteCode, ip);
     const DAY = 24 * 3600_000;
     let stamp: number | null = null;
     if (this.registerLimit > 0) {
-      if (this.recent(this.ipRegs, ip, DAY).length >= this.registerLimit)
+      if (this.recent(this.ipRegs, ip, DAY).length >= this.registerLimit) {
+        claim?.release();
         throw new AuthError(429, 'register_limited', 'too many registrations from this address', 3600);
+      }
       // counted before hashing: parallel requests from one IP cannot all pass the check
       stamp = this.reserve(this.ipRegs, ip, DAY);
     }
@@ -169,8 +189,10 @@ export class AuthService {
       };
       if (!this.store.create(account)) throw new AuthError(409, 'username_taken', 'username already taken');
       created = true;
+      claim?.commit(account.id);
       return { accountId: account.id };
     } finally {
+      if (!created) claim?.release();
       // failed attempts (taken name, busy server) do not consume the daily quota
       if (!created && stamp !== null) this.release(this.ipRegs, ip, DAY, stamp);
     }

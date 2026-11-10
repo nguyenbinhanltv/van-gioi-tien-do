@@ -1,7 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { TileGrid } from '@vgtd/sim';
 import { InvOp, InvReason, decode, encode, type InvResultMsg, type InvStateMsg, type Message } from '@vgtd/protocol';
-import { BagModel, NetClient, invReasonText, makeRequestId, type InventoryEvents, type NetDeps, type SocketLike } from '@vgtd/client-core';
+import {
+  BagModel,
+  NetClient,
+  invReasonText,
+  makeRequestId,
+  type InventoryEvents,
+  type NetDeps,
+  type SocketLike,
+} from '@vgtd/client-core';
 
 const STATE: InvStateMsg = {
   type: 'inv_state',
@@ -27,7 +35,13 @@ describe('BagModel', () => {
     expect(b.slotCount).toBe(4);
     expect(b.itemAt(0)).toMatchObject({ kind: 'stack', key: 'heal_pill', quality: 2, qty: 5, durability: null });
     expect(b.itemAt(1)).toBeNull();
-    expect(b.itemAt(2)).toMatchObject({ kind: 'instance', key: 'blueprint_gold_red', qty: 1, durability: 8000, bound: false });
+    expect(b.itemAt(2)).toMatchObject({
+      kind: 'instance',
+      key: 'blueprint_gold_red',
+      qty: 1,
+      durability: 8000,
+      bound: false,
+    });
     expect(b.itemAt(99)).toBeNull();
     expect(b.freeSlots()).toBe(2);
     expect(b.pendingTotal).toBe(30);
@@ -49,7 +63,13 @@ describe('BagModel', () => {
     const cmd = b.moveCmd(0, 3, ids)!;
     expect(cmd).toMatchObject({ type: 'inv_cmd', op: InvOp.Move, from: 0, to: 3 });
     expect(b.waitingCount).toBe(1);
-    const res: InvResultMsg = { type: 'inv_result', requestId: cmd.requestId, op: InvOp.Move, reason: InvReason.Ok, count: 0 };
+    const res: InvResultMsg = {
+      type: 'inv_result',
+      requestId: cmd.requestId,
+      op: InvOp.Move,
+      reason: InvReason.Ok,
+      count: 0,
+    };
     expect(b.applyResult(res)).toEqual(cmd);
     expect(b.waitingCount).toBe(0);
     expect(b.lastResult).toMatchObject({ reason: InvReason.Ok });
@@ -78,7 +98,7 @@ describe('BagModel', () => {
     let k = 0.1;
     const id = makeRequestId(() => (k = (k * 7.7) % 1));
     expect(id).toMatch(/^[0-9a-f]{32}$/);
-    expect(invReasonText(InvReason.EmptySlot)).toBe('nothing in that slot');
+    expect(invReasonText(InvReason.EmptySlot)).toBe('Ô này trống.');
     expect(invReasonText(200)).toContain('200');
   });
 });
@@ -102,7 +122,14 @@ class FakeSocket implements SocketLike {
     if (typeof d === 'string')
       queueMicrotask(() =>
         this.onmessage?.({
-          data: JSON.stringify({ type: 'hello_ack', entityId: 1, serverTimeMs: 0, tickHz: 20, protocol: 4, mapTiles: 64 }),
+          data: JSON.stringify({
+            type: 'hello_ack',
+            entityId: 1,
+            serverTimeMs: 0,
+            tickHz: 20,
+            protocol: 4,
+            mapTiles: 64,
+          }),
         }),
       );
   }
@@ -170,7 +197,13 @@ describe('using items (D90)', () => {
     expect(new BagModel().slotOfKey('heal_pill')).toBeNull();
   });
   it('reason texts exist for the new refusals', () => {
-    for (const r of [InvReason.NotUsable, InvReason.OnCooldown, InvReason.Dead, InvReason.NothingToHeal, InvReason.PillActive])
+    for (const r of [
+      InvReason.NotUsable,
+      InvReason.OnCooldown,
+      InvReason.Dead,
+      InvReason.NothingToHeal,
+      InvReason.PillActive,
+    ])
       expect(invReasonText(r)).not.toContain('refused');
   });
   it('through NetClient: sendBagUse / sendBagQuickUse send a decodable Use command, and nothing for an unusable slot', async () => {
@@ -180,7 +213,12 @@ describe('using items (D90)', () => {
     expect(net.sendBagUse(0)).toBe(false); // craft material
     expect(sock.sent.length).toBe(before);
     expect(net.sendBagUse(3)).toBe(true);
-    expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({ type: 'inv_cmd', op: InvOp.Use, from: 3, to: 0 });
+    expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({
+      type: 'inv_cmd',
+      op: InvOp.Use,
+      from: 3,
+      to: 0,
+    });
     expect(net.sendBagQuickUse('heal_pill')).toBe(true);
     expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({ op: InvOp.Use, from: 3 });
     expect(net.sendBagQuickUse('nope')).toBe(false);
@@ -206,12 +244,21 @@ describe('NetClient bag wiring', () => {
     const cmd = decode(frame);
     expect(cmd).toMatchObject({ type: 'inv_cmd', op: InvOp.Move, from: 0, to: 3 });
     expect(net.bag.waitingCount).toBe(1);
-    sock.push({ type: 'inv_result', requestId: (cmd as { requestId: string }).requestId, op: InvOp.Move, reason: InvReason.Ok, count: 0 });
+    sock.push({
+      type: 'inv_result',
+      requestId: (cmd as { requestId: string }).requestId,
+      op: InvOp.Move,
+      reason: InvReason.Ok,
+      count: 0,
+    });
     expect(net.bag.waitingCount).toBe(0);
     expect(seen).toEqual(['state', `result:${InvReason.Ok}`]);
     // claim
     expect(net.sendBagClaim()).toBe(true);
-    expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({ type: 'inv_cmd', op: InvOp.ClaimPending });
+    expect(decode(sock.sent[sock.sent.length - 1] as Uint8Array)).toMatchObject({
+      type: 'inv_cmd',
+      op: InvOp.ClaimPending,
+    });
   });
 
   it('replacing net.events (as attachCombat does) does not drop the inventory hooks', async () => {

@@ -17,18 +17,17 @@ type Direction = shared.Direction;
 /** Playable semi-chibi classes: URL `?class=<id>` and number keys 1-6 (order below). */
 export interface ChibiClass {
   readonly id: string;
-  readonly label: string;
   /** Source export folder (viewer / tools) and file stem (`<stem>_<DIR>_ske|tex`, armature `<stem>_<DIR>`). Runtime bundles are `chibi-<id>-<dir>` (D71). */
   readonly folder: string;
   readonly stem: string;
 }
 export const CHIBI_CLASSES: readonly ChibiClass[] = [
-  { id: 'the-tu', label: 'The tu', folder: 'dragonbones/the-tu-chibi-v1', stem: 'thetuchibi' },
-  { id: 'phap-tu', label: 'Phap tu', folder: 'dragonbones/phap-tu-chibi-v1', stem: 'phaptuchibi' },
-  { id: 'dan-phu-tu', label: 'Dan Phu tu', folder: 'dragonbones/dan-phu-tu-chibi-v1', stem: 'danphuchibi' },
-  { id: 'dao-tu', label: 'Dao tu', folder: 'dragonbones/dao-tu-chibi-v1', stem: 'daotuchibi' },
-  { id: 'kiem-tu', label: 'Kiem tu', folder: 'dragonbones/kiem-tu-chibi-v1', stem: 'kiemtuchibi' },
-  { id: 'thuong-tu', label: 'Thuong tu', folder: 'dragonbones/thuong-tu-chibi-v1', stem: 'thuongtuchibi' },
+  { id: 'the-tu', folder: 'dragonbones/the-tu-chibi-v1', stem: 'thetuchibi' },
+  { id: 'phap-tu', folder: 'dragonbones/phap-tu-chibi-v1', stem: 'phaptuchibi' },
+  { id: 'dan-phu-tu', folder: 'dragonbones/dan-phu-tu-chibi-v1', stem: 'danphuchibi' },
+  { id: 'dao-tu', folder: 'dragonbones/dao-tu-chibi-v1', stem: 'daotuchibi' },
+  { id: 'kiem-tu', folder: 'dragonbones/kiem-tu-chibi-v1', stem: 'kiemtuchibi' },
+  { id: 'thuong-tu', folder: 'dragonbones/thuong-tu-chibi-v1', stem: 'thuongtuchibi' },
 ];
 /** The five authored directions; W/SW/NW are always the mirror of E/SE/NE (D14). */
 const AUTHORED: readonly Direction[] = ['E', 'SE', 'S', 'NE', 'N'];

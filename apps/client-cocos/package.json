@@ -25,13 +25,18 @@
     "trade:online": "node scripts/trade-online-smoke.mjs",
     "sect:online": "node scripts/sect-online-smoke.mjs",
     "friends:online": "node scripts/friends-online-smoke.mjs",
+    "craft:online": "node scripts/craft-online-smoke.mjs",
     "touch:aim": "node scripts/touch-aim-smoke.mjs",
     "major:vfx": "node scripts/major-vfx-smoke.mjs",
     "bag:smoke": "node scripts/bag-smoke.mjs",
     "progression:online": "node scripts/progression-online-smoke.mjs",
     "class:online": "node scripts/class-online-smoke.mjs",
     "chat:online": "node scripts/chat-online-smoke.mjs",
-    "party:online": "node scripts/party-online-smoke.mjs"
+    "glyphs": "node scripts/glyph-smoke.mjs",
+    "party:online": "node scripts/party-online-smoke.mjs",
+    "tutorial:online": "node scripts/tutorial-online-smoke.mjs",
+    "sect:screens": "node scripts/sect-screens.mjs",
+    "crash:smoke": "node scripts/crash-smoke.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.21.5",

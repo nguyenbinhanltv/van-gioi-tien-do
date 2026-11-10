@@ -32,6 +32,21 @@ const FAUCET: Record<DropSource, AccountKind> = {
   boss: 'SYSTEM_FAUCET_DROP_BOSS',
 };
 
+/** One crafting exchange (D108): destroy materials, pay the furnace fee, add the product, all or nothing. */
+export interface CraftExchange {
+  /** idempotency key, unique per craft (`character:request:index`): the same key replays and applies nothing again */
+  key: string;
+  /** the material stack (`craft_material`) and how many units to destroy now */
+  materialDefId: number;
+  consume: number;
+  /** furnace fee in Linh thạch hạ (a sink: the stones are destroyed) */
+  fee: bigint;
+  /** the product, or null (a failed craft) */
+  produce: ItemGrant | null;
+}
+export type CraftExchangeResult =
+  { ok: true; replayed: boolean } | { ok: false; reason: 'NOT_ENOUGH_MATERIALS' | 'NOT_ENOUGH_STONES' | 'NO_SPACE' };
+
 export type Placement = 'bag' | 'pending' | 'lost';
 export interface GrantedItem {
   defId: number;
@@ -98,6 +113,7 @@ export class InventoryService {
   private readonly owners = new Map<string, OwnerState>();
   private readonly listeners: ((owner: string) => void)[] = [];
   private readonly grants = new Map<string, GrantResult>();
+  private readonly crafts = new Map<string, CraftExchangeResult>();
   private readonly bagSlots: number;
   private readonly pendingMax: number;
 
@@ -425,6 +441,68 @@ export class InventoryService {
     return result;
   }
 
+  /**
+   * Pay a quest reward (D107): Linh thạch hạ phẩm from the `SYSTEM_FAUCET_QUEST` account in ONE balanced ledger transaction, items into
+   * the bag (else the pending queue, else lost and counted like loot). `key` identifies the reward (`quest:<char>:<quest>:<epoch>`): the
+   * same key for the same owner is a replay and applies nothing again (process lifetime, see `Ledger`; the quest service additionally
+   * records the claim BEFORE paying, so a restart cannot pay twice either).
+   */
+  grantQuestReward(
+    owner: string,
+    reward: { stones: bigint; items: readonly { defId: number; quality: number; qty: number }[] },
+    key: string,
+  ): GrantResult {
+    const gk = `${owner}|${key}`;
+    const seen = this.grants.get(gk);
+    if (seen) return { ...seen, replayed: true };
+    const result = this.mutate(owner, (st) => {
+      const stones: GrantResult['stones'] = [];
+      if (reward.stones > 0n) {
+        const cur = STONE_CURRENCY['stone_ha']!;
+        this.ledger.post({
+          reason: 'QUEST',
+          idempotencyKey: `quest:${gk}`,
+          entries: [
+            { account: { kind: 'SYSTEM_FAUCET_QUEST', ownerId: null, currency: cur }, delta: -reward.stones },
+            { account: { kind: 'PLAYER_WALLET', ownerId: owner, currency: cur }, delta: reward.stones },
+          ],
+        });
+        stones.push({ currency: cur, amount: reward.stones });
+      }
+      const items: GrantedItem[] = [];
+      for (const g of reward.items) {
+        if (g.qty < 1) continue;
+        const grant: ItemGrant = { defId: g.defId, quality: g.quality, qty: g.qty };
+        items.push({ ...grant, where: st.bag.add(grant).ok ? 'bag' : this.park(st, grant) });
+      }
+      const r: GrantResult = { replayed: false, stones, items };
+      this.grants.set(gk, r);
+      if (this.grants.size > INVENTORY_CONFIG.GRANT_KEYS_KEPT)
+        this.grants.delete(this.grants.keys().next().value as string);
+      return r;
+    });
+    this.notify(owner);
+    return result;
+  }
+
+  /**
+   * Take `qty` of a stackable item (any quality, lowest first) out of the owner's bag; all-or-nothing, false when there is not enough.
+   * Used by quest turn-ins (D107): `collect` items are consumed, so the same items cannot complete a quest twice or on a second account.
+   */
+  takeStackable(owner: string, defId: number, qty: number): boolean {
+    const done = this.mutate(owner, (st) => {
+      if (st.bag.count(defId) < qty) return false;
+      let left = qty;
+      for (let q = 0; q <= 5 && left > 0; q++) {
+        const have = Math.min(left, st.bag.count(defId, q));
+        if (have > 0 && st.bag.removeStack(defId, q, have).ok) left -= have;
+      }
+      return left === 0;
+    });
+    if (done) this.notify(owner);
+    return done;
+  }
+
   private park(st: OwnerState, g: ItemGrant): Placement {
     const cap = INVENTORY_CONFIG.PENDING_QTY_MAX;
     const same = st.pending.find((p) => p.defId === g.defId && p.quality === g.quality);
@@ -442,6 +520,82 @@ export class InventoryService {
     this.lostItems += g.qty - take;
     st.pending.push({ defId: g.defId, quality: g.quality, qty: take });
     return 'pending';
+  }
+
+  // ------------------------------------------------------------------ crafting (D108)
+  /** Remove `qty` units of a stackable across all its quality stacks (lowest quality first). The caller checked the count. */
+  private takeMaterial(bag: Bag, defId: number, qty: number): void {
+    let left = qty;
+    for (let q = 0; q <= 5 && left > 0; q++) {
+      const have = bag.count(defId, q);
+      if (have === 0) continue;
+      const take = Math.min(have, left);
+      bag.removeStack(defId, q, take);
+      left -= take;
+    }
+  }
+  /**
+   * Check a craft without changing anything: enough material, enough stones for the fee, room for the product once the materials are gone.
+   * Used before the roll (so a craft that cannot complete is refused up front) and again inside `craftExchange`.
+   */
+  canCraft(
+    owner: string,
+    materialDefId: number,
+    materials: number,
+    fee: bigint,
+    produce: ItemGrant | null,
+  ): CraftExchangeResult {
+    const bag = this.bagOf(owner);
+    if (bag.count(materialDefId) < materials) return { ok: false, reason: 'NOT_ENOUGH_MATERIALS' };
+    if (this.wallet(owner, 'LT_HA') < fee) return { ok: false, reason: 'NOT_ENOUGH_STONES' };
+    if (produce) {
+      const sim = bag.clone();
+      this.takeMaterial(sim, materialDefId, materials);
+      if (!sim.canAdd([produce])) return { ok: false, reason: 'NO_SPACE' };
+    }
+    return { ok: true, replayed: false };
+  }
+  /**
+   * The atomic exchange of one craft: validated on a copy of the bag, the fee posted to the ledger (balanced: wallet -> `SYSTEM_SINK_CRAFT_FEE`),
+   * then applied to the real bag, which cannot fail any more. Either everything happens or nothing does. A key that was already applied replays
+   * its stored answer and changes nothing (docs/13 §6.2: no dupes).
+   */
+  craftExchange(owner: string, ex: CraftExchange): CraftExchangeResult {
+    const gk = `${owner}|${ex.key}`;
+    const seen = this.crafts.get(gk);
+    if (seen) return seen.ok ? { ok: true, replayed: true } : seen;
+    const result = this.mutate(owner, (st) => {
+      if (st.bag.count(ex.materialDefId) < ex.consume) return { ok: false, reason: 'NOT_ENOUGH_MATERIALS' } as const;
+      if (this.wallet(owner, 'LT_HA') < ex.fee) return { ok: false, reason: 'NOT_ENOUGH_STONES' } as const;
+      const sim = st.bag.clone();
+      this.takeMaterial(sim, ex.materialDefId, ex.consume);
+      if (ex.produce && !sim.add(ex.produce).ok) return { ok: false, reason: 'NO_SPACE' } as const;
+      if (ex.fee > 0n)
+        this.ledger.post({
+          reason: 'CRAFT',
+          idempotencyKey: `craft:${gk}`,
+          entries: [
+            { account: { kind: 'PLAYER_WALLET', ownerId: owner, currency: 'LT_HA' }, delta: -ex.fee },
+            { account: { kind: 'SYSTEM_SINK_CRAFT_FEE', ownerId: null, currency: 'LT_HA' }, delta: ex.fee },
+          ],
+        });
+      this.takeMaterial(st.bag, ex.materialDefId, ex.consume);
+      if (ex.produce) st.bag.add(ex.produce);
+      return { ok: true, replayed: false } as const;
+    });
+    if (result.ok) {
+      this.crafts.set(gk, result);
+      if (this.crafts.size > INVENTORY_CONFIG.GRANT_KEYS_KEPT)
+        this.crafts.delete(this.crafts.keys().next().value as string);
+      // the bag and the ledger fee become durable as ONE unit (write-ahead journal, D102): a crash can never leave the fee paid without the product
+      try {
+        this.durable?.commit(`craft:${gk}`);
+      } catch {
+        this.durableErrors++; // the craft stands in memory; the store keeps the documents dirty and retries them
+      }
+      this.notify(owner);
+    }
+    return result;
   }
 
   /** Move pending loot into the bag as far as it fits (whole entries, oldest first). Returns how many entries moved. */

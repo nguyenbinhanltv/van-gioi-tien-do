@@ -361,6 +361,50 @@ export class ProgressionService {
   recordOf(entityId: number): ProgressRecord | null {
     return this.sessions.get(entityId)?.rec ?? null;
   }
+  /** Alchemy mastery points (0..100) of a recipe key (D108); 0 for a character without any or before its profile loads. */
+  masteryOf(entityId: number, recipeKey: string): number {
+    return this.sessions.get(entityId)?.rec?.craftMastery?.[recipeKey] ?? 0;
+  }
+  /** The next craft nonce of a character (never repeats, persisted): the only thing a craft roll is seeded from besides the server seed. Null when not loaded. */
+  takeCraftNonce(entityId: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const n = (s.rec.craftNonce ?? 0) + 1;
+    s.rec = { ...s.rec, craftNonce: n };
+    s.dirty = true;
+    void this.save(s);
+    return n;
+  }
+  /** Has this character already used `requestId` for a craft command (one of its last `craftRequests` ids)? */
+  seenCraftRequest(entityId: number, requestId: string): boolean {
+    return this.sessions.get(entityId)?.rec?.craftRequests?.includes(requestId) ?? false;
+  }
+  /** Remember a craft requestId (a ring of the last `keep`), persisted. */
+  rememberCraftRequest(entityId: number, requestId: string, keep: number): void {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return;
+    const ring = [...(s.rec.craftRequests ?? []).filter((x) => x !== requestId), requestId].slice(-keep);
+    s.rec = { ...s.rec, craftRequests: ring };
+    s.dirty = true;
+    void this.save(s);
+  }
+  /** All the character's mastery entries (recipe key -> points). */
+  masteryAll(entityId: number): Readonly<Record<string, number>> {
+    return this.sessions.get(entityId)?.rec?.craftMastery ?? {};
+  }
+  /** Add mastery points to a recipe (capped at `max`), saved like every progression change. Returns the new total, or null when not loaded. */
+  addMastery(entityId: number, recipeKey: string, points: number, max: number): number | null {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec) return null;
+    const cur = s.rec.craftMastery?.[recipeKey] ?? 0;
+    const next = Math.min(max, Math.max(0, cur + Math.trunc(points)));
+    if (next !== cur) {
+      s.rec = { ...s.rec, craftMastery: { ...s.rec.craftMastery, [recipeKey]: next } };
+      s.dirty = true;
+      void this.save(s);
+    }
+    return next;
+  }
 
   // ------------------------------------------------------------------ Nghiệp Lực / Đạo Tâm (D103)
   /** Nghiệp Lực K of a joined player (0 until the profile is loaded). */
@@ -426,6 +470,22 @@ export class ProgressionService {
     if (s.pill !== null) return 'active';
     s.pill = quality;
     return 'ok';
+  }
+  /**
+   * Add tu vi from a source other than meditation (a quest reward, D107). Capped at the stage requirement like meditation (never past Req:
+   * the surplus is dropped, the breakthrough still has to be earned). Returns the tu vi actually added, 0 when the profile is not loaded.
+   */
+  grantTuVi(entityId: number, amount: number, nowMs = 0): number {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec || !(amount > 0) || isMaxStage(s.rec)) return 0;
+    const req = tuViRequired(s.rec);
+    const exp = Math.min(req, s.rec.exp + amount);
+    const added = exp - s.rec.exp;
+    if (added <= 0) return 0;
+    s.rec = { ...s.rec, exp };
+    s.dirty = true;
+    this.queueState(s, nowMs);
+    return added;
   }
   /** Quality of the waiting breakthrough pill, or null (tests / diagnostics). */
   pendingPill(entityId: number): number | null {

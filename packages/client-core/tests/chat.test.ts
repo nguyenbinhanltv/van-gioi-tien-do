@@ -1,7 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { TileGrid } from '@vgtd/sim';
 import { CHAT_LIMITS, ChatChannel, ChatReason, decode, encode, type ChatLine, type Message } from '@vgtd/protocol';
-import { CHAT_REASON_TEXT, ChatLog, NetClient, parseChatInput, type NetDeps, type SocketLike } from '@vgtd/client-core';
+import {
+  CHAT_REASON_KEY,
+  ChatLog,
+  chatReasonText,
+  NetClient,
+  parseChatInput,
+  type NetDeps,
+  type SocketLike,
+} from '@vgtd/client-core';
 
 const send = (channel: number, text: string, target = '') => ({ kind: 'send', channel, target, text });
 
@@ -44,7 +52,7 @@ describe('parseChatInput', () => {
   });
   it('length is checked in bytes: 128 Vietnamese "đ" fit, 129 do not', () => {
     expect(parseChatInput('đ'.repeat(128)).kind).toBe('send');
-    expect(parseChatInput('đ'.repeat(129))).toEqual({ kind: 'error', message: CHAT_REASON_TEXT[ChatReason.TooLong] });
+    expect(parseChatInput('đ'.repeat(129))).toEqual({ kind: 'error', message: chatReasonText(ChatReason.TooLong) });
     expect(parseChatInput('a'.repeat(CHAT_LIMITS.MAX_TEXT_BYTES)).kind).toBe('send');
     expect(parseChatInput('a'.repeat(CHAT_LIMITS.MAX_TEXT_BYTES + 1)).kind).toBe('error');
   });
@@ -95,15 +103,15 @@ describe('ChatLog', () => {
     const l = log();
     expect(l.applyResult({ type: 'chat_result', clientMsgId: 1, reason: ChatReason.Ok })).toBeNull();
     const e = l.applyResult({ type: 'chat_result', clientMsgId: 2, reason: ChatReason.RateLimited })!;
-    expect(e).toMatchObject({ tone: 'error', text: CHAT_REASON_TEXT[ChatReason.RateLimited] });
+    expect(e).toMatchObject({ tone: 'error', text: chatReasonText(ChatReason.RateLimited) });
     expect(l.applyResult({ type: 'chat_result', clientMsgId: 3, reason: 200 })!.text).toBe('Tin bị từ chối (mã 200).');
   });
   it('every wire reason has a Vietnamese text', () => {
     for (const k of Object.keys(ChatReason)
       .filter((x) => /^\d+$/.test(x))
       .map(Number)) {
-      expect(k in CHAT_REASON_TEXT, `reason ${k}`).toBe(true);
-      if (k !== ChatReason.Ok) expect(CHAT_REASON_TEXT[k]!.length).toBeGreaterThan(5);
+      expect(k in CHAT_REASON_KEY, `reason ${k}`).toBe(true);
+      if (k !== ChatReason.Ok) expect(chatReasonText(k).length).toBeGreaterThan(5);
     }
   });
   it('client message ids count up and wrap at 16 bits', () => {

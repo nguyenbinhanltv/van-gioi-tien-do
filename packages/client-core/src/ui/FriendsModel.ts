@@ -7,26 +7,35 @@
  * input / party command, so the shortcuts need no extra server code and inherit their rules (rate limits, party rules).
  */
 import { FRIENDS } from '@vgtd/shared';
+import { t, type StringKey } from '../i18n/strings.js';
 import { FriendReason, type FriendEntry, type FriendResultMsg, type FriendStateMsg } from '@vgtd/protocol';
 
 /** re-exported so engine scripts (which only see client-core) can name the ops */
 export { FriendOp } from '@vgtd/protocol';
 
-/** Vietnamese text of every friend refusal (user-facing). */
-export const FRIEND_REASON_TEXT: Readonly<Record<number, string>> = {
-  [FriendReason.Ok]: '',
-  [FriendReason.RateLimited]: 'Bạn thao tác quá nhanh, hãy chờ giây lát.',
-  [FriendReason.NoSuchPlayer]: 'Không tìm thấy người chơi này.',
-  [FriendReason.Self]: 'Không thể tự chọn chính mình.',
-  [FriendReason.AlreadyFriends]: 'Hai bạn đã là bạn bè.',
-  [FriendReason.AlreadyRequested]: 'Bạn đã gửi lời mời kết bạn cho người này rồi.',
-  [FriendReason.FriendListFull]: `Danh sách bạn bè của bạn đã đầy (${FRIENDS.MAX_FRIENDS}).`,
-  [FriendReason.TargetListFull]: 'Người này không nhận thêm bạn bè hoặc lời mời lúc này.',
-  [FriendReason.TooManyRequests]: `Bạn đang có quá nhiều lời mời chưa được trả lời (${FRIENDS.MAX_OUTGOING}).`,
-  [FriendReason.NoRequest]: 'Không có lời mời kết bạn nào như vậy.',
-  [FriendReason.NotFriends]: 'Người này không phải bạn bè của bạn.',
-  [FriendReason.NotReady]: 'Chưa vào game, chưa thao tác được.',
+/** String key of every friend refusal (user-facing text: `friendReasonText`). */
+export const FRIEND_REASON_KEY: Readonly<Record<number, StringKey | null>> = {
+  [FriendReason.Ok]: null,
+  [FriendReason.RateLimited]: 'friends.reason.rate_limited',
+  [FriendReason.NoSuchPlayer]: 'friends.reason.no_such_player',
+  [FriendReason.Self]: 'friends.reason.self',
+  [FriendReason.AlreadyFriends]: 'friends.reason.already_friends',
+  [FriendReason.AlreadyRequested]: 'friends.reason.already_requested',
+  [FriendReason.FriendListFull]: 'friends.reason.list_full',
+  [FriendReason.TargetListFull]: 'friends.reason.target_list_full',
+  [FriendReason.TooManyRequests]: 'friends.reason.too_many_requests',
+  [FriendReason.NoRequest]: 'friends.reason.no_request',
+  [FriendReason.NotFriends]: 'friends.reason.not_friends',
+  [FriendReason.NotReady]: 'friends.reason.not_ready',
 };
+
+/** The player-facing text of a friend refusal: '' for Ok, the generic "refused (code n)" line for an unknown code. */
+export function friendReasonText(reason: number): string {
+  const key = FRIEND_REASON_KEY[reason];
+  if (key === null) return '';
+  if (key === undefined) return t('friends.reason.unknown', { code: reason });
+  return t(key, { max: reason === FriendReason.TooManyRequests ? FRIENDS.MAX_OUTGOING : FRIENDS.MAX_FRIENDS });
+}
 
 export interface FriendView extends FriendEntry {
   /** shortcuts only make sense for someone who is online (a whisper to an offline player is refused by the server) */
@@ -85,21 +94,21 @@ export class FriendsModel {
     this.out = [...m.outgoing];
     this.seen = true;
     this.version++;
-    if (!had) return this.inc.length ? `Bạn có ${this.inc.length} lời mời kết bạn. Gõ /friend accept để nhận.` : null;
+    if (!had) return this.inc.length ? t('friends.event.pending_requests', { n: this.inc.length }) : null;
     const added = this.list.filter((f) => !before.has(f.name.toLowerCase())).map((f) => f.name);
-    if (added.length) return `Bạn và ${added.join(', ')} đã là bạn bè.`;
+    if (added.length) return t('friends.event.now_friends', { names: added.join(', ') });
     const now = new Set(this.list.map((f) => f.name.toLowerCase()));
     const gone = [...before].filter((n) => !now.has(n));
-    if (gone.length) return `${gone.join(', ')} không còn trong danh sách bạn bè.`;
+    if (gone.length) return t('friends.event.removed', { names: gone.join(', ') });
     const newInc = this.inc.filter((n) => !beforeInc.has(n.toLowerCase()));
-    if (newInc.length) return `${newInc.join(', ')} muốn kết bạn với bạn. Gõ /friend accept ${newInc[0]} để nhận.`;
+    if (newInc.length) return t('friends.event.request_from', { names: newInc.join(', '), first: newInc[0]! });
     return null;
   }
 
   /** The answer to a command: the line to show when refused, null when done. */
   applyResult(m: FriendResultMsg): string | null {
     if (m.reason === FriendReason.Ok) return null;
-    return FRIEND_REASON_TEXT[m.reason] ?? `Thao tác bị từ chối (mã ${m.reason}).`;
+    return friendReasonText(m.reason);
   }
 
   /** What to put in the chat input for "Nhắn riêng": the existing whisper command. */
@@ -113,12 +122,14 @@ export class FriendsModel {
 
   /** The list as plain lines (for `/friends` in the chat log). */
   summaryLines(): string[] {
-    if (!this.seen) return ['Danh sách bạn bè chưa tải xong.'];
-    const lines = [`Bạn bè (${this.count}/${FRIENDS.MAX_FRIENDS}, ${this.onlineCount} đang online):`];
+    if (!this.seen) return [t('friends.summary.not_loaded')];
+    const lines = [
+      t('friends.summary.header', { count: this.count, max: FRIENDS.MAX_FRIENDS, online: this.onlineCount }),
+    ];
     for (const f of this.friends()) lines.push(`  ${f.online ? '●' : '○'} ${f.name}`);
-    if (this.count === 0) lines.push('  (chưa có bạn bè: /friend add tên)');
-    if (this.inc.length) lines.push(`Lời mời nhận được: ${this.inc.join(', ')} (/friend accept [tên] · /friend decline [tên])`);
-    if (this.out.length) lines.push(`Lời mời đã gửi: ${this.out.join(', ')} (/friend remove tên để thu hồi)`);
+    if (this.count === 0) lines.push(t('friends.summary.empty'));
+    if (this.inc.length) lines.push(t('friends.summary.incoming', { names: this.inc.join(', ') }));
+    if (this.out.length) lines.push(t('friends.summary.outgoing', { names: this.out.join(', ') }));
     return lines;
   }
 }

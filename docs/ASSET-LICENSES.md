@@ -1,5 +1,47 @@
 # Hồ sơ nguồn gốc và giấy phép asset
 
+## GEMINI-VFX — hiệu ứng kỹ năng 6 lớp (PART 3 nhóm Q) do chủ dự án tự tạo bằng Google Gemini (2026-11-10)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-10, prompts per the orchestrator prompt pack part 3 (nhóm Q); chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. Mỗi lớp một ảnh 2752×1536, nền ĐEN, 3 khung cạnh nhau (đạn bay / nổ khi trúng / vòng mặt đất), dấu ✦ Gemini ở góc dưới-phải. Sao nguyên byte vào `assets-src/gemini/vfx/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba.
+
+**Xử lý (tái lập được, `npm run gen:gemini -w @vgtd/procgen`):** xoá ✦ (cùng bộ dò với particle), khoá độ sáng -> alpha (giữ nguyên màu), cắt 3 khung ở cột ít alpha nhất gần 1/3 và 2/3, bỏ mảnh tranh của khung bên cạnh lọt qua đường cắt (chỉ giữ cụm lớn), cắt sát, co về cạnh dài 256 / 320 / 512 px @2x (@1x một nửa); đạn xoay cho đầu hướng +x. Đóng chung trang atlas hạt (`atl_ptcl_*`) với tên `vfx_<lớp>_<proj|burst|ring>`; bảng preset `SkillVfxPresets.ts` (`stillsPreset`).
+
+| Tệp nguồn (nguyên byte)             | SHA-256 (12 ký tự đầu) |
+| ----------------------------------- | ---------------------- |
+| `assets-src/gemini/vfx/kiem.png`    | `28c36844e920`         |
+| `assets-src/gemini/vfx/phap.png`    | `811b795d95a2`         |
+| `assets-src/gemini/vfx/the.png`     | `65de666d5193`         |
+| `assets-src/gemini/vfx/dan_phu.png` | `07b0fe5e06fa`         |
+| `assets-src/gemini/vfx/thuong.png`  | `ba0b2bbe33d6`         |
+| `assets-src/gemini/vfx/dao.png`     | `d7744f04acfa`         |
+
+## GEMINI-PART3 — công trình tông môn, icon bí tịch / luyện đan và icon HUD / xã hội do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per orchestrator prompt pack (nhóm N, O, P). Ảnh là owner-provided Gemini exports (nằm ngoài repo ở thư mục nhập của chủ dự án), sao nguyên byte vào `assets-src/gemini/{sect,items2,ui2}/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba. Chủ dự án không lưu prompt gốc từng ảnh (như các phần trước): chỉ còn pack prompt của orchestrator làm đặc tả. Mọi ảnh 2048×2048 nền magenta, dấu ✦ Gemini ở góc dưới-phải.
+
+**Quyền sử dụng:** như GEMINI-PROPS-ICONS: output do chủ dự án tạo cho dự án này, điều khoản Google Gemini áp dụng cho tài khoản của chủ dự án; chưa có kiểm tra pháp lý riêng cho phát hành thương mại (xem `docs/OPEN-ITEMS.md`, mục "Asset Gemini").
+
+**Dùng trong game (tái lập được bằng `npm run gen:gemini -w @vgtd/procgen`, mã ở `tools/procgen/src/gemini/`):**
+
+- `sect/` (9 ảnh, nhóm N): công trình lớn dạng isometric của Sơn Môn: cổng, đại điện, Tàng Kinh Các, đan lô, lò rèn, mộc nhân, bảng Cống hiến, đèn đá, cờ phái. Xoá ✦, tách nền, cắt sát, pivot ở chân, vào atlas prop (`atl_prop_*`, **một trang**) ở dạng **@1x cho cả hai tầng** (trang @2x đã đầy 93% nên dùng pixel @1x vẽ 1:1, cờ `x1only` trong `manifest.json`; không thêm trang texture thứ hai vì sẽ làm vỡ batch L3 ngay cạnh điểm xuất phát). Đặt cố định theo `SECT_BUILDINGS` của `@vgtd/shared` (cạnh các NPC `npc_*`), server chặn đúng các ô đó trên lưới.
+- `items2/manuals.png` (nhóm O): lưới 3×3, 3 bậc × 3 dạng (sách, cuộn, bia) → icon `manual_t<bậc>_<dạng>`, bậc theo cấp bí tịch thư viện tông môn (D98). `items2/alchemy.png`: lưới 3×3 nền ô tối hơn (khóa thêm màu nền `extraBg`), dấu ✦ nằm TRÊN ô cuối (gỡ pha trộn `unmixStar`) → `cong_hien_token`, `herb_*` (4), `pill_*` (4); ánh xạ vào vật phẩm theo id (`ITEM_ICON_ALIASES`, tạm); icon chưa có vật phẩm vẫn được đăng ký. Vào atlas icon `atl_gicon_*`.
+- `ui2/hud_icons.png` (nhóm P): lưới 4×4 icon tròn có đĩa nền xanh đen: bạn bè, tổ đội, kênh chat, tên vùng, nhiệm vụ, túi, bản đồ, cài đặt, đóng (`HUD_ICON_IDS`). Dấu ✦ chồng lên cạnh đĩa cuối: gỡ pha trộn + vẽ lại cạnh đĩa theo bán kính từ góc khác + mặt nạ đĩa tròn. Atlas `atl_hud_*` (48 / 96 px), `getHudIcon(id)` (Cocos) và ảnh `data:` cho các panel DOM (`DomIcons.ts`).
+
+| Tệp nguồn (nguyên byte)                              | Loại              | SHA-256 (12 ký tự đầu) |
+| ---------------------------------------------------- | ----------------- | ---------------------- |
+| `assets-src/gemini/sect/sect_alchemy_furnace.png`    | prop (PART 3, N)  | `195247e23ef3`         |
+| `assets-src/gemini/sect/sect_banner.png`             | prop (PART 3, N)  | `4a74a72681f9`         |
+| `assets-src/gemini/sect/sect_contribution_board.png` | prop (PART 3, N)  | `6d1e6cbaf7ee`         |
+| `assets-src/gemini/sect/sect_forge_anvil.png`        | prop (PART 3, N)  | `943f7cc2e0ad`         |
+| `assets-src/gemini/sect/sect_gate.png`               | prop (PART 3, N)  | `cbdacde0c762`         |
+| `assets-src/gemini/sect/sect_lantern_post.png`       | prop (PART 3, N)  | `612c9858b231`         |
+| `assets-src/gemini/sect/sect_main_hall.png`          | prop (PART 3, N)  | `fbe6cdb658cd`         |
+| `assets-src/gemini/sect/sect_scripture_pavilion.png` | prop (PART 3, N)  | `fadebc75737c`         |
+| `assets-src/gemini/sect/sect_training_dummy.png`     | prop (PART 3, N)  | `25f496ace4b4`         |
+| `assets-src/gemini/items2/alchemy.png`               | icon vật phẩm (O) | `0a9a0f00a8ed`         |
+| `assets-src/gemini/items2/manuals.png`               | icon vật phẩm (O) | `026797e55418`         |
+| `assets-src/gemini/ui2/hud_icons.png`                | icon HUD (P)      | `c6c769186ee2`         |
+
 ## GEMINI-MOB-PHASES — skin pha boss do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. 3 ảnh 2752×1536 nền magenta, dấu ✦ Gemini ở góc dưới-phải, quay mặt sang TRÁI (cùng hướng với concept gốc): `boss_ho_vuong_p2` (pha 2 của Độc Nha Hổ Vương), `boss_co_mang_p2`, `boss_co_mang_p3` (pha 2 và 3 của Độc Hỏa Cổ Mãng). Sao nguyên byte vào `assets-src/concepts/mobs_phase/` (Git LFS).

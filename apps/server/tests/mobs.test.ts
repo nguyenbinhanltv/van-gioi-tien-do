@@ -8,6 +8,7 @@ import {
   MOB_RESPAWN_MS,
   NETWORK,
   ZONE_SPAWN_TABLES,
+  elementOfWireId,
   mobDefByKey,
   mobRealm,
   mobStats,
@@ -232,6 +233,7 @@ describe('combatStats (seam for the combat step)', () => {
         element: info.def.elements[info.variant] ?? info.def.elements[0],
         dropSource: info.def.tier === 'normal' ? 'field' : info.def.tier,
         hpMax: info.maxHp,
+        tier: info.def.tier,
       });
       expect(cs.realm).toBeGreaterThanOrEqual(1);
     }
@@ -385,6 +387,20 @@ describe('AOI replicates mobs', () => {
     const idx = new Set(monsters.map((e) => e.index));
     const moved = c.msgs.some((m) => m.type === 'snapshot' && m.entities.some((e) => idx.has(e.index) && e.anim === 1));
     expect(moved).toBe(true);
+  });
+  it('every monster enter carries its own element on the wire: main or variant (D114), absent for an elementless mob (D120)', () => {
+    const { n, c } = nodeWithMobs();
+    for (let t = 0; t < 80; t++) n.tick();
+    const monsters = c.msgs.flatMap((m) => (m.type === 'aoi_enter' ? m.entities : [])).filter((e) => e.kind === 1);
+    expect(monsters.length).toBeGreaterThan(5);
+    let variants = 0;
+    for (const e of monsters) {
+      const info = n.mobs!.info(e.entityId)!;
+      const want = info.def.elements[info.variant] ?? info.def.elements[0] ?? null;
+      expect(elementOfWireId(e.element ?? 0)).toBe(want);
+      if (info.variant === 1) variants++;
+    }
+    expect(variants).toBeGreaterThan(0); // some packs of a two-element mob carry the second element
   });
   it('a mob that leaves the area (killed) is sent as aoi_leave, and re-enters when it respawns', () => {
     const { n, c } = nodeWithMobs(0.2);

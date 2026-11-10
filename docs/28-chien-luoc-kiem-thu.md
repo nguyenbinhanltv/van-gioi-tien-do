@@ -112,6 +112,8 @@ flowchart TB
 
 [Cập nhật D100: S5 soak và bot chơi thật (NetClient, gateway + World Node + kho tệp D92) đã có bằng `npm run soak -w @vgtd/server` (soak ngắn `--minutes`, soak dài `--hours` chạy tay, khói CI 20 bot × 60 giây trong `ci.yml`, chỉ chặn đúng đắn và tick p99 > 100 ms); ngưỡng, số đo đầu tiên (tick p99 ~100 ms trượt 40 ms trên máy dev chung, băng thông / thực thể / heap đạt) và việc mở: [docs/35](35-p5-load-test.md).]
 
+[Cập nhật D106: cast được xét theo lúc đến server (`CastInput.ageMs`), kho tệp D92 ghi nền; `soak` có khối `tick profile`; xem [docs/35 §5](35-p5-load-test.md).]
+
 Kết quả loadbot quyết định **kích hoạt lộ trình tách service** ([20 §8](20-kien-truc-tong-the.md)) và là mục "đo AOI với 100 vs 100" của [OPEN-ITEMS §1 #6](OPEN-ITEMS.md). Chạy cục bộ hoặc theo lịch (workflow `schedule`), **không** nằm trong CI mỗi PR.
 
 ## 7. Kiểm thử hiệu năng client trên ma trận thiết bị

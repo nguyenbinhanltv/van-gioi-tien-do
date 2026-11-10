@@ -75,7 +75,53 @@ function liquidColor(patches, name, u, v, frame, frames) {
   const a = sampleWrap(list[0], u + t, v + t);
   const b = sampleWrap(list[list.length > 1 ? 1 : 0], u + 0.37 - t, v + 0.61 + t);
   const k = 0.28;
-  return [a[0] * (1 - k) + b[0] * k, a[1] * (1 - k) + b[1] * k, a[2] * (1 - k) + b[2] * k];
+  const c = [a[0] * (1 - k) + b[0] * k, a[1] * (1 - k) + b[1] * k, a[2] * (1 - k) + b[2] * k];
+  return name === 'water' ? gradeWater(list[0], c) : c;
+}
+
+// Art bible palette (docs/ASSET-LICENSES.md swatches): deep blue #294451, mountain blue #5E8798, jade #78B79A.
+const WATER_RAMP = [
+  [0, [41, 68, 81]],
+  [0.55, [94, 135, 152]],
+  [1, [120, 183, 154]],
+];
+/** Share of the owner's painted water kept next to the palette-mapped colour (1 = untouched, pale cyan). */
+const WATER_KEEP = 0.3;
+const lumaOf = (c) => 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+const lumaStats = new WeakMap();
+function statsOf(patch) {
+  let s = lumaStats.get(patch);
+  if (!s) {
+    const d = patch.data;
+    let sum = 0, sum2 = 0, n = 0;
+    for (let i = 0; i < d.length; i += 4) {
+      const l = lumaOf([d[i], d[i + 1], d[i + 2]]);
+      sum += l;
+      sum2 += l * l;
+      n++;
+    }
+    const mean = sum / n;
+    s = { mean, std: Math.sqrt(Math.max(1e-6, sum2 / n - mean * mean)) };
+    lumaStats.set(patch, s);
+  }
+  return s;
+}
+/**
+ * The painted water is a pale cyan that reads washed out next to the saturated land. Keep ITS ripples (luma relative to the
+ * patch mean) but map them onto the art-bible deep-blue -> mountain-blue -> jade ramp, blended back with a little of the original.
+ */
+function gradeWater(patch, c) {
+  const { mean, std } = statsOf(patch);
+  const x = Math.min(1, Math.max(0, 0.5 + (lumaOf(c) - mean) / (4 * std)));
+  let lo = WATER_RAMP[0], hi = WATER_RAMP[WATER_RAMP.length - 1];
+  for (let i = 1; i < WATER_RAMP.length; i++)
+    if (x <= WATER_RAMP[i][0]) {
+      lo = WATER_RAMP[i - 1];
+      hi = WATER_RAMP[i];
+      break;
+    }
+  const f = (x - lo[0]) / (hi[0] - lo[0] || 1);
+  return [0, 1, 2].map((k) => (lo[1][k] + (hi[1][k] - lo[1][k]) * f) * (1 - WATER_KEEP) + c[k] * WATER_KEEP);
 }
 
 module.exports = { MATERIALS, VARIANTS, sampleWrap, loadGround, landColor, liquidColor, smooth };

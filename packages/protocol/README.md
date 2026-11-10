@@ -36,3 +36,7 @@ additive, so they do not bump `PROTOCOL_VERSION` (2 since D74 for an unrelated f
 ## Party messages (D93)
 
 `party_cmd` (44), `party_result` (45), `party_invite` (46), `party_state` (47) and `party_vitals` (48) in `src/party.ts`: same cold envelope and strict canonical decode as chat. At most `PARTY.MAX_SIZE` members per roster, names capped at 24 bytes, the leader of a non-empty roster must be one of its members; every `party_cmd` is answered by exactly one `party_result`. The party chat channel is `ChatChannel.Party` (4) of the chat messages. `PROTOCOL_VERSION` is unchanged (additive ids; 49 and 69+ are left to other workers).
+
+## Tutorial messages (D105)
+
+`tutorial_state` (49: finished-step bitmask, kills, flags) and `tutorial_skip` (50: no body) in `src/tutorial.ts`: same cold envelope and strict canonical decode as the other cold messages. Unknown step bits and flags are rejected. The server decides every step; the client only ever sends the skip. `PROTOCOL_VERSION` is unchanged (additive ids).

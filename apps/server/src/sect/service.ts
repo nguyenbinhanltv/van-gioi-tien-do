@@ -278,6 +278,32 @@ export class SectService {
     }
   }
 
+  /**
+   * Cống hiến paid by a quest (D107): a member only, one balanced ledger transaction from the same faucet as kill rewards, idempotent by `key`
+   * (a repeated key replays). False when it was not paid (not a member, bad amount, ledger refusal): the quest service counts that.
+   */
+  grantContribution(accountId: string, amount: number, key: string): boolean {
+    if (!this.members.has(accountId) || !Number.isInteger(amount) || amount <= 0) return false;
+    try {
+      const r = this.ledger.post({
+        reason: 'SECT_REWARD',
+        idempotencyKey: `sect:quest:${accountId}|${key}`,
+        entries: [
+          { account: faucet, delta: -BigInt(amount) },
+          { account: wallet(accountId), delta: BigInt(amount) },
+        ],
+      });
+      if (!r.replayed) {
+        this.metrics.earned += amount;
+        this.dirty.add(accountId);
+      }
+      return true;
+    } catch {
+      this.metrics.rewardErrors++;
+      return false;
+    }
+  }
+
   // ------------------------------------------------------------------ output
   /** Called every world tick: sends each changed account's `sect_state` to its live sessions (one message per session per tick). */
   tick(): void {

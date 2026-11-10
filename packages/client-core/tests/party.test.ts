@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ChatChannel, PartyOp, PartyReason } from '@vgtd/protocol';
-import { ChatLog, PARTY_REASON_TEXT, PartyModel, parseChatInput } from '../src/index.js';
+import { ChatLog, partyReasonText, PartyModel, parseChatInput } from '../src/index.js';
 
 describe('party commands in the chat input', () => {
   it('/p talks on the Party channel', () => {
@@ -134,11 +134,11 @@ describe('PartyModel', () => {
     expect(m.version).toBe(v0 + 2);
     expect(m.applyResult({ type: 'party_result', clientMsgId: 1, reason: PartyReason.Ok })).toBeNull();
     expect(m.applyResult({ type: 'party_result', clientMsgId: 1, reason: PartyReason.NotLeader })).toBe(
-      PARTY_REASON_TEXT[PartyReason.NotLeader],
+      partyReasonText(PartyReason.NotLeader),
     );
     expect(m.applyResult({ type: 'party_result', clientMsgId: 1, reason: 200 })).toContain('200');
     for (const r of Object.values(PartyReason).filter((x): x is number => typeof x === 'number')) {
-      if (r !== PartyReason.Ok) expect(PARTY_REASON_TEXT[r], `reason ${r}`).toBeTruthy();
+      if (r !== PartyReason.Ok) expect(partyReasonText(r), `reason ${r}`).toBeTruthy();
     }
   });
 });

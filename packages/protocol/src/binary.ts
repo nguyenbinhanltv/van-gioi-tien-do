@@ -519,7 +519,7 @@ function encodeEnter(w: ByteWriter, m: AoiEnterMsg): void {
     w.u16(e.qi);
     w.u16(e.qj);
     w.u8(e.anim);
-    w.u8(e.dir);
+    w.u8((e.dir & 7) | ((e.element ?? 0) << 4)); // D120: direction 0-7 in the low bits, the monster element (0-5) in the high nibble
     w.u8(e.hpPct);
     w.u32(e.maxHp);
   }
@@ -621,7 +621,7 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
       if (n > LIMITS.MAX_ENTER_PER_MSG) throw new ProtocolError('range', 'too many entities');
       const entities: EnterEntity[] = [];
       for (let k = 0; k < n; k++) {
-        entities.push({
+        const ent: EnterEntity = {
           index: r.u16(),
           entityId: r.u32(),
           kind: r.u8(),
@@ -629,10 +629,17 @@ export function decode(buf: Uint8Array, opts: CodecOptions = {}): Message {
           qi: r.u16(),
           qj: r.u16(),
           anim: r.u8(),
-          dir: r.u8(),
-          hpPct: r.u8(),
-          maxHp: r.u32(),
-        });
+          dir: 0,
+          hpPct: 0,
+          maxHp: 0,
+        };
+        const db = r.u8();
+        ent.dir = db & 7;
+        if (db >> 4 > 5) throw new ProtocolError('range', 'enter.element');
+        if (db >> 4 > 0) ent.element = db >> 4; // absent = none: entries without an element decode exactly as before D120
+        ent.hpPct = r.u8();
+        ent.maxHp = r.u32();
+        entities.push(ent);
       }
       msg = { type, entities };
       break;

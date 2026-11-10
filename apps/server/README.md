@@ -53,6 +53,14 @@ smaller = denser) `--input-hz HZ` (20) `--speedhackers N` `--speed-factor X` (3;
 The server runs in the main thread; all bots run in one worker thread (own event loop) over loopback. Bandwidth is
 counted at the WebSocket frame layer (payload + 2/4/10 B header), **not** TCP/IP/TLS.
 
+### Soak (P5)
+
+`npm run soak -w @vgtd/server -- --preset smoke` runs 100 gameplay bots for 25 minutes on the real stack (file store, backups every
+5 minutes in a separate process) and exits non-zero when a threshold is crossed: heap / RSS growth slope, tick p99 over budget,
+`journal.json` not compacting, a failed / slow / unverifiable backup. `--preset full` is the 24 h run for a dedicated machine
+(never in CI). Each sample records tick p50 / p99, event-loop lag, RSS / heap, file-store sizes and backup duration into
+`samples.csv` / `samples.jsonl` / `summary.json` / `report.txt` under `--out`. Runbook: `docs/35-p5-load-test.md` section 6.
+
 ## Measured against the P2 exit criteria (docs/10 §12)
 
 Windows 11 dev box (shared with other agent sessions), Node 24, 100 honest bots, 20 Hz input, 30 s window after 3 s
@@ -77,3 +85,7 @@ teleport after ~5 s), honest players unaffected, and the speedhackers' observed 
 Caveats, also recorded in `docs/OPEN-ITEMS.md`: one earlier run on a busier machine showed a single 122 ms tick (p99 was
 still 31 ms), so p99 depends on host load; loopback means no real network latency/jitter; the Windows timer makes the
 measured tick _interval_ jitter (p50 ~47 ms, p99 ~63 ms) while the simulation time stays exactly 50 ms/tick.
+
+## Telemetry và dashboard KPI (D109)
+
+Server ghi sự kiện giả danh (không PII, `player_pid` = HMAC của account id) theo danh mục đóng `TELEMETRY_EVENTS` (`@vgtd/shared`), lưu cục bộ (log JSON-lines 90 ngày + `rollups.json`; với `STORE=file` nằm trong `<DATA_DIR>/telemetry/`, kèm `pid.key` mode 0600). Trang KPI: `http://127.0.0.1:<port>/dashboard` (JSON: `/dashboard/summary.json`): CCU, DAU, phễu FTUE, giữ chân D1 / D7 / D30, kinh tế từ sổ cái. Chỉ loopback được xem nếu không đặt `DASHBOARD_TOKEN`; có token thì gửi `Authorization: Bearer` (hoặc mở `/dashboard#token=...`). Xem thử với dữ liệu giả: `npm run dashboard:demo -w @vgtd/server` (thêm `-- --check` để mở bằng Chrome thật và kiểm trang).

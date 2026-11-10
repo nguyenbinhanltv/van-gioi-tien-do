@@ -55,6 +55,15 @@ export interface ProgressRecord {
    * hello. Absent on records written before D82: they are given a class by the next login (`resolveClass`).
    */
   readonly classId?: PathId;
+  /** alchemy mastery points 0..100 per recipe key (D108, docs/13 §4.1); absent = none yet. Persisted with the record (D92). */
+  readonly craftMastery?: Readonly<Record<string, number>>;
+  /**
+   * Server-side craft counter (D108): every craft roll is seeded from it, never from anything the client sends, so a client cannot replay or
+   * scan for a good roll. Persisted with the record; absent = 0.
+   */
+  readonly craftNonce?: number;
+  /** the most recent craft requestIds this character used (a short ring, oldest first): a reused id is refused, even after a relog or a restart */
+  readonly craftRequests?: readonly string[];
   /**
    * Đạo Tâm 0..100 (D103): changed only by the events the docs give a number for. Absent on records written before D103 = `DAO_TAM.START`.
    * The value that counts is `effectiveDaoTam(daoTam, karma)` (under the ceiling of the Nghiệp band), never this raw number.
