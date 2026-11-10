@@ -72,7 +72,7 @@ export function formatBalanceReport(d: BalanceData): string {
     `- **Chạy trên mã máy chủ thật**: \`WorldNode\` (lõi chiến đấu \`CombatSystem\`, \`MobManager\` + AI, đòn của quái và telegraph, hồi phục, luật cast của \`@vgtd/sim\`) trên bản đồ trống với **đúng một quái** của def được chọn (docs/10 §4) và người chơi ở **cùng cảnh giới / tầng** với quái (trận cân sức). Người chơi gửi khung \`skill_cast\` thật qua \`node.receive\`, mỗi tick một quyết định; thời gian là giờ sim (20 Hz), ngẫu nhiên là các luồng có seed: kết quả là hàm thuần của cấu hình, chạy lại ra đúng số này.`,
   );
   o.push(
-    `- **Người chơi kịch bản** (\`rotation.ts\`): chỉ dựa vào dữ liệu kỹ năng, không dựa id kỹ năng. Hồi khi ai đó dưới 65% HP, khiên khi sẵn sàng, còn lại chọn kỹ năng sát thương có (sát thương / giây thi triển) cao nhất trong số đang sẵn sàng; luôn đứng yên (không né telegraph, không di chuyển), uống đan hồi máu (18%, 3 viên, hồi chiêu 8 s) khi dưới 40% HP. Kỹ năng mà **mọi** hiệu ứng đều bị máy chủ bỏ qua thì không được dùng (mục 2).`,
+    `- **Người chơi kịch bản** (\`rotation.ts\`): chỉ dựa vào dữ liệu kỹ năng, không dựa id kỹ năng. Hồi khi ai đó dưới 65% HP, khiên khi sẵn sàng, kỹ năng tiện ích (khống chế, buff, debuff, đánh dấu, khiêu khích, dot) khi sẵn sàng và trong tầm (D116), còn lại chọn kỹ năng sát thương có (sát thương / giây thi triển) cao nhất trong số đang sẵn sàng; luôn đứng yên (không né telegraph, không di chuyển), uống đan hồi máu (18%, 3 viên, hồi chiêu 8 s) khi dưới 40% HP. Kỹ năng mà **mọi** hiệu ứng đều bị máy chủ bỏ qua thì không được dùng (mục 2).`,
   );
   o.push(
     `- **Dải cảnh giới**: Luyện Khí (quái thường ${BANDS[0]!.mobs.normal}, tinh anh ${BANDS[0]!.mobs.elite}), Trúc Cơ (${BANDS[1]!.mobs.normal}, ${BANDS[1]!.mobs.elite}), Kim Đan (${BANDS[2]!.mobs.normal}, ${BANDS[2]!.mobs.elite}, boss ${BANDS[2]!.mobs.boss}). Chỉ Kim Đan có boss trong docs/10. Mỗi ô chạy ${d.config.seeds.normal} / ${d.config.seeds.elite} / ${d.config.seeds.boss} hạt giống (quái thường / tinh anh / boss); hạt giống chỉ đổi cấp của quái trong cùng cảnh giới, và **mọi lớp gặp đúng các quái đó**. Số trong bảng là **trung vị** qua các hạt giống.`,
@@ -92,7 +92,7 @@ export function formatBalanceReport(d: BalanceData): string {
   o.push('## 2. Máy chủ mô phỏng được bao nhiêu bộ kỹ năng');
   o.push('');
   o.push(
-    '`resolveCast` chỉ xử lý hiệu ứng `damage`, `heal`, `shield`. Mọi hiệu ứng khác (dot, trạng thái khống chế, buff, đánh dấu, triệu hồi, dịch chuyển, khiêu khích ...) hiện **không có tác dụng** trên máy chủ. Bảng: số kỹ năng chủ động dùng được đầy đủ / một phần / tổng, và phần sát thương thiết kế (theo "đòn cơ bản tương đương") mà máy chủ tính được.',
+    'Từ D116 máy chủ mô phỏng **mọi loại hiệu ứng** của bộ kỹ năng MVP: `resolveCast` cho sát thương / hồi / khiên tức thời, hệ thống hiệu ứng cho dot, khống chế, buff, debuff, đánh dấu, thú triệu hồi, lướt / đẩy / kéo, khiêu khích, hồi MP, hồi sinh. Bảng: số kỹ năng chủ động dùng được đầy đủ / một phần / tổng, và phần sát thương thiết kế (theo "đòn cơ bản tương đương") mà máy chủ tính được. Còn thiếu ở tầng khác (không phải loại hiệu ứng): `move_speed_pct`, `invuln_ms` của lướt, `silence`, `tribulation_reduction`, `trait` của lớp, nhánh solo / team (xem OPEN-ITEMS D116).',
   );
   o.push('');
   o.push(
@@ -113,7 +113,7 @@ export function formatBalanceReport(d: BalanceData): string {
   );
   o.push('');
   o.push(
-    '**Phát hiện**: hồ sơ chiến đấu của máy chủ (`makeProfile`) lấy chỉ số cảnh giới thô (`roundedStatsAt`) và **không áp `stat_weights` của lớp** (docs/11: HP / MP / ATK / DEF khác nhau theo lớp): mọi lớp cùng cảnh giới có đúng cùng HP, MP, ATK, DEF. Bản sắc lớp trên máy chủ hôm nay chỉ đến từ kỹ năng.',
+    '**Chỉ số lớp** (D117): `makeProfile` áp `stat_weights` của lớp (docs/11) lên HP / MP / ATK / DEF / AGI, nên các lớp cùng cảnh giới có chỉ số khác nhau. Trước D117 mọi lớp cùng cảnh giới có đúng cùng chỉ số.',
   );
   o.push('');
 
@@ -212,7 +212,7 @@ export function formatBalanceReport(d: BalanceData): string {
     );
   o.push('');
   o.push(
-    '**Khống chế (uptime)**: máy chủ không áp khống chế lên quái (mục 2) nên không đo được trên mã thật. Cột "Khống chế cứng thiết kế" ở mục 2 là tiềm năng theo dữ liệu (tổng thời lượng / hồi chiêu của các hiệu ứng stun, freeze, knock-up, root), không phải kết quả chạy.',
+    '**Khống chế (uptime)**: từ D116 máy chủ áp khống chế lên quái (choáng / trói / chậm; boss miễn khống chế, chỉ bị ngắt đòn), nhưng harness chưa đo thời gian quái bị khống chế. Cột "Khống chế cứng thiết kế" ở mục 2 là tiềm năng theo dữ liệu (tổng thời lượng / hồi chiêu của các hiệu ứng stun, freeze, knock-up, root), không phải kết quả chạy.',
   );
   o.push('');
 
@@ -241,7 +241,7 @@ export function formatBalanceReport(d: BalanceData): string {
   o.push('## 7. Mô phỏng thiết kế (docs/11 §4.5) so với máy chủ');
   o.push('');
   o.push(
-    'Mô phỏng thiết kế (`skill_sim.ts`) chạy **đủ** bộ kỹ năng; cột máy chủ là DPS trung vị ở Kim Đan, quái thường, nhánh solo. Cả hai chuẩn hoá theo trung vị của 6 lớp: chênh lệch lớn nghĩa là phần bộ kỹ năng chưa cài làm đổi thứ hạng lớp.',
+    'Mô phỏng thiết kế (`skill_sim.ts`) chạy **đủ** bộ kỹ năng; cột máy chủ là DPS trung vị ở Kim Đan, quái thường, nhánh solo. Cả hai chuẩn hoá theo trung vị của 6 lớp: chênh lệch lớn nghĩa là hệ số / công thức của máy chủ cho thứ hạng khác mô phỏng thiết kế (còn lại: `move_speed_pct`, `invuln_ms`, `trait` của lớp, nhánh solo / team chưa có trên máy chủ; người chơi kịch bản không né, không di chuyển).',
   );
   o.push('');
   const srv = cell(solo, 'kim_dan', 'normal');
@@ -319,12 +319,10 @@ export function formatBalanceReport(d: BalanceData): string {
       );
   }
   const lowCov = d.kits.filter((k) => k.fullySupported < k.active);
-  o.push(
-    `| ${++n} | cả 6 | bộ kỹ năng chỉ cài một phần (${lowCov.map((k) => `${k.path} ${k.fullySupported}/${k.active}`).join(', ')}) | cài hiệu ứng còn thiếu trên máy chủ (dot, trạng thái khống chế, buff, đánh dấu, triệu hồi) **trước** khi chỉnh số: mọi so sánh trên bị lệch bởi phần chưa cài |`,
-  );
-  o.push(
-    `| ${++n} | cả 6 | \`stat_weights\` của lớp bị bỏ qua | quyết định: áp \`stat_weights\` vào \`makeProfile\` (docs/11 mong muốn) hay bỏ khỏi dữ liệu; rồi chạy lại báo cáo này |`,
-  );
+  if (lowCov.length > 0)
+    o.push(
+      `| ${++n} | ${lowCov.map((k) => k.path).join(', ')} | bộ kỹ năng chưa cài đủ (${lowCov.map((k) => `${k.path} ${k.fullySupported}/${k.active}`).join(', ')}) | cài hiệu ứng còn thiếu trên máy chủ **trước** khi chỉnh số: mọi so sánh trên bị lệch bởi phần chưa cài |`,
+    );
   o.push(
     `| ${++n} | cả 6 | nhánh solo / team không có trên máy chủ | cài nhánh (chỉ số \`dmg_taken_mult\`, \`threat_mult\`, \`team_dmg\` ... chưa có chỗ áp) để mục 3.4 và 5 phản ánh đúng thiết kế |`,
   );

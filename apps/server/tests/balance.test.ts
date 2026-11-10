@@ -135,14 +135,14 @@ describe('branches and kit coverage', () => {
     for (const p of PATHS) for (const m of unmodelledBranchMods(branchFor(p, 'solo'))) expect(m).toMatch(/=/);
   });
 
-  it('coverage: counts add up and the server does not simulate the whole kit of any class', () => {
+  it('coverage: counts add up and the server simulates the whole kit of every class (D116)', () => {
     for (const p of PATHS) {
       const c = kitCoverage(p);
       expect(c.fullySupported + c.partlySupported).toBeLessThanOrEqual(c.active);
       expect(c.damageShare).toBeGreaterThan(0);
       expect(c.damageShare).toBeLessThanOrEqual(1);
-      expect(c.fullySupported).toBeLessThan(c.active); // resolveCast ignores statuses / buffs / dots etc.
-      expect(Object.keys(c.unsupportedTypes).length).toBeGreaterThan(0);
+      expect(c.fullySupported).toBe(c.active); // D116: every effect type of the shipped data is handled
+      expect(Object.keys(c.unsupportedTypes)).toEqual([]);
     }
     expect(kitRows()).toHaveLength(6);
   });

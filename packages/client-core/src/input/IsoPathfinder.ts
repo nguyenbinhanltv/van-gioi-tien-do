@@ -21,18 +21,29 @@ export interface PathOptions {
 
 const SQRT2 = Math.SQRT2;
 const NEIGHBORS: ReadonlyArray<readonly [number, number, number]> = [
-  [1, 0, 1], [-1, 0, 1], [0, 1, 1], [0, -1, 1],
-  [1, 1, SQRT2], [1, -1, SQRT2], [-1, 1, SQRT2], [-1, -1, SQRT2],
+  [1, 0, 1],
+  [-1, 0, 1],
+  [0, 1, 1],
+  [0, -1, 1],
+  [1, 1, SQRT2],
+  [1, -1, SQRT2],
+  [-1, 1, SQRT2],
+  [-1, -1, SQRT2],
 ];
 
 /** Heap nhị phân theo f, lưu chỉ số nút. */
 class MinHeap {
   private items: number[] = [];
   constructor(private readonly f: Float64Array) {}
-  get size(): number { return this.items.length; }
-  clear(): void { this.items.length = 0; }
+  get size(): number {
+    return this.items.length;
+  }
+  clear(): void {
+    this.items.length = 0;
+  }
   push(n: number): void {
-    const a = this.items, f = this.f;
+    const a = this.items,
+      f = this.f;
     a.push(n);
     let k = a.length - 1;
     while (k > 0) {
@@ -43,14 +54,16 @@ class MinHeap {
     }
   }
   pop(): number {
-    const a = this.items, f = this.f;
+    const a = this.items,
+      f = this.f;
     const top = a[0];
     const last = a.pop()!;
     if (a.length > 0) {
       a[0] = last;
       let k = 0;
       for (;;) {
-        const l = 2 * k + 1, r = l + 1;
+        const l = 2 * k + 1,
+          r = l + 1;
         let m = k;
         if (l < a.length && f[a[l]] < f[a[m]]) m = l;
         if (r < a.length && f[a[r]] < f[a[m]]) m = r;
@@ -67,7 +80,7 @@ export class IsoPathfinder {
   private g: Float64Array;
   private f: Float64Array;
   private parent: Int32Array;
-  private stamp: Uint32Array;      // "thế hệ" của lần tìm: khỏi phải xóa mảng mỗi lần
+  private stamp: Uint32Array; // "thế hệ" của lần tìm: khỏi phải xóa mảng mỗi lần
   private closed: Uint32Array;
   private gen = 0;
   private heap: MinHeap;
@@ -90,13 +103,19 @@ export class IsoPathfinder {
   nearestWalkable(t: TilePos, radius = 6): TilePos | null {
     if (this.walk(t.i, t.j)) return t;
     for (let r = 1; r <= radius; r++) {
-      let best: TilePos | null = null, bestD = Infinity;
-      for (let dj = -r; dj <= r; dj++) for (let di = -r; di <= r; di++) {
-        if (Math.max(Math.abs(di), Math.abs(dj)) !== r) continue;
-        const i = t.i + di, j = t.j + dj;
-        const d = di * di + dj * dj;
-        if (d < bestD && this.walk(i, j)) { best = { i, j }; bestD = d; }
-      }
+      let best: TilePos | null = null,
+        bestD = Infinity;
+      for (let dj = -r; dj <= r; dj++)
+        for (let di = -r; di <= r; di++) {
+          if (Math.max(Math.abs(di), Math.abs(dj)) !== r) continue;
+          const i = t.i + di,
+            j = t.j + dj;
+          const d = di * di + dj * dj;
+          if (d < bestD && this.walk(i, j)) {
+            best = { i, j };
+            bestD = d;
+          }
+        }
       if (best) return best;
     }
     return null;
@@ -117,10 +136,12 @@ export class IsoPathfinder {
     this.gen = (this.gen + 1) >>> 0 || 1;
     const gen = this.gen;
     const h = (i: number, j: number) => {
-      const dx = Math.abs(i - e.i), dy = Math.abs(j - e.j);
+      const dx = Math.abs(i - e.i),
+        dy = Math.abs(j - e.j);
       return Math.max(dx, dy) + (SQRT2 - 1) * Math.min(dx, dy);
     };
-    const startIdx = s.j * W + s.i, goalIdx = e.j * W + e.i;
+    const startIdx = s.j * W + s.i,
+      goalIdx = e.j * W + e.i;
     this.heap.clear();
     this.g[startIdx] = 0;
     this.f[startIdx] = h(s.i, s.j);
@@ -136,9 +157,11 @@ export class IsoPathfinder {
       if (cur === goalIdx) return this.buildPath(goalIdx, smooth);
       if (++expanded > maxExpanded) return null;
 
-      const ci = cur % W, cj = (cur / W) | 0;
+      const ci = cur % W,
+        cj = (cur / W) | 0;
       for (const [di, dj, cost] of NEIGHBORS) {
-        const ni = ci + di, nj = cj + dj;
+        const ni = ci + di,
+          nj = cj + dj;
         if (!this.walk(ni, nj)) continue;
         if (di !== 0 && dj !== 0 && (!this.walk(ci + di, cj) || !this.walk(ci, cj + dj))) continue;
         const ni2 = nj * W + ni;
@@ -185,18 +208,32 @@ export class IsoPathfinder {
    * mọi ô mà đoạn thẳng đi qua phải đi được; đi qua đúng góc thì cả hai ô kề phải đi được.
    */
   lineOfSight(a: TilePos, b: TilePos): boolean {
-    let i = a.i, j = a.j;
-    const di = b.i - a.i, dj = b.j - a.j;
-    const si = Math.sign(di), sj = Math.sign(dj);
-    const adi = Math.abs(di), adj = Math.abs(dj);
-    let tMaxI = adi === 0 ? Infinity : 0.5 / adi, tMaxJ = adj === 0 ? Infinity : 0.5 / adj;
-    const tDI = adi === 0 ? Infinity : 1 / adi, tDJ = adj === 0 ? Infinity : 1 / adj;
+    let i = a.i,
+      j = a.j;
+    const di = b.i - a.i,
+      dj = b.j - a.j;
+    const si = Math.sign(di),
+      sj = Math.sign(dj);
+    const adi = Math.abs(di),
+      adj = Math.abs(dj);
+    let tMaxI = adi === 0 ? Infinity : 0.5 / adi,
+      tMaxJ = adj === 0 ? Infinity : 0.5 / adj;
+    const tDI = adi === 0 ? Infinity : 1 / adi,
+      tDJ = adj === 0 ? Infinity : 1 / adj;
     while (i !== b.i || j !== b.j) {
       if (Math.abs(tMaxI - tMaxJ) < 1e-9) {
         if (!this.walk(i + si, j) || !this.walk(i, j + sj)) return false;
-        i += si; j += sj; tMaxI += tDI; tMaxJ += tDJ;
-      } else if (tMaxI < tMaxJ) { i += si; tMaxI += tDI; }
-      else { j += sj; tMaxJ += tDJ; }
+        i += si;
+        j += sj;
+        tMaxI += tDI;
+        tMaxJ += tDJ;
+      } else if (tMaxI < tMaxJ) {
+        i += si;
+        tMaxI += tDI;
+      } else {
+        j += sj;
+        tMaxJ += tDJ;
+      }
       if (!this.walk(i, j)) return false;
     }
     return true;

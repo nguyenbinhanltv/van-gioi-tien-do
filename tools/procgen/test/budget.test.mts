@@ -187,6 +187,14 @@ describe('budget gate: initial package estimate', () => {
     expect(after.estimate.lazyBytes).toBeGreaterThan(0);
     expect(after.rows.some((r) => r.name === 'atl_mobphase_1x')).toBe(true); // still checked
   });
+  it('treats the particle atlas (atl_ptcl, loaded on demand) as lazy too', () => {
+    makeAtlas(dir, { name: 'atl_small' });
+    const before = runBudget({ atlasDir: dir });
+    makeAtlas(dir, { name: 'atl_ptcl_2x' });
+    const after = runBudget({ atlasDir: dir });
+    expect(after.estimate.assetBytes).toBe(before.estimate.assetBytes);
+    expect(after.estimate.lazyBytes).toBeGreaterThan(0);
+  });
   it('fails on Web when the estimate exceeds 25 MB, but not on PC', () => {
     makeAtlas(dir, { name: 'atl_small' });
     expect(codes(runBudget({ atlasDir: dir, reservedMb: 25 }))).toContain('INITIAL_PACKAGE_OVER');

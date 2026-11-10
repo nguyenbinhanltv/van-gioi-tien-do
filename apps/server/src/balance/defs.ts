@@ -1,9 +1,9 @@
 /**
  * Class-balance harness (D115), skill data helpers.
  *
- * The server combat core (`resolveCast`) only simulates `damage`, `heal` and `shield` effects; everything else a kit has (dots, statuses,
- * buffs, marks, summons, dashes, taunts ...) is reported as `unsupported` and does nothing yet. `kitCoverage` measures how much of each class
- * kit that leaves, and `branchDefs` applies a branch (solo / team) to the skill data the way the shared design simulation does, as far as
+ * Since D116 the server combat core simulates every effect type of the shipped kits (instant damage / heal / shield through `resolveCast`, and
+ * dots, statuses, buffs, marks, summons, dashes, taunts ... through the effect system); an effect type nobody handles would be reported as
+ * `unsupported`. `kitCoverage` measures how much of each class kit the core covers, and `branchDefs` applies a branch (solo / team) to the skill data the way the shared design simulation does, as far as
  * the real combat core can express it: skill patches (`damage_mult`, `cooldown_mult`, `shield_mult`) and the branch `stat_mods` that map onto a
  * coefficient (`dmg_mult`, `heal_mult`, `shield_mult`). Stat mods the server has no hook for (`dmg_taken_mult`, `threat_mult`, `lifesteal_add`,
  * `ally_crit_bonus`, `team_dmg`, `team_dr`) are NOT applied and are listed by `unmodelledBranchMods`. Pure data transforms: no numbers are
@@ -20,6 +20,7 @@ import {
   type SkillDefinitions,
   type SkillEffect,
 } from '@vgtd/shared';
+import { STATE_EFFECTS } from '../world/combat/resolve.js';
 
 export type BranchMode = 'solo' | 'team';
 
@@ -30,7 +31,15 @@ export function branchFor(path: PathId, mode: BranchMode, defs: SkillDefinitions
   return defs.branches.find((b) => b.id === id)!;
 }
 
-const SUPPORTED: ReadonlySet<SkillEffect['type']> = new Set(['damage', 'heal', 'shield', 'passive_stat']);
+/** every effect type the combat core handles: the instant ones of `resolveCast`, the state effects of D116, passives and the passive summon */
+const SUPPORTED: ReadonlySet<SkillEffect['type']> = new Set<SkillEffect['type']>([
+  'damage',
+  'heal',
+  'shield',
+  'passive_stat',
+  'summon',
+  ...STATE_EFFECTS,
+]);
 
 /** Stat mods of a branch the real combat core cannot express (they stay out of the harness and are listed in the report). */
 export function unmodelledBranchMods(b: BranchDef): string[] {
@@ -80,7 +89,7 @@ export interface KitCoverage {
   unsupportedTypes: Record<string, number>;
 }
 
-/** How much of a class kit the real combat core simulates (docs/34, `resolveCast`: damage / heal / shield only). */
+/** How much of a class kit the real combat core simulates (docs/34, D116: every effect type of the shipped data). */
 export function kitCoverage(path: PathId, defs: SkillDefinitions = skillDefinitions): KitCoverage {
   const skills = defs.skills.filter((s) => s.path === path && s.kind === 'active');
   let full = 0;
@@ -96,9 +105,12 @@ export function kitCoverage(path: PathId, defs: SkillDefinitions = skillDefiniti
     for (const t of new Set(unsupported.map((e) => e.type))) types[t] = (types[t] ?? 0) + 1;
     for (const e of eff) {
       if (e.type === 'damage' && e.scale) dmgSupported += equivalentHits(e.scale.coeff, e.hits ?? 1);
-      // damage the kit gets from effects the server ignores (dots, detonations, explosions, summons)
-      if ((e.type === 'dot' || e.type === 'detonate' || e.type === 'summon') && (e.scale || e.detonate_coeff))
-        dmgAll += equivalentHits(e.scale?.coeff ?? e.detonate_coeff ?? 0, e.hits ?? 1);
+      // damage the kit gets from dots, detonations and summons: counted as covered only when the server handles that effect type
+      if ((e.type === 'dot' || e.type === 'detonate' || e.type === 'summon') && (e.scale || e.detonate_coeff)) {
+        const eq = equivalentHits(e.scale?.coeff ?? e.detonate_coeff ?? 0, e.hits ?? 1);
+        if (SUPPORTED.has(e.type)) dmgSupported += eq;
+        else dmgAll += eq;
+      }
     }
   }
   return {

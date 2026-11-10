@@ -10,6 +10,8 @@
 - **Không rẻ hơn kênh rơi đồ ở phẩm cao.** Phân bố phẩm khi chế ở mức tay nghề thấp bắt đầu đúng bằng bảng "Quái dã ngoại" của 07 §6; tay nghề tối đa vẫn chưa bằng rương Boss ở phẩm Lam–Tím; phẩm Vàng–Đỏ bị chặn bởi **phẩm trần** của bản vẽ / đan phương (§4.3).
 - **Mở ở Trúc Cơ** (`crafting`, 07 §8). Hệ quả cố ý: Trúc Cơ Đan (cho ngưỡng Luyện Khí → Trúc Cơ) **không thể tự chế** khi còn ở Luyện Khí; người chơi mới nhận từ rơi đồ, nhiệm vụ chương 1 ([12](12-nhiem-vu-cot-truyen.md) §4.1) hoặc mua của người chơi Trúc Cơ trở lên ở Vạn Bảo Lâu. Đây là mối liên kết cộng đồng chủ ý.
 
+> **[Cập nhật D108 — luyện đan tối giản đã cài]** Máy chủ có Luyện Đan cho beta: các số §4–§6 nằm trong `@vgtd/shared` `alchemy.ts` (test dựng lại bảng §4.3), chế ở đan lô Sơn Môn, trao đổi nguyên tử + sổ cái `SYSTEM_SINK_CRAFT_FEE`, điểm thạo luyện lưu bền, bảng chế tạo phím P. Công thức đang có: Hồi Huyết Đan, Trúc Cơ Đan, Kết Kim Đan, Hộ Mạch Đan, Định Tâm Đan; số nguyên liệu mỗi lần chế, phẩm trần (Tím), làm tròn phí lò, mức cộng thạo luyện là **tạm** (xem D108 / OPEN-ITEMS). Luyện Khí và Chế Phù vẫn ngoài beta.
+
 ## 2. Ba nghề
 
 | Nghề          | Sản phẩm                                                                 | Dụng cụ (**lò / đỉnh**) | Tiêu hao chính                  | Gắn với hệ thống                                                                             |

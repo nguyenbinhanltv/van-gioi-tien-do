@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { mobZoneAt } from '@vgtd/shared';
+import { SECT_BUILDINGS, mobZoneAt, sectBlockedTiles, sectOrigin } from '@vgtd/shared';
 import manifest from '../../../tools/procgen/src/gemini/manifest.json';
 import {
   COURTYARD,
+  blockSectTiles,
   SPAWN_CLEAR_RADIUS,
   SWAMP_REACH,
   ZONE_MIN_DIST,
@@ -269,5 +270,100 @@ describe('zone dressing (PART 2 props)', () => {
     for (const a of trees)
       for (const b of trees)
         if (a !== b) expect(Math.max(Math.abs(a.i - b.i), Math.abs(a.j - b.j))).toBeGreaterThanOrEqual(5);
+  });
+});
+
+describe('Son Mon sect buildings (D118)', () => {
+  const N = 256;
+  const open = (): Terrain => 'dirt';
+  const base = (over: Partial<PlacementInput> = {}): PlacementInput => ({
+    width: N,
+    height: N,
+    seed: 3,
+    spawn: { i: 128, j: 128 },
+    terrain: open,
+    defs,
+    count: 40,
+    radius: 40,
+    sect: SECT_BUILDINGS,
+    sectOrigin: sectOrigin(N),
+    ...over,
+  });
+
+  it('places every building at exactly the shared offsets and blocks exactly the tiles the server blocks', () => {
+    const r = placeProps(base());
+    const sect = r.courtyard.filter((p) => p.name.startsWith('sect_') && p.name !== 'sect_gate_paifang');
+    expect(sect).toHaveLength(SECT_BUILDINGS.length);
+    const o = sectOrigin(N);
+    for (const b of SECT_BUILDINGS)
+      expect(
+        sect.some((p) => p.name === b.name && p.i === o.i + b.di && p.j === o.j + b.dj),
+        b.name,
+      ).toBe(true);
+    const mine = new Set(sectBlockedTiles(N).map(([i, j]) => `${i},${j}`));
+    const blocked = new Set(r.blocked.map(([i, j]) => `${i},${j}`));
+    for (const t of mine) expect(blocked.has(t), t).toBe(true);
+  });
+
+  it('never nudges: a building whose footprint is not all land is skipped, the others stay put', () => {
+    const o = sectOrigin(N);
+    // water under the main hall only
+    const water = (i: number, j: number): Terrain =>
+      Math.abs(i - (o.i - 17)) <= 1 && Math.abs(j - (o.j - 17)) <= 1 ? 'water' : 'dirt';
+    const r = placeProps(base({ terrain: water }));
+    const names = r.courtyard.map((p) => p.name);
+    expect(names).not.toContain('sect_main_hall');
+    expect(names).toContain('sect_gate');
+    expect(names.filter((n) => n === 'sect_lantern_post')).toHaveLength(4);
+  });
+
+  it('without `sect` the layout is exactly what it was (courtyard and scatter unchanged)', () => {
+    const a = placeProps(base({ sect: undefined, sectOrigin: undefined }));
+    const b = placeProps({ ...base(), sect: [], sectOrigin: undefined });
+    expect(b.courtyard).toEqual(a.courtyard);
+    expect(b.props).toEqual(a.props);
+  });
+
+  it('nothing is skipped on the default map (a skipped building would be an invisible wall: the test says so loudly)', () => {
+    expect(placeProps(base()).sectSkipped).toEqual([]);
+  });
+
+  it('a skipped building is reported with its reason (no def, not land, occupied)', () => {
+    const o = sectOrigin(N);
+    const noHall = { ...defs };
+    delete (noHall as Record<string, unknown>).sect_main_hall;
+    expect(placeProps(base({ defs: noHall })).sectSkipped).toContainEqual({
+      name: 'sect_main_hall',
+      di: -17,
+      dj: -17,
+      reason: 'no-def',
+    });
+    const water = (i: number, j: number): Terrain => (i === o.i - 3 && j === o.j - 14 ? 'water' : 'dirt');
+    expect(placeProps(base({ terrain: water })).sectSkipped.map((x) => [x.name, x.reason])).toEqual([
+      ['sect_scripture_pavilion', 'not-land'],
+    ]);
+  });
+
+  it('without any prop art the blocked set still holds every sectBlockedTiles tile (the server blocks them regardless)', () => {
+    const blocked = new Uint8Array(N * N); // what Bootstrap builds before it knows whether the art exists
+    const tiles = sectBlockedTiles(N);
+    expect(blockSectTiles(blocked, N, N, tiles)).toBe(tiles.length);
+    for (const [i, j] of tiles) expect(blocked[j * N + i], `${i},${j}`).toBe(1);
+    expect(blocked.reduce((n, v) => n + v, 0)).toBe(tiles.length); // and nothing else
+    expect(blockSectTiles(blocked, N, N, tiles)).toBe(0); // idempotent
+    expect(
+      blockSectTiles(new Uint8Array(4), 2, 2, [
+        [5, 5],
+        [-1, 0],
+      ]),
+    ).toBe(0); // outside the map is ignored
+  });
+
+  it('the scatter keeps away from the buildings (a prop never lands on a blocked sect tile)', () => {
+    const r = placeProps(base({ count: 120 }));
+    const mine = new Set(sectBlockedTiles(N).map(([i, j]) => `${i},${j}`));
+    for (const p of r.props) {
+      expect(mine.has(`${p.i},${p.j}`), `${p.name} at ${p.i},${p.j}`).toBe(false);
+    }
   });
 });

@@ -3,21 +3,23 @@
  * SERVER keeps (the first login that names one creates the character; later logins ignore what the client asks for), so this
  * only decides what we ask for. The choice is remembered per server + account so the picker does not appear again.
  */
-import { shared } from './vendor/vgtd.mjs';
+import { core, shared } from './vendor/vgtd.mjs';
 import type { KeyArtUrls } from './PropArt';
 
-/** Display data of the six classes, in wire order (`shared.PATHS`): name and element (docs/11 §4). */
-const CLASS_INFO: Readonly<Record<string, { name: string; hint: string }>> = {
-  kiem: { name: 'Kiếm tu', hint: 'kiếm · Kim' },
-  phap: { name: 'Pháp tu', hint: 'quạt · Hỏa / Thủy' },
-  the: { name: 'Thể tu', hint: 'quyền sáo · Thổ' },
-  dan_phu: { name: 'Đan / Phù tu', hint: 'phất trần + phù · Mộc / Kim' },
-  thuong: { name: 'Thương tu', hint: 'trường thương · Lôi' },
-  dao: { name: 'Đao tu', hint: 'trảm đao · Phong' },
+/** String keys of the six classes, by `shared.PATHS` id: name and weapon / element hint (docs/11 §4). */
+const CLASS_KEYS: Readonly<Record<string, { name: core.StringKey; hint: core.StringKey }>> = {
+  kiem: { name: 'class.kiem.name', hint: 'class.kiem.hint' },
+  phap: { name: 'class.phap.name', hint: 'class.phap.hint' },
+  the: { name: 'class.the.name', hint: 'class.the.hint' },
+  dan_phu: { name: 'class.dan_phu.name', hint: 'class.dan_phu.hint' },
+  thuong: { name: 'class.thuong.name', hint: 'class.thuong.hint' },
+  dao: { name: 'class.dao.name', hint: 'class.dao.hint' },
 };
 
+/** Display name of a class path id in the installed language (the id itself for anything unknown). */
 export function classLabel(path: string): string {
-  return CLASS_INFO[path]?.name ?? path;
+  const k = CLASS_KEYS[path];
+  return k ? core.t(k.name) : path;
 }
 
 const storageKey = (account: string): string => `vgtd.class.${account}`;
@@ -77,7 +79,7 @@ export function pickClass(
       box.appendChild(emblem);
     }
     const title = document.createElement('div');
-    title.textContent = 'Chọn Đạo Lộ (không đổi được sau khi tạo nhân vật)';
+    title.textContent = core.t('class_picker.title');
     title.style.fontSize = '20px';
     box.appendChild(title);
     const done = (path: shared.PathId): void => {
@@ -93,7 +95,12 @@ export function pickClass(
     shared.PATHS.forEach((path, k) => {
       const b = document.createElement('button');
       b.id = `vgtd-class-${path}`;
-      b.textContent = `${k + 1}. ${classLabel(path)} — ${CLASS_INFO[path]?.hint ?? ''}`;
+      const keys = CLASS_KEYS[path];
+      b.textContent = core.t('class_picker.option', {
+        n: k + 1,
+        name: classLabel(path),
+        hint: keys ? core.t(keys.hint) : '',
+      });
       Object.assign(b.style, {
         width: '320px',
         padding: '10px 14px',

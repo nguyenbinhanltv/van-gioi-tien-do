@@ -4,18 +4,38 @@
  *
  *  1. a heal when an ally (or itself) is below 65 % HP, aimed at the most hurt one;
  *  2. a shield whenever it is ready (no cost to waiting: the server only keeps the amount for its duration);
- *  3. otherwise the damage skill with the best damage-per-second of cast time among the ready ones (damage in basic-hit equivalents, so a
+ *  3. a utility skill (control, buff, debuff, mark, taunt, dot ...: D116) whenever it is ready and in reach: it costs nothing to use;
+ *  4. otherwise the damage skill with the best damage-per-second of cast time among the ready ones (damage in basic-hit equivalents, so a
  *     cooldown skill wins when it is ready and the basic attack fills the gaps).
  *
  * A skill is cast only when the server would accept it (cooldown, GCD, MP, not stunned, in reach, not in the middle of an earlier cast), so the
- * anti-cheat never sees a rejected cast. Skills whose every effect the combat core ignores (see `kitCoverage`) are not cast: a player would learn
- * at once that they do nothing, and the report counts them separately.
+ * anti-cheat never sees a rejected cast. Skills whose every effect the combat core ignores (see `kitCoverage`; none of the shipped data since
+ * D116) are not cast. Positional skills (dash, knock-back, pull, revive) are not cast: the scripted player never moves and has no corpse to raise;
+ * effects that need a party (`context: group`) are inactive here, the harness has no party service.
  */
 import { equivalentHits, type PathId, type SkillDef, type SkillDefinitions, type SkillEffect } from '@vgtd/shared';
 import { mpCostOf, type EntityState, type SkillDef as SimSkill } from '@vgtd/sim';
 import { quantizePos, type SkillCastMsg } from '@vgtd/protocol';
+import { STATE_EFFECTS } from '../world/combat/resolve.js';
 
-const SUPPORTED: ReadonlySet<SkillEffect['type']> = new Set(['damage', 'heal', 'shield']);
+const SUPPORTED: ReadonlySet<SkillEffect['type']> = new Set<SkillEffect['type']>([
+  'damage',
+  'heal',
+  'shield',
+  ...STATE_EFFECTS,
+]);
+/** utility effects the scripted player uses (the positional ones are left out) */
+const UTILITY: ReadonlySet<SkillEffect['type']> = new Set<SkillEffect['type']>([
+  'status',
+  'dot',
+  'hot',
+  'buff',
+  'debuff',
+  'mark',
+  'detonate',
+  'taunt',
+  'restore_mp',
+]);
 const HURTBOX = 0.45;
 const HEAL_BELOW = 0.65;
 
@@ -26,6 +46,8 @@ interface Entry {
   damageE: number;
   heals: boolean;
   shields: boolean;
+  /** no damage / heal / shield, only utility effects */
+  utility: boolean;
   busyMs: number;
   reach: number;
 }
@@ -65,6 +87,9 @@ export class Rotation {
           .reduce((n, e) => n + equivalentHits(e.scale!.coeff, e.hits ?? 1), 0),
         heals: eff.some((e) => e.type === 'heal'),
         shields: eff.some((e) => e.type === 'shield'),
+        utility:
+          !eff.some((e) => e.type === 'damage' || e.type === 'heal' || e.type === 'shield') &&
+          eff.some((e) => UTILITY.has(e.type)),
         busyMs: Math.max(s.gcdMs, t.cast_ms + (t.channel_ms ?? 0) + (t.recovery_ms ?? 0)),
         reach: reachOf(data),
       });
@@ -96,7 +121,14 @@ export class Rotation {
     // 2. shields whenever ready (while the fight is on)
     const sh = this.skills.find((e) => e.shields && !e.heals && ready(e));
     if (sh) return castOf(sh, sh.sim.targeting === 'ally_or_self' ? (hurt?.id ?? this.id) : 0, false);
-    // 3. the best damage skill that is ready and in reach
+    // 3. utility skills whenever ready (and, when they target enemies, in reach)
+    const ut = this.skills.find((e) => {
+      if (!e.utility || !ready(e)) return false;
+      if (e.sim.targeting === 'enemy') return dist <= e.reach;
+      return e.reach <= 0 || dist <= e.reach + HURTBOX;
+    });
+    if (ut) return castOf(ut, ut.sim.targeting === 'enemy' ? mobId : 0, ut.reach > 0);
+    // 4. the best damage skill that is ready and in reach
     let best: Entry | null = null;
     let bestScore = 0;
     for (const e of this.skills) {

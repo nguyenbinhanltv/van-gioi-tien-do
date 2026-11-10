@@ -28,10 +28,11 @@ export const INITIAL_PACKAGE_RESERVED_MB =
 export const PC_MAP_ATLAS_PREFIX = 'atl_map';
 /**
  * Atlas pages the client fetches on demand after the world is playable (boss phase skins: only when a boss with phases is in
- * view), so they are NOT part of the initial download estimate. Their size is still reported (`estimate.lazyBytes`) and every
+ * view; particle textures and the skill VFX stills packed with them: `PropArt.ensureParticles`, first effect / a few seconds after
+ * the HUD exists), so they are NOT part of the initial download estimate. Their size is still reported (`estimate.lazyBytes`) and every
  * page is still checked against the per-atlas caps. Add a prefix here only for art the client really loads lazily.
  */
-export const LAZY_ATLAS_PREFIXES: readonly string[] = ['atl_mobphase'];
+export const LAZY_ATLAS_PREFIXES: readonly string[] = ['atl_mobphase', 'atl_ptcl'];
 const isLazy = (name: string) => LAZY_ATLAS_PREFIXES.some((p) => name.startsWith(p));
 const COMPRESSED_EXT = ['.ktx2', '.webp', '.astc'];
 const MB = 1024 * 1024;

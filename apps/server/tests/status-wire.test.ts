@@ -1,6 +1,6 @@
 /** Own and other players' statuses on the wire (D94): change-only status block, status_update to viewers, movement really locked. */
 import { describe, expect, it } from 'vitest';
-import { decode, encode, type BaselinePos, type Message } from '@vgtd/protocol';
+import { StatusBit, decode, encode, type BaselinePos, type Message } from '@vgtd/protocol';
 import { WorldNode, type ClientTransport } from '../src/index.js';
 
 class Client implements ClientTransport {
@@ -165,5 +165,35 @@ describe('status_update for other players (D94)', () => {
     const updAt = late.msgs.findIndex((m) => m.type === 'status_update');
     expect(enterAt).toBeGreaterThanOrEqual(0);
     expect(updAt).toBeGreaterThan(enterAt); // after the enter, so the client already knows the entity
+  });
+});
+
+describe('control on mobs reaches the viewers (D116)', () => {
+  it('a stunned / rooted / slowed mob is announced to the clients that see it with the Stun / Root / Slow bits, and cleared when it ends', () => {
+    const node = new WorldNode({
+      seed: 4,
+      mapTiles: 256,
+      spawn: { i0: 20, j0: 20, side: 1 },
+      combat: {},
+      mobs: { zones: [{ zone: 'bia_rung', i0: 18, j0: 18, i1: 30, j1: 30 }], density: 0.3 },
+    });
+    const c = new Client();
+    node.addPlayer(c, 'acc');
+    run(node, 20);
+    const entered = c.msgs.flatMap((m) => (m.type === 'aoi_enter' ? m.entities : [])).find((e) => e.kind === 1);
+    expect(entered).toBeDefined();
+    const mobId = entered!.entityId;
+    node.combat!.effects.stunMob(mobId, node.world.timeMs, 500);
+    node.combat!.effects.slowMob(mobId, node.world.timeMs, 500, 0.5);
+    run(node, 4);
+    const ups = c.updates().filter((u) => u.entityId === mobId);
+    expect(ups.at(-1)!.mask).toBe(StatusBit.Stun | StatusBit.Slow);
+    run(node, 20);
+    expect(
+      c
+        .updates()
+        .filter((u) => u.entityId === mobId)
+        .at(-1)!.mask,
+    ).toBe(0);
   });
 });

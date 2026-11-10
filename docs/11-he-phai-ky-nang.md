@@ -538,6 +538,10 @@ Phần schema và dữ liệu mẫu dài trước đây trong mục này **đã 
 - Mọi kỹ năng chủ động **không vô dụng khi solo** và có hiệu ứng khi chơi nhóm; buff / hot đồng đội **gồm người thi triển**; kỹ năng nhắm đồng đội là `ally_or_self`; thẻ `context_aware` phải khớp với việc có effect `solo` / `group`.
 - **E** (3.4) nằm trong biên theo `tier` (basic ≤ 3,5; core ≤ 6; ultimate 4 – 16; ultimate thuần phòng thủ có thẻ `sustain` được miễn); `cooldown × (1 − cdr_cap) ≥ cast + channel`; `damage.hits = channel_ticks` với kỹ năng channel.
 
+> **[Cập nhật D116]** Máy chủ đã mô phỏng mọi loại hiệu ứng của bộ kỹ năng MVP (dot / hot, khống chế, buff / debuff, dấu, lướt, khiêu khích, thú triệu hồi ...) theo cùng quy tắc với mô phỏng thiết kế §4.5; còn thiếu `move_speed_pct`, `invuln_ms` của lướt, `silence`, `trait` của lớp. Xem DECISIONS D116 và báo cáo cân bằng D115 chạy lại.
+
+> **[Cập nhật D117]** `stat_weights` của lớp nay được máy chủ áp lên HP / MP / ATK / DEF / AGI của người chơi (`classStatsAt` trong `@vgtd/shared`); xem DECISIONS D117.
+
 > **[Cập nhật D115]** Công cụ đo cân bằng trên **mã máy chủ thật** (`npm run balance -w @vgtd/server`, [36-bao-cao-can-bang-dao-lo.md](36-bao-cao-can-bang-dao-lo.md)): TTK / sống sót / đóng góp tổ đội / đấu tay đôi theo dải Luyện Khí – Trúc Cơ – Kim Đan, cờ ngoại lệ ±15%, đề xuất chỉnh (chưa áp dụng). Phát hiện cần quyết định trước khi chỉnh số: máy chủ mới cài `damage` / `heal` / `shield` của bộ kỹ năng, bỏ qua `stat_weights` của lớp và chưa có nhánh solo / team.
 
 ## Câu hỏi cần chốt

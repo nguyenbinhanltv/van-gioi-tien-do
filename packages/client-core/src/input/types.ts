@@ -27,8 +27,15 @@ export interface InputFrame {
 }
 
 export const emptyFrame = (): InputFrame => ({
-  move: { i: 0, j: 0 }, magnitude: 0, dodge: false, flyToggle: false, qinggong: false,
-  casts: [], cancelCast: false, target: null, path: null,
+  move: { i: 0, j: 0 },
+  magnitude: 0,
+  dodge: false,
+  flyToggle: false,
+  qinggong: false,
+  casts: [],
+  cancelCast: false,
+  target: null,
+  path: null,
 });
 
 /** Camera của engine: đổi tọa độ client (CSS px của phần tử) sang màn hình logic thế giới. */
@@ -46,5 +53,10 @@ export const FLAG_DODGE = 1;
 export const FLAG_FLY_TOGGLE = 2;
 export const FLAG_QINGGONG = 4;
 
-export interface Rect { x: number; y: number; w: number; h: number }
+export interface Rect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
 export const inRect = (r: Rect, x: number, y: number) => x >= r.x && y >= r.y && x <= r.x + r.w && y <= r.y + r.h;
