@@ -111,12 +111,16 @@ const types = {
 const served = new Set(); // files the page actually requested
 const servedOrder = []; // files in the order of their FIRST request (the marker request is not a file)
 const servedAt = new Map(); // file -> ms of first request (fallback cut only)
+let markerWhy = ''; // 'body' = the player's body arrived, 'fallback' = the bounded timer fired
 let markerAt = -1; // index into servedOrder where the first_world_frame marker arrived, -1 = not seen
 const server = createServer((req, res) => {
   const p = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
   const pUrl = p.split(String.fromCharCode(92)).join('/'); // normalize() uses the platform separator
   if (pUrl.startsWith('__vgtd_milestone/')) {
-    if (pUrl === '__vgtd_milestone/first_world_frame' && markerAt < 0) markerAt = servedOrder.length;
+    if (pUrl === '__vgtd_milestone/first_world_frame' && markerAt < 0) {
+      markerAt = servedOrder.length;
+      markerWhy = new URL(req.url, 'http://x').searchParams.get('why') || 'body';
+    }
     return void res.writeHead(204).end();
   }
   let f = join(webDir, p || 'index.html');
@@ -291,7 +295,11 @@ const result = {
     loadedMB: Math.max(...col('loadedMB')),
     initialMBRaw: initRaw / MB,
     initialMBGzip: initGzip / MB,
-    cutBy: markerSeen ? 'first_world_frame marker' : 'playable instant (fallback)',
+    cutBy: markerSeen
+      ? markerWhy === 'fallback'
+        ? 'first_world_frame marker (fallback timer: the player body never arrived)'
+        : 'first_world_frame marker'
+      : 'playable instant (fallback)',
     lazyFetchedMBRaw: (rawBytes - initRaw) / MB, // requested after the milestone (lazy / streamed assets)
     lazyFetchedMBGzip: (gzipBytes - initGzip) / MB,
     packageMBRaw: rawBytes / MB,

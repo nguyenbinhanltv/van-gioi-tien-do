@@ -49,7 +49,7 @@ import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
 import { Minimap, WorldMapPanel } from './MapUi';
-import { markFirstWorldFrame } from './Milestones';
+import { FIRST_WORLD_FRAME_FALLBACK_MS, armFirstWorldFrameFallback, markFirstWorldFrame } from './Milestones';
 import { installCrashReporting, setCrashClass } from './CrashReport';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -152,6 +152,7 @@ export class Bootstrap extends Component {
     try {
       await this.build();
       this.ready = true;
+      armFirstWorldFrameFallback(FIRST_WORLD_FRAME_FALLBACK_MS); // no chibi art / a failed load must not strand the deferred VFX art
       console.log(
         `[vgtd] world ready: ${this.world.tileCount} tiles in ${this.world.chunkCount} chunks, ${this.ysort.count} L3 objects`,
       );
