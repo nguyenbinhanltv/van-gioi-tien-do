@@ -37,6 +37,21 @@ export function placeDesign(el: HTMLElement, r: { x: number; y: number; w: numbe
   } as Partial<CSSStyleDeclaration>);
 }
 
+/**
+ * Where one Esc press goes, in order: Settings itself (close it) -> an open panel (close it) -> the current combat target (the combat HUD
+ * clears it) -> open Settings. 'close' / 'panel' consume the key; 'target' leaves it to the combat HUD; 'open' opens Settings.
+ */
+export function escAction(s: {
+  settingsOpen: boolean;
+  panelOpen: boolean;
+  hasTarget: boolean;
+}): 'close' | 'panel' | 'target' | 'open' {
+  if (s.settingsOpen) return 'close';
+  if (s.panelOpen) return 'panel';
+  if (s.hasTarget) return 'target';
+  return 'open';
+}
+
 /** A typing field has the keyboard: hotkeys must stay out of it. */
 export function typingTarget(e: KeyboardEvent): boolean {
   const t = e.target as HTMLElement | null;

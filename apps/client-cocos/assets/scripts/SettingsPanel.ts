@@ -1,5 +1,5 @@
 import { core } from './vendor/vgtd.mjs';
-import { GOLD_LIGHT, frameStyle, typingTarget } from './HudChrome';
+import { GOLD_LIGHT, escAction, frameStyle, typingTarget } from './HudChrome';
 
 const KEY_VOLUME = 'vgtd.settings.volume';
 const KEY_DEBUG = 'vgtd.settings.debug';
@@ -28,6 +28,10 @@ export interface SettingsHooks {
   setDebug(on: boolean): void;
   /** Esc closes the topmost open panel first; true when it closed one (the settings stay closed) */
   closeTopPanel(): boolean;
+  /** a combat target is selected: Esc then clears it (combat HUD) instead of opening Settings */
+  hasTarget(): boolean;
+  /** an open panel exists (nothing is closed by asking) */
+  panelOpen(): boolean;
 }
 
 /**
@@ -145,10 +149,20 @@ export class SettingsPanel {
 
     this.keyDown = (e) => {
       if (e.code !== 'Escape' || e.repeat || typingTarget(e)) return;
-      if (this.open) this.toggle(false);
-      else if (!this.hooks.closeTopPanel()) this.toggle(true);
+      const act = escAction({
+        settingsOpen: this.open,
+        panelOpen: this.hooks.panelOpen(),
+        hasTarget: this.hooks.hasTarget(),
+      });
+      if (act === 'target') return; // the combat HUD clears the target on this same key
+      // consume the key so the world map's / combat's own Esc branches do not also act on it
+      e.stopImmediatePropagation();
+      if (act === 'close') this.toggle(false);
+      else if (act === 'panel') this.hooks.closeTopPanel();
+      else this.toggle(true);
     };
-    window.addEventListener('keydown', this.keyDown);
+    // capture phase: runs before the other window Esc listeners (world map, combat)
+    window.addEventListener('keydown', this.keyDown, true);
   }
 
   get visible(): boolean {
@@ -162,7 +176,7 @@ export class SettingsPanel {
   }
 
   destroy(): void {
-    window.removeEventListener('keydown', this.keyDown);
+    window.removeEventListener('keydown', this.keyDown, true);
     this.root.remove();
   }
 }

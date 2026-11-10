@@ -529,21 +529,12 @@ export class Bootstrap extends Component {
       debugOn: () => this.debugOn,
       setDebug: (on) => this.setDebug(on),
       // Esc first closes whatever panel is open; only when nothing is open does it open the settings
+      hasTarget: () => (this.combat?.backend.target.current ?? null) !== null,
+      panelOpen: () => this.openPanelCloser() !== null,
       closeTopPanel: () => {
-        const closers: Array<[boolean, () => void]> = [
-          [this.worldMapPanel?.isOpen ?? false, () => this.worldMapPanel?.toggle(false)],
-          [this.characterPanel?.visible ?? false, () => this.characterPanel?.toggle(false)],
-          [this.bagPanel?.isOpen ?? false, () => this.bagPanel?.toggle()],
-          [this.questPanel?.visible ?? false, () => this.questPanel?.toggle(false)],
-          [this.sectPanel?.visible ?? false, () => this.sectPanel?.toggle(false)],
-          [this.friendsPanel?.visible ?? false, () => this.friendsPanel?.toggle(false)],
-          [this.tradePanel?.visible ?? false, () => this.tradePanel?.toggle(false)],
-          [this.craftPanel?.visible ?? false, () => this.craftPanel?.toggle(false)],
-          [this.marketPanel?.visible ?? false, () => this.marketPanel?.toggle(false)],
-        ];
-        const open = closers.find(([isOpen]) => isOpen);
-        open?.[1]();
-        return !!open;
+        const close = this.openPanelCloser();
+        close?.();
+        return close !== null;
       },
     });
     const onl = (): boolean => !!online;
@@ -632,6 +623,22 @@ export class Bootstrap extends Component {
     };
     window.addEventListener('keydown', this.hudKeyDown);
     this.applyHudLayout(true);
+  }
+
+  /** The close action of the first open panel (Esc closes it before anything else), null when no panel is open. */
+  private openPanelCloser(): (() => void) | null {
+    const closers: Array<[boolean, () => void]> = [
+      [this.worldMapPanel?.isOpen ?? false, () => this.worldMapPanel?.toggle(false)],
+      [this.characterPanel?.visible ?? false, () => this.characterPanel?.toggle(false)],
+      [this.bagPanel?.isOpen ?? false, () => this.bagPanel?.toggle()],
+      [this.questPanel?.visible ?? false, () => this.questPanel?.toggle(false)],
+      [this.sectPanel?.visible ?? false, () => this.sectPanel?.toggle(false)],
+      [this.friendsPanel?.visible ?? false, () => this.friendsPanel?.toggle(false)],
+      [this.tradePanel?.visible ?? false, () => this.tradePanel?.toggle(false)],
+      [this.craftPanel?.visible ?? false, () => this.craftPanel?.toggle(false)],
+      [this.marketPanel?.visible ?? false, () => this.marketPanel?.toggle(false)],
+    ];
+    return closers.find(([isOpen]) => isOpen)?.[1] ?? null;
   }
 
   /** (Re)place every HUD widget from the shared layout contract (client-core `computeHudLayout`): on resize and when touch / pointer changes. */
