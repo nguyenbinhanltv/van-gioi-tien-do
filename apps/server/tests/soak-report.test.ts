@@ -283,3 +283,143 @@ describe('tick profile (D106)', () => {
     expect(formatSoak(summarizeSoak(config(), series(10), h))).not.toContain('tick profile'); // no profile, no section
   });
 });
+
+describe('soak extensions: growth slopes, journal, backups, event-loop lag', () => {
+  const run = (samples: SoakSample[], cfg = config()) => {
+    const h = new TickHistogram();
+    h.add([1, 2, 3, 4]);
+    return summarizeSoak(cfg, samples, h, {});
+  };
+  const crit = (s: ReturnType<typeof summarizeSoak>, prefix: string) =>
+    s.criteria.find((c) => c.name.startsWith(prefix));
+  const store = (o: Partial<NonNullable<SoakSample['store']>> = {}): NonNullable<SoakSample['store']> => ({
+    docs: { 'ledger.json': 1000, 'inventories.json': 2000 },
+    totalBytes: 3000,
+    journalBytes: 0,
+    journalPresent: false,
+    journalPending: false,
+    ...o,
+  });
+
+  it('a steady heap / RSS leak fails the slope criteria once the run is long enough; a short run only reports it', () => {
+    // 40 samples x 15 s = 600 s: +0.05 MB per sample on the heap (12 MB/h) and +0.5 MB on the RSS (120 MB/h)
+    const leak = (k: number) => ({ heapMb: 100 + k * 0.05, rssMb: 200 + k * 0.5 });
+    const s = run(series(40, leak));
+    expect(crit(s, 'heap growth slope')!.pass).toBe(true); // 12 MB/h <= 20
+    const rss = crit(s, 'RSS growth slope')!;
+    expect(rss.pass).toBe(false);
+    expect(rss.info).toBeUndefined();
+    expect(s.memory.rssSlopeMbPerH).toBeCloseTo(120, 0);
+    // thresholds come from the config
+    const tight = run(series(40, leak), config({ thresholds: { heapSlopeMbPerH: 5 } }));
+    expect(crit(tight, 'heap growth slope')!.pass).toBe(false);
+    // a run under 10 minutes is informational: never fails
+    const short = run(series(40, leak), config({ durationS: 300 }));
+    expect(crit(short, 'RSS growth slope')!.pass).toBe(true);
+    expect(crit(short, 'RSS growth slope')!.info).toBe(true);
+  });
+
+  it('the journal criterion fails when a journal stays on disk (or pending) for N consecutive samples, or is pending at the end', () => {
+    const healthy = run(series(20, () => ({ store: store() })));
+    expect(crit(healthy, 'journal compacts')!.pass).toBe(true);
+    expect(healthy.store!.journal.presentSamples).toBe(0);
+    // one stray journal seen once is a commit caught in the act: fine
+    const blip = run(
+      series(20, (k) => ({ store: store(k === 7 ? { journalPresent: true, journalBytes: 4096 } : {}) })),
+    );
+    expect(crit(blip, 'journal compacts')!.pass).toBe(true);
+    expect(blip.store!.journal.maxKb).toBe(4);
+    // three in a row: not compacting
+    const stuck = run(
+      series(20, (k) => ({ store: store(k >= 5 && k < 8 ? { journalPresent: true, journalBytes: 4096 } : {}) })),
+    );
+    expect(crit(stuck, 'journal compacts')!.pass).toBe(false);
+    expect(stuck.store!.journal.longestRun).toBe(3);
+    // the stuck-run length is a threshold
+    const lenient = run(
+      series(20, (k) => ({ store: store(k >= 5 && k < 8 ? { journalPresent: true } : {}) })),
+      config({ thresholds: { journalStuckSamples: 4 } }),
+    );
+    expect(crit(lenient, 'journal compacts')!.pass).toBe(true);
+    // pending after the last write: not compacting
+    const pending = run(series(20, (k) => ({ store: store(k === 19 ? { journalPending: true } : {}) })));
+    expect(crit(pending, 'journal compacts')!.pass).toBe(false);
+    expect(pending.store!.journal.pendingAtEnd).toBe(true);
+  });
+
+  it('store growth is reported per document, in MB per hour', () => {
+    // ledger.json grows 36 KB per 15 s sample = 8.4 MB/h
+    const s = run(
+      series(20, (k) => ({
+        store: store({
+          docs: { 'ledger.json': 1000 + k * 36 * 1024, 'inventories.json': 2000 },
+          totalBytes: 3000 + k * 36 * 1024,
+        }),
+      })),
+    );
+    expect(s.store!.growthByDoc['ledger.json']).toBeGreaterThan(8);
+    expect(s.store!.growthByDoc['inventories.json']).toBeUndefined(); // flat
+    expect(crit(s, 'file-store growth')!.info).toBe(true);
+    expect(run(series(20)).store).toBeUndefined(); // the memory store has no files
+    expect(crit(run(series(20)), 'journal compacts')).toBeUndefined();
+  });
+
+  it('backups: a failure, a slow one or a final one that does not verify fails the run; none taken adds no criterion', () => {
+    const ok = { ok: true, ms: 800, bytes: 3 * 1048576 };
+    const withB = (b: Partial<SoakSample>[]) => series(20, (k) => b[k] ?? {});
+    const good = run(withB([{}, { backup: ok }, {}, { backup: { ...ok, ms: 1200 } }]));
+    expect(crit(good, 'backups')!.pass).toBe(true);
+    expect(good.backups).toMatchObject({ count: 2, failed: 0, maxS: 1.2, lastVerified: null });
+    expect(crit(run(series(20)), 'backups')).toBeUndefined();
+    const failed = run(withB([{ backup: ok }, { backup: { ok: false, ms: 0, bytes: 0, error: 'disk full' } }]));
+    expect(crit(failed, 'backups')!.pass).toBe(false);
+    const slow = run(withB([{ backup: { ...ok, ms: 20_000 } }]));
+    expect(crit(slow, 'backups')!.pass).toBe(false);
+    const lenient = run(withB([{ backup: { ...ok, ms: 20_000 } }]), config({ thresholds: { backupS: 30 } }));
+    expect(crit(lenient, 'backups')!.pass).toBe(true);
+    // the final backup is not tied to a sample and carries the verification
+    const h = new TickHistogram();
+    h.add([1]);
+    const fin = summarizeSoak(config(), series(20), h, {}, undefined, h, [{ ...ok, verified: false }]);
+    expect(crit(fin, 'backups')!.pass).toBe(false);
+    expect(fin.backups!.lastVerified).toBe(false);
+    const fin2 = summarizeSoak(config(), series(20), h, {}, undefined, h, [{ ...ok, verified: true }]);
+    expect(crit(fin2, 'backups')!.pass).toBe(true);
+  });
+
+  it('the tick p99 budget is a threshold, and event-loop lag per window is summarised', () => {
+    const slowTicks = series(20, () => ({ tick: dist([30, 35, 45, 50]) }));
+    const h = new TickHistogram();
+    h.add([30, 35, 45, 50]);
+    const strict = summarizeSoak(config(), slowTicks, h, {});
+    expect(crit(strict, 'tick p99')!.pass).toBe(false);
+    const lenient = summarizeSoak(config({ thresholds: { tickP99Ms: 80 } }), slowTicks, h, {});
+    expect(crit(lenient, 'tick p99')!.pass).toBe(true);
+    const lag = run(series(10, (k) => ({ loop: { p50: 10, p99: 12 + k, max: 20 + k } })));
+    expect(lag.loop).toEqual({ meanP99: 16.5, worstP99: 21, max: 29 });
+    expect(run(series(10)).loop).toBeUndefined();
+  });
+
+  it('the CSV and the text report carry the new columns and lines; old series still render', () => {
+    const rows = samplesCsv(
+      series(3, (k) => ({
+        loop: { p50: 10, p99: 12, max: 30 },
+        store: store({ journalPresent: k === 1, journalBytes: k === 1 ? 2048 : 0 }),
+        ...(k === 2 ? { backup: { ok: true, ms: 900, bytes: 10 } } : {}),
+      })),
+    )
+      .trim()
+      .split('\n');
+    const head = rows[0]!.split(',');
+    for (const col of ['loop_p99_ms', 'store_mb', 'journal_kb', 'journal_present', 'backup_ms', 'backup_ok'])
+      expect(head).toContain(col);
+    expect(rows[1]!.split(',')).toHaveLength(head.length);
+    expect(rows[3]!.split(',')[head.indexOf('backup_ms')]).toBe('900');
+    expect(rows[2]!.split(',')[head.indexOf('journal_present')]).toBe('1');
+    const old = samplesCsv(series(2)).trim().split('\n');
+    expect(old[1]!.split(',')).toHaveLength(old[0]!.split(',').length); // missing fields are empty cells
+    const text = formatSoak(run(series(20, () => ({ loop: { p50: 10, p99: 12, max: 30 }, store: store() }))));
+    expect(text).toContain('event loop');
+    expect(text).toContain('file store');
+  });
+});

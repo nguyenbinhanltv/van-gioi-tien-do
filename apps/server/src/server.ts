@@ -10,6 +10,9 @@ import type { SectStore } from './sect/store.js';
 import { Ledger } from './world/inventory/ledger.js';
 import { FriendService } from './friends/service.js';
 import type { FriendStore } from './friends/store.js';
+import { QuestService, type QuestSectPort } from './quests/service.js';
+import type { QuestStore } from './quests/store.js';
+import { WORLD_CONFIG } from './config.js';
 import { MarketService, type MarketServiceOptions } from './market/service.js';
 import type { MarketStore } from './market/store.js';
 import { TelemetryService, type TelemetryOptions } from './telemetry/service.js';
@@ -35,6 +38,8 @@ export interface ServerOptions {
   sect?: { store?: SectStore; ledger?: Ledger } | false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
   friends?: { store?: FriendStore } | false;
+  /** quests options (D107): store (default in memory), wall clock (default `Date.now`), sect port; `false` = no quests. Needs inventory + progression. */
+  quests?: { store?: QuestStore; clock?: () => number; sect?: QuestSectPort } | false;
   /** crash report intake (D110): options, or `false` to run without it (default: enabled, in memory unless `dir` is given) */
   crash?: CrashOptions | false;
   /**
@@ -114,6 +119,18 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
           },
         }));
   const inventory = opts.world?.inventory;
+  const quests =
+    opts.quests === false || !inventory || !progression
+      ? undefined
+      : (opts.world?.quests ??
+        new QuestService({
+          ...(opts.quests?.store ? { store: opts.quests.store } : {}),
+          // sect quests pay Cống hiến through the sect module when it is hosted (D98 + D107)
+          ...(opts.quests?.sect ? { sect: opts.quests.sect } : sect ? { sect } : {}),
+          inventory,
+          clock: opts.quests?.clock ?? (() => Date.now()),
+          mapTiles: opts.world?.mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES,
+        }));
   const market =
     opts.market === false || !inventory
       ? undefined
@@ -140,6 +157,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     ...(trade ? { trade } : {}),
     ...(sect ? { sect } : {}),
     ...(friends ? { friends } : {}),
+    ...(quests ? { quests } : {}),
     ...(market ? { market } : {}),
     ...(telemetry ? { telemetry } : {}),
   });

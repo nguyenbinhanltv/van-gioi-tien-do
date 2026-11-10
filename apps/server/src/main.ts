@@ -112,6 +112,7 @@ const srv = await startServer({
       : undefined,
   },
   auth: { registerPerIpPerDay, ...(invites ? { invites } : {}), ...(stores ? { store: stores.accounts } : {}) },
+  ...(stores ? { friends: { store: stores.friends }, quests: { store: stores.quests } } : {}),
   ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
   ...(stores ? { friends: { store: stores.friends } } : {}),
   // Vạn Bảo Lâu (D112): the book is the market.json document; the weekly SHADOW CPI report goes to the log (telemetry can subscribe later)

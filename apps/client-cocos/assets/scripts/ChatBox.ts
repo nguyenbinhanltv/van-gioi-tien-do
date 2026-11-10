@@ -55,6 +55,8 @@ export class ChatBox {
   readonly friends: InstanceType<typeof core.FriendsModel>;
   /** set by the friends panel: `/friends` toggles it (without one the list is printed as chat lines) */
   onFriendsToggle: (() => void) | null = null;
+  /** set by the quest panel: `/quest` toggles the log (D107) */
+  onQuestsToggle: (() => void) | null = null;
   private readonly root: HTMLDivElement;
   private readonly list: HTMLDivElement;
   private readonly input: HTMLInputElement;
@@ -74,6 +76,7 @@ export class ChatBox {
   ) {
     this.log = new core.ChatLog({
       myName: () => username,
+      onQuests: () => this.onQuestsToggle?.(),
       onTrade: () => this.showTrade(),
       onSect: () => this.showSect(),
       onFriends: () => this.showFriends(),
