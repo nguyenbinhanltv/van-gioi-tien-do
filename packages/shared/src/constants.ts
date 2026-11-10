@@ -172,6 +172,11 @@ export const AOI = {
 export const BUDGETS = {
   /** Initial download (Web) in MB — replaces the old 30/29 MB. */
   INITIAL_DOWNLOAD_MB_WEB: 25,
+  /**
+   * Everything the game may fetch AFTER the first world frame (lazy pages, chibi background queue, VFX textures), MB raw, measured by
+   * `perf:p1` from the first-world-frame marker. Budgeted separately from the initial download so deferring art cannot hide it.
+   */
+  LAZY_DOWNLOAD_MB_WEB: 12,
   RAM_MB_WEB: 500,
   TEXTURE_RAM_MB_WEB: 220,
   DRAW_CALLS_WEB_MOBILE: 80,

@@ -228,6 +228,21 @@ describe('budget gate: initial package estimate', () => {
     expect(after.estimate.lazyBytes).toBeGreaterThan(0);
   });
 
+  it('gives the lazy pages their own ceiling (LAZY_PACKAGE_OVER)', () => {
+    makeAtlas(dir, { name: 'atl_small' });
+    expect(runBudget({ atlasDir: dir }).findings.some((f) => f.code === 'LAZY_PACKAGE_OVER')).toBe(false);
+    // a lazy page big enough to pass the shared lazy limit
+    makeAtlas(dir, { name: 'atl_ptcl_big', width: 128, height: 64 });
+    const big = path.join(
+      dir,
+      fs.readdirSync(dir).find((f) => f.startsWith('atl_ptcl_big') && f.endsWith('.png'))!,
+    );
+    fs.appendFileSync(big, Buffer.alloc(Math.ceil((BUDGETS.LAZY_DOWNLOAD_MB_WEB + 1) * 1024 * 1024)));
+    expect(
+      runBudget({ atlasDir: dir }).findings.some((f) => f.code === 'LAZY_PACKAGE_OVER' && f.level === 'error'),
+    ).toBe(true);
+  });
+
   it('treats the PART 3 pages (atl_fx, atl_equip, map_world: loaded on demand) as lazy too', () => {
     makeAtlas(dir, { name: 'atl_small' });
     const before = runBudget({ atlasDir: dir });

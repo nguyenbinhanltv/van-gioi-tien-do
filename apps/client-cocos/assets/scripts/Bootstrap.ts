@@ -49,6 +49,7 @@ import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
 import { Minimap, WorldMapPanel } from './MapUi';
+import { FIRST_WORLD_FRAME_FALLBACK_MS, armFirstWorldFrameFallback, markFirstWorldFrame } from './Milestones';
 import { installCrashReporting, setCrashClass } from './CrashReport';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
@@ -151,6 +152,7 @@ export class Bootstrap extends Component {
     try {
       await this.build();
       this.ready = true;
+      armFirstWorldFrameFallback(FIRST_WORLD_FRAME_FALLBACK_MS); // no chibi art / a failed load must not strand the deferred VFX art
       console.log(
         `[vgtd] world ready: ${this.world.tileCount} tiles in ${this.world.chunkCount} chunks, ${this.ysort.count} L3 objects`,
       );
@@ -269,6 +271,7 @@ export class Bootstrap extends Component {
     // classes, the player's other directions, rest clips).
     this.chibi.onInstalled = () => {
       if (chibiStreamer.backgroundOpen) return;
+      markFirstWorldFrame(); // the cut of the initial package (Milestones.ts): what is fetched from here on is the lazy set
       chibiStreamer.openBackground();
       this.chibi.prefetchDirections();
     };

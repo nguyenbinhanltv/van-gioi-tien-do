@@ -38,7 +38,7 @@ export interface PerfStats {
   frameMsMax: number;
   hitches50: number;
   hitches100: number;
-  budgets: { drawCalls: number; ramMB: number; initialDownloadMB: number };
+  budgets: { drawCalls: number; ramMB: number; initialDownloadMB: number; lazyDownloadMB: number };
 }
 
 /** Top-left perf overlay. Also publishes the latest numbers on `window.__vgtdPerf` for automation. */
@@ -87,6 +87,7 @@ export class PerfHud {
       drawCalls: shared.BUDGETS.DRAW_CALLS_WEB_MOBILE,
       ramMB: shared.BUDGETS.RAM_MB_WEB,
       initialDownloadMB: shared.BUDGETS.INITIAL_DOWNLOAD_MB_WEB,
+      lazyDownloadMB: shared.BUDGETS.LAZY_DOWNLOAD_MB_WEB,
     },
   };
   extra: () => {
