@@ -1,5 +1,6 @@
 import { Node, UITransform, dragonBones } from 'cc';
 import { character, shared } from './vendor/vgtd.mjs';
+import { chibiScale } from './WorldScale';
 import { newNode } from './IsoAdapter';
 import {
   chibiTierFor,
@@ -50,8 +51,8 @@ export function pathOfChibiId(id: string): string | undefined {
 }
 
 export type MoveState = 'idle' | 'walk' | 'run';
-/** Chibi masters are ~208 px tall in a 256 px cell; tiles are 64 px wide, so scale to ~1.3 tiles of height. */
-export const CHIBI_SCALE = 0.42;
+/** Chibi masters are ~208 px tall in a 256 px cell; scaled to the player height of the world-scale table (WorldScale.ts, D123). */
+export const CHIBI_SCALE = chibiScale(shared.TILE_WIDTH);
 
 export interface ChibiPick {
   /** Authored direction whose armature plays. */

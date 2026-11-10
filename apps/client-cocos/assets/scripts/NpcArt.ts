@@ -1,4 +1,6 @@
 import { Color, Node, Sprite, SpriteFrame, UITransform } from 'cc';
+import { shared } from './vendor/vgtd.mjs';
+import { NPC_HEIGHT_TILES, scaleForHeight } from './WorldScale';
 import { footprintSortable, newNode, tileToWorld } from './IsoAdapter';
 import { allocSortId } from './Actors';
 import { newMotion, stepMotion, type MotionState } from './MobMotion';
@@ -22,6 +24,8 @@ export class NpcStandee {
   private readonly body: Node;
   private readonly shadow: Node | null;
   private readonly motion: MotionState;
+  /** world scale (WorldScale.ts, D123): every NPC stands as tall as the player whatever its concept art size */
+  private readonly scale: number;
 
   constructor(
     readonly key: string,
@@ -31,18 +35,20 @@ export class NpcStandee {
     shadowFrame: SpriteFrame | null,
     shadowParent: Node | null,
   ) {
+    this.scale = scaleForHeight(NPC_HEIGHT_TILES, entry.h, shared.TILE_WIDTH);
     this.node = newNode(`Npc_${key}`);
     this.body = newNode('body', this.node);
     const ui = this.body.addComponent(UITransform);
     ui.setContentSize(entry.w, entry.h);
     ui.setAnchorPoint(entry.pivot.x, 1 - entry.pivot.y); // Cocos anchor y is up
+    this.body.setScale(this.scale, this.scale, 1);
     const sp = this.body.addComponent(Sprite);
     sp.sizeMode = Sprite.SizeMode.CUSTOM;
     sp.spriteFrame = frame;
     this.motion = newMotion(tile.i * 31 + tile.j);
     this.node.setPosition(tileToWorld(tile.i + 0.5, tile.j + 0.5));
     if (shadowFrame && shadowParent) {
-      const w = entry.w * SHADOW_W_FRAC;
+      const w = entry.w * this.scale * SHADOW_W_FRAC;
       this.shadow = newNode(`NpcShadow_${key}`, shadowParent);
       this.shadow.addComponent(UITransform).setContentSize(w, w * SHADOW_ASPECT);
       const ss = this.shadow.addComponent(Sprite);
@@ -55,7 +61,7 @@ export class NpcStandee {
 
   /** How far the art reaches above the foot (the culling margin of the Y-sort entry). */
   get reach(): number {
-    return this.entry.h + REACH_PAD;
+    return this.entry.h * this.scale + REACH_PAD;
   }
 
   /** Idle bob only: an NPC never moves and never faces anything (the art is front-facing). */
