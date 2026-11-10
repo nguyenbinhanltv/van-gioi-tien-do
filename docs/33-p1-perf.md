@@ -50,6 +50,35 @@ Số 55 / 80 của báo cáo thoát P1 là **không có quái và không có HUD
 
 Kết quả: **60–64** (tối đa trong 30 giây đo, zoom 1,5× mặc định; zoom 1,0× nhìn rộng hơn nên ~66) với cùng cảnh, sau khi gộp thêm code mới (party, status tile, khung UI 9-slice, map vùng); tầm với cắt của chibi 120 px, prop = max(cao, rộng/2) + 30; cảnh cơ sở (20 NPC, không quái, không combat) 49 (trước 53–55); mở túi đồ 37 (không đổi). Cổng đo: `npm run perf:p1 -w client-cocos -- --mobs --draw-limit 65` (chỉ siết được ngưỡng, không nới ngưỡng dùng chung). Mục tiêu 65 chưa có chỗ trống: thêm quái / NPC trên màn hình thì phải gom tiếp (HP bar trên đầu, armature).
 
+### Bộ đệm đỉnh của Batcher2D (`BATCHER2D_MEM_INCREMENT`, 2026-11-10)
+
+Nguyên nhân thật của phần lớn draw call "thừa" (đo bằng `__vgtdBatchTrace` + `__vgtdGroundProbe`, xem PR): mọi sprite của một chunk nền dùng cùng texture và material, nhưng engine gộp batch chỉ khi **hash dữ liệu bằng nhau**, và hash đó gồm id của **bộ đệm đỉnh** (`bid`). Mỗi bộ đệm đỉnh 2D mặc định chỉ 144 KB = 4096 đỉnh = 1024 sprite, nên một chunk nền (~1250-5000 ô) và mọi lớp đông sprite bị cắt thành nhiều batch ở ranh giới bộ đệm, dù không có gì khác biệt.
+
+Cách sửa: macro `BATCHER2D_MEM_INCREMENT` = **2048** (KB) trong `apps/client-cocos/settings/v2/packages/engine.json` (`macroConfig`; builder đưa vào `settings.json` của bản dựng: `"macros":{"BATCHER2D_MEM_INCREMENT":2048}`). Mỗi bộ đệm = 2048 KB / 36 B = **58254 đỉnh** (14563 sprite).
+
+- **Giới hạn trên 2303 KB**: chỉ số đỉnh trong bộ đệm là `Uint16` (tối đa 65535 đỉnh; đỉnh 36 byte). 4096 KB cho 116508 đỉnh và vượt giới hạn, nên KHÔNG tăng quá ~2300.
+- **Bộ nhớ**: mỗi bộ đệm = 2048 KB đỉnh + 455 KB chỉ số (`IB_SCALE` 4 × 2 B) ≈ 2,5 MB trên CPU và cùng cỡ đó trên GPU. Cảnh 14 quái + 20 NPC cần khoảng 80 nghìn đỉnh: 2 bộ đệm (~5 MB CPU + ~5 MB GPU), so với ~20 bộ đệm × 176 KB (~3,5 MB) ở mặc định; chênh vài MB là do làm tròn lên bộ đệm cuối. Đường RAM của cổng đo (heap JS + texture) không đổi trong sai số (160-173 MB cả hai bên); ArrayBuffer nằm ngoài heap JS nên số này không thấy phần chênh ~1-3 MB.
+
+**Còn mở: chưa kiểm tra bộ nhớ trên máy mobile thật.** Phần chênh bộ nhớ ở trên (~1-3 MB CPU + GPU) là số TÍNH, không phải số đo: ArrayBuffer nằm ngoài heap JS nên cổng đo không thấy. Cần đo trên thiết bị thật (Android tầm thấp và iOS Safari: bộ nhớ GPU của hai bộ đệm 2048 KB, nguy cơ bị hệ điều hành đóng tab) trước khi coi là đã chốt; xem mục "Cách đo trên máy mobile thật" bên dưới và `docs/OPEN-ITEMS.md`.
+
+Đo sạch (hai bản dựng release trên **stage mới** cho mỗi bên, cùng commit, chỉ khác dòng macro; `--mobs`, tối đa draw call 30 giây): zoom 1,5: **64 -> 38**; zoom 1,0: **70 -> 44**; zoom 2,0: **59 -> 35**. Kịch bản tung chiêu liên tục (nhánh PR #274, `--casting`): **70-76 -> 40-47** (zoom 1,5) trước khi gom tiếp bất cứ thứ gì khác. Lưu ý đo: bản dựng release chạy trên bản sao `build/stage-release` có Library riêng; muốn so sánh hai giá trị macro phải dùng `VGTD_STAGE_DIR` mới cho từng bên, nếu không bản dựng cũ có thể giữ cấu hình cũ.
+
+## Kịch bản tung chiêu liên tục (`--casting`) và cách tìm chỗ vỡ batch
+
+`npm run perf:p1 -w client-cocos -- --casting [--class dan-phu-tu]` = cảnh `--mobs` (14 quái + 20 NPC + HUD chiến đấu) trong khi thanh kỹ năng liên tục tung chiêu (`?vfxdemo=1`, mock offline): thanh cast, số hồi chiêu, ô trạng thái, số sát thương nổi, thanh máu trên đầu và hiệu ứng kỹ năng cùng hiện. CI không chạy perf (cần Cocos Creator headless): đây là cổng chạy tay như `--mobs`, dùng `--draw-limit 65`.
+
+Công cụ gỡ lỗi (`?drawdbg=1`): `window.__vgtdBatchTrace(reset)` đếm, theo đường dẫn node, batch nào BẮT ĐẦU ở node nào (bọc `Batcher2D.autoMergeBatches`, nhận component đầu của batch vừa được xả; bản release làm rối tên trường riêng của engine nên chỉ dùng component engine truyền vào); `__vgtdDrawExp('hide:<đường dẫn>')` / `show:` ẩn / hiện một node để đo chênh lệch `drawCalls`; khóa của `Label` trong báo cáo dựa vào texture chữ thật (`spriteFrame`).
+
+**Kết quả đo và bài học (2026-11-10).** Trước khi có `BATCHER2D_MEM_INCREMENT` (mục trên), tung chiêu liên tục đo 73 / 79 / 73 (Thể tu / Đan Phù / Pháp tu). Tôi đã thử gom HUD (một cỡ chữ cho mọi nhãn động, lớp phủ hồi chiêu là quad thay vì sprite `FILLED` tròn, ô trạng thái và thanh máu / số nổi tách lớp) và chỉ xuống 70 / 72 / 76. Nguyên nhân thật là bộ đệm đỉnh 144 KB cắt batch mỗi 1024 sprite. **Với macro 2048 KB** (cùng cơ sở mã, bản dựng sạch cho mỗi biến thể, tối đa / trung vị draw call trong 30 giây):
+
+| biến thể (casting, 3 lớp)                           | zoom 1,5 tối đa | zoom 1,5 trung vị | zoom 1,0 tối đa | zoom 1,0 trung vị |
+| --------------------------------------------------- | --------------: | ----------------: | --------------: | ----------------: |
+| A: không đổi HUD                                    |           42-45 |             38-39 |           49-50 |             43-45 |
+| B: đủ bốn thay đổi HUD                              |              41 |             35-37 |           48-49 |             42-44 |
+| C: như B nhưng giữ cỡ chữ gốc (chỉ CHAR + phân lớp) |           41-45 |             37-38 |           47-50 |             41-44 |
+
+Các thay đổi HUD chỉ đáng 1-3 draw call (trong sai số đo giữa các lần chạy) trong khi đổi hình thức (lớp phủ hồi chiêu kiểu cuộn thay vì quét tròn) và làm chữ nhỏ mềm hơn; cổng 65 đã đạt dư (tối đa 50). Vì vậy KHÔNG đưa các thay đổi đó vào; chỉ giữ công cụ đo. **Đính chính:** lúc đầu tôi viết "engine giữ MỘT atlas chữ cho mỗi cỡ chữ": sai. Ở 3.8.8 mọi nhãn CHAR dùng chung một `LetterAtlas` (`letter-font.ts`), cỡ chữ chỉ nằm trong khóa glyph; số liệu "~5 -> ~2" trước đó đo bằng cách ẩn nhãn nên chỉ chứng minh nhãn tốn draw call chứ không chứng minh nguyên nhân là cỡ chữ.
+
 ## Cách đo trên Web (headless)
 
 ```bash

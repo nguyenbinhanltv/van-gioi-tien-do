@@ -7,7 +7,14 @@ import * as lib from '../../../scripts/lib/play-lib.mjs';
 
 const {
   DEFAULTS,
+  buildOutcome,
+  buildPhaseOf,
   buildUrls,
+  editorActivityMs,
+  idleLimitMin,
+  isFirstBuild,
+  makeBuildWatchdog,
+  sourceFingerprint,
   checkNode,
   cocosEditorPath,
   controlLines,
@@ -44,6 +51,7 @@ type Opts = {
   clientPort: number;
   serverPort: number;
   buildTimeoutMin: number;
+  buildTimeoutExplicit: boolean;
   clientPortExplicit: boolean;
   serverPortExplicit: boolean;
 };
@@ -66,7 +74,8 @@ describe('play: argument parsing', () => {
       help: false,
       clientPort: DEFAULTS.clientPort,
       serverPort: DEFAULTS.serverPort,
-      buildTimeoutMin: 10,
+      buildTimeoutMin: 5,
+      buildTimeoutExplicit: false,
       clientPortExplicit: false,
       serverPortExplicit: false,
     });
@@ -117,8 +126,9 @@ describe('play: argument parsing', () => {
     expect(parse('--port', '8456').opts.clientPortExplicit).toBe(true); // even when it equals the default
   });
 
-  it('--build-timeout takes minutes 1-120, default 10', () => {
-    expect(parse().opts.buildTimeoutMin).toBe(10);
+  it('--build-timeout takes minutes 1-120 of NO progress, default 5 (and marks it as asked for)', () => {
+    expect(parse().opts.buildTimeoutMin).toBe(5);
+    expect(parse('--build-timeout', '3').opts.buildTimeoutExplicit).toBe(true);
     expect(parse('--build-timeout', '3').opts.buildTimeoutMin).toBe(3);
     expect(parse('--build-timeout=45').opts.buildTimeoutMin).toBe(45);
     for (const bad of ['0', '121', 'x', '-5'])
@@ -502,5 +512,138 @@ describe('play: --reset-data safety', () => {
     expect(existsSync(e)).toBe(false);
     // nothing to reset is not an error
     expect(resetData(join(e, 'missing'))).toEqual([]);
+  });
+});
+
+const progressDirs: string[] = [];
+afterEach(() => {
+  for (const d of progressDirs.splice(0)) rmSync(d, { recursive: true, force: true });
+});
+const mk = (): string => {
+  const d = mkdtempSync(join(tmpdir(), 'vgtd-progress-'));
+  progressDirs.push(d);
+  return d;
+};
+
+describe('play: a slow first build is not a hung build (progress-aware timeout)', () => {
+  const MIN = 60_000;
+  it('the watchdog only fires after a stretch WITHOUT any sign of life, and every sign of life restarts the clock', () => {
+    const w = makeBuildWatchdog({ idleMs: 5 * MIN, maxMs: 120 * MIN, now: 0 });
+    expect(w.check(4 * MIN)).toBeNull();
+    w.touch(4 * MIN); // a log line / a file written by the editor
+    expect(w.check(8 * MIN)).toBeNull(); // 8 minutes in, but only 4 since the last sign of life
+    expect(w.check(9 * MIN)).toBe('idle');
+    expect(w.idleSec(9 * MIN)).toBe(300);
+    expect(w.elapsedSec(9 * MIN)).toBe(540);
+    w.touch(3 * MIN); // an older timestamp never moves the clock back
+    expect(w.check(9 * MIN)).toBe('idle');
+  });
+
+  it('a build that keeps showing activity is never idle-killed (the old fixed 10 minutes killed exactly this one), but the hard cap still ends a runaway', () => {
+    const w = makeBuildWatchdog({ idleMs: 5 * MIN, maxMs: 120 * MIN, now: 0 });
+    for (let t = 1; t <= 40; t++) {
+      w.touch(t * 2 * MIN); // 80 minutes of a slow import that writes files
+      expect(w.check(t * 2 * MIN)).toBeNull();
+    }
+    expect(w.check(120 * MIN)).toBe('max');
+  });
+
+  it('the first build (no asset database) gets a much bigger idle allowance; a number the user asked for is taken literally', () => {
+    const plain = { buildTimeoutMin: DEFAULTS.buildTimeoutMin, buildTimeoutExplicit: false };
+    expect(idleLimitMin(plain, false)).toBe(DEFAULTS.buildTimeoutMin);
+    expect(idleLimitMin(plain, true)).toBe(DEFAULTS.firstBuildTimeoutMin);
+    expect(DEFAULTS.firstBuildTimeoutMin).toBeGreaterThan(DEFAULTS.buildTimeoutMin * 2);
+    expect(idleLimitMin({ buildTimeoutMin: 3, buildTimeoutExplicit: true }, true)).toBe(3);
+  });
+
+  it('detects a first build from a missing / empty library, and reads editor activity from library/, temp/ and the output', () => {
+    const d = mk();
+    expect(isFirstBuild(d)).toBe(true);
+    mkdirSync(join(d, 'library'));
+    expect(isFirstBuild(d)).toBe(true); // empty
+    mkdirSync(join(d, 'library/ab'), { recursive: true });
+    writeFileSync(join(d, 'library/ab/abcdef.json'), '{}');
+    expect(isFirstBuild(d)).toBe(false);
+    expect(editorActivityMs(join(d, 'nothing-here'))).toBe(0);
+    utimesSync(join(d, 'library/ab'), 1000, 1000);
+    utimesSync(join(d, 'library'), 1000, 1000);
+    const before = editorActivityMs(d);
+    writeFileSync(join(d, 'library/ab/another.json'), '{}'); // the import writes a file into a two-character folder
+    expect(editorActivityMs(d)).toBeGreaterThanOrEqual(before);
+    mkdirSync(join(d, 'temp'));
+    const future = Math.floor(Date.now() / 1000) + 86_400;
+    utimesSync(join(d, 'temp'), future, future);
+    expect(editorActivityMs(d)).toBeGreaterThanOrEqual(future * 1000 - 1000);
+  });
+
+  it('exit code 36 + a Finished line + the output present is a SUCCESS; without the line or the output it is not', () => {
+    expect(buildOutcome({ code: 0, indexExists: true, sawFinished: false })).toEqual({ ok: true, note: '' });
+    const ok36 = buildOutcome({ code: 36, indexExists: true, sawFinished: true });
+    expect(ok36.ok).toBe(true);
+    expect(ok36.note).toContain('36');
+    expect(buildOutcome({ code: 36, indexExists: true, sawFinished: false }).ok).toBe(false);
+    expect(buildOutcome({ code: 0, indexExists: false, sawFinished: true }).ok).toBe(false);
+    expect(buildOutcome({ code: 36, indexExists: false, sawFinished: true }).note).toContain('missing');
+  });
+
+  it('reads the phase from the build log (asset import, then build, then finished)', () => {
+    expect(buildPhaseOf('Start importing asset db')).toBe('import');
+    expect(buildPhaseOf('refresh asset-db')).toBe('import');
+    expect(buildPhaseOf('Start build task: web-mobile')).toBe('build');
+    expect(buildPhaseOf('build Task (web-mobile) Finished in 51 s')).toBe('finished');
+    expect(buildPhaseOf('something unrelated')).toBeNull();
+  });
+});
+
+describe('play: an up-to-date build is reused (only timestamps moved, or only server code changed)', () => {
+  it('needsRebuild reuses a "stale by mtime" build when the content fingerprint matches, and still rebuilds when it does not', () => {
+    const build = { exists: true, variant: 'release', mtimeMs: 1000 };
+    const src = { mtimeMs: 2000, file: 'apps/client-cocos/assets/scripts/Combat.ts' };
+    const decide = (over: Record<string, unknown>) =>
+      needsRebuild({ force: false, wantedVariant: 'release', build, newestSource: src, ...over } as never) as {
+        rebuild: boolean;
+        code: string;
+        reason: string;
+      };
+    expect(decide({}).code).toBe('stale');
+    expect(decide({ sameSources: false }).rebuild).toBe(true);
+    const same = decide({ sameSources: true });
+    expect(same).toMatchObject({ rebuild: false, code: 'ok' });
+    expect(same.reason).toContain('content did not');
+    // never overrides the other reasons to rebuild
+    expect(decide({ sameSources: true, force: true }).rebuild).toBe(true);
+    expect(decide({ sameSources: true, wantedVariant: 'dev' }).rebuild).toBe(true);
+  });
+
+  it('the fingerprint ignores touches, server code and generated output, and changes with the content of any client input', () => {
+    const root = mk();
+    const f = (rel: string, text: string) => {
+      mkdirSync(join(root, rel, '..'), { recursive: true });
+      writeFileSync(join(root, rel), text);
+    };
+    f('apps/client-cocos/assets/scripts/Combat.ts', 'export const a = 1;');
+    f('packages/shared/src/x.ts', 'export const x = 1;');
+    f('apps/server/src/world/node.ts', 'server code v1');
+    f('apps/client-cocos/assets/scripts/Combat.ts.meta', 'meta v1');
+    const h0 = sourceFingerprint(root);
+    expect(h0).toMatch(/^[0-9a-f]{40}$/);
+    // only timestamps moved (a branch switch / merge / touch)
+    for (const rel of ['apps/client-cocos/assets/scripts/Combat.ts', 'packages/shared/src/x.ts'])
+      utimesSync(join(root, rel), 5_000_000_000, 5_000_000_000);
+    expect(sourceFingerprint(root)).toBe(h0);
+    // the game SERVER, .meta files, tests and docs are not inputs of the web client
+    f('apps/server/src/world/node.ts', 'server code v2, much longer than before');
+    f('apps/client-cocos/assets/scripts/Combat.ts.meta', 'meta v2');
+    f('packages/shared/test/x.test.ts', 'a test');
+    f('packages/shared/README.md', 'docs');
+    expect(sourceFingerprint(root)).toBe(h0);
+    // a real change to a client input changes it, even with the same size and the same mtime
+    f('apps/client-cocos/assets/scripts/Combat.ts', 'export const a = 2;');
+    utimesSync(join(root, 'apps/client-cocos/assets/scripts/Combat.ts'), 5_000_000_000, 5_000_000_000);
+    expect(sourceFingerprint(root)).not.toBe(h0);
+    // adding / removing a file changes it too
+    const h1 = sourceFingerprint(root);
+    f('packages/shared/src/y.ts', 'new');
+    expect(sourceFingerprint(root)).not.toBe(h1);
   });
 });

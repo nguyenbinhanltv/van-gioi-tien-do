@@ -1,12 +1,21 @@
 import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
+import { CrashService, type CrashOptions } from './crash/index.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
+import { TutorialService, type TutorialOptions } from './tutorial/service.js';
+import { TradeService } from './trade/service.js';
 import { SectService } from './sect/service.js';
 import type { SectStore } from './sect/store.js';
 import { Ledger } from './world/inventory/ledger.js';
 import { FriendService } from './friends/service.js';
 import type { FriendStore } from './friends/store.js';
+import { QuestService, type QuestSectPort } from './quests/service.js';
+import type { QuestStore } from './quests/store.js';
+import { WORLD_CONFIG } from './config.js';
+import { MarketService, type MarketServiceOptions } from './market/service.js';
+import type { MarketStore } from './market/store.js';
+import { TelemetryService, type TelemetryOptions } from './telemetry/service.js';
 import { ProgressionService, type ProgressionOptions } from './progression/service.js';
 import { WorldNode, type WorldNodeOptions } from './world/node.js';
 
@@ -21,10 +30,28 @@ export interface ServerOptions {
   chat?: ChatOptions | false;
   /** `false` to run without parties (default: enabled, in-memory, session-only: D93) */
   party?: false;
+  /** tutorial / FTUE tracker options, or `false` to run without it (default: enabled, in-memory store: D105) */
+  tutorial?: TutorialOptions | false;
+  /** direct trade (D102): on whenever the world has an inventory, or `false` to run without it */
+  trade?: false;
   /** NPC sect options (D98): the persistence store (default in memory), or `false` to run without the sect */
   sect?: { store?: SectStore; ledger?: Ledger } | false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
   friends?: { store?: FriendStore } | false;
+  /** quests options (D107): store (default in memory), wall clock (default `Date.now`), sect port; `false` = no quests. Needs inventory + progression. */
+  quests?: { store?: QuestStore; clock?: () => number; sect?: QuestSectPort } | false;
+  /** crash report intake (D110): options, or `false` to run without it (default: enabled, in memory unless `dir` is given) */
+  crash?: CrashOptions | false;
+  /**
+   * Vạn Bảo Lâu options (D112). The market needs an inventory (items and the ledger): it is created whenever `world.inventory` exists, unless
+   * `false`. `store` = where the book is kept (default in memory), `report` / `now` / `durable` as in `MarketServiceOptions`.
+   */
+  market?:
+    ({ store?: MarketStore } & Pick<MarketServiceOptions, 'now' | 'report' | 'durable' | 'onDurableError'>) | false;
+  /** telemetry pipeline options, or `false` to run without it (default: enabled, in-memory log and rollups: D109) */
+  telemetry?: TelemetryOptions | false;
+  /** bearer token for `/dashboard` (default: only loopback connections are served) */
+  dashboardToken?: string;
   gateway?: GatewayOptions;
   /** start the 20 Hz loop (tests drive `world.tick()` themselves when false) */
   autoTick?: boolean;
@@ -34,6 +61,7 @@ export interface RunningServer {
   auth: AuthService;
   world: WorldNode;
   gateway: GatewayHandle;
+  crash?: CrashService;
   port: number;
   stop(): Promise<void>;
 }
@@ -46,6 +74,23 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
       : (opts.world?.progression ?? new ProgressionService({ seed: opts.world?.seed, ...opts.progression }));
   const chat = opts.chat === false ? undefined : (opts.world?.chat ?? new ChatService(opts.chat));
   const party = opts.party === false ? undefined : (opts.world?.party ?? new PartyService());
+  const telemetry =
+    opts.telemetry === false ? undefined : (opts.world?.telemetry ?? new TelemetryService(opts.telemetry));
+  const tutorial =
+    opts.tutorial === false
+      ? undefined
+      : (opts.world?.tutorial ??
+        new TutorialService({
+          mapTiles: opts.world?.mapTiles,
+          ...(telemetry ? { onEvent: (account, r) => telemetry.ftue(account, r) } : {}),
+          ...opts.tutorial,
+        }));
+  // a trade moves bag items and stones, so it only exists where the world has an inventory
+  const trade =
+    opts.trade === false
+      ? undefined
+      : (opts.world?.trade ??
+        (opts.world?.inventory ? new TradeService({ inventory: opts.world.inventory }) : undefined));
   // Cống hiến lives in the same ledger as the stones, so one durable `ledger.json` (D92) covers both. `sect.ledger` is the ledger of the
   // file stores (given by main.ts whenever STORE=file, with or without an inventory); when an inventory is also given it MUST be the same
   // object, or stones and Cống hiến would be booked in two ledgers and only one of them would be durable.
@@ -73,15 +118,57 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
             nameOf: (id) => auth.store.byId(id)?.username,
           },
         }));
+  const inventory = opts.world?.inventory;
+  const quests =
+    opts.quests === false || !inventory || !progression
+      ? undefined
+      : (opts.world?.quests ??
+        new QuestService({
+          ...(opts.quests?.store ? { store: opts.quests.store } : {}),
+          // sect quests pay Cống hiến through the sect module when it is hosted (D98 + D107)
+          ...(opts.quests?.sect ? { sect: opts.quests.sect } : sect ? { sect } : {}),
+          inventory,
+          clock: opts.quests?.clock ?? (() => Date.now()),
+          mapTiles: opts.world?.mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES,
+        }));
+  const market =
+    opts.market === false || !inventory
+      ? undefined
+      : (opts.world?.market ??
+        new MarketService({
+          ledger: inventory.ledger,
+          inventory,
+          ...(opts.market?.store ? { store: opts.market.store } : {}),
+          ...(opts.market?.now ? { now: opts.market.now } : {}),
+          ...(opts.market?.report ? { report: opts.market.report } : {}),
+          ...(opts.market?.durable ? { durable: opts.market.durable } : {}),
+          ...(opts.market?.onDurableError ? { onDurableError: opts.market.onDurableError } : {}),
+          directory: {
+            idOf: (nameLower) => auth.store.byUsername(nameLower)?.id,
+            nameOf: (id) => auth.store.byId(id)?.username,
+          },
+        }));
   const world = new WorldNode({
     ...opts.world,
     ...(progression ? { progression } : {}),
     ...(chat ? { chat } : {}),
     ...(party ? { party } : {}),
+    ...(tutorial ? { tutorial } : {}),
+    ...(trade ? { trade } : {}),
     ...(sect ? { sect } : {}),
     ...(friends ? { friends } : {}),
+    ...(quests ? { quests } : {}),
+    ...(market ? { market } : {}),
+    ...(telemetry ? { telemetry } : {}),
   });
-  const gateway = createGateway(auth, world, opts.gateway);
+  if (telemetry && world.inventory) telemetry.attachLedger(world.inventory.ledger);
+  const crash = opts.crash === false ? undefined : new CrashService(opts.crash);
+  const gateway = createGateway(auth, world, {
+    ...opts.gateway,
+    ...(crash ? { crash } : {}),
+    ...(telemetry ? { telemetry } : {}),
+    ...(opts.dashboardToken ? { dashboardToken: opts.dashboardToken } : {}),
+  });
   await new Promise<void>((resolve, reject) => {
     gateway.http.once('error', reject);
     gateway.http.listen(opts.port ?? 0, opts.host ?? '127.0.0.1', resolve);
@@ -91,6 +178,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     auth,
     world,
     gateway,
+    ...(crash ? { crash } : {}),
     port: gateway.port(),
     stop: async () => {
       world.stop();

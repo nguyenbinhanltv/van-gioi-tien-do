@@ -4,7 +4,14 @@ import { PointerController } from './PointerController.js';
 import { TouchController, TouchLayout } from './TouchController.js';
 import type { ZoomController } from '../camera/ZoomController.js';
 import {
-  CameraLike, FLAG_DODGE, FLAG_FLY_TOGGLE, FLAG_QINGGONG, InputFrame, InputMode, PlayerLocator, emptyFrame,
+  CameraLike,
+  FLAG_DODGE,
+  FLAG_FLY_TOGGLE,
+  FLAG_QINGGONG,
+  InputFrame,
+  InputMode,
+  PlayerLocator,
+  emptyFrame,
 } from './types.js';
 
 export interface InputManagerOptions {
@@ -22,7 +29,11 @@ export interface InputManagerOptions {
 }
 
 /** Gói input gửi server: khớp bảng "Gói input" trong tài liệu kiến trúc server. */
-export interface InputPacketFields { dir: number; mag: number; flags: number }
+export interface InputPacketFields {
+  dir: number;
+  mag: number;
+  flags: number;
+}
 
 /**
  * Lớp trừu tượng input cho PC, Mobile và Web:
@@ -43,7 +54,10 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
   private readonly freeTouches = new Map<number, Vec2>();
   private readonly pinchIds = new Set<number>();
 
-  constructor(private readonly el: HTMLElement, private readonly opts: InputManagerOptions) {
+  constructor(
+    private readonly el: HTMLElement,
+    private readonly opts: InputManagerOptions,
+  ) {
     super();
     this.pathfinder = new IsoPathfinder(opts.grid);
     this.pointer = new PointerController(opts.camera, opts.player, this.pathfinder, opts.pickEntity);
@@ -51,7 +65,7 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
     this.forced = opts.forcedMode ?? null;
     this._mode = this.forced ?? InputManager.detectInitialMode();
 
-    el.style.touchAction = 'none';            // tự xử lý cử chỉ, không để trình duyệt cuộn / zoom
+    el.style.touchAction = 'none'; // tự xử lý cử chỉ, không để trình duyệt cuộn / zoom
     el.style.userSelect = 'none';
     this.listen(el, 'pointerdown', (e) => this.onDown(e as PointerEvent));
     this.listen(el, 'pointermove', (e) => this.onMove(e as PointerEvent));
@@ -61,22 +75,31 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
     this.listen(el, 'contextmenu', (e) => e.preventDefault());
     this.listen(window, 'keydown', (e) => this.onKey(e as KeyboardEvent, true));
     this.listen(window, 'keyup', (e) => this.onKey(e as KeyboardEvent, false));
-    this.listen(window, 'blur', () => { this.pointer.reset(); this.touch.reset(); });
+    this.listen(window, 'blur', () => {
+      this.pointer.reset();
+      this.touch.reset();
+    });
   }
 
   static detectInitialMode(): InputMode {
     if (typeof window === 'undefined' || !window.matchMedia) return 'pointer';
-    return window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(hover: hover)').matches ? 'touch' : 'pointer';
+    return window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(hover: hover)').matches
+      ? 'touch'
+      : 'pointer';
   }
 
-  get mode(): InputMode { return this._mode; }
+  get mode(): InputMode {
+    return this._mode;
+  }
 
   forceMode(mode: InputMode | null): void {
     this.forced = mode;
     if (mode) this.switchMode(mode);
   }
 
-  setTouchLayout(layout: TouchLayout): void { this.touch.setLayout(layout); }
+  setTouchLayout(layout: TouchLayout): void {
+    this.touch.setLayout(layout);
+  }
 
   private listen(t: EventTarget, type: string, fn: (e: Event) => void): void {
     t.addEventListener(type, fn, { passive: false });
@@ -99,7 +122,7 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
   }
 
   private modeFromPointer(e: PointerEvent): InputMode {
-    return e.pointerType === 'touch' ? 'touch' : 'pointer';   // 'mouse' và 'pen' dùng bố cục PC
+    return e.pointerType === 'touch' ? 'touch' : 'pointer'; // 'mouse' và 'pen' dùng bố cục PC
   }
 
   private onWheel(e: WheelEvent): void {
@@ -116,7 +139,7 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
     this.freeTouches.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (this.freeTouches.size === 2) {
       for (const id of this.freeTouches.keys()) this.pinchIds.add(id);
-      this.pointer.reset();   // a first finger that already started a click-to-move must not fire it
+      this.pointer.reset(); // a first finger that already started a click-to-move must not fire it
       zoom.pinchStart(this.freeDistance());
     }
     return this.pinchIds.has(e.pointerId);
@@ -148,7 +171,8 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
       return;
     }
     if (this.opts.uiHitTest?.(e.clientX, e.clientY)) return;
-    if (this.trackFreeTouch(e)) {   // 2nd finger in pointer mode: pinch, not a click
+    if (this.trackFreeTouch(e)) {
+      // 2nd finger in pointer mode: pinch, not a click
       this.el.setPointerCapture(e.pointerId);
       e.preventDefault();
       return;
@@ -161,7 +185,8 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
   private onMove(e: PointerEvent): void {
     const free = this.freeTouches.get(e.pointerId);
     if (free) {
-      free.x = e.clientX; free.y = e.clientY;
+      free.x = e.clientX;
+      free.y = e.clientY;
       if (this.pinchIds.has(e.pointerId)) this.opts.zoom!.pinchUpdate(this.freeDistance());
     }
     if (this._mode === 'touch') {
@@ -176,7 +201,7 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
       const wasPinch = this.pinchIds.delete(e.pointerId);
       if (this.pinchIds.size < 2) this.opts.zoom?.pinchEnd();
       if (wasPinch) {
-        if (this.pinchIds.size === 0) this.freeTouches.clear();   // lone leftover finger must not re-pinch
+        if (this.pinchIds.size === 0) this.freeTouches.clear(); // lone leftover finger must not re-pinch
         return;
       }
     }
@@ -189,9 +214,9 @@ export class InputManager extends Emitter<{ modeChange: InputMode }> {
 
   private onKey(e: KeyboardEvent, down: boolean): void {
     const t = e.target as HTMLElement | null;
-    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;   // đang gõ chat
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return; // đang gõ chat
     const modifierOnly = ['Shift', 'Control', 'Alt', 'Meta'].includes(e.key);
-    if (down && !modifierOnly && !this.forced) this.switchMode('pointer');   // tablet cắm bàn phím
+    if (down && !modifierOnly && !this.forced) this.switchMode('pointer'); // tablet cắm bàn phím
     if (this._mode === 'pointer' && this.pointer.key(e, down)) e.preventDefault();
   }
 

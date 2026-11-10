@@ -15,13 +15,29 @@ import {
   type ChatResultMsg,
   type FriendResultMsg,
   type FriendStateMsg,
+  type QuestResultMsg,
+  type QuestStateMsg,
+  type CraftResultMsg,
+  type CraftStateMsg,
+  type MarketBuyMsg,
+  type MarketCancelMsg,
+  type MarketListMsg,
+  type MarketNoticeMsg,
+  type MarketResultMsg,
+  type MarketResultsMsg,
+  type MarketSearchMsg,
   type PartyInviteMsg,
+  type TradeInviteMsg,
+  type TradeResultMsg,
+  type TradeStateMsg,
   type SectResultMsg,
   type SectStateMsg,
   type PartyResultMsg,
   type PartyStateMsg,
   type PartyVitalsMsg,
+  type TutorialStateMsg,
   type CharStateMsg,
+  type DaoTamMsg,
   type EnterEntity,
   type MeditateResultMsg,
   type InvResultMsg,
@@ -115,6 +131,8 @@ export interface ReconnectOptions {
  */
 export interface ProgressionEvents {
   onCharState?(msg: CharStateMsg): void;
+  /** the Đạo Tâm that counts (D103); sent on join and whenever it changes */
+  onDaoTam?(msg: DaoTamMsg): void;
   onMeditateResult?(msg: MeditateResultMsg): void;
   onBreakthroughResult?(msg: BreakthroughResultMsg): void;
 }
@@ -152,6 +170,16 @@ export interface ChatEvents {
   onChatResult?(msg: ChatResultMsg): void;
 }
 
+/** Trade callbacks (D102), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface TradeEvents {
+  /** The trade window changed (phase Open), was closed (Closed) or executed (Done). */
+  onTradeState?(msg: TradeStateMsg): void;
+  /** Someone asked to trade with you. */
+  onTradeInvite?(msg: TradeInviteMsg): void;
+  /** The answer to a `sendTrade` (0 = done, otherwise why not). */
+  onTradeResult?(msg: TradeResultMsg): void;
+}
+
 /** Sect callbacks (D98), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
 export interface SectEvents {
   /** The whole picture (membership, Cống hiến, library of this class), after every change. */
@@ -160,12 +188,38 @@ export interface SectEvents {
   onSectResult?(msg: SectResultMsg): void;
 }
 
+/** Vạn Bảo Lâu callbacks (D112), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface MarketEvents {
+  /** A page of listings (the answer to a `market_search`). */
+  onMarketResults?(msg: MarketResultsMsg): void;
+  /** The answer to a list / buy / cancel (or a refused search). */
+  onMarketResult?(msg: MarketResultMsg): void;
+  /** One of your listings sold or expired. */
+  onMarketNotice?(msg: MarketNoticeMsg): void;
+}
+
 /** Friends callbacks (D96), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
 export interface FriendEvents {
   /** The whole picture (friends with online status, requests received / sent), after every change. */
   onFriendState?(msg: FriendStateMsg): void;
   /** The answer to a `sendFriend` (0 = done, otherwise why not). */
   onFriendResult?(msg: FriendResultMsg): void;
+}
+
+/** Quest callbacks (D107), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface QuestEvents {
+  /** The whole quest log, after every change. */
+  onQuestState?(msg: QuestStateMsg): void;
+  /** The answer to a `sendQuest` (0 = done, otherwise why not). */
+  onQuestResult?(msg: QuestResultMsg): void;
+}
+
+/** Crafting callbacks (D108), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface CraftEvents {
+  /** Furnace position, the running job and the mastery of every recipe, after every change. */
+  onCraftState?(msg: CraftStateMsg): void;
+  /** The answer to a `sendCraft` or one finished / cancelled craft. */
+  onCraftResult?(msg: CraftResultMsg): void;
 }
 
 /** Party callbacks (D93), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
@@ -180,11 +234,19 @@ export interface PartyEvents {
   onPartyResult?(msg: PartyResultMsg): void;
 }
 
+/** Tutorial callbacks (D105), a separate object from `NetEvents` like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface TutorialEvents {
+  /** The server's first-session state (after joining, and on every change). */
+  onTutorialState?(msg: TutorialStateMsg): void;
+}
+
 export interface NetOptions {
   /** e.g. `http://localhost:8080` */
   baseUrl: string;
   username: string;
   password: string;
+  /** closed beta (D111): single-use invitation code sent with the FIRST register only; dropped once a login succeeded so reconnects never resend it */
+  inviteCode?: string;
   deps: NetDeps;
   /** Class to create the character with on its first login: a class path id (`'kiem'`) or its wire id (D82). Ignored for an existing character. */
   classId?: string | number;
@@ -262,7 +324,11 @@ export class NetClient {
   /** number of times the session came back after a drop (resumed or re-logged-in) */
   reconnects = 0;
 
+  /** the invitation code still to send (D111); cleared after the first successful login */
+  private inviteCode: string | undefined;
+
   constructor(private readonly o: NetOptions) {
+    this.inviteCode = o.inviteCode;
     this.remote = new RemoteWorld(o.interpDelayMs);
     this.classRequest = o.classId;
     this.bag = new BagModel();
@@ -301,10 +367,20 @@ export class NetClient {
   chatEvents: ChatEvents = {};
   /** Callbacks for the party (own object, see `PartyEvents`). */
   partyEvents: PartyEvents = {};
+  /** Callbacks for the tutorial (own object, see `TutorialEvents`). */
+  tutorialEvents: TutorialEvents = {};
+  /** Callbacks for the direct trade (own object, see `TradeEvents`). */
+  tradeEvents: TradeEvents = {};
   /** Callbacks for the NPC sect (own object, see `SectEvents`). */
   sectEvents: SectEvents = {};
   /** Callbacks for the friends list (own object, see `FriendEvents`). */
   friendEvents: FriendEvents = {};
+  /** Callbacks for the quest log (own object, see `QuestEvents`). */
+  questEvents: QuestEvents = {};
+  /** Callbacks for alchemy (own object, see `CraftEvents`). */
+  craftEvents: CraftEvents = {};
+  /** Callbacks for Vạn Bảo Lâu (own object, see `MarketEvents`). */
+  marketEvents: MarketEvents = {};
 
   /** Move bag slot `from` onto `to` (the server decides; the new state arrives as `inv_state`). False when the move is obviously invalid or the socket is not open. */
   sendBagMove(from: number, to: number): boolean {
@@ -366,12 +442,18 @@ export class NetClient {
   /** register-or-login over HTTP, then a fresh `hello` with the access token */
   private async login(onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     const cred = { username: this.o.username, password: this.o.password };
-    const reg = await this.post('/auth/register', cred);
-    if (reg.status !== 201 && reg.status !== 409)
+    const reg = await this.post('/auth/register', this.inviteCode ? { ...cred, inviteCode: this.inviteCode } : cred);
+    const inviteLimited = reg.status === 429 && reg.json.error === 'invite_limited';
+    // 409: already registered. 403 invite_invalid: with BETA_INVITE_ONLY an existing account re-registering has no valid code; the login
+    // below decides (a wrong code for a new account fails there with a 401)
+    if (reg.status !== 201 && reg.status !== 409 && reg.status !== 403 && !inviteLimited)
       throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     const login = await this.post('/auth/login', cred);
+    if (login.status !== 200 && (reg.status === 403 || inviteLimited))
+      throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     if (login.status !== 200)
       throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
+    this.inviteCode = undefined; // used (or not needed): never sent again by a reconnect
     // `classId` only matters for a character that does not exist yet; the server's stored class wins afterwards (D82)
     return this.openSocket(
       {
@@ -568,6 +650,9 @@ export class NetClient {
       case 'char_state':
         this.emit(() => this.progressionEvents.onCharState?.(msg));
         break;
+      case 'dao_tam':
+        this.emit(() => this.progressionEvents.onDaoTam?.(msg));
+        break;
       case 'meditate_result':
         this.emit(() => this.progressionEvents.onMeditateResult?.(msg));
         break;
@@ -609,6 +694,18 @@ export class NetClient {
       case 'party_result':
         this.emit(() => this.partyEvents.onPartyResult?.(msg));
         break;
+      case 'tutorial_state':
+        this.emit(() => this.tutorialEvents.onTutorialState?.(msg));
+        break;
+      case 'trade_state':
+        this.emit(() => this.tradeEvents.onTradeState?.(msg));
+        break;
+      case 'trade_invite':
+        this.emit(() => this.tradeEvents.onTradeInvite?.(msg));
+        break;
+      case 'trade_result':
+        this.emit(() => this.tradeEvents.onTradeResult?.(msg));
+        break;
       case 'sect_state':
         this.emit(() => this.sectEvents.onSectState?.(msg));
         break;
@@ -621,6 +718,27 @@ export class NetClient {
       case 'friend_result':
         this.emit(() => this.friendEvents.onFriendResult?.(msg));
         break;
+      case 'quest_state':
+        this.emit(() => this.questEvents.onQuestState?.(msg));
+        break;
+      case 'quest_result':
+        this.emit(() => this.questEvents.onQuestResult?.(msg));
+        break;
+      case 'craft_state':
+        this.emit(() => this.craftEvents.onCraftState?.(msg));
+        break;
+      case 'craft_result':
+        this.emit(() => this.craftEvents.onCraftResult?.(msg));
+        break;
+      case 'market_results':
+        this.emit(() => this.marketEvents.onMarketResults?.(msg));
+        break;
+      case 'market_result':
+        this.emit(() => this.marketEvents.onMarketResult?.(msg));
+        break;
+      case 'market_notice':
+        this.emit(() => this.marketEvents.onMarketNotice?.(msg));
+        break;
       case 'pong': {
         const t0 = this.pings.get(msg.clientTimeMs);
         if (t0 !== undefined) {
@@ -631,7 +749,8 @@ export class NetClient {
       }
       case 'error':
         this.lastError = `server: ${msg.text} (${ErrorCode[msg.code] ?? msg.code})`;
-        if (FATAL_CODES.has(msg.code)) this.fatal = true; // kicked / wrong protocol: do not reconnect
+        if (FATAL_CODES.has(msg.code))
+          this.fatal = true; // kicked / wrong protocol: do not reconnect
         else if (msg.code === ErrorCode.Unauthorized && this.status === 'reconnecting') this.resumeRejected = true;
         break;
       default:
@@ -673,7 +792,8 @@ export class NetClient {
     // If this loop itself was starved (busy tab / CPU-starved host) frames sat unread in the socket queue: silence we cannot
     // attribute to the link. Forgive the gap instead of tearing down a healthy connection.
     const rcStale = this.rc?.staleMs ?? 0;
-    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0) this.lastRxMs = now;
+    if (this.lastUpdateMs > 0 && rcStale > 0 && now - this.lastUpdateMs > rcStale / 2 && this.lastRxMs > 0)
+      this.lastRxMs = now;
     this.lastUpdateMs = now;
     // half-open connection: the server sends a snapshot every tick, so silence means the link is dead
     const rc = this.rc;
@@ -753,6 +873,49 @@ export class NetClient {
     return true;
   }
 
+  /** Dismiss the tutorial hints (D105). The server answers with a fresh `tutorial_state`. False when the socket is not open. */
+  sendTutorialSkip(): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: 'tutorial_skip' }));
+    return true;
+  }
+
+  /**
+   * Send one trade command (D102): `op` is a `TradeOp`. `name` = the other player (invite) or the inviter (accept / decline, '' = the newest);
+   * `slot` / `qty` = a bag slot and a quantity for set-item (qty 0 takes the line out); `currency` / `amount` for set-stones. `clientMsgId` (uint16)
+   * comes back in the `trade_result`. False when the socket is not open or the command cannot be encoded.
+   */
+  sendTrade(m: {
+    op: number;
+    clientMsgId: number;
+    name?: string;
+    slot?: number;
+    qty?: number;
+    currency?: number;
+    amount?: number;
+  }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({
+          type: 'trade_cmd',
+          op: m.op,
+          clientMsgId: m.clientMsgId & 0xffff,
+          name: m.name ?? '',
+          slot: m.slot ?? 0,
+          qty: m.qty ?? 0,
+          currency: m.currency ?? 0,
+          amount: m.amount ?? 0,
+        }),
+      );
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * Send one sect command (D98): `op` is a `SectOp` (join / leave at the sect NPC, buy a library manual: `manual` = its index in the
    * `sect_state` library). `clientMsgId` (uint16) comes back in the `sect_result`. False when the socket is not open or it cannot be encoded.
@@ -783,11 +946,52 @@ export class NetClient {
     return true;
   }
 
+  /**
+   * Send one quest command (D107): `op` is a `QuestOp`; `questId` for accept / claim / abandon, `npc` (an NPC key) for talk. Only an intent:
+   * the server derives all progress itself. `clientMsgId` (uint16) comes back in the `quest_result`. False when the socket is not open or
+   * it cannot be encoded.
+   */
+  sendQuest(m: { op: number; questId?: string; npc?: string; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({ type: 'quest_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, questId: m.questId ?? '', npc: m.npc ?? '' }),
+      );
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one Vạn Bảo Lâu command (D112): a search, list, buy or cancel built by `MarketModel`. `clientMsgId` comes back in the answer.
+   * False when the socket is not open or it cannot be encoded.
+   */
+  sendMarket(m: MarketSearchMsg | MarketListMsg | MarketBuyMsg | MarketCancelMsg): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(encode(m));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
   /** Ask the server to start or stop meditation (D76). Returns false when the socket is not open. `requestId`: 32 lowercase hex characters. */
   sendMeditate(start: boolean, requestId: string): boolean {
     const ws = this.ws;
     if (!ws || ws.readyState !== WS_OPEN) return false;
     ws.send(encode({ type: start ? 'meditate_start' : 'meditate_stop', requestId }));
+    return true;
+  }
+
+  /** Start `count` crafts of a recipe, or cancel the running job (D108). Returns false when the socket is not open. */
+  sendCraft(m: { op: number; requestId: string; recipeId: number; count: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    ws.send(encode({ type: 'craft_cmd', ...m }));
     return true;
   }
 
@@ -807,7 +1011,12 @@ export class NetClient {
     const el = Math.max(0, this.o.deps.now() - s.at);
     const left = (ms: number): number => Math.max(0, Math.round(ms - el));
     const slowMs = left(s.status.slowMs);
-    return { rootMs: left(s.status.rootMs), slowMs, slowPct: slowMs > 0 ? s.status.slowPct : 0, poisonMs: left(s.status.poisonMs) };
+    return {
+      rootMs: left(s.status.rootMs),
+      slowMs,
+      slowPct: slowMs > 0 ? s.status.slowPct : 0,
+      poisonMs: left(s.status.poisonMs),
+    };
   }
 
   /** Another player's `StatusBit` flags (0 = none known), from `status_update`. */

@@ -136,6 +136,8 @@ Giá trị từ [07 §7](07-cong-thuc-data-schema.md); không đổi:
 - Giao dịch trực tiếp giữa người chơi: **3%** cố định.
 - Mọi Linh thạch thu qua các kênh này **bị hủy**, không chuyển cho người chơi khác.
 
+[Cập nhật D112: Vạn Bảo Lâu cơ bản đã cài ([docs/38](38-van-bao-lau.md)): thuế bán **cố định 5 %** trong beta, CPI tuần chạy bóng và không áp dụng; dạng số nguyên của phí / thuế (`listingFeeInt`, `marketTaxInt`, `sellerProceedsInt`, quy tắc làm tròn §2.1) đã có trong `@vgtd/shared` `formulas/market.ts`, nên "Khoảng trống" ở §5.3 về làm tròn đã đóng; hạng mục `SYSTEM_SINK_LISTING_FEE` / `SYSTEM_SINK_MARKET_TAX` đã có trong sổ cái. Hàng hết hạn về túi, rồi kho nhặt đồ (chưa có thư `mail`).]
+
 ### 5.1 Niêm yết – hủy – hết hạn
 
 ```mermaid
@@ -180,6 +182,8 @@ GDD ghi Đấu Giá Hội là kênh **hủy tiền** ([01 §10](01-gdd.md)); chi
 ### 5.5 Giao dịch trực tiếp
 
 Hai bên mời → đặt vật phẩm/tiền → **khóa** (mỗi bên xác nhận hai bước; đổi nội dung thì hủy xác nhận) → server giữ đồ của hai bên trong `ESCROW` → một giao dịch hoàn tất: chuyển chéo + thuế 3% → `SYSTEM_SINK_TRADE_TAX`. Hết hạn 60 s không hoạt động thì hoàn trả. Tốc độ/giá trị tối đa/ngày để chống RMT: tham số.
+
+[Cập nhật D102: đã làm ở `apps/server/src/trade` (`InventoryService.exchange`, ledger `TRADE`, `SYSTEM_SINK_TRADE_TAX`; thuế `directTradeTaxUnits` = làm tròn lên 3% mỗi chiều và mỗi loại tiền, chỉ trên Linh thạch). Vật phẩm không rời túi chủ tới bước thực hiện, nên không dùng tài khoản `ESCROW`; một bước trao đổi nguyên tử trong bộ nhớ thay cho việc giữ trong ESCROW. Trần tốc độ / giá trị / ngày chưa có.]
 
 ## 6. Rơi đồ, đột phá và nhật ký roll
 

@@ -134,6 +134,7 @@ export function randMessage(r: Rng, type?: HotType): Message {
           qj: r.int(0, 65535),
           anim: r.int(0, 255),
           dir: r.int(0, 7),
+          ...(r.bool() ? { element: r.int(1, 5) } : {}),
           hpPct: r.int(0, 255),
           maxHp: r.int(0, 2 ** 32 - 1),
         })),
@@ -195,7 +196,7 @@ export function randMessage(r: Rng, type?: HotType): Message {
       return m;
     }
     case 'status_update': {
-      const m: StatusUpdateMsg = { type: 'status_update', entityId: r.int(0, 2 ** 32 - 1), mask: r.int(0, 7) };
+      const m: StatusUpdateMsg = { type: 'status_update', entityId: r.int(0, 2 ** 32 - 1), mask: r.int(0, 15) };
       return m;
     }
     case 'boss_phase': {

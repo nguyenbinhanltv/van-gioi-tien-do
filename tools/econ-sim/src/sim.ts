@@ -12,7 +12,7 @@
  */
 import {
   BOSS_REPEAT_STONE_FACTOR,
-  CRAFT_FEE_RATE,
+  ALCHEMY,
   BREAKTHROUGH,
   DROP_TABLE,
   DURABILITY_LOSS,
@@ -25,9 +25,9 @@ import {
   ROOT_TYPES,
   STONE_VALUE,
   breakthroughSuccess,
-  craftPromoteChance,
   craftSuccessChance,
-  craftValue,
+  promotionChances,
+  referenceCost,
   directTradeTax,
   expectedStoneValue,
   listingFee,
@@ -171,8 +171,8 @@ const zeros = <K extends string>(keys: readonly K[]): Record<K, number> =>
 /** hạ phẩm value of the realm's weekly boss chest: 1610 at realm 1 (07 s6, 13 s5.1) */
 export const V_REF_1 = expectedStoneValue('boss');
 export const vRef = (realm: number): number => V_REF_1 * stoneRealmMultiplier(realm);
-/** V(r, q) of docs/13 s5.1 (shared) */
-export const pillValue = (realm: number, q: number): number => craftValue(realm, q);
+/** V(r, q) of docs/13 s5.1: `referenceCost` of the shared alchemy module (D108) */
+export const pillValue = (realm: number, q: number): number => referenceCost(realm, q, 'main');
 
 export function gini(sortedAsc: readonly number[]): number {
   const n = sortedAsc.length;
@@ -533,7 +533,7 @@ export function runSim(params: SimParams): SimResult {
         const pOk = craftSuccessChance(D, P.craftScore);
         const crafts = rng.poisson(P.craftsPerHour * craftH);
         for (let i = 0; i < crafts; i++) {
-          const fee = CRAFT_FEE_RATE * pillValue(tr, ceil);
+          const fee = ALCHEMY.FEE_RATE * pillValue(tr, ceil);
           if (p.mats < matNeed || p.wallet < fee) break;
           spend(p, 'craft_fee', fee);
           activity.craft.cost += fee;
@@ -542,7 +542,7 @@ export function runSim(params: SimParams): SimResult {
             item('mats', -matNeed);
             activity.craft.cost += matNeed * P.matUnitValue * matMult * 0.6;
             let q = 0;
-            while (q < 5 && rng.next() < craftPromoteChance(q, P.craftScore)) q++;
+            while (q < 5 && rng.next() < promotionChances(P.craftScore)[q]!) q++;
             q = Math.min(q, ceil);
             p.pills[tr]![q]!++;
             item('breakthrough_pill', 1);

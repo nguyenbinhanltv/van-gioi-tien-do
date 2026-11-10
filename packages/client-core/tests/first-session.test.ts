@@ -90,7 +90,7 @@ describe('FirstSessionTracker', () => {
     expect(t.view().steps[2]!.hint).toMatch(/hạ thêm/);
     t.update(at({ bagOpen: true, hasLoot: true, pending: 2 }));
     expect(t.current).toBe(2);
-    expect(t.view().steps[2]!.hint).toMatch(/Claim/);
+    expect(t.view().steps[2]!.hint).toMatch(/Nhận hàng chờ/);
     t.update(at({ bagOpen: true, hasLoot: true, pending: 0 }));
     expect(t.current).toBe(3);
   });

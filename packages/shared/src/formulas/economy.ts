@@ -146,6 +146,15 @@ export function sellerProceeds(price: number, tax: number): number {
 export function directTradeTax(amount: number): number {
   return amount * MARKET.DIRECT_TRADE_TAX;
 }
+/** `DIRECT_TRADE_TAX` in basis points (3% = 300): the ledger works in integers, never in floats. */
+export const DIRECT_TRADE_TAX_BPS = Math.round(MARKET.DIRECT_TRADE_TAX * 10_000);
+/**
+ * Direct-trade tax on a currency amount in the smallest unit, by the rounding rule of docs/26 §2.1: `tax = ceil(amount x bps / 10000)`;
+ * the receiver gets `amount - tax`, the tax goes to `SYSTEM_SINK_TRADE_TAX`. Exact for any size (bigint), 0 for 0.
+ */
+export function directTradeTaxUnits(amount: bigint): bigint {
+  return amount <= 0n ? 0n : (amount * BigInt(DIRECT_TRADE_TAX_BPS) + 9_999n) / 10_000n;
+}
 
 // ---------------------------------------------------------------- teleport / durability / repair
 /** Fee = 20 · 1.5^(r−1) · (1 + 0.5·d) hạ phẩm; r = player realm, d = zones crossed. */
@@ -181,46 +190,3 @@ export const SINK_TARGETS = {
   tierSwapAndOther: 0.12,
 } as const;
 export const SINK_SOURCE_RATIO_TARGET: readonly [number, number] = [0.9, 1.0];
-
-// ---------------------------------------------------------------- crafting (docs/13 s4-s6, "Đề xuất")
-/** docs/13 s5.1: value factor of a product by quality [Trắng … Đỏ]; V(r, q) = kappa_q · V_ref(r), V_ref(r) = 1610 · 1.5^(r−1). */
-export const CRAFT_QUALITY_KAPPA: readonly number[] = [0.15, 0.25, 0.4, 0.7, 1.2, 2.0];
-/** docs/13 s6: furnace fee = 3% of V(r, q) per craft, paid to the NPC and destroyed (`SYSTEM_SINK_CRAFT_FEE`). */
-export const CRAFT_FEE_RATE = 0.03;
-/** docs/13 s4.3 quality ladder: at rung k (0..4) promote with p_k = clamp(a_k + 0.04 · Score, 0, 0.9). */
-export const CRAFT_LADDER = { A: [0.5, 0.4, 0.3, 0.18, 0.08], SCORE_STEP: 0.04, MAX_P: 0.9 } as const;
-/** docs/13 s4.2: P_ok = clamp(S_D + 0.02 · Score, 0.40, 0.98), S_D = 0.95 − 0.07 · (D − 1), D = recipe difficulty 1..6. */
-export const CRAFT_SUCCESS = { BASE: 0.95, PER_DIFFICULTY: 0.07, PER_SCORE: 0.02, MIN: 0.4, MAX: 0.98 } as const;
-
-/** Value (hạ phẩm) of a product of `realm` and `quality` index 0..5: kappa_q · V_ref(r). */
-export function craftValue(realm: number, quality: number): number {
-  const k = CRAFT_QUALITY_KAPPA[quality];
-  if (k === undefined) throw new RangeError(`quality ${quality} out of range 0..5`);
-  return k * expectedStoneValue('boss') * stoneRealmMultiplier(realm);
-}
-/** Chance of promoting from rung `k` (0..4) to quality k + 1 at crafting `score` 0..5. */
-export function craftPromoteChance(k: number, score: number): number {
-  const a = CRAFT_LADDER.A[k];
-  if (a === undefined) throw new RangeError(`rung ${k} out of range 0..4`);
-  return clamp(a + CRAFT_LADDER.SCORE_STEP * score, 0, CRAFT_LADDER.MAX_P);
-}
-/** Step A: chance that a craft of difficulty `difficulty` (1..6) succeeds. */
-export function craftSuccessChance(difficulty: number, score: number): number {
-  return clamp(
-    CRAFT_SUCCESS.BASE - CRAFT_SUCCESS.PER_DIFFICULTY * (difficulty - 1) + CRAFT_SUCCESS.PER_SCORE * score,
-    CRAFT_SUCCESS.MIN,
-    CRAFT_SUCCESS.MAX,
-  );
-}
-/** Step B: probability of each final quality 0..5 at `score` (before the recipe's quality ceiling clamps it). */
-export function craftQualityDistribution(score: number): number[] {
-  const out: number[] = [];
-  let reach = 1;
-  for (let k = 0; k < 5; k++) {
-    const p = craftPromoteChance(k, score);
-    out.push(reach * (1 - p));
-    reach *= p;
-  }
-  out.push(reach);
-  return out;
-}
