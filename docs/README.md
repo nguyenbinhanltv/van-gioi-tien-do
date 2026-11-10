@@ -65,6 +65,7 @@ Bộ thiết kế hệ thống cho MVP. Mục ghi "Đề xuất – chờ duyệ
 | 35  | [35-p5-load-test.md](35-p5-load-test.md)               | Kiểm thử tải P5: bot chơi thật, soak ngắn / dài, khói CI (D100)                                                                |
 | 37  | [37-mo-phong-kinh-te.md](37-mo-phong-kinh-te.md)       | Báo cáo mô phỏng kinh tế (D113, sinh tự động bởi `tools/econ-sim`): lạm phát, kênh sinh ra / tiêu hao, nhịp tu luyện, cảnh báo |
 | 38  | [38-van-bao-lau.md](38-van-bao-lau.md)                 | Vạn Bảo Lâu cơ bản: ký quỹ, mua nguyên tử, phí 1 % + thuế cố định 5 %, CPI bóng (D112)                                         |
+| 39  | [39-bo-nho-batcher2d.md](39-bo-nho-batcher2d.md)       | Đo bộ nhớ của bộ đệm đỉnh Batcher2D (`BATCHER2D_MEM_INCREMENT` 144 / 1024 / 2048 KB) bằng giả lập mobile                       |
 
 ## 4. Art và hoạt cảnh (`art/`)
 
