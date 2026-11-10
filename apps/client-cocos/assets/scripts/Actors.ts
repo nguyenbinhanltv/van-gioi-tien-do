@@ -4,7 +4,8 @@ import { footprintSortable, newNode, pointSortable, tileToWorld } from './IsoAda
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
 import { CHIBI_REACH } from './CullMath';
-import { ChibiBody } from './ChibiBody';
+import { ChibiBody, type MoveState } from './ChibiBody';
+import { HoldGate, PositionSmoother } from './Smoothing';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 import { sharedAtlas } from './UiLabel';
 
@@ -65,6 +66,15 @@ export class PlayerActor {
   static readonly WALK_SPEED = 0.3;
   static readonly RUN_SPEED = 3.2;
   private facing: shared.Direction = 'S';
+  /** Online: the predicted position steps at 20 Hz; the drawn one eases onto it (frame-rate independent). */
+  private readonly smoother = new PositionSmoother(PlayerActor.NET_SMOOTH_TAU_SEC, PlayerActor.NET_SNAP_TILES);
+  /** A speed blip shorter than this never switches the idle/walk/run clip (stops a restart-every-frame flicker). */
+  private readonly stateGate = new HoldGate<MoveState>(PlayerActor.STATE_HOLD_SEC);
+  /** A/B switch (`?rawfollow=1`): no position smoothing and no clip debounce, like before the fix. */
+  static rawFollow = false;
+  static readonly NET_SMOOTH_TAU_SEC = 0.07;
+  static readonly NET_SNAP_TILES = 3;
+  static readonly STATE_HOLD_SEC = 0.08;
 
   constructor(
     ysort: YSortLayer,
@@ -111,11 +121,16 @@ export class PlayerActor {
     }
     if (this.chibi) {
       this.chibi.face(this.facing);
-      this.chibi.state(
-        speed < PlayerActor.WALK_SPEED ? 'idle' : this.walkMode || speed < PlayerActor.RUN_SPEED ? 'walk' : 'run',
-      );
+      this.chibi.state(this.moveStateFor(speed, dt));
+      this.chibi.animate(dt);
     }
     this.place();
+  }
+
+  private moveStateFor(speed: number, dt: number): MoveState {
+    const want: MoveState =
+      speed < PlayerActor.WALK_SPEED ? 'idle' : this.walkMode || speed < PlayerActor.RUN_SPEED ? 'walk' : 'run';
+    return PlayerActor.rawFollow ? want : this.stateGate.update(want, dt);
   }
 
   /**
@@ -123,16 +138,16 @@ export class PlayerActor {
    * Facing and idle/walk/run are derived from how far the drawn position actually moved this frame.
    */
   followNet(p: TilePos, dt: number): void {
-    const di = p.i - this.pos.i;
-    const dj = p.j - this.pos.j;
-    const speed = dt > 0 ? Math.hypot(di, dj) / dt : 0;
-    this.pos = { i: p.i, j: p.j };
+    const sm = PlayerActor.rawFollow ? p : this.smoother.update(p, dt);
+    const di = sm.i - this.pos.i;
+    const dj = sm.j - this.pos.j;
+    const speed = PlayerActor.rawFollow ? (dt > 0 ? Math.hypot(di, dj) / dt : 0) : this.smoother.speed;
+    this.pos = { i: sm.i, j: sm.j };
     if (this.chibi) {
       if (speed >= PlayerActor.WALK_SPEED) this.facing = character.directionFromTileVector(di, dj, this.facing);
       this.chibi.face(this.facing);
-      this.chibi.state(
-        speed < PlayerActor.WALK_SPEED ? 'idle' : this.walkMode || speed < PlayerActor.RUN_SPEED ? 'walk' : 'run',
-      );
+      this.chibi.state(this.moveStateFor(speed, dt));
+      this.chibi.animate(dt);
     } else if (Math.abs(di - dj) > 1e-4) {
       this.body.setScale(di - dj > 0 ? 1 : -1, 1, 1);
     }

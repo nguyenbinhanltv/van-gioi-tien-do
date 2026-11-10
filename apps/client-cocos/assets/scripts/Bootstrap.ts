@@ -183,6 +183,10 @@ export class Bootstrap extends Component {
     const params = new URLSearchParams(location.search);
     // `?lang=pseudo`: pseudo-localized text (longer, accented, bracketed) to spot clipped or concatenated strings (docs/19 §2.4)
     if (params.get('lang') === 'pseudo') core.setStrings(core.pseudoLocalize(core.sourceStrings()), 'pseudo');
+    // `?rawfollow=1`: the pre-smoothing behaviour (raw 20 Hz position, hard-set camera, per-frame clip choice) for A/B captures only
+    const raw = params.get('rawfollow') !== null;
+    CameraRig.rawFollow = raw;
+    PlayerActor.rawFollow = raw;
     const tierParam = params.get('tier');
     const tier: cw.StreamTier = tierParam === 'low' || tierParam === 'high' ? tierParam : 'medium';
     this.world = new WorldView(data, tilesetJson.animations, tilesetTex, worldRoot, tier);
@@ -454,7 +458,7 @@ export class Bootstrap extends Component {
       this.marketPanel = new MarketPanel(net);
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
-    this.rig.follow(this.playerScreen());
+    this.rig.snap(this.playerScreen());
     if (this.online) void this.startOnline();
     if (params.get('drawdbg') !== null) installDrawDebug(this.node); // window.__vgtdDrawDbg(): batch-break report
     if (params.get('glyphs') !== null) installGlyphSheet(this.uiRoot!); // every supported glyph through the shared label atlas (D104)
@@ -631,7 +635,7 @@ export class Bootstrap extends Component {
 
   /** Camera view in shared screen px (y down, 1x world px) for chunk streaming; centred on the player. */
   private cameraRect(): shared.Rect {
-    const c = this.playerScreen();
+    const c = this.rig.center; // the damped camera centre, not the player: the rect must match what is on screen
     // streamZoom = min(current, target): while zooming out the rect already covers the area about to be visible
     const { w, h } = core.visibleWorldSize(
       this.canvasUi.contentSize.width,
@@ -683,6 +687,23 @@ export class Bootstrap extends Component {
     this.wheel.update();
   }
 
+  /** Automation (scripts/camera-trace): when a page sets `globalThis.__vgtdTrace = []`, one sample per frame is appended. */
+  private traceFrame(dt: number): void {
+    const buf = (globalThis as unknown as { __vgtdTrace?: unknown[] }).__vgtdTrace;
+    if (!Array.isArray(buf) || buf.length > 4000) return;
+    const raw = this.online?.active ? this.online.net.selfPosition() : null;
+    const r = raw ? shared.tileToScreen(raw.i, raw.j) : null;
+    const p = this.playerScreen();
+    buf.push({
+      dt,
+      cam: this.rig.center,
+      draw: p,
+      raw: r,
+      clip: this.chibi.shown.clip,
+      dir: this.chibi.shown.drawn,
+    });
+  }
+
   update(dt: number): void {
     if (!this.ready) return;
     dt = Math.min(dt, 0.05);
@@ -729,6 +750,7 @@ export class Bootstrap extends Component {
     }
     for (const n of this.sectNpcs) n.update(dt);
     this.rig.follow(this.playerScreen(), dt);
+    this.traceFrame(dt);
     this.ysort.cull(this.cameraRect()); // park what is far outside the view: fewer draw calls (docs/33)
     this.ysort.sort();
     this.npcs?.update(dt);
