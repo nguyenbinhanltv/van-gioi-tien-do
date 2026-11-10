@@ -198,6 +198,30 @@ export class ChibiBody {
     this.playClip();
   }
 
+  /**
+   * Per-frame fallback motion. When the player is moving but the rig has no walk/run clip (so `playClip` fell back to `idle`),
+   * the body would glide frozen; bob it (hop + slight sway, in the armature's own units, no scale change) so movement still reads.
+   */
+  animate(dt: number): void {
+    const fallback = this.moveState !== 'idle' && !this.seated && this.playing === 'idle' && !!this.display.armature();
+    if (!fallback) {
+      if (this.bobT !== 0) {
+        this.bobT = 0;
+        this.dbNode.setPosition(0, 0, 0);
+        this.dbNode.angle = 0;
+      }
+      return;
+    }
+    this.bobT += dt;
+    const ph = this.bobT * ChibiBody.BOB_HZ * Math.PI * 2;
+    this.dbNode.setPosition(0, Math.abs(Math.sin(ph)) * ChibiBody.BOB_UNITS, 0);
+    this.dbNode.angle = Math.sin(ph) * ChibiBody.SWAY_DEG;
+  }
+  private bobT = 0;
+  static readonly BOB_HZ = 2.2;
+  static readonly BOB_UNITS = 14;
+  static readonly SWAY_DEG = 2.5;
+
   state(s: MoveState): void {
     if (s === this.moveState) return;
     this.moveState = s;
