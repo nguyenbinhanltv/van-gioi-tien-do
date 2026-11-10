@@ -13,6 +13,16 @@ import { clamp } from './breakthrough.js';
 export type Element = 'kim' | 'moc' | 'thuy' | 'hoa' | 'tho';
 export const ELEMENTS: readonly Element[] = ['kim', 'moc', 'thuy', 'hoa', 'tho'];
 
+/** Wire code of an element (D120, `EnterEntity.element`): 0 = none, 1..5 = position in `ELEMENTS` + 1. */
+export function elementWireId(e: Element | null | undefined): number {
+  const k = e ? ELEMENTS.indexOf(e) : -1;
+  return k < 0 ? 0 : k + 1;
+}
+/** Inverse of `elementWireId`; null for 0 or an unknown code. */
+export function elementOfWireId(n: number): Element | null {
+  return ELEMENTS[n - 1] ?? null;
+}
+
 /** Khắc (overcomes): Kim → Mộc → Thổ → Thủy → Hỏa → Kim. */
 export const OVERCOMES: Readonly<Record<Element, Element>> = {
   kim: 'moc',

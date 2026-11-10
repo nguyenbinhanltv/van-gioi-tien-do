@@ -542,6 +542,8 @@ Phần schema và dữ liệu mẫu dài trước đây trong mục này **đã 
 
 > **[Cập nhật D117]** `stat_weights` của lớp nay được máy chủ áp lên HP / MP / ATK / DEF / AGI của người chơi (`classStatsAt` trong `@vgtd/shared`); xem DECISIONS D117.
 
+> **[Cập nhật D115]** Công cụ đo cân bằng trên **mã máy chủ thật** (`npm run balance -w @vgtd/server`, [36-bao-cao-can-bang-dao-lo.md](36-bao-cao-can-bang-dao-lo.md)): TTK / sống sót / đóng góp tổ đội / đấu tay đôi theo dải Luyện Khí – Trúc Cơ – Kim Đan, cờ ngoại lệ ±15%, đề xuất chỉnh (chưa áp dụng). Phát hiện cần quyết định trước khi chỉnh số: máy chủ mới cài `damage` / `heal` / `shield` của bộ kỹ năng, bỏ qua `stat_weights` của lớp và chưa có nhánh solo / team.
+
 ## Câu hỏi cần chốt
 
 Đã gộp vào [31-bang-quyet-dinh.md](31-bang-quyet-dinh.md), nguồn duy nhất của câu hỏi mở: cột "Câu hỏi" ở đó ghi ID nguồn đã gộp (S1–S14). Nội dung gốc của mục này nằm trong lịch sử git.
