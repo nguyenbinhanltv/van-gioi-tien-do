@@ -662,6 +662,17 @@ Còn mở / lưu ý:
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
 
+## D107 — nhiệm vụ: còn mở
+
+- Chưa làm: chi tuyến (`side`), nhiệm vụ bí cảnh theo mùa, `event`, `tutorial` ([16-onboarding.md](16-onboarding.md)), và **nhân quả / nhánh Chính-Tà-Ma** của chương 2 (`docs/12` §3.4): cần Nghiệp Lực phía server (hiện `karma` chỉ nằm trong bản ghi tiến trình, chưa có nguồn cộng / trừ). Chương 2-3 chỉ có dữ liệu thẳng một mạch; hai chương này chưa chơi thử được vì chưa có người chơi Trúc Cơ.
+- Mục tiêu chưa hỗ trợ: `deliver` (giao vật phẩm cho NPC, cần khóa vật phẩm nhiệm vụ không giao dịch được), `craft`, `clear_instance`, `use_item`, `pvp_win`. `collect` nộp vật phẩm khi trả nhiệm vụ (bị lấy khỏi túi, kiểm tra lại lúc nhận thưởng) nên không lặp được bằng cách chuyền đồ; vật phẩm nhiệm vụ khóa không giao dịch (docs/12 §5.3) và `deliver` tới NPC vẫn là việc sau.
+- Đóng góp sát thương hợp lệ (>= 10 % máu) và hệ số "quái thấp cảnh giới" của `docs/12` §4.3 chưa áp dụng: kill tính cho người hạ quái và đồng đội trong `PARTY.SHARE_RANGE_TILES` bất kể mức đóng góp.
+- Vị trí NPC là bảng tạm `QUEST_NPCS` (độ lệch quanh tâm bản đồ, tầm 4 ô); NPC trên bản đồ là đám đông ngẫu nhiên của harness P1 (`Npcs.ts`). Khi NPC đứng yên có khóa `npc_*` (worker 42 / D98) cần nối: bảng vị trí dùng chung, dấu "?" / "!" nổi trên đầu NPC (đã có `QuestModel.markerFor`), nhấp NPC mở hội thoại thay cho các nút trong bộ theo dõi. Người chơi sinh ra ngẫu nhiên trong ô 96 x 96 ở giữa bản đồ nên có thể cách NPC vài chục ô: bộ theo dõi hiện tên NPC cần gặp nhưng chưa có mũi tên chỉ đường.
+- Ghi hoàn thành và trả thưởng chưa nguyên tử qua nhiều tài liệu (xem D107, "An toàn khi nhận thưởng"): sập giữa hai bước có thể làm mất thưởng. `TxJournal` (#257) đã vào `main`: chuyển `claim` sang `commitAtomic` (ledger + inventories + progression + quests).
+- Cống hiến: đã nối với `SectService` (D98, `grantContribution`: chỉ thành viên, giao dịch sổ cái cân bằng từ cùng tài khoản hệ thống với thưởng giết quái, khóa idempotency theo nhiệm vụ + chu kỳ). Nhiệm vụ tông môn chỉ mở khi đã vào tông môn; không có mô-đun tông môn thì chúng Locked.
+- Tổng thưởng Linh thạch của nhiệm vụ (~200 / tuần ở cảnh giới 1 với mọi bộ nhật + chu + tông môn) rất nhỏ so với 1 800 / 10 giờ săn: có thể quá keo; kiểm tra trong "Mô phỏng kinh tế" (#7). Các nhiệm vụ nhật thường chỉ có 3 mẫu / ngày (trần 5), chưa sinh theo vùng.
+- Chưa có smoke trình duyệt cho `QuestPanel` (cần bản dựng Cocos đầy đủ): phần logic có test (`quests.test.ts` ở shared / protocol / client-core / server, gồm e2e `quests-netclient.test.ts` đi bộ giữa các NPC thật), phần DOM mới được kiểm kiểu (tsc) và chưa chạy trên màn hình thật; chưa thử cảm ứng (dùng `/quest`).
+
 ## Báo cáo sập (D110): còn mở
 
 - **Giới hạn của endpoint nằm trong `CRASH_REPORT`** (`@vgtd/shared`), không dùng ngân sách theo lớp của D101 (#256); gộp lại nếu muốn một nguồn. Số liệu crash đã nằm trên dashboard D109 (`crash` của `/dashboard/summary.json`).

@@ -43,6 +43,7 @@ import { TutorialHints, tutorialRequested } from './TutorialHints';
 import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
+import { QuestPanel } from './QuestPanel';
 import { CraftPanel } from './CraftPanel';
 import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
@@ -115,6 +116,7 @@ export class Bootstrap extends Component {
   private tradePanel: TradePanel | null = null;
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private questPanel: QuestPanel | null = null;
   private craftPanel: CraftPanel | null = null;
   private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
@@ -392,6 +394,27 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // quest log + tracker (D107): J or /quest; the buttons only send intents, the server decides and pays
+      const net = this.online.net;
+      this.questPanel = new QuestPanel(
+        new core.QuestModel(),
+        {
+          send: (op, arg, clientMsgId) =>
+            net.sendQuest({
+              op,
+              clientMsgId,
+              ...(op === core.QuestOp.Talk ? { npc: arg } : { questId: arg }),
+            }),
+          position: () => net.selfPosition(),
+          mapTiles: () => map.width,
+        },
+        (line, tone) => chat.log.system(line, tone),
+      );
+      net.questEvents = {
+        onQuestState: (m) => this.questPanel?.onState(m),
+        onQuestResult: (m) => this.questPanel?.onResult(m),
+      };
+      chat.onQuestsToggle = () => this.questPanel?.toggle();
       // alchemy panel (D108): P; the numbers come from the same shared formulas the server uses, the server decides everything
       const craft = new core.CraftModel({
         now: () => performance.now(),
@@ -673,6 +696,7 @@ export class Bootstrap extends Component {
     this.tradePanel?.update();
     this.sectPanel?.update();
     this.friendsPanel?.update();
+    this.questPanel?.update();
     this.craftPanel?.update();
     this.marketPanel?.update();
     if (this.progressionHud) {
@@ -729,6 +753,7 @@ export class Bootstrap extends Component {
     this.tradePanel?.destroy();
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
+    this.questPanel?.destroy();
     this.craftPanel?.destroy();
     this.marketPanel?.destroy();
     this.bagPanel?.destroy();

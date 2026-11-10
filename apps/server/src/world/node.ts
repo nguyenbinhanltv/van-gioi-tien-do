@@ -12,6 +12,7 @@ import {
   NETWORK,
   PARTY,
   aoiCentre,
+  mobDefById,
   classWireId,
   inAoiAt,
   uwDistSq,
@@ -80,6 +81,8 @@ import type { TutorialService } from '../tutorial/service.js';
 import type { TradeService } from '../trade/service.js';
 import type { SectService } from '../sect/service.js';
 import type { FriendService } from '../friends/service.js';
+import type { QuestService } from '../quests/service.js';
+import { stageOf as recordStage } from '../progression/state.js';
 import type { MarketService } from '../market/service.js';
 import type { TelemetryService } from '../telemetry/service.js';
 import {
@@ -250,6 +253,8 @@ export interface WorldNodeOptions {
   sect?: SectService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
   friends?: FriendService;
+  /** quests module (D107): needs `progression` and `inventory`; absent = quest commands are rejected as unexpected */
+  quests?: QuestService;
   /**
    * Minimal alchemy (D108): needs `inventory` and `progression`. `true` = the furnace NPC in the middle of the spawn area; absent / false = no crafting
    * (craft messages are rejected as unexpected).
@@ -417,6 +422,7 @@ export class WorldNode {
   readonly trade: TradeService | undefined;
   readonly sect: SectService | undefined;
   readonly friends: FriendService | undefined;
+  readonly quests: QuestService | undefined;
   /** alchemy (D108); null when the node runs without it */
   readonly craft: CraftService | null = null;
   readonly market: MarketService | undefined;
@@ -499,6 +505,20 @@ export class WorldNode {
         const c = this.clients.get(id);
         if (c && !c.dead) this.send(c, m);
       },
+    });
+    this.quests = opts.quests;
+    this.quests?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
+      realmStage: (id) => {
+        const r = this.progression?.recordOf(id);
+        return r ? { realm: r.realm, stage: recordStage(r) } : undefined;
+      },
+      isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
+      grantTuVi: (id, amount) => this.progression?.grantTuVi(id, amount, this.world.timeMs) ?? 0,
     });
     this.party = opts.party;
     this.tutorial = opts.tutorial;
@@ -599,6 +619,7 @@ export class WorldNode {
             this.recordKill(e.killerId, e.mobId, e.rolls.length, mobPort);
             if (e.rolls.length > 0) this.tutorial?.note(e.killerId, 'loot');
             sink?.handle(e);
+            this.questKill(e.killerId, e.mobId); // one event per sharing member: credit exactly that member (D107)
             // a sect member's kill pays Cống hiến (D98); the kill key makes a repeated event a replay
             const owner = this.clients.get(e.killerId)?.accountId;
             if (owner !== undefined && opts.sect)
@@ -714,6 +735,7 @@ export class WorldNode {
     this.trade?.join({ entityId: id, accountId, name: displayName });
     this.sect?.join({ entityId: id, accountId, path: classPath });
     this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.quests?.join({ entityId: id, accountId });
     this.market?.join({ entityId: id, accountId });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
@@ -861,6 +883,7 @@ export class WorldNode {
     this.trade?.leave(id);
     this.sect?.leave(id);
     this.friends?.leave(id);
+    this.quests?.leave(id);
     this.market?.leave(id);
     this.chatHistoryDue.delete(id);
     this.heldMajor.delete(id);
@@ -1158,6 +1181,12 @@ export class WorldNode {
           this.badFrame(c, 'unexpected');
         } else this.send(c, this.friends.handle(id, msg, this.world.timeMs));
         break;
+      case 'quest_cmd':
+        if (!this.quests) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.quests.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           this.badFrame(c, 'unexpected');
@@ -1289,6 +1318,7 @@ export class WorldNode {
     this.trade?.tick(this.world.timeMs);
     this.sect?.tick();
     this.friends?.tick();
+    this.quests?.tick(this.world.timeMs);
     if (this.market && this.world.tick % 20 === 0) this.market.tick(); // expiry, returns and the weekly shadow report: about once a second
     this.telemetry?.tick(this.clients.size);
     for (const e of this.world.entities) {
@@ -1354,9 +1384,21 @@ export class WorldNode {
   }
 
   /**
+   * A kill counts for the quest objectives of `killerId` (D107). Combat already fans a kill out to every sharing party member: it calls
+   * `onDrops` once PER member with that member as `killerId`, so crediting a group here would multiply the credit by the party size.
+   * The mob is still alive when this runs.
+   */
+  private questKill(killerId: number, mobId: number): void {
+    if (!this.quests || !this.mobs) return;
+    const def = mobDefById(this.mobs.defIdOf(mobId));
+    if (def) this.quests.onKill(killerId, def.key, def.tier);
+  }
+
+  /**
    * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
    * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
    */
+
   private creditGroupOf(killerId: number): number[] {
     const members = this.party?.membersOf(killerId) ?? [];
     if (members.length <= 1) return [killerId];
@@ -1428,6 +1470,9 @@ export class WorldNode {
   private deliver(out: Outbound[]): void {
     for (const o of out) {
       const c = this.clients.get(o.entityId);
+      // a successful breakthrough is a quest event (D107); the roll itself stays the progression module's
+      if (o.msg.type === 'breakthrough_result' && o.msg.outcome === BreakthroughOutcome.Success)
+        this.quests?.onBreakthrough(o.entityId);
       if (!c || c.dead) continue;
       if (c.suspendedAtMs !== null) {
         // held player: the final answer of an event is kept for the resume (the rest is rebuilt from the live event)
