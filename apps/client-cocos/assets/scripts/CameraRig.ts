@@ -1,5 +1,6 @@
 import { Node, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
+import { CameraFilter } from './Smoothing';
 import { cameraOffset, clientToCocosUi, cocosToScreen, type ScreenPoint } from './IsoAdapter';
 
 /**
@@ -14,6 +15,21 @@ import { cameraOffset, clientToCocosUi, cocosToScreen, type ScreenPoint } from '
  * SEAM: client-world will own streaming windows; it only needs `follow()` each frame.
  */
 export class CameraRig {
+  /**
+   * Follow filter (shared screen px, 1x world): ~0.1 s exponential damping, a 2 px dead-zone, and an instant snap beyond 480 px
+   * (teleport / zone change / respawn). Feeds the interpolated render position, never the raw 20 Hz authoritative one.
+   */
+  private readonly filter = new CameraFilter(
+    CameraRig.FOLLOW_TAU_SEC,
+    CameraRig.DEAD_ZONE_PX,
+    CameraRig.SNAP_DISTANCE_PX,
+  );
+  /** A/B switch (`?rawfollow=1`): hard-set the camera onto the target like before the smoothing fix. */
+  static rawFollow = false;
+  static readonly FOLLOW_TAU_SEC = 0.1;
+  static readonly DEAD_ZONE_PX = 2;
+  static readonly SNAP_DISTANCE_PX = 480;
+
   constructor(
     private readonly worldRoot: Node,
     private readonly canvas: UITransform,
@@ -37,11 +53,26 @@ export class CameraRig {
     return w > 0 && cw > 0 ? cw / w : 1;
   }
 
-  /** Advance the zoom lerp by `dt` and centre the camera on a shared-screen point (offset on the device px grid). */
+  /** Where the camera is centred now (shared screen px); lags the follow target by the damping. */
+  get center(): ScreenPoint {
+    return this.filter.position;
+  }
+
+  /** Jump onto a shared-screen point without easing (scene rebuild, teleport the caller already knows about). */
+  snap(target: ScreenPoint): void {
+    this.filter.snap(target);
+    this.follow(target, 0);
+  }
+
+  /**
+   * Advance the zoom lerp and the damped follow by `dt` seconds, then place the world root. Only the final offset is snapped to
+   * the device px grid, so the smoothed motion is not quantised before it is drawn.
+   */
   follow(target: ScreenPoint, dt = 0): void {
     const z = this.zoomCtl.update(dt);
+    const c = CameraRig.rawFollow ? (this.filter.snap(target), target) : this.filter.update(target, dt);
     this.worldRoot.setScale(z, z, 1);
-    this.worldRoot.setPosition(cameraOffset(target, z, this.pxPerUnit()));
+    this.worldRoot.setPosition(cameraOffset(c, z, this.pxPerUnit()));
   }
 
   /** Browser client px -> UI-space (Canvas-local, y up) design units. */
