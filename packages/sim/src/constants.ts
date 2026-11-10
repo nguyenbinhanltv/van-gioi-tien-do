@@ -60,6 +60,8 @@ export const ANTICHEAT = {
   CAST_BUCKET: 10,
   /** Cooldown check tolerates min(RTT/2, this) ms of latency. */
   CAST_LATENCY_COMP_MAX_MS: 100,
+  /** A cast is judged as of its arrival, at most this many ms before the tick that processes it (D106; longer waits are clamped). */
+  CAST_MAX_AGE_MS: 1000,
   /**
    * Server-overload credit (`StepOptions.lagMs`): real time that passed WITHOUT sim time passing since a client joined (the server ran
    * behind real time). It makes the guards' clock equal to wall time since join, which is exactly the legitimate bound, so it cannot

@@ -130,7 +130,18 @@ describe('RemoteWorld interpolation', () => {
   const enter = (index: number, i: number, j: number): AoiEnterMsg => ({
     type: 'aoi_enter',
     entities: [
-      { index, entityId: 100 + index, kind: 0, defId: 0, qi: i * 32, qj: j * 32, anim: 0, dir: 2, hpPct: 100, maxHp: 1000 },
+      {
+        index,
+        entityId: 100 + index,
+        kind: 0,
+        defId: 0,
+        qi: i * 32,
+        qj: j * 32,
+        anim: 0,
+        dir: 2,
+        hpPct: 100,
+        maxHp: 1000,
+      },
     ],
   });
   const snap = (index: number, i: number, j: number, anim = 1): SnapshotMsg => ({

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { FRIENDS } from '@vgtd/shared';
 import { FriendOp, FriendReason, type FriendStateMsg } from '@vgtd/protocol';
-import { ChatLog, FRIEND_REASON_TEXT, FriendsModel, parseChatInput } from '../src/index.js';
+import { ChatLog, friendReasonText, FriendsModel, parseChatInput } from '../src/index.js';
 
 const state = (o: Partial<FriendStateMsg> = {}): FriendStateMsg => ({
   type: 'friend_state',
@@ -32,13 +32,13 @@ describe('friend commands in the chat input', () => {
     const l = new ChatLog({ myName: () => 'me', onFriends: () => shown++ });
     const got: unknown[] = [];
     const never = () => false;
-    expect(l.submit('/friend add bob', never, never, (m) => (got.push(m), true))).toBe(true);
+    expect(l.submit('/friend add bob', never, never, undefined, (m) => (got.push(m), true))).toBe(true);
     expect(got).toEqual([{ op: FriendOp.Request, name: 'bob', clientMsgId: expect.any(Number) }]);
-    expect(l.submit('/friend add bob', never, never, () => false)).toBe(false);
+    expect(l.submit('/friend add bob', never, never, undefined, () => false)).toBe(false);
     expect(l.entries.at(-1)).toMatchObject({ tone: 'error', text: 'Chưa kết nối máy chủ.' });
     expect(l.submit('/friend add bob', never)).toBe(false); // no friend sender wired
     expect(l.entries.at(-1)).toMatchObject({ tone: 'error' });
-    expect(l.submit('/friends', never, never, () => true)).toBe(false);
+    expect(l.submit('/friends', never, never, undefined, () => true)).toBe(false);
     expect(shown).toBe(1);
   });
 });
@@ -90,8 +90,8 @@ describe('FriendsModel', () => {
     expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason: FriendReason.Ok })).toBeNull();
     for (const reason of Object.values(FriendReason).filter((v): v is number => typeof v === 'number')) {
       if (reason === FriendReason.Ok) continue;
-      expect(FRIEND_REASON_TEXT[reason], `reason ${reason}`).toBeTruthy();
-      expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason })).toBe(FRIEND_REASON_TEXT[reason]);
+      expect(friendReasonText(reason), `reason ${reason}`).toBeTruthy();
+      expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason })).toBe(friendReasonText(reason));
     }
     expect(m.applyResult({ type: 'friend_result', clientMsgId: 1, reason: 200 })).toMatch(/mã 200/);
   });

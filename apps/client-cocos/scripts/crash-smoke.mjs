@@ -6,7 +6,7 @@
 // (CHROME_PATH overrides):
 //   - page A (`?online=1&crashtest=1`) throws one uncaught error 1.5 s after the start (forced) and is then closed;
 //   - page B (`?online=1`) runs clean and is then closed.
-// Checks on the server side (GET /ops/crash/summary.json, loopback) and on disk (crash-*.jsonl): two sessions, one crashed, crash-free
+// Checks on the server side (GET /dashboard/summary.json .crash, loopback) and on disk (crash-*.jsonl): two sessions, one crashed, crash-free
 // 50 %, the forced error is the top crash with a stack and the build id, the files hold no IP / username / query string.
 // Exit code 1 on a failed check.
 import { spawn, spawnSync } from 'node:child_process';
@@ -116,7 +116,7 @@ const browser = await puppeteer.launch({
     '--enable-webgl',
   ],
 });
-const summary = async () => (await fetch(`http://127.0.0.1:${gwPort}/ops/crash/summary.json`)).json();
+const summary = async () => (await (await fetch(`http://127.0.0.1:${gwPort}/dashboard/summary.json`)).json()).crash;
 const until = async (pred, ms = 30000) => {
   const t0 = Date.now();
   while (Date.now() - t0 < ms) {

@@ -48,7 +48,10 @@ export class PointerController {
     this.mouseWorld = this.toWorld(e);
     if (e.button !== 0) return;
     const hit = this.pickEntity?.(this.mouseWorld) ?? null;
-    if (hit !== null) { this.pendingTarget = hit; return; }
+    if (hit !== null) {
+      this.pendingTarget = hit;
+      return;
+    }
     this.holding = true;
     this.repath(performance.now(), true);
   }
@@ -73,13 +76,23 @@ export class PointerController {
   key(e: KeyboardEvent, down: boolean): boolean {
     const c = e.code;
     if (down) {
-      if (/^Digit[1-6]$/.test(c) && !e.repeat) { this.pendingCasts.push(Number(c.slice(5))); return true; }
-      if (c === 'Space' && !e.repeat) { this.pendingDodge = true; return true; }
-      if (c === 'KeyF' && !e.repeat) { this.pendingFly = true; return true; }
+      if (/^Digit[1-6]$/.test(c) && !e.repeat) {
+        this.pendingCasts.push(Number(c.slice(5)));
+        return true;
+      }
+      if (c === 'Space' && !e.repeat) {
+        this.pendingDodge = true;
+        return true;
+      }
+      if (c === 'KeyF' && !e.repeat) {
+        this.pendingFly = true;
+        return true;
+      }
     }
     if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ShiftLeft', 'ShiftRight'].includes(c)) {
-      if (down) this.keys.add(c); else this.keys.delete(c);
-      if (down && c.startsWith('Key')) this.path = null;   // WASD hủy click-to-move
+      if (down) this.keys.add(c);
+      else this.keys.delete(c);
+      if (down && c.startsWith('Key')) this.path = null; // WASD hủy click-to-move
       return true;
     }
     return false;
@@ -101,7 +114,8 @@ export class PointerController {
       }
       if (this.path.length === 0) this.path = null;
       else {
-        const di = this.path[0].i - pos.i, dj = this.path[0].j - pos.j;
+        const di = this.path[0].i - pos.i,
+          dj = this.path[0].j - pos.j;
         const len = Math.hypot(di, dj);
         frame.move = { i: di / len, j: dj / len };
         frame.magnitude = 1;
@@ -118,7 +132,8 @@ export class PointerController {
     if (this.pendingDodge) {
       frame.dodge = true;
       if (frame.magnitude === 0 && this.mouseWorld) {
-        const di = this.mouseWorld.i - pos.i, dj = this.mouseWorld.j - pos.j;
+        const di = this.mouseWorld.i - pos.i,
+          dj = this.mouseWorld.j - pos.j;
         const len = Math.hypot(di, dj) || 1;
         frame.move = { i: di / len, j: dj / len };
         frame.magnitude = 1;
@@ -127,6 +142,9 @@ export class PointerController {
     }
     frame.flyToggle = this.pendingFly;
     this.pendingFly = false;
-    if (this.pendingTarget !== null) { frame.target = this.pendingTarget; this.pendingTarget = null; }
+    if (this.pendingTarget !== null) {
+      frame.target = this.pendingTarget;
+      this.pendingTarget = null;
+    }
   }
 }

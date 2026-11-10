@@ -129,11 +129,14 @@ describe('POST /crash/report (HTTP)', () => {
       body: JSON.stringify(batch(1, [start(), err('http boom')])),
     });
     expect(r.status).toBe(202);
-    const s = (await (await fetch(url('/ops/crash/summary.json'))).json()) as { sessions: number; top: unknown[] };
-    expect(s.sessions).toBe(1);
-    expect(s.top).toHaveLength(1);
-    const page = await fetch(url('/ops/crash'));
+    const sum = (await (await fetch(url('/dashboard/summary.json'))).json()) as {
+      crash: { sessions: number; top: unknown[] };
+    };
+    expect(sum.crash.sessions).toBe(1);
+    expect(sum.crash.top).toHaveLength(1);
+    const page = await fetch(url('/dashboard'));
     expect(page.headers.get('content-security-policy')).toContain("default-src 'none'");
+    expect(await page.text()).toContain('crashTop'); // the dashboard page has the stability section
   });
 
   it('refuses oversized, malformed and non-operator requests', async () => {
@@ -144,7 +147,7 @@ describe('POST /crash/report (HTTP)', () => {
     expect(big.status).toBe(413);
     const bad = await fetch(url('/crash/report'), { method: 'POST', body: '{nope' });
     expect(bad.status).toBe(400);
-    const proxied = await fetch(url('/ops/crash/summary.json'), { headers: { 'x-forwarded-for': '1.2.3.4' } });
+    const proxied = await fetch(url('/dashboard/summary.json'), { headers: { 'x-forwarded-for': '1.2.3.4' } });
     expect(proxied.status).toBe(403);
   });
 
@@ -156,7 +159,7 @@ describe('POST /crash/report (HTTP)', () => {
       gateway: { dashboardToken: 'secret-token-1' },
     });
     try {
-      const u = `http://127.0.0.1:${s2.port}/ops/crash/summary.json`;
+      const u = `http://127.0.0.1:${s2.port}/dashboard/summary.json`;
       const h = { 'x-forwarded-for': '9.9.9.9' };
       expect((await fetch(u, { headers: h })).status).toBe(403);
       expect((await fetch(u, { headers: { ...h, authorization: 'Bearer wrong-token-xx' } })).status).toBe(403);

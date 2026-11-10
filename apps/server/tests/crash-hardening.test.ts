@@ -114,7 +114,7 @@ describe('crash store bounds', () => {
   });
 });
 
-describe('operator page', () => {
+describe('dashboard crash section', () => {
   let srv: RunningServer;
   const url = (p: string): string => `http://127.0.0.1:${srv.port}${p}`;
   beforeAll(async () => {
@@ -124,17 +124,15 @@ describe('operator page', () => {
     await srv.stop();
   });
 
-  it('the page asks for its data with an absolute path that resolves to the JSON endpoint (200)', async () => {
+  it('the dashboard JSON carries the crash rollup next to the telemetry KPIs', async () => {
     srv.crash!.submit(
       { v: 1, sid: sid(3), build: 'b', scene: 'main', events: [{ kind: 'session_start', atMs: 0 }] },
       'ip',
     );
-    const html = await (await fetch(url('/ops/crash'))).text();
-    const m = /fetch\('([^']+)'/.exec(html);
-    expect(m).not.toBeNull();
-    expect(m![1]!.startsWith('/')).toBe(true);
-    const data = await fetch(new URL(m![1]!, url('/ops/crash')));
+    const data = await fetch(url('/dashboard/summary.json'));
     expect(data.status).toBe(200);
-    expect(((await data.json()) as { sessions: number }).sessions).toBe(1);
+    const j = (await data.json()) as { crash: { sessions: number }; ccu: unknown };
+    expect(j.crash.sessions).toBe(1);
+    expect(j.ccu).toBeDefined();
   });
 });

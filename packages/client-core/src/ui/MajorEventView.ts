@@ -4,6 +4,7 @@
  */
 import { ConsequenceTier, MajorPhase, MajorResult } from '@vgtd/shared';
 import type { MajorEventMsg, TribulationStrikeMsg } from '@vgtd/protocol';
+import { t, type StringKey } from '../i18n/strings.js';
 
 /** One lightning bolt to draw: where (1/32 tile), how hard, and when it arrived (the view's clock). */
 export interface StrikeView {
@@ -27,10 +28,10 @@ export interface MajorSnapshot {
 
 const RESULT_SHOW_MS = 9000;
 
-const TIER_TEXT: Readonly<Record<number, string>> = {
-  [ConsequenceTier.Light]: 'Nhẹ',
-  [ConsequenceTier.Medium]: 'Trung',
-  [ConsequenceTier.Heavy]: 'Nặng',
+const TIER_KEY: Readonly<Record<number, StringKey>> = {
+  [ConsequenceTier.Light]: 'major.tier.light',
+  [ConsequenceTier.Medium]: 'major.tier.medium',
+  [ConsequenceTier.Heavy]: 'major.tier.heavy',
 };
 
 export class MajorEventView {
@@ -104,10 +105,10 @@ export class MajorEventView {
     const c = this.current();
     if (!c) return '';
     if (c.phase === MajorPhase.TamMa)
-      return `Tâm Ma (độ khó ${c.strengthPct}%): hạ bóng trong ${Math.ceil(c.remainingMs / 1000)} giây`;
-    if (c.phase === MajorPhase.Destiny) return 'Thiên Mệnh đang định đoạt…';
-    if (c.wave === 0) return 'Mây kiếp đang tụ…';
-    return `Lôi Kiếp: đạo ${c.wave}/${c.waves}`;
+      return t('major.title.tam_ma', { pct: c.strengthPct, secs: Math.ceil(c.remainingMs / 1000) });
+    if (c.phase === MajorPhase.Destiny) return t('major.title.destiny');
+    if (c.wave === 0) return t('major.title.gathering');
+    return t('major.title.wave', { wave: c.wave, waves: c.waves });
   }
 
   /** The result card after the event ended (null once it expired): lines of text and a tone. */
@@ -116,12 +117,17 @@ export class MajorEventView {
     if (!f || this.now() >= f.untilMs) return null;
     const m = f.msg;
     const lines: string[] = [];
-    if (m.result === MajorResult.Success) return { lines: ['Đột phá đại cảnh thành công!'], tone: 'good' };
-    if (m.result === MajorResult.TamMaLost) lines.push('Bại trước Tâm Ma.');
-    else if (m.result === MajorResult.RollFailed) lines.push('Thiên Mệnh không chiếu cố: đột phá thất bại.');
-    else lines.push(`Gục giữa Lôi Kiếp (hậu quả ${TIER_TEXT[m.tier] ?? '?'}).`);
-    if (m.expLostPct > 0) lines.push(`Mất ${m.expLostPct}% tu vi của nấc hiện tại.`);
-    if (m.lockMin > 0) lines.push(`Khóa đột phá đại cảnh ${m.lockMin >= 120 ? `${Math.round(m.lockMin / 60)} giờ` : `${m.lockMin} phút`}.`);
+    if (m.result === MajorResult.Success) return { lines: [t('major.result.success')], tone: 'good' };
+    if (m.result === MajorResult.TamMaLost) lines.push(t('major.result.tam_ma_lost'));
+    else if (m.result === MajorResult.RollFailed) lines.push(t('major.result.roll_failed'));
+    else lines.push(t('major.result.died', { tier: TIER_KEY[m.tier] ? t(TIER_KEY[m.tier]!) : '?' }));
+    if (m.expLostPct > 0) lines.push(t('major.result.exp_lost', { pct: m.expLostPct }));
+    if (m.lockMin > 0)
+      lines.push(
+        m.lockMin >= 120
+          ? t('major.result.lock_hours', { n: Math.round(m.lockMin / 60) })
+          : t('major.result.lock_minutes', { n: m.lockMin }),
+      );
     return { lines, tone: 'bad' };
   }
 }

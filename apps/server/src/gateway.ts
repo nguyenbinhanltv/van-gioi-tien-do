@@ -6,7 +6,7 @@
  *  OPTIONS *            -> 204 CORS preflight (only for origins in GatewayOptions.corsOrigins)
  *  GET  /health         -> 200 {ok, players, tick}
  *  POST /crash/report   crash / session-marker batch (D110, `CRASH_REPORT` limits) -> 202 {ok, accepted}; 400 invalid; 413 too large; 429 rate limited
- *  GET  /ops/crash, /ops/crash/summary.json   crash-free sessions % + top crashes (operator only: loopback or Bearer `dashboardToken`)
+ *                       crash-free sessions % + top crashes: the `crash` field of GET /dashboard/summary.json (operator only, same access rule)
  *  WS   /ws             first frame (text JSON, within 5 s): {"type":"hello","protocolMin":5,"protocolMax":5,"token":"...","classId"?}
  *                       `classId` (D82, optional): class path id or wire id; used only when the character does not exist yet (the stored
  *                       class wins afterwards); an invalid value is refused with BadMessage
@@ -22,7 +22,9 @@ import { ErrorCode, PROTOCOL_VERSION, encode } from '@vgtd/protocol';
 import { AuthError, type AuthService } from './auth/accounts.js';
 import { TokenError } from './auth/jwt.js';
 import { GATEWAY_CONFIG } from './config.js';
-import { CRASH_PAGE_HTML, operatorAllowed, type CrashService } from './crash/index.js';
+import type { CrashService } from './crash/index.js';
+import { DASHBOARD_CSP, DASHBOARD_HTML, dashboardAllowed } from './telemetry/dashboard.js';
+import type { TelemetryService } from './telemetry/service.js';
 import { WorldFullError, type ClientTransport, type WorldNode } from './world/node.js';
 
 export interface GatewayHandle {
@@ -64,7 +66,9 @@ export interface GatewayOptions {
   corsOrigins?: readonly string[];
   /** crash report intake (D110); without it the crash routes answer 404 */
   crash?: CrashService;
-  /** Bearer token that lets a non-loopback operator read /ops/crash (env DASHBOARD_TOKEN in main) */
+  /** telemetry pipeline (D109): account events and the `/dashboard` routes; absent = no dashboard */
+  telemetry?: TelemetryService;
+  /** bearer token for the dashboard and /ops/crash; without one only loopback connections are served */
   dashboardToken?: string;
 }
 
@@ -88,6 +92,21 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
             return;
           }
         }
+        if (
+          req.method === 'GET' &&
+          opts.telemetry &&
+          (req.url === '/dashboard' || req.url === '/dashboard/summary.json')
+        ) {
+          if (!dashboardAllowed(req, opts.dashboardToken)) return json(res, 403, { error: 'forbidden' });
+          const headers = { 'cache-control': 'no-store', 'content-security-policy': DASHBOARD_CSP };
+          if (req.url === '/dashboard') {
+            res.writeHead(200, { ...headers, 'content-type': 'text/html; charset=utf-8' });
+            res.end(DASHBOARD_HTML);
+            return;
+          }
+          const summary = opts.telemetry.summary();
+          return json(res, 200, opts.crash ? { ...summary, crash: opts.crash.summary() } : summary, headers);
+        }
         if (req.method === 'GET' && req.url === '/health') {
           return json(res, 200, { ok: true, players: world.clients.size, tick: world.world.tick });
         }
@@ -106,31 +125,17 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
             const r = opts.crash.submit(body, remoteIp(req));
             return json(res, r.status, r.body, r.retryAfterS ? { 'retry-after': String(r.retryAfterS) } : {});
           }
-          if (req.method === 'GET' && (path === '/ops/crash' || path === '/ops/crash/summary.json')) {
-            if (!operatorAllowed(req, opts.dashboardToken)) return json(res, 403, { error: 'forbidden' });
-            if (path === '/ops/crash/summary.json') {
-              const h = Number(new URL(req.url ?? '', 'http://x').searchParams.get('hours'));
-              return json(res, 200, opts.crash.summary(h > 0 && h <= 24 * 30 ? h * 3_600_000 : undefined), {
-                'cache-control': 'no-store',
-              });
-            }
-            res.writeHead(200, {
-              'content-type': 'text/html; charset=utf-8',
-              'cache-control': 'no-store',
-              'content-security-policy':
-                "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'",
-            });
-            return void res.end(CRASH_PAGE_HTML);
-          }
         }
         if (req.method === 'POST' && (req.url === '/auth/register' || req.url === '/auth/login')) {
           const body = (await readJson(req)) as { username?: unknown; password?: unknown } | null;
           if (!body || typeof body !== 'object') throw new AuthError(400, 'bad_json', 'invalid JSON');
           if (req.url === '/auth/register') {
             const r = await auth.register(body.username, body.password, remoteIp(req));
+            opts.telemetry?.emitAccount(r.accountId, 'account.register', { method: 'password' });
             return json(res, 201, r);
           }
           const r = await auth.login(body.username, body.password, remoteIp(req));
+          opts.telemetry?.emitAccount(r.accountId, 'account.login', { method: 'password' });
           return json(res, 200, r);
         }
         json(res, 404, { error: 'not_found' });
