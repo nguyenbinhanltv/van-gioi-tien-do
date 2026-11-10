@@ -98,15 +98,16 @@ export interface QuestNpc {
 }
 
 /**
- * Quest-giving NPCs. Keys follow the interim standee keys of D98 / #255 (`npc_*`). The positions are the Sơn Môn plaza around the
- * spawn; they are PLACEHOLDERS until the NPC art lands, the server only needs "is the player near this NPC".
+ * Quest-giving NPCs. Keys follow the interim standee keys of D98 / #255 (`npc_*`). The offsets are the tiles where the client
+ * draws the NPC standees (D123: `SECT_NPC_LAYOUT` in the Cocos client is asserted equal to this table), so what the player sees is what
+ * the server range-checks. PLACEHOLDER layout, the server only needs "is the player near this NPC".
  */
 export const QUEST_NPCS: readonly QuestNpc[] = [
-  { key: 'npc_truong_lao_dan', offset: [-3, -3] },
-  { key: 'npc_su_huynh', offset: [3, -3] },
-  { key: 'npc_ve_binh', offset: [-3, 3] },
-  { key: 'npc_thuong_nhan', offset: [3, 3] },
-  { key: 'npc_chuong_mon', offset: [0, -5] },
+  { key: 'npc_truong_lao_dan', offset: [-4, -9] },
+  { key: 'npc_su_huynh', offset: [-5, 5] },
+  { key: 'npc_ve_binh', offset: [-6, -12] },
+  { key: 'npc_thuong_nhan', offset: [6, 5] },
+  { key: 'npc_chuong_mon', offset: [-9, -4] },
 ];
 export const questNpc = (key: string): QuestNpc | undefined => QUEST_NPCS.find((n) => n.key === key);
 

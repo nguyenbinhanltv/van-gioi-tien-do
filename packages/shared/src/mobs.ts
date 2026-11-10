@@ -268,6 +268,8 @@ export interface SpawnGroup {
   count: number;
   /** members that spawn together around one anchor point (packs); 1 = every mob has its own point (D83) */
   pack?: number;
+  /** the first N packs spawn in the starter band (`MOB_STARTER_BAND`, D123) instead of the tier band: the mob of the first kill quest */
+  starterPacks?: number;
 }
 export interface ZoneSpawnTable {
   zone: MobZoneId;
@@ -295,6 +297,10 @@ export const MOB_THREAT = {
   minThreat: 1,
 } as const;
 
+/** The mob of the first kill quest (`q_c1_san_doc_tho`) and how many of its packs spawn near the start (D123, PLACEHOLDER). */
+export const STARTER_MOB_KEY = 'mob_doc_tho';
+export const STARTER_MOB_PACKS = 2;
+
 /** One table per zone: every def of the zone, counts by tier (normal 12 in packs of 3 / elite 2 / boss 1), PLACEHOLDERS (D74, D83). */
 export const ZONE_SPAWN_TABLES: readonly ZoneSpawnTable[] = (
   ['bia_rung', 'dam_lay_doc', 'co_thu_trung_tam', 'doc_hoa_dam'] as const
@@ -304,6 +310,7 @@ export const ZONE_SPAWN_TABLES: readonly ZoneSpawnTable[] = (
     def: d.key,
     count: d.tier === 'normal' ? MOB_COUNT_NORMAL : d.tier === 'elite' ? 2 : 1,
     pack: d.tier === 'normal' ? MOB_PACK_NORMAL : 1,
+    ...(d.key === STARTER_MOB_KEY ? { starterPacks: STARTER_MOB_PACKS } : {}),
   })),
 }));
 

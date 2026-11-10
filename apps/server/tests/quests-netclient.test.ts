@@ -108,13 +108,13 @@ async function player(s: RunningServer, name: string): Promise<Player> {
 
 async function boot(dir: string): Promise<RunningServer> {
   stores = openFileStores(dir, { flushMs: -1 });
-  // spawn on top of the elder (npc_truong_lao_dan stands 3 tiles west and north of the map centre)
+  // spawn on top of the elder (npc_truong_lao_dan stands 4 west and 9 north of the map centre, D123)
   srv = await startServer({
     port: 0,
     auth: { scrypt: FAST, registerPerIpPerDay: 0, ipFailLimit: 1_000_000, store: stores.accounts },
     world: {
       mapTiles: MAP,
-      spawn: { i0: C - 3.2, j0: C - 3.2, side: 0.4 },
+      spawn: { i0: C - 4.2, j0: C - 9.2, side: 0.4 },
       inventory: new InventoryService({ store: stores.inventories, ledger: stores.ledger }),
     },
     progression: { store: stores.progression },
@@ -152,8 +152,8 @@ describe('quests end to end (real server, real NetClient, durable file store)', 
     expect(p.results[2]).not.toBe(0);
     expect(p.quests.statusOf('q_c1_nhap_mon')).toBe(QuestStatus.Active);
 
-    // walk east to the senior (6 tiles), talk, claim
-    await p.walk(1, 0, () => (p.net.selfPosition()?.i ?? 0) >= C + 2.2);
+    // walk south to the senior (14 tiles), talk, claim
+    await p.walk(0, 1, () => (p.net.selfPosition()?.j ?? 0) >= C + 2);
     p.cmd(QuestOp.Talk, 'npc_su_huynh');
     await until('objective done', () => p.quests.statusOf('q_c1_nhap_mon') === QuestStatus.Ready);
     expect(p.quests.markerFor('npc_su_huynh')).toBe('?');

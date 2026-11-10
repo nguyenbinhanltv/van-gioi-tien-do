@@ -7,6 +7,8 @@ import {
   MOB_ID_BASE,
   MOB_RESPAWN_MS,
   NETWORK,
+  STARTER_MOB_KEY,
+  STARTER_MOB_PACKS,
   ZONE_SPAWN_TABLES,
   elementOfWireId,
   mobDefByKey,
@@ -429,5 +431,21 @@ describe('AOI replicates mobs', () => {
     const ents = c.msgs.flatMap((m) => (m.type === 'aoi_enter' ? m.entities : []));
     expect(ents.length).toBeGreaterThan(0);
     for (const e of ents) expect([e.kind, e.defId]).toEqual([0, classWireId(DEFAULT_CLASS)]);
+  });
+});
+
+describe('starter packs (D123)', () => {
+  it('the first packs of the first-quest mob spawn within a short walk of the spawn square, on the full slice map', () => {
+    const n = 256;
+    const grid = TileGrid.fromRows(Array.from({ length: n }, () => '.'.repeat(n)));
+    const m = new MobManager({ seed: SEED, zones: defaultMobZones(n), grid });
+    const w = m.populate(createWorld(SEED));
+    const def = mobDefByKey(STARTER_MOB_KEY)!;
+    const near = mobs(w).filter(
+      (e) =>
+        m.info(e.id)?.def.id === def.id && Math.max(Math.abs(e.i - n / 2), Math.abs(e.j - n / 2)) <= 0.22 * 120 + 3,
+    );
+    // 2 packs of 3 (pack members sit within MOB_PACK_RADIUS of the leader)
+    expect(near.length).toBeGreaterThanOrEqual(STARTER_MOB_PACKS * 3);
   });
 });

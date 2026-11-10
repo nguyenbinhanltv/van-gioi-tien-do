@@ -44,6 +44,7 @@ import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
 import { QuestPanel } from './QuestPanel';
+import { QuestWorldUi } from './QuestWorldUi';
 import { CraftPanel } from './CraftPanel';
 import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
@@ -119,6 +120,8 @@ export class Bootstrap extends Component {
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
   private questPanel: QuestPanel | null = null;
+  /** NPC plates / dialogue / objective arrow / floating feedback over the quest model (D123), online only */
+  private questWorld: QuestWorldUi | null = null;
   private craftPanel: CraftPanel | null = null;
   private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
@@ -385,6 +388,7 @@ export class Bootstrap extends Component {
           self: () => this.online!.net.selfPosition(),
           remotes: () => this.online!.net.remotes(),
           isPartyMember: (id: number) => chat.party.members().some((m) => m.entityId === id),
+          objective: () => this.questWorld?.objective ?? null,
         };
         this.minimap = new Minimap(mapWorld, feed);
         this.worldMapPanel = new WorldMapPanel(mapWorld, feed);
@@ -432,6 +436,33 @@ export class Bootstrap extends Component {
         },
         (line, tone) => chat.log.system(line, tone),
       );
+      this.questWorld = new QuestWorldUi(
+        this.questPanel.model,
+        {
+          clientToWorld: (x, y) => this.rig.clientToWorld(x, y),
+          npcs: () => this.sectNpcs.map((n) => ({ key: n.key, i: n.tile.i, j: n.tile.j, height: n.height })),
+          self: () => net.selfPosition(),
+          mapTiles: () => map.width,
+          mobs: () => net.remotes().filter((r) => r.kind === 1),
+          send: (op, arg) => this.questPanel!.sendIntent(op, arg),
+          findPath: (from, to) =>
+            this.input.input.pathfinder.findPath(
+              { i: Math.floor(from.i), j: Math.floor(from.j) },
+              { i: Math.floor(to.i), j: Math.floor(to.j) },
+              { maxExpanded: map.width * map.height, smooth: true },
+            ),
+          walk: (path) => this.input.input.pointer.followPath(path),
+          walking: () => this.input.input.pointer.walking,
+          portrait: (key) => this.npcPortrait(key),
+          say: (line, tone) => chat.log.system(line, tone),
+        },
+        game.canvas as HTMLElement,
+      );
+      this.questPanel.hooks.go = () => this.questWorld?.goToObjective();
+      this.questPanel.hooks.feedback = (items) => {
+        for (const it of items)
+          this.questWorld?.float(it.line, it.questDone ? 'quest' : it.objectiveDone ? 'done' : 'progress');
+      };
       net.questEvents = {
         onQuestState: (m) => this.questPanel?.onState(m),
         onQuestResult: (m) => this.questPanel?.onResult(m),
@@ -620,6 +651,33 @@ export class Bootstrap extends Component {
     if (dirs.length) this.scriptedWalk = dirs;
   }
 
+  /** The NPC's head from its standee art, drawn into a small canvas for the dialogue; null when the texture cannot be read (then a monogram shows). */
+  private npcPortrait(key: string): HTMLCanvasElement | null {
+    try {
+      const sp = this.propArt?.npc(key);
+      const tex = sp?.frame.texture as unknown as { image?: { data?: CanvasImageSource } } | undefined;
+      const img = tex?.image?.data;
+      if (!sp || !img) return null;
+      const r = sp.frame.rect;
+      const c = document.createElement('canvas');
+      c.width = c.height = 48;
+      Object.assign(c.style, {
+        width: '48px',
+        height: '48px',
+        marginRight: '10px',
+        borderRadius: '50%',
+        border: '2px solid #c9a24a',
+        background: '#2a3045',
+        flex: '0 0 auto',
+      });
+      const side = Math.min(r.width, r.height * 0.4);
+      c.getContext('2d')!.drawImage(img, r.x + (r.width - side) / 2, r.y, side, side, 0, 0, 48, 48);
+      return c;
+    } catch {
+      return null;
+    }
+  }
+
   private findSpawn(ci: number, cj: number): TilePos {
     for (let r = 0; r < 32; r++)
       for (let dj = -r; dj <= r; dj++)
@@ -721,6 +779,7 @@ export class Bootstrap extends Component {
     this.sectPanel?.update();
     this.friendsPanel?.update();
     this.questPanel?.update();
+    this.questWorld?.update(dt);
     this.craftPanel?.update();
     this.marketPanel?.update();
     if (this.progressionHud) {
@@ -778,6 +837,7 @@ export class Bootstrap extends Component {
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
     this.questPanel?.destroy();
+    this.questWorld?.destroy();
     this.craftPanel?.destroy();
     this.marketPanel?.destroy();
     this.bagPanel?.destroy();

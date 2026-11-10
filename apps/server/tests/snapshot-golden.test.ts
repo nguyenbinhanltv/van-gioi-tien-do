@@ -35,14 +35,14 @@ describe('snapshot stream golden (byte-identical to the pre-optimisation impleme
     expect(stream(r)).toEqual({ checksum: 'a4e17b5c', frames: 20983, bytes: 5676093 });
   });
 
-  it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged (checksum re-pinned by D116: the skill effects now act)', () => {
+  it('integration: 150 players + 30 mobs with combat (vitals, skill results, hit points on the wire) are unchanged (checksum re-pinned by D116: the skill effects now act; again by D123: the starter mob packs spawn elsewhere)', () => {
     const r = runTickBench({ players: 150, ticks: 120, warm: 30, area: 20, mobs: 30, mobAttacks: false, hash: true });
     // re-captured for D114: the odd packs of a normal mob now carry their variant element, which changes the Ngũ hành multiplier of the
     // fights in this run (the combat outcomes, so frames / bytes move with the checksum); nothing else about the stream changed
     // re-pinned again for D116: the skill effects now act (mobs stunned / slowed, `status_update` frames for mobs)
     // re-pinned again for D117: the class stat weights change HP / ATK per class
     // and for D120: aoi_enter now carries the mob element in the `dir` byte (same frames, same bytes, other content)
-    expect(stream(r)).toEqual({ checksum: '1c5333ec', frames: 31635, bytes: 5761002 });
+    expect(stream(r)).toEqual({ checksum: '4fd3324c', frames: 32449, bytes: 5713349 });
   });
 
   it('the benchmark itself is deterministic: two runs of the same config give the same checksum', () => {

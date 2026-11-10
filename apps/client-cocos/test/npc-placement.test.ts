@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { QUEST_NPCS } from '@vgtd/shared';
 import manifest from '../../../tools/procgen/src/gemini/manifest.json';
 import {
   NPC_MIN_SEPARATION,
@@ -149,5 +150,12 @@ describe('placeSectNpcs', () => {
         expect(Math.max(Math.abs(n.i - spawn.i), Math.abs(n.j - spawn.j))).toBeGreaterThan(SPAWN_CLEAR_RADIUS - 2);
       }
     }
+  });
+});
+
+describe('quest NPC tiles (D123)', () => {
+  it('the standee layout is the table the server range-checks against (shared QUEST_NPCS offsets)', () => {
+    for (const n of QUEST_NPCS)
+      expect(SECT_NPC_LAYOUT[n.key as keyof typeof SECT_NPC_LAYOUT]).toEqual({ di: n.offset[0], dj: n.offset[1] });
   });
 });

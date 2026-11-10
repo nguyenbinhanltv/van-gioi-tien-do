@@ -17,7 +17,7 @@ import {
   type QuestObjective,
 } from '@vgtd/shared';
 import { t, type StringKey } from '../i18n/strings.js';
-import { QUEST_DESC_KEY, QUEST_NAME_KEY, QUEST_NPC_KEY, QUEST_TARGET_KEY } from './QuestText.js';
+import { NPC_ROLE_KEY, QUEST_DESC_KEY, QUEST_NAME_KEY, QUEST_NPC_KEY, QUEST_TARGET_KEY } from './QuestText.js';
 import { QuestReason, type QuestResultMsg, type QuestStateMsg } from '@vgtd/protocol';
 
 /** re-exported so engine scripts (which only see client-core) can name the ops and statuses */
@@ -69,7 +69,23 @@ export const questStatusText = (status: number): string => {
 
 export const questName = (id: string): string => (QUEST_NAME_KEY[id] ? t(QUEST_NAME_KEY[id]!) : id);
 export const npcName = (key: string): string => (QUEST_NPC_KEY[key] ? t(QUEST_NPC_KEY[key]!) : key);
-const target = (key: string): string => (QUEST_TARGET_KEY[key] ? t(QUEST_TARGET_KEY[key]!) : key);
+/** Name of a mob, item or zone key as the quest texts show it. */
+export const targetName = (key: string): string => (QUEST_TARGET_KEY[key] ? t(QUEST_TARGET_KEY[key]!) : key);
+const target = targetName;
+/** Name plate text of an NPC: `Trưởng Lão · Luyện Đan` (just the name when the role is unknown). */
+export const npcPlate = (key: string): string =>
+  NPC_ROLE_KEY[key] ? t('npc.plate', { name: npcName(key), role: t(NPC_ROLE_KEY[key]!) }) : npcName(key);
+
+/** One objective that moved since the last `quest_state` (floating text and tracker tick). */
+export interface QuestFeedback {
+  questId: string;
+  /** the objective line with its new progress, e.g. `Hạ Độc Thố 3/5` */
+  line: string;
+  /** the objective reached its target with this change */
+  objectiveDone: boolean;
+  /** the quest completed (claimed) with this change: `line` is then the quest name */
+  questDone: boolean;
+}
 
 /** One objective as a line with its progress (`Hạ Độc Thố 3/5`). */
 export function objectiveLine(o: QuestObjective, progress: number): string {
@@ -115,6 +131,8 @@ export interface QuestView {
   progress: readonly number[];
   /** one line per objective, with progress */
   lines: string[];
+  /** per objective: reached its target (the tracker ticks it) */
+  done: boolean[];
   reward: string;
   /** the NPC to walk to next: the giver while the quest can be accepted, the turn-in NPC when it is ready, the objective NPC for talk */
   goTo: string | null;
@@ -126,6 +144,7 @@ export class QuestModel {
   version = 0;
   private entries = new Map<string, { status: number; progress: readonly number[] }>();
   private seen = false;
+  private feedback: QuestFeedback[] = [];
   private dailyAt = 0;
   private weeklyAt = 0;
   private receivedMs = 0;
@@ -149,6 +168,23 @@ export class QuestModel {
       if (!questDefById(q.id)) continue; // a newer server's quest this client has no text for
       next.set(q.id, { status: q.status, progress: [...q.progress] });
       const was = prev.get(q.id)?.status;
+      const before = prev.get(q.id);
+      if (had && before && q.status === QuestStatus.Completed && was !== q.status)
+        this.feedback.push({ questId: q.id, line: questName(q.id), objectiveDone: false, questDone: true });
+      else if (had && before && (q.status === QuestStatus.Active || q.status === QuestStatus.Ready)) {
+        const d = questDefById(q.id)!;
+        d.objectives.forEach((o, i) => {
+          const p0 = before.progress[i] ?? 0;
+          const p1 = q.progress[i] ?? 0;
+          if (p1 > p0)
+            this.feedback.push({
+              questId: q.id,
+              line: objectiveLine(o, p1),
+              objectiveDone: p1 >= objectiveTarget(o),
+              questDone: false,
+            });
+        });
+      }
       if (!had || was === undefined || was === q.status) continue;
       if (q.status === QuestStatus.Ready) lines.push(t('quest.event.ready', { name: questName(q.id), npc: npcName(questDefById(q.id)!.turnIn) }));
       else if (q.status === QuestStatus.Completed) lines.push(t('quest.event.completed', { name: questName(q.id) }));
@@ -161,6 +197,13 @@ export class QuestModel {
     this.seen = true;
     this.version++;
     return lines;
+  }
+
+  /** The objective changes since the last call (progress, completion), oldest first; empties the queue. */
+  drainFeedback(): QuestFeedback[] {
+    const out = this.feedback;
+    this.feedback = [];
+    return out;
   }
 
   /** The answer to a command: the line to show when refused, null when done. */
@@ -193,6 +236,7 @@ export class QuestModel {
       status,
       progress,
       lines: def.objectives.map((o, i) => objectiveLine(o, progress[i] ?? 0)),
+      done: def.objectives.map((o, i) => (progress[i] ?? 0) >= objectiveTarget(o)),
       reward: rewardLine(def),
       goTo,
       goToName: goTo ? npcName(goTo) : '',
@@ -236,6 +280,22 @@ export class QuestModel {
       if (st === QuestStatus.Available && d.giver === npcKey) accept = true;
     }
     return accept ? '!' : null;
+  }
+
+  /**
+   * What floats over an NPC (D123): 'ready' = a quest waits to be turned in here (yellow ?), 'available' = one can be accepted here
+   * (yellow !), 'active' = a quest turned in here is still being worked on (grey ?), null = nothing.
+   */
+  markerState(npcKey: string): 'ready' | 'available' | 'active' | null {
+    let accept = false;
+    let working = false;
+    for (const d of QUEST_DEFS) {
+      const st = this.statusOf(d.id);
+      if (st === QuestStatus.Ready && d.turnIn === npcKey) return 'ready';
+      if (st === QuestStatus.Available && d.giver === npcKey) accept = true;
+      if (st === QuestStatus.Active && d.turnIn === npcKey) working = true;
+    }
+    return accept ? 'available' : working ? 'active' : null;
   }
 
   /** Seconds to the next daily / weekly reset, counted down from the last state (`nowMs` on the same clock as `applyState`). */

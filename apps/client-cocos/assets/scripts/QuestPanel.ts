@@ -33,6 +33,10 @@ export interface QuestPanelHooks {
   position(): { i: number; j: number } | null;
   /** side of the (square) map in tiles */
   mapTiles(): number;
+  /** the tracker was clicked: walk to the current objective (D123) */
+  go?(): void;
+  /** objective progress / completion to show as floating text and a tracker flash (D123) */
+  feedback?(items: ReturnType<InstanceType<typeof core.QuestModel>['drainFeedback']>): void;
 }
 
 export class QuestPanel {
@@ -45,10 +49,12 @@ export class QuestPanel {
   private drawnTracker = '';
   private open = false;
   private nextId = 1;
+  /** until this time (performance.now) the tracker shows a brief highlight after an objective moved */
+  private flash = 0;
 
   constructor(
     readonly model: InstanceType<typeof core.QuestModel>,
-    private readonly hooks: QuestPanelHooks,
+    readonly hooks: QuestPanelHooks,
     /** a line for the chat log (announcements and refusals) */
     private readonly say: (line: string, tone: 'system' | 'error') => void,
     parent: HTMLElement = document.body,
@@ -57,11 +63,11 @@ export class QuestPanel {
     tracker.id = 'vgtd-quest-tracker';
     Object.assign(tracker.style, {
       position: 'fixed',
-      right: '16px',
-      top: '8px',
+      right: '12px',
+      top: '204px', // below the minimap (176 px + its 12 px margin), D123
       width: '230px',
       maxWidth: 'calc(100vw - 32px)',
-      maxHeight: '84px',
+      maxHeight: '150px',
       overflow: 'hidden',
       display: 'none',
       padding: '4px 8px',
@@ -158,10 +164,21 @@ export class QuestPanel {
   /** Feed from the net hooks (set by the owner of `net.questEvents`). Announcements and refusals go to the chat log. */
   onState(m: Parameters<InstanceType<typeof core.QuestModel>['applyState']>[0]): void {
     for (const line of this.model.applyState(m, performance.now())) this.say(line, 'system');
+    const fb = this.model.drainFeedback();
+    if (fb.length) {
+      this.flash = performance.now() + 1200;
+      this.drawnTracker = '';
+      this.hooks.feedback?.(fb);
+    }
   }
   onResult(m: Parameters<InstanceType<typeof core.QuestModel>['applyResult']>[0]): void {
     const refusal = this.model.applyResult(m);
     if (refusal) this.say(refusal, 'error');
+  }
+
+  /** An intent sent for the NPC dialogue (same path as the tracker buttons: the server decides). */
+  sendIntent(op: number, arg: string): boolean {
+    return this.send(op, arg);
   }
 
   private send(op: number, arg: string): boolean {
@@ -232,13 +249,18 @@ export class QuestPanel {
   private drawTracker(): void {
     const near = this.model.nearestNpc(this.hooks.position(), this.hooks.mapTiles());
     const acts = this.actions();
-    const items = this.model.tracker(2);
+    const tracked = this.model.tracker(2);
+    // nothing being worked on: show the first quest that can be accepted, so the player always has somewhere to go (D123)
+    const offer = tracked.length === 0 ? this.model.available().slice(0, 1) : [];
+    const items = tracked.length ? tracked : offer;
     const marker = near && near.inReach ? this.model.markerFor(near.key) : null;
+    const flashing = performance.now() < this.flash;
     const sig = JSON.stringify([
       this.model.version,
-      items.map((v) => v.lines),
+      items.map((v) => [v.id, v.lines, v.status]),
       acts.map((a) => a.label),
       near ? [near.key, near.inReach, Math.round(near.dist)] : null,
+      flashing,
     ]);
     if (sig === this.drawnTracker) return;
     this.drawnTracker = sig;
@@ -247,17 +269,35 @@ export class QuestPanel {
       return;
     }
     this.tracker.style.display = 'block';
+    this.tracker.style.borderColor = flashing ? '#ffd84a' : 'rgba(127,212,255,0.5)';
     const frag = document.createDocumentFragment();
-    for (const v of items) {
-      frag.appendChild(
-        this.text(v.name, v.status === core.QuestStatus.Ready ? '#8fe0a0' : GOLD, { fontWeight: 'bold' }),
+    items.forEach((v, n) => {
+      const status = v.status;
+      const head = this.text(
+        `${status === core.QuestStatus.Available ? '! ' : ''}${v.name}`,
+        status === core.QuestStatus.Ready ? '#8fe0a0' : GOLD,
+        { fontWeight: 'bold' },
       );
-      const first =
-        v.status === core.QuestStatus.Ready
-          ? core.t('quest.panel.turn_in_at', { npc: v.goToName })
-          : (v.lines[0] ?? '');
-      frag.appendChild(this.text(first, MUTED));
-    }
+      frag.appendChild(head);
+      // the objectives (clicking them auto-walks to the first one that is not done; a ready / acceptable quest walks to its NPC)
+      const body = document.createElement('div');
+      if (n === 0 && this.hooks.go) {
+        body.style.cursor = 'pointer';
+        body.title = core.t('quest.guide.go_hint');
+        body.addEventListener('click', () => this.hooks.go?.());
+      }
+      if (status === core.QuestStatus.Ready)
+        body.appendChild(this.text(core.t('quest.panel.turn_in_at', { npc: v.goToName }), MUTED));
+      else if (status === core.QuestStatus.Available)
+        body.appendChild(this.text(core.t('quest.panel.go_meet', { npc: v.goToName }), '#7fd4ff'));
+      else
+        v.lines.forEach((l, i) =>
+          body.appendChild(
+            this.text(`${v.done[i] ? '✓' : '·'} ${l.replace(/^[·✓]\s*/, '')}`, v.done[i] ? '#8fe0a0' : MUTED),
+          ),
+        );
+      frag.appendChild(body);
+    });
     if (acts.length) {
       const row = document.createElement('div');
       row.style.marginTop = '2px';

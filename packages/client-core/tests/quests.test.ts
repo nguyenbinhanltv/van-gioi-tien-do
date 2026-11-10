@@ -115,11 +115,11 @@ describe('QuestModel', () => {
     const m = new QuestModel();
     const c = 128;
     expect(m.nearestNpc(null, 256)).toBeNull();
-    expect(m.nearestNpc({ i: c + 3, j: c - 3 }, 256)).toMatchObject({ key: 'npc_su_huynh', name: 'Sư Huynh', inReach: true });
+    expect(m.nearestNpc({ i: c - 5, j: c + 5 }, 256)).toMatchObject({ key: 'npc_su_huynh', name: 'Sư Huynh', inReach: true });
     const far = m.nearestNpc({ i: c + 40, j: c + 40 }, 256)!;
     expect(far.inReach).toBe(false);
     expect(far.dist).toBeGreaterThan(QUESTS.NPC_RANGE_TILES);
-    expect(m.npcTile('npc_su_huynh', 256)).toEqual({ i: c + 3, j: c - 3 });
+    expect(m.npcTile('npc_su_huynh', 256)).toEqual({ i: c - 5, j: c + 5 });
     expect(m.npcTile('nope', 256)).toBeNull();
   });
 

@@ -31,6 +31,8 @@ export interface MapFeed {
   self(): { i: number; j: number } | null;
   remotes(): ReadonlyArray<{ entityId: number; kind: number; defId: number; i: number; j: number }>;
   isPartyMember(entityId: number): boolean;
+  /** the quest objective to mark (D123): a yellow diamond, pinned to the rim when it is outside the shown area */
+  objective?(): { i: number; j: number; label: string } | null;
 }
 
 const GROUND_COLOR: Record<string, string> = {
@@ -163,6 +165,36 @@ export class Minimap {
           ctx.fillRect(Math.round(p.x) - 1, Math.round(p.y) - 1, 3, 3);
         }
       }
+    }
+    const obj = this.feed.objective?.() ?? null;
+    if (obj) {
+      const p = toScreen(obj.i, obj.j);
+      const cx = S / 2;
+      const rim = S / 2 - 9;
+      const dx = p.x - cx;
+      const dy = p.y - cx;
+      const k = Math.max(Math.abs(dx), Math.abs(dy)) > rim ? rim / Math.max(Math.abs(dx), Math.abs(dy)) : 1;
+      const x = cx + dx * k;
+      const y = cx + dy * k;
+      ctx.fillStyle = '#ffd84a';
+      ctx.strokeStyle = '#3a2a00';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x, y - 7);
+      ctx.lineTo(x + 6, y);
+      ctx.lineTo(x, y + 7);
+      ctx.lineTo(x - 6, y);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+      const tip = core.t('quest.guide.minimap', { name: obj.label });
+      if (
+        this.canvas.title !==
+        `${core.t('map.minimap_hint')}
+${tip}`
+      )
+        this.canvas.title = `${core.t('map.minimap_hint')}
+${tip}`;
     }
     mark('self', me.i, me.j, 22, '#ffd75a');
     // caption: the region (and tile) the player stands in
