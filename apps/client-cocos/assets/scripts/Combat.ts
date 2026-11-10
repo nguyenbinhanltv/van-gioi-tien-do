@@ -710,6 +710,9 @@ export class CombatUi {
     if (this.vfxDemoNext < 0 || now < this.vfxDemoAt) return;
     this.vfxDemoAt = now + 1100;
     const bar = this.backend.hotbar;
+    // the demo needs a target for the single-target skills: select the nearest enemy once
+    if (this.backend.target.current === null)
+      this.backend.target.cycle(this.backend.enemies, this.playerPos(), 15, false);
     for (let n = 0; n < bar.slots.length; n++) {
       const slot = (this.vfxDemoNext + n) % bar.slots.length;
       if (!bar.slots[slot]?.castable) continue;
