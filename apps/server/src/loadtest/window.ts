@@ -1,5 +1,6 @@
 /** Measurement-window helpers shared by the load-test CLI and the P2 scenarios (apps/server/src/loadtest/scenarios.ts). */
 import type { RunningServer } from '../server.js';
+import { TICK_PHASES } from '../world/node.js';
 import type { ServerClientStats, ServerSample } from './runner.js';
 
 /** Copy the cumulative per-client counters so the window can be computed as a difference. */
@@ -37,6 +38,11 @@ export function windowSample(
   }
   return {
     tickMs: [...srv.world.tickMs],
+    profile: {
+      samples: Object.fromEntries(TICK_PHASES.map((k) => [k, [...srv.world.profile.samples[k]]])),
+      slowTicks: srv.world.profile.slowTicks,
+      slowBy: { ...srv.world.profile.slowBy },
+    },
     tickIntervalMs: [...srv.world.tickIntervalMs],
     clients,
     durationS,
@@ -52,6 +58,9 @@ export function windowSample(
 export function resetWindow(srv: RunningServer): void {
   srv.world.tickMs.length = 0;
   srv.world.tickIntervalMs.length = 0;
+  for (const k of TICK_PHASES) srv.world.profile.samples[k].length = 0;
+  srv.world.profile.slowTicks = 0;
+  for (const k of TICK_PHASES) srv.world.profile.slowBy[k] = 0;
   Object.assign(srv.world.phases, {
     stepMs: 0,
     aoiMs: 0,

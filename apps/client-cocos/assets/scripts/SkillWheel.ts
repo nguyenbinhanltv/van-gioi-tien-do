@@ -5,7 +5,7 @@ import type { ArtFrames } from './PlaceholderArt';
 import type { TilePos } from './Actors';
 import type { CombatUi } from './Combat';
 import { worldUiLayer } from './OverheadBar';
-import { sharedAtlas, dynamicLabel } from './UiLabel';
+import { sharedAtlas } from './UiLabel';
 
 interface Btn {
   root: Node;
@@ -53,7 +53,7 @@ export class SkillWheel {
     this.cancelSprite.sizeMode = Sprite.SizeMode.CUSTOM;
     this.cancelSprite.spriteFrame = art.pixel;
     this.cancelLabel = this.text(this.cancelNode, 'Label', 18, new Color(255, 255, 255, 255));
-    this.cancelLabel.string = 'Huy / Cancel';
+    this.cancelLabel.string = core.t('skillwheel.cancel');
     this.cancelNode.active = false;
     this.pageLabel = this.text(this.root, 'Page', 14, new Color(255, 255, 255, 200));
     const g = newNode('AimIndicator', worldUiLayer(worldRoot));
@@ -114,7 +114,7 @@ export class SkillWheel {
     this.radial(cd);
     this.radial(gcd);
     const label = this.text(root, 'Label', 18, new Color(255, 255, 255, 255));
-    const cdText = dynamicLabel(this.text(root, 'CdText', 20, new Color(255, 255, 255, 255))); // counts down
+    const cdText = sharedAtlas(this.text(root, 'CdText', 20, new Color(255, 255, 255, 255)), 'dynamic'); // counts down
     b = { root, bg, icon, cd, gcd, label, cdText };
     this.buttons.set(id, b);
     return b;
@@ -160,7 +160,8 @@ export class SkillWheel {
       } else {
         // dodge / fly (not wired to the server yet) and wheel slots past the 8 hotbar skills: dim, no label for empty ones
         btn.bg.color = DIM;
-        btn.label.string = b.id === 'dodge' ? 'NE' : b.id === 'fly' ? 'BAY' : '';
+        btn.label.string =
+          b.id === 'dodge' ? core.t('skillwheel.dodge') : b.id === 'fly' ? core.t('skillwheel.fly') : '';
         btn.icon.node.active = false;
         btn.cd.node.active = false;
         btn.gcd.node.active = false;

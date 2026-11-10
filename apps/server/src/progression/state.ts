@@ -55,6 +55,27 @@ export interface ProgressRecord {
    * hello. Absent on records written before D82: they are given a class by the next login (`resolveClass`).
    */
   readonly classId?: PathId;
+  /** alchemy mastery points 0..100 per recipe key (D108, docs/13 §4.1); absent = none yet. Persisted with the record (D92). */
+  readonly craftMastery?: Readonly<Record<string, number>>;
+  /**
+   * Server-side craft counter (D108): every craft roll is seeded from it, never from anything the client sends, so a client cannot replay or
+   * scan for a good roll. Persisted with the record; absent = 0.
+   */
+  readonly craftNonce?: number;
+  /** the most recent craft requestIds this character used (a short ring, oldest first): a reused id is refused, even after a relog or a restart */
+  readonly craftRequests?: readonly string[];
+  /**
+   * Đạo Tâm 0..100 (D103): changed only by the events the docs give a number for. Absent on records written before D103 = `DAO_TAM.START`.
+   * The value that counts is `effectiveDaoTam(daoTam, karma)` (under the ceiling of the Nghiệp band), never this raw number.
+   */
+  readonly daoTam?: number;
+  /** K gained through the daily-capped sources in the current server day (D103, docs/14 §3.3 "+100 mỗi ngày"); absent = nothing yet */
+  readonly karmaGain?: { readonly day: number; readonly gained: number };
+  /**
+   * Remaining lock of the MAJOR breakthrough (ms) as of the last write (D97): after a lost Tâm Ma (30 min) or a Nặng death in a Lôi Kiếp (24 h).
+   * The service turns it into an absolute time on load and refreshes it on every write, so it survives a restart. Absent / 0 = not locked.
+   */
+  readonly majorLockMs?: number;
 }
 
 type Position = Pick<ProgressRecord, 'realm' | 'subRealm'>;

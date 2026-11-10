@@ -141,7 +141,11 @@ export class Predictor {
     const keepFrom = first < 0 ? this.pending.length : first; // acked inputs are a prefix
     // the status at the moment of the ack: the server's block when it sent one, else what we had before the first unacked input
     let st: MoveStatus = self.status
-      ? { rootMs: self.status.rootMs, slowMs: self.status.slowMs, slowFactor: self.status.slowMs > 0 ? self.status.slowPct / 100 : 1 }
+      ? {
+          rootMs: self.status.rootMs,
+          slowMs: self.status.slowMs,
+          slowFactor: self.status.slowMs > 0 ? self.status.slowPct / 100 : 1,
+        }
       : (this.pendingStatus[keepFrom] ?? this.status);
     this.pending = this.pending.slice(keepFrom);
     this.pendingStatus = this.pendingStatus.slice(keepFrom);

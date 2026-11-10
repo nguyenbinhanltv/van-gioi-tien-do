@@ -14,32 +14,3 @@ export function sharedAtlas(l: Label, kind: 'static' | 'dynamic' = 'static'): La
   l.cacheMode = kind === 'static' ? Label.CacheMode.BITMAP : Label.CacheMode.CHAR;
   return l;
 }
-
-/**
- * Font size every dynamic (CHAR cache) label is rasterised at. The engine keeps ONE letter atlas per font description (family + size),
- * so labels of different sizes are different textures and can never share a draw call: a HUD with 12, 14, 16, 18, 22 and 32 px
- * dynamic labels paid one draw call per size as soon as they were all on screen (cooldown digits, damage numbers, toast...). All
- * dynamic labels now use this one size and the node scale gives the visual size.
- */
-export const DYN_FONT_PX = 24;
-
-/**
- * A dynamic label (text that changes while playing: hp / mp, cooldowns, damage numbers, counters, toasts): CHAR cache mode on the
- * shared letter atlas at `DYN_FONT_PX`; the size it was created with (`l.fontSize`) becomes the node scale. Resize later with
- * `setDynamicSize` (a scale change: no relayout), never by assigning `fontSize`.
- */
-export function dynamicLabel(l: Label): Label {
-  if (l.cacheMode === Label.CacheMode.CHAR && l.fontSize === DYN_FONT_PX) return l; // already converted (idempotent)
-  const px = l.fontSize;
-  l.cacheMode = Label.CacheMode.CHAR;
-  l.fontSize = DYN_FONT_PX;
-  l.lineHeight = DYN_FONT_PX + 2;
-  setDynamicSize(l, px);
-  return l;
-}
-
-/** Visual size (px) of a dynamic label: node scale only. */
-export function setDynamicSize(l: Label, px: number): void {
-  const k = px / DYN_FONT_PX;
-  l.node.setScale(k, k, 1);
-}

@@ -388,6 +388,13 @@ describe('own status block (D94)', () => {
   });
 
   it('status_update is 7 bytes with the stable hot id 18', () => {
+    // D116: a mob can also be stunned (bit 3); bit 4 and above do not exist
+    expect(decode(encode({ type: 'status_update', entityId: 7, mask: 8 | 2 }))).toEqual({
+      type: 'status_update',
+      entityId: 7,
+      mask: 10,
+    });
+    expect(() => encode({ type: 'status_update', entityId: 7, mask: 16 })).toThrow();
     const b = encode({ type: 'status_update', entityId: 12345, mask: 3 });
     expect(b.length).toBe(7);
     expect(b[1]).toBe(18);

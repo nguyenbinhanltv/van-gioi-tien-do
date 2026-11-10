@@ -2,7 +2,7 @@ import { Color, Label, Node, Sprite, UITransform } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
-import { sharedAtlas, dynamicLabel } from './UiLabel';
+import { sharedAtlas } from './UiLabel';
 
 type Net = InstanceType<typeof core.NetClient>;
 type Tracker = InstanceType<typeof core.FirstSessionTracker>;
@@ -83,6 +83,7 @@ export class FirstSessionHud {
   private readonly hint: Label;
   private scale = 1;
   private doneForS = 0;
+  private suppressed = false;
 
   constructor(
     hudParent: Node,
@@ -111,7 +112,7 @@ export class FirstSessionHud {
       l.node.setPosition(10, -36 - k * ROW_H, 0);
       this.rows.push(l);
     }
-    this.hint = dynamicLabel(label(this.root, 'Hint', 12, COL.hint)); // the distance changes as you walk
+    this.hint = sharedAtlas(label(this.root, 'Hint', 12, COL.hint), 'dynamic'); // the distance changes as you walk
     this.hint.node.setPosition(10, -PANEL_H + 14, 0);
     this.layout(1280, 720);
     // automation hook (scripts/bag-smoke.mjs): the tracker state without touching the DOM / canvas pixels
@@ -133,6 +134,12 @@ export class FirstSessionHud {
         this.tracker.onBreakthroughResult(m.outcome);
       },
     };
+  }
+
+  /** The server-side tutorial (D105) took over: hide this checklist (it keeps tracking, so its debug hook stays valid). */
+  suppress(on: boolean): void {
+    this.suppressed = on;
+    if (on) this.root.active = false;
   }
 
   /** Top-left, below the perf HUD, shrunk on narrow canvases. */
@@ -157,11 +164,11 @@ export class FirstSessionHud {
     const v = this.tracker.view();
     if (v.done) {
       this.doneForS += dt;
-      this.root.active = this.doneForS < SHOW_DONE_S;
-    }
+      this.root.active = this.doneForS < SHOW_DONE_S && !this.suppressed;
+    } else if (this.suppressed) this.root.active = false;
     this.title.string = v.done
-      ? 'Hành trình đầu tiên: hoàn thành!'
-      : `Hành trình đầu tiên  ${v.completed}/${v.steps.length}`;
+      ? core.t('firstsession.hud.title_done')
+      : core.t('firstsession.hud.title', { done: v.completed, total: v.steps.length });
     let hint = '';
     for (let k = 0; k < v.steps.length; k++) {
       const s = v.steps[k]!;

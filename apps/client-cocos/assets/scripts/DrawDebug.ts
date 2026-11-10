@@ -98,9 +98,9 @@ export function summarize(root: Node): {
 }
 
 /**
- * `window.__vgtdBatchTrace(reset?)`: which component ENDS each 2D batch. Wraps the engine's `Batcher2D.autoMergeBatches` (called when
- * the next renderable cannot join the running batch: other texture / material / render-data hash) and counts, per node path with
- * digits folded (`Slot3` -> `Slot#`), how often a batch ended at it. Returns { frames, perFrame: [[key, n per frame]...] } since the
+ * `window.__vgtdBatchTrace(reset?)`: which component STARTS each 2D batch. Wraps the engine's `Batcher2D.autoMergeBatches` (called when
+ * the next renderable cannot join the running batch: other texture / material / render-data hash; it receives the first component of
+ * the batch being flushed) and counts, per node path with digits folded (`Slot3` -> `Slot#`), how often a batch started at it. Returns { frames, perFrame: [[key, n per frame]...] } since the
  * last reset. Debug aid only.
  */
 function installBatchTrace(root: Node): void {

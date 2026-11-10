@@ -18,14 +18,22 @@ import { connect, createServer } from 'node:net';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  DEFAULTS,
   USAGE,
+  buildOutcome,
+  buildPhaseOf,
   buildUrls,
   openCommand,
   checkNode,
   cocosEditorPath,
   controlLines,
   corsOrigins,
+  editorActivityMs,
   hasSavedData,
+  idleLimitMin,
+  isFirstBuild,
+  makeBuildWatchdog,
+  sourceFingerprint,
   resetCheck,
   resetData,
   storePlan,
@@ -87,7 +95,7 @@ function pipeLines(stream, prefix, write, keep = () => true) {
   });
 }
 
-function start(name, args, env, { quiet = false, service = false, keep = () => true, tee = null } = {}) {
+function start(name, args, env, { quiet = false, service = false, keep = () => true, tee = null, onLine = null } = {}) {
   const child = spawn(process.execPath, args, {
     cwd: root,
     env: { ...process.env, ...env },
@@ -103,9 +111,20 @@ function start(name, args, env, { quiet = false, service = false, keep = () => t
     child.stdout.pipe(tee, { end: false });
     child.stderr.pipe(tee, { end: false });
   }
-  if (!quiet) pipeLines(child.stdout, `[${name}]`, (s) => process.stdout.write(s), keep);
-  else child.stdout.resume();
-  pipeLines(child.stderr, `[${name}]`, (s) => process.stderr.write(s), keep);
+  // `onLine` sees EVERY line, before the console filter (the build watchdog counts all output as a sign of life)
+  const tap = (k) => (line) => {
+    onLine?.(line);
+    return k(line);
+  };
+  if (!quiet) pipeLines(child.stdout, `[${name}]`, (s) => process.stdout.write(s), tap(keep));
+  else
+    pipeLines(
+      child.stdout,
+      `[${name}]`,
+      () => {},
+      tap(() => false),
+    );
+  pipeLines(child.stderr, `[${name}]`, (s) => process.stderr.write(s), tap(keep));
   // a long-running server that exits before we shut down is an error (the build step is expected to exit)
   if (service)
     child.once('exit', (code) => {
@@ -273,12 +292,26 @@ try {
 } catch {
   /* built by `npm run build:web`, or not at all */
 }
-const decision = needsRebuild({
+let storedHash = null;
+try {
+  storedHash = JSON.parse(readFileSync(marker, 'utf8')).sourcesHash ?? null;
+} catch {
+  /* no marker */
+}
+const decisionInput = {
   force: opts.rebuild,
   wantedVariant: variant,
   build: buildInfo,
   newestSource: buildInfo.exists ? newestSource(root) : null,
-});
+};
+let decision = needsRebuild(decisionInput);
+// the timestamps say "stale": before paying for a rebuild (1 minute, or tens on a first import) check that the CONTENT really changed.
+// A branch switch / merge / touch moves every mtime; a change in apps/server is not an input of the client at all.
+let sourcesHash = null;
+if (decision.code === 'stale') {
+  sourcesHash = sourceFingerprint(root);
+  if (storedHash && storedHash === sourcesHash) decision = needsRebuild({ ...decisionInput, sameSources: true });
+}
 
 const editor = cocosEditorPath(process.env, process.platform);
 const editorOk = !!editor && existsSync(editor);
@@ -340,48 +373,103 @@ say(
 
 // ------------------------------------------------------------------------------------------------ build
 if (decision.rebuild) {
+  const clientDir = client;
+  const first = isFirstBuild(clientDir);
+  const idleMin = idleLimitMin(opts, first);
   say(
-    `Build client (${variant === 'release' ? 'release: nhỏ, nhanh' : 'dev: debug, có art dev'}): ${reasonVi(decision)}. Mất khoảng 20-60 giây.`,
-    `Building the web client (${variant}): ${decision.reason}. Takes about 20-60 s.`,
+    `Build client (${variant === 'release' ? 'release: nhỏ, nhanh' : 'dev: debug, có art dev'}): ${reasonVi(decision)}. ${first ? 'Lần đầu có thể mất vài phút.' : 'Mất khoảng 20-60 giây.'}`,
+    `Building the web client (${variant}): ${decision.reason}. ${first ? 'First build: it can take several minutes.' : 'Takes about 20-60 s.'}`,
   );
+  if (first)
+    say(
+      'Đang import tài nguyên (asset DB)... lần chạy đầu có thể mất vài phút, trình soạn thảo gần như không in gì. Đừng đóng cửa sổ này.',
+      'Importing assets (asset DB)... the first run can take several minutes and the editor prints almost nothing. Do not close this window.',
+    );
+  // the fingerprint of what this build is made from, taken BEFORE it starts (a source edited during the build must look newer next time)
+  sourcesHash ??= sourceFingerprint(root);
   // Cocos Creator is very chatty: the console shows what matters (errors, warnings, the result), the whole log goes to a file
   mkdirSync(join(client, 'build'), { recursive: true });
   const logFile = join(client, 'build/play-build.log');
   const tee = createWriteStream(logFile);
   const quietCocos = makeBuildLineFilter();
+  const startedAt = Date.now();
+  const watch = makeBuildWatchdog({ idleMs: idleMin * 60_000, maxMs: DEFAULTS.buildMaxMin * 60_000, now: startedAt });
+  let sawFinished = false;
+  let phase = first ? 'import' : 'build';
   const build = start(
     'build',
     [join(client, 'scripts/build-web.mjs'), ...(variant === 'release' ? ['--release'] : [])],
     {},
-    { keep: quietCocos, tee },
+    {
+      keep: quietCocos,
+      tee,
+      onLine: (line) => {
+        watch.touch(Date.now());
+        if (/build Task .* Finished/.test(line)) sawFinished = true;
+        const ph = buildPhaseOf(line);
+        // phases only move forward (import -> build): a later line that mentions an import does not announce it again
+        if (ph && ph !== 'finished' && ph !== phase && !(phase === 'build' && ph === 'import')) {
+          phase = ph;
+          say(
+            ph === 'import' ? 'Giai đoạn: import tài nguyên...' : 'Giai đoạn: đóng gói / biên dịch...',
+            ph === 'import' ? 'Phase: importing assets...' : 'Phase: bundling / compiling...',
+          );
+        }
+      },
+    },
   );
-  const startedAt = Date.now();
+  let lastActivity = editorActivityMs(clientDir);
   const beat = setInterval(() => {
-    const s = Math.round((Date.now() - startedAt) / 1000);
-    say(`… đang build (${s} s) / still building (${s} s) …`);
+    const now = Date.now();
+    // the editor writes files while it imports even when it prints nothing: that counts as alive
+    const act = editorActivityMs(clientDir);
+    if (act > lastActivity) {
+      lastActivity = act;
+      watch.touch(now);
+    }
+    const s = watch.elapsedSec(now);
+    const quiet = watch.idleSec(now);
+    say(
+      `… đang build (${s} s, ${quiet < 20 ? 'đang hoạt động' : `${quiet} s không có tiến triển`}) …`,
+      `… still building (${s} s, ${quiet < 20 ? 'active' : `${quiet} s without progress`}) …`,
+    );
   }, 15_000);
-  // a build that never ends (for example a second Cocos Creator instance holding the editor's data) must not hang this command forever
-  let timedOut = false;
-  const killer = setTimeout(() => {
-    timedOut = true;
-    killTree(build.child);
-  }, opts.buildTimeoutMin * 60_000);
+  // a build that stops making progress (for example a second Cocos Creator instance holding the editor's data) must not hang this command
+  // forever; a slow one that keeps writing files or logging is left alone (up to the hard cap)
+  let stopped = null;
+  const killer = setInterval(() => {
+    const why = watch.check(Date.now());
+    if (why && !stopped) {
+      stopped = why;
+      killTree(build.child);
+    }
+  }, 5_000);
   const code = await build.exited;
   clearInterval(beat);
-  clearTimeout(killer);
+  clearInterval(killer);
   tee.end();
   if (shuttingDown) await new Promise(() => {}); // a signal arrived: shutdown() exits
   children.splice(children.indexOf(build), 1);
-  if (timedOut)
+  if (stopped)
     fail(
-      `Build client quá ${opts.buildTimeoutMin} phút nên đã bị dừng. Hãy đóng các cửa sổ Cocos Creator khác (kể cả của dự án khác) rồi thử lại. Log đầy đủ: ${logFile}`,
-      `The web client build took longer than ${opts.buildTimeoutMin} minutes and was stopped. Close other Cocos Creator instances (any project) and try again. Full log: ${logFile}`,
+      stopped === 'idle'
+        ? `Build client không có tiến triển suốt ${idleMin} phút nên đã bị dừng. Hãy đóng các cửa sổ Cocos Creator khác (kể cả của dự án khác) rồi thử lại, hoặc tăng --build-timeout. Log đầy đủ: ${logFile}`
+        : `Build client quá ${DEFAULTS.buildMaxMin} phút nên đã bị dừng. Log đầy đủ: ${logFile}`,
+      stopped === 'idle'
+        ? `The web client build made no progress for ${idleMin} minutes (no log output, no files written) and was stopped. Close other Cocos Creator instances (any project) and try again, or raise --build-timeout. Full log: ${logFile}`
+        : `The web client build ran longer than ${DEFAULTS.buildMaxMin} minutes and was stopped. Full log: ${logFile}`,
     );
-  if (code !== 0 || !existsSync(join(buildDir, 'index.html')))
-    fail(`Build client thất bại. Log đầy đủ: ${logFile}`, `The web client build failed. Full log: ${logFile}`);
+  // Cocos Creator's exit code is unreliable (36 after a good build): the artifact + the "Finished" line decide
+  const outcome = buildOutcome({ code, indexExists: existsSync(join(buildDir, 'index.html')), sawFinished });
+  if (!outcome.ok)
+    fail(
+      `Build client thất bại (${outcome.note}). Log đầy đủ: ${logFile}`,
+      `The web client build failed (${outcome.note}). Full log: ${logFile}`,
+    );
+  if (outcome.note) say(`Ghi chú: mã thoát ${code} của Cocos là bình thường khi build xong.`, `Note: ${outcome.note}.`);
   mkdirSync(buildDir, { recursive: true });
-  writeFileSync(marker, JSON.stringify({ variant, at: new Date().toISOString() }));
-  say('Build xong.', 'Build finished.');
+  writeFileSync(marker, JSON.stringify({ variant, at: new Date().toISOString(), sourcesHash }));
+  say(`Build xong (${watch.elapsedSec(Date.now())} s).`, `Build finished (${watch.elapsedSec(Date.now())} s).`);
 } else {
   say(
     `Dùng bản build sẵn có (${variant}): ${reasonVi(decision)}. Muốn build lại: --rebuild.`,

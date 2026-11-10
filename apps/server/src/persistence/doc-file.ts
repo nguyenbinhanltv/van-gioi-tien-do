@@ -3,20 +3,34 @@
  * burst of changes (a login storm, a drop) is ONE write, `flush()` writes now (shutdown, tests). The document is serialised when the
  * write happens, from live state, so a write always contains every change made before it.
  *
- * The write itself is synchronous (`writeFileAtomic`) and the documents are small (play-test scale); a database adapter replaces
- * this with real transactions (docs/08, D92). A failed write is counted and reported through `onError`, and retried by the next
+ * The scheduled write is ASYNCHRONOUS (D106): the document is serialised on the loop (a point-in-time copy), then the slow part (write +
+ * fsync) runs on the thread pool and only the commit renames touch the loop. A synchronous fsync inside the tick loop stalled it for
+ * 30-370 ms per write under 200 players. At most one write is in flight per file; changes made meanwhile are written right after.
+ * `flush()` stays synchronous (shutdown, tests) and supersedes any write still in flight. The whole document is still rewritten each
+ * time (play-test scale); a database adapter replaces this with real transactions (docs/08, D92). A failed write is counted and reported through `onError`, and retried by the next
  * `markDirty()`; it never throws into the game loop.
  */
-import { writeFileAtomic } from './atomic.js';
+import { fileWriteStats, writeFileAtomic, writeFileAtomicAsync } from './atomic.js';
 
 export interface DocFileOptions {
   flushMs?: number;
+  /** false = the old behaviour: the scheduled write is synchronous on the loop (only to compare, `soak --sync-writes`); default true */
+  background?: boolean;
   onError?: (e: unknown) => void;
+  /**
+   * Runs before every write of this document; if it throws the write does not happen and the document stays dirty. The file store uses it to
+   * finish a pending multi-document journal FIRST, so a newer version of a document can never be written while an older journal that covers
+   * it is still waiting to be rolled forward (a later restart would otherwise re-apply the stale journal over the newer data).
+   */
+  beforeWrite?: () => void;
 }
 
 export class DocFile {
   private timer: ReturnType<typeof setTimeout> | null = null;
   private dirty = false;
+  private inflight = false;
+  /** bumped by every write start: an async write commits only while it is still the newest */
+  private gen = 0;
   /** completed writes (test hook) */
   writes = 0;
   /** failed writes (test hook / ops) */
@@ -30,24 +44,100 @@ export class DocFile {
     this.flushMs = opts.flushMs ?? 250;
   }
 
+  /** The document's current text (what a write would put on disk): the journal records it before it applies a multi-document commit. */
+  text(): string {
+    return this.serialize();
+  }
+
+  /**
+   * The journal wrote `text` as this document's content. The document is clean only if that IS its current content: if it changed since
+   * (a later write is waiting), it stays dirty so that write still happens.
+   */
+  markWritten(text: string): void {
+    this.writes++;
+    // the journal just put newer content on disk synchronously: a background write that took its copy BEFORE this must not commit over it
+    this.gen++;
+    if (this.serialize() !== text) return;
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    this.dirty = false;
+  }
+
+  /** The document as it would be written right now (backups serialise every store in ONE synchronous turn, D99). */
+  serializeNow(): string {
+    return this.serialize();
+  }
+
   markDirty(): void {
     this.dirty = true;
     if (this.timer || this.flushMs < 0) return;
     this.timer = setTimeout(() => {
       this.timer = null;
-      this.flush();
+      if (this.opts.background === false) this.flush();
+      else void this.flushAsync();
     }, this.flushMs);
     this.timer.unref?.();
   }
 
-  /** Write now if anything changed since the last write. */
+  /** Write in the background if anything changed (see the class comment); never blocks on the disk. Resolves when that write is done. */
+  async flushAsync(): Promise<void> {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    if (!this.dirty || this.inflight) return; // an in-flight write re-checks `dirty` when it ends
+    this.inflight = true;
+    let gen = 0;
+    try {
+      // a multi-document journal that is still pending is finished FIRST (same rule as `flush()`): this write must never be older than it.
+      // The generation is taken AFTER that: settling bumps it (`markWritten`), and this write is the one that comes after the journal.
+      this.opts.beforeWrite?.();
+      gen = ++this.gen;
+      const t0 = performance.now();
+      const data = this.serialize();
+      const ser = performance.now() - t0;
+      fileWriteStats.serializeMs += ser;
+      if (ser > fileWriteStats.serializeMaxMs) fileWriteStats.serializeMaxMs = ser;
+      this.dirty = false; // changes from here on are a new write
+      // Decided in the SAME synchronous segment as the commit renames: a journal that became pending, or a synchronous write / journal apply
+      // that put newer content on disk while this write was on the thread pool, supersedes it (`beforeWrite` settles a pending journal,
+      // which bumps `gen` through `markWritten`; `flush()` bumps it directly).
+      const stillNewest = (): boolean => {
+        this.opts.beforeWrite?.();
+        return this.gen === gen;
+      };
+      if (await writeFileAtomicAsync(this.path, data, stillNewest)) this.writes++;
+      // else: a synchronous flush() superseded this write (it wrote newer state, or will)
+    } catch (e) {
+      this.errors++;
+      this.dirty = true; // the next change (or flush) tries again
+      this.opts.onError?.(e);
+    } finally {
+      this.inflight = false;
+    }
+    if (this.dirty && !this.timer) this.markDirty(); // changes arrived while writing
+  }
+
+  /** Resolves when no write is in flight and nothing is dirty (tests, orderly shutdown before `flush()`). */
+  async drain(): Promise<void> {
+    for (let k = 0; k < 100 && (this.dirty || this.inflight); k++) {
+      if (this.inflight) await new Promise((r) => setTimeout(r, 1));
+      else await this.flushAsync();
+    }
+  }
+
+  /** Write now (synchronously) if anything changed since the last write; supersedes a write in flight. */
   flush(): void {
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;
     }
-    if (!this.dirty) return;
+    if (!this.dirty && !this.inflight) return; // an in-flight write is not on disk yet: write the current state now
+    this.gen++; // an async write still in flight must not commit over this newer one
     try {
+      this.opts.beforeWrite?.();
       writeFileAtomic(this.path, this.serialize());
       this.dirty = false;
       this.writes++;

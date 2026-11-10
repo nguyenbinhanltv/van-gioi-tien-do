@@ -2,7 +2,7 @@ import { Color, Label, Node, Sprite, SpriteFrame, UITransform, game } from 'cc';
 import { core } from './vendor/vgtd.mjs';
 import { newNode } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
-import { sharedAtlas, dynamicLabel } from './UiLabel';
+import { sharedAtlas } from './UiLabel';
 import type { UiSlice } from './PropArt';
 
 type Bag = InstanceType<typeof core.BagModel>;
@@ -120,7 +120,7 @@ export class BagPanel {
       );
     }
     this.title = label(this.root, 'title', 16, new Color(235, 225, 190, 255));
-    this.title.string = 'BAG  [B]';
+    this.title.string = core.t('bag.title');
     this.title.node.setPosition(0, this.size.h / 2 - 16, 0);
     this.wallet = label(this.root, 'wallet', 13, new Color(200, 210, 230, 255));
     this.wallet.node.setPosition(0, this.size.h / 2 - 38, 0);
@@ -131,7 +131,7 @@ export class BagPanel {
       const icon = quad(this.root, `walletIcon${k}`, art, 22, 22, new Color(255, 255, 255, 255));
       icon.spriteFrame = frame;
       icon.node.setPosition(cx - 24, this.size.h / 2 - 38, 0);
-      const count = dynamicLabel(label(this.root, `walletCount${k}`, 13, new Color(200, 210, 230, 255)));
+      const count = sharedAtlas(label(this.root, `walletCount${k}`, 13, new Color(200, 210, 230, 255)), 'dynamic');
       count.node.setPosition(cx + 18, this.size.h / 2 - 38, 0);
       this.walletIcons.push({ icon, count });
     });
@@ -154,7 +154,7 @@ export class BagPanel {
       quality.node.setPosition(0, (r.h - 8) / 2 - 2, 0);
       quality.node.active = false;
       const code = label(holder, 'code', 14, new Color(255, 255, 255, 255));
-      const qty = dynamicLabel(label(holder, 'qty', 11, new Color(255, 255, 255, 255))); // stack sizes change with every pickup
+      const qty = sharedAtlas(label(holder, 'qty', 11, new Color(255, 255, 255, 255)), 'dynamic'); // stack sizes change with every pickup
       qty.node.setPosition(10, -14, 0);
       this.slots.push({ outline, bg, item, icon, quality, code, qty });
     }
@@ -163,9 +163,9 @@ export class BagPanel {
     this.claimBtn.setPosition(cb.x + cb.w / 2 - this.size.w / 2, this.size.h / 2 - (cb.y + cb.h / 2), 0);
     if (!hooks.slice?.(this.claimBtn, 'frame', 'button_normal', cb.w, cb.h, 0.7))
       quad(this.claimBtn, 'bg', art, cb.w, cb.h, new Color(70, 120, 80, 255));
-    this.claimText = dynamicLabel(label(this.claimBtn, 'text', 13, new Color(255, 255, 255, 255))); // 'Claim loot (N)'
+    this.claimText = sharedAtlas(label(this.claimBtn, 'text', 13, new Color(255, 255, 255, 255)), 'dynamic'); // 'Claim loot (N)'
     this.claimBtn.active = false;
-    this.toast = dynamicLabel(label(this.root, 'toast', 12, new Color(255, 170, 120, 255)));
+    this.toast = sharedAtlas(label(this.root, 'toast', 12, new Color(255, 170, 120, 255)), 'dynamic');
     this.toast.node.setPosition(60, -this.size.h / 2 + 20, 0);
     this.hint = label(this.root, 'hint', 14, new Color(190, 190, 190, 255));
     this.hint.node.setPosition(0, 0, 0);
@@ -252,7 +252,7 @@ export class BagPanel {
     const bag = this.bag();
     this.hint.node.active = !bag;
     if (!bag) {
-      this.hint.string = this.hooks.bag() ? 'waiting for the server...' : 'bag needs ?online=1';
+      this.hint.string = this.hooks.bag() ? core.t('bag.status.waiting') : core.t('bag.status.needs_online');
       this.wallet.string = '';
       for (const s of this.slots) this.hideSlot(s);
       this.claimBtn.active = false;
@@ -308,7 +308,7 @@ export class BagPanel {
             : '';
     }
     this.claimBtn.active = bag.pending.length > 0;
-    this.claimText.string = `Claim loot (${bag.pendingTotal})`;
+    this.claimText.string = core.t('bag.claim.pending', { button: core.t('bag.claim.button'), n: bag.pendingTotal });
     const last = bag.lastResult;
     this.toast.string = last && last.reason !== 0 ? core.invReasonText(last.reason) : '';
   }

@@ -200,6 +200,8 @@ Quy tắc:
 
 ### 5.3 Tâm Ma _[Thiết kế mới – chờ duyệt]_
 
+> _[Cập nhật D97: bản MVP chạy phía server cho Trúc Cơ → Kim Đan (Tâm Ma nhẹ) và Kim Đan → Nguyên Anh (Tâm Ma + Lôi Kiếp 3 đạo): bóng thật cạnh người chơi thay cho Tâm Cảnh instance, Đạo Tâm mặc định 60; chi tiết và phần chưa làm: DECISIONS D97.]_
+
 Tâm Ma là **trận chiến trong "Tâm Cảnh"** — một instance riêng, tileset sẵn có + shader đảo màu / méo hình, bố cục sinh theo dữ liệu người chơi, 9 biến thể (02 §2 "Tâm cảnh").
 
 | Loại                       | Ngưỡng (07 §2)                           | Hình thức _(Đề xuất)_                                                                                                                                |
@@ -293,7 +295,7 @@ Bản GDD trước (ngưỡng ±200, suy giảm 1% / ngày, xác suất rơi 25%
 | Tà đạo    | 80             | Tâm Ma mạnh hơn                                                                             |
 | Ma đạo    | 60             | Tâm Ma mạnh nhất; "Ma đạo tu nhanh" (07 §2) nếu muốn hiện thực thành +% hấp thu tu vi → G14 |
 
-Đạo Tâm ∈ [0, 100] chỉ tác động độ khó Tâm Ma (5.3), không nằm trong công thức đột phá 07 §2. Nguồn tăng / giảm Đạo Tâm: nhiệm vụ đạo tâm, giữ lời thề (+), giết vô tội, chết trong Tâm Cảnh (−) — số cụ thể: chưa thiết kế.
+Đạo Tâm ∈ [0, 100] chỉ tác động độ khó Tâm Ma (5.3), không nằm trong công thức đột phá 07 §2. _[Cập nhật D103: máy chủ giữ K và Đạo Tâm cho từng nhân vật (lưu bền), trần Đạo Tâm theo dải K như bảng trên, Đạo Tâm khởi đầu 60 là PLACEHOLDER vì tài liệu không nêu; HUD hiện nhãn phe, K và Đạo Tâm; chưa có sự kiện nào trong game đổi chúng, xem OPEN-ITEMS.]_ Nguồn tăng / giảm Đạo Tâm: nhiệm vụ đạo tâm, giữ lời thề (+), giết vô tội, chết trong Tâm Cảnh (−) — số cụ thể: chưa thiết kế.
 
 ## 9. Tông môn và chiến tranh Linh Mạch
 

@@ -107,11 +107,16 @@ export class OnlineSession {
   attachCombat(sc: InstanceType<typeof cb.ServerCombat>): void {
     this.serverCombat = sc;
     this.net.events = {
+      ...this.net.events, // keep hooks other HUD pieces chained (TribulationFx: onReconnect)
       onSkillResult: (msg) => sc.applySkillResult(msg, performance.now(), (i) => this.net.entityOfIndex(i)),
       onAoiEnter: (entities) => {
         for (const e of entities) {
           if (e.kind === KIND_MONSTER)
-            this.mobMeta.set(e.entityId, { name: `Mob ${e.defId}`, defId: e.defId, hpMax: e.maxHp });
+            this.mobMeta.set(e.entityId, {
+              name: core.t('combat.mob.fallback_name', { id: e.defId }),
+              defId: e.defId,
+              hpMax: e.maxHp,
+            });
         }
       },
       onBossPhase: (msg) => this.onBossPhase?.(msg.mobEntityId, msg.phase, msg.transformMs),

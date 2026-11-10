@@ -253,7 +253,7 @@ export function validateMessage(x: unknown): Message {
       const m: StatusUpdateMsg = {
         type: 'status_update',
         entityId: int(o.entityId, 0, U32, 'entityId'),
-        mask: int(o.mask, 0, 7, 'mask'),
+        mask: int(o.mask, 0, 15, 'mask'),
       };
       return m;
     }

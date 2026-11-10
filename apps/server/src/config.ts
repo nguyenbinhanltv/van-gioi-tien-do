@@ -47,3 +47,42 @@ export const WORLD_CONFIG = {
   /** tick duration samples kept for p50/p99 */
   TICK_SAMPLES: 20_000,
 } as const;
+
+/**
+ * Input hardening (D101, docs/25). One token bucket per message class per connection, on top of `GATEWAY_CONFIG.MAX_PACKETS_PER_S`. The
+ * numbers leave honest clients plenty of room (the client sends ~20 input packets/s; a lag spike or a tab resume sends a short burst) and
+ * only bite a client that floods: a frame over budget is dropped, a sustained flood (`FLOOD_MAX_DROPS` drops in `FLOOD_WINDOW_MS`) is kicked.
+ * Cần game designer / vận hành duyệt khi có số liệu thật.
+ */
+export const SECURITY_CONFIG = {
+  BUDGETS: {
+    /** `input`: 20 Hz client, up to 3 inputs per packet; a burst allows ~1.5 s of catch-up after a stall */
+    move: { burst: 40, perS: 30 },
+    /** `skill_cast`: the GCD / cooldowns are the real limit (sim guard), this only caps spam */
+    cast: { burst: 10, perS: 8 },
+    ping: { burst: 5, perS: 2 },
+    /** chat / party have their own per-account limiter that ANSWERS with a reason (chat/config.ts, party/config.ts): this outer cap is looser so that answer comes first and only a raw flood is dropped silently */
+    chat: { burst: 30, perS: 10 },
+    party: { burst: 30, perS: 10 },
+    /** bag drag / drop / sort / use */
+    inventory: { burst: 20, perS: 10 },
+    progression: { burst: 6, perS: 2 },
+    /** sect join / leave / buy (D98) and friends (D96): both have their own per-account limiter that answers with a reason; this outer cap is looser so their answer comes first, only a raw flood is dropped */
+    sect: { burst: 30, perS: 10 },
+    friend: { burst: 30, perS: 10 },
+    /** Vạn Bảo Lâu (D112): the market has its own per-account limiter that answers with a reason (market/config.ts); same looser outer cap */
+    market: { burst: 30, perS: 10 },
+    /** direct trade (D102): the trade service has its own per-account limiter that answers with a reason; this outer cap is looser so that answer comes first */
+    trade: { burst: 30, perS: 10 },
+  },
+  /** malformed / unexpected frames tolerated in a rolling window before the kick (honest bugs age out) */
+  MALFORMED_MAX: 5,
+  MALFORMED_WINDOW_MS: 30_000,
+  /** frames dropped over budget in a rolling window that count as a flood */
+  FLOOD_MAX_DROPS: 40,
+  FLOOD_WINDOW_MS: 10_000,
+  /** same security log line / over-budget error reply at most this often per connection and key */
+  LOG_THROTTLE_MS: 10_000,
+} as const;
+
+export type BudgetClass = keyof typeof SECURITY_CONFIG.BUDGETS;

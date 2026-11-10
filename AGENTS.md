@@ -83,6 +83,8 @@ green on your PR and never bypass it. Generated data: `npm run gen:data -w @vgtd
 - Docs under `docs/`: Vietnamese (keep headings, tables, formulas; mark overrides with `[Cập nhật ...]` notes).
 - Code, identifiers, comments, commit messages, PR text, this file: English. Vietnamese domain terms (Linh Căn, Lôi Kiếp, ...)
   stay as-is in identifiers' doc comments and user-facing strings.
+- Player-facing text (anything a player reads in the client): never a literal in code. Add the Vietnamese string to
+  `packages/client-core/src/i18n/vi-VN.ts` and use `t(key, params)` (D104); `tests/i18n-guard.test.ts` fails on hard-coded strings.
 
 ## Where things go
 

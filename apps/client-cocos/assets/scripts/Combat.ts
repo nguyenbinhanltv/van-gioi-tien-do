@@ -1,5 +1,5 @@
-import { Color, Label, Node, Sprite, SpriteFrame, UITransform, game } from 'cc';
-import { combat as cb, shared } from './vendor/vgtd.mjs';
+import { Color, Label, Node, Sprite, SpriteFrame, UITransform, Vec2, game } from 'cc';
+import { combat as cb, core, shared } from './vendor/vgtd.mjs';
 import { cellCenterToWorld, newNode, pointSortable, tileToWorld } from './IsoAdapter';
 import type { ArtFrames } from './PlaceholderArt';
 import type { YSortLayer } from './YSortLayer';
@@ -7,7 +7,9 @@ import type { TilePos } from './Actors';
 import type { MobArt, MobStandee } from './MobArt';
 import { OverheadBar, worldUiLayer } from './OverheadBar';
 import { getSkillIcon, getStatusIcon } from './PropArt';
-import { sharedAtlas, dynamicLabel, setDynamicSize } from './UiLabel';
+import { sharedAtlas } from './UiLabel';
+import { SkillVfx, classElementOf } from './SkillVfx';
+import { type ResolvedVfx, resolveVfx } from './SkillVfxPresets';
 
 /** ChibiBody class id -> Đạo Lộ (docs/11): picks the hotbar's 8 skills. */
 const CLASS_PATH: Record<string, shared.PathId> = {
@@ -45,7 +47,11 @@ export function createMockBackend(
   [3, 4.5, 6, 8, 12].forEach((r, n) => {
     const a = n * 1.9 + 0.4;
     const p = walkableNear(walkable, spawn.i + Math.cos(a) * r, spawn.j + Math.sin(a) * r);
-    specs.push({ name: n === 1 ? 'Hung nhan (hits back)' : `Moc nhan ${n + 1}`, pos: p, fightsBack: n === 1 });
+    specs.push({
+      name: n === 1 ? core.t('combat.mock.dummy_fighter') : core.t('combat.mock.dummy', { n: n + 1 }),
+      pos: p,
+      fightsBack: n === 1,
+    });
   });
   return new cb.MockCombat({ path: pathOfClass(classId), enemies: specs, rand, playerPos: spawn });
 }
@@ -65,16 +71,17 @@ const ELEMENT_COLOR: Record<string, Color> = {
   none: new Color(120, 120, 120, 255),
 };
 
-const BLOCK_TEXT: Record<string, string> = {
-  empty: 'empty slot',
-  passive: 'passive skill',
-  cooldown: 'on cooldown',
-  gcd: 'global cooldown',
-  busy: 'casting',
-  mp: 'not enough MP',
-  no_target: 'no target',
-  range: 'out of range',
-  dead: 'you are down',
+/** String key of the toast shown when a cast is blocked (`ev.reason` of the combat backend). */
+const BLOCK_KEY: Record<string, core.StringKey> = {
+  empty: 'combat.block.empty',
+  passive: 'combat.block.passive',
+  cooldown: 'combat.block.cooldown',
+  gcd: 'combat.block.gcd',
+  busy: 'combat.block.busy',
+  mp: 'combat.block.mp',
+  no_target: 'combat.block.no_target',
+  range: 'combat.block.range',
+  dead: 'combat.block.dead',
 };
 
 const SLOT = 56;
@@ -183,20 +190,18 @@ export class CombatUi {
   /** Touch input: the skill wheel replaces the bottom hotbar (hidden, not tappable). */
   private touchMode = false;
   /** status row (D94): one tile per active status, left of the HP bar */
-  private readonly statusTiles: Array<{
-    root: Node;
-    extra: Node[];
-    bg: Sprite;
-    icon: Sprite;
-    label: Label;
-    time: Label;
-  }> = [];
+  private readonly statusTiles: Array<{ root: Node; bg: Sprite; icon: Sprite; label: Label; time: Label }> = [];
   private readonly floaters: Floater[] = [];
   private readonly flash = new Map<number, number>();
   private clock = 0;
-  /** `?castdemo=1`: cast the hotbar slots in turn every ~1.1 s (the continuous-casting perf scenario, art review) */
-  private castDemoNext = -1;
-  private castDemoAt = 0;
+  /** INTERIM skill VFX (SkillVfx.ts): played on cast_done / on every enemy hit; client decoration only */
+  private vfx: SkillVfx | null = null;
+  private lastVfx: ResolvedVfx | null = null;
+  private lastVfxAtMs = -1e9;
+  private lastVfxFrom: { i: number; j: number } | null = null;
+  /** `?vfxdemo=1`: cast the hotbar slots in turn every second or so (art review, perf gate with effects on screen) */
+  private vfxDemoNext = -1;
+  private vfxDemoAt = 0;
   private scale = 1;
   private readonly keyDown: (e: KeyboardEvent) => void;
   private readonly pointerDown: (e: PointerEvent) => void;
@@ -258,18 +263,19 @@ export class CombatUi {
     this.shieldFill = quad(hp.back, 'Shield', art.pixel, 0, 4, new Color(240, 240, 255, 255));
     this.shieldFill.node.getComponent(UITransform)!.setAnchorPoint(0, 0.5);
     this.shieldFill.node.setPosition(-BAR_W / 2, BAR_H / 2 - 2, 0);
-    // status row: up to 4 tiles growing leftwards from the HP bar. Batching: the tile backgrounds are quads (one shared layer, merging with
-    // the bars); each tile's icon, caption and timer are attached to the icon / text / dynamic-text layers below (`attachStatusParts`), so
-    // a tile never interleaves quad / icon / label / label draws.
+    // status row: up to 4 tiles growing leftwards from the HP bar
     const TILE = 34;
-    const statusBgLayer = newNode('StatusBg', this.hudRoot);
-    const statusBg: Array<{ root: Node; bg: Sprite }> = [];
     for (let n = 0; n < 4; n++) {
-      const root = newNode(`Status${n}`, statusBgLayer);
+      const root = newNode(`Status${n}`, this.hudRoot);
       root.setPosition(-BAR_W / 2 - 5 - BAR_W / 2 - 22 - n * (TILE + 4), bars, 0);
       const bg = quad(root, 'Bg', art.pixel, TILE, TILE, new Color(60, 60, 60, 220));
+      const icon = quad(root, 'Icon', art.pixel, TILE - 6, TILE - 6, new Color(255, 255, 255, 255));
+      icon.node.active = false;
+      const label = text(root, 'Label', 11, new Color(255, 255, 255, 255));
+      const time = sharedAtlas(text(root, 'Time', 12, new Color(255, 240, 160, 255)), 'dynamic'); // remaining seconds
+      time.node.setPosition(0, -TILE / 2 - 8, 0);
       root.active = false;
-      statusBg.push({ root, bg });
+      this.statusTiles.push({ root, bg: bg, icon, label, time });
     }
     const cast = this.makeBar(
       'Cast',
@@ -284,7 +290,7 @@ export class CombatUi {
     this.castBar = cast.fill;
     cast.back.active = false;
     this.castBackNode = cast.back;
-    this.toast = dynamicLabel(text(this.dynText, 'Toast', 16, new Color(255, 220, 160, 255)));
+    this.toast = sharedAtlas(text(this.dynText, 'Toast', 16, new Color(255, 220, 160, 255)), 'dynamic');
     this.toast.node.setPosition(0, bars + BAR_H + 34, 0);
 
     const bar = this.backend.hotbar;
@@ -295,25 +301,6 @@ export class CombatUi {
     const layerIcon = newNode('HotbarIcon', this.hudRoot);
     const layerRing = newNode('HotbarRings', this.hudRoot);
     const layerText = newNode('HotbarText', this.hudRoot);
-    const layerStatusIcon = newNode('StatusIcons', this.hudRoot);
-    layerStatusIcon.setSiblingIndex(layerIcon.getSiblingIndex() + 1);
-    statusBg.forEach(({ root, bg }, n) => {
-      const at = (layer: Node): Node => {
-        const h = newNode(`Status${n}`, layer);
-        h.setPosition(root.position);
-        h.active = false;
-        return h;
-      };
-      const iconHolder = at(layerStatusIcon);
-      const textHolder = at(layerText);
-      const timeHolder = at(this.dynText);
-      const icon = quad(iconHolder, 'Icon', art.pixel, TILE - 6, TILE - 6, new Color(255, 255, 255, 255));
-      icon.node.active = false;
-      const label = text(textHolder, 'Label', 11, new Color(255, 255, 255, 255));
-      const time = dynamicLabel(text(timeHolder, 'Time', 12, new Color(255, 240, 160, 255))); // remaining seconds
-      time.node.setPosition(0, -TILE / 2 - 8, 0);
-      this.statusTiles.push({ root, extra: [iconHolder, textHolder, timeHolder], bg, icon, label, time });
-    });
     bar.slots.forEach((s, i) => {
       const x = -HUD_W / 2 + SLOT / 2 + i * (SLOT + GAP);
       const holder = (layer: Node): Node => {
@@ -352,10 +339,10 @@ export class CombatUi {
       tier.string = s.castable ? s.skill.tier[0]!.toUpperCase() : 'P';
       tier.node.setPosition(SLOT / 2 - 7, -SLOT / 2 + 7, 0);
       const cd = quad(ringRoot, 'Cd', art.pixel, SLOT, SLOT, new Color(0, 0, 0, 175));
-      this.curtain(cd);
+      this.radial(cd);
       const gcd = quad(ringRoot, 'Gcd', art.pixel, SLOT, SLOT, new Color(255, 255, 255, 75));
-      this.curtain(gcd);
-      const cdText = dynamicLabel(text(cdRoot, 'CdText', 18, new Color(255, 255, 255, 255))); // counts down
+      this.radial(gcd);
+      const cdText = sharedAtlas(text(cdRoot, 'CdText', 18, new Color(255, 255, 255, 255)), 'dynamic'); // counts down
       this.slots.push({ root, holders: [root, iconRoot, ringRoot, textRoot, cdRoot], bg, cd, gcd, cdText, x });
     });
 
@@ -363,7 +350,7 @@ export class CombatUi {
     this.targetRoot = newNode('TargetFrame', this.hudRoot);
     const tf = this.makeBar('Target', 0, 0, new Color(200, 80, 80, 255), 260, 16, this.targetRoot);
     this.targetFill = tf.fill;
-    this.targetText = dynamicLabel(tf.label); // hp numbers
+    this.targetText = sharedAtlas(tf.label, 'dynamic'); // hp numbers
     this.targetName = text(this.targetRoot, 'TargetName', 16, new Color(255, 235, 235, 255));
     this.targetName.node.setPosition(0, 20, 0);
     this.targetRoot.active = false;
@@ -371,12 +358,12 @@ export class CombatUi {
 
     // floating text pool (world space, above the Y-sorted entities)
     const l6 = worldUiLayer(worldRoot);
-    // world UI batching: all bar quads first (one layer), then all floating numbers (the labels): never interleaved
-    this.worldUi = newNode('Bars', l6);
-    const floatLayer = newNode('Floaters', l6);
-    this.selfBar = new OverheadBar(this.worldUi, art.pixel, 96);
+    this.worldUi = l6;
+    // `?vfxoff=1`: effects disabled (A/B for the draw-call gate: the cast HUD / floating numbers alone vs with the effects)
+    this.vfx = new URLSearchParams(location.search).get('vfxoff') !== null ? null : new SkillVfx(l6);
+    this.selfBar = new OverheadBar(l6, art.pixel, 96);
     for (let n = 0; n < 24; n++) {
-      const label = dynamicLabel(text(floatLayer, `Float${n}`, 22, new Color(255, 255, 255, 255))); // damage numbers
+      const label = sharedAtlas(text(l6, `Float${n}`, 22, new Color(255, 255, 255, 255)), 'dynamic'); // damage numbers
       label.node.active = false;
       this.floaters.push({
         node: label.node,
@@ -392,9 +379,9 @@ export class CombatUi {
     this.deathRoot = newNode('DeathOverlay', hudParent);
     quad(this.deathRoot, 'Dim', art.pixel, 4000, 4000, new Color(60, 0, 0, 120));
     const title = text(this.deathRoot, 'Title', 40, new Color(255, 225, 225, 255));
-    title.string = 'Ban da roi / You have fallen';
+    title.string = core.t('combat.death.title');
     title.node.setPosition(0, 40, 0);
-    this.deathCount = dynamicLabel(text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255))); // counts down
+    this.deathCount = sharedAtlas(text(this.deathRoot, 'Count', 24, new Color(255, 235, 200, 255)), 'dynamic'); // counts down
     this.deathCount.node.setPosition(0, -10, 0);
     this.deathRoot.active = false;
 
@@ -488,7 +475,8 @@ export class CombatUi {
       }
     }
     for (const ev of this.backend.update(now)) this.onEvent(ev);
-    this.updateCastDemo(now);
+    this.updateVfxDemo(now);
+    this.vfx?.update(dt);
     this.refresh(now, dt);
   }
 
@@ -512,7 +500,6 @@ export class CombatUi {
     this.statusTiles.forEach((t, k) => {
       const it = items[k];
       t.root.active = !!it;
-      for (const h of t.extra) h.active = !!it;
       if (!it) return;
       t.bg.color = colour[it.id] ?? new Color(60, 60, 60, 220);
       const frame = getStatusIcon(it.id);
@@ -611,8 +598,12 @@ export class CombatUi {
               : new Color(255, 255, 255, 255),
           ev.crit ? 32 : 22,
         );
+        if (!onPlayer && ev.sourceId === cb.PLAYER_ID) this.playHitVfx(ev.targetId);
         break;
       }
+      case 'cast_done':
+        this.playCastVfx(ev.slot);
+        break;
       case 'heal':
         this.spawnText(ev.targetId, `+${ev.amount}`, new Color(110, 235, 130, 255), 22);
         break;
@@ -621,7 +612,7 @@ export class CombatUi {
         break;
       case 'blocked':
         this.flash.set(ev.slot, 0.25);
-        this.toast.string = BLOCK_TEXT[ev.reason] ?? ev.reason;
+        this.toast.string = BLOCK_KEY[ev.reason] ? core.t(BLOCK_KEY[ev.reason]!) : ev.reason;
         this.toastLeft = 1.2;
         break;
       case 'death':
@@ -633,7 +624,7 @@ export class CombatUi {
       case 'respawn':
         if (ev.id === cb.PLAYER_ID) {
           this.diedAtMs = null;
-          this.toast.string = 'Hoi sinh / Respawned';
+          this.toast.string = core.t('combat.toast.respawned');
           this.toastLeft = 2.5;
         }
         break;
@@ -655,22 +646,77 @@ export class CombatUi {
     this.standees.get(entityId)?.flash(seconds);
   }
 
-  /** `?castdemo=1`: keep casting the hotbar in turn (offline mock combat), the continuous-casting perf scenario. */
-  startCastDemo(): void {
-    this.castDemoNext = 0;
-    this.castDemoAt = 0;
+  /** Where the cast goes: the selected enemy, else the nearest living one within reach, else null (direction skills fire along a default). */
+  private vfxTarget(rangeTiles: number): { i: number; j: number } | null {
+    const p = this.playerPos();
+    const sel = this.backend.target.current;
+    const t = sel === null ? undefined : this.backend.enemy(sel);
+    if (t && t.alive) return t.pos;
+    let best: { i: number; j: number } | null = null;
+    let bd = (rangeTiles + 2) * (rangeTiles + 2);
+    for (const e of this.backend.enemies) {
+      if (!e.alive) continue;
+      const d = (e.pos.i - p.i) ** 2 + (e.pos.j - p.j) ** 2;
+      if (d < bd) {
+        bd = d;
+        best = e.pos;
+      }
+    }
+    return best;
   }
 
-  private updateCastDemo(now: number): void {
-    if (this.castDemoNext < 0 || now < this.castDemoAt) return;
-    this.castDemoAt = now + 1100;
+  private playCastVfx(slot: number): void {
     const bar = this.backend.hotbar;
+    const skill = bar.slots[slot]?.skill;
+    if (!this.vfx || !skill) return;
+    const from = this.playerPos();
+    this.lastVfxFrom = { i: from.i, j: from.j };
+    this.lastVfxAtMs = this.clock;
+    this.lastVfx = this.vfx.cast(
+      bar.path,
+      classElementOf(bar.path),
+      skill,
+      from,
+      this.vfxTarget(skill.targeting.range_tiles ?? 3),
+    );
+  }
+
+  private playHitVfx(targetId: number): void {
+    const pos = this.backend.enemy(targetId)?.pos;
+    if (!this.vfx || !pos) return;
+    let vfx = this.lastVfx;
+    if (!vfx || this.clock - this.lastVfxAtMs > 1500) {
+      // damage over time / hits whose cast we did not see: the class' basic attack look
+      const bar = this.backend.hotbar;
+      const s = bar.slots[0]?.skill;
+      if (!s) return;
+      vfx = resolveVfx(bar.path, classElementOf(bar.path), s);
+    }
+    this.vfx.hit(vfx, pos, this.lastVfxFrom);
+  }
+
+  /** Live skill-VFX particles (debug hook / capture scripts). */
+  get vfxLive(): number {
+    return this.vfx?.live ?? 0;
+  }
+
+  /** `?vfxdemo=1`: keep casting the hotbar in turn (offline mock combat), for art review and the perf gate. */
+  startVfxDemo(): void {
+    this.vfxDemoNext = 0;
+    this.vfxDemoAt = 0;
+  }
+
+  private updateVfxDemo(now: number): void {
+    if (this.vfxDemoNext < 0 || now < this.vfxDemoAt) return;
+    this.vfxDemoAt = now + 1100;
+    const bar = this.backend.hotbar;
+    // the demo needs a target for the single-target skills: select the nearest enemy once
     if (this.backend.target.current === null)
       this.backend.target.cycle(this.backend.enemies, this.playerPos(), 15, false);
     for (let n = 0; n < bar.slots.length; n++) {
-      const slot = (this.castDemoNext + n) % bar.slots.length;
+      const slot = (this.vfxDemoNext + n) % bar.slots.length;
       if (!bar.slots[slot]?.castable) continue;
-      this.castDemoNext = slot + 1;
+      this.vfxDemoNext = slot + 1;
       this.castSlot(slot);
       return;
     }
@@ -678,8 +724,8 @@ export class CombatUi {
 
   /** A boss entered phase `phase` (wire `boss_phase`, D91): a big floating line above it and a toast; the standee transform / skin swap is `setEnemyPhase`. */
   announceBossPhase(entityId: number, phase: number): void {
-    this.spawnText(entityId, `Bien hinh! Pha ${phase + 1}`, new Color(255, 120, 60, 255), 34);
-    this.toast.string = `Boss bien hinh (pha ${phase + 1}) / Boss transforms (phase ${phase + 1})`;
+    this.spawnText(entityId, core.t('combat.boss.phase_float', { phase: phase + 1 }), new Color(255, 120, 60, 255), 34);
+    this.toast.string = core.t('combat.toast.boss_phase', { phase: phase + 1 });
     this.toastLeft = 2.5;
   }
 
@@ -691,7 +737,8 @@ export class CombatUi {
       this.floaters.reduce((a, b) => (a.age / a.life > b.age / b.life ? a : b));
     f.node.active = true;
     f.label.string = str;
-    setDynamicSize(f.label, size); // node scale only: assigning fontSize would re-layout and open a new letter atlas
+    f.label.fontSize = size;
+    f.label.lineHeight = size + 2;
     f.baseColor = color;
     f.age = 0;
     f.life = 1;
@@ -714,10 +761,10 @@ export class CombatUi {
     this.slots.forEach((s, i) => {
       const slot = bar.slots[i]!;
       const cd = bar.cooldownFraction(i, now);
-      this.setCurtain(s.cd, cd);
+      s.cd.fillRange = cd;
       s.cd.node.active = cd > 0;
       const useGcd = slot.castable && bar.usesGcd(i);
-      this.setCurtain(s.gcd, useGcd ? gcd : 0);
+      s.gcd.fillRange = useGcd ? gcd : 0;
       s.gcd.node.active = useGcd && gcd > 0;
       const left = bar.cooldownRemainingMs(i, now) / 1000;
       s.cdText.string = left > 0 ? (left >= 10 ? String(Math.ceil(left)) : left.toFixed(1)) : '';
@@ -863,8 +910,7 @@ export class CombatUi {
     if (this.diedAtMs === null) this.diedAtMs = this.clock; // joined dead / backend without the event
     const left = cb.respawnLeftMs(this.diedAtMs, this.clock, this.backend.respawnDelayMs);
     const secs = Math.ceil(left / 1000);
-    this.deathCount.string =
-      left > 0 ? `Hoi sinh sau ${secs} giay / Respawn in ${secs} s` : 'Dang hoi sinh... / Respawning...';
+    this.deathCount.string = left > 0 ? core.t('combat.death.respawn_in', { secs }) : core.t('combat.death.respawning');
   }
 
   private setBar(fill: Sprite, full: number, fraction: number): void {
@@ -872,20 +918,12 @@ export class CombatUi {
     ui.setContentSize(Math.max(0, full * fraction), ui.contentSize.height);
   }
 
-  /**
-   * Cooldown / GCD overlay: a plain quad whose height is the remaining fraction, hanging from the top of the slot (the shade recedes
-   * downwards as the cooldown runs out). Radial `FILLED` sprites cannot merge with each other in the engine's 2D batcher (one draw
-   * call each while cooling down); plain quads batch with every other quad of the HUD.
-   */
-  private curtain(sp: Sprite): void {
-    const ui = sp.node.getComponent(UITransform)!;
-    ui.setAnchorPoint(0.5, 1);
-    sp.node.setPosition(0, SLOT / 2, 0);
-    ui.setContentSize(SLOT, 0);
-  }
-
-  private setCurtain(sp: Sprite, fraction: number): void {
-    sp.node.getComponent(UITransform)!.setContentSize(SLOT, SLOT * fraction);
+  private radial(sp: Sprite): void {
+    sp.type = Sprite.Type.FILLED;
+    sp.fillType = Sprite.FillType.RADIAL;
+    sp.fillCenter = new Vec2(0.5, 0.5);
+    sp.fillStart = 0.25; // 12 o'clock
+    sp.fillRange = 0;
   }
 
   private makeBar(
@@ -910,7 +948,7 @@ export class CombatUi {
       holder = newNode(`${name}TextHolder`, textLayer);
       holder.setPosition(x, y, 0);
     }
-    const label = dynamicLabel(text(holder, `${name}Text`, 11, new Color(255, 255, 255, 255)));
+    const label = sharedAtlas(text(holder, `${name}Text`, 11, new Color(255, 255, 255, 255)), 'dynamic');
     label.string = ''; // a Label starts as the engine default text: bars whose text is never set (the cast bar) must draw nothing
     return { back: back.node, fill, label };
   }

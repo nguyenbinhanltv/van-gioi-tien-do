@@ -1,6 +1,4 @@
-import {
-  CAMERA_ZOOM_DEFAULT, CAMERA_ZOOM_MAX, CAMERA_ZOOM_MIN, CAMERA_ZOOM_STEP,
-} from '@vgtd/shared';
+import { CAMERA_ZOOM_DEFAULT, CAMERA_ZOOM_MAX, CAMERA_ZOOM_MIN, CAMERA_ZOOM_STEP } from '@vgtd/shared';
 
 /** Clamp a zoom factor to [CAMERA_ZOOM_MIN, CAMERA_ZOOM_MAX]; non-finite input falls back to the default. */
 export function clampZoom(z: number): number {
@@ -16,7 +14,7 @@ export function parseZoomParam(raw: string | null | undefined): number {
 
 /** Pixels of wheel `deltaY` that make up one notch (a classic mouse wheel click reports 100). */
 const WHEEL_PX_PER_NOTCH = 100;
-const WHEEL_LINE_PX = WHEEL_PX_PER_NOTCH / 3;   // 3 lines per notch
+const WHEEL_LINE_PX = WHEEL_PX_PER_NOTCH / 3; // 3 lines per notch
 const WHEEL_PAGE_PX = 800;
 
 /**
@@ -53,9 +51,15 @@ export class ZoomController {
     this._target = this._current = clampZoom(initial);
   }
 
-  get target(): number { return this._target; }
-  get current(): number { return this._current; }
-  get pinching(): boolean { return this.pinchBase !== null; }
+  get target(): number {
+    return this._target;
+  }
+  get current(): number {
+    return this._current;
+  }
+  get pinching(): boolean {
+    return this.pinchBase !== null;
+  }
 
   /** Set the target (clamped); `immediate` also jumps `current` (initial value, tests). */
   setTarget(z: number, immediate = false): void {
@@ -75,7 +79,9 @@ export class ZoomController {
     if (this.pinchBase) this._target = pinchZoom(this.pinchBase.zoom, this.pinchBase.dist, dist);
   }
 
-  pinchEnd(): void { this.pinchBase = null; }
+  pinchEnd(): void {
+    this.pinchBase = null;
+  }
 
   /** Advance the smoothing by `dt` seconds; returns the current zoom. */
   update(dt: number): number {
