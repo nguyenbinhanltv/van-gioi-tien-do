@@ -164,8 +164,11 @@ function playUntil(r: Rig, upTo: string, entity = 1, account = 'acct1'): void {
           { stones: 0n, items: [{ defId: itemDefByKey(o.item as DropItem)!.id, quality: 0, qty: o.count }] },
           `fill:${def.id}`,
         );
-      else if (o.kind === 'breakthrough')
-        o.toRealm ? r.svc.onBreakthrough(entity, 13, 14) : r.svc.onBreakthrough(entity, 9, 10); // major into the realm, or Luyện Khí -> Trúc Cơ
+      else if (o.kind === 'breakthrough') {
+        // the major breakthrough into the realm, or Luyện Khí -> Trúc Cơ
+        const [from, to] = o.toRealm ? [13, 14] : [9, 10];
+        r.svc.onBreakthrough(entity, from, to);
+      }
     }
     r.step();
     r.step();
