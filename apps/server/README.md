@@ -53,6 +53,14 @@ smaller = denser) `--input-hz HZ` (20) `--speedhackers N` `--speed-factor X` (3;
 The server runs in the main thread; all bots run in one worker thread (own event loop) over loopback. Bandwidth is
 counted at the WebSocket frame layer (payload + 2/4/10 B header), **not** TCP/IP/TLS.
 
+### Soak (P5)
+
+`npm run soak -w @vgtd/server -- --preset smoke` runs 100 gameplay bots for 25 minutes on the real stack (file store, backups every
+5 minutes in a separate process) and exits non-zero when a threshold is crossed: heap / RSS growth slope, tick p99 over budget,
+`journal.json` not compacting, a failed / slow / unverifiable backup. `--preset full` is the 24 h run for a dedicated machine
+(never in CI). Each sample records tick p50 / p99, event-loop lag, RSS / heap, file-store sizes and backup duration into
+`samples.csv` / `samples.jsonl` / `summary.json` / `report.txt` under `--out`. Runbook: `docs/35-p5-load-test.md` section 6.
+
 ## Measured against the P2 exit criteria (docs/10 §12)
 
 Windows 11 dev box (shared with other agent sessions), Node 24, 100 honest bots, 20 Hz input, 30 s window after 3 s
