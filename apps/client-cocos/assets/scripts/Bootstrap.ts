@@ -395,7 +395,6 @@ export class Bootstrap extends Component {
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
       // quest log + tracker (D107): J or /quest; the buttons only send intents, the server decides and pays
-      const net = this.online.net;
       this.questPanel = new QuestPanel(
         new core.QuestModel(),
         {

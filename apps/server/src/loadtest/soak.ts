@@ -15,11 +15,24 @@
  * · --store file|memory · --data-dir DIR · --seed N · --out DIR (samples.csv, samples.jsonl, summary.json, report.txt)
  * · --social-pace F (1 = realistic chat / party / bag cadence; --ci uses 0.12 so a minute still exercises them) · --sync-writes (file store writes on the loop like before D106, for A/B) · --gc / --no-gc (heap sampled after a GC: default on when node runs with --expose-gc, which the script does)
  * · --ci (20 bots, 60 s, memory-light gate) · --max-tick-p99 MS (gate for --ci, default 100) · --json
+ *
+ * Soak presets (never in CI; docs/35 §6 is the runbook):
+ *   --preset smoke   100 bots, 25 min, a sample every 15 s, a backup every 5 min: a local check before a long run
+ *   --preset full    200 bots, 24 h, a sample every 60 s, a backup every 30 min: for a dedicated machine
+ * Both write `--out` (default a new temp directory) and judge the run against the thresholds below; every preset value can be overridden.
+ * Per sample the CSV / JSONL also carry the event-loop lag of the window, the file-store sizes (documents + `journal.json`) and the backup
+ * that finished since the previous sample (a separate process, like the `backup` operator command: `soak-backup.ts`).
+ * · --backup-every-min M (0 = no backups; the last one at the end of the run is also verified) · --keep-backups N (3); backups go to
+ *   `--out/backups`, else a temporary directory removed at the end (never a path relative to the working directory)
+ * · thresholds (PROVISIONAL harness settings): --max-heap-slope-mb-h (20) · --max-rss-slope-mb-h (40) · --max-tick-p99-budget MS (40, the
+ *   design budget) · --max-backup-s (15) · --journal-stuck-samples N (3: a journal on disk or pending in N consecutive samples = not compacting)
  * Exit code: 0 all criteria pass (--ci: gate passes), 1 a criterion / the gate failed, 2 the harness itself failed.
  */
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync, appendFileSync } from 'node:fs';
+import { execFile } from 'node:child_process';
+import { mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writeFileSync, appendFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { monitorEventLoopDelay, PerformanceObserver } from 'node:perf_hooks';
 import { Worker } from 'node:worker_threads';
 import { ZONE_SPAWN_TABLES } from '@vgtd/shared';
@@ -31,14 +44,18 @@ import { InventoryService } from '../world/inventory/index.js';
 import type { GameBotStats } from './game-bot.js';
 import type { GameWorkerConfig } from './game-worker.js';
 import {
+  DEFAULT_THRESHOLDS,
   TickHistogram,
   formatSoak,
   gateFailures,
   samplesCsv,
   summarizeSoak,
+  type BackupSample,
   type BotTotals,
   type SoakConfig,
   type SoakSample,
+  type SoakThresholds,
+  type StoreSample,
 } from './soak-report.js';
 import { dist } from './stats.js';
 import { copyStats, resetWindow, windowSample } from './window.js';
@@ -58,11 +75,30 @@ const num = (n: string, d: number): number => {
 };
 
 const ci = flag('ci');
-const bots = num('bots', ci ? 20 : 200);
-const durationS = Math.round(num('seconds', 0) + num('minutes', 0) * 60 + num('hours', 0) * 3600) || (ci ? 60 : 600);
+const preset = str('preset', '');
+if (preset !== '' && preset !== 'smoke' && preset !== 'full') throw new Error('--preset must be smoke or full');
+/** the soak presets (see the header): defaults for bots, duration, sampling and backups; every one is overridable */
+const PRESETS = {
+  smoke: { bots: 100, durationS: 25 * 60, sampleS: 15, backupMin: 5 },
+  full: { bots: 200, durationS: 24 * 3600, sampleS: 60, backupMin: 30 },
+} as const;
+const pre = preset === '' ? null : PRESETS[preset];
+const bots = num('bots', pre?.bots ?? (ci ? 20 : 200));
+const durationS =
+  Math.round(num('seconds', 0) + num('minutes', 0) * 60 + num('hours', 0) * 3600) ||
+  (pre?.durationS ?? (ci ? 60 : 600));
 const connectPerS = num('connect-per-s', 8);
 const warmupS = num('warmup-s', Math.ceil(15 + bots / connectPerS));
-const sampleS = num('sample-s', durationS >= 3 * 3600 ? 60 : durationS >= 600 ? 15 : 5);
+const sampleS = num('sample-s', pre?.sampleS ?? (durationS >= 3 * 3600 ? 60 : durationS >= 600 ? 15 : 5));
+const backupEveryMin = num('backup-every-min', pre?.backupMin ?? 0);
+const keepBackups = Math.max(1, Math.round(num('keep-backups', 3)));
+const thresholds: SoakThresholds = {
+  heapSlopeMbPerH: num('max-heap-slope-mb-h', DEFAULT_THRESHOLDS.heapSlopeMbPerH),
+  rssSlopeMbPerH: num('max-rss-slope-mb-h', DEFAULT_THRESHOLDS.rssSlopeMbPerH),
+  tickP99Ms: num('max-tick-p99-budget', DEFAULT_THRESHOLDS.tickP99Ms),
+  backupS: num('max-backup-s', DEFAULT_THRESHOLDS.backupS),
+  journalStuckSamples: Math.max(1, Math.round(num('journal-stuck-samples', DEFAULT_THRESHOLDS.journalStuckSamples))),
+};
 const workersN = Math.max(1, Math.min(bots, num('workers', Math.ceil(bots / 50))));
 const mobCount = num('mobs', ci ? 40 : 150);
 const area = num('area', 96);
@@ -80,7 +116,9 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 
 if (storeKind !== 'file' && storeKind !== 'memory') throw new Error('--store must be file or memory');
 const outDir =
-  flag('out') || durationS >= 3600 ? str('out', join(tmpdir(), `vgtd-soak-${Date.now().toString(36)}`)) : '';
+  flag('out') || durationS >= 3600 || pre
+    ? str('out', join(tmpdir(), `vgtd-soak-${preset || 'run'}-${Date.now().toString(36)}`))
+    : '';
 const dataDir = str('data-dir', '');
 const tmpData = storeKind === 'file' && !dataDir ? mkdtempSync(join(tmpdir(), 'vgtd-soak-data-')) : '';
 const stores = storeKind === 'file' ? openFileStores(dataDir || tmpData, { background: !flag('sync-writes') }) : null;
@@ -117,7 +155,10 @@ const runId = Date.now().toString(36);
 const roster = Array.from({ length: bots }, (_, n) => `soak${runId}_${n}`);
 const config: SoakConfig = {
   bots,
-  mode: ci ? 'CI smoke' : durationS >= 3 * 3600 ? 'long soak' : 'short soak',
+  mode: ci ? 'CI smoke' : preset ? `${preset} soak` : durationS >= 3 * 3600 ? 'long soak' : 'short soak',
+  thresholds,
+  backupEveryMin,
+  ...(preset ? { preset } : {}),
   durationS,
   warmupS,
   sampleS,
@@ -261,6 +302,65 @@ const gcObserver = new PerformanceObserver((list) => {
 });
 gcObserver.observe({ entryTypes: ['gc'] });
 const loopDelay = monitorEventLoopDelay({ resolution: 10 });
+/** the same, reset every window: one event-loop lag reading per sample */
+const windowLoop = monitorEventLoopDelay({ resolution: 10 });
+
+/** File sizes of the store directory (documents + `journal.json`) and the journal state; undefined for the memory store. */
+function sampleStore(): StoreSample | undefined {
+  if (!stores) return undefined;
+  const dir = dataDir || tmpData;
+  const docs: Record<string, number> = {};
+  let total = 0;
+  for (const name of readdirSync(dir)) {
+    if (!name.endsWith('.json')) continue;
+    try {
+      const size = statSync(join(dir, name)).size;
+      docs[name] = size;
+      total += size;
+    } catch {
+      // the file was replaced between the listing and the stat (an atomic write): the next sample sees it
+    }
+  }
+  return {
+    docs,
+    totalBytes: total,
+    journalBytes: docs['journal.json'] ?? 0,
+    journalPresent: 'journal.json' in docs,
+    journalPending: stores.journalPending(),
+  };
+}
+
+// ------------------------------------------------------------------ backups (a separate process, like the `backup` operator command)
+const backupScript = join(dirname(fileURLToPath(import.meta.url)), 'soak-backup.mjs');
+// where the backups go: `--out/backups`, else inside the temporary data directory, else (an existing `--data-dir` and no `--out`) a fresh
+// temporary directory of their own: never a path relative to the working directory, and removed when the run ends
+const tmpBackups =
+  backupEveryMin > 0 && stores && !outDir && !tmpData ? mkdtempSync(join(tmpdir(), 'vgtd-soak-backups-')) : '';
+const backupRoot = backupEveryMin > 0 && stores ? join(outDir || tmpData || tmpBackups, 'backups') : '';
+function runBackup(verify: boolean): Promise<BackupSample> {
+  return new Promise((resolve) => {
+    execFile(
+      process.execPath,
+      [backupScript, dataDir || tmpData, backupRoot, String(keepBackups), ...(verify ? ['--verify'] : [])],
+      { timeout: 10 * 60 * 1000 },
+      (err, stdout) => {
+        const line = stdout.trim().split('\n').pop() ?? '';
+        try {
+          resolve(JSON.parse(line) as BackupSample);
+        } catch {
+          resolve({
+            ok: false,
+            ms: 0,
+            bytes: 0,
+            error: err ? err.message : `unreadable backup output: ${line.slice(0, 200)}`,
+          });
+        }
+      },
+    );
+  });
+}
+let backupInFlight: Promise<void> | null = null;
+let backupDone: BackupSample | undefined;
 let fileWrites0 = { ...fileWriteStats };
 let exitCode = 0;
 let stopRequested = false;
@@ -275,6 +375,9 @@ try {
   resetWindow(srv);
   observing = true;
   loopDelay.enable();
+  windowLoop.enable();
+  if (backupRoot) mkdirSync(backupRoot, { recursive: true });
+  let nextBackupMs = backupEveryMin * 60_000;
   fileWrites0 = { ...fileWriteStats };
   const cpuRun0 = process.cpuUsage();
   let base = copyStats(srv);
@@ -298,11 +401,19 @@ try {
     }
     const list = await botStats();
     const tot = totalsOf(list);
+    const loop = {
+      p50: windowLoop.percentile(50) / 1e6,
+      p99: windowLoop.percentile(99) / 1e6,
+      max: windowLoop.max / 1e6,
+    };
+    const store = sampleStore();
     if (useGc) {
       inForcedGc = true;
       (globalThis as { gc?: () => void }).gc!();
       inForcedGc = false;
     }
+    if (useGc) await sleep(25); // the delay of a blocked timer is recorded when it fires, after the pause: let the forced GC's one land first
+    windowLoop.reset(); // ... so it is thrown away here and the pause is not counted as the game's lag
     const mem = process.memoryUsage();
     const m1 = srv.world.metrics;
     const honest = s.clients;
@@ -332,6 +443,9 @@ try {
       aoiEnterPerSec: honest.length ? honest.reduce((a, c) => a + c.aoiEnter, 0) / honest.length / win : 0,
       heapMb: mem.heapUsed / 1048576,
       rssMb: mem.rss / 1048576,
+      loop,
+      ...(store ? { store } : {}),
+      ...(backupDone ? { backup: backupDone } : {}),
       kicks,
       disconnects: m1.disconnects - m0.disconnects,
       violations: viol,
@@ -339,7 +453,19 @@ try {
       castRejected: m1.castRejected - m0.castRejected,
       bots: tot,
     };
+    backupDone = undefined;
     samples.push(sample);
+    // the next backup: in its own process, so the loop being measured is not blocked; a slow one is not started twice
+    if (backupRoot && !backupInFlight && now - tStart >= nextBackupMs) {
+      nextBackupMs += backupEveryMin * 60_000;
+      backupInFlight = runBackup(false)
+        .then((r) => {
+          backupDone = r;
+        })
+        .finally(() => {
+          backupInFlight = null;
+        });
+    }
     if (outDir) appendFileSync(join(outDir, 'samples.jsonl'), JSON.stringify(sample) + '\n');
     log(
       `[${sample.tSec.toFixed(0).padStart(6)}s] online ${sample.online}/${bots} tick p50 ${sample.tick.p50.toFixed(1)} p99 ${sample.tick.p99.toFixed(1)} max ${sample.tick.max.toFixed(1)} ms · down ${sample.downKBps.mean.toFixed(2)} KB/s/player · visible ${sample.visibleMean.toFixed(0)} · heap ${sample.heapMb.toFixed(0)} MB rss ${sample.rssMb.toFixed(0)} MB · casts ${tot.casts} kills ${tot.kills} chat ${tot.chatDelivered} party ${tot.partyJoins}`,
@@ -353,6 +479,17 @@ try {
   }
   observing = false;
   loopDelay.disable();
+  windowLoop.disable();
+  // the last backup of the run is taken after everything is flushed and is also verified (a restore drill in miniature)
+  const finalBackups: BackupSample[] = [];
+  if (backupRoot && stores) {
+    await backupInFlight;
+    if (backupDone) finalBackups.push(backupDone);
+    srv.world.inventory?.flushAll();
+    stores.flush();
+    log('final backup (verified)...');
+    finalBackups.push(await runBackup(true));
+  }
   const cpuRun = process.cpuUsage(cpuRun0);
   const summary = summarizeSoak(
     config,
@@ -377,6 +514,8 @@ try {
       },
       cpuCores: (cpuRun.user + cpuRun.system) / 1000 / Math.max(1, durationS * 1000),
     },
+    undefined,
+    finalBackups,
   );
   const text = formatSoak(summary);
   if (outDir) {
@@ -421,5 +560,6 @@ try {
     stores.flush();
   }
   if (tmpData) rmSync(tmpData, { recursive: true, force: true });
+  if (tmpBackups) rmSync(tmpBackups, { recursive: true, force: true });
 }
 process.exit(exitCode);

@@ -76,7 +76,6 @@ export class ChatBox {
   ) {
     this.log = new core.ChatLog({
       myName: () => username,
-      onFriends: () => this.showFriends(),
       onQuests: () => this.onQuestsToggle?.(),
       onTrade: () => this.showTrade(),
       onSect: () => this.showSect(),

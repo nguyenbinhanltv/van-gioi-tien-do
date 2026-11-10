@@ -13,7 +13,11 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outdir = join(root, 'node_modules', '.vgtd-soak');
 mkdirSync(outdir, { recursive: true });
 await build({
-  entryPoints: { soak: join(root, 'src/loadtest/soak.ts'), 'game-worker': join(root, 'src/loadtest/game-worker.ts') },
+  entryPoints: {
+    soak: join(root, 'src/loadtest/soak.ts'),
+    'game-worker': join(root, 'src/loadtest/game-worker.ts'),
+    'soak-backup': join(root, 'src/loadtest/soak-backup.ts'),
+  },
   outdir,
   bundle: true,
   platform: 'node',
