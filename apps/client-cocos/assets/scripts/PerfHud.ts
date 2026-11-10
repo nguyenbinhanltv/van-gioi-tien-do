@@ -162,9 +162,13 @@ export class PerfHud {
     this.textures.push({ w, h });
   }
 
-  /** Pin the HUD to the top-left corner of a canvas of the given design size. */
-  layout(canvasW: number, canvasH: number): void {
-    this.bg.setPosition(-canvasW / 2 + 8, canvasH / 2 - 8, 0);
+  /** Pin the HUD to the top-left corner of a canvas of the given design size, `left` units in (clear of the player frame column). */
+  layout(canvasW: number, canvasH: number, left = 8): void {
+    this.bg.setPosition(-canvasW / 2 + left, canvasH / 2 - 8, 0);
+  }
+
+  get visible(): boolean {
+    return this.bg.active;
   }
 
   update(dt: number): void {

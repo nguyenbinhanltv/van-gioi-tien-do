@@ -256,6 +256,7 @@ export class CombatUi {
       this.hudRoot,
       this.dynText,
     );
+    this.vitalNodes.push(hp.back, mp.back, hp.label.node.parent!, mp.label.node.parent!);
     this.hpFill = hp.fill;
     this.mpFill = mp.fill;
     this.hpText = hp.label;
@@ -439,6 +440,8 @@ export class CombatUi {
   }
 
   private castBackNode: Node;
+  private readonly vitalNodes: Node[] = [];
+  private targetRect: { x: number; y: number; w: number; h: number } | null = null;
 
   /** Called by InputManager (`pickEntity`): tile under the click -> enemy id, trying the body (above the foot) too. */
   pick(tile: TilePos): number | null {
@@ -452,12 +455,26 @@ export class CombatUi {
     return sel.pickAt(targets, t2, 0.9);
   }
 
+  /** The own HP / MP bars above the hotbar: hidden when the HUD's player frame (top-left, PlayerFrame.ts) shows the same numbers. */
+  setVitalsVisible(v: boolean): void {
+    for (const n of this.vitalNodes) n.active = v;
+  }
+
+  /** Where the target frame sits (design rect of the shared HUD layout, top centre); null = the old fixed spot. */
+  setTargetRect(r: { x: number; y: number; w: number; h: number } | null): void {
+    this.targetRect = r;
+  }
+
   /** Re-anchor to the canvas size (design units). */
   layout(canvasW: number, canvasH: number): void {
     this.scale = Math.min(1, (canvasW - 16) / HUD_W);
     this.hudRoot.setScale(this.scale, this.scale, 1);
     this.hudRoot.setPosition(0, -canvasH / 2 + 10, 0);
-    this.targetRoot.setPosition(0, (canvasH - 20) / this.scale - 70, 0);
+    // target frame: the bar sits 38 units under the rect's top, the name 20 above the bar (hudRoot-local y is up, scaled)
+    const ty = this.targetRect
+      ? (canvasH - 10 - (this.targetRect.y + 38)) / this.scale
+      : (canvasH - 20) / this.scale - 70;
+    this.targetRoot.setPosition(0, ty, 0);
     this.deathRoot.setPosition(0, 0, 0);
   }
 

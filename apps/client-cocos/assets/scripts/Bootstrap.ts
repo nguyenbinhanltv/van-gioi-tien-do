@@ -6,6 +6,7 @@ import {
   Node,
   ResolutionPolicy,
   game,
+  profiler,
   Sprite,
   UITransform,
   _decorator,
@@ -51,7 +52,12 @@ import { TribulationFx } from './TribulationFx';
 import { Minimap, WorldMapPanel } from './MapUi';
 import { FIRST_WORLD_FRAME_FALLBACK_MS, armFirstWorldFrameFallback, markFirstWorldFrame } from './Milestones';
 import { installCrashReporting, setCrashClass } from './CrashReport';
-import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
+import { classNameOfPath, pickClass, rememberClass, rememberedClass } from './ClassPicker';
+import { PlayerFrame } from './PlayerFrame';
+import { MenuBar, type MenuEntry } from './MenuBar';
+import { CharacterPanel } from './CharacterPanel';
+import { SettingsPanel, savedDebug } from './SettingsPanel';
+import { typingTarget } from './HudChrome';
 
 const { ccclass } = _decorator;
 
@@ -137,6 +143,15 @@ export class Bootstrap extends Component {
   /** `#chibiwalk=E,S,NE`: scripted facing sequence for headless captures (1.5 s per direction). */
   private scriptedWalk: shared.Direction[] | null = null;
   private scriptedT = 0;
+  /** HUD chrome (DOM): player frame, menu bar, character sheet and settings; placed by the shared layout (client-core `computeHudLayout`) */
+  private playerFrame: PlayerFrame | null = null;
+  private menuBar: MenuBar | null = null;
+  private characterPanel: CharacterPanel | null = null;
+  private settingsPanel: SettingsPanel | null = null;
+  /** the debug overlay (FPS / draw calls / heap / net): off for players; F3 / backquote / `?debug=1` / the settings switch turn it on */
+  private debugOn = false;
+  private hudKeyDown: ((e: KeyboardEvent) => void) | null = null;
+  private hudProfileKey = '';
   private canvasUi!: UITransform;
   private lastCanvasW = 0;
   private ready = false;
@@ -344,6 +359,8 @@ export class Bootstrap extends Component {
     });
     this.hud.onReset = () => this.world.resetStreamStats();
     this.hud.note = `tier ${this.world.tier}`;
+    const dbg = params.get('debug');
+    this.setDebug(dbg === '1' || dbg === 'true' || savedDebug()); // perf tools read window.__vgtdPerf, which is published either way
     // online (`?online=1`) is created first: with `&combat=1` the HUD then talks to the server instead of the offline mock
     if (onlineRequested()) this.online = new OnlineSession(this.ysort, l2, art);
     // created before the bag and (later) the combat HUD so both draw above it; fed with the player's own kills in applyServerClass
@@ -460,11 +477,192 @@ export class Bootstrap extends Component {
       this.marketPanel = new MarketPanel(net);
     }
     this.firstSession?.hookProgression(); // after the progression HUD: it replaces net.progressionEvents wholesale
+    this.buildHudChrome();
     this.rig.snap(this.playerScreen());
     if (this.online) void this.startOnline();
     if (params.get('drawdbg') !== null) installDrawDebug(this.node); // window.__vgtdDrawDbg(): batch-break report
     if (params.get('glyphs') !== null) installGlyphSheet(this.uiRoot!); // every supported glyph through the shared label atlas (D104)
     this.maybeAutotest();
+  }
+
+  /** F3 / backquote / `?debug=1` / settings: show or hide the debug overlay. */
+  private setDebug(on: boolean): void {
+    this.debugOn = on;
+    this.hud.setVisible(on);
+    // the engine's own stats block (debug builds): same switch
+    if (on) profiler.showStats();
+    else profiler.hideStats();
+  }
+
+  private progressionState(): { label: string; tuVi: number; tuViReq: number; maxStage: boolean } | null {
+    const s = this.progressionHud?.view.state;
+    return s ? { label: s.label, tuVi: s.tuVi, tuViReq: s.tuViReq, maxStage: s.maxStage } : null;
+  }
+
+  /**
+   * Player frame, menu bar, character sheet and settings (DOM). Every button wires an EXISTING panel's toggle; the hotkeys stay with the
+   * panels (B bag, J quests, K sect, O friends, L world map; M is meditation, D76) plus C (character) and Esc (settings) from here.
+   */
+  private buildHudChrome(): void {
+    const online = this.online;
+    const source = {
+      name: () => online?.username ?? core.t('hud.player.offline_name'),
+      className: () => classNameOfPath(pathOfChibiId(this.chibi.classInfo.id)),
+      realm: () => this.progressionState()?.label ?? '',
+      vitals: () => {
+        const p = this.combat?.backend.player;
+        return p ? { hp: p.hp, hpMax: p.hpMax, mp: p.mp, mpMax: p.mpMax, shield: p.shield } : null;
+      },
+    };
+    this.playerFrame = new PlayerFrame(source);
+    this.combat?.setVitalsVisible(false); // the player frame shows HP / MP now
+    this.characterPanel = new CharacterPanel({
+      ...source,
+      tuVi: () => {
+        const s = this.progressionState();
+        if (!s) return '';
+        return s.maxStage ? core.t('progression.hud.max_stage') : `${Math.floor(s.tuVi)} / ${Math.floor(s.tuViReq)}`;
+      },
+      standing: () => this.progressionHud?.view.standingText() ?? '',
+    });
+    this.settingsPanel = new SettingsPanel({
+      debugOn: () => this.debugOn,
+      setDebug: (on) => this.setDebug(on),
+      // Esc first closes whatever panel is open; only when nothing is open does it open the settings
+      hasTarget: () => (this.combat?.backend.target.current ?? null) !== null,
+      panelOpen: () => this.openPanelCloser() !== null,
+      closeTopPanel: () => {
+        const close = this.openPanelCloser();
+        close?.();
+        return close !== null;
+      },
+    });
+    const onl = (): boolean => !!online;
+    const entries: MenuEntry[] = [
+      {
+        id: 'bag',
+        icon: 'bag',
+        shortKey: 'hud.menu.short.bag',
+        nameKey: 'hud.menu.bag',
+        key: 'B',
+        run: () => this.bagPanel?.toggle(),
+      },
+      {
+        id: 'character',
+        icon: null,
+        shortKey: 'hud.menu.short.character',
+        nameKey: 'hud.menu.character',
+        key: 'C',
+        run: () => this.characterPanel?.toggle(),
+      },
+      // TODO(P0 polish): no skills panel yet (the hotbar kit is the only skill UI); K is the sect hotkey (D98)
+      { id: 'skills', icon: null, shortKey: 'hud.menu.short.skills', nameKey: 'hud.menu.skills', key: '', run: null },
+      {
+        id: 'quests',
+        icon: 'quest_available',
+        shortKey: 'hud.menu.short.quests',
+        nameKey: 'hud.menu.quests',
+        key: 'J',
+        run: () => this.questPanel?.toggle(),
+        available: onl,
+      },
+      // the world map answers to L (and the minimap click): M is meditation (D76)
+      {
+        id: 'map',
+        icon: 'map',
+        shortKey: 'hud.menu.short.map',
+        nameKey: 'hud.menu.map',
+        key: 'L',
+        run: () => this.worldMapPanel?.toggle(),
+        available: onl,
+      },
+      {
+        id: 'sect',
+        icon: 'sect',
+        shortKey: 'hud.menu.short.sect',
+        nameKey: 'hud.menu.sect',
+        key: 'K',
+        run: () => this.sectPanel?.toggle(),
+        available: onl,
+      },
+      {
+        id: 'friends',
+        icon: 'friend_add',
+        shortKey: 'hud.menu.short.friends',
+        nameKey: 'hud.menu.friends',
+        key: 'O',
+        run: () => this.friendsPanel?.toggle(),
+        available: onl,
+      },
+      // no party window exists (the party frames appear by themselves): the button opens the chat on "/invite "
+      {
+        id: 'party',
+        icon: 'party_invite',
+        shortKey: 'hud.menu.short.party',
+        nameKey: 'hud.menu.party',
+        key: '',
+        run: () => this.chatBox?.focus('/invite '),
+        available: onl,
+      },
+      {
+        id: 'settings',
+        icon: 'settings',
+        shortKey: 'hud.menu.short.settings',
+        nameKey: 'hud.menu.settings',
+        key: 'Esc',
+        run: () => this.settingsPanel?.toggle(),
+      },
+    ];
+    this.menuBar = new MenuBar(entries);
+    this.hudKeyDown = (e: KeyboardEvent): void => {
+      if (e.repeat || e.ctrlKey || e.metaKey || e.altKey || typingTarget(e)) return;
+      if (e.code === 'F3' || e.code === 'Backquote') {
+        e.preventDefault();
+        this.setDebug(!this.debugOn);
+      }
+    };
+    window.addEventListener('keydown', this.hudKeyDown);
+    this.applyHudLayout(true);
+  }
+
+  /** The close action of the first open panel (Esc closes it before anything else), null when no panel is open. */
+  private openPanelCloser(): (() => void) | null {
+    const closers: Array<[boolean, () => void]> = [
+      [this.worldMapPanel?.isOpen ?? false, () => this.worldMapPanel?.toggle(false)],
+      [this.characterPanel?.visible ?? false, () => this.characterPanel?.toggle(false)],
+      [this.bagPanel?.isOpen ?? false, () => this.bagPanel?.toggle()],
+      [this.questPanel?.visible ?? false, () => this.questPanel?.toggle(false)],
+      [this.sectPanel?.visible ?? false, () => this.sectPanel?.toggle(false)],
+      [this.friendsPanel?.visible ?? false, () => this.friendsPanel?.toggle(false)],
+      [this.tradePanel?.visible ?? false, () => this.tradePanel?.toggle(false)],
+      [this.craftPanel?.visible ?? false, () => this.craftPanel?.toggle(false)],
+      [this.marketPanel?.visible ?? false, () => this.marketPanel?.toggle(false)],
+    ];
+    return closers.find(([isOpen]) => isOpen)?.[1] ?? null;
+  }
+
+  /** (Re)place every HUD widget from the shared layout contract (client-core `computeHudLayout`): on resize and when touch / pointer changes. */
+  private applyHudLayout(force = false): void {
+    const w = this.canvasUi.contentSize.width;
+    const h = this.canvasUi.contentSize.height;
+    const profile = core.hudProfile(w, h, this.input?.input.mode === 'touch');
+    const key = `${w}x${h}|${profile}|${window.innerHeight}`;
+    if (!force && key === this.hudProfileKey) return;
+    this.hudProfileKey = key;
+    const lay = core.computeHudLayout(w, h, profile);
+    const f = window.innerHeight / h; // CSS px per design unit
+    this.progressionHud?.place(lay.rects.cultivation);
+    this.combat?.setTargetRect(lay.rects['target-frame']);
+    this.combat?.layout(w, h);
+    this.playerFrame?.place(lay.rects['player-frame'], f);
+    this.menuBar?.place(lay.rects['menu-bar'], f, lay.menu);
+    this.minimap?.place(lay.rects.minimap, f);
+    this.questPanel?.place(lay.rects['quest-tracker'], f);
+    this.partyFrames?.place(lay.rects['party-frames'], f);
+    this.tutorialHints?.place(lay.rects['hint-card'], f);
+    this.chatBox?.place(lay.narrow ? lay.rects.chat : null, f);
+    // the debug overlay (when on) sits right of the player frame column
+    this.hud.layout(w, h, lay.rects['player-frame'].x + lay.rects['player-frame'].w + 16);
   }
 
   private makeCombatUi(backend: cb.CombatBackend): void {
@@ -479,6 +677,8 @@ export class Bootstrap extends Component {
       (x, y) => this.rig.clientToWorld(x, y),
     );
     this.combat.mobArt = this.mobArt;
+    if (this.playerFrame) this.combat.setVitalsVisible(false); // online the combat HUD is built after the chrome: the player frame shows HP / MP
+    this.hudProfileKey = ''; // re-place everything (the target frame) on the next update
     // debug hook for art review (`?combat=1&mobdemo=1`: entity id == mob wire id): window.__vgtdMobPhase(11, 1, 1800) transforms the boss
     (globalThis as unknown as Record<string, unknown>).__vgtdMobPhase = (entityId: number, phase: number, ms = 1800) =>
       this.combat?.setEnemyPhase(entityId, phase, ms);
@@ -764,9 +964,12 @@ export class Bootstrap extends Component {
     this.input.updateVisuals();
 
     const w = this.canvasUi.contentSize.width;
+    this.applyHudLayout();
+    this.playerFrame?.update();
+    this.characterPanel?.update();
+    this.menuBar?.refresh();
     if (w !== this.lastCanvasW) {
       this.lastCanvasW = w;
-      this.hud.layout(w, this.canvasUi.contentSize.height);
       this.combat?.layout(w, this.canvasUi.contentSize.height);
       this.progressionHud?.layout(w, this.canvasUi.contentSize.height);
       this.bagPanel?.layout(w, this.canvasUi.contentSize.height);
@@ -809,6 +1012,11 @@ export class Bootstrap extends Component {
     this.tribulationFx?.destroy();
     this.minimap?.destroy();
     this.worldMapPanel?.destroy();
+    this.playerFrame?.destroy();
+    this.menuBar?.destroy();
+    this.characterPanel?.destroy();
+    this.settingsPanel?.destroy();
+    if (this.hudKeyDown) window.removeEventListener('keydown', this.hudKeyDown);
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

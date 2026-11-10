@@ -137,9 +137,17 @@ export class PartyFrames {
     this.run(inv ? `${command} ${inv.fromName}` : command);
   }
 
+  /** Placement from the shared HUD layout (design rect + CSS px per design unit); overrides the standalone placement below. */
+  place(r: { x: number; y: number; w: number; h: number }, f: number): void {
+    this.override = { x: r.x * f, y: r.y * f, w: r.w * f, scale: f };
+    this.layout();
+  }
+
+  private override: { x: number; y: number; w: number; scale: number } | null = null;
+
   private layout(): void {
     const touch = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
-    const p = core.partyFramesPlacement(window.innerWidth, window.innerHeight, touch);
+    const p = this.override ?? core.partyFramesPlacement(window.innerWidth, window.innerHeight, touch);
     Object.assign(this.root.style, {
       left: `${p.x}px`,
       top: `${p.y}px`,

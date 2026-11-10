@@ -11,6 +11,7 @@
  * Everything shown is `QuestModel` from client-core, drawn with `textContent` ONLY, and every button only sends an intent
  * (`quest_cmd`): the server checks distance, prerequisites and objectives and pays the rewards.
  */
+import { frameStyle, placeDesign } from './HudChrome';
 import { core } from './vendor/vgtd.mjs';
 
 const BTN: Partial<CSSStyleDeclaration> = {
@@ -56,21 +57,17 @@ export class QuestPanel {
     const tracker = document.createElement('div');
     tracker.id = 'vgtd-quest-tracker';
     Object.assign(tracker.style, {
+      ...frameStyle(0.8),
       position: 'fixed',
-      right: '16px',
-      top: '8px',
-      width: '230px',
-      maxWidth: 'calc(100vw - 32px)',
-      maxHeight: '84px',
+      right: '12px',
+      top: '196px', // the HUD layout (`place`) overrides this: under the minimap
+      width: '240px',
+      maxWidth: 'calc(100vw - 24px)',
+      maxHeight: '96px',
       overflow: 'hidden',
       display: 'none',
       padding: '4px 8px',
       font: '11px/1.3 sans-serif',
-      textAlign: 'left',
-      color: '#f0f0f5',
-      background: 'rgba(8,10,18,0.6)',
-      border: '1px solid rgba(127,212,255,0.5)',
-      borderRadius: '6px',
       zIndex: '440',
       pointerEvents: 'auto',
     } as Partial<CSSStyleDeclaration>);
@@ -90,12 +87,8 @@ export class QuestPanel {
       overflowY: 'auto',
       display: 'none',
       padding: '8px',
+      ...frameStyle(0.95),
       font: '12px/1.35 sans-serif',
-      textAlign: 'left',
-      color: '#f0f0f5',
-      background: 'rgba(8,10,18,0.9)',
-      border: '1px solid #7fd4ff',
-      borderRadius: '8px',
       zIndex: '450',
     } as Partial<CSSStyleDeclaration>);
     const head = document.createElement('div');
@@ -148,6 +141,13 @@ export class QuestPanel {
 
   get visible(): boolean {
     return this.open;
+  }
+
+  /** Put the tracker at a design rect of the shared HUD layout (`f` CSS px per design unit); max height only, it grows with its lines. */
+  place(r: { x: number; y: number; w: number; h: number }, f: number): void {
+    placeDesign(this.tracker, r, f);
+    this.tracker.style.height = 'auto';
+    this.tracker.style.maxHeight = `${r.h}px`;
   }
   toggle(force?: boolean): void {
     this.open = force ?? !this.open;
