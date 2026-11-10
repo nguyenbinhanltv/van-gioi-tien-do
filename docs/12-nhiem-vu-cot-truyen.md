@@ -1,5 +1,7 @@
 # Nhiệm vụ & Cốt truyện – Vạn Giới Tiên Đồ
 
+> **[Cập nhật D107, 2026-11-09]** Chủ sở hữu đã duyệt tài liệu này; phần hiện thực nằm ở `packages/shared/src/quests.ts` (dữ liệu, reset 05:00 UTC+7, đơn vị thưởng) và `apps/server/src/quests/`. Khác đề xuất: dữ liệu là mô-đun TypeScript chứ không phải `quests.json` + Ajv, mục tiêu rút gọn còn `kill` / `collect` / `talk` / `reach` / `breakthrough` / `cultivate`, tiến độ lưu theo tài khoản trong kho D92 (`quests.json`) chứ chưa phải bảng `quest_progress`. Còn thiếu so với tài liệu: xem OPEN-ITEMS "D107 - nhiệm vụ: còn mở".
+>
 > **Trạng thái: bản thiết kế đề xuất – chờ duyệt.** Mảng này nằm trong [OPEN-ITEMS.md](OPEN-ITEMS.md) §3 ("Nhiệm vụ và cốt truyện") và hồ sơ gốc không có chi tiết. Mọi con số mới mang nhãn _Đề xuất – chờ duyệt_. Số liệu đã có hiệu lực chỉ được **trích dẫn** từ [07-cong-thuc-data-schema.md](07-cong-thuc-data-schema.md) / `@vgtd/shared`, không định nghĩa lại ở đây.
 >
 > Phạm vi MVP thật sự do [10-mvp-scope.md](10-mvp-scope.md) quyết định (đang được viết lại bởi nhóm thiết kế A); tài liệu này giả định MVP gồm **Luyện Khí → Trúc Cơ** và một đoạn mở đầu Kim Đan, hai bản đồ mẫu trong [04-tilemap.md](04-tilemap.md) (Sơn Môn Đại Phái, Bí Cảnh Rừng Độc). Hệ phái và kỹ năng xem [11-he-phai-ky-nang.md](11-he-phai-ky-nang.md); tổng quan xem [01-gdd.md](01-gdd.md).

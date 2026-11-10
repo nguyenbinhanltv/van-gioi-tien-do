@@ -28,6 +28,8 @@ export class TelegraphLayer {
   private readonly node: Node;
   private readonly g: Graphics;
   private readonly tmp = new Vec3();
+  /** views the caller draws itself (the tribulation warning decals, TribulationFx) */
+  skip: ((v: TelegraphShapeView) => boolean) | null = null;
 
   constructor(parent: Node) {
     this.node = newNode('Telegraphs', parent);
@@ -40,6 +42,7 @@ export class TelegraphLayer {
     const g = this.g;
     g.clear();
     for (const v of views) {
+      if (this.skip?.(v)) continue;
       this.drawShape(v, 1, false);
       if (v.progress > 0.02) this.drawShape(v, v.progress, true);
     }

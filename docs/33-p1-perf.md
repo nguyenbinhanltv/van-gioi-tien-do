@@ -63,6 +63,22 @@ Cách sửa: macro `BATCHER2D_MEM_INCREMENT` = **2048** (KB) trong `apps/client-
 
 Đo sạch (hai bản dựng release trên **stage mới** cho mỗi bên, cùng commit, chỉ khác dòng macro; `--mobs`, tối đa draw call 30 giây): zoom 1,5: **64 -> 38**; zoom 1,0: **70 -> 44**; zoom 2,0: **59 -> 35**. Kịch bản tung chiêu liên tục (nhánh PR #274, `--casting`): **70-76 -> 40-47** (zoom 1,5) trước khi gom tiếp bất cứ thứ gì khác. Lưu ý đo: bản dựng release chạy trên bản sao `build/stage-release` có Library riêng; muốn so sánh hai giá trị macro phải dùng `VGTD_STAGE_DIR` mới cho từng bên, nếu không bản dựng cũ có thể giữ cấu hình cũ.
 
+## Kịch bản tung chiêu liên tục (`--casting`) và cách tìm chỗ vỡ batch
+
+`npm run perf:p1 -w client-cocos -- --casting [--class dan-phu-tu]` = cảnh `--mobs` (14 quái + 20 NPC + HUD chiến đấu) trong khi thanh kỹ năng liên tục tung chiêu (`?vfxdemo=1`, mock offline): thanh cast, số hồi chiêu, ô trạng thái, số sát thương nổi, thanh máu trên đầu và hiệu ứng kỹ năng cùng hiện. CI không chạy perf (cần Cocos Creator headless): đây là cổng chạy tay như `--mobs`, dùng `--draw-limit 65`.
+
+Công cụ gỡ lỗi (`?drawdbg=1`): `window.__vgtdBatchTrace(reset)` đếm, theo đường dẫn node, batch nào BẮT ĐẦU ở node nào (bọc `Batcher2D.autoMergeBatches`, nhận component đầu của batch vừa được xả; bản release làm rối tên trường riêng của engine nên chỉ dùng component engine truyền vào); `__vgtdDrawExp('hide:<đường dẫn>')` / `show:` ẩn / hiện một node để đo chênh lệch `drawCalls`; khóa của `Label` trong báo cáo dựa vào texture chữ thật (`spriteFrame`).
+
+**Kết quả đo và bài học (2026-11-10).** Trước khi có `BATCHER2D_MEM_INCREMENT` (mục trên), tung chiêu liên tục đo 73 / 79 / 73 (Thể tu / Đan Phù / Pháp tu). Tôi đã thử gom HUD (một cỡ chữ cho mọi nhãn động, lớp phủ hồi chiêu là quad thay vì sprite `FILLED` tròn, ô trạng thái và thanh máu / số nổi tách lớp) và chỉ xuống 70 / 72 / 76. Nguyên nhân thật là bộ đệm đỉnh 144 KB cắt batch mỗi 1024 sprite. **Với macro 2048 KB** (cùng cơ sở mã, bản dựng sạch cho mỗi biến thể, tối đa / trung vị draw call trong 30 giây):
+
+| biến thể (casting, 3 lớp)                           | zoom 1,5 tối đa | zoom 1,5 trung vị | zoom 1,0 tối đa | zoom 1,0 trung vị |
+| --------------------------------------------------- | --------------: | ----------------: | --------------: | ----------------: |
+| A: không đổi HUD                                    |           42-45 |             38-39 |           49-50 |             43-45 |
+| B: đủ bốn thay đổi HUD                              |              41 |             35-37 |           48-49 |             42-44 |
+| C: như B nhưng giữ cỡ chữ gốc (chỉ CHAR + phân lớp) |           41-45 |             37-38 |           47-50 |             41-44 |
+
+Các thay đổi HUD chỉ đáng 1-3 draw call (trong sai số đo giữa các lần chạy) trong khi đổi hình thức (lớp phủ hồi chiêu kiểu cuộn thay vì quét tròn) và làm chữ nhỏ mềm hơn; cổng 65 đã đạt dư (tối đa 50). Vì vậy KHÔNG đưa các thay đổi đó vào; chỉ giữ công cụ đo. **Đính chính:** lúc đầu tôi viết "engine giữ MỘT atlas chữ cho mỗi cỡ chữ": sai. Ở 3.8.8 mọi nhãn CHAR dùng chung một `LetterAtlas` (`letter-font.ts`), cỡ chữ chỉ nằm trong khóa glyph; số liệu "~5 -> ~2" trước đó đo bằng cách ẩn nhãn nên chỉ chứng minh nhãn tốn draw call chứ không chứng minh nguyên nhân là cỡ chữ.
+
 ## Cách đo trên Web (headless)
 
 ```bash

@@ -34,7 +34,7 @@ import { chibiStreamer } from './ChibiAssets';
 import { CHIBI_CLASSES, ChibiBody, chibiIdOfPath, pathOfChibiId } from './ChibiBody';
 import { InputBridge } from './InputBridge';
 import { PerfHud } from './PerfHud';
-import { OnlineSession, onlineRequested } from './OnlineSession';
+import { OnlineSession, markInviteUsed, onlineRequested } from './OnlineSession';
 import { SkillWheel } from './SkillWheel';
 import { ProgressionHud } from './ProgressionHud';
 import { ChatBox } from './ChatBox';
@@ -43,10 +43,13 @@ import { TutorialHints, tutorialRequested } from './TutorialHints';
 import { TradePanel } from './TradePanel';
 import { SectPanel } from './SectPanel';
 import { FriendsPanel } from './FriendsPanel';
+import { QuestPanel } from './QuestPanel';
 import { CraftPanel } from './CraftPanel';
 import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
+import { Minimap, WorldMapPanel } from './MapUi';
+import { installCrashReporting, setCrashClass } from './CrashReport';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -114,12 +117,16 @@ export class Bootstrap extends Component {
   private tradePanel: TradePanel | null = null;
   private sectPanel: SectPanel | null = null;
   private friendsPanel: FriendsPanel | null = null;
+  private questPanel: QuestPanel | null = null;
   private craftPanel: CraftPanel | null = null;
   private marketPanel: MarketPanel | null = null;
   /** first-session objective checklist (D84), online only; its own file, fed from here */
   private firstSession: FirstSessionHud | null = null;
   /** Tâm Ma / Lôi Kiếp overlay + lightning (D97), online only */
   private tribulationFx: TribulationFx | null = null;
+  /** minimap (corner) and world map panel (M), online only; DOM overlays (PART 3 T) */
+  private minimap: Minimap | null = null;
+  private worldMapPanel: WorldMapPanel | null = null;
   /** online: the server's class for this character has been applied (body art, hotbar); until then nothing class-specific is built */
   private classApplied = false;
   private uiRoot: Node | null = null;
@@ -140,6 +147,7 @@ export class Bootstrap extends Component {
       return;
     }
     console.log('[vgtd] Bootstrap.start');
+    installCrashReporting();
     try {
       await this.build();
       this.ready = true;
@@ -360,9 +368,25 @@ export class Bootstrap extends Component {
         (p, n, k, w, h, s) => this.propArt?.slice(p, n, k, w, h, s) ?? null,
       );
       this.tribulationFx = new TribulationFx(hudRoot, this.worldRootNode!, art, this.online.net);
+      this.online.skipTelegraphs((v) => this.tribulationFx?.handlesTelegraph(v.id) ?? false);
       this.chatBox = new ChatBox(this.online.net, this.online.username);
       const chat = this.chatBox;
       this.partyFrames = new PartyFrames(chat.party, (cmd) => chat.command(cmd)); // party frames (D93)
+      {
+        const mapWorld = {
+          width: this.world.width,
+          groundAt: (i: number, j: number) => this.world.groundAt(i, j),
+          zones: this.world.data.zones,
+        };
+        const feed = {
+          self: () => this.online!.net.selfPosition(),
+          remotes: () => this.online!.net.remotes(),
+          isPartyMember: (id: number) => chat.party.members().some((m) => m.entityId === id),
+        };
+        this.minimap = new Minimap(mapWorld, feed);
+        this.worldMapPanel = new WorldMapPanel(mapWorld, feed);
+        this.minimap.onClick(() => this.worldMapPanel?.toggle());
+      }
       if (tutorialRequested()) this.tutorialHints = new TutorialHints(this.online.net); // server-tracked FTUE hints (D105)
       // trade panel (D102): opens by itself with a window / an invite, or with T and /trade; its buttons run the lines the player could type
       const net = this.online.net;
@@ -390,6 +414,26 @@ export class Bootstrap extends Component {
         prefill: (text) => chat.focus(text),
       });
       chat.onFriendsToggle = () => this.friendsPanel?.toggle();
+      // quest log + tracker (D107): J or /quest; the buttons only send intents, the server decides and pays
+      this.questPanel = new QuestPanel(
+        new core.QuestModel(),
+        {
+          send: (op, arg, clientMsgId) =>
+            net.sendQuest({
+              op,
+              clientMsgId,
+              ...(op === core.QuestOp.Talk ? { npc: arg } : { questId: arg }),
+            }),
+          position: () => net.selfPosition(),
+          mapTiles: () => map.width,
+        },
+        (line, tone) => chat.log.system(line, tone),
+      );
+      net.questEvents = {
+        onQuestState: (m) => this.questPanel?.onState(m),
+        onQuestResult: (m) => this.questPanel?.onResult(m),
+      };
+      chat.onQuestsToggle = () => this.questPanel?.toggle();
       // alchemy panel (D108): P; the numbers come from the same shared formulas the server uses, the server decides everything
       const craft = new core.CraftModel({
         now: () => performance.now(),
@@ -461,6 +505,8 @@ export class Bootstrap extends Component {
     if (!path) return;
     this.classApplied = true;
     rememberClass(online.accountKey, path);
+    markInviteUsed(online.accountKey);
+    setCrashClass(path);
     const chibiId = chibiIdOfPath(path);
     if (chibiId) this.chibi.setClass(chibiId);
     if (this.combatOn && !this.combat) {
@@ -661,6 +707,7 @@ export class Bootstrap extends Component {
     this.updateSkillWheel(frame);
     this.updateStatusRow();
     this.tribulationFx?.update(dt);
+    this.minimap?.update(performance.now());
     this.chatBox?.update();
     this.partyFrames?.update();
     if (this.tutorialHints) {
@@ -670,6 +717,7 @@ export class Bootstrap extends Component {
     this.tradePanel?.update();
     this.sectPanel?.update();
     this.friendsPanel?.update();
+    this.questPanel?.update();
     this.craftPanel?.update();
     this.marketPanel?.update();
     if (this.progressionHud) {
@@ -726,11 +774,14 @@ export class Bootstrap extends Component {
     this.tradePanel?.destroy();
     this.sectPanel?.destroy();
     this.friendsPanel?.destroy();
+    this.questPanel?.destroy();
     this.craftPanel?.destroy();
     this.marketPanel?.destroy();
     this.bagPanel?.destroy();
     this.firstSession?.destroy();
     this.tribulationFx?.destroy();
+    this.minimap?.destroy();
+    this.worldMapPanel?.destroy();
     if (this.keyHandlers) {
       window.removeEventListener('keydown', this.keyHandlers.down);
       window.removeEventListener('keyup', this.keyHandlers.up);

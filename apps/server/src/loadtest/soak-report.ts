@@ -79,6 +79,29 @@ export class TickHistogram {
   }
 }
 
+/** File sizes of the file store at one sample (soak runs with `--store file`). */
+export interface StoreSample {
+  /** bytes per document file (`accounts.json`, ...), plus `journal.json` while it exists */
+  docs: Record<string, number>;
+  totalBytes: number;
+  /** size of `journal.json` (0 = absent: the write-ahead journal is deleted when a commit finishes) */
+  journalBytes: number;
+  journalPresent: boolean;
+  /** a commit's journal is still waiting to be finished after an error (`journalPending`) */
+  journalPending: boolean;
+}
+
+/** One backup taken during the run (a separate process, like the `backup` operator command: it never blocks the game loop). */
+export interface BackupSample {
+  ok: boolean;
+  /** time the backup itself took inside its process (reading the live documents, hashing, publishing, rotating) */
+  ms: number;
+  bytes: number;
+  /** `verifyBackup` of the final backup passed (only set on the last one) */
+  verified?: boolean;
+  error?: string;
+}
+
 /** One sampling window of the run. */
 export interface SoakSample {
   /** seconds since the measurement started */
@@ -101,6 +124,12 @@ export interface SoakSample {
   aoiEnterPerSec: number;
   heapMb: number;
   rssMb: number;
+  /** event-loop delay of this window (perf_hooks.monitorEventLoopDelay, ms); absent in older series */
+  loop?: { p50: number; p99: number; max: number };
+  /** file-store sizes at this sample (file store only) */
+  store?: StoreSample;
+  /** a backup that finished since the previous sample, if any */
+  backup?: BackupSample;
   /** server-side counters since the previous sample */
   kicks: number;
   disconnects: number;
@@ -134,8 +163,39 @@ export interface BotTotals {
   rttP95: number;
 }
 
+/**
+ * Pass / fail thresholds of the soak harness itself (PROVISIONAL, harness settings, not game numbers): a long run exits non-zero when one is
+ * crossed. Overridable on the command line (`--max-heap-slope-mb-h`, `--max-rss-slope-mb-h`, `--max-tick-p99-budget`, `--max-backup-s`).
+ */
+export interface SoakThresholds {
+  /** heap growth after the warm-up quarter, MB per hour (after a GC) */
+  heapSlopeMbPerH: number;
+  /** RSS growth after the warm-up quarter, MB per hour */
+  rssSlopeMbPerH: number;
+  /** tick p99 budget in ms (default: the design budget) */
+  tickP99Ms: number;
+  /** longest acceptable backup, seconds */
+  backupS: number;
+  /** a journal present (or pending) in this many consecutive samples is "not compacting" */
+  journalStuckSamples: number;
+}
+
+export const DEFAULT_THRESHOLDS: SoakThresholds = {
+  heapSlopeMbPerH: 20,
+  rssSlopeMbPerH: 40,
+  tickP99Ms: BUDGETS.tickP99Ms,
+  backupS: 15,
+  journalStuckSamples: 3,
+};
+
 export interface SoakConfig {
   bots: number;
+  /** thresholds in force (defaults when absent) */
+  thresholds?: Partial<SoakThresholds>;
+  /** minutes between backups (0 / absent = none) */
+  backupEveryMin?: number;
+  /** named preset the run started from (`smoke`, `full`) */
+  preset?: string;
   mode: string;
   durationS: number;
   warmupS: number;
@@ -228,8 +288,16 @@ export interface SoakSummary {
     slopeMbPerH: number;
     driftPct: number;
     rssMaxMb: number;
+    /** RSS slope after the warm-up quarter, MB per hour */
+    rssSlopeMbPerH: number;
     basis: string;
   };
+  /** event-loop delay over the windows (ms): the worst window p99 and max, and the mean of the window p99s; absent without per-window data */
+  loop?: { meanP99: number; worstP99: number; max: number };
+  /** file-store growth and journal health; absent without store samples */
+  store?: StoreSummary;
+  /** backups taken during the run; absent when none were attempted */
+  backups?: BackupSummary;
   errors: {
     kicks: number;
     disconnects: number;
@@ -244,6 +312,34 @@ export interface SoakSummary {
   criteria: Criterion[];
   /** where the tick time goes (D106); absent when the driver did not profile */
   profile?: ProfileSummary;
+}
+
+export interface StoreSummary {
+  samples: number;
+  startMb: number;
+  endMb: number;
+  /** growth of the total size of the documents (journal included), MB per hour, whole run */
+  growthMbPerH: number;
+  /** growth per document, MB per hour (documents that grow at all) */
+  growthByDoc: Record<string, number>;
+  journal: {
+    maxKb: number;
+    /** samples that found the journal on disk */
+    presentSamples: number;
+    /** longest run of consecutive samples with a journal on disk or pending */
+    longestRun: number;
+    pendingAtEnd: boolean;
+  };
+}
+
+export interface BackupSummary {
+  count: number;
+  failed: number;
+  meanS: number;
+  maxS: number;
+  lastMb: number;
+  /** the last backup passed `verifyBackup` (null = not checked) */
+  lastVerified: boolean | null;
 }
 
 const mean = (a: readonly number[]): number => (a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0);
@@ -261,6 +357,76 @@ export function slopePerHour(t: readonly number[], y: readonly number[]): number
     den += (t[k]! - mt) ** 2;
   }
   return den > 0 ? (num / den) * 3600 : 0;
+}
+
+/** RSS trend: least-squares slope (MB per hour) over the samples after the warm-up quarter, like the heap slope. */
+export function rssSlope(samples: readonly SoakSample[]): number {
+  if (samples.length < 8) return 0;
+  const tail = samples.slice(Math.floor(samples.length / 4));
+  return slopePerHour(
+    tail.map((s) => s.tSec),
+    tail.map((s) => s.rssMb),
+  );
+}
+
+/** Growth and journal health of the file store over a run; undefined when no sample carries store data. */
+export function storeSummary(samples: readonly SoakSample[]): StoreSummary | undefined {
+  const withStore = samples.filter((s): s is SoakSample & { store: StoreSample } => !!s.store);
+  if (withStore.length === 0) return undefined;
+  const mb = (b: number): number => b / 1048576;
+  const t = withStore.map((s) => s.tSec);
+  const growthByDoc: Record<string, number> = {};
+  const names = new Set(withStore.flatMap((s) => Object.keys(s.store.docs)));
+  names.delete('journal.json'); // the journal is reported on its own
+  for (const n of names) {
+    const g = slopePerHour(
+      t,
+      withStore.map((s) => mb(s.store.docs[n] ?? 0)),
+    );
+    if (g > 0) growthByDoc[n] = g;
+  }
+  let run = 0;
+  let longest = 0;
+  for (const s of withStore) {
+    run = s.store.journalPresent || s.store.journalPending ? run + 1 : 0;
+    longest = Math.max(longest, run);
+  }
+  const last = withStore[withStore.length - 1]!.store;
+  return {
+    samples: withStore.length,
+    startMb: mb(withStore[0]!.store.totalBytes),
+    endMb: mb(last.totalBytes),
+    growthMbPerH: slopePerHour(
+      t,
+      withStore.map((s) => mb(s.store.totalBytes)),
+    ),
+    growthByDoc,
+    journal: {
+      maxKb: Math.max(0, ...withStore.map((s) => s.store.journalBytes)) / 1024,
+      presentSamples: withStore.filter((s) => s.store.journalPresent).length,
+      longestRun: longest,
+      pendingAtEnd: last.journalPending,
+    },
+  };
+}
+
+/** Backups of a run; undefined when none were attempted. */
+export function backupSummary(
+  samples: readonly SoakSample[],
+  extra: readonly BackupSample[] = [],
+): BackupSummary | undefined {
+  const b = [...samples.map((s) => s.backup).filter((x): x is BackupSample => !!x), ...extra];
+  if (b.length === 0) return undefined;
+  const ok = b.filter((x) => x.ok);
+  const last = b[b.length - 1]!;
+  return {
+    count: b.length,
+    failed: b.length - ok.length,
+    meanS: mean(ok.map((x) => x.ms / 1000)),
+    maxS: Math.max(0, ...ok.map((x) => x.ms / 1000)),
+    lastMb: last.bytes / 1048576,
+    lastVerified: last.verified ?? null,
+  };
 }
 
 function median(a: readonly number[]): number {
@@ -294,6 +460,8 @@ export function summarizeSoak(
   violationKinds: Record<string, number> = {},
   profile?: ProfileInput,
   tickHist: TickHistogram = hist,
+  /** backups that are not tied to a sample (the final, verified one) */
+  extraBackups: readonly BackupSample[] = [],
 ): SoakSummary {
   const last = samples[samples.length - 1];
   const down = samples.map((s) => s.downKBps);
@@ -362,6 +530,7 @@ export function summarizeSoak(
       slopeMbPerH: drift.slopeMbPerH,
       driftPct: drift.driftPct,
       rssMaxMb: Math.max(0, ...samples.map((s) => s.rssMb)),
+      rssSlopeMbPerH: rssSlope(samples),
       basis: drift.basis,
     },
     errors: {
@@ -376,6 +545,17 @@ export function summarizeSoak(
     activity: totals,
     criteria: [],
   };
+  const loops = samples.map((s) => s.loop).filter((x): x is NonNullable<SoakSample['loop']> => !!x);
+  if (loops.length > 0)
+    sum.loop = {
+      meanP99: mean(loops.map((l) => l.p99)),
+      worstP99: Math.max(0, ...loops.map((l) => l.p99)),
+      max: Math.max(0, ...loops.map((l) => l.max)),
+    };
+  const store = storeSummary(samples);
+  if (store) sum.store = store;
+  const backups = backupSummary(samples, extraBackups);
+  if (backups) sum.backups = backups;
   sum.errors.violationKinds = violationKinds;
   if (profile) sum.profile = profileOf(profile, tickHist);
   sum.criteria = criteriaOf(sum);
@@ -411,6 +591,7 @@ function profileOf(p: ProfileInput, ticks: TickHistogram): ProfileSummary {
 function criteriaOf(s: SoakSummary): Criterion[] {
   const f = (n: number, d = 2): string => n.toFixed(d);
   const c = s.config;
+  const th: SoakThresholds = { ...DEFAULT_THRESHOLDS, ...c.thresholds };
   const out: Criterion[] = [];
   out.push({
     name: 'CCU stable (every bot online at the end, none ended or kicked)',
@@ -420,9 +601,9 @@ function criteriaOf(s: SoakSummary): Criterion[] {
   });
   out.push({
     name: 'tick p99',
-    target: `<= ${BUDGETS.tickP99Ms} ms (20 Hz budget ${BUDGETS.tickBudgetMs} ms)`,
+    target: `<= ${th.tickP99Ms} ms (20 Hz budget ${BUDGETS.tickBudgetMs} ms)`,
     value: `p50 ${f(s.tick.p50)}  p95 ${f(s.tick.p95)}  p99 ${f(s.tick.p99)}  max ${f(s.tick.max)} ms; worst window p99 ${f(s.tick.worstWindowP99)} ms; ${s.tick.overruns} ticks over ${BUDGETS.tickBudgetMs} ms (${f(s.tick.overrunPct, 3)}%)`,
-    pass: s.tick.p99 <= BUDGETS.tickP99Ms,
+    pass: s.tick.p99 <= th.tickP99Ms,
   });
   out.push({
     name: 'downstream per player, mean over the run (WS payload + frame header)',
@@ -454,6 +635,60 @@ function criteriaOf(s: SoakSummary): Criterion[] {
     value: `${f(s.memory.driftPct, 1)}% (${s.memory.basis}); slope ${f(s.memory.slopeMbPerH, 1)} MB/h; heap ${f(s.memory.heapStartMb, 0)} -> ${f(s.memory.heapEndMb, 0)} MB, max ${f(s.memory.heapMaxMb, 0)}; RSS max ${f(s.memory.rssMaxMb, 0)} MB${c.durationS < 7200 ? ' (run shorter than 2 h: indicative)' : ''}`,
     pass: Math.abs(s.memory.driftPct) <= BUDGETS.heapDrift * 100,
   });
+  // growth slopes: only judged on a run long enough for a slope to mean something (10 min) and with enough samples; shorter runs are informational
+  const slopeJudged = c.durationS >= 600 && s.samples >= 8;
+  const short = slopeJudged ? '' : ' (run too short: informational)';
+  out.push({
+    name: 'heap growth slope',
+    target: `<= ${th.heapSlopeMbPerH} MB/h after warm-up${short}`,
+    value: `${f(s.memory.slopeMbPerH, 1)} MB/h (${s.memory.basis}); heap ${f(s.memory.heapStartMb, 0)} -> ${f(s.memory.heapEndMb, 0)} MB`,
+    pass: !slopeJudged || s.memory.slopeMbPerH <= th.heapSlopeMbPerH,
+    ...(slopeJudged ? {} : { info: true }),
+  });
+  out.push({
+    name: 'RSS growth slope',
+    target: `<= ${th.rssSlopeMbPerH} MB/h after warm-up${short}`,
+    value: `${f(s.memory.rssSlopeMbPerH, 1)} MB/h; RSS max ${f(s.memory.rssMaxMb, 0)} MB`,
+    pass: !slopeJudged || s.memory.rssSlopeMbPerH <= th.rssSlopeMbPerH,
+    ...(slopeJudged ? {} : { info: true }),
+  });
+  if (s.store) {
+    const j = s.store.journal;
+    const stuck = j.longestRun >= th.journalStuckSamples || j.pendingAtEnd;
+    out.push({
+      name: 'journal compacts (the write-ahead journal is deleted when a commit finishes)',
+      target: `never on disk or pending in ${th.journalStuckSamples} consecutive samples, none pending at the end`,
+      value: `on disk in ${j.presentSamples}/${s.store.samples} samples, longest run ${j.longestRun}, max ${f(j.maxKb, 1)} KB, ${j.pendingAtEnd ? 'PENDING at the end' : 'none pending at the end'}`,
+      pass: !stuck,
+    });
+    const byDoc = Object.entries(s.store.growthByDoc)
+      .map(([n, g]) => `${n} ${f(g, 2)}`)
+      .join(', ');
+    out.push({
+      name: 'file-store growth (info)',
+      target: 'reported',
+      value: `${f(s.store.startMb, 2)} -> ${f(s.store.endMb, 2)} MB, ${f(s.store.growthMbPerH, 2)} MB/h${byDoc ? `; by document ${byDoc} MB/h` : ''}`,
+      pass: true,
+      info: true,
+    });
+  }
+  if (s.backups) {
+    const b = s.backups;
+    out.push({
+      name: 'backups (each one succeeds within the time limit; the last one verifies)',
+      target: `<= ${th.backupS} s each, 0 failures${b.lastVerified === null ? '' : ', last verified'}`,
+      value: `${b.count} taken, ${b.failed} failed, mean ${f(b.meanS, 2)} s, max ${f(b.maxS, 2)} s, last ${f(b.lastMb, 2)} MB, last verified ${b.lastVerified === null ? 'not checked' : b.lastVerified}`,
+      pass: b.failed === 0 && b.maxS <= th.backupS && b.lastVerified !== false,
+    });
+  }
+  if (s.loop)
+    out.push({
+      name: 'event-loop lag (info)',
+      target: 'reported',
+      value: `window p99 mean ${f(s.loop.meanP99)} ms, worst ${f(s.loop.worstP99)} ms, max ${f(s.loop.max)} ms`,
+      pass: true,
+      info: true,
+    });
   out.push({
     name: 'no protocol violations / bot errors',
     target: '0',
@@ -525,6 +760,18 @@ export function formatSoak(s: SoakSummary): string {
   lines.push(
     `memory             heap ${f(s.memory.heapStartMb, 0)} -> ${f(s.memory.heapEndMb, 0)} MB (max ${f(s.memory.heapMaxMb, 0)}), drift ${f(s.memory.driftPct, 1)}%, slope ${f(s.memory.slopeMbPerH, 1)} MB/h, RSS max ${f(s.memory.rssMaxMb, 0)} MB`,
   );
+  if (s.loop)
+    lines.push(
+      `event loop         window p99 mean ${f(s.loop.meanP99)} ms, worst ${f(s.loop.worstP99)} ms, max ${f(s.loop.max)} ms`,
+    );
+  if (s.store)
+    lines.push(
+      `file store         ${f(s.store.startMb, 2)} -> ${f(s.store.endMb, 2)} MB (${f(s.store.growthMbPerH, 2)} MB/h); journal on disk in ${s.store.journal.presentSamples}/${s.store.samples} samples, longest run ${s.store.journal.longestRun}, max ${f(s.store.journal.maxKb, 1)} KB${s.store.journal.pendingAtEnd ? ', PENDING at the end' : ''}`,
+    );
+  if (s.backups)
+    lines.push(
+      `backups            ${s.backups.count} taken, ${s.backups.failed} failed, mean ${f(s.backups.meanS, 2)} s, max ${f(s.backups.maxS, 2)} s, last ${f(s.backups.lastMb, 2)} MB, verified ${s.backups.lastVerified === null ? 'not checked' : s.backups.lastVerified}`,
+    );
   const a = s.activity;
   lines.push(
     `bots               online ${a.online}/${c.bots}, ended ${a.ended}, reconnects ${a.reconnects}, rtt p95 ${f(a.rttP95, 1)} ms; casts ${a.casts} (${a.castsAccepted} ok / ${a.castsRefused} refused), kills ${a.kills}, deaths ${a.deaths}, chat ${a.chatDelivered}/${a.chatSent}, party invites ${a.partyInvitesSent} joins ${a.partyJoins} leaves ${a.partyLeaves}, claims ${a.bagClaims}, pills ${a.pillsUsed}, meditations ${a.meditations}, walked ${f(a.walked, 0)} tiles`,
@@ -570,7 +817,7 @@ function formatProfile(p: ProfileSummary): string[] {
 /** One CSV line per sample (the time series of a run, for plotting / the docs). */
 export function samplesCsv(samples: readonly SoakSample[]): string {
   const head =
-    't_s,online,tick_p50,tick_p95,tick_p99,tick_max,overruns,interval_p99,step_ms,aoi_ms,snap_ms,down_mean,down_p95,down_max,up_mean,visible_mean,visible_max,enter_per_s,heap_mb,rss_mb,kicks,disconnects,violations,casts,kills,deaths';
+    't_s,online,tick_p50,tick_p95,tick_p99,tick_max,overruns,interval_p99,step_ms,aoi_ms,snap_ms,down_mean,down_p95,down_max,up_mean,visible_mean,visible_max,enter_per_s,heap_mb,rss_mb,kicks,disconnects,violations,casts,kills,deaths,loop_p50_ms,loop_p99_ms,loop_max_ms,store_mb,journal_kb,journal_present,backup_ms,backup_ok';
   const rows = samples.map((s) =>
     [
       s.tSec.toFixed(0),
@@ -599,6 +846,14 @@ export function samplesCsv(samples: readonly SoakSample[]): string {
       s.bots.casts,
       s.bots.kills,
       s.bots.deaths,
+      s.loop ? s.loop.p50.toFixed(2) : '',
+      s.loop ? s.loop.p99.toFixed(2) : '',
+      s.loop ? s.loop.max.toFixed(2) : '',
+      s.store ? (s.store.totalBytes / 1048576).toFixed(3) : '',
+      s.store ? (s.store.journalBytes / 1024).toFixed(1) : '',
+      s.store ? (s.store.journalPresent ? 1 : 0) : '',
+      s.backup ? s.backup.ms.toFixed(0) : '',
+      s.backup ? (s.backup.ok ? 1 : 0) : '',
     ].join(','),
   );
   return [head, ...rows].join('\n') + '\n';

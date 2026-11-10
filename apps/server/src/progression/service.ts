@@ -471,6 +471,22 @@ export class ProgressionService {
     s.pill = quality;
     return 'ok';
   }
+  /**
+   * Add tu vi from a source other than meditation (a quest reward, D107). Capped at the stage requirement like meditation (never past Req:
+   * the surplus is dropped, the breakthrough still has to be earned). Returns the tu vi actually added, 0 when the profile is not loaded.
+   */
+  grantTuVi(entityId: number, amount: number, nowMs = 0): number {
+    const s = this.sessions.get(entityId);
+    if (!s?.rec || !(amount > 0) || isMaxStage(s.rec)) return 0;
+    const req = tuViRequired(s.rec);
+    const exp = Math.min(req, s.rec.exp + amount);
+    const added = exp - s.rec.exp;
+    if (added <= 0) return 0;
+    s.rec = { ...s.rec, exp };
+    s.dirty = true;
+    this.queueState(s, nowMs);
+    return added;
+  }
   /** Quality of the waiting breakthrough pill, or null (tests / diagnostics). */
   pendingPill(entityId: number): number | null {
     return this.sessions.get(entityId)?.pill ?? null;

@@ -10,6 +10,8 @@ Tiêu chí P5 ([docs/10 §12](10-mvp-scope.md)): "Test tải 200 CCU bot"; cổn
 npm run soak -w @vgtd/server -- --bots 200 --minutes 30 --out soak-30m     # soak ngắn (200 bot, 30 phút)
 npm run soak -w @vgtd/server -- --bots 100 --hours 24 --out soak-24h       # soak dài: cổng beta, chạy tay, KHÔNG chạy trong CI
 npm run soak -w @vgtd/server -- --ci                                       # khói CI: 20 bot, 60 giây
+npm run soak -w @vgtd/server -- --preset smoke                             # khói cục bộ 25 phút: 100 bot, backup mỗi 5 phút (mục 6)
+npm run soak -w @vgtd/server -- --preset full --out soak-24h               # 24 giờ trên máy riêng: 200 bot, backup mỗi 30 phút (mục 6)
 ```
 
 Mã: `apps/server/src/loadtest/` (`game-bot.ts`, `game-worker.ts`, `soak.ts`, `soak-report.ts`), kịch bản chạy `apps/server/scripts/soak.mjs` (đóng gói bằng esbuild, chạy `node --expose-gc`).
@@ -22,16 +24,21 @@ Mã: `apps/server/src/loadtest/` (`game-bot.ts`, `game-worker.ts`, `soak.ts`, `s
 
 ## 2. Tiêu chí và ngưỡng
 
-| Tiêu chí                    | Ngưỡng                                                        | Nguồn                             |
-| --------------------------- | ------------------------------------------------------------- | --------------------------------- |
-| CCU ổn định                 | mọi bot còn online cuối lần chạy, 0 bị đá / ngắt / nối lại    | docs/10 §12 (cổng beta)           |
-| Tick p99                    | ≤ 40 ms (ngân sách tick 50 ms ở 20 Hz)                        | docs/28 §6.2, docs/08             |
-| Băng thông xuống / người    | ≤ 8 KB/s khi săn quái (trung bình lần chạy và p95 của cửa sổ) | docs/00 §3, docs/28 §6.2          |
-| Băng thông lên / người      | < 1 KB/s                                                      | docs/08 §8                        |
-| Thực thể gửi / người        | ≤ 120 (Mobile / Web)                                          | docs/00 §3                        |
-| Heap                        | trôi ≤ 5 % (trung vị quý cuối so với quý hai, sau warm-up)    | docs/28 §6.2 (đề xuất)            |
-| Vi phạm giao thức / lỗi bot | 0                                                             | bot trung thực không được vi phạm |
-| Bot thật sự chơi            | cast > 0, hạ quái > 0 (khi có quái), chat nhận > 0 (≥ 2 phút) | tránh "đạt" vì không làm gì       |
+| Tiêu chí                    | Ngưỡng                                                                                 | Nguồn                                                   |
+| --------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| CCU ổn định                 | mọi bot còn online cuối lần chạy, 0 bị đá / ngắt / nối lại                             | docs/10 §12 (cổng beta)                                 |
+| Tick p99                    | ≤ 40 ms (ngân sách tick 50 ms ở 20 Hz)                                                 | docs/28 §6.2, docs/08                                   |
+| Băng thông xuống / người    | ≤ 8 KB/s khi săn quái (trung bình lần chạy và p95 của cửa sổ)                          | docs/00 §3, docs/28 §6.2                                |
+| Băng thông lên / người      | < 1 KB/s                                                                               | docs/08 §8                                              |
+| Thực thể gửi / người        | ≤ 120 (Mobile / Web)                                                                   | docs/00 §3                                              |
+| Heap                        | trôi ≤ 5 % (trung vị quý cuối so với quý hai, sau warm-up)                             | docs/28 §6.2 (đề xuất)                                  |
+| Độ dốc heap / RSS           | heap ≤ 20 MB/giờ, RSS ≤ 40 MB/giờ sau khoảng khởi động (chỉ xét khi chạy ≥ 10 phút)    | đề xuất của công cụ soak (D121 chưa có số của designer) |
+| Nhật ký ghi trước nén gọn   | `journal.json` không nằm trên đĩa / treo ở ≥ 3 mẫu liên tiếp, không treo cuối lần chạy | D102 (xóa sau mỗi commit)                               |
+| Backup khi đang chạy        | mỗi bản thành công, ≤ 15 giây; bản cuối xác thực được (`verifyBackup`)                 | D99                                                     |
+| Vi phạm giao thức / lỗi bot | 0                                                                                      | bot trung thực không được vi phạm                       |
+| Bot thật sự chơi            | cast > 0, hạ quái > 0 (khi có quái), chat nhận > 0 (≥ 2 phút)                          | tránh "đạt" vì không làm gì                             |
+
+Các ngưỡng soak (độ dốc, backup, ngân sách tick p99, độ dài chuỗi nhật ký treo) là **thiết lập của công cụ**, đề xuất, không phải số gameplay; đổi bằng `--max-heap-slope-mb-h`, `--max-rss-slope-mb-h`, `--max-tick-p99-budget`, `--max-backup-s`, `--journal-stuck-samples` (mặc định 20 / 40 / 40 / 15 / 3). Chạy ngắn hơn 10 phút thì hai độ dốc chỉ để thông tin.
 
 Số vi phạm chỉ tính **trong cửa sổ đo** (sau warm-up); bộ đếm của server từ lúc khởi động (gồm giai đoạn nối bot) được in kèm theo loại.
 
@@ -128,3 +135,99 @@ Các nguồn khác đã đo, **chưa sửa** (không phải lỗi rõ ràng củ
 - **`snap`** (mã hóa + gửi): 55-60 % thời gian tick trung bình, tuyến tính theo người nhận x thực thể thấy (200 x ~113). Là chi phí cố hữu của thiết kế; muốn giảm phải đổi mức chi tiết / tần số (quyết định thiết kế, không phải sửa mã).
 - **`mobs`**: 2,7 ms trung bình nhưng p99 12 ms (nhiều quái đuổi người cùng lúc); chưa phân tích sâu.
 - **Tuần tự hóa cả tài liệu**: tăng theo số tài khoản và độ dài sổ cái (ghi tăng dần / nhật ký thêm vào cuối là hướng đúng; việc của kho PostgreSQL ở D92).
+
+## 6. Runbook: soak 24 giờ (D121)
+
+**Không chạy trong CI, không chạy trên máy dev đang làm việc khác.** Soak chạy server và bot **chung một tiến trình / một máy**: số tick là cận trên của một server riêng, và mọi tải khác trên máy làm nhiễu độ trễ vòng lặp. Cổng beta ([docs/10 §12](10-mvp-scope.md)) là "100 CCU 24 giờ không sự cố"; bản `full` dùng 200 bot để có dư địa.
+
+### 6.1 Thêm trong lần chạy soak (so với mục 1)
+
+Mỗi mẫu (CSV / JSONL) có thêm: **độ trễ vòng lặp** của cửa sổ (`loop_p50_ms`, `loop_p99_ms`, `loop_max_ms`; `monitorEventLoopDelay` độ phân giải 10 ms nên sàn khoảng 10 ms là bình thường), **kích thước tệp của kho D92** (`store_mb`, mỗi tài liệu trong JSONL, `journal_kb`, `journal_present`) và **thời gian backup** (`backup_ms`, `backup_ok`). Backup chạy **trong một tiến trình riêng** (`soak-backup.ts`, cùng việc với lệnh `backup` của vận hành, D99: đọc tài liệu sống, ghi, xoay vòng giữ 3 bản): không chặn vòng lặp đang đo. Bản **cuối** của lần chạy được lấy sau khi flush hết và **được xác thực** (`verifyBackup`).
+
+Backup nằm ở `--out/backups`; nếu không có `--out` (chỉ khi chạy dưới 1 giờ, không preset) thì ở một thư mục tạm riêng và **bị xóa khi lần chạy kết thúc**, kể cả khi dùng `--data-dir`; không bao giờ ghi vào thư mục hiện hành. Muốn giữ backup thì đặt `--out`.
+
+Preset (mọi giá trị đều ghi đè được bằng cờ riêng):
+
+| Preset  | Bot | Thời gian | Mẫu mỗi | Backup mỗi | Dùng để                                    |
+| ------- | --- | --------- | ------- | ---------- | ------------------------------------------ |
+| `smoke` | 100 | 25 phút   | 15 giây | 5 phút     | kiểm nhanh trước khi chạy dài; chạy cục bộ |
+| `full`  | 200 | 24 giờ    | 60 giây | 30 phút    | cổng beta, máy riêng                       |
+
+### 6.2 Kiểm nhanh cục bộ (khoảng 25 phút)
+
+```bash
+npm ci
+npm run soak -w @vgtd/server -- --preset smoke
+# kết quả: thư mục tạm in ở đầu lần chạy (hoặc --out DIR): samples.csv, samples.jsonl, summary.json, report.txt, backups/
+```
+
+Mã thoát 0 = mọi tiêu chí đạt (độ dốc heap / RSS ở bản 25 phút là **tham khảo có xét**: đủ 10 phút nên đã được chấm, nhưng 25 phút vẫn ngắn). Mã 1 = trượt tiêu chí, xem `report.txt`; mã 2 = công cụ hỏng.
+
+### 6.3 Chạy đủ 24 giờ trên máy riêng
+
+1. **Máy**: một máy không chạy gì khác (không IDE, không phiên agent), điện ổn định, tắt ngủ / tự cập nhật / quét virus thời gian thực trên thư mục kết quả; đĩa trống ít nhất 2 GB (kết quả + 3 backup + kho tệp); Node ≥ 18 (khuyến nghị bản chạy ở CI, 22).
+2. **Mã**: `git switch main && git pull`, ghi lại commit (`git rev-parse HEAD`), `npm ci`, `npm run build`.
+3. **Thử khói trước**: `--preset smoke` phải xong với mã 0 trên chính máy này; nếu không, đừng bắt đầu chạy dài.
+4. **Chạy** (một phiên không bị ngắt, dùng `tmux` / `screen` / dịch vụ, không phụ thuộc phiên SSH):
+   ```bash
+   npm run soak -w @vgtd/server -- --preset full --out /duong/dan/soak-24h 2>&1 | tee /duong/dan/soak-24h.log
+   ```
+   Có thể dùng `--data-dir DIR` để đặt kho tệp ở đĩa muốn đo (mặc định: thư mục tạm, xóa khi xong).
+5. **Theo dõi** (không cần canh): `tail -f soak-24h.log` in một dòng mỗi 60 giây (tick, heap, RSS, bot online). `samples.jsonl` được ghi nối đuôi sau mỗi mẫu, nên nếu tiến trình chết vẫn còn dữ liệu đến lúc đó; `Ctrl+C` (SIGINT) dừng sớm **và vẫn ghi báo cáo** cho phần đã đo.
+6. **Xong**: đọc `report.txt` (mục 4); lưu `summary.json`, `samples.csv`, log và commit vào chỗ chung (ngoài kho mã, như số đo đầu tiên ở mục 3). Một lần chạy đạt khi mã thoát 0: không bot nào bị rớt / đá, tick p99 ≤ 40 ms, độ dốc heap / RSS trong ngưỡng, nhật ký ghi trước nén gọn, mọi backup thành công và bản cuối xác thực được.
+
+### 6.4 Khi một tiêu chí trượt
+
+| Triệu chứng                   | Nhìn vào                                                                   | Việc thường gặp                                                                                                                       |
+| ----------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Độ dốc heap / RSS vượt ngưỡng | `heap_mb`, `rss_mb` trong `samples.csv` (vẽ theo `t_s`); heap đã đo sau GC | rò rỉ thật (phiên / bản đồ không được xóa) hay chỉ là kho tệp lớn lên (so với `store_mb`); chạy lại ngắn với `--store memory` để tách |
+| Tick p99 vượt 40 ms           | `tick_p99`, `loop_p99_ms`, mục "tick profile" trong `report.txt`           | pha nào lớn nhất; GC; ghi tệp trên vòng lặp (`file-store writes`); máy có tải khác                                                    |
+| Nhật ký không nén gọn         | `journal_present`, `journal_kb`; `journalPending` cuối lần chạy            | commit nhiều tài liệu bị lỗi đĩa, hoặc ghi trễ không bao giờ hoàn tất: xem log lỗi của kho (D102)                                     |
+| Backup chậm / hỏng            | `backup_ms`, `backup_ok`, thư mục `backups/`                               | đĩa chậm hoặc bị quét virus; tài liệu quá lớn (xem tăng trưởng từng tài liệu trong mục tiêu chí)                                      |
+| Bot bị rớt hàng loạt          | `kicks`, `disconnects`, `report.txt` mục vi phạm                           | ngân sách tin nhắn (D101) hoặc backpressure                                                                                           |
+
+Số đo của lần chạy 24 giờ đầu tiên **chưa có** (chưa chạy ở đây): bản 25 phút `smoke` chỉ là kiểm công cụ. Ngưỡng độ dốc và backup là đề xuất của công cụ; sau lần chạy thật cần xem lại.
+
+## 7. D119: giảm chi phí mã hóa snapshot
+
+Số đo đầu tiên (mục 5.2) cho thấy `snap` (mã hóa + gửi snapshot) là pha lớn nhất của tick: 7,9 ms trung bình ở 200 bot, 55-60 % thời gian tick. D119 cắt phần mã hóa, **không đổi định dạng dây, không đổi `PROTOCOL_VERSION`, không đổi số gameplay**.
+
+### 7.1 Cái gì tốn
+
+Hồ sơ CPU (`npm run bench:tick -w @vgtd/server -- --cpu-prof`, 200 người, 150 quái, đầu vào xác định): `sendSnapshots` tự nó chiếm 26 % tổng thời gian CPU, cộng `encodeSnapshot` 3,7 %, `write` 3,1 %, `finish` 2,7 %, `result` 2,0 %, kiểm tra lại cấu trúc `validateMessage` + `snapEntity` 2,9 %, GC 7,8 %. Trong `sendSnapshots`, số tick theo dòng cho thấy vòng quét `c.visible` mỗi client là chỗ nóng: tạo một cặp `[khóa, giá trị]` cho mỗi phần tử Map, phép `%` theo chu kỳ dải, rồi dựng một object `SnapshotEntity` cho mỗi bản ghi, để `encode` kiểm tra lại từng object và đẩy từng bản ghi qua một `BitWriter` rồi **sao chép** hai lần.
+
+### 7.2 Đã làm
+
+- `encodeSnapshotRecords` (`packages/protocol/src/binary.ts`): mã hóa snapshot từ các **mảng song song** (`SnapshotRecords`, một bộ đệm dùng lại cho mọi client của mọi tick) thay vì dựng `SnapshotMsg` + object cho từng thực thể; không chạy lại `validateMessage` trên cả thông điệp (mọi trường của bản ghi vẫn bị kiểm tra phạm vi: giới hạn dây bằng đúng độ rộng bit nên `BitWriter` tự từ chối; phần đầu thông điệp và `self` kiểm tra như cũ; mảng là `Float64Array` để một giá trị ngoài phạm vi hay số lẻ không bị cắt âm thầm); chuỗi bit được nối vào thông điệp qua `BitWriter.finishView()` (không sao chép).
+- `WorldNode.sendSnapshots`: điền `SnapshotRecords` thay vì mảng object; cập nhật `Client.last` **tại chỗ** sau khi mã hóa (không cấp phát cặp object mới mỗi bản ghi); duyệt `c.visible.values()` (id nằm trong `Visible`) thay vì `entries()`, và phép `% chu kỳ` thành `& (chu kỳ - 1)` (chu kỳ dải là 1 / 2 / 4).
+- Không làm (đã cân nhắc): **chia sẻ byte đã mã hóa giữa các client**: bản ghi của mỗi client dùng delta so với vị trí client đó nhận gần nhất (`Client.last`), nên hai client thấy cùng thực thể thường mã hóa khác nhau; chia sẻ chỉ có nghĩa nếu bỏ delta theo client hoặc nhóm client theo trạng thái đã nhận, tức là đổi giao thức / băng thông (cần quyết định riêng). Delta so với snapshot đã xác nhận cuối và bỏ trường không đổi **đã có từ D73** (`Client.last`, bỏ bản ghi không đổi, dải theo khoảng cách).
+
+### 7.3 Số đo (cùng một máy, trước = `main`, sau = nhánh này)
+
+**Tính đúng:** luồng byte **không đổi**: `npm run bench:tick -- --hash` in cùng checksum `57976c24` (29.449.495 byte, 260.146 khung) trước và sau; `snapshot-golden.test.ts` (byte vàng), test tương đương mới (`snapshot-records.test.ts`: byte-giống-hệt `encode()` trên 300 snapshot ngẫu nhiên có seed + biên delta, từ chối đúng những gì `encode` từ chối) và toàn bộ test xác định đều xanh.
+
+**Đo trong tiến trình** (`bench:tick`, 200 người, 40x40 ô, 150 quái, 600 tick, đầu vào xác định, không socket; chạy xen kẽ cũ / mới, máy dev chung nên mỗi cặp là phép so cùng điều kiện gần nhau nhất):
+
+| Cặp                                      | `snap` ms/tick (cũ → mới) | CPU ms/tick (cũ → mới) | tick trung bình ms (cũ → mới) |
+| ---------------------------------------- | ------------------------- | ---------------------- | ----------------------------- |
+| 1                                        | 3,38 → 2,17               | 7,00 → 5,96            | 5,70 → 4,37                   |
+| 2                                        | 3,07 → 2,05               | 6,33 → 5,31            | 5,24 → 4,13                   |
+| 3                                        | 3,36 → 2,31               | 7,63 → 5,94            | 5,78 → 4,69                   |
+| 4 (sau khi thêm `values()` + mặt nạ bit) | 4,59 → 2,50               | 9,43 → 6,64            | 7,79 → 5,14                   |
+
+Ba cặp chạy lúc máy rảnh cho `snap` **-32 đến -35 %**, CPU -14 đến -22 %; các cặp chạy lúc máy nghẽn (CPU hệ thống 100 %, nhiều tiến trình khác) vẫn cùng chiều nhưng nhiễu hơn (cặp 4: -46 %, hai cặp nghẽn khác lệch). Hồ sơ CPU sau cải thiện: tổng thời gian mẫu 10,6 s → 6,0 s cho cùng khối lượng việc (có phần nhờ máy rảnh hơn lúc đo).
+
+**Đo bằng soak** (`npm run soak`, bot thật qua socket, kho bộ nhớ, 150 s đo sau 30 s khởi động; bộ cũ và mới build từ hai bản mã, chạy xen kẽ). **Nhiễu máy át tín hiệu 2 ms**: vòng 1 bị tranh chấp CPU nặng (p99 hàng trăm ms ở CẢ cũ lẫn mới, `snap` 6-18 ms ở cả hai), nên chỉ vòng 2 (máy rảnh) dùng được:
+
+| Vòng 2 (máy rảnh) | tick p50 / p95 / p99 (ms) | `snap` ms/tick   | tick > 50 ms |
+| ----------------- | ------------------------- | ---------------- | ------------ |
+| 200 bot, cũ       | 14,00 / 30,75 / 61,50     | 9,16             | 46 (1,56 %)  |
+| 200 bot, mới      | 12,25 / 22,75 / **32,50** | **6,39** (-30 %) | 4 (0,13 %)   |
+| 100 bot, cũ       | 6,00 / 10,00 / 12,50      | 3,00             | 0            |
+| 100 bot, mới      | 5,50 / 9,50 / 12,75       | **2,53** (-16 %) | 0            |
+
+(Vòng 1, máy nghẽn: 100 bot cũ p99 76,75 / mới 106,50; 200 bot cũ 739 / mới 647: **không kết luận được**, chỉ cho thấy máy dev chung không phân giải nổi chênh lệch vài ms; ngoài ra thứ tự chạy xen kẽ không loại được hiệu ứng nhiệt / nền.) Kết luận thận trọng: **bằng chứng chính là phép đo trong tiến trình có checksum byte**; soak ở vòng sạch cùng chiều (200 bot: p99 61,5 → 32,5 ms, nhưng mẫu đơn, chưa lặp lại trên máy riêng).
+
+### 7.4 Còn lại
+
+`snap` vẫn chiếm ~55 % thời gian tick ở bench (2,1-2,5 ms trong 4-5 ms): phần dư gồm duyệt `visible` của từng client (tuyến tính theo người nhận x thực thể thấy), tạo `self`, `write` / `frameHeader` và bản sao cuối mỗi thông điệp. Giảm thêm cần đổi mức chi tiết (tần số, trần 120 thực thể: quyết định thiết kế, không phải sửa mã) hoặc tách mã hóa sang worker. `updateAoi` (~19 % CPU ở hồ sơ) và `mobs` chưa đụng tới.

@@ -12,6 +12,7 @@ import { join } from 'node:path';
 import type { Account, AccountStore } from '../auth/accounts.js';
 import type { SectSnapshot, SectStore } from '../sect/store.js';
 import type { FriendSnapshot, FriendStore } from '../friends/store.js';
+import type { QuestSnapshot, QuestStore } from '../quests/store.js';
 import type { MarketSnapshot, MarketStore } from '../market/store.js';
 import type { ProgressRecord } from '../progression/state.js';
 import type { ProgressionStore } from '../progression/store.js';
@@ -282,6 +283,41 @@ export class FileFriendStore implements FriendStore {
   }
 }
 
+/** Quest progress per account (D107): see `QuestSnapshot`. `commit()` writes the document NOW and reports whether that worked. */
+export class FileQuestStore implements QuestStore {
+  private readonly rows = new Map<string, QuestSnapshot>();
+  readonly file: DocFile;
+  constructor(path: string, opts: DocFileOptions = {}) {
+    const doc = load(path, 'quests', (d) => {
+      if (typeof d.owners !== 'object' || d.owners === null || Array.isArray(d.owners))
+        throw new Error('quests: missing owners');
+      return d.owners as Record<string, QuestSnapshot>;
+    });
+    for (const [owner, snap] of Object.entries(doc ?? {})) {
+      if ((snap as { v?: unknown } | null)?.v !== 1 || typeof snap.quests !== 'object' || snap.quests === null)
+        throw new Error(`quests: malformed record for ${owner}`);
+      this.rows.set(owner, snap);
+    }
+    this.file = new DocFile(path, () => JSON.stringify({ v: VERSION, owners: Object.fromEntries(this.rows) }), opts);
+  }
+  load(owner: string): QuestSnapshot | undefined {
+    const s = this.rows.get(owner);
+    return s === undefined ? undefined : structuredClone(s);
+  }
+  save(owner: string, snap: QuestSnapshot): void {
+    const prev = this.rows.get(owner);
+    if (prev !== undefined && JSON.stringify(prev) === JSON.stringify(snap)) return;
+    if (prev === undefined && Object.keys(snap.quests).length === 0) return;
+    this.rows.set(owner, structuredClone(snap));
+    this.file.markDirty();
+  }
+  commit(): boolean {
+    const errors = this.file.errors;
+    this.file.flush();
+    return this.file.errors === errors;
+  }
+}
+
 /** The market book (D112): active listings (each one holds its escrowed item), recent sales and the weekly shadow reports, see `MarketSnapshot`. */
 export class FileMarketStore implements MarketStore {
   private snap: MarketSnapshot | undefined;
@@ -370,6 +406,7 @@ export const STORE_DOC_NAMES = [
   'tutorial.json',
   'sect.json',
   'friends.json',
+  'quests.json',
   'market.json',
   'ledger.json',
 ] as const;
@@ -384,6 +421,7 @@ export interface FileStores {
   tutorial: FileTutorialStore;
   sect: FileSectStore;
   friends: FileFriendStore;
+  quests: FileQuestStore;
   market: FileMarketStore;
   ledger: Ledger;
   /** write every document now (shutdown, tests) */
@@ -413,7 +451,7 @@ export interface FileStores {
   readonly recovered: string | null;
 }
 
-/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `tutorial.json`, `friends.json`, `market.json`, `ledger.json`. */
+/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `tutorial.json`, `friends.json`, `quests.json`, `market.json`, `ledger.json`. */
 export function openFileStores(dir: string, opts: DocFileOptions & JournalOptions = {}): FileStores {
   // FIRST finish a commit a crash interrupted: every document below is then loaded in its committed state
   const recovered = recoverJournal(dir);
@@ -426,6 +464,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
   const sect = new FileSectStore(join(dir, 'sect.json'), opts);
   const tutorial = new FileTutorialStore(join(dir, 'tutorial.json'), opts);
   const friends = new FileFriendStore(join(dir, 'friends.json'), opts);
+  const quests = new FileQuestStore(join(dir, 'quests.json'), opts);
   const market = new FileMarketStore(join(dir, 'market.json'), opts);
   const { ledger, file: ledgerFile } = openFileLedger(join(dir, 'ledger.json'), opts);
   const commitAtomic = (label: string, docs: readonly DocFile[]): void => journal.commit(label, docs);
@@ -436,6 +475,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
     tutorial,
     sect,
     friends,
+    quests,
     market,
     ledger,
     dir,
@@ -451,6 +491,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
       tutorial.file.flush();
       sect.file.flush();
       friends.file.flush();
+      quests.file.flush();
       market.file.flush();
       ledgerFile.flush();
     },
@@ -463,6 +504,7 @@ export function openFileStores(dir: string, opts: DocFileOptions & JournalOption
         'tutorial.json': tutorial.file.serializeNow(),
         'sect.json': sect.file.serializeNow(),
         'friends.json': friends.file.serializeNow(),
+        'quests.json': quests.file.serializeNow(),
         'market.json': market.file.serializeNow(),
         'ledger.json': ledgerFile.serializeNow(),
       };

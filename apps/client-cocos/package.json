@@ -36,7 +36,8 @@
     "glyphs": "node scripts/glyph-smoke.mjs",
     "party:online": "node scripts/party-online-smoke.mjs",
     "tutorial:online": "node scripts/tutorial-online-smoke.mjs",
-    "sect:screens": "node scripts/sect-screens.mjs"
+    "sect:screens": "node scripts/sect-screens.mjs",
+    "crash:smoke": "node scripts/crash-smoke.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.21.5",

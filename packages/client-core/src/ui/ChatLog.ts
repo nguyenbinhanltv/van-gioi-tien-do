@@ -70,6 +70,7 @@ export function chatHelpLines(): string[] {
     t('chat.help.sect'),
     t('chat.help.party'),
     t('chat.help.friends'),
+    t('chat.help.quest'),
   ];
 }
 
@@ -84,7 +85,8 @@ export type ParsedChatInput =
   | { kind: 'sect'; op: number; manual: number }
   | { kind: 'sects' }
   | { kind: 'friend'; op: number; name: string }
-  | { kind: 'friends' };
+  | { kind: 'friends' }
+  | { kind: 'quests' };
 
 const utf8Bytes = (s: string): number => new TextEncoder().encode(s).length;
 
@@ -239,6 +241,11 @@ export function parseChatInput(raw: string, ctx: { lastWhisperFrom?: string | nu
     case 'friends':
     case 'banbe':
       return { kind: 'friends' };
+    case 'quest':
+    case 'quests':
+    case 'q':
+    case 'nhiemvu':
+      return { kind: 'quests' };
     case 'friend':
     case 'f':
     case 'ketban': {
@@ -321,6 +328,8 @@ export interface ChatLogOptions {
   onSect?: () => void;
   /** `/friends` was typed: show the friend list (the panel, or its text lines) */
   onFriends?: () => void;
+  /** `/quest` was typed: show the quest log (the panel, or its text lines) */
+  onQuests?: () => void;
 }
 
 export type SendChat = (m: { channel: number; text: string; target: string; clientMsgId: number }) => boolean;
@@ -456,6 +465,9 @@ export class ChatLog {
       }
       case 'friends':
         this.o.onFriends?.();
+        return false;
+      case 'quests':
+        this.o.onQuests?.();
         return false;
       case 'friend': {
         if (!sendFriend) {

@@ -43,6 +43,13 @@ import {
   type FriendServerMessage,
 } from './friends.js';
 import {
+  decodeQuestBody,
+  encodeQuestBody,
+  validateQuestMessage,
+  type QuestClientMessage,
+  type QuestServerMessage,
+} from './quests.js';
+import {
   decodeMarketBody,
   encodeMarketBody,
   validateMarketMessage,
@@ -114,6 +121,10 @@ export enum ColdMsgId {
   FriendCmd = 92,
   FriendResult = 93,
   FriendState = 94,
+  /** quests (D107, quests.ts); 120-139 is the docs/24 quest block */
+  QuestCmd = 120,
+  QuestResult = 121,
+  QuestState = 122,
   /** crafting (D108, craft.ts): docs/24 ids 90-91, the state message sits after the friends range */
   CraftCmd = 90,
   CraftResult = 91,
@@ -173,6 +184,9 @@ export const COLD_MSG_NAMES: Readonly<Record<number, ColdMessage['type']>> = {
   [ColdMsgId.FriendCmd]: 'friend_cmd',
   [ColdMsgId.FriendResult]: 'friend_result',
   [ColdMsgId.FriendState]: 'friend_state',
+  [ColdMsgId.QuestCmd]: 'quest_cmd',
+  [ColdMsgId.QuestResult]: 'quest_result',
+  [ColdMsgId.QuestState]: 'quest_state',
   [ColdMsgId.CraftCmd]: 'craft_cmd',
   [ColdMsgId.CraftResult]: 'craft_result',
   [ColdMsgId.CraftState]: 'craft_state',
@@ -218,6 +232,9 @@ export const COLD_MSG_IDS: Readonly<Record<ColdMessage['type'], ColdMsgId>> = {
   friend_cmd: ColdMsgId.FriendCmd,
   friend_result: ColdMsgId.FriendResult,
   friend_state: ColdMsgId.FriendState,
+  quest_cmd: ColdMsgId.QuestCmd,
+  quest_result: ColdMsgId.QuestResult,
+  quest_state: ColdMsgId.QuestState,
   craft_cmd: ColdMsgId.CraftCmd,
   craft_result: ColdMsgId.CraftResult,
   craft_state: ColdMsgId.CraftState,
@@ -337,6 +354,7 @@ export type ColdClientMessage =
   | InvClientMessage
   | ChatClientMessage
   | PartyClientMessage
+  | QuestClientMessage
   | TradeClientMessage
   | SectClientMessage
   | TutorialClientMessage
@@ -351,6 +369,7 @@ export type ColdServerMessage =
   | InvServerMessage
   | ChatServerMessage
   | PartyServerMessage
+  | QuestServerMessage
   | TradeServerMessage
   | SectServerMessage
   | MajorServerMessage
@@ -427,6 +446,7 @@ export function validateColdMessage(o: Rec): ColdMessage | null {
         validateInventoryMessage(o) ??
         validateChatMessage(o) ??
         validatePartyMessage(o) ??
+        validateQuestMessage(o) ??
         validateTradeMessage(o) ??
         validateSectMessage(o) ??
         validateMajorMessage(o) ??
@@ -535,6 +555,11 @@ export function encodeColdBody(w: ColdWriter, m: ColdMessage): void {
     case 'friend_state':
       encodeFriendBody(w, m);
       break;
+    case 'quest_cmd':
+    case 'quest_result':
+    case 'quest_state':
+      encodeQuestBody(w, m);
+      break;
     case 'craft_cmd':
     case 'craft_result':
     case 'craft_state':
@@ -626,6 +651,10 @@ export function decodeColdBody(r: ColdReader, type: ColdMessage['type']): Rec {
     case 'friend_result':
     case 'friend_state':
       return decodeFriendBody(r, type);
+    case 'quest_cmd':
+    case 'quest_result':
+    case 'quest_state':
+      return decodeQuestBody(r, type);
     case 'craft_cmd':
     case 'craft_result':
     case 'craft_state':

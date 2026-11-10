@@ -15,6 +15,8 @@ import {
   type ChatResultMsg,
   type FriendResultMsg,
   type FriendStateMsg,
+  type QuestResultMsg,
+  type QuestStateMsg,
   type CraftResultMsg,
   type CraftStateMsg,
   type MarketBuyMsg,
@@ -204,6 +206,14 @@ export interface FriendEvents {
   onFriendResult?(msg: FriendResultMsg): void;
 }
 
+/** Quest callbacks (D107), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
+export interface QuestEvents {
+  /** The whole quest log, after every change. */
+  onQuestState?(msg: QuestStateMsg): void;
+  /** The answer to a `sendQuest` (0 = done, otherwise why not). */
+  onQuestResult?(msg: QuestResultMsg): void;
+}
+
 /** Crafting callbacks (D108), a separate object like the other cold-family hooks. A throwing hook never breaks the session. */
 export interface CraftEvents {
   /** Furnace position, the running job and the mastery of every recipe, after every change. */
@@ -235,6 +245,8 @@ export interface NetOptions {
   baseUrl: string;
   username: string;
   password: string;
+  /** closed beta (D111): single-use invitation code sent with the FIRST register only; dropped once a login succeeded so reconnects never resend it */
+  inviteCode?: string;
   deps: NetDeps;
   /** Class to create the character with on its first login: a class path id (`'kiem'`) or its wire id (D82). Ignored for an existing character. */
   classId?: string | number;
@@ -312,7 +324,11 @@ export class NetClient {
   /** number of times the session came back after a drop (resumed or re-logged-in) */
   reconnects = 0;
 
+  /** the invitation code still to send (D111); cleared after the first successful login */
+  private inviteCode: string | undefined;
+
   constructor(private readonly o: NetOptions) {
+    this.inviteCode = o.inviteCode;
     this.remote = new RemoteWorld(o.interpDelayMs);
     this.classRequest = o.classId;
     this.bag = new BagModel();
@@ -359,6 +375,8 @@ export class NetClient {
   sectEvents: SectEvents = {};
   /** Callbacks for the friends list (own object, see `FriendEvents`). */
   friendEvents: FriendEvents = {};
+  /** Callbacks for the quest log (own object, see `QuestEvents`). */
+  questEvents: QuestEvents = {};
   /** Callbacks for alchemy (own object, see `CraftEvents`). */
   craftEvents: CraftEvents = {};
   /** Callbacks for Vạn Bảo Lâu (own object, see `MarketEvents`). */
@@ -424,12 +442,18 @@ export class NetClient {
   /** register-or-login over HTTP, then a fresh `hello` with the access token */
   private async login(onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     const cred = { username: this.o.username, password: this.o.password };
-    const reg = await this.post('/auth/register', cred);
-    if (reg.status !== 201 && reg.status !== 409)
+    const reg = await this.post('/auth/register', this.inviteCode ? { ...cred, inviteCode: this.inviteCode } : cred);
+    const inviteLimited = reg.status === 429 && reg.json.error === 'invite_limited';
+    // 409: already registered. 403 invite_invalid: with BETA_INVITE_ONLY an existing account re-registering has no valid code; the login
+    // below decides (a wrong code for a new account fails there with a 401)
+    if (reg.status !== 201 && reg.status !== 409 && reg.status !== 403 && !inviteLimited)
       throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     const login = await this.post('/auth/login', cred);
+    if (login.status !== 200 && (reg.status === 403 || inviteLimited))
+      throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     if (login.status !== 200)
       throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
+    this.inviteCode = undefined; // used (or not needed): never sent again by a reconnect
     // `classId` only matters for a character that does not exist yet; the server's stored class wins afterwards (D82)
     return this.openSocket(
       {
@@ -694,6 +718,12 @@ export class NetClient {
       case 'friend_result':
         this.emit(() => this.friendEvents.onFriendResult?.(msg));
         break;
+      case 'quest_state':
+        this.emit(() => this.questEvents.onQuestState?.(msg));
+        break;
+      case 'quest_result':
+        this.emit(() => this.questEvents.onQuestResult?.(msg));
+        break;
       case 'craft_state':
         this.emit(() => this.craftEvents.onCraftState?.(msg));
         break;
@@ -910,6 +940,24 @@ export class NetClient {
     if (!ws || ws.readyState !== WS_OPEN) return false;
     try {
       ws.send(encode({ type: 'friend_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, name: m.name ?? '' }));
+    } catch {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Send one quest command (D107): `op` is a `QuestOp`; `questId` for accept / claim / abandon, `npc` (an NPC key) for talk. Only an intent:
+   * the server derives all progress itself. `clientMsgId` (uint16) comes back in the `quest_result`. False when the socket is not open or
+   * it cannot be encoded.
+   */
+  sendQuest(m: { op: number; questId?: string; npc?: string; clientMsgId: number }): boolean {
+    const ws = this.ws;
+    if (!ws || ws.readyState !== WS_OPEN) return false;
+    try {
+      ws.send(
+        encode({ type: 'quest_cmd', op: m.op, clientMsgId: m.clientMsgId & 0xffff, questId: m.questId ?? '', npc: m.npc ?? '' }),
+      );
     } catch {
       return false;
     }

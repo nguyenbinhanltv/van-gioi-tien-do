@@ -1,5 +1,6 @@
 import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
+import { CrashService, type CrashOptions } from './crash/index.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
 import { TutorialService, type TutorialOptions } from './tutorial/service.js';
@@ -9,6 +10,9 @@ import type { SectStore } from './sect/store.js';
 import { Ledger } from './world/inventory/ledger.js';
 import { FriendService } from './friends/service.js';
 import type { FriendStore } from './friends/store.js';
+import { QuestService, type QuestSectPort } from './quests/service.js';
+import type { QuestStore } from './quests/store.js';
+import { WORLD_CONFIG } from './config.js';
 import { MarketService, type MarketServiceOptions } from './market/service.js';
 import type { MarketStore } from './market/store.js';
 import { TelemetryService, type TelemetryOptions } from './telemetry/service.js';
@@ -34,6 +38,10 @@ export interface ServerOptions {
   sect?: { store?: SectStore; ledger?: Ledger } | false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
   friends?: { store?: FriendStore } | false;
+  /** quests options (D107): store (default in memory), wall clock (default `Date.now`), sect port; `false` = no quests. Needs inventory + progression. */
+  quests?: { store?: QuestStore; clock?: () => number; sect?: QuestSectPort } | false;
+  /** crash report intake (D110): options, or `false` to run without it (default: enabled, in memory unless `dir` is given) */
+  crash?: CrashOptions | false;
   /**
    * Vạn Bảo Lâu options (D112). The market needs an inventory (items and the ledger): it is created whenever `world.inventory` exists, unless
    * `false`. `store` = where the book is kept (default in memory), `report` / `now` / `durable` as in `MarketServiceOptions`.
@@ -53,6 +61,7 @@ export interface RunningServer {
   auth: AuthService;
   world: WorldNode;
   gateway: GatewayHandle;
+  crash?: CrashService;
   port: number;
   stop(): Promise<void>;
 }
@@ -110,6 +119,18 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
           },
         }));
   const inventory = opts.world?.inventory;
+  const quests =
+    opts.quests === false || !inventory || !progression
+      ? undefined
+      : (opts.world?.quests ??
+        new QuestService({
+          ...(opts.quests?.store ? { store: opts.quests.store } : {}),
+          // sect quests pay Cống hiến through the sect module when it is hosted (D98 + D107)
+          ...(opts.quests?.sect ? { sect: opts.quests.sect } : sect ? { sect } : {}),
+          inventory,
+          clock: opts.quests?.clock ?? (() => Date.now()),
+          mapTiles: opts.world?.mapTiles ?? WORLD_CONFIG.DEFAULT_MAP_TILES,
+        }));
   const market =
     opts.market === false || !inventory
       ? undefined
@@ -136,12 +157,15 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     ...(trade ? { trade } : {}),
     ...(sect ? { sect } : {}),
     ...(friends ? { friends } : {}),
+    ...(quests ? { quests } : {}),
     ...(market ? { market } : {}),
     ...(telemetry ? { telemetry } : {}),
   });
   if (telemetry && world.inventory) telemetry.attachLedger(world.inventory.ledger);
+  const crash = opts.crash === false ? undefined : new CrashService(opts.crash);
   const gateway = createGateway(auth, world, {
     ...opts.gateway,
+    ...(crash ? { crash } : {}),
     ...(telemetry ? { telemetry } : {}),
     ...(opts.dashboardToken ? { dashboardToken: opts.dashboardToken } : {}),
   });
@@ -154,6 +178,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     auth,
     world,
     gateway,
+    ...(crash ? { crash } : {}),
     port: gateway.port(),
     stop: async () => {
       world.stop();

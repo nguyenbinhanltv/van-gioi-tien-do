@@ -12,6 +12,7 @@ import {
   NETWORK,
   PARTY,
   aoiCentre,
+  mobDefById,
   classWireId,
   inAoiAt,
   uwDistSq,
@@ -36,6 +37,8 @@ import {
   ProtocolError,
   decode,
   encode,
+  encodeSnapshotRecords,
+  SnapshotRecords,
   LIMITS,
   dequantizePos,
   quantizePos,
@@ -45,7 +48,6 @@ import {
   type ChatLine,
   type EnterEntity,
   type Message,
-  type SnapshotEntity,
   TelegraphShape,
 } from '@vgtd/protocol';
 import {
@@ -80,6 +82,8 @@ import type { TutorialService } from '../tutorial/service.js';
 import type { TradeService } from '../trade/service.js';
 import type { SectService } from '../sect/service.js';
 import type { FriendService } from '../friends/service.js';
+import type { QuestService } from '../quests/service.js';
+import { stageOf as recordStage } from '../progression/state.js';
 import type { MarketService } from '../market/service.js';
 import type { TelemetryService } from '../telemetry/service.js';
 import {
@@ -130,6 +134,8 @@ export interface ClientStats {
 }
 
 interface Visible {
+  /** entity id (the key of `Client.visible`): lets the per-tick snapshot walk the `values()` without a [key, value] pair per entry */
+  id: number;
   index: number;
   /** 0 near (20 Hz), 1 mid (10 Hz), 2 far (5 Hz) */
   band: 0 | 1 | 2;
@@ -250,6 +256,8 @@ export interface WorldNodeOptions {
   sect?: SectService;
   /** friends module (D96): requests / list with online status, persisted through its store; absent = friend commands are rejected as unexpected */
   friends?: FriendService;
+  /** quests module (D107): needs `progression` and `inventory`; absent = quest commands are rejected as unexpected */
+  quests?: QuestService;
   /**
    * Minimal alchemy (D108): needs `inventory` and `progression`. `true` = the furnace NPC in the middle of the spawn area; absent / false = no crafting
    * (craft messages are rejected as unexpected).
@@ -295,7 +303,8 @@ export type TickPhase = (typeof TICK_PHASES)[number];
 /** A tick longer than this is "slow": its biggest phase is counted in `profile.slowBy` (the 20 Hz period). */
 const SLOW_TICK_MS = 50;
 
-const BAND_PERIOD = [1, 2, 4] as const;
+/** band periods are 1 / 2 / 4 ticks (near 20 Hz, mid 10 Hz, far 5 Hz): `(tick + index) % period === 0` as one AND with `period - 1` (the hot per-client snapshot loop, D119) */
+const BAND_MASK = [0, 1, 3] as const;
 const clock = (): number => Number(process.hrtime.bigint()) / 1e6;
 
 /** Append and keep at most `cap` samples (oldest dropped in chunks, so removal is amortised O(1)). */
@@ -406,6 +415,10 @@ export class WorldNode {
   private byId = new Map<number, EntityState>();
   /** per-tick cache of what a snapshot says about each entity (see `currentOf`) */
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
+  /** the records of the snapshot being built, reused for every client of every tick (D119) */
+  private readonly snapRec = new SnapshotRecords();
+  /** per record of the snapshot being built: the shared per-tick state it was taken from (to update the client's `last` after encoding) */
+  private readonly snapTouched: Array<{ qi: number; qj: number; anim: number; dir: number; hp: number }> = [];
   readonly progression: ProgressionService | undefined;
   /** Tâm Ma / Lôi Kiếp events of major breakthroughs (D97); null without combat + progression */
   readonly major: MajorBreakthroughs | null;
@@ -417,6 +430,7 @@ export class WorldNode {
   readonly trade: TradeService | undefined;
   readonly sect: SectService | undefined;
   readonly friends: FriendService | undefined;
+  readonly quests: QuestService | undefined;
   /** alchemy (D108); null when the node runs without it */
   readonly craft: CraftService | null = null;
   readonly market: MarketService | undefined;
@@ -499,6 +513,20 @@ export class WorldNode {
         const c = this.clients.get(id);
         if (c && !c.dead) this.send(c, m);
       },
+    });
+    this.quests = opts.quests;
+    this.quests?.attach({
+      deliver: (id, m) => {
+        const c = this.clients.get(id);
+        if (c && !c.dead) this.send(c, m);
+      },
+      posOf: (id) => this.byId.get(id),
+      realmStage: (id) => {
+        const r = this.progression?.recordOf(id);
+        return r ? { realm: r.realm, stage: recordStage(r) } : undefined;
+      },
+      isMeditating: (id) => this.progression?.isMeditating(id) ?? false,
+      grantTuVi: (id, amount) => this.progression?.grantTuVi(id, amount, this.world.timeMs) ?? 0,
     });
     this.party = opts.party;
     this.tutorial = opts.tutorial;
@@ -599,6 +627,7 @@ export class WorldNode {
             this.recordKill(e.killerId, e.mobId, e.rolls.length, mobPort);
             if (e.rolls.length > 0) this.tutorial?.note(e.killerId, 'loot');
             sink?.handle(e);
+            this.questKill(e.killerId, e.mobId); // one event per sharing member: credit exactly that member (D107)
             // a sect member's kill pays Cống hiến (D98); the kill key makes a repeated event a replay
             const owner = this.clients.get(e.killerId)?.accountId;
             if (owner !== undefined && opts.sect)
@@ -714,6 +743,7 @@ export class WorldNode {
     this.trade?.join({ entityId: id, accountId, name: displayName });
     this.sect?.join({ entityId: id, accountId, path: classPath });
     this.friends?.join({ entityId: id, accountId, name: displayName, classId: classWireId(classPath) });
+    this.quests?.join({ entityId: id, accountId });
     this.market?.join({ entityId: id, accountId });
     if (this.chat) {
       this.chat.join({ entityId: id, accountId, name: displayName });
@@ -861,6 +891,7 @@ export class WorldNode {
     this.trade?.leave(id);
     this.sect?.leave(id);
     this.friends?.leave(id);
+    this.quests?.leave(id);
     this.market?.leave(id);
     this.chatHistoryDue.delete(id);
     this.heldMajor.delete(id);
@@ -1158,6 +1189,12 @@ export class WorldNode {
           this.badFrame(c, 'unexpected');
         } else this.send(c, this.friends.handle(id, msg, this.world.timeMs));
         break;
+      case 'quest_cmd':
+        if (!this.quests) {
+          c.stats.badMessages++;
+          this.send(c, { type: 'error', code: ErrorCode.BadMessage, text: 'unexpected message' });
+        } else this.send(c, this.quests.handle(id, msg, this.world.timeMs));
+        break;
       case 'inv_cmd':
         if (!this.invSync) {
           this.badFrame(c, 'unexpected');
@@ -1289,6 +1326,7 @@ export class WorldNode {
     this.trade?.tick(this.world.timeMs);
     this.sect?.tick();
     this.friends?.tick();
+    this.quests?.tick(this.world.timeMs);
     if (this.market && this.world.tick % 20 === 0) this.market.tick(); // expiry, returns and the weekly shadow report: about once a second
     this.telemetry?.tick(this.clients.size);
     for (const e of this.world.entities) {
@@ -1354,9 +1392,21 @@ export class WorldNode {
   }
 
   /**
+   * A kill counts for the quest objectives of `killerId` (D107). Combat already fans a kill out to every sharing party member: it calls
+   * `onDrops` once PER member with that member as `killerId`, so crediting a group here would multiply the credit by the party size.
+   * The mob is still alive when this runs.
+   */
+  private questKill(killerId: number, mobId: number): void {
+    if (!this.quests || !this.mobs) return;
+    const def = mobDefById(this.mobs.defIdOf(mobId));
+    if (def) this.quests.onKill(killerId, def.key, def.tier);
+  }
+
+  /**
    * Who shares the credit (loot) of a kill by `killerId`: the killer's party members who are alive and within `PARTY.SHARE_RANGE_TILES` of the
    * killer, the killer always included, ascending. Without a party this is just `[killerId]`. PLACEHOLDER rule (D93, "cần game designer duyệt").
    */
+
   private creditGroupOf(killerId: number): number[] {
     const members = this.party?.membersOf(killerId) ?? [];
     if (members.length <= 1) return [killerId];
@@ -1428,6 +1478,9 @@ export class WorldNode {
   private deliver(out: Outbound[]): void {
     for (const o of out) {
       const c = this.clients.get(o.entityId);
+      // a successful breakthrough is a quest event (D107); the roll itself stays the progression module's
+      if (o.msg.type === 'breakthrough_result' && o.msg.outcome === BreakthroughOutcome.Success)
+        this.quests?.onBreakthrough(o.entityId);
       if (!c || c.dead) continue;
       if (c.suspendedAtMs !== null) {
         // held player: the final answer of an event is kept for the resume (the rest is rebuilt from the live event)
@@ -1576,7 +1629,7 @@ export class WorldNode {
           const index = c.slots.indexOf(0);
           if (index < 0) break;
           c.slots[index] = e.id;
-          const entry: Visible = { index, band: 0 };
+          const entry: Visible = { id: e.id, index, band: 0 };
           c.visible.set(e.id, entry);
           bandOf(e, entry, e.id);
           const qi = quantizePos(e.i);
@@ -1850,12 +1903,14 @@ export class WorldNode {
       // ignoring band turns and the unchanged-record skip, so a client whose state is wrong recovers; once per ACK_TIMEOUT_MS
       const resync = c.snapSeq === 0 || (timedOut && this.world.timeMs - c.lastResyncMs >= WORLD_CONFIG.ACK_TIMEOUT_MS);
       if (resync) c.lastResyncMs = this.world.timeMs;
-      const entities: SnapshotEntity[] = [];
-      const touchedIdx: number[] = [];
-      const touchedLast: Last[] = [];
-      for (const [eid, v] of c.visible) {
-        if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
-        const cur = this.currentOf(eid);
+      // the records of this snapshot go into the node's ONE reusable parallel-array buffer (no per-entity object, D119)
+      const rec = this.snapRec;
+      const touched = this.snapTouched;
+      let n = 0;
+      const tick = this.world.tick;
+      for (const v of c.visible.values()) {
+        if (!resync && ((tick + v.index) & BAND_MASK[v.band]) !== 0) continue;
+        const cur = this.currentOf(v.id);
         if (!cur) continue;
         const last = c.last[v.index];
         const hp = cur.hp;
@@ -1870,17 +1925,16 @@ export class WorldNode {
           last.dir === cur.dir
         )
           continue;
-        entities.push({
-          index: v.index,
-          qi: cur.qi,
-          qj: cur.qj,
-          anim: cur.anim,
-          dir: cur.dir,
-          hpPct: !resync && last && last.hp === hp ? null : hp,
-        });
-        touchedIdx.push(v.index);
-        touchedLast.push({ qi: cur.qi, qj: cur.qj, hp, anim: cur.anim, dir: cur.dir });
+        rec.index[n] = v.index;
+        rec.qi[n] = cur.qi;
+        rec.qj[n] = cur.qj;
+        rec.anim[n] = cur.anim;
+        rec.dir[n] = cur.dir;
+        rec.hp[n] = !resync && last && last.hp === hp ? -1 : hp;
+        touched[n] = cur;
+        n++;
       }
+      rec.count = n;
       // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
       const vitals = this.vitalsOf(me);
       const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
@@ -1888,9 +1942,8 @@ export class WorldNode {
       const statusSig = this.combat ? this.combat.status.signature(me.id, this.world.timeMs) : '';
       const sendStatus = statusSig !== c.lastStatusSig || ((full || resync) && statusSig !== '');
       const seq = (c.snapSeq + 1) & 0xffff;
-      const bytes = encode(
+      const bytes = encodeSnapshotRecords(
         {
-          type: 'snapshot',
           seq,
           baselineSeq: full ? null : c.snapSeq & 0xffff,
           tick: this.world.tick,
@@ -1899,11 +1952,23 @@ export class WorldNode {
             sendVitals ? vitals : null,
             sendStatus && this.combat ? this.combat.status.statusOf(me.id, this.world.timeMs) : null,
           ),
-          entities,
         },
-        { baseline: (index) => c.last[index] },
+        rec,
+        c.last,
       );
-      for (let k = 0; k < touchedIdx.length; k++) c.last[touchedIdx[k]!] = touchedLast[k];
+      // what this client now holds per slot: updated in place AFTER encoding (the encoder read the old positions as its delta baseline)
+      for (let k = 0; k < n; k++) {
+        const idx = rec.index[k]!;
+        const cur = touched[k]!;
+        const l = c.last[idx];
+        if (l) {
+          l.qi = cur.qi;
+          l.qj = cur.qj;
+          l.hp = cur.hp;
+          l.anim = cur.anim;
+          l.dir = cur.dir;
+        } else c.last[idx] = { qi: cur.qi, qj: cur.qj, hp: cur.hp, anim: cur.anim, dir: cur.dir };
+      }
       if (sendVitals) c.lastVitals = vitals;
       c.lastStatusSig = statusSig;
       c.snapSeq = seq;

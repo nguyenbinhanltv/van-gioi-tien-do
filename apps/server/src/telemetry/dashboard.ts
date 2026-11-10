@@ -47,6 +47,7 @@ td,th{padding:3px 10px;text-align:right;border-bottom:1px solid #232a3a}th:first
 <h2>FTUE (hành trình đầu tiên)</h2><div class="muted" id="ftueNote"></div><table id="ftue"></table>
 <h2>Giữ chân</h2><table id="ret"></table>
 <h2>Kinh tế (sổ cái)</h2><div class="muted" id="econNote"></div><table id="econ"></table>
+<h2>Ổn định (crash-free, D110)</h2><div class="muted" id="crashNote"></div><table id="crashBuilds"></table><table id="crashTop"></table>
 <h2>Sức khỏe dữ liệu</h2><div id="health" class="muted"></div>
 <script>
 (function(){
@@ -78,6 +79,13 @@ function render(s){
  fill(document.getElementById('econ'),['Tiền tệ','Sinh ra','Tiêu hao','Tiêu hao / sinh ra','Kênh sinh ra','Kênh tiêu hao'],s.economy.currencies.map(function(c){
   var cls=c.inTarget===null?'':(c.inTarget?'ok':'warn');
   return [c.currency,c.faucet,c.sink,cell(c.ratio===null?'-':c.ratio.toFixed(2),cls),JSON.stringify(c.faucetChannels),JSON.stringify(c.sinkChannels)]}));
+ var cn=document.getElementById('crashNote');
+ if(s.crash){var c=s.crash;
+  cn.textContent='Phiên không sập: '+c.crashFreePct+'% (đích '+c.target+'%) - '+c.sessions+' phiên, '+c.crashedSessions+' sập, '+c.liveSessions+' đang chạy, '+c.abandonedSessions+' bỏ dở (24 giờ)';
+  cn.className=c.crashFreePct>=c.target?'ok':'warn';
+  fill(document.getElementById('crashBuilds'),['Bản dựng','Phiên','Sập','Không sập %'],c.byBuild.map(function(x){return [x.build,x.sessions,x.crashed,x.crashFreePct]}));
+  fill(document.getElementById('crashTop'),['Top crash','Phiên','Lần','Nguồn','Thông điệp'],c.top.map(function(x){return [x.fatal?'sập':'lỗi',x.sessions,x.occurrences,x.source,x.message]}));
+ }else cn.textContent='chưa bật nhận báo cáo sập';
  document.getElementById('health').textContent='Sự kiện bị từ chối bởi lược đồ: '+s.health.refusedEvents+' - lỗi ghi log: '+s.health.logErrors;
 }
 function load(){fetch('/dashboard/summary.json',{headers:headers,cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(render).catch(function(e){document.getElementById('meta').textContent='không tải được: '+e.message})}
