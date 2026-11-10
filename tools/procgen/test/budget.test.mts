@@ -10,7 +10,10 @@ import { runBudget, renderMarkdown, isPow2, atlasCap, INITIAL_PACKAGE_RESERVED_M
 
 const require = createRequire(import.meta.url);
 const { Image } = require('../src/lib/png.js') as {
-  Image: new (w: number, h: number) => { width: number; height: number; data: Uint8ClampedArray; save(p: string): void };
+  Image: new (
+    w: number,
+    h: number,
+  ) => { width: number; height: number; data: Uint8ClampedArray; save(p: string): void };
 };
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'vgtd-budget-test-'));
@@ -150,14 +153,43 @@ describe('budget gate: icons and tiles', () => {
     expect(codes(runBudget({ atlasDir: dir }))).toContain('ICON_SIZE');
   });
   it('real generated tileset (128x64 and 64x32) passes; a 100x50 tile size fails', () => {
-    for (const [tw, ok] of [[128, true], [64, true]] as const) {
+    for (const [tw, ok] of [
+      [128, true],
+      [64, true],
+    ] as const) {
       const out = path.join(TMP, `tm${tw}`);
-      const r = spawnSync(process.execPath, [path.join(ROOT, 'src/tilemap/generate_tilemap.js'), '--seed', '5', '--width', '16', '--height', '16', '--tileW', String(tw), '--out', out], { encoding: 'utf8' });
+      const r = spawnSync(
+        process.execPath,
+        [
+          path.join(ROOT, 'src/tilemap/generate_tilemap.js'),
+          '--seed',
+          '5',
+          '--width',
+          '16',
+          '--height',
+          '16',
+          '--tileW',
+          String(tw),
+          '--out',
+          out,
+        ],
+        { encoding: 'utf8' },
+      );
       expect(r.status).toBe(0);
       expect(runBudget({ atlasDir: out }).ok).toBe(ok);
     }
     const bad = path.join(TMP, 'tm-bad');
-    spawnSync(process.execPath, [path.join(ROOT, 'src/tilemap/generate_tilemap.js'), '--seed', '5', '--width', '8', '--height', '8', '--out', bad]);
+    spawnSync(process.execPath, [
+      path.join(ROOT, 'src/tilemap/generate_tilemap.js'),
+      '--seed',
+      '5',
+      '--width',
+      '8',
+      '--height',
+      '8',
+      '--out',
+      bad,
+    ]);
     const f = path.join(bad, 'tileset.json');
     const j = JSON.parse(fs.readFileSync(f, 'utf8'));
     j.tileWidth = 100;
@@ -191,6 +223,15 @@ describe('budget gate: initial package estimate', () => {
     makeAtlas(dir, { name: 'atl_small' });
     const before = runBudget({ atlasDir: dir });
     makeAtlas(dir, { name: 'atl_ptcl_2x' });
+    const after = runBudget({ atlasDir: dir });
+    expect(after.estimate.assetBytes).toBe(before.estimate.assetBytes);
+    expect(after.estimate.lazyBytes).toBeGreaterThan(0);
+  });
+
+  it('treats the PART 3 pages (atl_fx, atl_equip, map_world: loaded on demand) as lazy too', () => {
+    makeAtlas(dir, { name: 'atl_small' });
+    const before = runBudget({ atlasDir: dir });
+    for (const name of ['atl_fx_2x', 'atl_equip_2x', 'map_world_2x']) makeAtlas(dir, { name });
     const after = runBudget({ atlasDir: dir });
     expect(after.estimate.assetBytes).toBe(before.estimate.assetBytes);
     expect(after.estimate.lazyBytes).toBeGreaterThan(0);
@@ -239,7 +280,11 @@ describe('budget gate: failures and report', () => {
     makeAtlas(bad, { name: 'atl_bad', declaredPadding: 0 });
     const summary = path.join(TMP, 'summary.md');
     const run = (atlas: string) =>
-      spawnSync(process.execPath, ['--import', 'tsx', path.join(ROOT, 'pipeline/budget_gate.mts'), '--atlas', atlas, '--summary', summary], { cwd: ROOT, encoding: 'utf8' });
+      spawnSync(
+        process.execPath,
+        ['--import', 'tsx', path.join(ROOT, 'pipeline/budget_gate.mts'), '--atlas', atlas, '--summary', summary],
+        { cwd: ROOT, encoding: 'utf8' },
+      );
     expect(run(good).status).toBe(0);
     expect(run(bad).status).toBe(20);
     const text = fs.readFileSync(summary, 'utf8');

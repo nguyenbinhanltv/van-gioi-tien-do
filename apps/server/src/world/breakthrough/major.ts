@@ -35,8 +35,8 @@ import type { MobTelegraphEvent } from '../combat/mob-attacks.js';
 import type { MajorEventPort, MajorStartInfo, Outbound, ProgressionService } from '../../progression/service.js';
 import { SHADOW_ID_BASE, ShadowRegistry } from './shadows.js';
 
-/** Wire telegraph ids of this module live above the mob attack counter's usual range (both are u16). */
-const TELEGRAPH_ID_BASE = 0xf000;
+/** Wire telegraph ids of this module live above the mob attack counter's usual range (both are u16): `MAJOR_EVENT.TELEGRAPH_ID_BASE`. */
+const TELEGRAPH_ID_BASE = MAJOR_EVENT.TELEGRAPH_ID_BASE;
 const COLLIDER_RADIUS = 0.35;
 
 interface Wind {
