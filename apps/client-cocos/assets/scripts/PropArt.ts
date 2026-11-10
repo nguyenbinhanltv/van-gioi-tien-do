@@ -48,6 +48,14 @@ interface Sidecar {
   hud?: Record<string, { index: number; f2: AtlasFrame; f1: AtlasFrame }>;
   /** particle textures by name (ArtRegistry.ts), PART 2 */
   particles?: Record<string, { f2: AtlasFrame; f1: AtlasFrame }>;
+  /** PART 3 R: tribulation effects by name (ArtRegistry FX_NAMES), a LAZY page; `pivotY` = ground contact of the strike, fraction of the height */
+  fx?: Record<string, { w: number; h: number; pivotY?: number; mode: string; f2: AtlasFrame; f1: AtlasFrame }>;
+  /** PART 3 S: equipment icons by weapon type / slot (ArtRegistry EQUIP_ICON_IDS), a LAZY page */
+  equip?: Record<string, { index: number; f2: AtlasFrame; f1: AtlasFrame }>;
+  /** PART 3 T: minimap markers by id (ArtRegistry MINIMAP_ICON_IDS) */
+  mapIcons?: Record<string, { index: number; f2: AtlasFrame; f1: AtlasFrame }>;
+  /** PART 3 T: the parchment world map, one texture per tier, loaded when the map panel opens */
+  worldMap?: { f2: { file: string; w: number; h: number }; f1: { file: string; w: number; h: number } };
   /** login backdrop + emblem: single textures next to the atlas pages */
   keyArt?: {
     backdrop: { file: string; w: number; h: number };
@@ -137,6 +145,44 @@ export function preloadParticles(): Promise<void> {
   return current?.ensureParticles() ?? Promise.resolve();
 }
 
+/** Tribulation effect frame by name (`FX_NAMES`): strike / cloud (alpha = luminance) or warning / scorch decal. Null until `preloadFx` resolved. */
+export function getFxFrame(name: string): SpriteFrame | null {
+  return current?.fx(name) ?? null;
+}
+/** Size (@1x design px) and ground-contact fraction of an effect frame. */
+export function getFxInfo(name: string): { w: number; h: number; pivotY: number } | null {
+  return current?.fxInfo(name) ?? null;
+}
+/** Start loading the tribulation effect page (first Lôi Kiếp / Tâm Ma); resolves at once when the art is not available. */
+export function preloadFx(): Promise<void> {
+  return current?.ensureFx() ?? Promise.resolve();
+}
+/** Equipment icon by weapon type or slot id (`EQUIP_ICON_IDS`), neutral art (the UI draws the quality frame). Null until `preloadEquipIcons` resolved. */
+export function getEquipIcon(id: string): SpriteFrame | null {
+  return current?.equip(id) ?? null;
+}
+export function preloadEquipIcons(): Promise<void> {
+  return current?.ensureEquip() ?? Promise.resolve();
+}
+/** Minimap marker by id (`MINIMAP_ICON_IDS`), loaded with the initial art; round, draw at 16-24 design px. */
+export function getMinimapIcon(id: string): SpriteFrame | null {
+  return current?.mapIcon(id) ?? null;
+}
+/** URL of the parchment world map image for the DOM map panel (loaded on the first call, cached); null when the art was not generated. Aspect ~1:1. */
+export function loadWorldMapUrl(): Promise<string | null> {
+  return current?.worldMap() ?? Promise.resolve(null);
+}
+/**
+ * The minimap marker sheet for a 2D canvas (the minimap and the map panel are DOM overlays, so they cost no draw call of the world): the
+ * decoded page image and the frame of every marker id, or null when the art is not there.
+ */
+export function getMinimapSheet(): {
+  image: CanvasImageSource;
+  frames: Record<string, { x: number; y: number; w: number; h: number }>;
+} | null {
+  return current?.mapSheet() ?? null;
+}
+
 /**
  * Owner-provided Gemini props (D-less art asset: assets-src/gemini, ASSET-LICENSES.md) and item icons, packed by
  * `npm run gen:gemini -w @vgtd/procgen` into `resources/world/` (generated, git-ignored). Props are ONE atlas page so
@@ -151,6 +197,16 @@ export class PropArt {
   private readonly statusFrames = new Map<string, SpriteFrame>();
   private readonly realmFrames = new Map<string, SpriteFrame>();
   private readonly particleFrames = new Map<string, SpriteFrame>();
+  private readonly fxFrames = new Map<string, SpriteFrame>();
+  private readonly equipFrames = new Map<string, SpriteFrame>();
+  private readonly mapIconFrames = new Map<string, SpriteFrame>();
+  private fxLoader: (() => Promise<void>) | null = null;
+  private equipLoader: (() => Promise<void>) | null = null;
+  private worldMapLoader: (() => Promise<string | null>) | null = null;
+  private mapSheetData: {
+    image: CanvasImageSource;
+    frames: Record<string, { x: number; y: number; w: number; h: number }>;
+  } | null = null;
   private readonly hudFrames = new Map<string, SpriteFrame>();
   /** decoded atlas pages (for the DOM icon data URLs) and the data URLs already made */
   private readonly pageImages = new Map<string, ImageAsset>();
@@ -261,6 +317,45 @@ export class PropArt {
           art.particleFrames.set(name, makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h));
         }
       };
+      // PART 3: minimap markers with the initial art (a 125 KB page); tribulation effects and equipment icons are lazy pages
+      for (const [id, s] of Object.entries(meta.mapIcons ?? {})) {
+        const f = low ? s.f1 : s.f2;
+        art.mapIconFrames.set(id, makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h));
+      }
+      {
+        // the same page as a plain image for the 2D-canvas minimap
+        const first = Object.values(meta.mapIcons ?? {})[0];
+        const page = first ? (low ? first.f1 : first.f2) : null;
+        const img = page ? await loadAsset(pageOf(page), ImageAsset) : null;
+        const data = img?.data as unknown;
+        if (img && data && typeof data === 'object') {
+          const frames: Record<string, { x: number; y: number; w: number; h: number }> = {};
+          for (const [id, s] of Object.entries(meta.mapIcons ?? {})) {
+            const f = low ? s.f1 : s.f2;
+            frames[id] = { x: f.x, y: f.y, w: f.w, h: f.h };
+          }
+          art.mapSheetData = { image: data as CanvasImageSource, frames };
+        }
+      }
+      art.fxLoader = async () => {
+        for (const [name, s] of Object.entries(meta.fx ?? {})) {
+          const f = low ? s.f1 : s.f2;
+          art.fxFrames.set(name, makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h));
+        }
+      };
+      art.equipLoader = async () => {
+        for (const [id, s] of Object.entries(meta.equip ?? {})) {
+          const f = low ? s.f1 : s.f2;
+          art.equipFrames.set(id, makeFrame(await texture(pageOf(f)), f.x, f.y, f.w, f.h));
+        }
+      };
+      art.worldMapLoader = async () => {
+        const w = meta.worldMap;
+        if (!w) return null;
+        const f = low ? w.f1 : w.f2;
+        const img = await loadAsset(`world/${f.file.replace(/\.png$/, '')}`, ImageAsset);
+        return img ? imageUrl(img) : null;
+      };
     } catch (e) {
       console.warn('[vgtd] gemini art unavailable, using placeholders:', e);
       return null;
@@ -345,6 +440,51 @@ export class PropArt {
     return this.particlesPromise;
   }
   private particlesPromise: Promise<void> | null = null;
+
+  /** Tribulation effect frame (see `getFxFrame`). */
+  fx(name: string): SpriteFrame | null {
+    return this.fxFrames.get(name) ?? null;
+  }
+  fxInfo(name: string): { w: number; h: number; pivotY: number } | null {
+    const e = this.meta.fx?.[name];
+    return e ? { w: e.w, h: e.h, pivotY: e.pivotY ?? 0.5 } : null;
+  }
+  ensureFx(): Promise<void> {
+    this.fxPromise ??= (this.fxLoader?.() ?? Promise.resolve()).catch((e) => {
+      console.warn('[vgtd] tribulation effects unavailable:', e);
+    });
+    return this.fxPromise;
+  }
+  private fxPromise: Promise<void> | null = null;
+
+  equip(id: string): SpriteFrame | null {
+    return this.equipFrames.get(id) ?? null;
+  }
+  ensureEquip(): Promise<void> {
+    this.equipPromise ??= (this.equipLoader?.() ?? Promise.resolve()).catch((e) => {
+      console.warn('[vgtd] equipment icons unavailable:', e);
+    });
+    return this.equipPromise;
+  }
+  private equipPromise: Promise<void> | null = null;
+
+  mapIcon(id: string): SpriteFrame | null {
+    return this.mapIconFrames.get(id) ?? null;
+  }
+  mapSheet(): {
+    image: CanvasImageSource;
+    frames: Record<string, { x: number; y: number; w: number; h: number }>;
+  } | null {
+    return this.mapSheetData;
+  }
+  worldMap(): Promise<string | null> {
+    this.worldMapPromise ??= (this.worldMapLoader?.() ?? Promise.resolve(null)).catch((e) => {
+      console.warn('[vgtd] world map unavailable:', e);
+      return null;
+    });
+    return this.worldMapPromise;
+  }
+  private worldMapPromise: Promise<string | null> | null = null;
 
   /** Particle texture by name, or null. */
   particle(name: string): SpriteFrame | null {

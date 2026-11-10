@@ -42,6 +42,8 @@ const isPng = (buf) => buf.length > 8 && buf.readUInt32BE(0) === 0x89504e47;
 const propSrc = (n) => manifest.props[n].src || `props/${n}`;
 const files = [
   ...Object.keys(manifest.props).map((n) => propSrc(n).split('/')),
+  ...Object.values(manifest.tribulation.fx).map((f) => f.file.split('/')),
+  ...[manifest.equip.file, manifest.map.icons.file, manifest.map.world.file].map((f) => f.split('/')),
   ...[manifest.status.file, manifest.realms.file, manifest.keyArt.backdrop.file, manifest.keyArt.emblem.file].map((f) =>
     f.split('/'),
   ),
@@ -173,6 +175,13 @@ function main() {
     'hud_2x',
     'hud_1x',
     'keyart',
+    'fx_2x',
+    'fx_1x',
+    'equip_2x',
+    'equip_1x',
+    'mmap_2x',
+    'mmap_1x',
+    'worldmap',
   ])
     fs.mkdirSync(path.join(OUT, d), { recursive: true });
 
@@ -193,6 +202,10 @@ function main() {
     particles: {},
     hud: {},
     keyArt: {},
+    fx: {},
+    equip: {},
+    mapIcons: {},
+    worldMap: {},
     atlases: {},
   };
   const verify = (key, srcBuf, sparkle, isBg) => {
@@ -367,6 +380,67 @@ function main() {
     };
     console.log(`  key art: backdrop ${b.w}x${b.h}, emblem ${er.x2.width}x${er.x2.height} @2x`);
   }
+  // PART 3: tribulation effects (R): black-background strike + cloud (luminance alpha), magenta warning / scorch decals
+  for (const [name, def] of Object.entries(manifest.tribulation.fx)) {
+    const buf = bufs.get(def.file);
+    let r;
+    if (def.mode === 'black') {
+      r = G.processFx(decodePNG(buf), def.w || 0, def.pivotY ?? 0.5, def.h || 0);
+      verify(def.file, buf, r.sparkle, G.isDark);
+    } else {
+      r = G.processUi(decodePNG(buf), def.w, undefined, { despillEdge: def.despillEdge });
+      verify(def.file, buf, r.sparkle);
+    }
+    r.x2.save(path.join(OUT, 'fx_2x', `${name}.png`));
+    r.x1.save(path.join(OUT, 'fx_1x', `${name}.png`));
+    sidecar.fx[name] = {
+      w: r.x1.width,
+      h: r.x1.height,
+      ...(def.pivotY !== undefined ? { pivotY: def.pivotY } : {}),
+      mode: def.mode,
+    };
+    console.log(`  ${def.file}: ${r.x1.width}x${r.x1.height} @1x (${def.mode}), sparkle ${r.sparkle.pixels}px`);
+  }
+  // PART 3: equipment icons (S) and minimap markers (T): grids of round / free-shaped tiles
+  for (const [grid, outKey, dir] of [
+    [manifest.equip, 'equip', 'equip'],
+    [manifest.map.icons, 'mapIcons', 'mmap'],
+  ]) {
+    const buf = bufs.get(grid.file);
+    const r = G.sliceGrid(decodePNG(buf), grid.size2, grid.cols, grid.rows, {
+      fit: 'contain',
+      pad: grid.pad,
+      eraseCorner: grid.eraseCorner,
+      cells: true,
+    });
+    verify(grid.file, buf, r.sparkle);
+    if (grid.ids.length !== grid.cols * grid.rows)
+      problems.push(`${grid.file}: ${grid.ids.length} ids for a ${grid.cols}x${grid.rows} grid`);
+    grid.ids.forEach((id, k) => {
+      r.x2[k].save(path.join(OUT, `${dir}_2x`, `${id}.png`));
+      r.x1[k].save(path.join(OUT, `${dir}_1x`, `${id}.png`));
+      sidecar[outKey][id] = { index: k };
+    });
+    console.log(`  ${grid.file}: ${grid.ids.length} tiles, sparkle ${r.sparkle.pixels}px`);
+  }
+  // PART 3: the parchment world map (T): one opaque texture per tier, loaded when the map panel opens
+  {
+    const w = manifest.map.world;
+    // the Gemini mark sits ON the parchment (not on the magenta margin): erase it like the login backdrop's, then key the margin
+    const img = decodePNG(bufs.get(w.file));
+    // the mark is a pale cream star on beige parchment: lighter in the blue channel than any parchment pixel, and not the magenta margin
+    const mark = G.removeBackdropMark(img, { skipMagenta: true, borderOk: (r, g, b) => r >= 185 && r <= 245 && g >= 150 && g <= 215 && b >= 95 && b <= 185 && r > g && g > b, test: (r, g, b) => b >= 165 && g >= 195 && r >= 220 && r - b <= 65 });
+    if (mark.components < 1) problems.push(`${w.file}: no Gemini mark found on the parchment corner`);
+    const r = G.processUi(img, w.w);
+    const sparkle = mark;
+    r.x2.save(path.join(OUT, 'worldmap', 'world_map_2x.png'));
+    r.x1.save(path.join(OUT, 'worldmap', 'world_map_1x.png'));
+    sidecar.worldMap = {
+      f2: { file: 'map_world_2x.png', w: r.x2.width, h: r.x2.height },
+      f1: { file: 'map_world_1x.png', w: r.x1.width, h: r.x1.height },
+    };
+    console.log(`  ${w.file}: ${r.x1.width}x${r.x1.height} @1x, mark ${sparkle.pixels}px`);
+  }
   // INTERIM mob standees (concept art, faces left): one @1x tier
   for (const [key, def] of Object.entries(manifest.mobs)) {
     const buf = bufs.get(`mobs/${key}`);
@@ -482,6 +556,12 @@ function main() {
     ['hud_1x', 'atl_hud_1x', 'hud'],
     ['particles_2x', 'atl_ptcl_2x', 'particles'],
     ['particles_1x', 'atl_ptcl_1x', 'particles'],
+    ['fx_2x', 'atl_fx_2x', 'fx'],
+    ['fx_1x', 'atl_fx_1x', 'fx'],
+    ['equip_2x', 'atl_equip_2x', 'equip'],
+    ['equip_1x', 'atl_equip_1x', 'equip'],
+    ['mmap_2x', 'atl_mmap_2x', 'mapIcons'],
+    ['mmap_1x', 'atl_mmap_1x', 'mapIcons'],
   ]) {
     const a = pack(dir, atlasName);
     const scale = atlasName.endsWith('2x') ? 'f2' : 'f1';
@@ -498,6 +578,11 @@ function main() {
     ['emblem_1x.png', 'keyart_emblem_1x.png'],
   ])
     fs.copyFileSync(path.join(OUT, 'keyart', from), path.join(OUT, 'atlas', to));
+  for (const [from, to] of [
+    ['world_map_2x.png', 'map_world_2x.png'],
+    ['world_map_1x.png', 'map_world_1x.png'],
+  ])
+    fs.copyFileSync(path.join(OUT, 'worldmap', from), path.join(OUT, 'atlas', to));
   fs.writeFileSync(path.join(OUT, 'gemini.json'), JSON.stringify(sidecar, null, 2));
   fs.writeFileSync(stampFile, stamp);
   console.log(`✔ gemini assets -> ${OUT}`);

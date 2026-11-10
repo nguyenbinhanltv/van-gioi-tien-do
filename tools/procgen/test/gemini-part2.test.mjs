@@ -18,7 +18,8 @@ const px = (img, x, y) => {
 function mark(img, cx, cy, r, col) {
   for (let y = cy - r; y <= cy + r; y++)
     for (let x = cx - r; x <= cx + r; x++)
-      if (Math.abs(x - cx) + Math.abs(y - cy) < r - (Math.abs(x - cx) * Math.abs(y - cy)) / (r + 5)) img.setPixel(x, y, ...col, 255);
+      if (Math.abs(x - cx) + Math.abs(y - cy) < r - (Math.abs(x - cx) * Math.abs(y - cy)) / (r + 5))
+        img.setPixel(x, y, ...col, 255);
 }
 
 describe('PART 2: generic grids (status icons 4 x 3, realm badges 3 x 3)', () => {
@@ -30,7 +31,8 @@ describe('PART 2: generic grids (status icons 4 x 3, realm badges 3 x 3)', () =>
       const x0 = 20 + (k % cols) * 130,
         y0 = 20 + Math.floor(k / cols) * 130;
       const w = wide && k % 2 ? 80 : 100;
-      for (let y = y0; y < y0 + 100; y++) for (let x = x0; x < x0 + w; x++) img.setPixel(x, y, 30 + 20 * k, 120, 220 - 15 * k, 255);
+      for (let y = y0; y < y0 + 100; y++)
+        for (let x = x0; x < x0 + w; x++) img.setPixel(x, y, 30 + 20 * k, 120, 220 - 15 * k, 255);
     }
     mark(img, img.width - 30, img.height - 30, 20, [255, 160, 255]);
     return img;
@@ -69,7 +71,9 @@ describe('PART 2: generic grids (status icons 4 x 3, realm badges 3 x 3)', () =>
   it('eraseCorner clears a box in the bottom-right corner before the tiles are found', () => {
     const img = gridOf(3, 3);
     // a pale blob glued to the last tile: without eraseCorner it would be part of the tile, with it the tile box is unchanged
-    for (let y = 20 + 2 * 130 + 100; y < 20 + 2 * 130 + 100 + 12; y++) for (let x = 20 + 2 * 130 + 80; x < 20 + 2 * 130 + 92; x++) img.setPixel(x, y, 30 + 20 * 8, 120, 220 - 15 * 8, 255);
+    for (let y = 20 + 2 * 130 + 100; y < 20 + 2 * 130 + 100 + 12; y++)
+      for (let x = 20 + 2 * 130 + 80; x < 20 + 2 * 130 + 92; x++)
+        img.setPixel(x, y, 30 + 20 * 8, 120, 220 - 15 * 8, 255);
     const r = G.sliceGrid(img, 64, 3, 3, { eraseCorner: 0.12 });
     expect(r.x2).toHaveLength(9);
     expect(px(r.x2[8], 32, 32).slice(0, 3)).toEqual([30 + 20 * 8, 120, 220 - 15 * 8]);
@@ -121,7 +125,8 @@ describe('PART 2: particle textures (black background, luminance -> alpha)', () 
 describe('PART 2: login backdrop and emblem', () => {
   function backdrop() {
     const img = new Image(1600, 900);
-    for (let y = 0; y < 900; y++) for (let x = 0; x < 1600; x++) img.setPixel(x, y, 70 + (x >> 5), 80, 100 + (y >> 5), 255);
+    for (let y = 0; y < 900; y++)
+      for (let x = 0; x < 1600; x++) img.setPixel(x, y, 70 + (x >> 5), 80, 100 + (y >> 5), 255);
     mark(img, 1550, 850, 32, [165, 165, 165]);
     return img;
   }
@@ -186,7 +191,59 @@ describe('PART 2: manifest', () => {
 
   it('the 10 particle exports exist', () => {
     expect(manifest.particles.names).toHaveLength(10);
-    for (const n of manifest.particles.names) expect(fs.existsSync(path.join(root, 'particles', n + '.png')), n).toBe(true);
+    for (const n of manifest.particles.names)
+      expect(fs.existsSync(path.join(root, 'particles', n + '.png')), n).toBe(true);
+  });
+});
+
+describe('PART 3: effect textures, cell grids, rim despill', () => {
+  it('processFx keeps the aspect (by height for a strike, by width for a cloud) and turns black into transparency', () => {
+    const img = new Image(400, 300);
+    for (let y = 0; y < 300; y++) for (let x = 0; x < 400; x++) img.setPixel(x, y, 0, 0, 0, 255);
+    for (let y = 40; y < 260; y++) for (let x = 190; x < 210; x++) img.setPixel(x, y, 230, 200, 255, 255); // a tall bolt
+    const tall = G.processFx(img, 0, 0.9, 200);
+    expect(tall.x1.height).toBe(200);
+    expect(tall.x1.width).toBeLessThan(40);
+    expect(tall.x2.height).toBe(400);
+    expect(px(tall.x1, 2, 100)[3]).toBeLessThan(30); // black margin -> transparent
+    const mid = tall.x1.width >> 1;
+    expect(px(tall.x1, mid, 100)[3]).toBeGreaterThan(200);
+    const wide = G.processFx(img, 100, 0.5, 0);
+    expect(wide.x1.width).toBe(100);
+  });
+
+  it('cells mode slices a regular grid by cell even when a tile is made of separate pieces', () => {
+    const img = new Image(300 + 40, 200 + 40);
+    for (let y = 0; y < img.height; y++) for (let x = 0; x < img.width; x++) img.setPixel(x, y, 250, 40, 248, 255);
+    for (let r = 0; r < 2; r++)
+      for (let c = 0; c < 3; c++) {
+        const x0 = 20 + c * 100 + 10,
+          y0 = 20 + r * 100 + 10;
+        const k = r * 3 + c;
+        // two separate blobs per tile (like a pair of boots)
+        for (let y = y0; y < y0 + 60; y++)
+          for (let x = x0; x < x0 + 30; x++) img.setPixel(x, y, 30 + 20 * k, 120, 200, 255);
+        for (let y = y0; y < y0 + 60; y++)
+          for (let x = x0 + 45; x < x0 + 75; x++) img.setPixel(x, y, 30 + 20 * k, 120, 200, 255);
+      }
+    const r = G.sliceGrid(img, 64, 3, 2, { fit: 'contain', cells: true });
+    expect(r.x2).toHaveLength(6);
+    r.x2.forEach((im, k) => {
+      // the left blob of every tile carries the tile colour: the pair stayed one tile
+      const left = px(im, 10, 32);
+      expect(left.slice(0, 3), 'tile ' + k).toEqual([30 + 20 * k, 120, 200]);
+    });
+  });
+
+  it('despillEdge pulls pink out of the rim only', () => {
+    const img = new Image(60, 60);
+    for (let y = 0; y < 60; y++) for (let x = 0; x < 60; x++) img.setPixel(x, y, 0, 0, 0, 0);
+    for (let y = 10; y < 50; y++) for (let x = 10; x < 50; x++) img.setPixel(x, y, 200, 60, 200, 255); // pink everywhere
+    G.despillEdge?.(img, 4);
+    const rim = px(img, 11, 30);
+    const core = px(img, 30, 30);
+    expect(rim[0] - rim[1]).toBeLessThan(10);
+    expect(core.slice(0, 3)).toEqual([200, 60, 200]);
   });
 });
 

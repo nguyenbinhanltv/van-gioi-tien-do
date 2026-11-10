@@ -245,6 +245,8 @@ export interface NetOptions {
   baseUrl: string;
   username: string;
   password: string;
+  /** closed beta (D111): single-use invitation code sent with the FIRST register only; dropped once a login succeeded so reconnects never resend it */
+  inviteCode?: string;
   deps: NetDeps;
   /** Class to create the character with on its first login: a class path id (`'kiem'`) or its wire id (D82). Ignored for an existing character. */
   classId?: string | number;
@@ -322,7 +324,11 @@ export class NetClient {
   /** number of times the session came back after a drop (resumed or re-logged-in) */
   reconnects = 0;
 
+  /** the invitation code still to send (D111); cleared after the first successful login */
+  private inviteCode: string | undefined;
+
   constructor(private readonly o: NetOptions) {
+    this.inviteCode = o.inviteCode;
     this.remote = new RemoteWorld(o.interpDelayMs);
     this.classRequest = o.classId;
     this.bag = new BagModel();
@@ -436,12 +442,18 @@ export class NetClient {
   /** register-or-login over HTTP, then a fresh `hello` with the access token */
   private async login(onAck: (ack: HelloAck) => void): Promise<HelloAck> {
     const cred = { username: this.o.username, password: this.o.password };
-    const reg = await this.post('/auth/register', cred);
-    if (reg.status !== 201 && reg.status !== 409)
+    const reg = await this.post('/auth/register', this.inviteCode ? { ...cred, inviteCode: this.inviteCode } : cred);
+    const inviteLimited = reg.status === 429 && reg.json.error === 'invite_limited';
+    // 409: already registered. 403 invite_invalid: with BETA_INVITE_ONLY an existing account re-registering has no valid code; the login
+    // below decides (a wrong code for a new account fails there with a 401)
+    if (reg.status !== 201 && reg.status !== 409 && reg.status !== 403 && !inviteLimited)
       throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     const login = await this.post('/auth/login', cred);
+    if (login.status !== 200 && (reg.status === 403 || inviteLimited))
+      throw new Error(`register: ${reg.status} ${String(reg.json.message ?? reg.json.error ?? '')}`);
     if (login.status !== 200)
       throw new Error(`login: ${login.status} ${String(login.json.message ?? login.json.error ?? '')}`);
+    this.inviteCode = undefined; // used (or not needed): never sent again by a reconnect
     // `classId` only matters for a character that does not exist yet; the server's stored class wins afterwards (D82)
     return this.openSocket(
       {

@@ -37,6 +37,8 @@ import {
   ProtocolError,
   decode,
   encode,
+  encodeSnapshotRecords,
+  SnapshotRecords,
   LIMITS,
   dequantizePos,
   quantizePos,
@@ -46,7 +48,6 @@ import {
   type ChatLine,
   type EnterEntity,
   type Message,
-  type SnapshotEntity,
   TelegraphShape,
 } from '@vgtd/protocol';
 import {
@@ -133,6 +134,8 @@ export interface ClientStats {
 }
 
 interface Visible {
+  /** entity id (the key of `Client.visible`): lets the per-tick snapshot walk the `values()` without a [key, value] pair per entry */
+  id: number;
   index: number;
   /** 0 near (20 Hz), 1 mid (10 Hz), 2 far (5 Hz) */
   band: 0 | 1 | 2;
@@ -300,7 +303,8 @@ export type TickPhase = (typeof TICK_PHASES)[number];
 /** A tick longer than this is "slow": its biggest phase is counted in `profile.slowBy` (the 20 Hz period). */
 const SLOW_TICK_MS = 50;
 
-const BAND_PERIOD = [1, 2, 4] as const;
+/** band periods are 1 / 2 / 4 ticks (near 20 Hz, mid 10 Hz, far 5 Hz): `(tick + index) % period === 0` as one AND with `period - 1` (the hot per-client snapshot loop, D119) */
+const BAND_MASK = [0, 1, 3] as const;
 const clock = (): number => Number(process.hrtime.bigint()) / 1e6;
 
 /** Append and keep at most `cap` samples (oldest dropped in chunks, so removal is amortised O(1)). */
@@ -411,6 +415,10 @@ export class WorldNode {
   private byId = new Map<number, EntityState>();
   /** per-tick cache of what a snapshot says about each entity (see `currentOf`) */
   private readonly snapCache = new Map<number, { qi: number; qj: number; anim: number; dir: number; hp: number }>();
+  /** the records of the snapshot being built, reused for every client of every tick (D119) */
+  private readonly snapRec = new SnapshotRecords();
+  /** per record of the snapshot being built: the shared per-tick state it was taken from (to update the client's `last` after encoding) */
+  private readonly snapTouched: Array<{ qi: number; qj: number; anim: number; dir: number; hp: number }> = [];
   readonly progression: ProgressionService | undefined;
   /** Tâm Ma / Lôi Kiếp events of major breakthroughs (D97); null without combat + progression */
   readonly major: MajorBreakthroughs | null;
@@ -1621,7 +1629,7 @@ export class WorldNode {
           const index = c.slots.indexOf(0);
           if (index < 0) break;
           c.slots[index] = e.id;
-          const entry: Visible = { index, band: 0 };
+          const entry: Visible = { id: e.id, index, band: 0 };
           c.visible.set(e.id, entry);
           bandOf(e, entry, e.id);
           const qi = quantizePos(e.i);
@@ -1895,12 +1903,14 @@ export class WorldNode {
       // ignoring band turns and the unchanged-record skip, so a client whose state is wrong recovers; once per ACK_TIMEOUT_MS
       const resync = c.snapSeq === 0 || (timedOut && this.world.timeMs - c.lastResyncMs >= WORLD_CONFIG.ACK_TIMEOUT_MS);
       if (resync) c.lastResyncMs = this.world.timeMs;
-      const entities: SnapshotEntity[] = [];
-      const touchedIdx: number[] = [];
-      const touchedLast: Last[] = [];
-      for (const [eid, v] of c.visible) {
-        if (!resync && (this.world.tick + v.index) % BAND_PERIOD[v.band] !== 0) continue;
-        const cur = this.currentOf(eid);
+      // the records of this snapshot go into the node's ONE reusable parallel-array buffer (no per-entity object, D119)
+      const rec = this.snapRec;
+      const touched = this.snapTouched;
+      let n = 0;
+      const tick = this.world.tick;
+      for (const v of c.visible.values()) {
+        if (!resync && ((tick + v.index) & BAND_MASK[v.band]) !== 0) continue;
+        const cur = this.currentOf(v.id);
         if (!cur) continue;
         const last = c.last[v.index];
         const hp = cur.hp;
@@ -1915,17 +1925,16 @@ export class WorldNode {
           last.dir === cur.dir
         )
           continue;
-        entities.push({
-          index: v.index,
-          qi: cur.qi,
-          qj: cur.qj,
-          anim: cur.anim,
-          dir: cur.dir,
-          hpPct: !resync && last && last.hp === hp ? null : hp,
-        });
-        touchedIdx.push(v.index);
-        touchedLast.push({ qi: cur.qi, qj: cur.qj, hp, anim: cur.anim, dir: cur.dir });
+        rec.index[n] = v.index;
+        rec.qi[n] = cur.qi;
+        rec.qj[n] = cur.qj;
+        rec.anim[n] = cur.anim;
+        rec.dir[n] = cur.dir;
+        rec.hp[n] = !resync && last && last.hp === hp ? -1 : hp;
+        touched[n] = cur;
+        n++;
       }
+      rec.count = n;
       // own HP / MP / shield (wire v3): only when changed since what this client last got, or on a full / resync snapshot
       const vitals = this.vitalsOf(me);
       const sendVitals = vitals !== null && (full || resync || !sameVitals(c.lastVitals, vitals));
@@ -1933,9 +1942,8 @@ export class WorldNode {
       const statusSig = this.combat ? this.combat.status.signature(me.id, this.world.timeMs) : '';
       const sendStatus = statusSig !== c.lastStatusSig || ((full || resync) && statusSig !== '');
       const seq = (c.snapSeq + 1) & 0xffff;
-      const bytes = encode(
+      const bytes = encodeSnapshotRecords(
         {
-          type: 'snapshot',
           seq,
           baselineSeq: full ? null : c.snapSeq & 0xffff,
           tick: this.world.tick,
@@ -1944,11 +1952,23 @@ export class WorldNode {
             sendVitals ? vitals : null,
             sendStatus && this.combat ? this.combat.status.statusOf(me.id, this.world.timeMs) : null,
           ),
-          entities,
         },
-        { baseline: (index) => c.last[index] },
+        rec,
+        c.last,
       );
-      for (let k = 0; k < touchedIdx.length; k++) c.last[touchedIdx[k]!] = touchedLast[k];
+      // what this client now holds per slot: updated in place AFTER encoding (the encoder read the old positions as its delta baseline)
+      for (let k = 0; k < n; k++) {
+        const idx = rec.index[k]!;
+        const cur = touched[k]!;
+        const l = c.last[idx];
+        if (l) {
+          l.qi = cur.qi;
+          l.qj = cur.qj;
+          l.hp = cur.hp;
+          l.anim = cur.anim;
+          l.dir = cur.dir;
+        } else c.last[idx] = { qi: cur.qi, qj: cur.qj, hp: cur.hp, anim: cur.anim, dir: cur.dir };
+      }
       if (sendVitals) c.lastVitals = vitals;
       c.lastStatusSig = statusSig;
       c.snapSeq = seq;
