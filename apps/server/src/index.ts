@@ -23,4 +23,5 @@ export * from './ops/cli.js';
 export * from './sect/index.js';
 export * from './world/breakthrough/index.js';
 export * from './friends/index.js';
+export * from './balance/index.js';
 export * from './market/index.js';
