@@ -26,6 +26,7 @@ import {
   mobDefByKey,
   mobDropSource,
   mobZoneMargin,
+  elementWireId,
   mobRealm,
   mobStats,
   rngFloat,
@@ -241,6 +242,11 @@ export class MobManager {
   defIdOf(id: number): number {
     const s = this.slots[id - MOB_ID_BASE];
     return s && s.id === id ? s.def.id : 0;
+  }
+  /** wire `EnterEntity.element` of a mob (D120): its own element (variant, D114) as `elementWireId`, 0 for anything else or an elementless mob */
+  elementWireIdOf(id: number): number {
+    const s = this.slots[id - MOB_ID_BASE];
+    return s && s.id === id ? elementWireId(s.def.elements[s.variant] ?? s.def.elements[0] ?? null) : 0;
   }
   /** wire `EnterEntity.kind` of an entity id: 1 monster, 0 player */
   kindOf(id: number): number {

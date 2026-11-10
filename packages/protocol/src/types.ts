@@ -190,6 +190,8 @@ export interface EnterEntity {
   qj: number;
   anim: number;
   dir: number;
+  /** Ngũ hành element of a monster (D120): 0 / absent = none, else `elementWireId` (1..5). Shares the `dir` byte on the wire (`dir` is 0-7), so the entry stays 20 B. */
+  element?: number;
   hpPct: number;
   maxHp: number;
 }

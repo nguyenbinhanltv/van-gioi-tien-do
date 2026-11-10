@@ -1595,6 +1595,8 @@ export class WorldNode {
             qj,
             anim: se.anim,
             dir: se.dir,
+            // monsters: their element (D120: variant elements of D114 included); 0 = none, omitted from the message
+            ...(this.mobs?.elementWireIdOf(e.id) ? { element: this.mobs.elementWireIdOf(e.id) } : {}),
             hpPct,
             maxHp: this.maxHpOf(e),
           });
