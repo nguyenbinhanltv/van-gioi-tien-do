@@ -451,8 +451,7 @@ export interface FileStores {
   readonly recovered: string | null;
 }
 
-/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `friends.json`, `quests.json`, `market.json`, `ledger.json`. */
-/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `tutorial.json`, `friends.json`, `market.json`, `ledger.json`. */
+/** Open (or create) the data directory: `accounts.json`, `progression.json`, `inventories.json`, `sect.json`, `tutorial.json`, `friends.json`, `quests.json`, `market.json`, `ledger.json`. */
 export function openFileStores(dir: string, opts: DocFileOptions & JournalOptions = {}): FileStores {
   // FIRST finish a commit a crash interrupted: every document below is then loaded in its committed state
   const recovered = recoverJournal(dir);
