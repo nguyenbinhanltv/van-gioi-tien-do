@@ -116,6 +116,11 @@ export class OnlineSession {
     });
   }
 
+  /** Views the caller draws itself (the tribulation warning decals of `TribulationFx`) are skipped by the ordinary telegraph circles. */
+  skipTelegraphs(fn: (v: { id: number }) => boolean): void {
+    this.telegraphs.skip = fn;
+  }
+
   /**
    * Attach the combat backend: casts go out through `net.sendSkillCast`, and the NetClient hooks feed it `skill_result` (hits, cooldowns,
    * refusals), monsters entering / leaving view (`aoi_enter` carries max HP, snapshots only hpPct), the snapshot tick (server time) and the

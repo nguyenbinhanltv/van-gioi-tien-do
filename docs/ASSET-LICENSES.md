@@ -108,6 +108,27 @@
 | `assets-src/concepts/mobs_phase/boss_co_mang_p3.png`  | concept pha boss   | `23459eea5ae0`         |
 | `assets-src/concepts/mobs_phase/boss_ho_vuong_p2.png` | concept pha boss   | `859776e5375a`         |
 
+## GEMINI-PART3 — hiệu ứng Lôi Kiếp, icon trang bị, bản đồ thế giới và marker minimap do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
+
+**Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack. Ảnh là owner-provided Gemini exports (nằm ngoài repo ở thư mục nhập của chủ dự án), sao nguyên byte vào `assets-src/gemini/{tribulation,equip,map}/` và `assets-src/concepts/tribulation/` (Git LFS); không dùng thư viện ảnh / tài nguyên bên thứ ba. Mọi ảnh có dấu ✦ Gemini ở góc dưới-phải; nền ĐEN (tia sét, mây), nền magenta (vòng cảnh báo, vết cháy, equipment, minimap_icons, concept Tâm Ma), `world_map` là tranh đặc có viền magenta.
+
+**Xử lý (`npm run gen:gemini -w @vgtd/procgen`, tái lập được):**
+
+- `tribulation/r1_strike`, `r2_cloud` (nền đen): xoá ✦, độ sáng → alpha (như hạt PART 2), giữ tỉ lệ, atlas `atl_fx_*` (trang tải lười khi Lôi Kiếp / Tâm Ma bắt đầu); `r3_warning_decal`, `r4_scorch_decal` (magenta): tách nền, trừ viền hồng ở mép loang của vết cháy (`despillEdge`), cùng atlas. `concepts/tribulation/tam_ma.png` chỉ là ảnh tham chiếu (không vào bản dựng); màu phủ Tâm Ma chỉnh sang tím-đen theo concept.
+- `equip/equipment.png` (lưới 4×3, mỗi ô là hộp bao của phần đục trong ô): `atl_equip_*` (128 / 64 px), id = 6 loại vũ khí của `skills.json` rồi 6 vị trí (áo, giày, đai, nhẫn, ngọc bội, bùa); art trung tính, UI vẽ khung phẩm.
+- `map/minimap_icons.png` (4×2): `atl_mmap_*` (96 / 48 px). `map/world_map.png`: ✦ nằm TRÊN giấy da nên xoá bằng vá khuếch tán (kể cả khi chạm viền magenta), tách viền, 512 / 1024 px, hai tệp đơn `map_world_*.png` tải khi mở bản đồ (M).
+
+| Tệp nguồn (nguyên byte)                              | Loại                        | SHA-256 (12 ký tự đầu) |
+| ---------------------------------------------------- | --------------------------- | ---------------------- |
+| `assets-src/gemini/tribulation/r1_strike.png`        | Lôi Kiếp: tia sét (nền đen) | `71dfad9c586d`         |
+| `assets-src/gemini/tribulation/r2_cloud.png`         | Lôi Kiếp: mây (nền đen)     | `7c4b6892dae8`         |
+| `assets-src/gemini/tribulation/r3_warning_decal.png` | Lôi Kiếp: vòng cảnh báo     | `9cc2e3120dec`         |
+| `assets-src/gemini/tribulation/r4_scorch_decal.png`  | Lôi Kiếp: vết cháy          | `93526b7abd98`         |
+| `assets-src/concepts/tribulation/tam_ma.png`         | concept Tâm Ma (tham chiếu) | `77b06eed2a6f`         |
+| `assets-src/gemini/equip/equipment.png`              | icon trang bị 4×3           | `cd10b00a23a7`         |
+| `assets-src/gemini/map/minimap_icons.png`            | marker minimap 4×2          | `38819845ed7a`         |
+| `assets-src/gemini/map/world_map.png`                | bản đồ thế giới             | `c9ccebbbf257`         |
+
 ## GEMINI-GROUND-UI — texture nền 6 chất liệu và khung UI 9-slice do chủ dự án tự tạo bằng Google Gemini (2026-11-09)
 
 **Nguồn:** AI-generated with Google Gemini by the project owner, 2026-11-09, prompts per the orchestrator prompt pack; chủ dự án không lưu prompt gốc. Quyền sử dụng như mục GEMINI-PROPS-ICONS. Sao nguyên byte vào `assets-src/gemini/ground/` (6 ảnh 2048×2048, nhìn từ trên xuống, KHÔNG nền magenta, dấu ✦ Gemini ở góc dưới-phải của từng ảnh) và `assets-src/gemini/ui/` (4 ảnh 2752×1536 nền magenta, dấu ✦ ở góc dưới-phải).

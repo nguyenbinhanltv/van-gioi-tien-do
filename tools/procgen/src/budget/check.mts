@@ -23,16 +23,20 @@ const { decodePNG } = require('../lib/png.js') as { decodePNG: (buf: Buffer) => 
 export const ICON_SIZES: readonly number[] = BUDGETS.ICON_SIZES_PX;
 export const EXTRUDE_MIN_PX = BUDGETS.ATLAS_EXTRUDE_MIN_PX;
 export const INITIAL_PACKAGE_RESERVED_MB =
-  BUDGETS.INITIAL_RESERVED_MB_WEB.ENGINE_CODE + BUDGETS.INITIAL_RESERVED_MB_WEB.AUDIO + BUDGETS.INITIAL_RESERVED_MB_WEB.SPARE;
+  BUDGETS.INITIAL_RESERVED_MB_WEB.ENGINE_CODE +
+  BUDGETS.INITIAL_RESERVED_MB_WEB.AUDIO +
+  BUDGETS.INITIAL_RESERVED_MB_WEB.SPARE;
 /** PC map atlases (only these may reach ATLAS_MAX_PC) are named with this prefix. */
 export const PC_MAP_ATLAS_PREFIX = 'atl_map';
 /**
  * Atlas pages the client fetches on demand after the world is playable (boss phase skins: only when a boss with phases is in
  * view; particle textures and the skill VFX stills packed with them: `PropArt.ensureParticles`, first effect / a few seconds after
- * the HUD exists), so they are NOT part of the initial download estimate. Their size is still reported (`estimate.lazyBytes`) and every
+ * the HUD exists; PART 3: `atl_fx` the Lôi Kiếp / Tâm Ma effects, loaded at the first major event (`PropArt.ensureFx`), `atl_equip` the
+ * equipment icons (`ensureEquip`), `map_world` the parchment world map, loaded when the map panel first opens), so they are NOT part of the
+ * initial download estimate. Their size is still reported (`estimate.lazyBytes`) and every
  * page is still checked against the per-atlas caps. Add a prefix here only for art the client really loads lazily.
  */
-export const LAZY_ATLAS_PREFIXES: readonly string[] = ['atl_mobphase', 'atl_ptcl'];
+export const LAZY_ATLAS_PREFIXES: readonly string[] = ['atl_mobphase', 'atl_ptcl', 'atl_fx', 'atl_equip', 'map_world'];
 const isLazy = (name: string) => LAZY_ATLAS_PREFIXES.some((p) => name.startsWith(p));
 const COMPRESSED_EXT = ['.ktx2', '.webp', '.astc'];
 const MB = 1024 * 1024;
@@ -112,7 +116,9 @@ export const isPow2 = (n: number): boolean => Number.isInteger(n) && n > 0 && (n
 
 /** Max page size for an atlas on a platform (docs/02: 4096 only for PC map atlases). */
 export function atlasCap(name: string, platform: Platform): number {
-  return platform === 'pc' && name.startsWith(PC_MAP_ATLAS_PREFIX) ? BUDGETS.ATLAS_MAX_PC : BUDGETS.ATLAS_MAX_WEB_MOBILE;
+  return platform === 'pc' && name.startsWith(PC_MAP_ATLAS_PREFIX)
+    ? BUDGETS.ATLAS_MAX_PC
+    : BUDGETS.ATLAS_MAX_WEB_MOBILE;
 }
 
 // ---- loading ----------------------------------------------------------------------------------------------
@@ -122,7 +128,10 @@ function readJson(file: string): unknown {
 
 export function loadAtlases(dir: string, findings: Finding[]): AtlasInfo[] {
   const out: AtlasInfo[] = [];
-  for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.json')).sort()) {
+  for (const f of fs
+    .readdirSync(dir)
+    .filter((n) => n.endsWith('.json'))
+    .sort()) {
     let j: any;
     try {
       j = readJson(path.join(dir, f));
@@ -137,7 +146,14 @@ export function loadAtlases(dir: string, findings: Finding[]): AtlasInfo[] {
         kind: 'atlas',
         padding: Number(j.padding),
         pages: (j.pages ?? []).map((p: any) => ({ file: p.file, width: p.width, height: p.height })),
-        frames: Object.entries<any>(j.frames ?? {}).map(([name, fr]) => ({ name, page: fr.page, x: fr.x, y: fr.y, w: fr.w, h: fr.h })),
+        frames: Object.entries<any>(j.frames ?? {}).map(([name, fr]) => ({
+          name,
+          page: fr.page,
+          x: fr.x,
+          y: fr.y,
+          w: fr.w,
+          h: fr.h,
+        })),
       });
     } else if (j?.format === 'tutien-tileset') {
       out.push({
@@ -158,10 +174,18 @@ function checkPages(a: AtlasInfo, platform: Platform, findings: Finding[]): void
   const cap = atlasCap(a.name, platform);
   for (const p of a.pages) {
     if (!isPow2(p.width) || !isPow2(p.height)) {
-      findings.push({ level: 'error', code: 'ATLAS_NOT_POT', msg: `${p.file}: ${p.width}x${p.height} không phải lũy thừa 2` });
+      findings.push({
+        level: 'error',
+        code: 'ATLAS_NOT_POT',
+        msg: `${p.file}: ${p.width}x${p.height} không phải lũy thừa 2`,
+      });
     }
     if (p.width > cap || p.height > cap) {
-      findings.push({ level: 'error', code: 'ATLAS_TOO_LARGE', msg: `${p.file}: ${p.width}x${p.height} vượt ${cap} (${platform}${cap === BUDGETS.ATLAS_MAX_PC ? ', atlas map PC' : ''})` });
+      findings.push({
+        level: 'error',
+        code: 'ATLAS_TOO_LARGE',
+        msg: `${p.file}: ${p.width}x${p.height} vượt ${cap} (${platform}${cap === BUDGETS.ATLAS_MAX_PC ? ', atlas map PC' : ''})`,
+      });
     }
   }
 }
@@ -169,7 +193,11 @@ function checkPages(a: AtlasInfo, platform: Platform, findings: Finding[]): void
 function checkGeometry(a: AtlasInfo, findings: Finding[]): void {
   const pad = BUDGETS.ATLAS_PADDING_PX;
   if (!(a.padding >= pad)) {
-    findings.push({ level: 'error', code: 'PADDING_MISSING', msg: `${a.source}: padding khai báo ${a.padding}, cần >= ${pad}` });
+    findings.push({
+      level: 'error',
+      code: 'PADDING_MISSING',
+      msg: `${a.source}: padding khai báo ${a.padding}, cần >= ${pad}`,
+    });
   }
   const eff = Math.max(pad, 0);
   for (const f of a.frames) {
@@ -179,7 +207,11 @@ function checkGeometry(a: AtlasInfo, findings: Finding[]): void {
       continue;
     }
     if (f.x < eff || f.y < eff || f.x + f.w + eff > page.width || f.y + f.h + eff > page.height) {
-      findings.push({ level: 'error', code: 'PADDING_MISSING', msg: `${a.source}: ${f.name} cách mép trang < ${eff}px` });
+      findings.push({
+        level: 'error',
+        code: 'PADDING_MISSING',
+        msg: `${a.source}: ${f.name} cách mép trang < ${eff}px`,
+      });
     }
   }
   // Frames inflated by the padding must not overlap: there is room for `pad` of extrude around each one.
@@ -191,7 +223,11 @@ function checkGeometry(a: AtlasInfo, findings: Finding[]): void {
       const ox = Math.min(p.x + p.w + eff, q.x + q.w + eff) - Math.max(p.x - eff, q.x - eff);
       const oy = Math.min(p.y + p.h + eff, q.y + q.h + eff) - Math.max(p.y - eff, q.y - eff);
       if (ox > 0 && oy > 0) {
-        findings.push({ level: 'error', code: 'PADDING_MISSING', msg: `${a.source}: ${p.name} và ${q.name} gần nhau hơn ${2 * eff}px (không đủ chỗ padding/extrude)` });
+        findings.push({
+          level: 'error',
+          code: 'PADDING_MISSING',
+          msg: `${a.source}: ${p.name} và ${q.name} gần nhau hơn ${2 * eff}px (không đủ chỗ padding/extrude)`,
+        });
       }
     }
   }
@@ -237,7 +273,11 @@ function checkExtrude(a: AtlasInfo, dir: string, findings: Finding[]): void {
     }
     const bad = extrudeMismatches(img, f, EXTRUDE_MIN_PX);
     if (bad > 0) {
-      findings.push({ level: 'error', code: 'EXTRUDE_MISSING', msg: `${page.file}: ${f.name} thiếu extrude ${EXTRUDE_MIN_PX}px (${bad} pixel viền không khớp mép ảnh)` });
+      findings.push({
+        level: 'error',
+        code: 'EXTRUDE_MISSING',
+        msg: `${page.file}: ${f.name} thiếu extrude ${EXTRUDE_MIN_PX}px (${bad} pixel viền không khớp mép ảnh)`,
+      });
     }
   }
 }
@@ -247,7 +287,11 @@ function checkIcons(a: AtlasInfo, findings: Finding[]): void {
   if (!m) return;
   const n = Number(m[1]);
   if (!ICON_SIZES.includes(n)) {
-    findings.push({ level: 'error', code: 'ICON_SIZE', msg: `${a.name}: kích thước icon ${n} không thuộc ${ICON_SIZES.join('/')}` });
+    findings.push({
+      level: 'error',
+      code: 'ICON_SIZE',
+      msg: `${a.name}: kích thước icon ${n} không thuộc ${ICON_SIZES.join('/')}`,
+    });
   }
   for (const f of a.frames) {
     if (f.w !== n || f.h !== n) {
@@ -263,14 +307,21 @@ function checkTiles(a: AtlasInfo, dir: string, findings: Finding[]): void {
     (ts.tileWidth === TILE_WIDTH && ts.tileHeight === TILE_HEIGHT) ||
     (ts.tileWidth === 2 * TILE_WIDTH && ts.tileHeight === 2 * TILE_HEIGHT);
   if (!ok) {
-    findings.push({ level: 'error', code: 'TILE_SIZE', msg: `tile ${ts.tileWidth}x${ts.tileHeight}, cần ${TILE_WIDTH}x${TILE_HEIGHT} @1x hoặc ${2 * TILE_WIDTH}x${2 * TILE_HEIGHT} @2x` });
+    findings.push({
+      level: 'error',
+      code: 'TILE_SIZE',
+      msg: `tile ${ts.tileWidth}x${ts.tileHeight}, cần ${TILE_WIDTH}x${TILE_HEIGHT} @1x hoặc ${2 * TILE_WIDTH}x${2 * TILE_HEIGHT} @2x`,
+    });
   }
 }
 
 // ---- package size estimate ----------------------------------------------------------------------------------
 function dirBytes(dir: string, accept: (name: string) => boolean): number {
   if (!fs.existsSync(dir)) return 0;
-  return fs.readdirSync(dir).filter(accept).reduce((s, f) => s + fs.statSync(path.join(dir, f)).size, 0);
+  return fs
+    .readdirSync(dir)
+    .filter(accept)
+    .reduce((s, f) => s + fs.statSync(path.join(dir, f)).size, 0);
 }
 
 // ---- entry point --------------------------------------------------------------------------------------------
@@ -283,7 +334,11 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
   }
   const atlases = fs.existsSync(opts.atlasDir) ? loadAtlases(opts.atlasDir, findings) : [];
   if (fs.existsSync(opts.atlasDir) && atlases.length === 0) {
-    findings.push({ level: 'error', code: 'NO_ATLAS', msg: `Không tìm thấy atlas (tutien-atlas / tutien-tileset JSON) trong ${opts.atlasDir}` });
+    findings.push({
+      level: 'error',
+      code: 'NO_ATLAS',
+      msg: `Không tìm thấy atlas (tutien-atlas / tutien-tileset JSON) trong ${opts.atlasDir}`,
+    });
   }
   for (const a of atlases) {
     checkPages(a, platform, findings);
@@ -304,10 +359,13 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
     }
   }
 
-  const compressedBytes = opts.distDir ? dirBytes(opts.distDir, (n) => !isLazy(n) && COMPRESSED_EXT.some((e) => n.endsWith(e))) : 0;
+  const compressedBytes = opts.distDir
+    ? dirBytes(opts.distDir, (n) => !isLazy(n) && COMPRESSED_EXT.some((e) => n.endsWith(e)))
+    : 0;
   const useCompressed = compressedBytes > 0;
   const assetBytes = useCompressed
-    ? compressedBytes + dirBytes(opts.distDir!, (n) => !isLazy(n) && n.endsWith('.json') && n !== 'compress_manifest.json')
+    ? compressedBytes +
+      dirBytes(opts.distDir!, (n) => !isLazy(n) && n.endsWith('.json') && n !== 'compress_manifest.json')
     : dirBytes(opts.atlasDir, (n) => !isLazy(n) && (n.endsWith('.png') || n.endsWith('.json')));
   const lazyBytes = dirBytes(opts.atlasDir, (n) => isLazy(n) && (n.endsWith('.png') || n.endsWith('.json')));
   const reservedMb = opts.reservedMb ?? INITIAL_PACKAGE_RESERVED_MB;
@@ -326,14 +384,26 @@ export function runBudget(opts: BudgetOptions): BudgetReport {
     });
   }
   if (!useCompressed) {
-    findings.push({ level: 'warn', code: 'NOT_COMPRESSED', msg: 'Chưa có KTX2/WebP/ASTC (thiếu basisu/astcenc/cwebp): ước tính dùng PNG nên là cận trên' });
+    findings.push({
+      level: 'warn',
+      code: 'NOT_COMPRESSED',
+      msg: 'Chưa có KTX2/WebP/ASTC (thiếu basisu/astcenc/cwebp): ước tính dùng PNG nên là cận trên',
+    });
   }
   return {
     platform,
     findings,
     rows,
     chibi,
-    estimate: { assetBytes, lazyBytes, reservedMb, totalMb, limitMb, basis: useCompressed ? 'compressed' : 'png-upper-bound', enforced },
+    estimate: {
+      assetBytes,
+      lazyBytes,
+      reservedMb,
+      totalMb,
+      limitMb,
+      basis: useCompressed ? 'compressed' : 'png-upper-bound',
+      enforced,
+    },
     ok: !findings.some((f) => f.level === 'error'),
   };
 }
@@ -350,7 +420,10 @@ export function renderMarkdown(r: BudgetReport): string {
   lines.push(`| Asset procgen (${e.basis}) | ${(e.assetBytes / MB).toFixed(2)} MB |`);
   if (e.lazyBytes > 0) lines.push(`| Lazy atlas (not in the initial download) | ${(e.lazyBytes / MB).toFixed(2)} MB |`);
   lines.push(`| Engine + audio + dự phòng (docs/02) | ${e.reservedMb} MB |`);
-  if (r.chibi) lines.push(`| Người chơi: nhóm loco 1 hướng, tier full, ASTC (D71) | ${r.chibi.initialPlayerMB.full.toFixed(2)} MB |`);
+  if (r.chibi)
+    lines.push(
+      `| Người chơi: nhóm loco 1 hướng, tier full, ASTC (D71) | ${r.chibi.initialPlayerMB.full.toFixed(2)} MB |`,
+    );
   lines.push(`| **Ước tính** | **${e.totalMb.toFixed(2)} MB** |`);
   lines.push(`| Ngân sách | ${e.limitMb} MB${e.enforced ? '' : ' (không áp dụng cho nền tảng này)'} |`);
   if (r.chibi) lines.push('', renderChibiMarkdown(r.chibi));
