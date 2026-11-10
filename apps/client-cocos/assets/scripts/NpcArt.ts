@@ -64,6 +64,11 @@ export class NpcStandee {
     return this.entry.h * this.scale + REACH_PAD;
   }
 
+  /** Height of the art above the foot, world px (the name plate and the click area sit on it). */
+  get height(): number {
+    return this.entry.h * this.scale;
+  }
+
   /** Idle bob only: an NPC never moves and never faces anything (the art is front-facing). */
   update(dt: number): void {
     const o = stepMotion(this.motion, dt, { pos: { i: this.tile.i, j: this.tile.j }, hp: 1, alive: true });

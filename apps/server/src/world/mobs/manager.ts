@@ -16,6 +16,7 @@ import {
   COLLIDER_RADIUS_TILES,
   MOB_AI,
   MOB_BANDS,
+  MOB_STARTER_BAND,
   MOB_PACK_RADIUS,
   MOB_THREAT,
   MOB_ENTITY_KIND,
@@ -180,7 +181,7 @@ export class MobManager {
         let anchor: [number, number] = [0, 0];
         for (let k = 0; k < n; k++) {
           // pack leader: a point in the tier band; the other members within MOB_PACK_RADIUS of it (draw order: see makeSlot)
-          if (k % pack === 0) anchor = this.drawPoint(rect, def);
+          if (k % pack === 0) anchor = this.drawPoint(rect, def, k / pack < (g.starterPacks ?? 0));
           const home = k % pack === 0 ? anchor : this.drawNear(anchor, rect);
           // variants (D114): the packs of a normal mob alternate between its two elements (docs/10 "8 loại x 2 biến thể"); no RNG is drawn
           const variant = def.tier === 'normal' && def.elements.length > 1 ? Math.floor(k / pack) % 2 : 0;
@@ -274,20 +275,32 @@ export class MobManager {
   }
 
   /**
-   * A walkable point inside `rect` and inside the tier's distance band (D83). Up to SPAWN_ATTEMPTS tries (2 floats each);
+   * A walkable point inside `rect` and inside the tier's distance band (D83; the starter band of D125 for `starter` packs). Up to SPAWN_ATTEMPTS tries (2 floats each);
    * when none lands in the band the last WALKABLE point is used, else the rect centre.
    */
-  private drawPoint(rect: MobZone, def: MobDef): [number, number] {
-    const band = MOB_BANDS[def.tier];
+  private drawPoint(rect: MobZone, def: MobDef, wantStarter = false): [number, number] {
+    // a starter pack samples only the box around the centre that the starter band reaches (the band is a thin ring of the rect: sampling
+    // the whole rect would mostly miss it); when that box does not meet the zone rect (small map, custom zones) it is a normal pack
+    const reach = MOB_STARTER_BAND.maxFrac * this.radius;
+    const sI0 = Math.max(rect.i0, this.centre.i - reach);
+    const sI1 = Math.min(rect.i1, this.centre.i + reach);
+    const sJ0 = Math.max(rect.j0, this.centre.j - reach);
+    const sJ1 = Math.min(rect.j1, this.centre.j + reach);
+    const starter = wantStarter && sI0 < sI1 && sJ0 < sJ1;
+    const band = starter ? MOB_STARTER_BAND : MOB_BANDS[def.tier];
     const lo = band.minFrac * this.radius;
     const hi = band.maxFrac * this.radius;
     let walkable: [number, number] | null = null;
+    const i0 = starter ? sI0 : rect.i0;
+    const i1 = starter ? sI1 : rect.i1;
+    const j0 = starter ? sJ0 : rect.j0;
+    const j1 = starter ? sJ1 : rect.j1;
     for (let a = 0; a < SPAWN_ATTEMPTS; a++) {
       const [fa, r1] = rngFloat(this.rng);
       const [fb, r2] = rngFloat(r1);
       this.rng = r2;
-      const i = rect.i0 + fa * (rect.i1 - rect.i0);
-      const j = rect.j0 + fb * (rect.j1 - rect.j0);
+      const i = i0 + fa * (i1 - i0);
+      const j = j0 + fb * (j1 - j0);
       if (circleBlocked(this.grid, i, j, COLLIDER_RADIUS_TILES, 0, false)) continue;
       walkable = [i, j];
       const d = this.fromCentre(i, j);

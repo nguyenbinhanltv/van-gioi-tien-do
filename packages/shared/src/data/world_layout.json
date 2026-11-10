@@ -12,6 +12,7 @@
     { "id": "co_thu_trung_tam", "quadrant": [0, 1] },
     { "id": "doc_hoa_dam", "quadrant": [1, 1] }
   ],
+  "starterBand": { "minFrac": 0.15, "maxFrac": 0.22 },
   "zoneBorderCorners": 3,
   "plazaMarginTiles": 4,
   "clearingFrac": 0.22,

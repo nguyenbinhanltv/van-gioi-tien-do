@@ -18,6 +18,7 @@ export * from './ui/TutorialModel.js';
 export * from './ui/TradeModel.js';
 export * from './ui/SectModel.js';
 export * from './ui/FriendsModel.js';
+export * from './ui/QuestGuide.js';
 export * from './ui/QuestModel.js';
 export * from './ui/QuestText.js';
 export * from './ui/CraftModel.js';

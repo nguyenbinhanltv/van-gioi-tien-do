@@ -33,8 +33,8 @@ async function rig() {
   const node = new WorldNode({
     seed: 5,
     mapTiles: MAP,
-    // on top of npc_ve_binh (3 west, 3 south of the centre)
-    spawn: { i0: C - 3.2, j0: C + 2.8, side: 0.4 },
+    // on top of npc_ve_binh (6 west, 12 north of the centre, D125)
+    spawn: { i0: C - 6.2, j0: C - 12.2, side: 0.4 },
     mobs: true,
     combat: {},
     inventory,
@@ -98,7 +98,7 @@ describe('WorldNode feeds quests', () => {
     const node = new WorldNode({
       seed: 5,
       mapTiles: MAP,
-      spawn: { i0: C - 3.2, j0: C + 2.8, side: 0.4 },
+      spawn: { i0: C - 6.2, j0: C - 12.2, side: 0.4 },
       mobs: true,
       combat: {},
       inventory,

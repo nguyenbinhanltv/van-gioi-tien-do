@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
+  mobZoneAnchor,
+  mobZoneAt,
   DROP_TABLE,
   QUESTS,
   QUEST_DEFS,
@@ -117,9 +119,9 @@ describe('content table', () => {
       if (q.type === 'sect') expect(q.sectRequired).toBe(true);
     }
   });
-  it('NPC table: unique keys, all within a plaza', () => {
+  it('NPC table: unique keys, all within the Sơn Môn plaza (14 tiles of the map centre)', () => {
     expect(new Set(QUEST_NPCS.map((n) => n.key)).size).toBe(QUEST_NPCS.length);
-    for (const n of QUEST_NPCS) expect(Math.max(Math.abs(n.offset[0]), Math.abs(n.offset[1]))).toBeLessThanOrEqual(8);
+    for (const n of QUEST_NPCS) expect(Math.max(Math.abs(n.offset[0]), Math.abs(n.offset[1]))).toBeLessThanOrEqual(14);
   });
 });
 
@@ -198,5 +200,14 @@ describe('reward units', () => {
     expect(killMatches('mob_doc_tho', 'mob_hoi_lang', 'normal')).toBe(false);
     expect(killMatches('tier:elite', 'elite_lang_vuong', 'elite')).toBe(true);
     expect(killMatches('tier:boss', 'elite_lang_vuong', 'elite')).toBe(false);
+  });
+});
+
+describe('mobZoneAnchor (D125)', () => {
+  it.each([64, 128, 256])('is inside its own zone on a %i-tile map', (n) => {
+    for (const z of ['bia_rung', 'dam_lay_doc', 'co_thu_trung_tam', 'doc_hoa_dam'] as const) {
+      const a = mobZoneAnchor(z, n);
+      expect(mobZoneAt(a.i, a.j, n)).toBe(z);
+    }
   });
 });

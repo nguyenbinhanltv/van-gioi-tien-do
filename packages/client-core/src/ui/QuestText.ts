@@ -103,4 +103,15 @@ export const QUEST_NPC_KEY: Readonly<Record<string, StringKey>> = {
   'npc_ve_binh': 'quest.npc_ve_binh',
   'npc_thuong_nhan': 'quest.npc_thuong_nhan',
   'npc_chuong_mon': 'quest.npc_chuong_mon',
+  'npc_tho_ren': 'quest.npc_tho_ren',
+};
+
+/** The role line of an NPC's name plate (`Trưởng Lão · Luyện Đan`). */
+export const NPC_ROLE_KEY: Readonly<Record<string, StringKey>> = {
+  'npc_truong_lao_dan': 'npc.role.npc_truong_lao_dan',
+  'npc_su_huynh': 'npc.role.npc_su_huynh',
+  'npc_ve_binh': 'npc.role.npc_ve_binh',
+  'npc_thuong_nhan': 'npc.role.npc_thuong_nhan',
+  'npc_chuong_mon': 'npc.role.npc_chuong_mon',
+  'npc_tho_ren': 'npc.role.npc_tho_ren',
 };

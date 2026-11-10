@@ -45,3 +45,24 @@ export function mobZoneAt(i: number, j: number, mapTiles: number): MobLayoutZone
   if (east && south) return 'doc_hoa_dam';
   return null;
 }
+
+/**
+ * Where the first packs of a zone's starter mob live (D125), as a fraction of `R` like `MOB_BANDS`: a short walk from the spawn so the first
+ * kill quest is reachable in seconds. Applies only to spawn groups that set `starterPacks`. PLACEHOLDER (cần game designer duyệt).
+ */
+export const MOB_STARTER_BAND: { minFrac: number; maxFrac: number } = layout.starterBand;
+
+/**
+ * A tile in the middle of a mob zone's starter band on a `mapTiles` square map: the "go there" point of a zone objective (the zone
+ * rectangle's quadrant is `world_layout.json` `zones[].quadrant`). Used by the quest guidance arrow; not a gameplay rule.
+ */
+export function mobZoneAnchor(zone: MobLayoutZone, mapTiles: number): { i: number; j: number } {
+  const q = layout.zones.find((z) => z.id === zone)?.quadrant ?? [0, 0];
+  // inside the zone rectangle (see `mobZoneAt`): at least one tile past the margin on each axis, whatever the map size
+  const d = Math.max(
+    ((MOB_STARTER_BAND.minFrac + MOB_STARTER_BAND.maxFrac) / 2) * mobAreaHalfSize(mapTiles),
+    mobZoneMargin(mapTiles) + 1,
+  );
+  const c = mapTiles / 2;
+  return { i: c + (q[0] === 0 ? -d : d), j: c + (q[1] === 0 ? -d : d) };
+}
