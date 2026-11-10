@@ -110,6 +110,8 @@ Cảnh báo (Alertmanager hoặc Grafana alerting) ở MVP gửi vào **thông b
 
 ## 7. Báo cáo lỗi
 
+_[Cập nhật D110: báo cáo sập phía client đã làm: lô `POST /crash/report` (giới hạn kích thước và tốc độ), lưu JSONL cục bộ, số "phiên không sập %" và top crash trên dashboard (`/dashboard`, trường `crash` của `summary.json`); thay cho Sentry/GlitchTip ở giai đoạn local-only (D27). Chi tiết: DECISIONS D110.]_
+
 | Nguồn                                   | Cách làm (MVP)                                                                                                                                                                                                                | Sau MVP                           |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
 | Server (ngoại lệ chưa bắt, worker chết) | `process.on('uncaughtException'/'unhandledRejection')` → log `fatal` + metric + thoát có kiểm soát (trình giám sát khởi động lại); worker chết → khởi động lại ([22 §3.7](22-server-modules.md))                              | Sentry/GlitchTip                  |

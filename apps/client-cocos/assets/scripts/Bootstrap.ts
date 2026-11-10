@@ -47,6 +47,7 @@ import { CraftPanel } from './CraftPanel';
 import { MarketPanel } from './MarketPanel';
 import { FirstSessionHud, firstSessionRequested } from './FirstSessionHud';
 import { TribulationFx } from './TribulationFx';
+import { installCrashReporting, setCrashClass } from './CrashReport';
 import { pickClass, rememberClass, rememberedClass } from './ClassPicker';
 
 const { ccclass } = _decorator;
@@ -140,6 +141,7 @@ export class Bootstrap extends Component {
       return;
     }
     console.log('[vgtd] Bootstrap.start');
+    installCrashReporting();
     try {
       await this.build();
       this.ready = true;
@@ -461,6 +463,7 @@ export class Bootstrap extends Component {
     if (!path) return;
     this.classApplied = true;
     rememberClass(online.accountKey, path);
+    setCrashClass(path);
     const chibiId = chibiIdOfPath(path);
     if (chibiId) this.chibi.setClass(chibiId);
     if (this.combatOn && !this.combat) {

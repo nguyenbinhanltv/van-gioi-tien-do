@@ -1,5 +1,6 @@
 import { AuthService, type AuthOptions } from './auth/accounts.js';
 import { createGateway, type GatewayHandle, type GatewayOptions } from './gateway.js';
+import { CrashService, type CrashOptions } from './crash/index.js';
 import { ChatService, type ChatOptions } from './chat/service.js';
 import { PartyService } from './party/service.js';
 import { TutorialService, type TutorialOptions } from './tutorial/service.js';
@@ -34,6 +35,8 @@ export interface ServerOptions {
   sect?: { store?: SectStore; ledger?: Ledger } | false;
   /** friends options (D96): the persistence store (default in memory), or `false` to run without friends */
   friends?: { store?: FriendStore } | false;
+  /** crash report intake (D110): options, or `false` to run without it (default: enabled, in memory unless `dir` is given) */
+  crash?: CrashOptions | false;
   /**
    * Vạn Bảo Lâu options (D112). The market needs an inventory (items and the ledger): it is created whenever `world.inventory` exists, unless
    * `false`. `store` = where the book is kept (default in memory), `report` / `now` / `durable` as in `MarketServiceOptions`.
@@ -53,6 +56,7 @@ export interface RunningServer {
   auth: AuthService;
   world: WorldNode;
   gateway: GatewayHandle;
+  crash?: CrashService;
   port: number;
   stop(): Promise<void>;
 }
@@ -140,8 +144,10 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     ...(telemetry ? { telemetry } : {}),
   });
   if (telemetry && world.inventory) telemetry.attachLedger(world.inventory.ledger);
+  const crash = opts.crash === false ? undefined : new CrashService(opts.crash);
   const gateway = createGateway(auth, world, {
     ...opts.gateway,
+    ...(crash ? { crash } : {}),
     ...(telemetry ? { telemetry } : {}),
     ...(opts.dashboardToken ? { dashboardToken: opts.dashboardToken } : {}),
   });
@@ -154,6 +160,7 @@ export async function startServer(opts: ServerOptions = {}): Promise<RunningServ
     auth,
     world,
     gateway,
+    ...(crash ? { crash } : {}),
     port: gateway.port(),
     stop: async () => {
       world.stop();

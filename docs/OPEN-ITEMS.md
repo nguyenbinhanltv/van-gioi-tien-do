@@ -662,6 +662,15 @@ Còn mở / lưu ý:
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
 
+## Báo cáo sập (D110): còn mở
+
+- **Giới hạn của endpoint nằm trong `CRASH_REPORT`** (`@vgtd/shared`), không dùng ngân sách theo lớp của D101 (#256); gộp lại nếu muốn một nguồn. Số liệu crash đã nằm trên dashboard D109 (`crash` của `/dashboard/summary.json`).
+- **Id bản dựng**: client gửi `dev` trừ khi trang đặt `globalThis.__VGTD_BUILD__`; `build-web` / `release-stage` chưa đặt (cần số commit hoặc phiên bản để chia crash-free % theo bản).
+- **Chưa có source map**: stack là mã đã gói; trước beta cần ánh xạ ngược (hoặc gửi bản dựng không nén cho tester) để top-crash đọc được.
+- **Lỗi engine không qua `console.error`** (crash native, WebGL context lost, hết bộ nhớ làm tab bị giết) không có sự kiện nào; tab bị giết chỉ thấy là phiên "bỏ dở" (tính là không sập), nên crash-free % có thể **lạc quan**. Cần heartbeat hoặc dấu "lần chạy trước không kết thúc sạch" (localStorage) để tính phiên bị giết.
+- **Server chưa có nhóm báo cáo cho lỗi server** (`uncaughtException` ở docs/27 §7 vẫn chỉ log); D110 chỉ đo phiên phía client.
+- **Giới hạn kho crash (đã làm)**: bộ nhớ giữ tối đa 20 000 bản ghi, mỗi ngày tối đa 16 MiB (lô vượt bị bỏ và đếm), giữ 14 ngày, mỗi lần đọc tối đa 48 MiB, kết quả tổng hợp được nhớ đệm 10 giây. Chưa có cảnh báo khi bản ghi bị bỏ (số đếm `storeDropped` chỉ có trong mã).
+
 ## i18n tiếng Việt (D104): còn mở
 
 - **Tên trong dữ liệu `@vgtd/shared` chưa qua bảng chuỗi**: `REALM_NAMES` / `SUB_STAGE_NAMES` / `stageLabel` (hiện ở HUD tu luyện), tên quái (`MOB_DEFS`), tên vật phẩm và kỹ năng. Đây là dữ liệu dùng chung với server (bảng số liệu docs/07, docs/10, docs/11), không phải chuỗi trong mã client; cần khóa `realm.<n>.name`, `mob.<key>.name`, `item.<key>.name`, `skill.<id>.name` (docs/19 §2.2) và client dịch theo khóa khi có ngôn ngữ thứ hai.
