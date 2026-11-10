@@ -26,6 +26,7 @@ import {
   STONE_VALUE,
   breakthroughSuccess,
   craftSuccessChance,
+  failedMaterialLoss,
   promotionChances,
   referenceCost,
   directTradeTax,
@@ -540,14 +541,14 @@ export function runSim(params: SimParams): SimResult {
           if (rng.next() < pOk) {
             p.mats -= matNeed;
             item('mats', -matNeed);
-            activity.craft.cost += matNeed * P.matUnitValue * matMult * 0.6;
+            activity.craft.cost += matNeed * P.matUnitValue * matMult; // a success consumes every material
             let q = 0;
             while (q < 5 && rng.next() < promotionChances(P.craftScore)[q]!) q++;
             q = Math.min(q, ceil);
             p.pills[tr]![q]!++;
             item('breakthrough_pill', 1);
           } else {
-            const lost = Math.ceil(matNeed * 0.6);
+            const lost = failedMaterialLoss(matNeed); // docs/13 s4.4 via the shared alchemy module (ALCHEMY.FAIL_DESTROY)
             p.mats -= lost;
             item('mats', -lost);
             activity.craft.cost += lost * P.matUnitValue * matMult;

@@ -262,7 +262,7 @@ craft ███░░░░░░░░░░░░░░░░░░░░░�
 
 ### Cảnh báo mức thông tin
 
-- **[thông tin] Chế tạo: lãi ròng -4.582 hạ phẩm mỗi giờ chế (săn thường 973).** Doanh thu sau thuế 5.610.891, chi phí (phí lò + nguyên liệu theo giá chợ) 19.484.837. Lãi âm nghĩa là nguyên liệu đắt hơn đan bán được ở giá chợ trong mô hình này.
+- **[thông tin] Chế tạo: lãi ròng -8.180 hạ phẩm mỗi giờ chế (săn thường 973).** Doanh thu sau thuế 5.610.891, chi phí (phí lò + nguyên liệu theo giá chợ) 30.379.177. Lãi âm nghĩa là nguyên liệu đắt hơn đan bán được ở giá chợ trong mô hình này.
 - **[thông tin] Nhịp tu luyện: nhóm regular qua cổng Kết Anh (vào Nguyên Anh) ở ngày trung vị 21 (79,9% nhóm tới được).** Tu vi chỉ tăng khi tu luyện: tổng 41 nấc ≈ 47 giờ thuần (docs/12 §4.2) và 17 nấc đầu ≈ 5,6 giờ; thời gian chờ chủ yếu là đan đột phá, không phải tu vi. Đây là hệ quả trực tiếp của công thức 07 §5; game designer cần xem có muốn nhịp này không.
 - **[thông tin] Mâu thuẫn trong docs/12 §4.2: nhiệm vụ nhật "0,25 giờ farm quy chuẩn" = 45 hạ phẩm ở r = 1, nhưng ghi chú ghi "≈ 90".** 0,25 × 150 × 1,2 = 45. Mô phỏng dùng đơn vị (45).
 
