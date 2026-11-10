@@ -78,9 +78,8 @@ export class PositionSmoother {
   private ready = false;
   /** Tiles per second the smoothed position moved during the last `update`. */
   speed = 0;
-  /** Smoothed tile-space displacement of the last `update` (for facing). */
-  di = 0;
-  dj = 0;
+  private di = 0;
+  private dj = 0;
 
   constructor(
     private readonly tauSec: number,
