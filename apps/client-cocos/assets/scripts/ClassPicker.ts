@@ -6,6 +6,12 @@
 import { core, shared } from './vendor/vgtd.mjs';
 import type { KeyArtUrls } from './PropArt';
 
+/** The class name text of a path id (`'kiem'` -> Kiếm tu), '' for an unknown path. */
+export function classNameOfPath(path: string | undefined): string {
+  const k = path ? CLASS_KEYS[path] : undefined;
+  return k ? core.t(k.name) : '';
+}
+
 /** String keys of the six classes, by `shared.PATHS` id: name and weapon / element hint (docs/11 §4). */
 const CLASS_KEYS: Readonly<Record<string, { name: core.StringKey; hint: core.StringKey }>> = {
   kiem: { name: 'class.kiem.name', hint: 'class.kiem.hint' },

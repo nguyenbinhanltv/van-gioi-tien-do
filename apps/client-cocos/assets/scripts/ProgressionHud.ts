@@ -191,8 +191,28 @@ export class ProgressionHud {
     return { root, bg, text, x, y, frame };
   }
 
-  /** Re-anchor to the canvas size (design units): top-right corner, 8 px margin. */
+  /** Put the panel at a design rect of the shared HUD layout (client-core `computeHudLayout`, `cultivation`): width sets the scale. */
+  place(rect: { x: number; y: number; w: number; h: number } | null): void {
+    this.rect = rect;
+    this.layout(this.canvasW, this.canvasH);
+  }
+
+  private rect: { x: number; y: number; w: number; h: number } | null = null;
+  private canvasW = 1280;
+  private canvasH = 720;
+
+  /** Re-anchor to the canvas size (design units): the layout rect when there is one, else the top-right corner, 8 px margin. */
   layout(canvasW: number, canvasH: number): void {
+    this.canvasW = canvasW;
+    this.canvasH = canvasH;
+    const r = this.rect;
+    if (r) {
+      this.scale = r.w / PANEL_W;
+      this.root.setScale(this.scale, this.scale, 1);
+      // the panel's origin is its top-right corner
+      this.root.setPosition(-canvasW / 2 + r.x + r.w, canvasH / 2 - r.y, 0);
+      return;
+    }
     this.scale = Math.min(1, (canvasW - 2 * MARGIN) / PANEL_W);
     this.root.setScale(this.scale, this.scale, 1);
     this.root.setPosition(canvasW / 2 - MARGIN, canvasH / 2 - MARGIN, 0);

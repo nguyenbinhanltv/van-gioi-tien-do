@@ -167,8 +167,12 @@ export class ChatBox {
       minHeight: '0',
       overflow: 'hidden',
       padding: '4px 6px',
-      background: 'rgba(8,10,18,0.45)',
-      borderRadius: '6px 6px 0 0',
+      background: 'linear-gradient(180deg, rgba(26,40,36,0.62), rgba(10,16,18,0.62))',
+      border: '2px solid #c9a24a', // the HUD's framed look (HudChrome.frameStyle)
+      borderBottom: '0',
+      boxShadow: 'inset 0 0 0 1px rgba(255,236,170,0.22), inset 0 0 10px rgba(0,0,0,0.55)',
+      boxSizing: 'border-box',
+      borderRadius: '8px 8px 0 0',
       textShadow: '0 1px 2px #000',
       wordBreak: 'break-word',
       display: 'flex',
@@ -191,8 +195,8 @@ export class ChatBox {
       font: '13px sans-serif',
       color: '#f0f0f5',
       background: 'rgba(8,10,18,0.75)',
-      border: '1px solid #556',
-      borderRadius: '0 0 6px 6px',
+      border: '2px solid #c9a24a',
+      borderRadius: '0 0 8px 8px',
       outline: 'none',
     } as Partial<CSSStyleDeclaration>);
     // the channel the next line goes to, as a round icon inside the input (World / Zone / whisper / party; docs/05 chat channels): only when the

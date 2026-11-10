@@ -822,3 +822,12 @@ Chợ cơ bản đã cài (ký quỹ, tìm, mua nguyên tử, hủy, hết hạn
 1. **Viền hệ (rim)** quanh standee cần shader / vật liệu riêng: bỏ qua để giữ giới hạn draw call; hiện chỉ có màu đỉnh nhạt (22%, cần duyệt bằng mắt trên máy thật, đặc biệt hệ Kim gần trắng).
 2. **Chữ hệ trên thanh máu đầu quái** và **icon hệ**: mới có `[KIM]` ở khung mục tiêu; icon khi bộ icon trạng thái / hệ có.
 3. Hệ của **người chơi** (hệ chính của lớp) và NPC chưa gửi trên `aoi_enter` (khả năng mở rộng cùng nửa byte cao).
+
+## D123 — HUD và menu (P0 polish, 2026-11-10)
+
+1. **Panel Kỹ năng** chưa có: nút trong thanh menu đang mờ. Cần quyết phím (`K` đang là Tông môn, D98) và nội dung (cây kỹ năng, gán thanh kỹ năng).
+2. **Cửa sổ Tổ đội** chưa có (chỉ có khung đội tự hiện): nút Tổ đội mới mở chat với `/invite `.
+3. **Phím theo yêu cầu**: chủ dự án muốn Bản đồ = `M`, Kỹ năng = `K`, nhưng `M` là Đả tọa (D76) và `K` là Tông môn (D98); hiện giữ phím cũ (Bản đồ `L`). Cần chủ dự án chọn có đổi phím cũ hay không.
+4. **Bảng Nhân vật** chỉ có số client đã biết (tên, đạo lộ, cảnh giới, tu vi, HP / MP, Nghiệp Lực / Đạo Tâm); chưa có chỉ số chi tiết (cần hệ trang bị).
+5. **Cài đặt**: âm lượng mới được lưu (chưa có âm thanh), ngôn ngữ chỉ có Tiếng Việt (chọn khác bị khóa).
+6. Khung viền DOM (minimap, tracker, chat, khung nhân vật, menu) dựng bằng CSS vàng / ngọc, chưa dùng 9-slice Gemini (chỉ bảng tu vi và nút của nó dùng); nếu muốn đồng bộ art cần xuất khung ra URL cho DOM.
