@@ -2,6 +2,7 @@
 import { jsonLineSink } from './world/security-log.js';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { FileInviteLog, InviteService, defaultInviteFile } from './invites/index.js';
 import { createBackup, openFileStores } from './persistence/index.js';
 import { TelemetryService, openTelemetryFiles } from './telemetry/index.js';
 import { InventoryService } from './world/inventory/index.js';
@@ -53,6 +54,19 @@ if (process.env.MAP_FILE) {
     `[vgtd/server] terrain from ${process.env.MAP_FILE}: ${t.width}x${t.height}, ${t.rows.join('').split('#').length - 1} blocked tiles`,
   );
 }
+// BETA_INVITE_ONLY=1 (D111): registration needs a single-use invitation code minted with `npm run invites -w @vgtd/server -- mint`; the codes
+// live (hashed) in INVITES_FILE (default <DATA_DIR>/invites.jsonl). Existing accounts keep logging in without a code.
+const inviteOnly = flag(process.env.BETA_INVITE_ONLY);
+const invites = inviteOnly
+  ? new InviteService({
+      log: new FileInviteLog(defaultInviteFile(process.env)),
+      onError: (e) => console.error('[vgtd/server] invite log write failed:', e),
+    })
+  : undefined;
+if (invites)
+  console.log(
+    `[vgtd/server] BETA_INVITE_ONLY: registration needs an invitation code (${invites.list().filter((r) => r.status === 'unused').length} unused)`,
+  );
 // the Son Mon sect buildings (D118) block their tiles on the server grid, exactly the tiles the client draws and blocks them on (shared
 // SECT_BUILDINGS); SECT_BUILDINGS=0 leaves the map as the terrain file / open map says (A/B measurements, old clients)
 let grid: TileGrid | undefined;
@@ -97,7 +111,7 @@ const srv = await startServer({
         )
       : undefined,
   },
-  auth: { registerPerIpPerDay, ...(stores ? { store: stores.accounts } : {}) },
+  auth: { registerPerIpPerDay, ...(invites ? { invites } : {}), ...(stores ? { store: stores.accounts } : {}) },
   ...(stores ? { friends: { store: stores.friends }, quests: { store: stores.quests } } : {}),
   ...(stores ? { sect: { store: stores.sect, ledger: stores.ledger } } : {}),
   ...(stores ? { friends: { store: stores.friends } } : {}),

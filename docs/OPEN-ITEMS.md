@@ -662,6 +662,14 @@ Còn mở / lưu ý:
 - Trạng thái online chỉ biết trong một World Node (một tiến trình); nhiều node cần kênh trạng thái chung (docs/20 / Redis).
 - Hiển thị: bảng bạn bè chưa có icon lớp, chưa có chấm "bận / đang trong tổ đội"; chỉ kiểm tra bằng smoke thô, chưa thử trên màn hình cảm ứng (chưa có nút mở bảng trên cảm ứng: dùng `/friends`).
 
+## Mời tester (D111): còn mở
+
+- **Giao mã ra ngoài là việc của người vận hành**: CLI chỉ in mã; không có e-mail, không có danh sách "mã nào gửi cho ai" trong hệ thống (cố ý, để không lưu PII). Người vận hành tự ghi id (không phải mã) cạnh người nhận nếu cần thu hồi.
+- **Chưa có ô nhập mã trên màn hình đăng nhập**: tester dùng liên kết có `?invite=<mã>`. Ô nhập cần chuỗi người chơi mới (qua `t()`, D104) và game designer duyệt luồng.
+- **Một tài khoản = một mã**, không có mã nhiều lần dùng hay mã theo nhóm (đúng yêu cầu `max uses = 1`); nếu cần cho sự kiện thì quyết định riêng.
+- **Hai tiến trình cùng ghi một nhật ký chỉ-thêm** an toàn ở quy mô người vận hành; chưa có khóa tệp. Một tiến trình server (D96 cũng giả định vậy); nhiều World Node cần kho mã dùng chung (PostgreSQL, docs/23).
+- **Mã bị lộ trước khi dùng** (đăng lên diễn đàn): chỉ thu hồi được thủ công (`revoke`); chưa có phát hiện bất thường. Giới hạn tốc độ theo IP chỉ chặn dò mã (80 bit: không dò được), không chặn người dùng mã bị lộ.
+
 ## D107 — nhiệm vụ: còn mở
 
 - Chưa làm: chi tuyến (`side`), nhiệm vụ bí cảnh theo mùa, `event`, `tutorial` ([16-onboarding.md](16-onboarding.md)), và **nhân quả / nhánh Chính-Tà-Ma** của chương 2 (`docs/12` §3.4): cần Nghiệp Lực phía server (hiện `karma` chỉ nằm trong bản ghi tiến trình, chưa có nguồn cộng / trừ). Chương 2-3 chỉ có dữ liệu thẳng một mạch; hai chương này chưa chơi thử được vì chưa có người chơi Trúc Cơ.

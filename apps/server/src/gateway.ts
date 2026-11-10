@@ -1,7 +1,7 @@
 /**
  * Gateway: HTTP auth endpoints (docs/25: credentials never travel over the WebSocket URL) plus the WebSocket entry.
  *
- *  POST /auth/register  {username,password}  -> 201 {accountId}
+ *  POST /auth/register  {username,password,inviteCode?}  -> 201 {accountId}; with BETA_INVITE_ONLY (D111) `inviteCode` is required: 403 invite_invalid / 429 invite_limited
  *  POST /auth/login     {username,password}  -> 200 {token, accountId, sessionId, expiresAtS}
  *  OPTIONS *            -> 204 CORS preflight (only for origins in GatewayOptions.corsOrigins)
  *  GET  /health         -> 200 {ok, players, tick}
@@ -108,7 +108,12 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           return json(res, 200, opts.crash ? { ...summary, crash: opts.crash.summary() } : summary, headers);
         }
         if (req.method === 'GET' && req.url === '/health') {
-          return json(res, 200, { ok: true, players: world.clients.size, tick: world.world.tick });
+          return json(res, 200, {
+            ok: true,
+            players: world.clients.size,
+            tick: world.world.tick,
+            inviteOnly: auth.inviteOnly,
+          });
         }
         if (opts.crash) {
           const path = (req.url ?? '').split('?')[0];
@@ -127,10 +132,10 @@ export function createGateway(auth: AuthService, world: WorldNode, opts: Gateway
           }
         }
         if (req.method === 'POST' && (req.url === '/auth/register' || req.url === '/auth/login')) {
-          const body = (await readJson(req)) as { username?: unknown; password?: unknown } | null;
+          const body = (await readJson(req)) as { username?: unknown; password?: unknown; inviteCode?: unknown } | null;
           if (!body || typeof body !== 'object') throw new AuthError(400, 'bad_json', 'invalid JSON');
           if (req.url === '/auth/register') {
-            const r = await auth.register(body.username, body.password, remoteIp(req));
+            const r = await auth.register(body.username, body.password, remoteIp(req), body.inviteCode);
             opts.telemetry?.emitAccount(r.accountId, 'account.register', { method: 'password' });
             return json(res, 201, r);
           }
