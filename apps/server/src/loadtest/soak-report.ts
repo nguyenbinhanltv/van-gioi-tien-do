@@ -79,7 +79,6 @@ export class TickHistogram {
   }
 }
 
-/** One sampling window of the run. */
 /** File sizes of the file store at one sample (soak runs with `--store file`). */
 export interface StoreSample {
   /** bytes per document file (`accounts.json`, ...), plus `journal.json` while it exists */
@@ -103,6 +102,7 @@ export interface BackupSample {
   error?: string;
 }
 
+/** One sampling window of the run. */
 export interface SoakSample {
   /** seconds since the measurement started */
   tSec: number;

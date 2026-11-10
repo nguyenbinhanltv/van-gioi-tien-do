@@ -361,7 +361,6 @@ function runBackup(verify: boolean): Promise<BackupSample> {
 }
 let backupInFlight: Promise<void> | null = null;
 let backupDone: BackupSample | undefined;
-const allBackups: BackupSample[] = [];
 let fileWrites0 = { ...fileWriteStats };
 let exitCode = 0;
 let stopRequested = false;
@@ -413,7 +412,8 @@ try {
       (globalThis as { gc?: () => void }).gc!();
       inForcedGc = false;
     }
-    windowLoop.reset(); // after the forced GC: its pause is not the game's
+    if (useGc) await sleep(25); // the delay of a blocked timer is recorded when it fires, after the pause: let the forced GC's one land first
+    windowLoop.reset(); // ... so it is thrown away here and the pause is not counted as the game's lag
     const mem = process.memoryUsage();
     const m1 = srv.world.metrics;
     const honest = s.clients;
@@ -461,7 +461,6 @@ try {
       backupInFlight = runBackup(false)
         .then((r) => {
           backupDone = r;
-          allBackups.push(r);
         })
         .finally(() => {
           backupInFlight = null;
