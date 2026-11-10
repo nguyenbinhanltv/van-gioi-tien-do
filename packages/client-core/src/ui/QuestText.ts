@@ -25,6 +25,18 @@ export const QUEST_NAME_KEY: Readonly<Record<string, StringKey>> = {
   'q_weekly_tru_ma': 'quest.q_weekly_tru_ma.name',
   'q_sect_tuan_tra': 'quest.q_sect_tuan_tra.name',
   'q_sect_thanh_loc': 'quest.q_sect_thanh_loc.name',
+  'q_c2_nhan_lenh': 'quest.q_c2_nhan_lenh.name',
+  'q_c2_bia_rung': 'quest.q_c2_bia_rung.name',
+  'q_c2_vao_dam': 'quest.q_c2_vao_dam.name',
+  'q_c2_doc_chu': 'quest.q_c2_doc_chu.name',
+  'q_c2_doc_thiem': 'quest.q_c2_doc_thiem.name',
+  'q_c2_thu_thap': 'quest.q_c2_thu_thap.name',
+  'q_c2_thiem_vuong': 'quest.q_c2_thiem_vuong.name',
+  'q_c3_tam_tinh': 'quest.q_c3_tam_tinh.name',
+  'q_c3_co_can': 'quest.q_c3_co_can.name',
+  'q_c3_huyet_diep': 'quest.q_c3_huyet_diep.name',
+  'q_c3_co_can_mau': 'quest.q_c3_co_can_mau.name',
+  'q_c3_kim_dan': 'quest.q_c3_kim_dan.name',
 };
 
 export const QUEST_DESC_KEY: Readonly<Record<string, StringKey>> = {
@@ -47,6 +59,18 @@ export const QUEST_DESC_KEY: Readonly<Record<string, StringKey>> = {
   'q_weekly_tru_ma': 'quest.q_weekly_tru_ma.desc',
   'q_sect_tuan_tra': 'quest.q_sect_tuan_tra.desc',
   'q_sect_thanh_loc': 'quest.q_sect_thanh_loc.desc',
+  'q_c2_nhan_lenh': 'quest.q_c2_nhan_lenh.desc',
+  'q_c2_bia_rung': 'quest.q_c2_bia_rung.desc',
+  'q_c2_vao_dam': 'quest.q_c2_vao_dam.desc',
+  'q_c2_doc_chu': 'quest.q_c2_doc_chu.desc',
+  'q_c2_doc_thiem': 'quest.q_c2_doc_thiem.desc',
+  'q_c2_thu_thap': 'quest.q_c2_thu_thap.desc',
+  'q_c2_thiem_vuong': 'quest.q_c2_thiem_vuong.desc',
+  'q_c3_tam_tinh': 'quest.q_c3_tam_tinh.desc',
+  'q_c3_co_can': 'quest.q_c3_co_can.desc',
+  'q_c3_huyet_diep': 'quest.q_c3_huyet_diep.desc',
+  'q_c3_co_can_mau': 'quest.q_c3_co_can_mau.desc',
+  'q_c3_kim_dan': 'quest.q_c3_kim_dan.desc',
 };
 
 export const QUEST_TARGET_KEY: Readonly<Record<string, StringKey>> = {
@@ -64,6 +88,13 @@ export const QUEST_TARGET_KEY: Readonly<Record<string, StringKey>> = {
   'dam_lay_doc': 'quest.target.dam_lay_doc',
   'co_thu_trung_tam': 'quest.target.co_thu_trung_tam',
   'doc_hoa_dam': 'quest.target.doc_hoa_dam',
+  'mob_thanh_xa': 'quest.target.mob_thanh_xa',
+  'mob_doc_chu': 'quest.target.mob_doc_chu',
+  'mob_doc_thiem': 'quest.target.mob_doc_thiem',
+  'elite_thiem_vuong': 'quest.target.elite_thiem_vuong',
+  'mob_co_can': 'quest.target.mob_co_can',
+  'mob_huyet_diep': 'quest.target.mob_huyet_diep',
+  'elite_co_can_mau': 'quest.target.elite_co_can_mau',
 };
 
 export const QUEST_NPC_KEY: Readonly<Record<string, StringKey>> = {

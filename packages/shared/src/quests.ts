@@ -217,7 +217,91 @@ export const QUEST_DEFS: readonly QuestDef[] = [
     objectives: [{ kind: 'breakthrough' }],
     rewards: { cultMinutes: 4, stoneWildHours: 0.2, items: [{ item: 'breakthrough_pill', count: 1, quality: 0 }] },
   },
-  // ---------------------------------------------------------------- chapter 2: Trúc Cơ Thí Luyện (data only)
+  // ---------------------------------------------------------------- chapter 2: Trúc Cơ Thí Luyện (Mở 3 / Thân 4 / Kết 3, docs/12 §3.3)
+  {
+    id: 'q_c2_nhan_lenh',
+    type: 'main',
+    chapter: 2,
+    giver: CM,
+    turnIn: CM,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c1_dot_pha'],
+    objectives: [{ kind: 'talk', npc: CM }],
+    rewards: { cultMinutes: 1, stoneWildHours: 0.05, items: [{ item: 'heal_pill', count: 2 }] },
+  },
+  {
+    id: 'q_c2_bia_rung',
+    type: 'main',
+    chapter: 2,
+    giver: VB,
+    turnIn: VB,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c2_nhan_lenh'],
+    objectives: [{ kind: 'kill', target: 'mob_thanh_xa', count: 6 }],
+    rewards: { cultMinutes: 2, stoneWildHours: 0.08 },
+  },
+  {
+    id: 'q_c2_vao_dam',
+    type: 'main',
+    chapter: 2,
+    giver: VB,
+    turnIn: VB,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c2_bia_rung'],
+    objectives: [{ kind: 'reach', zone: 'dam_lay_doc' }],
+    rewards: { cultMinutes: 2, stoneWildHours: 0.08 },
+  },
+  {
+    id: 'q_c2_doc_chu',
+    type: 'main',
+    chapter: 2,
+    giver: TL,
+    turnIn: TL,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c2_vao_dam'],
+    objectives: [{ kind: 'kill', target: 'mob_doc_chu', count: 6 }],
+    rewards: { cultMinutes: 2, stoneWildHours: 0.1 },
+  },
+  {
+    id: 'q_c2_doc_thiem',
+    type: 'main',
+    chapter: 2,
+    giver: TL,
+    turnIn: TL,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c2_doc_chu'],
+    objectives: [{ kind: 'kill', target: 'mob_doc_thiem', count: 5 }],
+    rewards: { cultMinutes: 2, stoneWildHours: 0.1 },
+  },
+  {
+    id: 'q_c2_thu_thap',
+    type: 'main',
+    chapter: 2,
+    giver: TN,
+    turnIn: TN,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c2_doc_thiem'],
+    objectives: [{ kind: 'collect', item: 'craft_material', count: 6 }],
+    rewards: { cultMinutes: 2, stoneWildHours: 0.1 },
+  },
+  {
+    id: 'q_c2_thiem_vuong',
+    type: 'main',
+    chapter: 2,
+    giver: TL,
+    turnIn: TL,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c2_thu_thap'],
+    objectives: [{ kind: 'kill', target: 'elite_thiem_vuong', count: 1 }],
+    rewards: { cultMinutes: 2, stoneWildHours: 0.1 },
+  },
   {
     id: 'q_c2_bi_canh',
     type: 'main',
@@ -226,9 +310,9 @@ export const QUEST_DEFS: readonly QuestDef[] = [
     turnIn: TL,
     repeat: 'none',
     minRealm: 2,
-    after: ['q_c1_dot_pha'],
+    after: ['q_c2_thiem_vuong'],
     objectives: [{ kind: 'reach', zone: 'doc_hoa_dam' }],
-    rewards: { cultMinutes: 6, stoneWildHours: 0.2 },
+    rewards: { cultMinutes: 2, stoneWildHours: 0.1 },
   },
   {
     id: 'q_c2_doc_nguyen',
@@ -240,7 +324,7 @@ export const QUEST_DEFS: readonly QuestDef[] = [
     minRealm: 2,
     after: ['q_c2_bi_canh'],
     objectives: [{ kind: 'kill', target: 'tier:elite', count: 3 }],
-    rewards: { cultMinutes: 8, stoneWildHours: 0.3 },
+    rewards: { cultMinutes: 2, stoneWildHours: 0.12 },
   },
   {
     id: 'q_c2_ho_vuong',
@@ -252,9 +336,57 @@ export const QUEST_DEFS: readonly QuestDef[] = [
     minRealm: 2,
     after: ['q_c2_doc_nguyen'],
     objectives: [{ kind: 'kill', target: 'boss_ho_vuong', count: 1 }],
-    rewards: { cultMinutes: 12, stoneWildHours: 0.5 },
+    rewards: { cultMinutes: 3, stoneWildHours: 0.15, items: [{ item: 'heal_pill', count: 3 }] },
   },
-  // ---------------------------------------------------------------- chapter 3: Tâm Ma (data only)
+  // ---------------------------------------------------------------- chapter 3: Tâm Ma (7 quests; the last one is the major breakthrough, D97)
+  {
+    id: 'q_c3_tam_tinh',
+    type: 'main',
+    chapter: 3,
+    giver: SH,
+    turnIn: SH,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c2_ho_vuong'],
+    objectives: [{ kind: 'talk', npc: SH }],
+    rewards: { cultMinutes: 1, stoneWildHours: 0.05 },
+  },
+  {
+    id: 'q_c3_co_can',
+    type: 'main',
+    chapter: 3,
+    giver: SH,
+    turnIn: SH,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c3_tam_tinh'],
+    objectives: [{ kind: 'kill', target: 'mob_co_can', count: 6 }],
+    rewards: { cultMinutes: 3, stoneWildHours: 0.1 },
+  },
+  {
+    id: 'q_c3_huyet_diep',
+    type: 'main',
+    chapter: 3,
+    giver: SH,
+    turnIn: SH,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c3_co_can'],
+    objectives: [{ kind: 'kill', target: 'mob_huyet_diep', count: 5 }],
+    rewards: { cultMinutes: 3, stoneWildHours: 0.1 },
+  },
+  {
+    id: 'q_c3_co_can_mau',
+    type: 'main',
+    chapter: 3,
+    giver: SH,
+    turnIn: SH,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c3_huyet_diep'],
+    objectives: [{ kind: 'kill', target: 'elite_co_can_mau', count: 1 }],
+    rewards: { cultMinutes: 3, stoneWildHours: 0.15 },
+  },
   {
     id: 'q_c3_tam_ma',
     type: 'main',
@@ -263,9 +395,9 @@ export const QUEST_DEFS: readonly QuestDef[] = [
     turnIn: SH,
     repeat: 'none',
     minRealm: 2,
-    after: ['q_c2_ho_vuong'],
+    after: ['q_c3_co_can_mau'],
     objectives: [{ kind: 'cultivate', minutes: 10 }],
-    rewards: { cultMinutes: 10, stoneWildHours: 0.3 },
+    rewards: { cultMinutes: 4, stoneWildHours: 0.15 },
   },
   {
     id: 'q_c3_hau_son',
@@ -277,7 +409,19 @@ export const QUEST_DEFS: readonly QuestDef[] = [
     minRealm: 2,
     after: ['q_c3_tam_ma'],
     objectives: [{ kind: 'kill', target: 'boss_co_mang', count: 1 }],
-    rewards: { cultMinutes: 14, stoneWildHours: 0.5 },
+    rewards: { cultMinutes: 4, stoneWildHours: 0.2 },
+  },
+  {
+    id: 'q_c3_kim_dan',
+    type: 'main',
+    chapter: 3,
+    giver: TL,
+    turnIn: TL,
+    repeat: 'none',
+    minRealm: 2,
+    after: ['q_c3_hau_son'],
+    objectives: [{ kind: 'breakthrough' }],
+    rewards: { cultMinutes: 1, stoneWildHours: 0.1, items: [{ item: 'heal_pill', count: 3 }] },
   },
   // ---------------------------------------------------------------- daily set (docs/12 §2: max 5 per day, 3 are defined)
   {
@@ -407,6 +551,14 @@ export function stoneWildHoursToStones(hours: number, realm: number): number {
 /** Ceiling of tu vi the whole chapter-1 chain may pay (docs/12 §4.2: 25 % of the realm's total Req, in normalised minutes). */
 export function chapterCultBudgetMinutes(totalReqMinutes: number): number {
   return totalReqMinutes * 0.25;
+}
+/** Total Req of `realm`'s stages in normalised cultivation minutes: sum of Req(s) / Absorb(s) (realm 1 = stages 1..9, then 4 per realm). */
+export function realmReqMinutes(realm: number): number {
+  const first = realm === 1 ? 1 : 10 + (realm - 2) * 4;
+  const last = realm === 1 ? 9 : first + 3;
+  let t = 0;
+  for (let st = first; st <= last; st++) t += requiredCultivation(st) / absorbBase(st);
+  return t;
 }
 /** Total Req of realm 1 (stages 1..9) in normalised cultivation minutes: sum of Req(s) / Absorb(s). */
 export function realm1ReqMinutes(): number {
