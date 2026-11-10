@@ -59,7 +59,8 @@ export type QuestObjective =
   | { kind: 'collect'; item: string; count: number }
   | { kind: 'talk'; npc: string }
   | { kind: 'reach'; zone: MobLayoutZone }
-  | { kind: 'breakthrough' }
+  /** a successful breakthrough; with `toRealm` only the major one that carries the character INTO that realm counts (a minor stage does not) */
+  | { kind: 'breakthrough'; toRealm?: number }
   | { kind: 'cultivate'; minutes: number };
 
 export interface QuestRewards {
@@ -420,7 +421,8 @@ export const QUEST_DEFS: readonly QuestDef[] = [
     repeat: 'none',
     minRealm: 2,
     after: ['q_c3_hau_son'],
-    objectives: [{ kind: 'breakthrough' }],
+    maxRealm: 2, // a character already in Kim Đan cannot take it (the chain ends there)
+    objectives: [{ kind: 'breakthrough', toRealm: 3 }],
     rewards: { cultMinutes: 1, stoneWildHours: 0.1, items: [{ item: 'heal_pill', count: 3 }] },
   },
   // ---------------------------------------------------------------- daily set (docs/12 §2: max 5 per day, 3 are defined)

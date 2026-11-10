@@ -164,7 +164,8 @@ function playUntil(r: Rig, upTo: string, entity = 1, account = 'acct1'): void {
           { stones: 0n, items: [{ defId: itemDefByKey(o.item as DropItem)!.id, quality: 0, qty: o.count }] },
           `fill:${def.id}`,
         );
-      else if (o.kind === 'breakthrough') r.svc.onBreakthrough(entity);
+      else if (o.kind === 'breakthrough')
+        o.toRealm ? r.svc.onBreakthrough(entity, 13, 14) : r.svc.onBreakthrough(entity, 9, 10); // major into the realm, or Luyện Khí -> Trúc Cơ
     }
     r.step();
     r.step();
@@ -276,6 +277,37 @@ describe('chapters 2 and 3 play through (data + existing objectives only)', () =
   });
 });
 
+describe('the Kim Đan breakthrough objective counts only the major breakthrough into realm 3', () => {
+  it('a minor stage breakthrough inside Trúc Cơ does not advance it, the major one does; Kim Đan characters cannot take it', () => {
+    const r = rig();
+    join(r);
+    playUntil(r, 'q_c3_kim_dan'); // everything before it
+    r.realm.realm = 2;
+    r.realm.stage = 12;
+    r.at(1, 'npc_truong_lao_dan');
+    expect(r.cmd(1, QuestOp.Accept, 'q_c3_kim_dan')).toBe(QuestReason.Ok);
+    r.svc.onBreakthrough(1, 10, 11); // minor
+    r.svc.onBreakthrough(1, 11, 12); // minor
+    r.step();
+    expect(entryOf(r, 'acct1', 'q_c3_kim_dan').progress).toEqual([0]);
+    r.svc.onBreakthrough(1, 12, 13); // still Trúc Cơ (the last minor stage)
+    r.step();
+    expect(entryOf(r, 'acct1', 'q_c3_kim_dan').progress).toEqual([0]);
+    r.svc.onBreakthrough(1, 13, 14); // the major breakthrough into Kim Đan
+    r.step();
+    expect(entryOf(r, 'acct1', 'q_c3_kim_dan').status).toBe(QuestStatus.Ready);
+    // a character that is already in Kim Đan (realm 3) before accepting cannot take the quest at all
+    const late = rig();
+    join(late);
+    playUntil(late, 'q_c3_kim_dan');
+    late.realm.realm = 3;
+    late.realm.stage = 14;
+    late.at(1, 'npc_truong_lao_dan');
+    expect(late.statusOf('acct1', 'q_c3_kim_dan')).toBe(QuestStatus.Locked);
+    expect(late.cmd(1, QuestOp.Accept, 'q_c3_kim_dan')).toBe(QuestReason.Locked);
+  });
+});
+
 describe('objectives come from server events only', () => {
   it('kills count by mob key and by tier, only while the quest is active, and are capped at the target', () => {
     const r = rig();
@@ -310,7 +342,7 @@ describe('objectives come from server events only', () => {
   it('a kill for an unknown / absent player is ignored', () => {
     const r = rig();
     r.svc.onKill(99, 'mob_doc_tho', 'normal');
-    r.svc.onBreakthrough(99);
+    r.svc.onBreakthrough(99, 9, 10);
     join(r);
     r.svc.leave(1);
     r.svc.onKill(1, 'mob_doc_tho', 'normal');
