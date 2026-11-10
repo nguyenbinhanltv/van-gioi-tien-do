@@ -144,6 +144,8 @@ Các nguồn khác đã đo, **chưa sửa** (không phải lỗi rõ ràng củ
 
 Mỗi mẫu (CSV / JSONL) có thêm: **độ trễ vòng lặp** của cửa sổ (`loop_p50_ms`, `loop_p99_ms`, `loop_max_ms`; `monitorEventLoopDelay` độ phân giải 10 ms nên sàn khoảng 10 ms là bình thường), **kích thước tệp của kho D92** (`store_mb`, mỗi tài liệu trong JSONL, `journal_kb`, `journal_present`) và **thời gian backup** (`backup_ms`, `backup_ok`). Backup chạy **trong một tiến trình riêng** (`soak-backup.ts`, cùng việc với lệnh `backup` của vận hành, D99: đọc tài liệu sống, ghi, xoay vòng giữ 3 bản): không chặn vòng lặp đang đo. Bản **cuối** của lần chạy được lấy sau khi flush hết và **được xác thực** (`verifyBackup`).
 
+Backup nằm ở `--out/backups`; nếu không có `--out` (chỉ khi chạy dưới 1 giờ, không preset) thì ở một thư mục tạm riêng và **bị xóa khi lần chạy kết thúc**, kể cả khi dùng `--data-dir`; không bao giờ ghi vào thư mục hiện hành. Muốn giữ backup thì đặt `--out`.
+
 Preset (mọi giá trị đều ghi đè được bằng cờ riêng):
 
 | Preset  | Bot | Thời gian | Mẫu mỗi | Backup mỗi | Dùng để                                    |

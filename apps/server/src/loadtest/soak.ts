@@ -22,7 +22,8 @@
  * Both write `--out` (default a new temp directory) and judge the run against the thresholds below; every preset value can be overridden.
  * Per sample the CSV / JSONL also carry the event-loop lag of the window, the file-store sizes (documents + `journal.json`) and the backup
  * that finished since the previous sample (a separate process, like the `backup` operator command: `soak-backup.ts`).
- * · --backup-every-min M (0 = no backups; the last one at the end of the run is also verified) · --keep-backups N (3)
+ * · --backup-every-min M (0 = no backups; the last one at the end of the run is also verified) · --keep-backups N (3); backups go to
+ *   `--out/backups`, else a temporary directory removed at the end (never a path relative to the working directory)
  * · thresholds (PROVISIONAL harness settings): --max-heap-slope-mb-h (20) · --max-rss-slope-mb-h (40) · --max-tick-p99-budget MS (40, the
  *   design budget) · --max-backup-s (15) · --journal-stuck-samples N (3: a journal on disk or pending in N consecutive samples = not compacting)
  * Exit code: 0 all criteria pass (--ci: gate passes), 1 a criterion / the gate failed, 2 the harness itself failed.
@@ -331,7 +332,11 @@ function sampleStore(): StoreSample | undefined {
 
 // ------------------------------------------------------------------ backups (a separate process, like the `backup` operator command)
 const backupScript = join(dirname(fileURLToPath(import.meta.url)), 'soak-backup.mjs');
-const backupRoot = backupEveryMin > 0 && stores ? join(outDir || tmpData, 'backups') : '';
+// where the backups go: `--out/backups`, else inside the temporary data directory, else (an existing `--data-dir` and no `--out`) a fresh
+// temporary directory of their own: never a path relative to the working directory, and removed when the run ends
+const tmpBackups =
+  backupEveryMin > 0 && stores && !outDir && !tmpData ? mkdtempSync(join(tmpdir(), 'vgtd-soak-backups-')) : '';
+const backupRoot = backupEveryMin > 0 && stores ? join(outDir || tmpData || tmpBackups, 'backups') : '';
 function runBackup(verify: boolean): Promise<BackupSample> {
   return new Promise((resolve) => {
     execFile(
@@ -556,5 +561,6 @@ try {
     stores.flush();
   }
   if (tmpData) rmSync(tmpData, { recursive: true, force: true });
+  if (tmpBackups) rmSync(tmpBackups, { recursive: true, force: true });
 }
 process.exit(exitCode);
