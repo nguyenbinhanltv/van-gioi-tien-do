@@ -134,8 +134,12 @@ const heal = (r: Rig, account = 'acct1'): number =>
 
 /** Play chapter 1 up to (not including) the quest `upTo`, finishing every earlier quest the way a player would. */
 function playUntil(r: Rig, upTo: string, entity = 1, account = 'acct1'): void {
-  for (const def of QUEST_DEFS.filter((d) => d.type === 'main' && d.chapter === 1)) {
+  for (const def of QUEST_DEFS.filter((d) => d.type === 'main')) {
     if (def.id === upTo) return;
+    if (def.minRealm === 2) {
+      r.realm.realm = 2; // chapters 2-3 are for Trúc Cơ
+      r.realm.stage = 10;
+    }
     r.at(entity, def.giver);
     expect(r.cmd(entity, QuestOp.Accept, def.id), `accept ${def.id}`).toBe(QuestReason.Ok);
     for (const o of def.objectives) {
@@ -178,7 +182,7 @@ describe('accept / progress / claim', () => {
   it('chapter 1 plays through end to end and every reward arrives', () => {
     const r = rig();
     join(r);
-    playUntil(r, 'q_c2_bi_canh'); // the whole of chapter 1 (the loop stops at the first non chapter-1 quest: none here, so it runs out)
+    playUntil(r, 'q_c2_nhan_lenh'); // the whole of chapter 1
     for (const d of QUEST_DEFS.filter((q) => q.chapter === 1))
       expect(r.statusOf('acct1', d.id), d.id).toBe(QuestStatus.Completed);
     // tu vi: the sum of the cult minutes at stage 1
@@ -253,6 +257,22 @@ describe('accept / progress / claim', () => {
     expect(r.cmd(1, QuestOp.Abandon, 'q_c1_nhap_mon')).toBe(QuestReason.NotActive);
     expect(r.statusOf('acct1', 'q_c1_nhap_mon')).toBe(QuestStatus.Available);
     expect(r.cmd(1, QuestOp.Accept, 'q_c1_nhap_mon')).toBe(QuestReason.Ok);
+  });
+});
+
+describe('chapters 2 and 3 play through (data + existing objectives only)', () => {
+  it('the whole main chain completes in order and ends on the Kim Đan breakthrough', () => {
+    const r = rig();
+    join(r);
+    playUntil(r, 'no_such_quest'); // every main quest, chapter 1 then 2 then 3
+    for (const d of QUEST_DEFS.filter((q) => q.type === 'main'))
+      expect(r.statusOf('acct1', d.id), d.id).toBe(QuestStatus.Completed);
+    expect(r.inv.ledger.reconcile()).toEqual([]);
+  });
+  it('chapter 2 stays locked for a Luyện Khí character', () => {
+    const r = rig();
+    join(r);
+    expect(r.statusOf('acct1', 'q_c2_nhan_lenh')).toBe(QuestStatus.Locked);
   });
 });
 

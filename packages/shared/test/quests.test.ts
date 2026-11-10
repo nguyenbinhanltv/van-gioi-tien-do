@@ -17,6 +17,7 @@ import {
   questResetIn,
   questWeekEpoch,
   realm1ReqMinutes,
+  realmReqMinutes,
   stoneWildHoursToStones,
   type DropItem,
   type QuestDef,
@@ -135,6 +136,18 @@ describe('docs/12 §4.2 faucet budgets', () => {
       chapterCultBudgetMinutes(realm1ReqMinutes()),
     );
     expect(sum(c1, (q) => q.rewards.stoneWildHours ?? 0)).toBeLessThanOrEqual(1.0);
+  });
+  it('chapters 2 and 3: tu vi <= 25 % of the realm 2 Req (Trúc Cơ), and each has its Mở / Thân / Kết size', () => {
+    for (const ch of [2, 3])
+      expect(
+        sum(of('main', ch), (q) => q.rewards.cultMinutes ?? 0),
+        `chapter ${ch}`,
+      ).toBeLessThanOrEqual(chapterCultBudgetMinutes(realmReqMinutes(2)));
+    expect(of('main', 2)).toHaveLength(10);
+    expect(of('main', 3)).toHaveLength(7);
+    // one unbroken chain: every chapter 2-3 quest follows exactly the previous one
+    const chain = QUEST_DEFS.filter((q) => q.type === 'main');
+    chain.slice(1).forEach((q, i) => expect(q.after, q.id).toEqual([chain[i]!.id]));
   });
   it('every chapter stays within 1.0 stone hours', () => {
     for (const ch of [1, 2, 3])
